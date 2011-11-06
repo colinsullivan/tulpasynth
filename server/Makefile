@@ -3,7 +3,7 @@ LDFLAGS = -lboost_system -lboost_date_time -lboost_regex -lboost_random  -lboost
 
 CXX		?= c++
 
-chat_server: chat_server.o chat.o
+sound_server: sound_server.o sound.o
 	# First build websocketpp (Makefile modified)
 	(cd ./vendor/zaphoyd-websocketpp-ec28725;make;)
 
@@ -16,4 +16,4 @@ chat_server: chat_server.o chat.o
 #
 .PHONY:		clean
 clean:
-		rm -f *.o chat_server
+	rm -f *.o sound_server

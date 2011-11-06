@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery-1.6.3.min.js"></script>
+<script src="websocket.js"></script>
+
+</head>
+<body>
+
+	<div id="messages"></div>
+
+
+	<script>
+
+		$(document).ready(connect);
+
+		function info_message(message) {
+			$("#messages").append("<p>"+message+"</p>");
+			$("#messages").prop({ scrollTop: $("#messages").prop("scrollHeight")  });
+		}
+
+	</script>
+
+
+</body>
+</html>
