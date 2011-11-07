@@ -22,7 +22,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
             double streamTime, RtAudioStreamStatus status, void * data )
 {
     // debug print something out per callback
-    std::cerr << ".";
+    // std::cerr << ".";
 
     // Create new audio buffer which will hold our results
     SAMPLE * buffy = new SAMPLE[numFrames*CHANNELS];
@@ -60,6 +60,9 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
             
         // increment sample number
         g_t += 1.0;
+
+        // Increase frequency
+        g_freq += sin(PI/16 * g_t/SAMPLE_RATE);
     }
 
     // Send buffer to all connected socket clients
