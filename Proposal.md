@@ -38,5 +38,10 @@ For the audio processing server, I will develop in C++ using elements from the "
 The best "measure of goodness" that I can think of is the results of a survey asking people who have used the application if they felt like they were making music successfully, if they felt like they were collaborating with others successfully, etc.
 
 
+## Milestones
+
+At minimum, this project could result in a interface where users click on a well-defined grid point in the canvas to add a dot there.  When the playhead gets to that dot, a single note will play. People can collaboratively add these dots, so in effect there is only a single timbre in the entire instrument.
+
+At maximum, the result could basically be what I have described throughout the document.  There are multiple timbre options, and the items can be manipulated to change the sound that they make when the playhead moves over them.
 
 
