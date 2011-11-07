@@ -161,4 +161,4 @@ void socket_sound_handler::send_to_all(std::string data) {
 	for (it = m_connections.begin(); it != m_connections.end(); it++) {
 		(*it).first->send(data);
 	}
-}
+};

@@ -1,8 +1,30 @@
 var url = 'ws://localhost:9003/sound';
 var ws = null;
 
+var context = null;
+var audio = null;
+
 function connect() {
     console.log('Connecting to: '+url);
+
+    if("AudioContext" in window) {
+        context = new AudioContext();
+    }
+    else if("webkitAudioContext" in window) {
+        context = new webkitAudioContext();
+
+        window.AudioBuffer = window.webkitAudioBuffer;
+    }
+    else {
+        info_message("This browser does not suport AudioContext");
+    }
+
+    
+    audio = context.createBufferSource();
+    audio.loop = 1;
+    audio.noteOn(0);
+    audio.connect(context.destination);
+
     
     if ("WebSocket" in window) {
         ws = new WebSocket(url);
@@ -30,16 +52,15 @@ function connect() {
     
     ws.onmessage = function(e) {
         var message = JSON.parse(e.data);
-        
-        if (message.type == "msg") {
-            info_message(message.value,message.sender);
-        } else if (message.type == "participants") {
-            var o = "<ul>";
-            for (var p in message.value) {
-                o += "<li>"+message.value[p]+"</li>";
-            }
-            o += "</ul>";
-            $("#participants").html(o);
+
+        if(message.type == 'buf') {
+            if(!audio.buffer || audio.buffer.length != message.numFrames*1)
+                console.log('creating audio.buffer with size: '+message.numFrames*1);
+                audio.buffer = context.createBuffer(1, message.numFrames*1, 44100);
+
+            
+            audio.buffer.getChannelData(0).set(message.samples);
         }
+        
     };
 }
