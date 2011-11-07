@@ -34,13 +34,14 @@ public:
 	// lobby will ignore binary messages
 	void on_message(websocketpp::session_ptr client,
 		const std::vector<unsigned char> &data) {}
+	
+	void send_to_all(std::string data);
+
 private:
 	std::string serialize_state();
 	std::string encode_message(std::string sender,std::string msg,bool escape = true);
 	std::string get_con_id(websocketpp::session_ptr s);
-	
-	void send_to_all(std::string data);
-	
+
 	// list of outstanding connections
 	std::map<websocketpp::session_ptr,std::string> m_connections;
 };
