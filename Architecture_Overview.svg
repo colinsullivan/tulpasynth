@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="34cm" height="14cm" viewBox="416 202 669 267" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="426" y="204" width="71.85" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="426" y="204" width="71.85" height="36"/>
+    <rect style="fill: #ffffff" x="418" y="212" width="71.85" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="418" y="212" width="71.85" height="36"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="453.925" y="233.9">
+      <tspan x="453.925" y="233.9">Browser</tspan>
+    </text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="432" y1="236.9" x2="483.85" y2="236.9"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="786" y="319" width="62.05" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="786" y="319" width="62.05" height="36"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="817.025" y="340.9">
+      <tspan x="817.025" y="340.9">Server</tspan>
+    </text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="796" y1="343.9" x2="838.05" y2="343.9"/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="502.322,226 574,226 574,337 780.632,337 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="516.086,218 500.086,226 516.086,234 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="766.868,345 782.868,337 766.868,329 "/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.7998;font-family:monospace;font-style:normal;font-weight:normal" x="576" y="278.5">WebSocket connection</text>
+    <text style="fill: #000000;text-anchor:start;font-size:12.7998;font-family:monospace;font-style:normal;font-weight:normal" x="517.85" y="223"></text>
+    <text style="fill: #000000;text-anchor:end;font-size:12.7998;font-family:monospace;font-style:normal;font-weight:normal" x="765.104" y="334"></text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="457.924,248 457.924,355 543.226,355 543.226,400.828 "/>
+    <polygon style="fill: #ffffff" points="543.226,414 535.226,406 543.226,398 551.226,406 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="543.226,414 535.226,406 543.226,398 551.226,406 "/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:monospace;font-style:normal;font-weight:normal" x="504" y="347">
+      <tspan x="504" y="347">Creates</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="480" y="414" width="126.45" height="36" rx="20" ry="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="480" y="414" width="126.45" height="36" rx="20" ry="20"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="543.225" y="435.9">
+      <tspan x="543.225" y="435.9">Control Message</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="543.225,450 543.225,470 817.025,470 817.025,371 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="825.025,363 817.025,371 809.025,363 "/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:monospace;font-style:normal;font-weight:normal" x="685" y="465">
+      <tspan x="685" y="465">Sent to server</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="969" y="319" width="115.15" height="36" rx="20" ry="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="969" y="319" width="115.15" height="36" rx="20" ry="20"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="1026.58" y="340.9">
+      <tspan x="1026.58" y="340.9">Audio Samples</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="848.05,337 848.05,337 955.828,337 "/>
+    <polygon style="fill: #ffffff" points="969,337 961,345 953,337 961,329 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="969,337 961,345 953,337 961,329 "/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:monospace;font-style:normal;font-weight:normal" x="906" y="334">
+      <tspan x="906" y="334">Generates</tspan>
+    </text>
+  </g>
+</svg>
