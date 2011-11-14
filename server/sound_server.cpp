@@ -7,6 +7,7 @@
  *              Licensed under the MIT license.
  **/
 
+#include <math.h>
 
 #include <websocketpp.hpp>
 #include <boost/asio.hpp>
@@ -21,8 +22,31 @@ using boost::asio::ip::tcp;
 socket_handler* sockets;
 
 RtAudioStream* audio;
+
+
+/**
+ *  Loop duration in samples
+ **/
+int LOOP_DURATION = 4*SAMPLE_RATE;
+
+/**
+ *  Interval at which to update clients
+ **/
+int SYNC_UPDATE_INTERVAL = floor(0.1*SAMPLE_RATE);
+
+/**
+ *  Last time we sent a sync message
+ **/
+int g_lastsync_t = 0;
+
+
+
 SAMPLE g_freq = 440;
-SAMPLE g_t = 0;
+int g_t = 0;
+
+// Our current position relative to loop
+int g_loop_t = 0;
+
 float periodLength = 1 / (g_freq / SAMPLE_RATE);
 
 int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
@@ -32,22 +56,22 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     // std::cerr << ".";
 
     // Create new audio buffer which will hold our results
-    SAMPLE * buffy = new SAMPLE[numFrames*CHANNELS];
-    SAMPLE* output = (SAMPLE*)outputBuffer;
+    // SAMPLE * buffy = new SAMPLE[numFrames*CHANNELS];
+    SAMPLE* buffy = (SAMPLE*)outputBuffer;
     // SAMPLE * input = (SAMPLE *)inputBuffer;
     
     // Message we will send over websocket
     std::stringstream msg;
 
-    msg << "{\"type\":\"buf\",\"numFrames\":" 
-    	<< numFrames
-    	<< ",\"samples\":[";
+    // msg << "{\"type\":\"buf\",\"numFrames\":" 
+    	// << numFrames
+    	// << ",\"samples\":[";
 
     // fill
-    for( int i = 0; i < numFrames; i++ )
+    for( unsigned int i = 0; i < numFrames; i++ )
     {
     	// Don't need to play audio on the server!
-    	output[i*CHANNELS] = 0;
+    	// output[i*CHANNELS] = 0;
 
         /* Amount of samples since the last period */
         int samplesSinceLastPeriod = int(g_t) % int(periodLength);
@@ -55,11 +79,11 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         // generate signal
         buffy[i*CHANNELS] = sin( 2 * PI * g_freq * g_t / SAMPLE_RATE );
 
-        msg << buffy[i*CHANNELS];
+        // msg << buffy[i*CHANNELS];
 
-        if(i < numFrames-1) {
-        	msg << ",";
-        }
+        // if(i < numFrames-1) {
+        	// msg << ",";
+        // }
 
         // copy into other channels
         for( int j = 1; j < CHANNELS; j++ )
@@ -69,13 +93,19 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         g_t += 1.0;
 
         // Increase frequency
-        g_freq += sin(PI/16 * g_t/SAMPLE_RATE);
+        // g_freq += sin(PI/16 * g_t/SAMPLE_RATE);
     }
 
-    // Send buffer to all connected socket clients
-    msg << "]}";
-    sockets->send_to_all(msg.str());
-    
+    // Update loop position
+    g_loop_t = g_t % LOOP_DURATION;
+
+    // Send loop position to all connected clients every `SYNC_UPDATE_INTERVAL` samples.
+    if((g_t-g_lastsync_t) > SYNC_UPDATE_INTERVAL) {
+        g_lastsync_t = g_t;
+        msg << "{\"type\":\"sync\", \"t\":" << g_loop_t << "}";
+        std::cout << "Sending:\n" << msg.str() << std::endl;
+        sockets->send_to_all(msg.str());
+    }    
     return 0;
 }
 
