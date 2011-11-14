@@ -1,19 +1,17 @@
 EXECUTABLE=sound_server
 
 OBJS = 	$(EXECUTABLE).o \
-		socket_handler.o \
+		sound.o \
 		RtAudio.o \
 		RtAudioStream.o
 
 PRECFLAGS = -O2 -ggdb -Wall \
 	-I./vendor/zaphoyd-websocketpp-ec28725/src \
-	-I./vendor/rtaudio-4.0.10 \
-	-I./vendor/boost_1_47_0/include
+	-I./vendor/rtaudio-4.0.10
 
 PRELDFLAGS = \
 	-lstdc++ \
 	-lm \
-	-L./vendor/boost_1_47_0/lib \
 	-lboost_system \
 	-lboost_date_time \
 	-lboost_regex \

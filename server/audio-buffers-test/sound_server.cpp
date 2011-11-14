@@ -1,24 +1,17 @@
-/**
- *  @file       sound_server.cpp
- *
- *  @author     Colin Sullivan <colinsul [at] gmail.com>
- *
- *              Copyright (c) 2011 Colin Sullivan
- *              Licensed under the MIT license.
- **/
 
 
 #include <websocketpp.hpp>
 #include <boost/asio.hpp>
 
-#include "socket_handler.hpp"
+#include "sound.hpp"
 #include "RtAudioStream.h"
 
 #include <iostream>
 
 using boost::asio::ip::tcp;
+using namespace socketsound;
 
-socket_handler* sockets;
+socket_sound_handler* sound_handler;
 
 RtAudioStream* audio;
 SAMPLE g_freq = 440;
@@ -74,7 +67,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
 
     // Send buffer to all connected socket clients
     msg << "]}";
-    sockets->send_to_all(msg.str());
+    sound_handler->send_to_all(msg.str());
     
     return 0;
 }
@@ -117,7 +110,7 @@ int main(int argc, char* argv[]) {
 	temp << host << ":" << port;
 	full_host = temp.str();
 
-	sockets = new socket_handler();
+	sound_handler = new socket_sound_handler();
 
 
 
@@ -127,7 +120,7 @@ int main(int argc, char* argv[]) {
 		tcp::endpoint endpoint(tcp::v6(), port);
 		
 		websocketpp::server_ptr server(
-			new websocketpp::server(io_service,endpoint,boost::shared_ptr<socket_handler>(sockets))
+			new websocketpp::server(io_service,endpoint,boost::shared_ptr<socket_sound_handler>(sound_handler))
 		);
 		
 		// setup server settings
