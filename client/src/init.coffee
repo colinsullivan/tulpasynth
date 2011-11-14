@@ -2,26 +2,30 @@
 window.WebSocket = window.WebSocket || window.MozWebSocket || null
 
 ws = null
+socket = 'ws://basillamus.stanford.edu:9090/'
 
-handle_sync_message = (message) ->
-    $('#playhead').css({'left': message.t*100+"%"});
+info = (msg) ->
+  $('#info').html(msg);
 
-
-$(document).ready () ->
+connect = () ->
     if window.WebSocket == null
-        throw new Error "This browser does not support websockets."
+        errorMsg = "This browser does not support websockets."
+        info errorMsg
+        throw new Error errorMsg
         return false
 
-    ws = new WebSocket 'ws://basillamus.stanford.edu:9090/'
+    info "Attempting to connect to "+socket
+    ws = new WebSocket socket
 
     ws.onopen = (e) ->
-        console.log 'Websocket connection established.'
+        info 'Websocket connection established.'
     
     ws.onerror = (e) ->
         throw new Error e
     
     ws.onclose = (e) ->
-        console.log 'Websocket connection closed.'
+        info 'Websocket connection closed.'
+        setTimeout(connect, 500);
     
     ws.onmessage = (e) ->
 
@@ -31,3 +35,12 @@ $(document).ready () ->
             sync: handle_sync_message
         
         messageHandlers[message.type] message
+
+
+
+
+handle_sync_message = (message) ->
+    $('#playhead').css({'left': message.t*100+"%"});
+
+
+$(document).ready connect
