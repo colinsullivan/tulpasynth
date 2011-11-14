@@ -44,8 +44,8 @@ int g_lastsync_t = 0;
 SAMPLE g_freq = 440;
 int g_t = 0;
 
-// Our current position relative to loop
-int g_loop_t = 0;
+// Our current position relative to loop (percentage)
+double g_loop_t = 0.0;
 
 float periodLength = 1 / (g_freq / SAMPLE_RATE);
 
@@ -97,7 +97,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     }
 
     // Update loop position
-    g_loop_t = g_t % LOOP_DURATION;
+    g_loop_t = (double)(g_t % LOOP_DURATION)/LOOP_DURATION;
 
     // Send loop position to all connected clients every `SYNC_UPDATE_INTERVAL` samples.
     if((g_t-g_lastsync_t) > SYNC_UPDATE_INTERVAL) {

@@ -1,0 +1,21 @@
+body {
+    margin: 0
+}
+
+div#canvas {
+    width: 1024px;
+    height: 768px;
+    margin: auto;
+    border: 1px solid black;
+}
+
+div#playhead {
+    height: 100%;
+    width: 1px;
+
+    background-color: red;
+
+    position: relative;
+
+    left: 0%;
+}
