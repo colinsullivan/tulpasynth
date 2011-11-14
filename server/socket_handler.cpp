@@ -24,10 +24,10 @@ void socket_handler::validate(session_ptr client) {
 	}
 	
 	// Require specific origin example
-	if (client->get_origin() != "http://localhost:8080") {
-		err << "Request from unrecognized origin: " << client->get_origin();
-		throw(websocketpp::handshake_error(err.str(),403));
-	}
+	// if (client->get_origin() != "http://basillamus.stanford.edu:8080") {
+		// err << "Request from unrecognized origin: " << client->get_origin();
+		// throw(websocketpp::handshake_error(err.str(),403));
+	// }
 }
 
 void socket_handler::on_open(session_ptr client) {
