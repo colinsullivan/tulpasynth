@@ -17,7 +17,7 @@
 RtAudioStream::RtAudioStream() {
 
     this->t = 0;
-    this->bufferFrames = 512;
+    this->bufferFrames = 1024;
 
     
     // Ensure there is an audio device available
@@ -30,7 +30,7 @@ RtAudioStream::RtAudioStream() {
     this->adac.showWarnings(true);
 }
 
-void RtAudioStream::start(RtAudioCallback callback) {
+void RtAudioStream::init(RtAudioCallback callback) {
     // set input and output parameters
     RtAudio::StreamParameters iParams, oParams;
     iParams.deviceId = this->adac.getDefaultInputDevice();
@@ -43,6 +43,8 @@ void RtAudioStream::start(RtAudioCallback callback) {
     // create stream options
     RtAudio::StreamOptions options;
 
+    unsigned int bufferFrames = this->bufferFrames;
+
     try {
         // open a stream
         adac.openStream(
@@ -50,7 +52,7 @@ void RtAudioStream::start(RtAudioCallback callback) {
             &iParams,
             RTAUDIO_FLOAT64,
             SAMPLE_RATE,
-            &this->bufferFrames,
+            &bufferFrames,
             callback,
             NULL,
             &options
@@ -61,6 +63,14 @@ void RtAudioStream::start(RtAudioCallback callback) {
         this->handle_error_and_exit(e);
     }
 
+    if(bufferFrames != this->bufferFrames) {
+        this->bufferFrames = bufferFrames;
+    }
+
+}
+
+
+void RtAudioStream::start() {
     try {
         // start stream
         adac.startStream();
@@ -69,7 +79,7 @@ void RtAudioStream::start(RtAudioCallback callback) {
     catch( RtError& e )
     {
         this->handle_error_and_exit(e);
-    }
+    }    
 }
 
 void RtAudioStream::stop() {

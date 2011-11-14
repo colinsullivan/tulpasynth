@@ -2,12 +2,12 @@ EXECUTABLE=sound_server
 
 OBJS = 	$(EXECUTABLE).o \
 		socket_handler.o \
-		RtAudio.o \
-		RtAudioStream.o
+		RtAudioStream.o \
+		Glitch.o
 
 PRECFLAGS = -O2 -ggdb -Wall \
 	-I./vendor/zaphoyd-websocketpp-ec28725/src \
-	-I./vendor/rtaudio-4.0.10 \
+	-I./vendor/stk-4.4.3/include \
 	-I./vendor/boost_1_47_0/include
 
 PRELDFLAGS = \
@@ -19,6 +19,7 @@ PRELDFLAGS = \
 	-lboost_regex \
 	-lboost_random  \
 	-lboost_program_options \
+	./vendor/stk-4.4.3/src/libstk.a \
 	./vendor/zaphoyd-websocketpp-ec28725/libwebsocketpp.a
 
 CXX		?= c++
@@ -51,6 +52,9 @@ RtAudio.o: ./vendor/rtaudio-4.0.10/RtAudio.cpp ./vendor/rtaudio-4.0.10/RtAudio.h
 
 
 %.o: %.cpp
+	$(CXX) -c $(CFLAGS) -o $@ $^
+
+%.o: instruments/%.cpp
 	$(CXX) -c $(CFLAGS) -o $@ $^
 
 # cleanup by removing generated files
