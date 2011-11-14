@@ -103,7 +103,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     if((g_t-g_lastsync_t) > SYNC_UPDATE_INTERVAL) {
         g_lastsync_t = g_t;
         msg << "{\"type\":\"sync\", \"t\":" << g_loop_t << "}";
-        std::cout << "Sending:\n" << msg.str() << std::endl;
+        // std::cout << "Sending:\n" << msg.str() << std::endl;
         sockets->send_to_all(msg.str());
     }    
     return 0;
@@ -132,8 +132,8 @@ int main(int argc, char* argv[]) {
 	/* Initialize stream generator object for creating sounds */
     audio = new RtAudioStream();
 
-	std::string host = "localhost";
-	short port = 9003;
+	std::string host = "basillamus.stanford.edu";
+	short port = 9090;
 	std::string full_host;
 	
 	if (argc == 3) {
@@ -161,7 +161,8 @@ int main(int argc, char* argv[]) {
 		);
 		
 		// setup server settings
-		server->add_host(host);
+		server->add_host("localhost");
+        server->add_host(host);
 		server->add_host(full_host);
 		// Chat server should only be receiving small text messages, reduce max
 		// message size limit slightly to save memory, improve performance, and 
