@@ -8,6 +8,8 @@
  **/
 
 #include <math.h>
+#include <vector>
+#include <iostream>
 
 #include <websocketpp.hpp>
 #include <boost/asio.hpp>
@@ -15,13 +17,22 @@
 #include "socket_handler.hpp"
 #include "RtAudioStream.h"
 
-#include <iostream>
+#include "instruments/Glitch.hpp"
+
 
 using boost::asio::ip::tcp;
 
 socket_handler* sockets;
 
 RtAudioStream* audio;
+
+// Vector to hold all instruments
+std::vector<stk::Instrmnt*> instrs;
+
+// Vector to hold output buffers for each instrument.
+std::vector<stk::StkFrames*> instrumentBuffers;
+
+
 
 
 /**
@@ -47,54 +58,58 @@ int g_t = 0;
 // Our current position relative to loop (percentage)
 double g_loop_t = 0.0;
 
-float periodLength = 1 / (g_freq / SAMPLE_RATE);
+/**
+ *  Helper method to copy audio from channel one into
+ *  other channels.
+ *
+ *  @param  output      The buffer we are manipulating.
+ *  @param  numFrames   Number of audio frames in buffer.
+ **/
+void copy_channels(SAMPLE output[], const unsigned int numFrames) {
+    /* For each frame */
+    for( unsigned int i = 0; i < numFrames; i++ ) {
+
+        /* For each channel */
+        for( int j = 1; j < CHANNELS; j++ ) {
+            /* Copy audio from first channel */
+            output[i*CHANNELS+j] = output[i*CHANNELS];            
+        }
+    }
+}
 
 int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
             double streamTime, RtAudioStreamStatus status, void * data )
-{
-    // debug print something out per callback
-    // std::cerr << ".";
-
-    // Create new audio buffer which will hold our results
-    // SAMPLE * buffy = new SAMPLE[numFrames*CHANNELS];
-    SAMPLE* buffy = (SAMPLE*)outputBuffer;
-    // SAMPLE * input = (SAMPLE *)inputBuffer;
-    
+{    
     // Message we will send over websocket
     std::stringstream msg;
 
-    // msg << "{\"type\":\"buf\",\"numFrames\":" 
-    	// << numFrames
-    	// << ",\"samples\":[";
-
-    // fill
-    for( unsigned int i = 0; i < numFrames; i++ )
-    {
-    	// Don't need to play audio on the server!
-    	// output[i*CHANNELS] = 0;
-
-        /* Amount of samples since the last period */
-        int samplesSinceLastPeriod = int(g_t) % int(periodLength);
-
-        // generate signal
-        buffy[i*CHANNELS] = sin( 2 * PI * g_freq * g_t / SAMPLE_RATE );
-
-        // msg << buffy[i*CHANNELS];
-
-        // if(i < numFrames-1) {
-        	// msg << ",";
-        // }
-
-        // copy into other channels
-        for( int j = 1; j < CHANNELS; j++ )
-            buffy[i*CHANNELS+j] = buffy[i*CHANNELS];
-            
-        // increment sample number
-        g_t += 1.0;
-
-        // Increase frequency
-        // g_freq += sin(PI/16 * g_t/SAMPLE_RATE);
+    /* Zero output buffer */
+    SAMPLE* outputSamples = (SAMPLE *)outputBuffer;
+    for(unsigned int i = 0; i < numFrames; i++) {
+        outputSamples[i*CHANNELS] = 0;
     }
+
+
+    /* For each instrument */
+    for(unsigned int i = 0; i < instrs.size(); i++) {
+        stk::Instrmnt* instr = instrs[i];
+        stk::StkFrames* instrOutput = instrumentBuffers[i];
+
+        // Generate output
+        instr->tick((*instrOutput), 0);
+
+        // Add to output buffer
+        for(unsigned int i = 0; i < numFrames; i++) {
+            outputSamples[i*CHANNELS] += (float)(*instrOutput)[i];
+        }
+    }
+
+    // copy into other channels
+    copy_channels(outputSamples, numFrames);
+
+
+    // increment sample number
+    g_t += numFrames;
 
     // Update loop position
     g_loop_t = (double)(g_t % LOOP_DURATION)/LOOP_DURATION;
@@ -168,15 +183,30 @@ int main(int argc, char* argv[]) {
 		// message size limit slightly to save memory, improve performance, and 
 		// guard against DoS attacks.
 		server->set_max_message_size(0xFFFF); // 64KiB
+
+        // Set up instruments
+
+        // Tell stk where to get its raw wave files
+        stk::Stk::setRawwavePath("./instruments/samples/");
+
+        instrs.push_back(new instruments::Glitch(1));
+        // And create buffers for each 
+        for(unsigned int i = 0; i < instrs.size(); i++) {
+            instrumentBuffers.push_back(new stk::StkFrames(audio->getBufferFrames(), CHANNELS));
+        }
+
+
 		
 		// start the server
 		server->start_accept();
 		
 		// Start audio generator
-	    audio->start(callback);
+	    audio->init(callback);
+
 
 		std::cout << "Starting sound server on " << full_host << std::endl;
-		
+
+        audio->start();		
 		io_service.run();
 	} catch (std::exception& e) {
 		std::cerr << "Exception: " << e.what() << std::endl;
