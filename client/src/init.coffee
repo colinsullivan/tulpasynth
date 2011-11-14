@@ -12,7 +12,7 @@ $(document).ready () ->
         throw new Error "This browser does not support websockets."
         return false
 
-    ws = new WebSocket 'ws://localhost:9003/'
+    ws = new WebSocket 'ws://basillamus.stanford.edu:9090/'
 
     ws.onopen = (e) ->
         console.log 'Websocket connection established.'
