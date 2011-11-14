@@ -4,7 +4,7 @@ window.WebSocket = window.WebSocket || window.MozWebSocket || null
 ws = null
 
 handle_sync_message = (message) ->
-    $("#message").html('Sync message received:<br />t:'+message.t);
+    $('#playhead').css({'left': message.t*100+"%"});
 
 
 $(document).ready () ->
