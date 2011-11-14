@@ -18,7 +18,7 @@ void socket_handler::validate(session_ptr client) {
 	std::stringstream err;
 	
 	// We only know about the sound resource
-	if (client->get_resource() != "/socket") {
+	if (client->get_resource() != "/") {
 		err << "Request for unknown resource " << client->get_resource();
 		throw(websocketpp::handshake_error(err.str(),404));
 	}

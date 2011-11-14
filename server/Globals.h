@@ -11,7 +11,7 @@
 
 #define SAMPLE double
 #define SAMPLE_RATE 44100
-#define CHANNELS 1
+#define CHANNELS 2
 #define PI 3.14159265358979
 
 #endif
