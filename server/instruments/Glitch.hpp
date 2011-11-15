@@ -46,6 +46,7 @@ namespace instruments {
         StkFloat tick( unsigned int channel = 0 );
         StkFrames& tick( StkFrames& frames, unsigned int channel = 0 );
 
+        bool mDisabled;
 
     private:
 
@@ -98,19 +99,16 @@ namespace instruments {
 
         if (clip) {
             // Grab samples off of clip
-            StkFrames result = clip->tick(frames);
+            clip->tick(frames);
 
             // If we've finished playing file
             if(clip->isFinished()) {
                 this->mCurrentClip = NULL;
                 clip->reset();
             }
+        }
 
-            return result;
-        }
-        else {
-            return frames;
-        }
+        return frames;
     }
 }
 

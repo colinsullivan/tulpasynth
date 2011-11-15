@@ -1,10 +1,16 @@
+$canvas_width: 1024;
+$canvas_height: 768;
+
+
 body {
     margin: 0
 }
 
+
 div#canvas {
-    width: 1024px;
-    height: 768px;
+    position: absolute;
+    width: $canvas_width+px;
+    height: $canvas_height+px;
     margin: auto;
     border: 1px solid black;
 }
@@ -18,4 +24,20 @@ div#playhead {
     position: relative;
 
     left: 0%;
+}
+
+div.instrument {
+    position: absolute;
+}
+
+div.glitch {
+    $width: $canvas_width/8 - 16;
+    top: $canvas_height/2 - $width/2+px;
+    width: $width+px;
+    height: $width+px;
+    background-color: black;
+}
+
+div.glitch.disabled {
+    opacity: 0.4;
 }
