@@ -31,6 +31,8 @@ instruments::Glitch::Glitch(int numClips) {
     }
 
     this->mDisabled = true;
+
+    this->mOnTime = -1.0;
 }
 
 FileWvIn* instruments::Glitch::new_current_clip() {
@@ -53,6 +55,7 @@ FileWvIn* instruments::Glitch::get_current_clip() {
 }
 
 void instruments::Glitch::noteOn( StkFloat frequency, StkFloat amplitude ) {
+    this->noteOff(0.5);
     this->new_current_clip();
     this->keyOn();
 };

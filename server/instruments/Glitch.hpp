@@ -48,6 +48,11 @@ namespace instruments {
 
         bool mDisabled;
 
+        /**
+         *  The time which this glitch should play
+         **/
+        double mOnTime;
+
     private:
 
         /**
@@ -70,28 +75,27 @@ namespace instruments {
          *  Get the current clip (or start a new one)
          **/
         FileWvIn* get_current_clip();
+
     };
 
     inline StkFloat Glitch::tick(unsigned int) {
 
         FileWvIn* clip = this->mCurrentClip;
+        StkFloat result = 0.0;
 
         // If there is currently a clip playing
-        if(clip) {
+        if(clip != NULL) {
             // Grab a sample off of the clip
-            StkFloat result = clip->tick();
+            result = clip->tick();
 
             // If file is done playing
             if(clip->isFinished()) {
                 this->mCurrentClip = NULL;
                 clip->reset();
             }
+        }
 
-            return result;
-        }
-        else {
-            return 0.0;
-        }
+        return result;
     }
 
     inline StkFrames& Glitch::tick(StkFrames& frames, unsigned int channel) {
