@@ -55,3 +55,15 @@ cd ../../
 echo "**********************"
 echo "*      STK done      *"
 echo "**********************"
+
+echo "************************"
+echo "*   Building jsoncpp   *"
+echo "************************"
+
+cd ./vendor/jsoncpp-src-0.6.0-rc2
+
+python scons.py platform=linux-gcc
+
+echo "************************"
+echo "*     jsoncpp done     *"
+echo "************************"

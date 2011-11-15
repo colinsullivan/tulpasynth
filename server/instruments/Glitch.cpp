@@ -29,6 +29,8 @@ instruments::Glitch::Glitch(int numClips) {
         // Load wavefile
         this->attacks_.push_back(new FileWvIn(filepath.str(), true));
     }
+
+    this->mDisabled = true;
 }
 
 FileWvIn* instruments::Glitch::new_current_clip() {

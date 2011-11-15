@@ -18,6 +18,7 @@
 #include <boost/shared_ptr.hpp>
 #include <websocketpp.hpp>
 #include <websocket_connection_handler.hpp>
+#include <Instrmnt.h>
 
 #include <map>
 #include <string>
@@ -25,8 +26,11 @@
 
 class socket_handler : public websocketpp::connection_handler {
 public:
-	socket_handler() {}
-	virtual ~socket_handler() {}
+	socket_handler() {};
+	socket_handler(std::vector<stk::Instrmnt*>* instrs) {
+		this->instrs = instrs;
+	};
+	virtual ~socket_handler() {};
 	
 	void validate(websocketpp::session_ptr client); 
 	
@@ -51,6 +55,9 @@ private:
 
 	// list of outstanding connections
 	std::map<websocketpp::session_ptr,std::string> m_connections;
+
+	// Keep references to instrument instances
+	std::vector<stk::Instrmnt*>* instrs;
 };
 
 typedef boost::shared_ptr<socket_handler> socket_handler_ptr;
