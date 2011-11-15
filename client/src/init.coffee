@@ -78,7 +78,18 @@ init_ui = () ->
             id: i
             el: glitchElement
         
+        console.log glitches[i].onTime
+        
         glitchElement.data({'glitchId': i});
+
+        # Tell server to create glitch instrument with given properties
+        # glitch = glitches[i]
+        # message = 
+        #     type: 'glitchCreate'
+        #     id: glitch.id
+        #     onTime: glitch.onTime
+        #     disabled: glitch.disabled
+        # ws.send JSON.stringify message
 
         glitchElement.click () ->
             glitchElement = $(this)
