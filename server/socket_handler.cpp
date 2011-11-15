@@ -10,7 +10,11 @@
 
 #include "socket_handler.hpp"
 
+#include "instruments/Glitch.hpp"
+
 #include <boost/algorithm/string/replace.hpp>
+#include <json/reader.h>
+#include <json/value.h>
 
 using websocketpp::session_ptr;
 
@@ -62,8 +66,28 @@ void socket_handler::on_close(session_ptr client) {
 }
 
 void socket_handler::on_message(session_ptr client,const std::string &msg) {
-	// std::cout << "message from client " << client << ": " << msg << std::endl;
-	
+	std::cout << "message from client " << client << ": " << msg << std::endl;
+	Json::Value glitchProperties;
+	Json::Reader reader;
+
+	bool parsingSuccessful = reader.parse(msg, glitchProperties);
+	if ( !parsingSuccessful ) {
+	    // report to the user the failure and their locations in the document.
+	    std::cout  << "Failed to parse configuration\n"
+	               << reader.getFormattedErrorMessages();
+	    return;
+	}
+
+
+	// Client is telling us to turn glitch on or off
+	int glitchId = glitchProperties["id"].asInt();
+	instruments::Glitch* glitch = (instruments::Glitch*)(*this->instrs)[glitchId];
+
+	// Do it
+	glitch->mDisabled = glitchProperties["disabled"].asBool();
+
+	// Update all clients
+	this->send_to_all(msg);
 	
 	
 	// // check for special command messages

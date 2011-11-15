@@ -147,7 +147,7 @@ int main(int argc, char* argv[]) {
 	/* Initialize stream generator object for creating sounds */
     audio = new RtAudioStream();
 
-	std::string host = "basillamus.stanford.edu";
+	std::string host = "192.168.179.214";
 	short port = 9090;
 	std::string full_host;
 	
@@ -162,7 +162,7 @@ int main(int argc, char* argv[]) {
 	temp << host << ":" << port;
 	full_host = temp.str();
 
-	sockets = new socket_handler();
+	sockets = new socket_handler(&instrs);
 
 
 
@@ -189,7 +189,11 @@ int main(int argc, char* argv[]) {
         // Tell stk where to get its raw wave files
         stk::Stk::setRawwavePath("./instruments/samples/");
 
-        instrs.push_back(new instruments::Glitch(1));
+        // Create 8 glitches for now
+        for(int i = 0; i < 8; i++) {
+            instrs.push_back(new instruments::Glitch(14));
+        }
+
         // And create buffers for each 
         for(unsigned int i = 0; i < instrs.size(); i++) {
             instrumentBuffers.push_back(new stk::StkFrames(audio->getBufferFrames(), CHANNELS));
