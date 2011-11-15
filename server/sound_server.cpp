@@ -89,6 +89,37 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         outputSamples[i*CHANNELS] = 0;
     }
 
+    // For each frame
+    for(unsigned int i = 0; i < numFrames; i++) {
+
+        double next_loop_t = (double)((g_t+1)%LOOP_DURATION)/LOOP_DURATION;
+
+        // For each instrument
+        for(unsigned int j = 0; j < instrs.size(); j++) {
+            instruments::Glitch* instr = (instruments::Glitch*)instrs[j];
+
+
+            // If glitch should be triggered
+            if((instr->mOnTime == g_loop_t || 
+                (instr->mOnTime > g_loop_t && instr->mOnTime < next_loop_t))
+                && !instr->mDisabled
+            ) {
+                // Trigger
+                instr->noteOn(-1.0, -1.0);
+            }
+
+            // Generate sample
+            outputSamples[i*CHANNELS] += instr->tick(0);
+            
+        }
+
+        // increment sample number
+        g_t += 1;
+
+        // Update loop position
+        g_loop_t = next_loop_t;
+
+    }
 
     /* For each instrument */
     for(unsigned int i = 0; i < instrs.size(); i++) {
@@ -107,12 +138,6 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     // copy into other channels
     copy_channels(outputSamples, numFrames);
 
-
-    // increment sample number
-    g_t += numFrames;
-
-    // Update loop position
-    g_loop_t = (double)(g_t % LOOP_DURATION)/LOOP_DURATION;
 
     // Send loop position to all connected clients every `SYNC_UPDATE_INTERVAL` samples.
     if((g_t-g_lastsync_t) > SYNC_UPDATE_INTERVAL) {
@@ -193,6 +218,16 @@ int main(int argc, char* argv[]) {
         for(int i = 0; i < 8; i++) {
             instrs.push_back(new instruments::Glitch(14));
         }
+
+        ((instruments::Glitch*)instrs[0])->mOnTime = 0.0546875;
+        ((instruments::Glitch*)instrs[1])->mOnTime = 0.166015625;
+        ((instruments::Glitch*)instrs[2])->mOnTime = 0.27734375;
+        ((instruments::Glitch*)instrs[3])->mOnTime = 0.388671875;
+        ((instruments::Glitch*)instrs[4])->mOnTime = 0.5;
+        ((instruments::Glitch*)instrs[5])->mOnTime = 0.611328125;
+        ((instruments::Glitch*)instrs[6])->mOnTime = 0.72265625;
+        ((instruments::Glitch*)instrs[7])->mOnTime = 0.833984375;
+        ((instruments::Glitch*)instrs[8])->mOnTime = 0.9453125;
 
         // And create buffers for each 
         for(unsigned int i = 0; i < instrs.size(); i++) {
