@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
-<svg width="34cm" height="14cm" viewBox="416 202 669 267" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="34cm" height="19cm" viewBox="416 90 669 380" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g>
     <rect style="fill: #ffffff" x="426" y="204" width="71.85" height="36"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="426" y="204" width="71.85" height="36"/>
@@ -62,6 +62,29 @@
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="969,337 961,345 953,337 961,329 "/>
     <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:monospace;font-style:normal;font-weight:normal" x="906" y="334">
       <tspan x="906" y="334">Generates</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="817.025,319 817.025,242.05 816.85,242.05 816.85,178.272 "/>
+    <polygon style="fill: #ffffff" points="816.85,165.1 824.85,173.1 816.85,181.1 808.85,173.1 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="816.85,165.1 824.85,173.1 816.85,181.1 808.85,173.1 "/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:monospace;font-style:normal;font-weight:normal" x="850" y="244">
+      <tspan x="850" y="244">Creates</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="725.5" y="129.1" width="182.7" height="36" rx="20" ry="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="725.5" y="129.1" width="182.7" height="36" rx="20" ry="20"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="816.85" y="151">
+      <tspan x="816.85" y="151">Synchronization Message</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="816.85,129.1 816.85,109.1 457.925,109.1 457.925,186.994 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="449.925,194.994 457.925,186.994 465.925,194.994 "/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:monospace;font-style:normal;font-weight:normal" x="640" y="102">
+      <tspan x="640" y="102">Sent to all connected clients</tspan>
+      <tspan x="640" y="118"></tspan>
     </text>
   </g>
 </svg>
