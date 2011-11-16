@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="12cm" height="18cm" viewBox="285 85 237 354" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="410" y="86" width="110.5" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="410" y="86" width="110.5" height="28"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:16;font-family:sanserif;font-style:italic;font-weight:700" x="465.25" y="105">Instrument</text>
+    <rect style="fill: #ffffff" x="410" y="114" width="110.5" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="410" y="114" width="110.5" height="8"/>
+    <rect style="fill: #ffffff" x="410" y="122" width="110.5" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="410" y="122" width="110.5" height="8"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="286" y="333" width="117.8" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="286" y="333" width="117.8" height="28"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:16;font-family:sanserif;font-style:normal;font-weight:700" x="344.9" y="352">Glitch</text>
+    <rect style="fill: #ffffff" x="286" y="361" width="117.8" height="69"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="286" y="361" width="117.8" height="69"/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:monospace;font-style:normal;font-weight:normal" x="289" y="375">+onTime: float</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="289" y="389.5">Time when this</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="289" y="403.5">glitch should</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="289" y="417.5">start.</text>
+    <rect style="fill: #ffffff" x="286" y="430" width="117.8" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="286" y="430" width="117.8" height="8"/>
+  </g>
+</svg>

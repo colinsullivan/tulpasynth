@@ -9,7 +9,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#define SAMPLE double
+#define SAMPLE StkFloat
 #define SAMPLE_RATE 44100
 #define CHANNELS 2
 // #define PI 3.14159265358979
