@@ -86,7 +86,9 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     /* Zero output buffer */
     SAMPLE* outputSamples = (SAMPLE *)outputBuffer;
     for(unsigned int i = 0; i < numFrames; i++) {
-        outputSamples[i*CHANNELS] = 0;
+        for(int c = 0; c < CHANNELS; c++) {
+            outputSamples[i*CHANNELS+c] = 0;
+        }
     }
 
     // For each frame
@@ -108,8 +110,11 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
                 instr->noteOn(-1.0, -1.0);
             }
 
-            // Generate sample
-            outputSamples[i*CHANNELS] += instr->tick(0);
+            // Generate sample on each channel
+            for(int c = 0; c < CHANNELS; c++) {
+                outputSamples[i*CHANNELS+c] += instr->tick(c);
+            }
+            
             
         }
 
@@ -122,18 +127,20 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     }
 
     /* For each instrument */
-    for(unsigned int i = 0; i < instrs.size(); i++) {
-        stk::Instrmnt* instr = instrs[i];
-        stk::StkFrames* instrOutput = instrumentBuffers[i];
+    // for(unsigned int i = 0; i < instrs.size(); i++) {
+    //     stk::Instrmnt* instr = instrs[i];
+    //     stk::StkFrames* instrOutput = instrumentBuffers[i];
 
-        // Generate output
-        instr->tick((*instrOutput), 0);
+    //     // Generate output
+    //     instr->tick((*instrOutput), 0);
 
-        // Add to output buffer
-        for(unsigned int i = 0; i < numFrames; i++) {
-            outputSamples[i*CHANNELS] += (float)(*instrOutput)[i];
-        }
-    }
+    //     // Add to output buffer
+    //     for(unsigned int i = 0; i < numFrames; i++) {
+    //         for(int c = 0; c < CHANNELS; c++) {
+    //             outputSamples[i*CHANNELS+c] += (float)(*instrOutput)[i];
+    //         }
+    //     }
+    // }
 
     // copy into other channels
     copy_channels(outputSamples, numFrames);
