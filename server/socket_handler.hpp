@@ -31,7 +31,7 @@ class socket_handler : public websocketpp::connection_handler {
 public:
 	socket_handler() {};
 	socket_handler(Orchestra* orchestra) {
-		this->instrs = instrs;
+		this->orchestra = orchestra;
 	};
 	virtual ~socket_handler() {};
 	
@@ -59,8 +59,8 @@ private:
 	// list of outstanding connections
 	std::map<websocketpp::session_ptr,std::string> m_connections;
 
-	// Keep references to instrument instances
-	std::vector<stk::Instrmnt*>* instrs;
+	// Keep reference to orchestra
+	Orchestra* orchestra;
 };
 
 typedef boost::shared_ptr<socket_handler> socket_handler_ptr;

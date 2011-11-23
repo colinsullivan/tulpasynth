@@ -41,22 +41,24 @@ $(document).ready () ->
     # Start listening on our socket
     hwfinal.socket = new hwfinal.SocketHelper 'ws://128.12.201.51:9090'
 
-    id = 1
-    for i in [
-        0.0546875,
-        0.166015625,
-        0.27734375,
-        0.388671875,
-        0.5,
-        0.611328125,
-        0.72265625,
-        0.833984375,
-        0.9453125]
+    hwfinal.socket.onready = () ->
+        for i in [
+            0.0546875,
+            0.166015625,
+            0.27734375,
+            0.388671875,
+            0.5,
+            0.611328125,
+            0.72265625,
+            0.833984375,
+            0.9453125]
 
-        hwfinal.orchestra.get('instruments').add new hwfinal.models.instruments.Glitch
-                id: id++
+            glitchInstance = new hwfinal.models.instruments.Glitch
                 startTime: i
                 disabled: true
+            glitchInstance.save()
+
+            hwfinal.orchestra.get('instruments').add glitchInstance
 
 
 
