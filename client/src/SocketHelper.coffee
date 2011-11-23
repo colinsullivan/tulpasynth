@@ -35,11 +35,17 @@ class hwfinal.SocketHelper
             throw new Error e
         
         socket.onclose = (e) =>
-            console.log 'Websocket connection closed.'
+            console.log 'Websocket connection closed...Reconnecting...'
             setTimeout(() =>
                 @connect()
             , 500);
         
+        ###
+        #   When the socket receives a synchronization message from the 
+        #   server, it updates the appropriate model.
+        #
+        #   @param  e   Raw event object from websocket.
+        ###
         socket.onmessage = (e) =>
 
             message = JSON.parse e.data
@@ -49,11 +55,3 @@ class hwfinal.SocketHelper
 
             # Update it
             modelInstance.set message.attributes
-            # messageHandlers = 
-            #     sync: handle_sync_message
-            #     glitchUpdate: handle_glitchupdate_message
-            
-            # if messageHandlers[message.type]?
-            #     messageHandlers[message.type] message
-            # else
-            #     throw new Error "No handler for message: #{e.data}"
