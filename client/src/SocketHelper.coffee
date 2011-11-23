@@ -28,27 +28,32 @@ class hwfinal.SocketHelper
         console.log "Attempting to connect to #{@url}"
         socket = new WebSocket @url
 
-        socket.onopen = (e) ->
+        socket.onopen = (e) =>
             console.log 'Websocket connection established.'
         
-        socket.onerror = (e) ->
+        socket.onerror = (e) =>
             throw new Error e
         
-        socket.onclose = (e) ->
+        socket.onclose = (e) =>
             console.log 'Websocket connection closed.'
             setTimeout(() =>
                 @connect()
             , 500);
         
-        socket.onmessage = (e) ->
+        socket.onmessage = (e) =>
 
             message = JSON.parse e.data
-
-            messageHandlers = 
-                sync: handle_sync_message
-                glitchUpdate: handle_glitchupdate_message
             
-            if messageHandlers[message.type]?
-                messageHandlers[message.type] message
-            else
-                throw new Error "No handler for message: #{e.data}"
+            # The model instance to update
+            modelInstance = Backbone.Relational.store.find hwfinal.models[message.type], message.id
+
+            # Update it
+            modelInstance.set message.attributes
+            # messageHandlers = 
+            #     sync: handle_sync_message
+            #     glitchUpdate: handle_glitchupdate_message
+            
+            # if messageHandlers[message.type]?
+            #     messageHandlers[message.type] message
+            # else
+            #     throw new Error "No handler for message: #{e.data}"

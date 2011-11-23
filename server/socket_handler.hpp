@@ -24,10 +24,13 @@
 #include <string>
 #include <vector>
 
+#include "Orchestra.hpp"
+
+
 class socket_handler : public websocketpp::connection_handler {
 public:
 	socket_handler() {};
-	socket_handler(std::vector<stk::Instrmnt*>* instrs) {
+	socket_handler(Orchestra* orchestra) {
 		this->instrs = instrs;
 	};
 	virtual ~socket_handler() {};

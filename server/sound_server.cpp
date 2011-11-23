@@ -14,9 +14,13 @@
 #include <websocketpp.hpp>
 #include <boost/asio.hpp>
 #include <tclap/CmdLine.h>
+#include <json/value.h>
+#include <json/writer.h>
 
 #include "socket_handler.hpp"
 #include "RtAudioStream.h"
+
+#include "Orchestra.hpp"
 
 #include "instruments/Glitch.hpp"
 
@@ -27,19 +31,10 @@ socket_handler* sockets;
 
 RtAudioStream* audio;
 
-// Vector to hold all instruments
-std::vector<stk::Instrmnt*> instrs;
+/*  Singleton `Orchestra` instance for handling time
+    and instrument encapsulation */
+Orchestra* orchestra;
 
-// Vector to hold output buffers for each instrument.
-std::vector<stk::StkFrames*> instrumentBuffers;
-
-
-
-
-/**
- *  Loop duration in samples
- **/
-int LOOP_DURATION = 4*SAMPLE_RATE;
 
 /**
  *  Interval at which to update clients
@@ -47,17 +42,15 @@ int LOOP_DURATION = 4*SAMPLE_RATE;
 int SYNC_UPDATE_INTERVAL = floor(0.1*SAMPLE_RATE);
 
 /**
- *  Last time we sent a sync message
+ *  Last time we sent a sync message (sample number)
  **/
 int g_lastsync_t = 0;
 
-
-
-SAMPLE g_freq = 440;
+/**
+ *  Global sample counter
+ **/
 int g_t = 0;
 
-// Our current position relative to loop (percentage)
-double g_loop_t = 0.0;
 
 /**
  *  Helper method to copy audio from channel one into
@@ -95,35 +88,36 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     // For each frame
     for(unsigned int i = 0; i < numFrames; i++) {
 
-        double next_loop_t = (double)((g_t+1)%LOOP_DURATION)/LOOP_DURATION;
+        int loopDuration = orchestra->get_duration();
+        double next_loop_t = (double)((g_t+1)%loopDuration)/loopDuration;
 
         // For each instrument
-        for(unsigned int j = 0; j < instrs.size(); j++) {
-            instruments::Glitch* instr = (instruments::Glitch*)instrs[j];
+        // for(unsigned int j = 0; j < instrs.size(); j++) {
+        //     instruments::Glitch* instr = (instruments::Glitch*)instrs[j];
 
 
-            // If glitch should be triggered
-            if((instr->mOnTime == g_loop_t || 
-                (instr->mOnTime > g_loop_t && instr->mOnTime < next_loop_t))
-                && !instr->mDisabled
-            ) {
-                // Trigger
-                instr->noteOn(-1.0, -1.0);
-            }
+        //     // If glitch should be triggered
+        //     if((instr->mOnTime == g_loop_t || 
+        //         (instr->mOnTime > g_loop_t && instr->mOnTime < next_loop_t))
+        //         && !instr->mDisabled
+        //     ) {
+        //         // Trigger
+        //         instr->noteOn(-1.0, -1.0);
+        //     }
 
-            // Generate sample on each channel
-            for(int c = 0; c < CHANNELS; c++) {
-                outputSamples[i*CHANNELS+c] += instr->tick(c);
-            }
+        //     // Generate sample on each channel
+        //     for(int c = 0; c < CHANNELS; c++) {
+        //         outputSamples[i*CHANNELS+c] += instr->tick(c);
+        //     }
             
             
-        }
+        // }
 
         // increment sample number
         g_t += 1;
 
         // Update loop position
-        g_loop_t = next_loop_t;
+        orchestra->set_t(next_loop_t);
 
     }
 
@@ -149,10 +143,19 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
 
     // Send loop position to all connected clients every `SYNC_UPDATE_INTERVAL` samples.
     if((g_t-g_lastsync_t) > SYNC_UPDATE_INTERVAL) {
+        // Keep track of when we last sent sync messages to clients
         g_lastsync_t = g_t;
-        msg << "{\"type\":\"sync\", \"t\":" << g_loop_t << "}";
-        // std::cout << "Sending:\n" << msg.str() << std::endl;
-        sockets->send_to_all(msg.str());
+
+        // Create JSON response
+        Json::Value resp;
+        resp["type"] = "Orchestra";
+        resp["id"] = "1";
+        resp["attributes"]["t"] = orchestra->get_t();
+
+        Json::StyledWriter writer;
+        std::string msg = writer.write(resp);
+        std::cout << "Sending:\n" << msg << std::endl;
+        sockets->send_to_all(msg);
     }    
     return 0;
 }
@@ -223,13 +226,16 @@ int main(int argc, char* argv[]) {
 	/* Initialize stream generator object for creating sounds */
     audio = new RtAudioStream();
 
+    /* Initialize `Orchestra` to encapsulate composition */
+    orchestra = new Orchestra();
+
 	std::string full_host;		
 	std::stringstream temp;
 	
 	temp << host << ":" << port;
 	full_host = temp.str();
 
-	sockets = new socket_handler(&instrs);
+	sockets = new socket_handler(orchestra);
 
 
 
@@ -257,24 +263,24 @@ int main(int argc, char* argv[]) {
         stk::Stk::setRawwavePath("./instruments/samples/");
 
         // Create 8 glitches for now
-        for(int i = 0; i < 8; i++) {
-            instrs.push_back(new instruments::Glitch(14));
-        }
+        // for(int i = 0; i < 8; i++) {
+        //     instrs.push_back(new instruments::Glitch(14));
+        // }
 
-        ((instruments::Glitch*)instrs[0])->mOnTime = 0.0546875;
-        ((instruments::Glitch*)instrs[1])->mOnTime = 0.166015625;
-        ((instruments::Glitch*)instrs[2])->mOnTime = 0.27734375;
-        ((instruments::Glitch*)instrs[3])->mOnTime = 0.388671875;
-        ((instruments::Glitch*)instrs[4])->mOnTime = 0.5;
-        ((instruments::Glitch*)instrs[5])->mOnTime = 0.611328125;
-        ((instruments::Glitch*)instrs[6])->mOnTime = 0.72265625;
-        ((instruments::Glitch*)instrs[7])->mOnTime = 0.833984375;
-        ((instruments::Glitch*)instrs[8])->mOnTime = 0.9453125;
+        // ((instruments::Glitch*)instrs[0])->mOnTime = 0.0546875;
+        // ((instruments::Glitch*)instrs[1])->mOnTime = 0.166015625;
+        // ((instruments::Glitch*)instrs[2])->mOnTime = 0.27734375;
+        // ((instruments::Glitch*)instrs[3])->mOnTime = 0.388671875;
+        // ((instruments::Glitch*)instrs[4])->mOnTime = 0.5;
+        // ((instruments::Glitch*)instrs[5])->mOnTime = 0.611328125;
+        // ((instruments::Glitch*)instrs[6])->mOnTime = 0.72265625;
+        // ((instruments::Glitch*)instrs[7])->mOnTime = 0.833984375;
+        // ((instruments::Glitch*)instrs[8])->mOnTime = 0.9453125;
 
-        // And create buffers for each 
-        for(unsigned int i = 0; i < instrs.size(); i++) {
-            instrumentBuffers.push_back(new stk::StkFrames(audio->getBufferFrames(), CHANNELS));
-        }
+        // // And create buffers for each 
+        // for(unsigned int i = 0; i < instrs.size(); i++) {
+        //     instrumentBuffers.push_back(new stk::StkFrames(audio->getBufferFrames(), CHANNELS));
+        // }
 
 
 		
