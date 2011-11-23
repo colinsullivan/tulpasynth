@@ -4,6 +4,7 @@ OBJS = 	$(EXECUTABLE).o \
 		socket_handler.o \
 		RtAudioStream.o \
 		Orchestra.o \
+		Instrument.o \
 		Glitch.o
 
 PRECFLAGS = -O2 -ggdb -Wall \

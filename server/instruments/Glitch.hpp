@@ -12,10 +12,13 @@
 
 #include <Sampler.h>
 
+#include "Instrument.hpp"
+
+
 using namespace stk;
 
 namespace instruments {
-    class Glitch : public Sampler
+    class Glitch : public Instrument, public Sampler
     {
     public:
         /**
@@ -24,7 +27,7 @@ namespace instruments {
          *  @param  numClips  Amount of glitch clips we 
          *  can choose from.
          **/
-        Glitch(int numClips);
+        Glitch(Orchestra* anOrch, int numClips);
         ~Glitch(){};
 
         /**
@@ -52,6 +55,15 @@ namespace instruments {
          *  The time which this glitch should play
          **/
         double mOnTime;
+
+        virtual Json::Value get_attributes_object() {
+            Json::Value attrs = instruments::Instrument::get_attributes_object();
+
+            attrs["onTime"] = this->mOnTime;
+            attrs["disabled"] = this->mDisabled;
+
+            return attrs;
+        };
 
     private:
 

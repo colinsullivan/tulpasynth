@@ -12,9 +12,13 @@
 #define _ORCHESTRA_HPP_
 
 #include <vector>
-#include <Instrmnt.h>
 
 #include "Globals.h"
+// #include "instruments/Instrument.hpp"
+
+namespace instruments {
+    class Instrument;
+}
 
 /**
  *  @class  Encapsulation of current loop and instruments.
@@ -22,13 +26,9 @@
 class Orchestra
 {
 public:
-    Orchestra() {
-        this->t = 0.0;
-        this->duration = 4*SAMPLE_RATE;
-        this->instruments = new std::vector<stk::Instrmnt*>();
-    };
+    Orchestra();
     ~Orchestra() {
-        delete instruments;
+        delete instrs;
     };
 
     /**
@@ -54,6 +54,20 @@ public:
         return this->duration;
     };
 
+    /**
+     *  Add a new instrument to the orchestra
+     **/
+    void add_instrument(instruments::Instrument* anInstrument) {
+        this->instrs->push_back(anInstrument);
+    }
+
+    /**
+     *  Generate a new ID for a newly created instrument.
+     **/
+    int generate_instrument_id() {
+        return this->NEXT_INSTRUMENT_ID++;
+    }
+
 private:
 
     /**
@@ -69,9 +83,13 @@ private:
     /**
      *  All instruments currently instantiated
      **/
-    std::vector<stk::Instrmnt*>* instruments;
+    std::vector<instruments::Instrument*>* instrs;
 
-
+    /**
+     *  Static incrementing integer for ids of new 
+     *  instruments
+     **/
+    int NEXT_INSTRUMENT_ID;
 
 };
 
