@@ -13,6 +13,7 @@
 
 #include <websocketpp.hpp>
 #include <boost/asio.hpp>
+#include <tclap/CmdLine.h>
 
 #include "socket_handler.hpp"
 #include "RtAudioStream.h"
@@ -176,19 +177,53 @@ int main(int argc, char* argv[]) {
     /* When program is killed, handle properly */
     signal(SIGINT, signal_callback_handler);
 
+    /* Host and port to bind websocket server to */
+    std::string host;
+    short port;
+
+    /* Parse command line arguments */
+    try {
+        TCLAP::CmdLine cmd(
+            "Server for hwfinal, the collaborative music making tool.",
+            ' ',
+            "0.1"
+        );
+
+        TCLAP::ValueArg<std::string> hostArg(
+            "a",
+            "address",
+            "The IP address to bind the websocket server to.",
+            false,
+            // Default IP
+            "192.168.179.214",
+            "std::string",
+            cmd
+        );
+
+        TCLAP::ValueArg<short> portArg(
+            "p",
+            "port",
+            "The port to bind the websocket server to.",
+            false,
+            // Default port
+            9090,
+            "short",
+            cmd
+        );
+
+        cmd.parse(argc, argv);
+
+        host = hostArg.getValue();
+        port = portArg.getValue();
+    } catch(TCLAP::ArgException &e) {
+        std::cerr << "Error while parsing arguments: " << e.error() << std::endl;
+    }
+
+
 	/* Initialize stream generator object for creating sounds */
     audio = new RtAudioStream();
 
-	std::string host = "192.168.179.214";
-	short port = 9090;
-	std::string full_host;
-	
-	if (argc == 3) {
-		// TODO: input validation?
-		host = argv[1];
-		port = atoi(argv[2]);
-	}
-		
+	std::string full_host;		
 	std::stringstream temp;
 	
 	temp << host << ":" << port;

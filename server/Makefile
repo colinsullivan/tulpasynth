@@ -9,7 +9,8 @@ PRECFLAGS = -O2 -ggdb -Wall \
 	-I./vendor/zaphoyd-websocketpp-ec28725/src \
 	-I./vendor/stk-4.4.3/include \
 	-I./vendor/boost_1_47_0/include \
-	-I./vendor/jsoncpp-src-0.6.0-rc2/include/
+	-I./vendor/jsoncpp-src-0.6.0-rc2/include/ \
+	-I./vendor/tclap-1.2.1/include/
 
 PRELDFLAGS = \
 	-lstdc++ \

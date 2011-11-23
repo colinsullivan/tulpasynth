@@ -64,6 +64,25 @@ cd ./vendor/jsoncpp-src-0.6.0-rc2
 
 python scons.py platform=linux-gcc
 
+cd ../../
+
 echo "************************"
 echo "*     jsoncpp done     *"
+echo "************************"
+
+echo "************************"
+echo "*    Building TCLAP    *"
+echo "************************"
+
+cd ./vendor/tclap-1.2.1/
+
+if [ -e ./Makefile ]; then
+    make
+else
+    ./configure
+    make
+fi  
+
+echo "************************"
+echo "*      TCLAP Done      *"
 echo "************************"
