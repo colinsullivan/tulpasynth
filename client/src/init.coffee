@@ -13,30 +13,31 @@
 
 # Global namespace
 window.hwfinal = {
+    views: {},
     models: {},
     # Our `SocketHelper` instance
     socket: null,
     # Our `Orchestra` instance
-    orchestra: null
+    orchestra: null,
 }
 
 $(document).ready () ->
     
     # Set up error handler
-    # window.onerror = (e) ->
-    #     alert e
+    window.onerror = (e) ->
+        $('#info').text e
 
     # Create our singleton `Orchestra` instance
     hwfinal.orchestra = new hwfinal.models.Orchestra
         id: 1
+    
+    # Create our singleton `Timeline` view
+    hwfinal.timeline = new hwfinal.views.Timeline()
 
     # Start listening on our socket
     hwfinal.socket = new hwfinal.SocketHelper 'ws://192.168.179.214:9090'
 
 
-
-# handle_sync_message = (message) ->
-#     $('#playhead').css({'left': message.t*100+"%"});
 
 # handle_glitchupdate_message = (message) ->
 #     glitch = glitches[message.id]
