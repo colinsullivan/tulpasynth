@@ -267,15 +267,6 @@ int main(int argc, char* argv[]) {
         //     instrs.push_back(new instruments::Glitch(14));
         // }
 
-        // ((instruments::Glitch*)instrs[0])->mOnTime = 0.0546875;
-        // ((instruments::Glitch*)instrs[1])->mOnTime = 0.166015625;
-        // ((instruments::Glitch*)instrs[2])->mOnTime = 0.27734375;
-        // ((instruments::Glitch*)instrs[3])->mOnTime = 0.388671875;
-        // ((instruments::Glitch*)instrs[4])->mOnTime = 0.5;
-        // ((instruments::Glitch*)instrs[5])->mOnTime = 0.611328125;
-        // ((instruments::Glitch*)instrs[6])->mOnTime = 0.72265625;
-        // ((instruments::Glitch*)instrs[7])->mOnTime = 0.833984375;
-        // ((instruments::Glitch*)instrs[8])->mOnTime = 0.9453125;
 
         // // And create buffers for each 
         // for(unsigned int i = 0; i < instrs.size(); i++) {

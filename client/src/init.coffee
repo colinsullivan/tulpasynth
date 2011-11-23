@@ -13,8 +13,12 @@
 
 # Global namespace
 window.hwfinal = {
-    views: {},
-    models: {},
+    views: {
+        instrumentcontrollers: {}
+    },
+    models: {
+        instruments: {}
+    },
     # Our `SocketHelper` instance
     socket: null,
     # Our `Orchestra` instance
@@ -37,6 +41,21 @@ $(document).ready () ->
     # Start listening on our socket
     hwfinal.socket = new hwfinal.SocketHelper 'ws://192.168.179.214:9090'
 
+    id = 1
+    for i in [
+        0.0546875,
+        0.166015625,
+        0.27734375,
+        0.388671875,
+        0.5,
+        0.611328125,
+        0.72265625,
+        0.833984375,
+        0.9453125]
+
+        hwfinal.orchestra.get('instruments').add new hwfinal.models.instruments.Glitch
+                id: id++
+                startTime: i
 
 
 # handle_glitchupdate_message = (message) ->
@@ -49,17 +68,7 @@ $(document).ready () ->
 #     else
 #         glitch.el.removeClass 'disabled'
 
-# init_ui = () ->
-#     for i in [0..8]
-#         glitchElement = $('<div></div>').attr
-#             'class': 'instrument glitch disabled'
 
-#         $('#instruments').append(glitchElement);
-
-#         leftValue = i*glitchElement.width() + 2*i
-#         glitchElement.css({
-#             left: leftValue
-#         });
 
 #         glitches[i] = 
 #             disabled: true
