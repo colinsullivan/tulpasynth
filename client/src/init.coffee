@@ -39,7 +39,7 @@ $(document).ready () ->
     hwfinal.timeline = new hwfinal.views.Timeline()
 
     # Start listening on our socket
-    hwfinal.socket = new hwfinal.SocketHelper 'ws://192.168.179.214:9090'
+    hwfinal.socket = new hwfinal.SocketHelper 'ws://128.12.201.51:9090'
 
     id = 1
     for i in [
@@ -56,17 +56,8 @@ $(document).ready () ->
         hwfinal.orchestra.get('instruments').add new hwfinal.models.instruments.Glitch
                 id: id++
                 startTime: i
+                disabled: true
 
-
-# handle_glitchupdate_message = (message) ->
-#     glitch = glitches[message.id]
-
-#     glitch.disabled = message.disabled
-
-#     if glitch.disabled
-#         glitch.el.addClass 'disabled'
-#     else
-#         glitch.el.removeClass 'disabled'
 
 
 
