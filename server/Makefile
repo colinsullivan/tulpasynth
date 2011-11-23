@@ -3,6 +3,7 @@ EXECUTABLE=sound_server
 OBJS = 	$(EXECUTABLE).o \
 		socket_handler.o \
 		RtAudioStream.o \
+		Orchestra.o \
 		Glitch.o
 
 PRECFLAGS = -O2 -ggdb -Wall \
@@ -52,7 +53,6 @@ $(EXECUTABLE): $(OBJS)
 
 RtAudio.o: ./vendor/rtaudio-4.0.10/RtAudio.cpp ./vendor/rtaudio-4.0.10/RtAudio.h ./vendor/rtaudio-4.0.10/RtError.h
 	$(CXX) -c $(CFLAGS) ./vendor/rtaudio-4.0.10/RtAudio.cpp
-
 
 %.o: %.cpp
 	$(CXX) -c $(CFLAGS) -o $@ $^

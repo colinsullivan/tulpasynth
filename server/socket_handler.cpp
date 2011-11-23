@@ -80,11 +80,11 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 
 
 	// Client is telling us to turn glitch on or off
-	int glitchId = glitchProperties["id"].asInt();
-	instruments::Glitch* glitch = (instruments::Glitch*)(*this->instrs)[glitchId];
+	// int glitchId = glitchProperties["id"].asInt();
+	// instruments::Glitch* glitch = (instruments::Glitch*)(*this->instrs)[glitchId];
 
 	// Do it
-	glitch->mDisabled = glitchProperties["disabled"].asBool();
+	// glitch->mDisabled = glitchProperties["disabled"].asBool();
 
 	// Update all clients
 	this->send_to_all(msg);
