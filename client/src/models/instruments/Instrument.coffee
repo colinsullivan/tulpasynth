@@ -10,10 +10,15 @@
 ###
 #   @class  Base class for all instruments.
 ###
-class hwfinal.models.Instrument extends Backbone.RelationalModel
+class hwfinal.models.instruments.Instrument extends Backbone.RelationalModel
+
+    ###
+    #   All instruments must include their namespace as a string
+    ###
+    namespace: 'hwfinal.models.instruments.Instrument'
 
 
 ###
 #   @class  A set of instrument instances.
 ###
-class hwfinal.models.InstrumentCollection extends Backbone.Collection
+class hwfinal.models.instruments.InstrumentCollection extends Backbone.Collection
