@@ -19,8 +19,8 @@ class hwfinal.models.Orchestra extends Backbone.RelationalModel
     relations: [{
         type: Backbone.HasMany,
         key: 'instruments'
-        relatedModel: 'hwfinal.models.Instrument',
-        collectionType: 'hwfinal.models.InstrumentCollection',
+        relatedModel: 'hwfinal.models.instruments.Instrument',
+        collectionType: 'hwfinal.models.instruments.InstrumentCollection',
         reverseRelation:
             key: 'orchestra',
             includeInJSON: false
