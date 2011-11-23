@@ -11,7 +11,8 @@
 #include "Glitch.hpp"
 
 
-instruments::Glitch::Glitch(int numClips) {
+instruments::Glitch::Glitch(Orchestra* anOrch, int numClips) : instruments::Instrument::Instrument(anOrch) {
+
     this->mNumClips = numClips;
     this->mCurrentClip = NULL;
 

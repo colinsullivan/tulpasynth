@@ -14,6 +14,7 @@
 
 #include <boost/algorithm/string/replace.hpp>
 #include <json/reader.h>
+#include <json/writer.h>
 #include <json/value.h>
 
 using websocketpp::session_ptr;
@@ -67,15 +68,52 @@ void socket_handler::on_close(session_ptr client) {
 
 void socket_handler::on_message(session_ptr client,const std::string &msg) {
 	std::cout << "message from client " << client << ": " << msg << std::endl;
-	Json::Value glitchProperties;
+	Json::Value messageObject;
 	Json::Reader reader;
 
-	bool parsingSuccessful = reader.parse(msg, glitchProperties);
+	bool parsingSuccessful = reader.parse(msg, messageObject);
 	if ( !parsingSuccessful ) {
 	    // report to the user the failure and their locations in the document.
 	    std::cout  << "Failed to parse configuration\n"
 	               << reader.getFormattedErrorMessages();
 	    return;
+	}
+
+	std::string method = messageObject["method"].asString();
+
+	// What are we doing
+	if(method == "create") {
+		// We're creating a new instrument model of a certain type
+		std::string clientModelNamespace = messageObject["namespace"].asString();
+
+		std::cout << "Creating new " << clientModelNamespace << " object" << std::endl;
+
+		instruments::Instrument* newInstr = NULL;
+
+		if(clientModelNamespace == "hwfinal.models.instruments.Instrument.Glitch") {
+			// Create new glitch object (this will automatically get added to orchestra)
+			newInstr = (instruments::Instrument*)new instruments::Glitch(this->orchestra, 14);
+		}
+		else {
+			std::cerr << "Namespace " << clientModelNamespace << " unrecognized." << std::endl;
+			return;
+		}
+
+		// Serialize model and send back to server
+		Json::Value outgoingMessageObject;
+		outgoingMessageObject["method"] = "update";
+		outgoingMessageObject["namespace"] = messageObject["namespace"];
+		outgoingMessageObject["id"] = newInstr->get_id();
+		outgoingMessageObject["attributes"] = newInstr->get_attributes_object();
+
+		Json::StyledWriter writer;
+		std::string outgoingMessage = writer.write(outgoingMessageObject);
+		std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
+
+	}
+	else {
+		std::cerr << "Method " << method << " unrecognized." << std::endl;
+		return;
 	}
 
 

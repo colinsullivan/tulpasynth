@@ -20,6 +20,8 @@ class hwfinal.SocketHelper
 
         @connect()
     
+    onready: () ->    
+    
     connect: () ->
         if window.WebSocket == null
             throw new Error "This browser does not support websockets."
@@ -27,9 +29,11 @@ class hwfinal.SocketHelper
 
         console.log "Attempting to connect to #{@url}"
         socket = new WebSocket @url
+        @socket = socket
 
         socket.onopen = (e) =>
             console.log 'Websocket connection established.'
+            @onready()
         
         socket.onerror = (e) =>
             throw new Error e
@@ -55,3 +59,11 @@ class hwfinal.SocketHelper
 
             # Update it
             modelInstance.set message.attributes
+    
+    send: (messageObject) ->
+        message = JSON.stringify messageObject
+        console.log 'Sending:'
+        console.log message
+        console.log '\n'
+        
+        @socket.send message

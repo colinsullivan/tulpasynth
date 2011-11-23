@@ -154,7 +154,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
 
         Json::StyledWriter writer;
         std::string msg = writer.write(resp);
-        std::cout << "Sending:\n" << msg << std::endl;
+        // std::cout << "Sending:\n" << msg << std::endl;
         sockets->send_to_all(msg);
     }    
     return 0;
@@ -262,10 +262,6 @@ int main(int argc, char* argv[]) {
         // Tell stk where to get its raw wave files
         stk::Stk::setRawwavePath("./instruments/samples/");
 
-        // Create 8 glitches for now
-        // for(int i = 0; i < 8; i++) {
-        //     instrs.push_back(new instruments::Glitch(14));
-        // }
 
 
         // // And create buffers for each 
