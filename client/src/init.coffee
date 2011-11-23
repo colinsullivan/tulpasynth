@@ -23,11 +23,16 @@ window.hwfinal = {
 $(document).ready () ->
     
     # Set up error handler
-    window.onerror = (e) ->
-        alert e
+    # window.onerror = (e) ->
+    #     alert e
+
+    # Create our singleton `Orchestra` instance
+    hwfinal.orchestra = new hwfinal.models.Orchestra
+        id: 1
 
     # Start listening on our socket
     hwfinal.socket = new hwfinal.SocketHelper 'ws://192.168.179.214:9090'
+
 
 
 # handle_sync_message = (message) ->
