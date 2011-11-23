@@ -24,27 +24,27 @@ class hwfinal.views.instrumentcontrollers.FixedSquareToggleButton extends Backbo
         
         @instrument.bind 'change', () => 
             @render()
-        
+    
+    events:
+        'click': 'toggle'
+
     render: () ->
         instrument = @instrument
         
         leftValue = instrument.get('startTime')*1024 - @el.width()/2
-        console.log 'leftValue'
-        console.log leftValue
-        
+
         @el.css
             left: leftValue
 
         if instrument.get('disabled') is true
-            @disable
+            @el.addClass 'disabled'
         else
-            @enable
+            @el.removeClass 'disabled'
         
         return this
-
-        
-    disable: () ->
-        @el.addClass 'disabled'
     
-    enable: () ->
-        @el.removeClass 'disabled'
+    toggle: () ->
+        @instrument.set
+            disabled: !@instrument.get 'disabled'
+        
+        @instrument.save()
