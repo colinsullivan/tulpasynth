@@ -44,7 +44,7 @@ namespace instruments {
             result["id"] = this->id;
             return result;
         };
-    private:
+    protected:
 
         /**
          *  The id of this instrument
