@@ -53,12 +53,32 @@ class hwfinal.SocketHelper
         socket.onmessage = (e) =>
 
             message = JSON.parse e.data
-            
-            # The model instance to update
-            modelInstance = Backbone.Relational.store.find hwfinal.models[message.type], message.id
 
-            # Update it
-            modelInstance.set message.attributes
+            method = message.method
+
+            namespaceSplit = message.namespace.split '.'
+
+            modelType = window
+            while namespaceSplit.length
+                modelType = modelType[namespaceSplit.shift()]
+                        
+
+            if method == 'update'
+
+                # Get model instance to update
+                modelInstance = Backbone.Relational.store.find modelType, message.id
+    
+                # Update it
+                modelInstance.set message.attributes
+            else if method == 'create'
+                
+                console.log 'message'
+                console.log message
+                
+                
+            else
+                throw new Error "Method #{method} not recognized."
+
     
     send: (messageObject) ->
         message = JSON.stringify messageObject

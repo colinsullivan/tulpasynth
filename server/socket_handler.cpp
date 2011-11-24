@@ -92,7 +92,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 
 		if(clientModelNamespace == "hwfinal.models.instruments.Instrument.Glitch") {
 			// Create new glitch object (this will automatically get added to orchestra)
-			newInstr = (instruments::Instrument*)new instruments::Glitch(this->orchestra, 14);
+			newInstr = (instruments::Instrument*)new instruments::Glitch(this->orchestra, 14, messageObject["attributes"]);
 		}
 		else {
 			std::cerr << "Namespace " << clientModelNamespace << " unrecognized." << std::endl;
@@ -124,8 +124,8 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 	// Do it
 	// glitch->mDisabled = glitchProperties["disabled"].asBool();
 
-	// Update all clients
-	this->send_to_all(msg);
+	// Relay message to all other clients
+	this->send_to_all_but_one(msg, client);
 	
 	
 	// // check for special command messages
@@ -232,4 +232,13 @@ void socket_handler::send_to_all(std::string data) {
 	for (it = m_connections.begin(); it != m_connections.end(); it++) {
 		(*it).first->send(data);
 	}
+};
+
+void socket_handler::send_to_all_but_one(std::string data, session_ptr one) {
+	std::map<session_ptr,std::string>::iterator it;
+	for (it = m_connections.begin(); it != m_connections.end(); it++) {
+		if((*it).first != one) {
+			(*it).first->send(data);
+		}
+	}    
 };
