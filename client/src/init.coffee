@@ -39,7 +39,7 @@ $(document).ready () ->
     hwfinal.timeline = new hwfinal.views.Timeline()
 
     # Start listening on our socket
-    hwfinal.socket = new hwfinal.SocketHelper 'ws://128.12.201.51:9090'
+    hwfinal.socket = new hwfinal.SocketHelper 'ws://192.168.179.214:9090'
 
     hwfinal.socket.onready = () ->
         for i in [

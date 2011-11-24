@@ -26,6 +26,12 @@ namespace instruments {
     {
     public:
         Instrument(){};
+        /**
+         *  Instrument constructor
+         *
+         *  @param  anOrch  `Orchestra` instance to add
+         *  ourselves to.
+         **/
         Instrument(Orchestra* anOrch);
         ~Instrument(){};
 
