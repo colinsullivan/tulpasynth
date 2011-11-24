@@ -148,7 +148,8 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
 
         // Create JSON response
         Json::Value resp;
-        resp["type"] = "Orchestra";
+        resp["method"] = "update";
+        resp["namespace"] = "hwfinal.models.Orchestra";
         resp["id"] = "1";
         resp["attributes"]["t"] = orchestra->get_t();
 

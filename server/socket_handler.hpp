@@ -24,6 +24,9 @@
 #include <string>
 #include <vector>
 
+using websocketpp::session_ptr;
+
+
 #include "Orchestra.hpp"
 
 
@@ -50,7 +53,13 @@ public:
 		const std::vector<unsigned char> &data) {}
 	
 	void send_to_all(std::string data);
-
+	/**
+	 *  Send message to all clients except for one.
+	 *
+	 *	@param  data  	Message to send to clients
+	 *	@param  one  	Client to NOT send the message to.
+	 **/
+	void send_to_all_but_one(std::string data, session_ptr one);
 private:
 	std::string serialize_state();
 	std::string encode_message(std::string sender,std::string msg,bool escape = true);

@@ -11,7 +11,7 @@
 #include "Glitch.hpp"
 
 
-instruments::Glitch::Glitch(Orchestra* anOrch, int numClips) : instruments::Instrument::Instrument(anOrch) {
+instruments::Glitch::Glitch(Orchestra* anOrch, int numClips, Json::Value initialAttributes) : instruments::Instrument::Instrument(anOrch) {
 
     this->mNumClips = numClips;
     this->mCurrentClip = NULL;
@@ -31,9 +31,9 @@ instruments::Glitch::Glitch(Orchestra* anOrch, int numClips) : instruments::Inst
         this->attacks_.push_back(new FileWvIn(filepath.str(), true));
     }
 
-    this->mDisabled = true;
+    this->mDisabled = initialAttributes["disabled"].asBool();
 
-    this->mOnTime = -1.0;
+    this->mStartTime = initialAttributes["startTime"].asDouble();
 }
 
 FileWvIn* instruments::Glitch::new_current_clip() {
