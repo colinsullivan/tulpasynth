@@ -56,28 +56,51 @@ class hwfinal.SocketHelper
 
             method = message.method
 
-            namespaceSplit = message.namespace.split '.'
+            if method == 'response/id'
+                # Get id
+                id = message.id
 
-            modelType = window
-            while namespaceSplit.length
-                modelType = modelType[namespaceSplit.shift()]
-                        
+                # Get first in line
+                model = hwfinal.models.waitingInstances.shift()
 
-            if method == 'update'
-
-                # Get model instance to update
-                modelInstance = Backbone.Relational.store.find modelType, message.id
-    
-                # Update it
-                modelInstance.set message.attributes
-            else if method == 'create'
+                # Give id
+                model.set
+                    id: id
                 
-                console.log 'message'
-                console.log message
-                
+                # Save
+                model.save {},
+                    method: 'create'
                 
             else
-                throw new Error "Method #{method} not recognized."
+
+                namespaceSplit = message.namespace.split '.'
+
+                modelType = window
+                while namespaceSplit.length
+                    modelType = modelType[namespaceSplit.shift()]
+                
+                if _.isUndefined modelType
+                    throw new Error "Type #{message.namespace} not found."
+
+                if method == 'update'
+
+                    # Get model instance to update
+                    modelInstance = Backbone.Relational.store.find modelType, message.id
+                
+                    if not modelInstance
+                        throw new Error "Model #{message.namespace} id: #{message.id} not found."
+        
+                    # Update it
+                    modelInstance.set message.attributes
+                else if method == 'create'
+                    
+                    console.log "Creating model of #{modelType} with attributes:"
+                    console.log message.attributes
+                    # Create model
+                    modelInstance = new modelType message.attributes
+                    
+                else
+                    throw new Error "Method #{method} not recognized."
 
     
     send: (messageObject) ->

@@ -15,4 +15,4 @@ Instrument = hwfinal.models.instruments.Instrument
 ###
 class hwfinal.models.instruments.Glitch extends Instrument
 
-    namespace: "#{Instrument.prototype.namespace}.Glitch"
+    namespace: "hwfinal.models.instruments.Glitch"

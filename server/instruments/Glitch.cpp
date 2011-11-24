@@ -34,6 +34,8 @@ instruments::Glitch::Glitch(Orchestra* anOrch, int numClips, Json::Value initial
     this->mDisabled = initialAttributes["disabled"].asBool();
 
     this->mStartTime = initialAttributes["startTime"].asDouble();
+
+    this->id = initialAttributes["id"].asInt();
 }
 
 FileWvIn* instruments::Glitch::new_current_clip() {
