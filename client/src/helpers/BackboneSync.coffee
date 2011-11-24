@@ -14,6 +14,9 @@ Backbone.sync = (method, model, options) ->
         method: method
         attributes: model.toJSON()
     
+    if options.method
+        message.method = options.method
+    
     hwfinal.socket.send message
     
 

@@ -54,7 +54,7 @@ class hwfinal.views.Timeline extends Backbone.View
             'left': orchestra.get('t')*100+"%"
     
     create_instrument_controller: (instrument) ->
-        instrumentClassName = instrument.namespace.replace "hwfinal.models.instruments.Instrument.", ""
+        instrumentClassName = instrument.namespace.replace "hwfinal.models.instruments.", ""
 
         instrumentControllerClass = null
 

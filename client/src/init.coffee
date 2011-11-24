@@ -17,7 +17,8 @@ window.hwfinal = {
         instrumentcontrollers: {}
     },
     models: {
-        instruments: {}
+        instruments: {},
+        waitingInstances: []
     },
     # Our `SocketHelper` instance
     socket: null,
@@ -41,24 +42,22 @@ $(document).ready () ->
     # Start listening on our socket
     hwfinal.socket = new hwfinal.SocketHelper 'ws://192.168.179.214:9090'
 
-    hwfinal.socket.onready = () ->
-        for i in [
-            0.0546875,
-            0.166015625,
-            0.27734375,
-            0.388671875,
-            0.5,
-            0.611328125,
-            0.72265625,
-            0.833984375,
-            0.9453125]
+window.hwfinal.create_sequencer = () ->
+    for i in [
+        0.0546875,
+        0.166015625,
+        0.27734375,
+        0.388671875,
+        0.5,
+        0.611328125,
+        0.72265625,
+        0.833984375,
+        0.9453125]
 
-            glitchInstance = new hwfinal.models.instruments.Glitch
-                startTime: i
-                disabled: true
-            glitchInstance.save()
-
-            hwfinal.orchestra.get('instruments').add glitchInstance
+        
+        glitchInstance = new hwfinal.models.instruments.Glitch
+            startTime: i
+            disabled: true
 
 
 

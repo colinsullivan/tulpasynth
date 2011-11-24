@@ -81,8 +81,21 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 
 	std::string method = messageObject["method"].asString();
 
+
+	Json::Value outgoingMessageObject;
+	Json::StyledWriter writer;
+
+
 	// What are we doing
-	if(method == "create") {
+	if(method == "request/id") {
+		// Respond with next instrument id
+		outgoingMessageObject["method"] = "response/id";
+		outgoingMessageObject["id"] = this->orchestra->generate_instrument_id();
+		client->send(writer.write(outgoingMessageObject));
+	}
+	else if(method == "create") {
+		Json::Value outgoingMessageObject;
+		Json::StyledWriter writer;
 		// We're creating a new instrument model of a certain type
 		std::string clientModelNamespace = messageObject["namespace"].asString();
 
@@ -90,7 +103,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 
 		instruments::Instrument* newInstr = NULL;
 
-		if(clientModelNamespace == "hwfinal.models.instruments.Instrument.Glitch") {
+		if(clientModelNamespace == "hwfinal.models.instruments.Glitch") {
 			// Create new glitch object (this will automatically get added to orchestra)
 			newInstr = (instruments::Instrument*)new instruments::Glitch(this->orchestra, 14, messageObject["attributes"]);
 		}
@@ -99,16 +112,24 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 			return;
 		}
 
-		// Serialize model and send back to server
-		Json::Value outgoingMessageObject;
-		outgoingMessageObject["method"] = "update";
+		// Serialize model and relay to all clients
+		outgoingMessageObject["method"] = "create";
 		outgoingMessageObject["namespace"] = messageObject["namespace"];
 		outgoingMessageObject["id"] = newInstr->get_id();
 		outgoingMessageObject["attributes"] = newInstr->get_attributes_object();
 
-		Json::StyledWriter writer;
 		std::string outgoingMessage = writer.write(outgoingMessageObject);
 		std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
+
+		this->send_to_all_but_one(msg, client);
+
+		// Also relay original client with same info but in an "update" message
+		outgoingMessageObject["method"] = "update";
+
+		outgoingMessage = writer.write(outgoingMessageObject);
+		std::cout << "outgoingMessage to single client:\n" << outgoingMessage << std::endl;
+		client->send(outgoingMessage);
+
 
 	}
 	else {
@@ -125,7 +146,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 	// glitch->mDisabled = glitchProperties["disabled"].asBool();
 
 	// Relay message to all other clients
-	this->send_to_all_but_one(msg, client);
+	
 	
 	
 	// // check for special command messages

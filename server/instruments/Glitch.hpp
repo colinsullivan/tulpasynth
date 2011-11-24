@@ -18,7 +18,7 @@
 using namespace stk;
 
 namespace instruments {
-    class Glitch : public Instrument, public Sampler
+    class Glitch : private Instrument, public Sampler
     {
     public:
         /**
