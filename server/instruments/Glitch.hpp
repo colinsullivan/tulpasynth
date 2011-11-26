@@ -49,7 +49,14 @@ namespace instruments {
         StkFloat tick( unsigned int channel = 0 );
         StkFrames& tick( StkFrames& frames, unsigned int channel = 0 );
 
+        virtual void play() {
+            this->noteOn(-1, -1);
+            return;
+        }
 
+        virtual stk::StkFloat next_samp(int chan) {
+            return this->tick(chan);
+        }
     private:
 
         /**

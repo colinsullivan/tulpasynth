@@ -12,8 +12,10 @@
 #define _INSTRUMENT_HPP_
 
 // #include "../Orchestra.hpp"
+#include <Stk.h>
 
 #include <json/value.h>
+#include <iostream>
 
 class Orchestra;
 
@@ -41,19 +43,31 @@ namespace instruments {
         };
 
         virtual Json::Value get_attributes() {
-            return attributes;
+            return this->attributes;
         };
 
         void set_attributes(Json::Value newAttributes) {
             this->attributes = newAttributes;
         }
-    protected:
 
         /**
-         *  The id of this instrument
+         *  Start playing this instrument
          **/
-        int id;
+        virtual void play() {
+            // Should be overridden by subclasses
+            return;
+        }
 
+        /**
+         *  Pull the next sample from this unit generator
+         *
+         *  @param  chan  Channel of sample to retrieve
+         **/
+        virtual stk::StkFloat next_samp(int chan) {
+            // Should be overridden in subclasses
+            return 0.0;
+        }
+    protected:
         /**
          *  The attributes of this object (including id)
          **/
