@@ -12,13 +12,14 @@
 #define _ORCHESTRA_HPP_
 
 #include <vector>
+#include <iostream>
 
 #include "Globals.h"
-// #include "instruments/Instrument.hpp"
+#include "instruments/Instrument.hpp"
 
-namespace instruments {
-    class Instrument;
-}
+// namespace instruments {
+//     class Instrument;
+// }
 
 /**
  *  @class  Encapsulation of current loop and instruments.
@@ -59,6 +60,30 @@ public:
      **/
     void add_instrument(instruments::Instrument* anInstrument) {
         this->instrs->push_back(anInstrument);
+    }
+
+    /**
+     *  Retrieve an instrument given an id. TODO: better
+     *  data structure.
+     *
+     *  @param  instrumentId  The id of the instrument to retrieve.
+     **/
+    instruments::Instrument* get_instrument(int instrumentId) {
+        instruments::Instrument* result = NULL;
+        for(unsigned int i = 0; i < this->instrs->size(); i++) {
+            if((*this->instrs)[i]->get_id() == instrumentId) {
+                result = (*this->instrs)[i];
+                break;
+            }
+        }
+
+        if(result == NULL) {
+            std::cerr << "Instrument with id " << instrumentId << " not found." << std::endl;
+            return NULL;
+        }
+        else {
+            return result;
+        }
     }
 
     /**

@@ -150,7 +150,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         Json::Value resp;
         resp["method"] = "update";
         resp["namespace"] = "hwfinal.models.Orchestra";
-        resp["id"] = "1";
+        resp["attributes"]["id"] = "1";
         resp["attributes"]["t"] = orchestra->get_t();
 
         Json::StyledWriter writer;

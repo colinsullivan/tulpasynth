@@ -84,18 +84,17 @@ class hwfinal.SocketHelper
 
                 if method == 'update'
 
+                    # If we're trying to update the 
+
                     # Get model instance to update
-                    modelInstance = Backbone.Relational.store.find modelType, message.id
+                    modelInstance = Backbone.Relational.store.find modelType, message.attributes.id
                 
                     if not modelInstance
-                        throw new Error "Model #{message.namespace} id: #{message.id} not found."
+                        throw new Error "Model #{message.namespace} id: #{message.attributes.id} not found."
         
                     # Update it
                     modelInstance.set message.attributes
-                else if method == 'create'
-                    
-                    console.log "Creating model of #{modelType} with attributes:"
-                    console.log message.attributes
+                else if method == 'create'                    
                     # Create model
                     modelInstance = new modelType message.attributes
                     
