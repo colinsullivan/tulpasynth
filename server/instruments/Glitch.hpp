@@ -27,7 +27,7 @@ namespace instruments {
          *  @param  numClips  Amount of glitch clips we 
          *  can choose from.
          **/
-        Glitch(Orchestra* anOrch, int numClips, Json::Value initialAttributes);
+        Glitch(Orchestra* anOrch, Json::Value initialAttributes, int numClips);
         ~Glitch(){};
 
         /**
@@ -49,21 +49,6 @@ namespace instruments {
         StkFloat tick( unsigned int channel = 0 );
         StkFrames& tick( StkFrames& frames, unsigned int channel = 0 );
 
-        bool mDisabled;
-
-        /**
-         *  The time which this glitch should play
-         **/
-        double mStartTime;
-
-        virtual Json::Value get_attributes_object() {
-            Json::Value attrs = instruments::Instrument::get_attributes_object();
-
-            attrs["startTime"] = this->mStartTime;
-            attrs["disabled"] = this->mDisabled;
-
-            return attrs;
-        };
 
     private:
 

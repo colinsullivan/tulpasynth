@@ -11,10 +11,18 @@
 
 #include "../Orchestra.hpp"
 
-instruments::Instrument::Instrument(Orchestra* anOrch) {
+instruments::Instrument::Instrument(Orchestra* anOrch, Json::Value initialAttributes) {
     this->orch = anOrch;
 
-    this->id = this->orch->generate_instrument_id();
+    // If the initial attributes did not include an id, error
+    if(initialAttributes.get("id", false) == false) {
+        std::cerr << "New instrument did not have an id." << std::endl;
+        return;
+    }
+    else {
+        // Read in all attributes
+        this->attributes = initialAttributes;
+        this->orch->add_instrument(this);
+    }
 
-    this->orch->add_instrument(this);
 };
