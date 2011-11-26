@@ -94,8 +94,6 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		client->send(writer.write(outgoingMessageObject));
 	}
 	else if(method == "create") {
-		Json::Value outgoingMessageObject;
-		Json::StyledWriter writer;
 		// We're creating a new instrument model of a certain type
 		std::string clientModelNamespace = messageObject["namespace"].asString();
 
@@ -105,7 +103,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 
 		if(clientModelNamespace == "hwfinal.models.instruments.Glitch") {
 			// Create new glitch object (this will automatically get added to orchestra)
-			newInstr = (instruments::Instrument*)new instruments::Glitch(this->orchestra, 14, messageObject["attributes"]);
+			newInstr = (instruments::Instrument*)new instruments::Glitch(this->orchestra, messageObject["attributes"], 14);
 		}
 		else {
 			std::cerr << "Namespace " << clientModelNamespace << " unrecognized." << std::endl;
@@ -115,8 +113,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		// Serialize model and relay to all clients
 		outgoingMessageObject["method"] = "create";
 		outgoingMessageObject["namespace"] = messageObject["namespace"];
-		outgoingMessageObject["id"] = newInstr->get_id();
-		outgoingMessageObject["attributes"] = newInstr->get_attributes_object();
+		outgoingMessageObject["attributes"] = newInstr->get_attributes();
 
 		std::string outgoingMessage = writer.write(outgoingMessageObject);
 		std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
@@ -130,6 +127,17 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		std::cout << "outgoingMessage to single client:\n" << outgoingMessage << std::endl;
 		client->send(outgoingMessage);
 
+
+	}
+	else if(method == "update") {
+		// Get instrument.
+		instruments::Instrument* instr = this->orchestra->get_instrument(messageObject["attributes"]["id"].asInt());
+
+		// Save its attributes
+		instr->set_attributes(messageObject["attributes"]);
+
+		// Relay to all other clients
+		this->send_to_all_but_one(msg, client);
 
 	}
 	else {
