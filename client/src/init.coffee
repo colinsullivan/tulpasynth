@@ -45,7 +45,7 @@ $(document).ready () ->
     hwfinal.timeline = new hwfinal.views.Timeline()
 
     # Start listening on our socket
-    hwfinal.socket = new hwfinal.SocketHelper 'ws://128.12.201.51:9090'
+    hwfinal.socket = new hwfinal.SocketHelper 'ws://basillamus.stanford.edu:9090'
 
 
 window.hwfinal.create_sequencer = () ->

@@ -43,6 +43,21 @@ class hwfinal.views.Timeline extends Backbone.View
         # If an instrument is added to the orchestra
         orchestra.bind 'add:instruments', (instrument) =>
             @create_instrument_controller instrument
+        
+        @delegateEvents()
+    
+    events: 
+        "click": "_handle_click"
+    
+    _handle_click: (e) ->
+
+        # For now, create glitch at point
+        glitch = new hwfinal.models.instruments.Glitch
+            startTime: e.clientX/$(e.currentTarget).width()
+            x: e.clientX
+            y: e.clientY
+    
+    
 
     
     ###
@@ -56,15 +71,13 @@ class hwfinal.views.Timeline extends Backbone.View
     create_instrument_controller: (instrument) ->
         instrumentClassName = instrument.namespace.replace "hwfinal.models.instruments.", ""
 
-        instrumentControllerClass = null
-
         instrumentControllerClasses = hwfinal.views.instrumentcontrollers
 
 
         instrumentControllerClassMap = 
-            "Glitch": instrumentControllerClasses['FixedSquareToggleButton']
+            "Glitch": instrumentControllerClasses['SquareToggleButton']
 
-        
+
         instrumentController = new instrumentControllerClassMap[instrumentClassName]
             instrument: instrument
         
@@ -72,7 +85,7 @@ class hwfinal.views.Timeline extends Backbone.View
         @instrumentControllers[instrument.get('id')] = instrumentController
 
         # Add controller onto timeline
-        @instrumentControllerContainer.append instrumentController.el
+        # @instrumentControllerContainer.append instrumentController.el
 
         # Render
         instrumentController.render()
