@@ -24,9 +24,9 @@ class hwfinal.views.Timeline extends Backbone.View
         @instrumentControllerContainer = $ '#instruments'
 
         ###
-        #   Playhead element (only one)
+        #   Playhead is a line on the canvas
         ###
-        @playheadElement = $ '#playhead'
+        @playhead = hwfinal.canvas.rect 0, 0, 1, "100%"
 
         ###
         #   Instrument controllers (by `Instrument.id`)
@@ -50,8 +50,8 @@ class hwfinal.views.Timeline extends Backbone.View
     #   to the appropriate position.
     ###
     update_playhead: (orchestra) ->
-        @playheadElement.css
-            'left': orchestra.get('t')*100+"%"
+        @playhead.attr
+            x: orchestra.get('t')*100+"%"
     
     create_instrument_controller: (instrument) ->
         instrumentClassName = instrument.namespace.replace "hwfinal.models.instruments.", ""
