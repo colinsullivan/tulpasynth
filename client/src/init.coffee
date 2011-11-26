@@ -24,6 +24,8 @@ window.hwfinal = {
     socket: null,
     # Our `Orchestra` instance
     orchestra: null,
+    # Our RaphaelJS canvas
+    canvas: null
 }
 
 $(document).ready () ->
@@ -31,6 +33,9 @@ $(document).ready () ->
     # Set up error handler
     window.onerror = (e) ->
         $('#info').text e
+
+    # Create RaphaelJS canvas
+    hwfinal.canvas = Raphael $('#canvas').get(0), $('#canvas').width(), $('#canvas').height()
 
     # Create our singleton `Orchestra` instance
     hwfinal.orchestra = new hwfinal.models.Orchestra
@@ -41,6 +46,7 @@ $(document).ready () ->
 
     # Start listening on our socket
     hwfinal.socket = new hwfinal.SocketHelper 'ws://128.12.201.51:9090'
+
 
 window.hwfinal.create_sequencer = () ->
     for i in [
