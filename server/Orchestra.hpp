@@ -93,6 +93,13 @@ public:
         return this->NEXT_INSTRUMENT_ID++;
     }
 
+    /**
+     *  Return the entire list of instruments for iteration.
+     **/
+    std::vector<instruments::Instrument*>* get_instruments() {
+        return this->instrs;
+    }
+
 private:
 
     /**

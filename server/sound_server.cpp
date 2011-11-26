@@ -85,6 +85,9 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         }
     }
 
+    // Get all instruments
+    std::vector<instruments::Instrument*>* instrs = orchestra->get_instruments();
+
     // For each frame
     for(unsigned int i = 0; i < numFrames; i++) {
 
@@ -92,26 +95,34 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         double next_loop_t = (double)((g_t+1)%loopDuration)/loopDuration;
 
         // For each instrument
-        // for(unsigned int j = 0; j < instrs.size(); j++) {
-        //     instruments::Glitch* instr = (instruments::Glitch*)instrs[j];
+        for(unsigned int j = 0; j < instrs->size(); j++) {
+            instruments::Instrument* instr = (*instrs)[j];
+
+            // If instrument should be triggered
+            double startTime = instr->get_attributes()["startTime"].asDouble();
+            double now = orchestra->get_t();
+            if(
+                (
+                    // Start time is now
+                    startTime == now
+                    ||
+                    // Start time is later but before next buffer
+                    (startTime > now && startTime < next_loop_t)
+                // And instrument is not "disabled"
+                ) && !instr->get_attributes()["disabled"].asBool()
+            ) {
+                // Play instrument
+                std::cout << "playing instrument #" << instr->get_id() << std::endl;
+                instr->play();
+            }
 
 
-        //     // If glitch should be triggered
-        //     if((instr->mOnTime == g_loop_t || 
-        //         (instr->mOnTime > g_loop_t && instr->mOnTime < next_loop_t))
-        //         && !instr->mDisabled
-        //     ) {
-        //         // Trigger
-        //         instr->noteOn(-1.0, -1.0);
-        //     }
-
-        //     // Generate sample on each channel
-        //     for(int c = 0; c < CHANNELS; c++) {
-        //         outputSamples[i*CHANNELS+c] += instr->tick(c);
-        //     }
+            // Pull samples off of instrument wether it is playing or not.
+            for(int c = 0; c < CHANNELS; c++) {
+                outputSamples[i*CHANNELS+c] += instr->next_samp(c);
+            }
             
-            
-        // }
+        }
 
         // increment sample number
         g_t += 1;
