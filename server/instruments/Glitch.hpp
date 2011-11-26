@@ -57,6 +57,11 @@ namespace instruments {
         virtual stk::StkFloat next_samp(int chan) {
             return this->tick(chan);
         }
+
+        virtual stk::StkFrames& next_buf(stk::StkFrames& frames, unsigned int channel) {
+            return this->tick(frames, channel);
+        }
+
     private:
 
         /**

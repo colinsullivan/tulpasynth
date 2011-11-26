@@ -78,59 +78,69 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     std::stringstream msg;
 
     /* Zero output buffer */
-    SAMPLE* outputSamples = (SAMPLE *)outputBuffer;
+    SAMPLE* outputSamples = (SAMPLE*)outputBuffer;
     for(unsigned int i = 0; i < numFrames; i++) {
         for(int c = 0; c < CHANNELS; c++) {
-            outputSamples[i*CHANNELS+c] = 0;
+            outputSamples[i*CHANNELS+c] = 0.0;
         }
     }
+
 
     // Get all instruments
     std::vector<instruments::Instrument*>* instrs = orchestra->get_instruments();
 
-    // For each frame
-    for(unsigned int i = 0; i < numFrames; i++) {
+    // Get start time of next buffer (relative to loop duration)
+    int loopDuration = orchestra->get_duration();
+    double nextFrameT = (double)((g_t+numFrames)%loopDuration)/loopDuration;
 
-        int loopDuration = orchestra->get_duration();
-        double next_loop_t = (double)((g_t+1)%loopDuration)/loopDuration;
+    // For each instrument
+    for(unsigned int j = 0; j < instrs->size(); j++) {
+        instruments::Instrument* instr = (*instrs)[j];
 
-        // For each instrument
-        for(unsigned int j = 0; j < instrs->size(); j++) {
-            instruments::Instrument* instr = (*instrs)[j];
+        // Temporary output buffer
+        StkFrames* tempFrames = new StkFrames(0.0, numFrames, CHANNELS);
 
-            // If instrument should be triggered
-            double startTime = instr->get_attributes()["startTime"].asDouble();
-            double now = orchestra->get_t();
-            if(
-                (
-                    // Start time is now
-                    startTime == now
-                    ||
-                    // Start time is later but before next buffer
-                    (startTime > now && startTime < next_loop_t)
-                // And instrument is not "disabled"
-                ) && !instr->get_attributes()["disabled"].asBool()
-            ) {
-                // Play instrument
-                std::cout << "playing instrument #" << instr->get_id() << std::endl;
-                instr->play();
-            }
-
-
-            // Pull samples off of instrument wether it is playing or not.
-            for(int c = 0; c < CHANNELS; c++) {
-                outputSamples[i*CHANNELS+c] += instr->next_samp(c);
-            }
-            
+        // If instrument should be triggered during this buffer
+        double startTime = instr->get_attributes()["startTime"].asDouble();
+        double now = orchestra->get_t();
+        if(
+            (
+                // Start time is now
+                startTime == now
+                ||
+                // Start time is later but before next buffer
+                (startTime > now && startTime < nextFrameT)
+            // And instrument is not "disabled"
+            ) && !instr->get_attributes()["disabled"].asBool()
+        ) {
+            // Play instrument
+            std::cout << "playing instrument #" << instr->get_id() << std::endl;
+            instr->play();
         }
 
-        // increment sample number
-        g_t += 1;
 
-        // Update loop position
-        orchestra->set_t(next_loop_t);
+        // Pull samples off of instrument wether it is playing or not.
+        for(unsigned int i = 0; i < CHANNELS; i++) {
+            instr->next_buf((*tempFrames), i);
+        }
 
+        // Add samples to our master output
+        for(unsigned int i = 0; i < numFrames; i++) {
+            for(int j = 0; j < CHANNELS; j++) {
+                outputSamples[i*CHANNELS+j] += (*tempFrames)[i*CHANNELS+j];
+            }
+        }
+
+        // Clear tempFrames
+        delete tempFrames;
     }
+
+    // increment global sample counter
+    g_t += numFrames;
+
+    // Update loop position
+    orchestra->set_t(nextFrameT);
+
 
     /* For each instrument */
     // for(unsigned int i = 0; i < instrs.size(); i++) {
@@ -149,7 +159,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     // }
 
     // copy into other channels
-    copy_channels(outputSamples, numFrames);
+    // copy_channels(outputSamples, numFrames);
 
 
     // Send loop position to all connected clients every `SYNC_UPDATE_INTERVAL` samples.
