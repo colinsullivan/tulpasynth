@@ -55,6 +55,7 @@ namespace instruments {
          **/
         virtual void play() {
             // Should be overridden by subclasses
+            std::cerr << "WARNING: instruments::Instrument::play does nothing." << std::endl;
             return;
         };
 
@@ -65,6 +66,7 @@ namespace instruments {
          **/
         virtual stk::StkFloat next_samp(int chan) {
             // Should be overridden in subclasses
+            std::cerr << "WARNING: instruments::Instrument::next_samp returns zeros." << std::endl;
             return 0.0;
         };
 
