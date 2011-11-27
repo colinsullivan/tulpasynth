@@ -23,6 +23,7 @@
 #include "Orchestra.hpp"
 
 #include "instruments/Glitch.hpp"
+#include "instruments/SoftTone.hpp"
 
 
 using boost::asio::ip::tcp;
@@ -35,6 +36,9 @@ RtAudioStream* audio;
     and instrument encapsulation */
 Orchestra* orchestra;
 
+// Test
+instruments::SoftTone* s;
+bool sPlayed = false;
 
 /**
  *  Interval at which to update clients
@@ -85,6 +89,12 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         }
     }
 
+    if(g_t > SAMPLE_RATE*3 && !sPlayed) {
+        std::cout << "playing test" << std::endl;
+        s->play();
+        sPlayed = true;
+    }
+
 
     // Get all instruments
     std::vector<instruments::Instrument*>* instrs = orchestra->get_instruments();
@@ -93,12 +103,14 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     int loopDuration = orchestra->get_duration();
     double nextFrameT = (double)((g_t+numFrames)%loopDuration)/loopDuration;
 
+    StkFrames* tempFrames = NULL;
+
     // For each instrument
     for(unsigned int j = 0; j < instrs->size(); j++) {
         instruments::Instrument* instr = (*instrs)[j];
 
         // Temporary output buffer
-        StkFrames* tempFrames = new StkFrames(0.0, numFrames, CHANNELS);
+        tempFrames = new StkFrames(0.0, numFrames, CHANNELS);
 
         // If instrument should be triggered during this buffer
         double startTime = instr->get_attributes()["startTime"].asDouble();
@@ -122,12 +134,9 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         // Pull samples off of instrument wether it is playing or not.
         for(unsigned int i = 0; i < CHANNELS; i++) {
             instr->next_buf((*tempFrames), i);
-        }
-
-        // Add samples to our master output
-        for(unsigned int i = 0; i < numFrames; i++) {
-            for(int j = 0; j < CHANNELS; j++) {
-                outputSamples[i*CHANNELS+j] += (*tempFrames)[i*CHANNELS+j];
+            // Add samples to master output for this channel
+            for(int k = 0; k < numFrames; k++) {
+                outputSamples[k*CHANNELS+i] += (*tempFrames)[k*CHANNELS+i];
             }
         }
 
@@ -135,31 +144,13 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         delete tempFrames;
     }
 
+
+
     // increment global sample counter
     g_t += numFrames;
 
     // Update loop position
     orchestra->set_t(nextFrameT);
-
-
-    /* For each instrument */
-    // for(unsigned int i = 0; i < instrs.size(); i++) {
-    //     stk::Instrmnt* instr = instrs[i];
-    //     stk::StkFrames* instrOutput = instrumentBuffers[i];
-
-    //     // Generate output
-    //     instr->tick((*instrOutput), 0);
-
-    //     // Add to output buffer
-    //     for(unsigned int i = 0; i < numFrames; i++) {
-    //         for(int c = 0; c < CHANNELS; c++) {
-    //             outputSamples[i*CHANNELS+c] += (float)(*instrOutput)[i];
-    //         }
-    //     }
-    // }
-
-    // copy into other channels
-    // copy_channels(outputSamples, numFrames);
 
 
     // Send loop position to all connected clients every `SYNC_UPDATE_INTERVAL` samples.
@@ -260,8 +251,6 @@ int main(int argc, char* argv[]) {
 	sockets = new socket_handler(orchestra);
 
 
-
-
 	try {
 		boost::asio::io_service io_service;
 		tcp::endpoint endpoint(tcp::v6(), port);
@@ -279,31 +268,31 @@ int main(int argc, char* argv[]) {
 		// guard against DoS attacks.
 		server->set_max_message_size(0xFFFF); // 64KiB
 
-        // Set up instruments
-
         // Tell stk where to get its raw wave files
         stk::Stk::setRawwavePath("./instruments/samples/");
 
-
-
-        // // And create buffers for each 
-        // for(unsigned int i = 0; i < instrs.size(); i++) {
-        //     instrumentBuffers.push_back(new stk::StkFrames(audio->getBufferFrames(), CHANNELS));
-        // }
-
-
+        // Tell stk what sample rate we're using
+        stk::Stk::setSampleRate(SAMPLE_RATE);
 		
 		// start the server
 		server->start_accept();
+
 		
 		// Start audio generator
 	    audio->init(callback);
+
+        Json::Value attributes;
+        attributes["id"] = orchestra->generate_instrument_id();
+        attributes["disabled"] = true;
+        s = new instruments::SoftTone(orchestra, attributes, 20);
 
 
 		std::cout << "Starting sound server on " << full_host << std::endl;
 
         audio->start();		
 		io_service.run();
+
+
 	} catch (std::exception& e) {
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
