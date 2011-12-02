@@ -11,7 +11,8 @@
 
 #define SAMPLE stk::StkFloat
 #define SAMPLE_RATE 44100
-#define CHANNELS 1
+#define CHANNELS 2
 // #define PI 3.14159265358979
+#define RADIANS_PER_SAMPLE (2*3.14159265358979)/44100;
 
 #endif
