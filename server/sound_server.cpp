@@ -23,7 +23,7 @@
 #include "Orchestra.hpp"
 
 #include "instruments/Glitch.hpp"
-#include "instruments/SoftTone.hpp"
+#include "instruments/Bubbly.hpp"
 
 
 using boost::asio::ip::tcp;
@@ -37,8 +37,8 @@ RtAudioStream* audio;
 Orchestra* orchestra;
 
 // Test
-instruments::SoftTone* s;
-bool sPlayed = false;
+// instruments::Bubbly* s;
+// bool sPlayed = false;
 
 /**
  *  Interval at which to update clients
@@ -89,11 +89,12 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         }
     }
 
-    if(g_t > SAMPLE_RATE*3 && !sPlayed) {
-        std::cout << "playing test" << std::endl;
-        s->play();
-        sPlayed = true;
-    }
+    // if(g_t > SAMPLE_RATE*3 && !sPlayed) {
+    //     std::cout << "playing test" << std::endl;
+    //     // s->freq(440);
+    //     s->play();
+    //     sPlayed = true;
+    // }
 
 
     // Get all instruments
@@ -135,7 +136,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         for(unsigned int i = 0; i < CHANNELS; i++) {
             instr->next_buf((*tempFrames), i);
             // Add samples to master output for this channel
-            for(int k = 0; k < numFrames; k++) {
+            for(unsigned int k = 0; k < numFrames; k++) {
                 outputSamples[k*CHANNELS+i] += (*tempFrames)[k*CHANNELS+i];
             }
         }
@@ -281,10 +282,10 @@ int main(int argc, char* argv[]) {
 		// Start audio generator
 	    audio->init(callback);
 
-        Json::Value attributes;
-        attributes["id"] = orchestra->generate_instrument_id();
-        attributes["disabled"] = true;
-        s = new instruments::SoftTone(orchestra, attributes, 20);
+        // Json::Value attributes;
+        // attributes["id"] = orchestra->generate_instrument_id();
+        // attributes["disabled"] = true;
+        // s = new instruments::Bubbly(orchestra, attributes);
 
 
 		std::cout << "Starting sound server on " << full_host << std::endl;
