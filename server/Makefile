@@ -6,7 +6,7 @@ OBJS = 	$(EXECUTABLE).o \
 		Orchestra.o \
 		Instrument.o \
 		Glitch.o \
-		SoftTone.o
+		Bubbly.o
 
 PRECFLAGS = -O2 -ggdb -Wall \
 	-I./vendor/zaphoyd-websocketpp-ec28725/src \
