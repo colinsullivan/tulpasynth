@@ -64,7 +64,7 @@ namespace instruments {
          *
          *  @param  chan  Channel of sample to retrieve
          **/
-        virtual stk::StkFloat next_samp(int chan) {
+        virtual stk::StkFloat next_samp(int channel) {
             // Should be overridden in subclasses
             std::cerr << "WARNING: instruments::Instrument::next_samp returns zeros." << std::endl;
             return 0.0;
@@ -75,10 +75,12 @@ namespace instruments {
          *  computed outputs.  Returns same reference 
          *  to StkFrames object passed in.
          *
-         *  @param  frames  The frames to fill with audio
-         *  @param  channel  ?
+         *  @param  frames  The frames to fill with audio.  Should have the
+         *  same number of channels as `CHANNELS`.
          **/
-        virtual stk::StkFrames& next_buf(stk::StkFrames& frames, unsigned int channel) {
+        virtual stk::StkFrames& next_buf(stk::StkFrames& frames) {
+            // Should be overridden in subclasses
+            std::cerr << "WARNING: instruments::Instrument::next_buf is a passthrough." << std::endl;
             return frames;
         };
     protected:
