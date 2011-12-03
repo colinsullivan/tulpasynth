@@ -76,21 +76,17 @@ class hwfinal.views.Timeline extends Backbone.View
 
 
         # Snap y value to grid
-        console.log 'e.clientY'
-        console.log e.clientY
-
         y = Raphael.snapTo(@yGrid, e.clientY, @yPxPerGrid/2);
 
-        console.log 'y'
-        console.log y
-        
-
+        # Get relative pitch index
+        pitchIndex = _.indexOf(@yGrid, y, true);
 
         # For now, create glitch at point
-        glitch = new hwfinal.models.instruments.Glitch
+        glitch = new hwfinal.models.instruments.Bubbly
             startTime: e.clientX/$(e.currentTarget).width()
             x: e.clientX
             y: y
+            pitchIndex: pitchIndex
     
     
 
@@ -110,7 +106,7 @@ class hwfinal.views.Timeline extends Backbone.View
 
 
         instrumentControllerClassMap = 
-            "Glitch": instrumentControllerClasses['SquareToggleButton']
+            "Bubbly": instrumentControllerClasses['SquareToggleButton']
 
 
         instrumentController = new instrumentControllerClassMap[instrumentClassName]
