@@ -32,6 +32,7 @@ instruments::Bubbly::Bubbly(Orchestra* anOrch, Json::Value initialAttributes) : 
 void instruments::Bubbly::freq(stk::StkFloat aFreq) {
     /**
      *  Filter calculations stolen from ChucK: ugen_filter.cpp:757
+     *  TODO: Figure out GPL issues
      **/
     stk::StkFloat Q = 40;
     stk::StkFloat freq = aFreq;
@@ -66,6 +67,7 @@ stk::StkFrames& instruments::Bubbly::next_buf(stk::StkFrames& frames, unsigned i
 
         /**
          *  Filter calculations stolen from ChucK: ugen_filter.cpp:777
+         *  TODO: Deal with GPL issues
          **/
         // go: adapated from SC3's RLPF
         SAMPLE y0 = m_a0 * frames[i] + m_b1 * m_y1 + m_b2 * m_y2;
