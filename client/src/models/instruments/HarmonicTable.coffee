@@ -20,13 +20,13 @@ class HarmonicTable extends hwfinal.models.instruments.Instrument
     initialize: (attributes) ->
         attributes = attributes || {}
 
-        if not attributes.firstPitch:
+        if not attributes.firstPitch
             throw new Error "firstPitch required."
         
-        if not attributes.width:
+        if not attributes.width
             throw new Error "width required."
         
-        if not attributes.height:
+        if not attributes.height
             throw new Error "height required"
         
         @generate_table()
@@ -36,8 +36,9 @@ class HarmonicTable extends hwfinal.models.instruments.Instrument
         @table = [];
 
         # For each row of table
-        for x in [0..@get('width')]:
+        for x in [0..@get('width')]
             # Need to use MIDI here to generate table rows.
+            return
             
     
     
