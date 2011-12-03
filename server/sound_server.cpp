@@ -23,7 +23,7 @@
 #include "Orchestra.hpp"
 
 #include "instruments/Glitch.hpp"
-#include "instruments/Bubbly.hpp"
+#include "instruments/Earth.hpp"
 
 
 using boost::asio::ip::tcp;
@@ -37,8 +37,8 @@ RtAudioStream* audio;
 Orchestra* orchestra;
 
 // Test
-// instruments::Bubbly* s;
-// bool sPlayed = false;
+instruments::RAMpler* s;
+bool sPlayed = false;
 
 /**
  *  Interval at which to update clients
@@ -89,12 +89,12 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         }
     }
 
-    // if(g_t > SAMPLE_RATE*3 && !sPlayed) {
-    //     std::cout << "playing test" << std::endl;
-    //     // s->freq(440);
-    //     s->play();
-    //     sPlayed = true;
-    // }
+    if(g_t > SAMPLE_RATE*3 && !sPlayed) {
+        std::cout << "playing test" << std::endl;
+        // s->freq(440);
+        s->play();
+        sPlayed = true;
+    }
 
 
     // Get all instruments
@@ -104,14 +104,12 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     int loopDuration = orchestra->get_duration();
     double nextFrameT = (double)((g_t+numFrames)%loopDuration)/loopDuration;
 
-    StkFrames* tempFrames = NULL;
+    // Temporary output buffer
+    StkFrames* tempFrames = new StkFrames(0.0, numFrames, CHANNELS);
 
     // For each instrument
     for(unsigned int j = 0; j < instrs->size(); j++) {
         instruments::Instrument* instr = (*instrs)[j];
-
-        // Temporary output buffer
-        tempFrames = new StkFrames(0.0, numFrames, CHANNELS);
 
         // If instrument should be triggered during this buffer
         double startTime = instr->get_attributes()["startTime"].asDouble();
@@ -133,17 +131,19 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
 
 
         // Pull samples off of instrument wether it is playing or not.
+        instr->next_buf((*tempFrames));
+
+        // Add samples to master output for each channel
         for(unsigned int i = 0; i < CHANNELS; i++) {
-            instr->next_buf((*tempFrames), i);
-            // Add samples to master output for this channel
             for(unsigned int k = 0; k < numFrames; k++) {
                 outputSamples[k*CHANNELS+i] += (*tempFrames)[k*CHANNELS+i];
             }
         }
 
         // Clear tempFrames
-        delete tempFrames;
+        tempFrames->resize(numFrames, CHANNELS, 0.0);
     }
+    delete tempFrames;
 
 
 
@@ -282,10 +282,10 @@ int main(int argc, char* argv[]) {
 		// Start audio generator
 	    audio->init(callback);
 
-        // Json::Value attributes;
-        // attributes["id"] = orchestra->generate_instrument_id();
-        // attributes["disabled"] = true;
-        // s = new instruments::Bubbly(orchestra, attributes);
+        Json::Value attributes;
+        attributes["id"] = orchestra->generate_instrument_id();
+        attributes["disabled"] = true;
+        s = new instruments::RAMpler(orchestra, attributes);
 
 
 		std::cout << "Starting sound server on " << full_host << std::endl;

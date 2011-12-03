@@ -11,7 +11,8 @@
 ###
 
 # ADDRESS = '192.168.179.214'
-ADDRESS = 'basillamus.stanford.edu'
+# ADDRESS = 'basillamus.stanford.edu'
+ADDRESS = '192.168.1.4'
 
 # Global namespace
 window.hwfinal = {

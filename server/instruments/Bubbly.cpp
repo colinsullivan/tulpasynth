@@ -97,14 +97,15 @@ void instruments::Bubbly::freq(stk::StkFloat aFreq) {
     // // m_Q = 1.0 / qres;
 }
 
-stk::StkFrames& instruments::Bubbly::next_buf(stk::StkFrames& frames, unsigned int channel) {
+stk::StkFrames& instruments::Bubbly::next_buf(stk::StkFrames& frames) {
 
     // Next sample for this channel
-    stk::StkFloat* nextSample = this->nextSamplePerChannel[channel];
+    stk::StkFloat* nextSample = this->nextSamplePerChannel[0];
 
     // Fill buffer with result of impulse train
     for(unsigned int i = 0; i < frames.size(); i++) {
         frames[i] = (*nextSample);
+    
         if((*nextSample) == 1.0) {
             (*nextSample) = 0.0;
         }
@@ -120,10 +121,14 @@ stk::StkFrames& instruments::Bubbly::next_buf(stk::StkFrames& frames, unsigned i
         m_y1 = y0;
 
 
-    }
+    }    
 
-    // Filter result.
-    // lpf.tick(frames, channel);
 
+    // Copy into other channels
+    // for(int channel = 1; channel < CHANNELS; channel++) {
+    //     for(int i = 0; i < frames.size(); i++) {
+    //         frames[i*CHANNELS+channel] = frames[i*CHANNELS];
+    //     }
+    // }
     return frames;
 };
