@@ -19,8 +19,52 @@ instruments::Bubbly::Bubbly(Orchestra* anOrch, Json::Value initialAttributes) : 
     m_y1 = 0;
     m_y2 = 0;
 
-    // Initialize frequency calculations.
-    this->freq(440);
+    // Bubbly object should be sent a `pitchIndex` attribute.
+    int pitchIndex = initialAttributes["pitchIndex"].asInt();
+
+    float descendingMajorThirds[32] = {  
+        2093.004522, 
+        1661.218790, 
+        1318.510228, 
+        1046.502261, 
+        830.609395, 
+        659.255114, 
+        523.251131, 
+        415.304698, 
+        329.627557, 
+        261.625565, 
+        207.652349, 
+        164.813778, 
+        130.812783, 
+        103.826174, 
+        82.406889, 
+        65.406391, 
+        51.913087, 
+        41.203445, 
+        32.703196, 
+        25.956544, 
+        20.601722, 
+        16.351598, 
+        12.978272, 
+        10.300861, 
+        8.175799, 
+        6.489136, 
+        5.150431, 
+        4.087899, 
+        3.244568, 
+        2.575215, 
+        2.043950, 
+        1.622284 
+    };
+
+
+    // float frequency = 110*(32 - (pitchIndex));
+    float frequency = descendingMajorThirds[pitchIndex];
+
+    std::cout << "frequency:\n" << frequency << std::endl;
+
+    // Convert to frequency
+    this->freq(frequency);
 
     // Set low pass parameters
     // lpf.setCoefficients(0, next_b1, next_b2, next_a0, 0, true);
