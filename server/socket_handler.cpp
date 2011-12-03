@@ -11,6 +11,7 @@
 #include "socket_handler.hpp"
 
 #include "instruments/Glitch.hpp"
+#include "instruments/Bubbly.hpp"
 
 #include <boost/algorithm/string/replace.hpp>
 #include <json/reader.h>
@@ -104,6 +105,10 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		if(clientModelNamespace == "hwfinal.models.instruments.Glitch") {
 			// Create new glitch object (this will automatically get added to orchestra)
 			newInstr = (instruments::Instrument*)new instruments::Glitch(this->orchestra, messageObject["attributes"], 14);
+		}
+		else if(clientModelNamespace == "hwfinal.models.instruments.Bubbly") {
+			// Create new bubbly object
+			newInstr = (instruments::Instrument*)new instruments::Bubbly(this->orchestra, messageObject["attributes"]);
 		}
 		else {
 			std::cerr << "Namespace " << clientModelNamespace << " unrecognized." << std::endl;
