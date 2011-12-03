@@ -81,6 +81,9 @@ class hwfinal.views.Timeline extends Backbone.View
         # Get relative pitch index
         pitchIndex = _.indexOf(@yGrid, y, true);
 
+        if pitchIndex == -1
+            return
+
         # For now, create glitch at point
         glitch = new hwfinal.models.instruments.Bubbly
             startTime: e.clientX/$(e.currentTarget).width()
