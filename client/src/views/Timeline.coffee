@@ -19,6 +19,29 @@ class hwfinal.views.Timeline extends Backbone.View
         @el = $ '#canvas'
 
         ###
+        #   Height and width of our canvas (hardcoded for now)
+        ###
+        @height = 768;
+        @width = 1024;
+
+        ###
+        #   Grid for placing objects on y-axis
+        ###
+        @yGrid = [];
+
+        # We will have 32 spots in the grid for now
+        yGridSize = 32
+        @yPxPerGrid = @height/yGridSize
+
+        for i in [0...yGridSize]
+            @yGrid.push(i*@yPxPerGrid)
+        
+        console.log '@yGrid'
+        console.log @yGrid
+        
+
+
+        ###
         #   Container for our instrument controllers
         ###
         @instrumentControllerContainer = $ '#instruments'
@@ -51,11 +74,23 @@ class hwfinal.views.Timeline extends Backbone.View
     
     _handle_click: (e) ->
 
+
+        # Snap y value to grid
+        console.log 'e.clientY'
+        console.log e.clientY
+
+        y = Raphael.snapTo(@yGrid, e.clientY, @yPxPerGrid/2);
+
+        console.log 'y'
+        console.log y
+        
+
+
         # For now, create glitch at point
         glitch = new hwfinal.models.instruments.Glitch
             startTime: e.clientX/$(e.currentTarget).width()
             x: e.clientX
-            y: e.clientY
+            y: y
     
     
 
