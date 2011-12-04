@@ -123,10 +123,11 @@ class hwfinal.views.Timeline extends Backbone.View
 
 
         instrumentControllerClassMap = 
-            "Bubbly": instrumentControllerClasses['SquareToggleButton']
+            "Bubbly": 'BasicCircle'
+            "Earth": 'BasicSquare'
 
 
-        instrumentController = new instrumentControllerClassMap[instrumentClassName]
+        instrumentController = new instrumentControllerClasses[instrumentControllerClassMap[instrumentClassName]]
             instrument: instrument
         
         # Add controller into datastructure

@@ -10,13 +10,15 @@
 
 #include "socket_handler.hpp"
 
-#include "instruments/Glitch.hpp"
-#include "instruments/Bubbly.hpp"
-
 #include <boost/algorithm/string/replace.hpp>
 #include <json/reader.h>
 #include <json/writer.h>
 #include <json/value.h>
+
+#include "instruments/Glitch.hpp"
+#include "instruments/Bubbly.hpp"
+#include "instruments/Earth.hpp"
+
 
 using websocketpp::session_ptr;
 
@@ -109,6 +111,10 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		else if(clientModelNamespace == "hwfinal.models.instruments.Bubbly") {
 			// Create new bubbly object
 			newInstr = (instruments::Instrument*)new instruments::Bubbly(this->orchestra, messageObject["attributes"]);
+		}
+		else if(clientModelNamespace == "hwfinal.models.instruments.Earth") {
+			// Create new earth instrument
+			newInstr = (instruments::Instrument*)new instruments::Earth(this->orchestra, messageObject["attributes"]);
 		}
 		else {
 			std::cerr << "Namespace " << clientModelNamespace << " unrecognized." << std::endl;
