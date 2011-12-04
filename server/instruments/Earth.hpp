@@ -13,7 +13,7 @@
 #include "RAMpler.hpp"
 
 namespace instruments {
-    class Earth : private RAMpler
+    class Earth : protected RAMpler
     {
     public:
         Earth(Orchestra* anOrch, Json::Value initialAttributes);

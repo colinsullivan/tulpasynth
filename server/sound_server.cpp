@@ -132,11 +132,12 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
 
         // Pull samples off of instrument wether it is playing or not.
         instr->next_buf((*tempFrames));
+        stk::StkFloat gain = instr->get_gain();
 
         // Add samples to master output for each channel
         for(unsigned int i = 0; i < CHANNELS; i++) {
             for(unsigned int k = 0; k < numFrames; k++) {
-                outputSamples[k*CHANNELS+i] += (*tempFrames)[k*CHANNELS+i];
+                outputSamples[k*CHANNELS+i] += ((*tempFrames)[k*CHANNELS+i]*gain);
             }
         }
 
