@@ -12,7 +12,7 @@
 
 # ADDRESS = '192.168.179.214'
 # ADDRESS = 'basillamus.stanford.edu'
-ADDRESS = '192.168.1.4'
+ADDRESS = window.location.hostname
 
 # Global namespace
 window.hwfinal = {
