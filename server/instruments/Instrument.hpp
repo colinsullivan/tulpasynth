@@ -42,11 +42,19 @@ namespace instruments {
             return this->attributes["id"].asInt();
         };
 
+        stk::StkFloat get_gain() {
+            return (stk::StkFloat)this->attributes["gain"].asDouble();
+        }
+
         virtual Json::Value get_attributes() {
             return this->attributes;
         };
 
         void set_attributes(Json::Value newAttributes) {
+            // Default gain value
+            double gain = newAttributes.get("gain", this->defaultAttributes["gain"].asDouble()).asDouble();
+            newAttributes["gain"] = gain;
+
             this->attributes = newAttributes;
         };
 
@@ -90,9 +98,16 @@ namespace instruments {
         Json::Value attributes;
 
         /**
+         *  Any default attributes
+         **/
+        Json::Value defaultAttributes;
+
+        /**
          *  Reference to the orchestra
          **/
         Orchestra* orch;
+    private:
+        
     };
 
 }

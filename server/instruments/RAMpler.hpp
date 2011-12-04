@@ -22,7 +22,7 @@ namespace instruments {
     /**
      *  @class  A sampler which keeps audio in RAM.
      **/
-    class RAMpler : private Instrument
+    class RAMpler : protected Instrument
     {
     public:
         /**
