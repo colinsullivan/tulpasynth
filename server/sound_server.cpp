@@ -37,8 +37,8 @@ RtAudioStream* audio;
 Orchestra* orchestra;
 
 // Test
-instruments::Earth* s;
-bool sPlayed = false;
+// instruments::Earth* s;
+// bool sPlayed = false;
 
 /**
  *  Interval at which to update clients
@@ -89,12 +89,12 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         }
     }
 
-    if(g_t > SAMPLE_RATE*3 && !sPlayed) {
-        std::cout << "playing test" << std::endl;
-        // s->freq(440);
-        s->play();
-        sPlayed = true;
-    }
+    // if(g_t > SAMPLE_RATE*3 && !sPlayed) {
+    //     std::cout << "playing test" << std::endl;
+    //     // s->freq(440);
+    //     s->play();
+    //     sPlayed = true;
+    // }
 
 
     // Get all instruments
@@ -282,10 +282,10 @@ int main(int argc, char* argv[]) {
 		// Start audio generator
 	    audio->init(callback);
 
-        Json::Value attributes;
-        attributes["id"] = orchestra->generate_instrument_id();
-        attributes["disabled"] = true;
-        s = new instruments::Earth(orchestra, attributes);
+        // Json::Value attributes;
+        // attributes["id"] = orchestra->generate_instrument_id();
+        // attributes["disabled"] = true;
+        // s = new instruments::Earth(orchestra, attributes);
 
 
 		std::cout << "Starting sound server on " << full_host << std::endl;
