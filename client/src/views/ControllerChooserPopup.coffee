@@ -111,13 +111,13 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
             x: pen.x
             y: pen.y
 
-        # SquareToggleButton
-        squareToggleButtonExample = hwfinal.canvas.rect pen.x, pen.y, 10, 10
+        # Bubbly
+        bubblyExample = hwfinal.canvas.circle pen.x, pen.y, 10
 
-        squareToggleButtonExample.attr
+        bubblyExample.attr
             fill: 'black'
         
-        squareToggleButtonExample.click () =>
+        bubblyExample.click () =>
             @hide()
 
             coords = @currentArrowCoords
@@ -128,7 +128,26 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
                 y: coords.y
                 pitchIndex: @currentPitchIndex
         
-        @set.push squareToggleButtonExample
+        @set.push bubblyExample
+
+        pen.x += 25
+
+        # Earth
+        earthExample = hwfinal.canvas.rect pen.x, pen.y, 10, 10
+        earthExample.attr
+            fill: 'black'
+        earthExample.click () =>
+            @hide()
+            coords = @currentArrowCoords
+            new hwfinal.models.instruments.Earth
+                startTime: coords.x/hwfinal.canvas.width
+                x: coords.x
+                y: coords.y
+                pitchIndex: @currentPitchIndex
+        @set.push earthExample
+
+
+
 
         ###
         #   Now draw box around sample controllers
