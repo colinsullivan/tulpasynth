@@ -37,7 +37,7 @@ RtAudioStream* audio;
 Orchestra* orchestra;
 
 // Test
-instruments::RAMpler* s;
+instruments::Earth* s;
 bool sPlayed = false;
 
 /**
@@ -285,7 +285,7 @@ int main(int argc, char* argv[]) {
         Json::Value attributes;
         attributes["id"] = orchestra->generate_instrument_id();
         attributes["disabled"] = true;
-        s = new instruments::RAMpler(orchestra, attributes);
+        s = new instruments::Earth(orchestra, attributes);
 
 
 		std::cout << "Starting sound server on " << full_host << std::endl;

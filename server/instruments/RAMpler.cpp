@@ -10,12 +10,24 @@
 #include "RAMpler.hpp"
 
 instruments::RAMpler::RAMpler(Orchestra* anOrch, Json::Value initialAttributes) : instruments::Instrument::Instrument(anOrch, initialAttributes) {
-    std::stringstream filepath;
+    return;
+};
 
-    filepath << stk::Stk::rawwavePath() << "Earth.aif";
+void instruments::RAMpler::set_clip(std::string clipPath) {
+    // Load clip
+    this->mClip = new stk::FileWvIn(clipPath);
 
-    // Load wavefile
-    this->mClip = new stk::FileWvIn(filepath.str());
+    // If clip is large
+    unsigned long fileSize = this->mClip->getSize();
+    if(fileSize > 1000000) {
+        // Close and delete `FileWvIn` instance
+        this->mClip->closeFile();
+        delete this->mClip;
+
+        // Load again with larger chuckThreshold to ensure it
+        // stays in RAM.
+        this->mClip = new stk::FileWvIn(clipPath, false, true, fileSize+1);
+    }
 }
 
 stk::StkFloat instruments::RAMpler::next_samp(int channel) {

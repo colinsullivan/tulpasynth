@@ -10,15 +10,27 @@
 #ifndef _EARTH_HPP_
 #define _EARTH_HPP_
 
-#include "Instrument.hpp"
 #include "RAMpler.hpp"
 
 namespace instruments {
     class Earth : private RAMpler
     {
     public:
-        Earth();
-        ~Earth();
+        Earth(Orchestra* anOrch, Json::Value initialAttributes);
+        ~Earth() {};
+
+        virtual void play() {
+            return RAMpler::play();
+        };
+
+        virtual stk::StkFloat next_samp(int channel) {
+            return RAMpler::next_samp(channel);
+        };
+
+        virtual stk::StkFrames& next_buf(stk::StkFrames& frames) {
+            return RAMpler::next_buf(frames);
+        };
+
     };
 };
 #endif
