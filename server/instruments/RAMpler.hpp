@@ -10,12 +10,18 @@
 #ifndef _RAMPLER_HPP_
 #define _RAMPLER_HPP_
 
+#include <string.h>
+
 #include <Stk.h>
 #include <FileWvIn.h>
 
 #include "Instrument.hpp"
 
 namespace instruments {
+
+    /**
+     *  @class  A sampler which keeps audio in RAM.
+     **/
     class RAMpler : private Instrument
     {
     public:
@@ -23,7 +29,14 @@ namespace instruments {
          *  Create a `RAMpler` object.
          **/
         RAMpler(Orchestra* anOrch, Json::Value initialAttributes);
-        ~RAMpler(){};
+        ~RAMpler() {
+            delete this->mClip;
+        };
+
+        /**
+         *  Set clip to use
+         **/
+        void set_clip(std::string clipPath);
 
         /**
          *  Helper method to reset `mPlaying` and `mClip` if we've finished
@@ -35,7 +48,7 @@ namespace instruments {
         virtual void play() {
             this->mPlaying = true;
             return;
-        }
+        };
 
         virtual stk::StkFloat next_samp(int channel);
         virtual stk::StkFrames& next_buf(stk::StkFrames& frames);

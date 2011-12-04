@@ -36,9 +36,6 @@ class hwfinal.views.Timeline extends Backbone.View
         for i in [0...yGridSize]
             @yGrid.push(i*@yPxPerGrid)
         
-        console.log '@yGrid'
-        console.log @yGrid
-        
 
 
         ###
