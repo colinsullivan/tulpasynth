@@ -56,7 +56,7 @@ namespace instruments {
             return this->attributes;
         };
 
-        void set_attributes(Json::Value newAttributes) {
+        virtual void set_attributes(Json::Value newAttributes) {
             // Default gain value
             double gain = newAttributes.get("gain", this->defaultAttributes["gain"].asDouble()).asDouble();
             newAttributes["gain"] = gain;

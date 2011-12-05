@@ -111,12 +111,14 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
             x: pen.x
             y: pen.y
 
+        
+
         # Bubbly
         bubblyExample = hwfinal.canvas.circle pen.x, pen.y, 10
 
         bubblyExample.attr
             fill: 'black'
-        
+
         bubblyExample.click () =>
             @hide()
 
@@ -145,6 +147,24 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
                 y: coords.y
                 pitchIndex: @currentPitchIndex
         @set.push earthExample
+
+        pen.x += 40
+
+        # Prickly
+        pricklyExample = hwfinal.canvas.ellipse pen.x, pen.y, 15, 10
+        pricklyExample.attr
+            fill: 'green'
+        pricklyExample.click () =>
+            @hide()
+            coords = @currentArrowCoords
+            startTime = coords.x/hwfinal.canvas.width
+            new hwfinal.models.instruments.Prickly
+                startTime: startTime
+                endTime: startTime+0.1
+                x: coords.x
+                y: coords.y
+                pitchIndex: @currentPitchIndex
+        @set.push pricklyExample
 
 
 

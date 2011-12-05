@@ -15,11 +15,11 @@
 #include <iostream>
 
 #include "Globals.h"
-#include "instruments/Instrument.hpp"
+// #include "instruments/Instrument.hpp"
 
-// namespace instruments {
-//     class Instrument;
-// }
+namespace instruments {
+    class Instrument;
+}
 
 /**
  *  @class  Encapsulation of current loop and instruments.
@@ -58,33 +58,19 @@ public:
     /**
      *  Add a new instrument to the orchestra
      **/
-    void add_instrument(instruments::Instrument* anInstrument) {
-        this->instrs->insert(std::pair<int, instruments::Instrument*>(anInstrument->get_id(), anInstrument));
-    };
+    void add_instrument(instruments::Instrument* anInstrument);
 
     /**
      *  Delete an instrument from the orchestra.
      **/
-    void delete_instrument(int instrumentId) {
-        this->instrs->erase(instrumentId);
-    };
+    void delete_instrument(int instrumentId);
 
     /**
      *  Retrieve an instrument given an id.
      *
      *  @param  instrumentId  The id of the instrument to retrieve.
      **/
-    instruments::Instrument* get_instrument(int instrumentId) {
-        std::map<int, instruments::Instrument*>::iterator result = this->instrs->find(instrumentId);
-
-        if(result == this->instrs->end()) {
-            std::cerr << "Instrument with id " << instrumentId << " not found." << std::endl;
-            return NULL;
-        }
-        else {
-            return (*result).second;
-        }
-    };
+    instruments::Instrument* get_instrument(int instrumentId);
 
     /**
      *  Generate a new ID for a newly created instrument.
@@ -96,9 +82,7 @@ public:
     /**
      *  Return the entire list of instruments for iteration.
      **/
-    std::map<int, instruments::Instrument*>* get_instruments() {
-        return this->instrs;
-    }
+    std::map<int, instruments::Instrument*>* get_instruments();
 
 private:
 
