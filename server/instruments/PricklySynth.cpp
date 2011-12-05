@@ -103,21 +103,24 @@ void instruments::PricklySynth::play() {
     Instrument::play();
 
     // Restart filter
-    this->mSweeper.addPhase(1-this->mSweeper.lastOut());
+    // this->mSweeper.addPhase(1-this->mSweeper.lastOut());
 
     // Set filter to oscillate once during entire note
-    float durationSeconds = (
-        (this->attributes["endTime"].asFloat() - this->attributes["startTime"].asFloat())
-        *(float)this->orch->get_duration()
-    )/(float)SAMPLE_RATE;
-    this->mSweeper.setFrequency(durationSeconds*2);
+    // float durationSeconds = (
+    //     (this->attributes["endTime"].asFloat() - this->attributes["startTime"].asFloat())
+    //     *(float)this->orch->get_duration()
+    // )/(float)SAMPLE_RATE;
+    // this->mSweeper.setFrequency(durationSeconds);
 
     this->mEnvelope.keyOn();
 };
 
 
 stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
-    int durationSamples = floor((this->attributes["endTime"].asFloat() - this->attributes["startTime"].asFloat())*(float)this->orch->get_duration());
+    int durationSamples = floor(
+        (this->attributes["endTime"].asFloat() - this->attributes["startTime"].asFloat())
+        *(float)this->orch->get_duration()
+    );
 
     if(this->mPlaying) {
         // Fill buffer
@@ -149,12 +152,12 @@ stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
             this->m_y1 = y0;
 
             // Envelope sound
-            frames[i] *= this->mEnvelope.tick();
+            // frames[i] *= this->mEnvelope.tick();
 
             this->mPlayedSamples++;
 
             // If there's only 0.2 seconds left
-            if(durationSamples - this->mPlayedSamples == 0.8*SAMPLE_RATE) {
+            if((durationSamples - this->mPlayedSamples) == 0.8*SAMPLE_RATE) {
                 this->mEnvelope.keyOff();
             }
 

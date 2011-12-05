@@ -67,7 +67,7 @@ class hwfinal.SocketHelper
                 model.set
                     id: id
                 
-                # Save
+                # Save and notify server
                 model.save {},
                     method: 'create'
                 

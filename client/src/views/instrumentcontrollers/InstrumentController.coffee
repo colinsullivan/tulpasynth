@@ -35,6 +35,7 @@ class hwfinal.views.instrumentcontrollers.InstrumentController extends Backbone.
         #     # delete @
         
         @render()
+        @post_render()
     
     render: () ->
         if @controller
