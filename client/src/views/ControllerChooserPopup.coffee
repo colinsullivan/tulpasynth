@@ -113,59 +113,61 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
 
         
 
-        # Bubbly
-        bubblyExample = hwfinal.canvas.circle pen.x, pen.y, 10
+        if pitchIndex <= 16
+            # Bubbly
+            bubblyExample = hwfinal.canvas.circle pen.x, pen.y, 10
 
-        bubblyExample.attr
-            fill: 'black'
+            bubblyExample.attr
+                fill: 'black'
 
-        bubblyExample.click () =>
-            @hide()
+            bubblyExample.click () =>
+                @hide()
 
-            coords = @currentArrowCoords
+                coords = @currentArrowCoords
 
-            new hwfinal.models.instruments.Bubbly
-                startTime: coords.x/hwfinal.canvas.width
-                x: coords.x
-                y: coords.y
-                pitchIndex: @currentPitchIndex
-        
-        @set.push bubblyExample
+                new hwfinal.models.instruments.Bubbly
+                    startTime: coords.x/hwfinal.canvas.width
+                    x: coords.x
+                    y: coords.y
+                    pitchIndex: @currentPitchIndex
+            
+            @set.push bubblyExample
 
         pen.x += 25
 
-        # Earth
-        earthExample = hwfinal.canvas.rect pen.x, pen.y, 10, 10
-        earthExample.attr
-            fill: 'black'
-        earthExample.click () =>
-            @hide()
-            coords = @currentArrowCoords
-            new hwfinal.models.instruments.Earth
-                startTime: coords.x/hwfinal.canvas.width
-                x: coords.x
-                y: coords.y
-                pitchIndex: @currentPitchIndex
-        @set.push earthExample
+        if pitchIndex >= 15
+            # Earth
+            earthExample = hwfinal.canvas.rect pen.x, pen.y, 10, 10
+            earthExample.attr
+                fill: 'black'
+            earthExample.click () =>
+                @hide()
+                coords = @currentArrowCoords
+                new hwfinal.models.instruments.Earth
+                    startTime: coords.x/hwfinal.canvas.width
+                    x: coords.x
+                    y: coords.y
+                    pitchIndex: @currentPitchIndex
+            @set.push earthExample
 
         pen.x += 40
 
-        # Prickly
-        pricklyExample = hwfinal.canvas.ellipse pen.x, pen.y, 15, 10
-        pricklyExample.attr
-            fill: 'green'
-        pricklyExample.click () =>
-            @hide()
-            coords = @currentArrowCoords
-            startTime = coords.x/hwfinal.canvas.width
-            new hwfinal.models.instruments.Prickly
-                startTime: startTime
-                endTime: startTime+0.1
-                x: coords.x
-                y: coords.y
-                pitchIndex: @currentPitchIndex
-        @set.push pricklyExample
-
+        if pitchIndex >= 18
+            # Prickly
+            pricklyExample = hwfinal.canvas.ellipse pen.x, pen.y, 15, 10
+            pricklyExample.attr
+                fill: 'green'
+            pricklyExample.click () =>
+                @hide()
+                coords = @currentArrowCoords
+                startTime = coords.x/hwfinal.canvas.width
+                new hwfinal.models.instruments.Prickly
+                    startTime: startTime
+                    endTime: startTime+0.1
+                    x: coords.x
+                    y: coords.y
+                    pitchIndex: @currentPitchIndex
+            @set.push pricklyExample
 
 
 

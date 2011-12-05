@@ -12,10 +12,47 @@
 
 instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAttributes) : instruments::Instrument::Instrument(anOrch, initialAttributes) {
 
+    float descendingMinorThirds[32] = {
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        440.000000, 
+        369.994423, 
+        311.126984, 
+        261.625565, 
+        220.000000, 
+        184.997211, 
+        155.563492, 
+        130.812783, 
+        110.000000, 
+        92.498606, 
+        77.781746, 
+        65.406391, 
+        55.000000, 
+        46.249303, 
+        38.890873
+    };
+
+    stk::StkFloat freq = descendingMinorThirds[initialAttributes["pitchIndex"].asInt()];
+
+
+
     this->mMinFilterFreq = 110;
     this->mMaxFilterFreq = 2000;
 
-    stk::StkFloat freq = 440;
 
     // BPF f;
     this->mFundSawGain = 1.0;
@@ -29,7 +66,7 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
     this->mLowSine.setFrequency(freq/4);
 
     this->mJuiceGain = 1;
-    this->mJuice.setFrequency(freq/8);
+    this->mJuice.setFrequency(55);
 
     this->mSweeper.setFrequency(0.15);
     this->mSweeperGain = 1;
@@ -42,7 +79,7 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
 
     this->filterFreq(this->mMinFilterFreq);
 
-    this->get_attributes()["gain"] = 0.75;
+    this->attributes["gain"] = 0.40;
 
     this->mPlayedSamples = 0;
 
