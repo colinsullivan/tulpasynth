@@ -68,8 +68,7 @@ namespace instruments {
          *  Start playing this instrument
          **/
         virtual void play() {
-            // Should be overridden by subclasses
-            std::cerr << "WARNING: instruments::Instrument::play does nothing." << std::endl;
+            this->mPlaying = true;
             return;
         };
 
@@ -112,6 +111,12 @@ namespace instruments {
          *  Reference to the orchestra
          **/
         Orchestra* orch;
+
+        /**
+         *  If this instrument is currently playing.
+         **/
+        bool mPlaying;
+
     private:
 
     };
