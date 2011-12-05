@@ -8,7 +8,8 @@ OBJS = 	$(EXECUTABLE).o \
 		Glitch.o \
 		Bubbly.o \
 		RAMpler.o \
-		Earth.o
+		Earth.o \
+		PricklySynth.o
 
 PRECFLAGS = -O2 -ggdb -Wall \
 	-I./vendor/zaphoyd-websocketpp-ec28725/src \
