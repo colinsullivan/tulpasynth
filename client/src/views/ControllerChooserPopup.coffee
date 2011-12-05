@@ -133,11 +133,12 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
             
             @set.push bubblyExample
 
-        pen.x += 25
+        pen.x += 20
+        pen.y -= 10
 
         if pitchIndex >= 15
             # Earth
-            earthExample = hwfinal.canvas.rect pen.x, pen.y, 10, 10
+            earthExample = hwfinal.canvas.rect pen.x, pen.y, 20, 20
             earthExample.attr
                 fill: 'black'
             earthExample.click () =>
@@ -151,6 +152,7 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
             @set.push earthExample
 
         pen.x += 40
+        pen.y += 10
 
         if pitchIndex >= 18
             # Prickly
