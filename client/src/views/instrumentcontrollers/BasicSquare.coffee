@@ -17,8 +17,8 @@ class hwfinal.views.instrumentcontrollers.BasicSquare extends hwfinal.views.inst
 
         @controller = hwfinal.canvas.rect @instrument.get('x'),
             @instrument.get('y'),
-            10,
-            10
+            20,
+            20
         
         @controller.attr
             fill: 'black'
