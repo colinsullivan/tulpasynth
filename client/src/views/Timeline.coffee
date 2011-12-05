@@ -81,7 +81,7 @@ class hwfinal.views.Timeline extends Backbone.View
         orchestra.bind 'remove:instruments', (instrument) =>
             controller = @instrumentControllers[instrument.get('id')]
 
-            controller.controller.remove()
+            controller.all.remove()
             delete controller
             @instrumentControllers[instrument.get('id')] = null
         
@@ -134,6 +134,7 @@ class hwfinal.views.Timeline extends Backbone.View
             "Bubbly": 'BasicCircle'
             "Earth": 'BasicSquare'
             'Prickly': 'AdjustableOval'
+            'DistortedSnare': 'BasicDiamond'
 
 
         instrumentController = new instrumentControllerClasses[instrumentControllerClassMap[instrumentClassName]]

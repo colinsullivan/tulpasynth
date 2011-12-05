@@ -22,7 +22,7 @@
 
 #include "Orchestra.hpp"
 
-#include "instruments/PricklySynth.hpp"
+#include "instruments/DistortedSnare.hpp"
 
 
 using boost::asio::ip::tcp;
@@ -36,7 +36,7 @@ RtAudioStream* audio;
 Orchestra* orchestra;
 
 // Test
-// instruments::PricklySynth* s;
+// instruments::DistortedSnare* s;
 // bool sPlayed = false;
 
 /**
@@ -285,7 +285,7 @@ int main(int argc, char* argv[]) {
         // Json::Value attributes;
         // attributes["id"] = orchestra->generate_instrument_id();
         // attributes["disabled"] = true;
-        // s = new instruments::PricklySynth(orchestra, attributes);
+        // s = new instruments::DistortedSnare(orchestra, attributes);
 
 
 		std::cout << "Starting sound server on " << full_host << std::endl;

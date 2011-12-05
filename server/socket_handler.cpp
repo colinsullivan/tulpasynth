@@ -19,6 +19,7 @@
 #include "instruments/Bubbly.hpp"
 #include "instruments/Earth.hpp"
 #include "instruments/PricklySynth.hpp"
+#include "instruments/DistortedSnare.hpp"
 
 
 using websocketpp::session_ptr;
@@ -121,6 +122,10 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		else if(clientModelNamespace == "hwfinal.models.instruments.Prickly") {
 			// Create new Prickly synth
 			newInstr = (instruments::Instrument*)new instruments::PricklySynth(this->orchestra, messageObject["attributes"]);
+		}
+		else if(clientModelNamespace == "hwfinal.models.instruments.DistortedSnare") {
+			// Create new snare
+			newInstr = (instruments::Instrument*)new instruments::DistortedSnare(this->orchestra, messageObject["attributes"]);
 		}
 		else {
 			std::cerr << "Namespace " << clientModelNamespace << " unrecognized." << std::endl;

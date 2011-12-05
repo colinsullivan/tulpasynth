@@ -172,6 +172,25 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
             @set.push pricklyExample
 
 
+        pen.x -= 30
+        pen.y -= 10
+
+        if pitchIndex < 15
+            # DistortedSnare
+            snareExample = hwfinal.canvas.path 'M'+pen.x+','+pen.y+' l 10,10 l -10,10 l -10,-10 l 10,-10z'
+            snareExample.attr
+                fill: 'red'
+            snareExample.click () =>
+                @hide()
+                coords = @currentArrowCoords
+                startTime = coords.x/hwfinal.canvas.width
+                new hwfinal.models.instruments.DistortedSnare
+                    startTime: startTime
+                    x: coords.x
+                    y: coords.y
+                    pitchIndex = @currentPitchIndex
+            @set.push(snareExample)
+
 
         ###
         #   Now draw box around sample controllers

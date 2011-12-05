@@ -21,6 +21,10 @@ class hwfinal.views.instrumentcontrollers.InstrumentController extends Backbone.
         ###
         @controller = null
         
+        ###
+        #   All objects relating to this controller must reside in this set
+        ###
+        @all = hwfinal.canvas.set()
 
         # When instrument's data is changed, re-render        
         @instrument.bind 'change', () => 
@@ -38,10 +42,6 @@ class hwfinal.views.instrumentcontrollers.InstrumentController extends Backbone.
         @post_render()
     
     render: () ->
-        if @controller
-            @controller.remove()
-            @controller = null
-
         return @
     
     post_render: () ->
