@@ -34,6 +34,9 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
     this->mSweeper.setFrequency(0.15);
     this->mSweeperGain = 1;
 
+    // Note on in 1/10 of a second
+    this->mEnvelope.setTime(0.20);
+
     this->m_y1 = 0;
     this->m_y2 = 0;
 
@@ -59,6 +62,23 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
 
 // }
 
+void instruments::PricklySynth::play() {
+    Instrument::play();
+
+    // Restart filter
+    this->mSweeper.addPhase(1-this->mSweeper.lastOut());
+
+    // Set filter to oscillate once during entire note
+    float durationSeconds = (
+        (this->attributes["endTime"].asFloat() - this->attributes["startTime"].asFloat())
+        *(float)this->orch->get_duration()
+    )/(float)SAMPLE_RATE;
+    this->mSweeper.setFrequency(durationSeconds*2);
+
+    this->mEnvelope.keyOn();
+};
+
+
 stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
     int durationSamples = floor((this->attributes["endTime"].asFloat() - this->attributes["startTime"].asFloat())*(float)this->orch->get_duration());
 
@@ -76,7 +96,7 @@ stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
             this->filterFreq(
                 (this->mMaxFilterFreq-this->mMinFilterFreq)
                 *
-                (0.25*(this->mSweeper.tick()+1))
+                (0.5*(this->mSweeper.tick()+1))
                 +this->mMinFilterFreq
             );
 
@@ -91,8 +111,17 @@ stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
             this->m_y2 = this->m_y1;
             this->m_y1 = y0;
 
+            // Envelope sound
+            frames[i] *= this->mEnvelope.tick();
+
             this->mPlayedSamples++;
 
+            // If there's only 0.2 seconds left
+            if(durationSamples - this->mPlayedSamples == 0.8*SAMPLE_RATE) {
+                this->mEnvelope.keyOff();
+            }
+
+            // If we're done
             if(this->mPlayedSamples >= durationSamples) {
                 this->mPlaying = false;
                 this->mPlayedSamples = 0;
@@ -100,9 +129,6 @@ stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
 
 
         }
-        // for(int i = 0; i < frames.size(); i++) {
-            
-        // }
     }
     return frames;
 }
