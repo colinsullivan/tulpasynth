@@ -8,7 +8,7 @@
  **/
 
 #include <math.h>
-#include <vector>
+#include <map>
 #include <iostream>
 
 #include <websocketpp.hpp>
@@ -98,7 +98,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
 
 
     // Get all instruments
-    std::vector<instruments::Instrument*>* instrs = orchestra->get_instruments();
+    std::map<int, instruments::Instrument*>* instrs = orchestra->get_instruments();
 
     // Get start time of next buffer (relative to loop duration)
     int loopDuration = orchestra->get_duration();
@@ -108,8 +108,9 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     StkFrames* tempFrames = new StkFrames(0.0, numFrames, CHANNELS);
 
     // For each instrument
-    for(unsigned int j = 0; j < instrs->size(); j++) {
-        instruments::Instrument* instr = (*instrs)[j];
+    std::map<int, instruments::Instrument*>::iterator instrsIterator;
+    for(instrsIterator = instrs->begin(); instrsIterator != instrs->end(); instrsIterator++) {
+        instruments::Instrument* instr = (*instrsIterator).second;
 
         // If instrument should be triggered during this buffer
         double startTime = instr->get_attributes()["startTime"].asDouble();

@@ -15,12 +15,37 @@ class hwfinal.views.instrumentcontrollers.InstrumentController extends Backbone.
         options = options || {}
 
         @instrument = options.instrument
+
+        ###
+        #   controller will be the reference to the RaphaelJS object.
+        ###
+        @controller = null
         
 
         # When instrument's data is changed, re-render        
         @instrument.bind 'change', () => 
             @render()
+        
+        # When instrument is deleted, delete controller
+        # @instrument.bind 'destroy', () =>
+        #     console.log '@controller'
+        #     console.log @controller
+            
+        #     @controller.hide()
+        #     # delete @
+        
+        @render()
     
     render: () ->
+        if @controller
+            @controller.remove()
+            @controller = null
 
         return @
+    
+    post_render: () ->
+
+        @controller.click () =>
+            console.log "Deleting instrument #{@instrument.get('id')}"
+            @instrument.destroy()
+

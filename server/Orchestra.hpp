@@ -11,7 +11,7 @@
 #ifndef _ORCHESTRA_HPP_
 #define _ORCHESTRA_HPP_
 
-#include <vector>
+#include <map>
 #include <iostream>
 
 #include "Globals.h"
@@ -59,32 +59,32 @@ public:
      *  Add a new instrument to the orchestra
      **/
     void add_instrument(instruments::Instrument* anInstrument) {
-        this->instrs->push_back(anInstrument);
-    }
+        this->instrs->insert(std::pair<int, instruments::Instrument*>(anInstrument->get_id(), anInstrument));
+    };
 
     /**
-     *  Retrieve an instrument given an id. TODO: better
-     *  data structure.
+     *  Delete an instrument from the orchestra.
+     **/
+    void delete_instrument(int instrumentId) {
+        this->instrs->erase(instrumentId);
+    };
+
+    /**
+     *  Retrieve an instrument given an id.
      *
      *  @param  instrumentId  The id of the instrument to retrieve.
      **/
     instruments::Instrument* get_instrument(int instrumentId) {
-        instruments::Instrument* result = NULL;
-        for(unsigned int i = 0; i < this->instrs->size(); i++) {
-            if((*this->instrs)[i]->get_id() == instrumentId) {
-                result = (*this->instrs)[i];
-                break;
-            }
-        }
+        std::map<int, instruments::Instrument*>::iterator result = this->instrs->find(instrumentId);
 
-        if(result == NULL) {
+        if(result == this->instrs->end()) {
             std::cerr << "Instrument with id " << instrumentId << " not found." << std::endl;
             return NULL;
         }
         else {
-            return result;
+            return (*result).second;
         }
-    }
+    };
 
     /**
      *  Generate a new ID for a newly created instrument.
@@ -96,7 +96,7 @@ public:
     /**
      *  Return the entire list of instruments for iteration.
      **/
-    std::vector<instruments::Instrument*>* get_instruments() {
+    std::map<int, instruments::Instrument*>* get_instruments() {
         return this->instrs;
     }
 
@@ -113,9 +113,10 @@ private:
     double t;
 
     /**
-     *  All instruments currently instantiated
+     *  All instruments currently instantiated.  They are mapped 
+     *  by their ids.
      **/
-    std::vector<instruments::Instrument*>* instrs;
+    std::map<int, instruments::Instrument*>* instrs;
 
     /**
      *  Static incrementing integer for ids of new 
