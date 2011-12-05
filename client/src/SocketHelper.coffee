@@ -104,7 +104,10 @@ class hwfinal.SocketHelper
                     if not modelInstance
                         throw new Error "Model #{message.namespace} id: #{message.attributes.id} not found."
                     
-                    modelInstance.destroy()
+                    # Delete local instances of model, do not inform
+                    # server.
+                    modelInstance.destroy
+                        nosave: true
                     
                 else
                     throw new Error "Method #{method} not recognized."

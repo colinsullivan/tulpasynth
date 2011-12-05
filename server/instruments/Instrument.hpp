@@ -38,6 +38,12 @@ namespace instruments {
         Instrument(Orchestra* anOrch, Json::Value initialAttributes);
         ~Instrument(){};
 
+        /**
+         *  Should be called when instrument is finished initializing,
+         *  and is ready to be played.
+         **/
+        void finish_initializing();
+
         int get_id() {
             return this->attributes["id"].asInt();
         };
@@ -107,7 +113,7 @@ namespace instruments {
          **/
         Orchestra* orch;
     private:
-        
+
     };
 
 }

@@ -154,7 +154,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		// Delete the instrument
 		this->orchestra->delete_instrument(messageObject["attributes"]["id"].asInt());
 
-		// Relay message
+		// Relay message to all other clients
 		std::string outgoingMessage = writer.write(messageObject);
 		std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
 		this->send_to_all_but_one(msg, client);
@@ -276,6 +276,7 @@ void socket_handler::send_to_all_but_one(std::string data, session_ptr one) {
 	std::map<session_ptr,std::string>::iterator it;
 	for (it = m_connections.begin(); it != m_connections.end(); it++) {
 		if((*it).first != one) {
+			std::cout << "Sending message to " << (*it).first << std::endl;
 			(*it).first->send(data);
 		}
 	}    

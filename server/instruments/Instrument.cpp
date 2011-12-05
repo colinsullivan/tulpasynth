@@ -24,7 +24,10 @@ instruments::Instrument::Instrument(Orchestra* anOrch, Json::Value initialAttrib
     else {
         // Read in all attributes
         this->set_attributes(initialAttributes);
-        this->orch->add_instrument(this);
     }
 
 };
+
+void instruments::Instrument::finish_initializing() {
+    this->orch->add_instrument(this);
+}
