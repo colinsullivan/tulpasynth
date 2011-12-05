@@ -15,13 +15,16 @@ class hwfinal.views.instrumentcontrollers.BasicSquare extends hwfinal.views.inst
     render: () ->
         super
 
-        @controller = hwfinal.canvas.rect @instrument.get('x'),
-            @instrument.get('y'),
-            20,
-            20
+        if not @controller
+            @controller = hwfinal.canvas.rect()
+            @all.push @controller
         
         @controller.attr
             fill: 'black'
+            x: @instrument.get('x')
+            y: @instrument.get('y')
+            width: 20
+            height: 20
         
         @post_render()
 

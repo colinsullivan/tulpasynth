@@ -9,7 +9,8 @@ OBJS = 	$(EXECUTABLE).o \
 		Bubbly.o \
 		RAMpler.o \
 		Earth.o \
-		PricklySynth.o
+		PricklySynth.o \
+		DistortedSnare.o
 
 PRECFLAGS = -O2 -ggdb -Wall \
 	-I./vendor/zaphoyd-websocketpp-ec28725/src \
