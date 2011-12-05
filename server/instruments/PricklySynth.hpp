@@ -15,6 +15,7 @@
 
 #include <BlitSaw.h>
 #include <SineWave.h>
+#include <Envelope.h>
 
 #include "Instrument.hpp"
 #include "../Orchestra.hpp"
@@ -28,9 +29,7 @@ public:
     PricklySynth(Orchestra* anOrch, Json::Value initialAttributes);
     ~PricklySynth() {};
 
-    virtual void play() {
-        Instrument::play();
-    };
+    virtual void play();
 
     /**
      *  Override this so we can handle calculation of off time
@@ -61,6 +60,11 @@ protected:
 
     stk::SineWave mSweeper;
     stk::StkFloat mSweeperGain;
+
+    /**
+     *  Master envelope for voice
+     **/
+    stk::Envelope mEnvelope;
 
     /**
      *  When modulating filter's frequency, stay within bounds.
