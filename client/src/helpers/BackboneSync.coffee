@@ -16,8 +16,9 @@ Backbone.sync = (method, model, options) ->
     
     if options.method
         message.method = options.method
-    
-    hwfinal.socket.send message
+
+    if options.nosave? and options.nosave == true    
+        hwfinal.socket.send message
 
     options.success()
     
