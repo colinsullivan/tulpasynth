@@ -36,8 +36,8 @@ RtAudioStream* audio;
 Orchestra* orchestra;
 
 // Test
-instruments::PricklySynth* s;
-bool sPlayed = false;
+// instruments::PricklySynth* s;
+// bool sPlayed = false;
 
 /**
  *  Interval at which to update clients
@@ -88,12 +88,12 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         }
     }
 
-    if(g_t > SAMPLE_RATE*3 && !sPlayed) {
-        std::cout << "playing test" << std::endl;
-        // s->freq(440);
-        s->play();
-        sPlayed = true;
-    }
+    // if(g_t > SAMPLE_RATE*3 && !sPlayed) {
+    //     std::cout << "playing test" << std::endl;
+    //     // s->freq(440);
+    //     s->play();
+    //     sPlayed = true;
+    // }
 
 
     // Get all instruments
@@ -128,7 +128,6 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
             std::cout << "playing instrument #" << instr->get_id() << std::endl;
             instr->play();
         }
-
 
         // Pull samples off of instrument wether it is playing or not.
         instr->next_buf((*tempFrames));
@@ -283,10 +282,10 @@ int main(int argc, char* argv[]) {
 		// Start audio generator
 	    audio->init(callback);
 
-        Json::Value attributes;
-        attributes["id"] = orchestra->generate_instrument_id();
-        attributes["disabled"] = true;
-        s = new instruments::PricklySynth(orchestra, attributes);
+        // Json::Value attributes;
+        // attributes["id"] = orchestra->generate_instrument_id();
+        // attributes["disabled"] = true;
+        // s = new instruments::PricklySynth(orchestra, attributes);
 
 
 		std::cout << "Starting sound server on " << full_host << std::endl;

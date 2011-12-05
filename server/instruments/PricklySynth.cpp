@@ -9,6 +9,7 @@
 
 #include "PricklySynth.hpp"
 
+
 instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAttributes) : instruments::Instrument::Instrument(anOrch, initialAttributes) {
 
     this->mMinFilterFreq = 110;
@@ -40,13 +41,30 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
 
     this->get_attributes()["gain"] = 0.75;
 
+    this->mPlayedSamples = 0;
+
     this->finish_initializing();
 };
 
+// void instruments::PricklySynth::set_attributes(Json::Value newAttributes) {
+
+//     // Calculate duration from start and end times
+//     float dur = newAttributes["endTime"] - newAttributes["startTime"];
+
+//     bool durationHasChanged = false;
+
+//     instruments::Instrument::set_attributes(newAttributes);
+
+
+
+// }
+
 stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
+    int durationSamples = floor((this->attributes["endTime"].asFloat() - this->attributes["startTime"].asFloat())*(float)this->orch->get_duration());
+
     if(this->mPlaying) {
         // Fill buffer
-        for(int i = 0; i < frames.size(); i++) {
+        for(unsigned int i = 0; i < frames.size(); i++) {
             frames[i] += this->mFundSineGain*this->mFundSine.tick();
             frames[i] += this->mFundSawGain*this->mFundSaw.tick();
             frames[i] += this->mLowSineGain*this->mLowSine.tick();
@@ -72,6 +90,14 @@ stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
             frames[i] = this->m_a0 * (y0 - this->m_y2);
             this->m_y2 = this->m_y1;
             this->m_y1 = y0;
+
+            this->mPlayedSamples++;
+
+            if(this->mPlayedSamples >= durationSamples) {
+                this->mPlaying = false;
+                this->mPlayedSamples = 0;
+            }
+
 
         }
         // for(int i = 0; i < frames.size(); i++) {

@@ -11,10 +11,13 @@
 #ifndef _PRICKLYSYNTH_HPP_
 #define _PRICKLYSYNTH_HPP_
 
+#include <math.h>
+
 #include <BlitSaw.h>
 #include <SineWave.h>
 
 #include "Instrument.hpp"
+#include "../Orchestra.hpp"
 #include "../Globals.h"
 
 namespace instruments {
@@ -27,11 +30,22 @@ public:
 
     virtual void play() {
         Instrument::play();
-    }
+    };
+
+    /**
+     *  Override this so we can handle calculation of off time
+     **/
+    // virtual void set_attributes(Json::Value newAttributes);
 
     virtual stk::StkFrames& next_buf(stk::StkFrames& frames);
 
 protected:
+
+    /**
+     *  How many samples we've played so far (in this iteration)
+     **/
+    int mPlayedSamples;
+
     // BPF f;
     stk::BlitSaw mFundSaw;
     stk::StkFloat mFundSawGain;

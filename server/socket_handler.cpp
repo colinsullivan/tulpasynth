@@ -18,6 +18,7 @@
 #include "instruments/Glitch.hpp"
 #include "instruments/Bubbly.hpp"
 #include "instruments/Earth.hpp"
+#include "instruments/PricklySynth.hpp"
 
 
 using websocketpp::session_ptr;
@@ -94,6 +95,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		// Respond with next instrument id
 		outgoingMessageObject["method"] = "response/id";
 		outgoingMessageObject["id"] = this->orchestra->generate_instrument_id();
+		std::cout << "Responding with id: " <<  outgoingMessageObject["id"] << std::endl;
 		client->send(writer.write(outgoingMessageObject));
 	}
 	else if(method == "create") {
@@ -115,6 +117,10 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		else if(clientModelNamespace == "hwfinal.models.instruments.Earth") {
 			// Create new earth instrument
 			newInstr = (instruments::Instrument*)new instruments::Earth(this->orchestra, messageObject["attributes"]);
+		}
+		else if(clientModelNamespace == "hwfinal.models.instruments.Prickly") {
+			// Create new Prickly synth
+			newInstr = (instruments::Instrument*)new instruments::PricklySynth(this->orchestra, messageObject["attributes"]);
 		}
 		else {
 			std::cerr << "Namespace " << clientModelNamespace << " unrecognized." << std::endl;
