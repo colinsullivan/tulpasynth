@@ -22,8 +22,7 @@
 
 #include "Orchestra.hpp"
 
-#include "instruments/Glitch.hpp"
-#include "instruments/Earth.hpp"
+#include "instruments/PricklySynth.hpp"
 
 
 using boost::asio::ip::tcp;
@@ -37,8 +36,8 @@ RtAudioStream* audio;
 Orchestra* orchestra;
 
 // Test
-// instruments::Earth* s;
-// bool sPlayed = false;
+instruments::PricklySynth* s;
+bool sPlayed = false;
 
 /**
  *  Interval at which to update clients
@@ -89,12 +88,12 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         }
     }
 
-    // if(g_t > SAMPLE_RATE*3 && !sPlayed) {
-    //     std::cout << "playing test" << std::endl;
-    //     // s->freq(440);
-    //     s->play();
-    //     sPlayed = true;
-    // }
+    if(g_t > SAMPLE_RATE*3 && !sPlayed) {
+        std::cout << "playing test" << std::endl;
+        // s->freq(440);
+        s->play();
+        sPlayed = true;
+    }
 
 
     // Get all instruments
@@ -105,7 +104,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
     double nextFrameT = (double)((g_t+numFrames)%loopDuration)/loopDuration;
 
     // Temporary output buffer
-    StkFrames* tempFrames = new StkFrames(0.0, numFrames, CHANNELS);
+    stk::StkFrames* tempFrames = new stk::StkFrames(0.0, numFrames, CHANNELS);
 
     // For each instrument
     std::map<int, instruments::Instrument*>::iterator instrsIterator;
@@ -284,10 +283,10 @@ int main(int argc, char* argv[]) {
 		// Start audio generator
 	    audio->init(callback);
 
-        // Json::Value attributes;
-        // attributes["id"] = orchestra->generate_instrument_id();
-        // attributes["disabled"] = true;
-        // s = new instruments::Earth(orchestra, attributes);
+        Json::Value attributes;
+        attributes["id"] = orchestra->generate_instrument_id();
+        attributes["disabled"] = true;
+        s = new instruments::PricklySynth(orchestra, attributes);
 
 
 		std::cout << "Starting sound server on " << full_host << std::endl;
