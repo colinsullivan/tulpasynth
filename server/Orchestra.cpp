@@ -19,4 +19,28 @@ Orchestra::Orchestra()  {
      *  ID of new instruments
      **/
     this->NEXT_INSTRUMENT_ID = 1;
+};
+
+void Orchestra::add_instrument(instruments::Instrument* anInstrument) {
+    this->instrs->insert(std::pair<int, instruments::Instrument*>(anInstrument->get_id(), anInstrument));
+};
+
+void Orchestra::delete_instrument(int instrumentId) {
+    this->instrs->erase(instrumentId);
+};
+
+instruments::Instrument* Orchestra::get_instrument(int instrumentId) {
+    std::map<int, instruments::Instrument*>::iterator result = this->instrs->find(instrumentId);
+
+    if(result == this->instrs->end()) {
+        std::cerr << "Instrument with id " << instrumentId << " not found." << std::endl;
+        return NULL;
+    }
+    else {
+        return (*result).second;
+    }
+};
+
+std::map<int, instruments::Instrument*>* Orchestra::get_instruments() {
+    return this->instrs;
 }
