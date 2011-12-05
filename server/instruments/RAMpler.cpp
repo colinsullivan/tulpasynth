@@ -10,6 +10,7 @@
 #include "RAMpler.hpp"
 
 instruments::RAMpler::RAMpler(Orchestra* anOrch, Json::Value initialAttributes) : instruments::Instrument::Instrument(anOrch, initialAttributes) {
+    this->mPlaying = false;
     return;
 };
 

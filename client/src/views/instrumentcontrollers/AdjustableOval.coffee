@@ -47,6 +47,7 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
             ry: 15
         if not @controller
             @controller = hwfinal.canvas.ellipse()
+            @all.push @controller
 
         @controller.attr controllerAttrs
 
@@ -69,11 +70,13 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
 
         if not @leftHandle
             @leftHandle = hwfinal.canvas.circle()
+            @all.push @leftHandle
 
         @leftHandle.attr leftHandleAttrs
         
         if not @rightHandle
             @rightHandle = hwfinal.canvas.circle()
+            @all.push @rightHandle
 
         @rightHandle.attr rightHandleAttrs
 

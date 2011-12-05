@@ -34,8 +34,8 @@ window.hwfinal = {
 $(document).ready () ->
     
     # Set up error handler
-    window.onerror = (e) ->
-        $('#info').text e
+    # window.onerror = (e) ->
+    #     $('#info').text e
 
     # Create RaphaelJS canvas
     hwfinal.canvas = Raphael $('#canvas').get(0), $('#canvas').width(), $('#canvas').height()
