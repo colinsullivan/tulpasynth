@@ -13,7 +13,7 @@
 Orchestra::Orchestra()  {
     this->t = 0.0;
     this->duration = 4*SAMPLE_RATE;
-    this->instrs = new std::vector<instruments::Instrument*>();
+    this->instrs = new std::map<int, instruments::Instrument*>();
 
     /**
      *  ID of new instruments

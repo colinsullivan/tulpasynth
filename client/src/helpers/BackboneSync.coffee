@@ -18,6 +18,8 @@ Backbone.sync = (method, model, options) ->
         message.method = options.method
     
     hwfinal.socket.send message
+
+    options.success()
     
 
 

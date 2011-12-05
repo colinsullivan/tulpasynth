@@ -137,8 +137,6 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		outgoingMessage = writer.write(outgoingMessageObject);
 		std::cout << "outgoingMessage to single client:\n" << outgoingMessage << std::endl;
 		client->send(outgoingMessage);
-
-
 	}
 	else if(method == "update") {
 		// Get instrument.
@@ -148,8 +146,18 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		instr->set_attributes(messageObject["attributes"]);
 
 		// Relay to all other clients
+		std::string outgoingMessage = writer.write(messageObject);
+		std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
 		this->send_to_all_but_one(msg, client);
+	}
+	else if(method == "delete") {
+		// Delete the instrument
+		this->orchestra->delete_instrument(messageObject["attributes"]["id"].asInt());
 
+		// Relay message
+		std::string outgoingMessage = writer.write(messageObject);
+		std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
+		this->send_to_all_but_one(msg, client);
 	}
 	else {
 		std::cerr << "Method " << method << " unrecognized." << std::endl;
