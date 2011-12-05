@@ -71,6 +71,8 @@ instruments::Bubbly::Bubbly(Orchestra* anOrch, Json::Value initialAttributes) : 
     // lpf.setResonance(440, 40, true);
     // lpf.setPole(0.8);
 
+    this->finish_initializing();
+
 };
 
 void instruments::Bubbly::freq(stk::StkFloat aFreq) {

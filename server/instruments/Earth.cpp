@@ -19,4 +19,6 @@ instruments::Earth::Earth(Orchestra* anOrch, Json::Value initialAttributes) : in
     filepath << stk::Stk::rawwavePath() << "Earth.aif";
 
     this->set_clip(filepath.str());
+
+    this->finish_initializing();
 }
