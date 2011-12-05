@@ -133,7 +133,7 @@ class hwfinal.views.Timeline extends Backbone.View
         instrumentControllerClassMap = 
             "Bubbly": 'BasicCircle'
             "Earth": 'BasicSquare'
-            'Prickly': 'BasicOval'
+            'Prickly': 'AdjustableOval'
 
 
         instrumentController = new instrumentControllerClasses[instrumentControllerClassMap[instrumentClassName]]
