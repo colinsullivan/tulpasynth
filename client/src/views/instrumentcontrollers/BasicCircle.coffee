@@ -14,12 +14,14 @@ class hwfinal.views.instrumentcontrollers.BasicCircle extends hwfinal.views.inst
 
     render: () ->
         super
-        
-        @el = hwfinal.canvas.circle @instrument.get('x'),
+
+        @controller = hwfinal.canvas.circle @instrument.get('x'),
             @instrument.get('y'),
             10
         
-        @el.attr
+        @controller.attr
             fill: 'black'
+        
+        @post_render()
         
         return @

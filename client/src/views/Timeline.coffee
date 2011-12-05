@@ -77,6 +77,14 @@ class hwfinal.views.Timeline extends Backbone.View
         orchestra.bind 'add:instruments', (instrument) =>
             @create_instrument_controller instrument
         
+        # If an instrument is deleted, delete controller
+        orchestra.bind 'remove:instruments', (instrument) =>
+            controller = @instrumentControllers[instrument.get('id')]
+
+            controller.controller.remove()
+            delete controller
+            @instrumentControllers[instrument.get('id')] = null
+        
         @background.click (e) =>
             @_handle_click e
         
@@ -132,10 +140,3 @@ class hwfinal.views.Timeline extends Backbone.View
         
         # Add controller into datastructure
         @instrumentControllers[instrument.get('id')] = instrumentController
-
-        # Add controller onto timeline
-        # @instrumentControllerContainer.append instrumentController.el
-
-        # Render
-        instrumentController.render()
-

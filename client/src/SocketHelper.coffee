@@ -97,6 +97,14 @@ class hwfinal.SocketHelper
                 else if method == 'create'                    
                     # Create model
                     modelInstance = new modelType message.attributes
+                else if method == 'delete'
+                    # Delete model
+                    modelInstance = Backbone.Relational.store.find modelType, message.attributes.id
+
+                    if not modelInstance
+                        throw new Error "Model #{message.namespace} id: #{message.attributes.id} not found."
+                    
+                    modelInstance.destroy()
                     
                 else
                     throw new Error "Method #{method} not recognized."
