@@ -72,7 +72,7 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
     this->mSweeperGain = 1;
 
     // Note on in 1/10 of a second
-    this->mEnvelope.setTime(0.20);
+    this->mEnvelope.setTime(0.10);
 
     this->m_y1 = 0;
     this->m_y2 = 0;
@@ -122,7 +122,13 @@ stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
         *(float)this->orch->get_duration()
     );
 
-    if(this->mPlaying) {
+    // Sample (relative to loop duration) on which this synth should start
+    float startSample = this->attributes["startTime"].asFloat()*(float)this->orch->get_duration();
+
+    // Sample (relative to loop duration) on which this synth should end
+    float endSample = this->attributes["endTime"].asFloat()*(float)this->orch->get_duration();
+
+    if(this->mPlaying == true) {
         // Fill buffer
         for(unsigned int i = 0; i < frames.size(); i++) {
             frames[i] += this->mFundSineGain*this->mFundSine.tick();
@@ -152,19 +158,25 @@ stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
             this->m_y1 = y0;
 
             // Envelope sound
-            // frames[i] *= this->mEnvelope.tick();
+            frames[i] *= this->mEnvelope.tick();
 
             this->mPlayedSamples++;
 
-            // If there's only 0.2 seconds left
-            if((durationSamples - this->mPlayedSamples) == 0.8*SAMPLE_RATE) {
+            // If there's only 0.1 seconds left, need to turn off envelope
+            float samplesLeft = endSample - (startSample + this->mPlayedSamples);
+            // std::cout << "samplesLeft:\n" << samplesLeft << std::endl;
+
+            if(samplesLeft == 0) {
+                std::cout << "Stopping instrument #" << this->get_id() << " at t=" << (startSample + this->mPlayedSamples)/this->orch->get_duration() << std::endl;
                 this->mEnvelope.keyOff();
             }
 
             // If we're done
-            if(this->mPlayedSamples >= durationSamples) {
+            if(samplesLeft <= -0.1*SAMPLE_RATE) {
+                std::cout << "Instrument #" << this->get_id() << " done playing at t=" << (startSample + this->mPlayedSamples)/this->orch->get_duration() << std::endl;
                 this->mPlaying = false;
                 this->mPlayedSamples = 0;
+                break;
             }
 
 
