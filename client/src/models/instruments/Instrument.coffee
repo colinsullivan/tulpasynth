@@ -49,6 +49,9 @@ class hwfinal.models.instruments.Instrument extends Backbone.RelationalModel
     ###
     #   If the id of this instrument is being set, add to the
     #   orchestra once finished.
+    #
+    #   Also check duration to ensure it doesn't go below 0.1, and
+    #   that start/end times do not go out of bounds.
     ###
     set: (attrs, options) ->
 
@@ -57,7 +60,23 @@ class hwfinal.models.instruments.Instrument extends Backbone.RelationalModel
         # If we're receiving an id
         if not @get('id') and attrs['id'] and not @initialized
             finishInitializing = true
+
+        # If start/end times are being changed
+        if attrs? and (attrs.startTime? or attrs.endTime?)
+            startTime = attrs.startTime || this.get 'startTime'
+            endTime = attrs.endTime || this.get 'endTime'
             
+            # If duration is going to be changed to too small of a value
+            if endTime - startTime < 0.09
+                # Ignore changes to start/end times
+                delete attrs.startTime
+                delete attrs.endTime
+            
+            # If start or end times will be out of bounds
+            if startTime < 0.0 || startTime > 1 || endTime < 0.0 || endTime > 1
+                # Ignore changes to start/end times
+                delete attrs.startTime
+                delete attrs.endTime
 
         super
         
