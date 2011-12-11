@@ -24,7 +24,7 @@ class hwfinal.views.instrumentcontrollers.BasicOval extends hwfinal.views.instru
 
         width = duration*hwfinal.canvas.width
 
-        @controller = hwfinal.canvas.ellipse @instrument.get('x'), @instrument.get('y'), width/2, 15
+        @controller = hwfinal.canvas.ellipse startTime*hwfinal.canvas.width, @instrument.get('y'), width/2, 15
         
         @controller.attr
             fill: 'green'

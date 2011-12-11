@@ -9,7 +9,7 @@
 
 #include "Bubbly.hpp"
 
-instruments::Bubbly::Bubbly(Orchestra* anOrch, Json::Value initialAttributes) : instruments::Instrument::Instrument(anOrch, initialAttributes) {
+instruments::Bubbly::Bubbly(Orchestra* anOrch, Json::Value initialAttributes) : instruments::PitchedInstrument::PitchedInstrument(anOrch, initialAttributes) {
     this->nextSamplePerChannel = new stk::StkFloat*[CHANNELS];
     for(unsigned int i = 0; i < CHANNELS; i++) {
         this->nextSamplePerChannel[i] = new stk::StkFloat(0.0);
@@ -19,52 +19,23 @@ instruments::Bubbly::Bubbly(Orchestra* anOrch, Json::Value initialAttributes) : 
     m_y1 = 0;
     m_y2 = 0;
 
-    // Bubbly object should be sent a `pitchIndex` attribute.
-    int pitchIndex = initialAttributes["pitchIndex"].asInt();
+    this->pitches[0] = 2093.0045;
+    this->pitches[1] = 1661.2188;
+    this->pitches[2] = 1318.5102;
+    this->pitches[3] = 1046.5023;
+    this->pitches[4] = 830.6094;
+    this->pitches[5] = 659.2551;
+    this->pitches[6] = 523.2511;
+    this->pitches[7] = 415.3047;
+    this->pitches[8] = 329.6276;
+    this->pitches[9] = 261.6256;
+    this->pitches[10] = 207.6523;
+    this->pitches[11] = 164.8138;
+    this->pitches[12] = 130.8128;
+    this->pitches[13] = 103.8262;
+    this->pitches[14] = 82.4069;
 
-    float descendingMajorThirds[32] = {  
-        2093.004522, 
-        1661.218790, 
-        1318.510228, 
-        1046.502261, 
-        830.609395, 
-        659.255114, 
-        523.251131, 
-        415.304698, 
-        329.627557, 
-        261.625565, 
-        207.652349, 
-        164.813778, 
-        130.812783, 
-        103.826174, 
-        82.406889, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0 
-    };
-
-
-    // float frequency = 110*(32 - (pitchIndex));
-    float frequency = descendingMajorThirds[pitchIndex];
-
-    std::cout << "frequency:\n" << frequency << std::endl;
-
-    // Convert to frequency
-    this->freq(frequency);
+    this->set_attributes(initialAttributes);
 
     // Set low pass parameters
     // lpf.setCoefficients(0, next_b1, next_b2, next_a0, 0, true);

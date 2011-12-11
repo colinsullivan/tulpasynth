@@ -125,7 +125,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
             ) && !instr->get_attributes()["disabled"].asBool()
         ) {
             // Play instrument
-            std::cout << "playing instrument #" << instr->get_id() << " at t=" << now << std::endl;
+            // std::cout << "playing instrument #" << instr->get_id() << " at t=" << now << std::endl;
             instr->play();
         }
 

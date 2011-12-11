@@ -87,13 +87,19 @@ class hwfinal.views.Timeline extends Backbone.View
         
         @background.click (e) =>
             @_handle_click e
-        
+    
+    snap_y_value: (y) ->
+        Raphael.snapTo @yGrid, y, @yPxPerGrid/2
+    
+    get_pitch_index: (snappedY) ->
+        _.indexOf @yGrid, snappedY, true
+
     _handle_click: (e) ->
         # Snap y value to grid
-        y = Raphael.snapTo(@yGrid, e.layerY, @yPxPerGrid/2);
+        y = @snap_y_value e.layerY
 
         # Get relative pitch index of snapped y value
-        pitchIndex = _.indexOf(@yGrid, y, true);
+        pitchIndex = @get_pitch_index y
 
         # Click is too close to bottom
         if pitchIndex == -1
