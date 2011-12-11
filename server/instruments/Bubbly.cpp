@@ -35,6 +35,7 @@ instruments::Bubbly::Bubbly(Orchestra* anOrch, Json::Value initialAttributes) : 
     this->pitches[13] = 103.8262;
     this->pitches[14] = 82.4069;
 
+    this->get_attributes()["gain"] = 1.25;
     this->set_attributes(initialAttributes);
 
     // Set low pass parameters

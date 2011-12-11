@@ -25,17 +25,18 @@ class hwfinal.views.Timeline extends Backbone.View
         
         @background.attr
             fill: 'white'
+            "stroke-width": 0
 
         ###
         #   Height and width of our canvas (hardcoded for now)
         ###
-        @height = 768;
-        @width = 1024;
+        @height = 768
+        @width = 1024
 
         ###
         #   Grid for placing objects on y-axis
         ###
-        @yGrid = [];
+        @yGrid = []
 
         # We will have 32 spots in the grid for now
         yGridSize = 32
@@ -43,6 +44,28 @@ class hwfinal.views.Timeline extends Backbone.View
 
         for i in [0...yGridSize]
             @yGrid.push(i*@yPxPerGrid)
+        
+        ###
+        #   Grid for x-axis (just for drawing currently)
+        ###
+        @xGrid = []
+
+        xGridSize = @width/32
+        @xPxPerGrid = @width/xGridSize
+
+        for i in [0...xGridSize]
+            @xGrid.push(i*@xPxPerGrid)
+        
+
+        # Draw x-axis grid
+        @xGridLines = []
+        for i in @xGrid
+            gridLine = hwfinal.canvas.path 'M'+i+',0 L'+i+','+@height+' z'
+            gridLine.attr
+                'stroke-width': 1
+                'opacity': 0.25
+            gridLine.node.style["shapeRendering"] = 'crispEdges';
+            @xGridLines.push gridLine
         
 
         ###
@@ -53,7 +76,10 @@ class hwfinal.views.Timeline extends Backbone.View
         ###
         #   Playhead is a line on the canvas
         ###
-        @playhead = hwfinal.canvas.rect 0, 0, 1, "100%"
+        @playhead = hwfinal.canvas.path()
+        @playhead.attr
+            'stroke-width': 1
+        @playhead.node.style["shapeRendering"] = "crispEdges";
 
         ###
         #   Instrument controllers (by `Instrument.id`)
@@ -127,8 +153,15 @@ class hwfinal.views.Timeline extends Backbone.View
     #   to the appropriate position.
     ###
     update_playhead: (orchestra) ->
+        # console.log 'orchestra.get(\'t\')*@width'
+        # console.log orchestra.get('t')*@width
+
+        x = orchestra.get('t')*@width
+
         @playhead.attr
-            x: orchestra.get('t')*100+"%"
+            path: 'M'+x+',0 L'+x+','+@height
+        
+        # @playhead.translate orchestra.get('t')*@width
     
     create_instrument_controller: (instrument) ->
         instrumentClassName = instrument.namespace.replace "hwfinal.models.instruments.", ""

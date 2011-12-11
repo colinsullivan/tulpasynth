@@ -56,7 +56,7 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
 
     this->filterFreq(this->mMinFilterFreq);
 
-    this->get_attributes()["gain"] = 0.40;
+    this->get_attributes()["gain"] = 0.30;
 
     this->mPlayedFrames = 0;
 
