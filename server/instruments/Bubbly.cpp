@@ -99,7 +99,7 @@ void instruments::Bubbly::freq(stk::StkFloat aFreq) {
     // // m_Q = 1.0 / qres;
 }
 
-stk::StkFrames& instruments::Bubbly::next_buf(stk::StkFrames& frames) {
+stk::StkFrames& instruments::Bubbly::next_buf(stk::StkFrames& frames, double nextBufferT) {
 
     // Next sample for this channel
     stk::StkFloat* nextSample = this->nextSamplePerChannel[0];

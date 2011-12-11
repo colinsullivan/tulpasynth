@@ -57,14 +57,14 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
             'stroke-width': 2
             r: 5
             cy: @instrument.get('y')
+            'cursor': 'ew-resize'
         
         leftHandleAttrs = _.extend
-            'cursor': 'ew-resize'
-            cx: startTime*hwfinal.canvas.width-ovalWidth/2+2.5
+            cx: startTime*hwfinal.canvas.width+1
         , handleAttrs
 
         rightHandleAttrs = _.extend
-            cx: startTime*hwfinal.canvas.width+ovalWidth/2-2.5
+            cx: endTime*hwfinal.canvas.width-1
         , handleAttrs
 
 
@@ -93,19 +93,17 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
     #   Reveal the resize handles on left and right side of oval.
     ###
     _show_handles: () ->
-        # handleAnimateProperties = 
-        #     params:
-        #         opacity: 1
-        #     ms: 500
-        #     easing: '>'
-            
-        # @leftHandle.animate handleAnimateProperties
-        # @rightHandle.animate handleAnimateProperties
         handleAttrs = 
-            opacity: 1
+            # opacity: 1
+            r: 5
+
         
-        @leftHandle.attr handleAttrs
+        # @leftHandle.attr handleAttrs
         # @rightHandle.attr handleAttrs
+
+        @leftHandle.animate handleAttrs, 250, 'bounce'
+        @rightHandle.animate handleAttrs, 250, 'bounce'
+
     
     ###
     #   Hide the resize handles.
@@ -121,7 +119,8 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
         # @rightHandle.animate handleAnimateProperties
 
         handleAttrs = 
-            opacity: 0
+            # opacity: 0
+            r: 0
         
         @leftHandle.attr handleAttrs
         @rightHandle.attr handleAttrs
@@ -129,73 +128,37 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
     post_render: () ->
         super
 
-        # @controller.hover () =>
-        #     @_show_handles()
-        # , () =>
-        #     @_hide_handles()
+        @controller.hover () =>
+            @_show_handles()
+        , () =>
+            @_hide_handles()
 
-        # @rightHandle.hover () =>
-        #     @_show_handles()
-        # , () =>
-        #     @_hide_handles()
+        @rightHandle.hover () =>
+            @_show_handles()
+        , () =>
+            @_hide_handles()
         
-        # @leftHandle.hover () =>
-        #     @_show_handles()
-        # , () =>
-        #     @_hide_handles()
+        @leftHandle.hover () =>
+            @_show_handles()
+        , () =>
+            @_hide_handles()
         
-        # dragStart = () =>
-        #     @dragging = true
-        #     document.body.style.cursor = "ew-resize"
-        # dragEnd = () =>
-        #     @dragging = false
-        #     @instrument.save()
-        #     document.body.style.cursor = "auto"
+        dragStart = () =>
+            @dragging = true
+            document.body.style.cursor = "ew-resize"
+        dragEnd = () =>
+            @dragging = false
+            @instrument.save()
+            document.body.style.cursor = "auto"
         
-        # # Left handle changes start time of sound
-        # @leftHandle.drag (dx, dy, x, y) =>
-        #     # Calculate our own dx
-        #     dx = x - (@controller.attr('cx') - @controller.attr('rx'))
-
-        #     # startTimeDiff = dx/hwfinal.canvas.width
-        #     newStartTime = x/hwfinal.canvas.width
-
-        #     radiusDiff = -1*dx/2
-        #     newRadius = @controller.attr('rx') + radiusDiff
-        #     newX = @controller.attr('cx')+dx/2
-
-        #     # @controller.attr
-        #         # cx: newX
-        #         # rx: newRadius
-            
-        #     @instrument.set
-        #         startTime: newStartTime
-        #         x: newX
-        # , dragStart, dragEnd
+        # Left handle changes start time of sound
+        @leftHandle.drag (dx, dy, x, y) =>
+            @instrument.set
+                startTime: x/hwfinal.canvas.width
+        , dragStart, dragEnd
         
         # Right handle changes end time
-        # @rightHandle.drag (dx, dy, x, y) =>
-        #     # Calculate our own dx
-        #     dx = x - (@controller.attr('cx') - @controller.attr('rx'))
-
-        #     radiusDiff = -1*dx/2
-        #     newRadius = @controller.attr('rx') + radiusDiff
-        #     newX = @controller.attr('cx')+dx/2
-
-        #     newEndTime = (x+newRadius*2)/hwfinal.canvas.width
-
-        #     @instrument.set
-        #         x: newX
-        #         endTime: newEndTime
-        # , dragStart, dragEnd
-
-
-
-                
-            
-                
-
-            
-
-
-    
+        @rightHandle.drag (dx, dy, x, y) =>
+            @instrument.set
+                endTime: x/hwfinal.canvas.width
+        , dragStart, dragEnd

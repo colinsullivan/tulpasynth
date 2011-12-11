@@ -51,7 +51,7 @@ namespace instruments {
         };
 
         virtual stk::StkFloat next_samp(int channel);
-        virtual stk::StkFrames& next_buf(stk::StkFrames& frames);
+        virtual stk::StkFrames& next_buf(stk::StkFrames& frames, double nextBufferT);
     
     private:
         /**

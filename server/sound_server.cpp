@@ -42,7 +42,7 @@ Orchestra* orchestra;
 /**
  *  Interval at which to update clients
  **/
-int SYNC_UPDATE_INTERVAL = floor(0.1*SAMPLE_RATE);
+int SYNC_UPDATE_INTERVAL = floor(0.05*SAMPLE_RATE);
 
 /**
  *  Last time we sent a sync message (sample number)
@@ -130,7 +130,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         }
 
         // Pull samples off of instrument wether it is playing or not.
-        instr->next_buf((*tempFrames));
+        instr->next_buf((*tempFrames), nextFrameT);
         stk::StkFloat gain = instr->get_gain();
 
         // Add samples to master output for each channel

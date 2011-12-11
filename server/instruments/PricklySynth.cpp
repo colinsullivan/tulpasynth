@@ -81,7 +81,7 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
 
     this->attributes["gain"] = 0.40;
 
-    this->mPlayedSamples = 0;
+    this->mPlayedFrames = 0;
 
     this->finish_initializing();
 };
@@ -113,22 +113,33 @@ void instruments::PricklySynth::play() {
     // this->mSweeper.setFrequency(durationSeconds);
 
     this->mEnvelope.keyOn();
+    this->mPlayedFrames = 0;
+    this->mKeyedOff = false;
 };
 
 
-stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
+stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames, double nextBufferT) {
     int durationSamples = floor(
         (this->attributes["endTime"].asFloat() - this->attributes["startTime"].asFloat())
         *(float)this->orch->get_duration()
     );
 
     // Sample (relative to loop duration) on which this synth should start
-    float startSample = this->attributes["startTime"].asFloat()*(float)this->orch->get_duration();
+    double startFrame = this->attributes["startTime"].asFloat()*(double)this->orch->get_duration();
 
     // Sample (relative to loop duration) on which this synth should end
-    float endSample = this->attributes["endTime"].asFloat()*(float)this->orch->get_duration();
+    double endFrame = this->attributes["endTime"].asFloat()*(double)this->orch->get_duration();
+
+    // Current frame at the beginning of this buffer
+    double currentBufferFrame = this->orch->get_t()*(double)this->orch->get_duration();
+    double nextBufferFrame = nextBufferT*(double)this->orch->get_duration();
+
+
 
     if(this->mPlaying == true) {
+        
+        int totalFrames = ceil(endFrame - startFrame);
+
         // Fill buffer
         for(unsigned int i = 0; i < frames.size(); i++) {
             frames[i] += this->mFundSineGain*this->mFundSine.tick();
@@ -160,22 +171,41 @@ stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames) {
             // Envelope sound
             frames[i] *= this->mEnvelope.tick();
 
-            this->mPlayedSamples++;
+            this->mPlayedFrames++;
+
+            int framesRemaining = totalFrames - this->mPlayedFrames;
+            // std::cout << "framesRemaining:\n" << framesRemaining << std::endl;
+
 
             // If there's only 0.1 seconds left, need to turn off envelope
-            float samplesLeft = endSample - (startSample + this->mPlayedSamples);
-            // std::cout << "samplesLeft:\n" << samplesLeft << std::endl;
+            if(
+                
+                // If we haven't already keyed off
+                !this->mKeyedOff
+                &&
+                (
+                    // And there is 0.1 seconds remaining
+                    endFrame - currentBufferFrame == 0.1*SAMPLE_RATE
+                    ||
+                    // or there is more than 0.1 seconds remaining
+                    (
+                        endFrame - currentBufferFrame > 0.1*SAMPLE_RATE
+                        &&
+                        // And next time there will be less than 0.1 seconds remaining
+                        endFrame - nextBufferFrame < 0.1*SAMPLE_RATE
+                    )
+                )
 
-            if(samplesLeft == 0) {
-                std::cout << "Stopping instrument #" << this->get_id() << " at t=" << (startSample + this->mPlayedSamples)/this->orch->get_duration() << std::endl;
+            ) {
+                std::cout << "Stopping instrument #" << this->get_id() << " at t=" << (startFrame + this->mPlayedFrames)/this->orch->get_duration() << std::endl;
                 this->mEnvelope.keyOff();
+                this->mKeyedOff = true;
             }
 
             // If we're done
-            if(samplesLeft <= -0.1*SAMPLE_RATE) {
-                std::cout << "Instrument #" << this->get_id() << " done playing at t=" << (startSample + this->mPlayedSamples)/this->orch->get_duration() << std::endl;
+            if(this->orch->get_t()*this->orch->get_duration() >= endFrame) {
+                std::cout << "Instrument #" << this->get_id() << " done playing at t=" << (startFrame + this->mPlayedFrames)/this->orch->get_duration() << std::endl;
                 this->mPlaying = false;
-                this->mPlayedSamples = 0;
                 break;
             }
 
