@@ -55,13 +55,12 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
 
         if @active
             @hide()
+            return
         
         @currentArrowCoords = arrowCoords
         @currentPitchIndex = pitchIndex
 
         @set = hwfinal.canvas.set()
-
-        popupDirection = 'up'
 
         pen = 
             x: arrowCoords.x
@@ -165,7 +164,7 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
                 startTime = coords.x/hwfinal.canvas.width
                 new hwfinal.models.instruments.Prickly
                     startTime: startTime
-                    endTime: startTime+0.1
+                    endTime: startTime+0.11
                     x: coords.x
                     y: coords.y
                     pitchIndex: @currentPitchIndex
@@ -226,7 +225,7 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
         pathText += ' l '+rectBottomSegmentWidth+' 0';
         pathText += ' z';
 
-        bubble = hwfinal.canvas.path pathText
+        bubble = hwfinal.canvas.path pathText    
         @set.push bubble
                 
         @set.rotate rotateDegrees, arrowCoords.x, arrowCoords.y

@@ -94,8 +94,14 @@ class hwfinal.views.instrumentcontrollers.InstrumentController extends Backbone.
         snappedY = hwfinal.timeline.snap_y_value y
         pitchIndex = hwfinal.timeline.get_pitch_index snappedY
 
+        if pitchIndex == -1
+            return
+
+        duration = @instrument.get('endTime') - @instrument.get('startTime')
+        newStartTime = x/hwfinal.canvas.width
         @instrument.set
-            startTime: x/hwfinal.canvas.width
+            startTime: newStartTime
+            endTime: newStartTime+duration
             y: snappedY
             pitchIndex: pitchIndex
     
