@@ -3,7 +3,7 @@
 // Descending minor thirds starting on an A
 69 => int current;
 3 => int decrement;
-16 => int startingIndex;
+0 => int startingIndex;
 
 
 

@@ -121,11 +121,14 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
                 ||
                 // Start time is later but before next buffer
                 (startTime > now && startTime < nextFrameT)
+                ||
+                // Start time is 0 and we are about to restart loop
+                (startTime == 0 && nextFrameT < now)
             // And instrument is not "disabled"
             ) && !instr->get_attributes()["disabled"].asBool()
         ) {
             // Play instrument
-            // std::cout << "playing instrument #" << instr->get_id() << " at t=" << now << std::endl;
+            std::cout << "playing instrument #" << instr->get_id() << " at t=" << now << std::endl;
             instr->play();
         }
 
