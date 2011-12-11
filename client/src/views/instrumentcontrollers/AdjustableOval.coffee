@@ -108,7 +108,12 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
     ###
     #   Hide the resize handles.
     ###
-    _hide_handles: () ->
+    _hide_handles: (e) ->
+
+        # If we simply hovered between elements on our 
+        if e? and e.toElement? and (e.toElement == @leftHandle.node || e.toElement == @rightHandle.node || e.toElement == @controller.node)
+            return
+        
         # handleAnimateProperties = 
         #     params:
         #         opacity: 0
@@ -128,20 +133,20 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
     post_render: () ->
         super
 
-        @controller.hover () =>
-            @_show_handles()
-        , () =>
-            @_hide_handles()
+        @controller.hover (e) =>
+            @_show_handles(e)
+        , (e) =>
+            @_hide_handles(e)
 
-        @rightHandle.hover () =>
-            @_show_handles()
-        , () =>
-            @_hide_handles()
+        @rightHandle.hover (e) =>
+            @_show_handles(e)
+        , (e) =>
+            @_hide_handles(e)
         
-        @leftHandle.hover () =>
-            @_show_handles()
-        , () =>
-            @_hide_handles()
+        @leftHandle.hover (e) =>
+            @_show_handles(e)
+        , (e) =>
+            @_hide_handles(e)
         
         dragStart = () =>
             @dragging = true
