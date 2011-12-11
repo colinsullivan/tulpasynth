@@ -101,7 +101,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
 
     // Get start time of next buffer (relative to loop duration)
     int loopDuration = orchestra->get_duration();
-    double nextFrameT = (double)((g_t+numFrames)%loopDuration)/loopDuration;
+    double nextFrameT = (double)((g_t+numFrames)%loopDuration)/(double)loopDuration;
 
     // Temporary output buffer
     stk::StkFrames* tempFrames = new stk::StkFrames(0.0, numFrames, CHANNELS);
@@ -125,7 +125,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
             ) && !instr->get_attributes()["disabled"].asBool()
         ) {
             // Play instrument
-            std::cout << "playing instrument #" << instr->get_id() << std::endl;
+            std::cout << "playing instrument #" << instr->get_id() << " at t=" << now << std::endl;
             instr->play();
         }
 
