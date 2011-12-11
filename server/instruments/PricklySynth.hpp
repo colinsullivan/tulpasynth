@@ -17,13 +17,13 @@
 #include <SineWave.h>
 #include <Envelope.h>
 
-#include "Instrument.hpp"
+#include "PitchedInstrument.hpp"
 #include "../Orchestra.hpp"
 #include "../Globals.h"
 
 namespace instruments {
 
-class PricklySynth : private Instrument
+class PricklySynth : protected PitchedInstrument
 {
 public:
     PricklySynth(Orchestra* anOrch, Json::Value initialAttributes);
@@ -31,10 +31,7 @@ public:
 
     virtual void play();
 
-    /**
-     *  Override this so we can handle calculation of off time
-     **/
-    // virtual void set_attributes(Json::Value newAttributes);
+    virtual void freq(stk::StkFloat aFreq);
 
     virtual stk::StkFrames& next_buf(stk::StkFrames& frames, double nextBufferT);
 

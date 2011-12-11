@@ -10,44 +10,24 @@
 #include "PricklySynth.hpp"
 
 
-instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAttributes) : instruments::Instrument::Instrument(anOrch, initialAttributes) {
+instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAttributes) : instruments::PitchedInstrument::PitchedInstrument(anOrch, initialAttributes) {
 
-    float descendingMinorThirds[32] = {
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        440.000000, 
-        369.994423, 
-        311.126984, 
-        261.625565, 
-        220.000000, 
-        184.997211, 
-        155.563492, 
-        130.812783, 
-        110.000000, 
-        92.498606, 
-        77.781746, 
-        65.406391, 
-        55.000000, 
-        46.249303, 
-        38.890873
-    };
-
-    stk::StkFloat freq = descendingMinorThirds[initialAttributes["pitchIndex"].asInt()];
-
+    this->pitches[16] = 440.0000;
+    this->pitches[17] = 369.9944;
+    this->pitches[18] = 311.1270;
+    this->pitches[19] = 261.6256;
+    this->pitches[20] = 220.0000;
+    this->pitches[21] = 184.9972;
+    this->pitches[22] = 155.5635;
+    this->pitches[23] = 130.8128;
+    this->pitches[24] = 110.0000;
+    this->pitches[25] = 92.4986;
+    this->pitches[26] = 77.7817;
+    this->pitches[27] = 65.4064;
+    this->pitches[28] = 55.0000;
+    this->pitches[29] = 46.2493;
+    this->pitches[30] = 38.8909;
+    this->pitches[31] = 32.7032;
 
 
     this->mMinFilterFreq = 110;
@@ -56,14 +36,11 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
 
     // BPF f;
     this->mFundSawGain = 1.0;
-    this->mFundSaw.setFrequency(freq);
     this->mFundSaw.setHarmonics(10);
 
     this->mFundSineGain = 0.9;
-    this->mFundSine.setFrequency(freq);
 
     this->mLowSineGain = 0.1;
-    this->mLowSine.setFrequency(freq/4);
 
     this->mJuiceGain = 1;
     this->mJuice.setFrequency(55);
@@ -79,12 +56,23 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
 
     this->filterFreq(this->mMinFilterFreq);
 
-    this->attributes["gain"] = 0.40;
+    this->get_attributes()["gain"] = 0.40;
 
     this->mPlayedFrames = 0;
 
+    this->set_attributes(initialAttributes);
+
     this->finish_initializing();
 };
+
+void instruments::PricklySynth::freq(stk::StkFloat aFreq) {
+    instruments::PitchedInstrument::freq(aFreq);
+
+    this->mFundSaw.setFrequency(aFreq);
+    this->mFundSine.setFrequency(aFreq);
+    this->mLowSine.setFrequency(aFreq/4);
+
+}
 
 // void instruments::PricklySynth::set_attributes(Json::Value newAttributes) {
 
@@ -100,14 +88,14 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
 // }
 
 void instruments::PricklySynth::play() {
-    Instrument::play();
+    PitchedInstrument::play();
 
     // Restart filter
     // this->mSweeper.addPhase(1-this->mSweeper.lastOut());
 
     // Set filter to oscillate once during entire note
     // float durationSeconds = (
-    //     (this->attributes["endTime"].asFloat() - this->attributes["startTime"].asFloat())
+    //     (this->get_attributes()["endTime"].asFloat() - this->get_attributes()["startTime"].asFloat())
     //     *(float)this->orch->get_duration()
     // )/(float)SAMPLE_RATE;
     // this->mSweeper.setFrequency(durationSeconds);
@@ -120,15 +108,15 @@ void instruments::PricklySynth::play() {
 
 stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames, double nextBufferT) {
     int durationSamples = floor(
-        (this->attributes["endTime"].asFloat() - this->attributes["startTime"].asFloat())
+        (this->get_attributes()["endTime"].asFloat() - this->get_attributes()["startTime"].asFloat())
         *(float)this->orch->get_duration()
     );
 
     // Sample (relative to loop duration) on which this synth should start
-    double startFrame = this->attributes["startTime"].asFloat()*(double)this->orch->get_duration();
+    double startFrame = this->get_attributes()["startTime"].asFloat()*(double)this->orch->get_duration();
 
     // Sample (relative to loop duration) on which this synth should end
-    double endFrame = this->attributes["endTime"].asFloat()*(double)this->orch->get_duration();
+    double endFrame = this->get_attributes()["endTime"].asFloat()*(double)this->orch->get_duration();
 
     // Current frame at the beginning of this buffer
     double currentBufferFrame = this->orch->get_t()*(double)this->orch->get_duration();
