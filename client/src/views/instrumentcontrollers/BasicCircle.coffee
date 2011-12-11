@@ -21,10 +21,7 @@ class hwfinal.views.instrumentcontrollers.BasicCircle extends hwfinal.views.inst
         
         @controller.attr
             fill: 'black'
-            cx: @instrument.get('x')
+            cx: @instrument.get('startTime')*hwfinal.canvas.width
             cy: @instrument.get('y')
             r: 10
-        
-        @post_render()
-        
         return @

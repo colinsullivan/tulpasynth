@@ -23,9 +23,6 @@ class hwfinal.views.instrumentcontrollers.BasicDiamond extends hwfinal.views.ins
         y = @instrument.get('y')+10
         @controller.attr
             fill: 'red'
-            path: 'M'+@instrument.get('x')+','+y+' l 10,10 l -10,10 l -10,-10 l 10,-10 z '
-
-        
-        @post_render()
+            path: 'M'+(@instrument.get('startTime')*hwfinal.canvas.width)+','+y+' l 10,10 l -10,10 l -10,-10 l 10,-10 z '
 
         @

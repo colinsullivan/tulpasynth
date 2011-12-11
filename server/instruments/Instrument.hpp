@@ -42,7 +42,7 @@ namespace instruments {
          *  Should be called when instrument is finished initializing,
          *  and is ready to be played.
          **/
-        void finish_initializing();
+        virtual void finish_initializing();
 
         int get_id() {
             return this->attributes["id"].asInt();

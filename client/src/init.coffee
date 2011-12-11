@@ -29,6 +29,8 @@ window.hwfinal = {
     orchestra: null,
     # Our RaphaelJS canvas
     canvas: null
+    # Our `Timeline` view instance
+    timeline: null
 }
 
 $(document).ready () ->
