@@ -18,7 +18,7 @@ namespace instruments {
     /**
      *  @class  Base class for any instruments that have a pitch.
      **/
-    class PitchedInstrument : private Instrument
+    class PitchedInstrument : protected Instrument
     {
     public:
         PitchedInstrument(Orchestra* anOrch, Json::Value initialAttributes);
@@ -34,8 +34,16 @@ namespace instruments {
          **/
         virtual void set_attributes(Json::Value newAttributes);
 
+        virtual Json::Value get_attributes() {
+            return Instrument::get_attributes();
+        }
+
         virtual void finish_initializing() {
             Instrument::finish_initializing();
+        }
+
+        virtual void play() {
+            Instrument::play();
         }
 
 
