@@ -36,14 +36,20 @@ public:
      **/
     // virtual void set_attributes(Json::Value newAttributes);
 
-    virtual stk::StkFrames& next_buf(stk::StkFrames& frames);
+    virtual stk::StkFrames& next_buf(stk::StkFrames& frames, double nextBufferT);
 
 protected:
 
     /**
      *  How many samples we've played so far (in this iteration)
      **/
-    int mPlayedSamples;
+    int mPlayedFrames;
+
+    /**
+     *  Wether or not we've called `keyOff` on the envelope since
+     *  starting to play.
+     **/
+    bool mKeyedOff;
 
     // BPF f;
     stk::BlitSaw mFundSaw;

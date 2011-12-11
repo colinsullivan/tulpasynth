@@ -43,7 +43,7 @@ stk::StkFloat instruments::RAMpler::next_samp(int channel) {
     return result;
 }
 
-stk::StkFrames& instruments::RAMpler::next_buf(stk::StkFrames& frames) {
+stk::StkFrames& instruments::RAMpler::next_buf(stk::StkFrames& frames, double nextBufferT) {
     
     if(this->mPlaying) {
         // Grab samples from clip

@@ -90,8 +90,11 @@ namespace instruments {
          *
          *  @param  frames  The frames to fill with audio.  Should have the
          *  same number of channels as `CHANNELS`.
+         *
+         *  @param  nextBufferT  The t value the orchestra will have at
+         *  the next buffer.
          **/
-        virtual stk::StkFrames& next_buf(stk::StkFrames& frames) {
+        virtual stk::StkFrames& next_buf(stk::StkFrames& frames, double nextBufferT) {
             // Should be overridden in subclasses
             std::cerr << "WARNING: instruments::Instrument::next_buf is a passthrough." << std::endl;
             return frames;

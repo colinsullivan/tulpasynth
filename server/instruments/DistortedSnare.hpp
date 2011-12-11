@@ -27,8 +27,8 @@ namespace instruments {
             return RAMpler::next_samp(channel);
         };
 
-        virtual stk::StkFrames& next_buf(stk::StkFrames& frames) {
-            return RAMpler::next_buf(frames);
+        virtual stk::StkFrames& next_buf(stk::StkFrames& frames, double nextBufferT) {
+            return RAMpler::next_buf(frames, nextBufferT);
         };
 
     };
