@@ -44,6 +44,13 @@ class hwfinal.views.instrumentcontrollers.InstrumentController extends Backbone.
         #   the timeout.
         ###
         @mousedownTimeout = null
+
+        ###
+        #   Keep track of mouse position relative to BBox of controller.
+        ###
+        @controllerMousedownPosition =
+            x: null
+            y: null
         
         ###
         #   All objects relating to this controller must reside in this set
@@ -71,6 +78,12 @@ class hwfinal.views.instrumentcontrollers.InstrumentController extends Backbone.
     _handle_controller_drag_start: (x, y) ->
         @dragging = true
 
+        bbox = @controller.getBBox()
+
+        @controllerMousedownPosition.x = x - bbox.x
+        # @controllerMousedownPosition.y = y - bbox.y
+        
+
         clearTimeout @draggingTimeout
     
     _handle_controller_drag_end: (e) ->
@@ -91,6 +104,11 @@ class hwfinal.views.instrumentcontrollers.InstrumentController extends Backbone.
         # , 250
 
     _handle_controller_drag: (dx, dy, x, y) ->
+
+        # Maintain mouse position relative to element
+        x = x - @controllerMousedownPosition.x
+        # y = y - @controllerMousedownPosition.y
+
         snappedY = hwfinal.timeline.snap_y_value y
         pitchIndex = hwfinal.timeline.get_pitch_index snappedY
 
