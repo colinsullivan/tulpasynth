@@ -21,11 +21,9 @@ class hwfinal.views.instrumentcontrollers.BasicSquare extends hwfinal.views.inst
         
         @controller.attr
             fill: 'black'
-            x: @instrument.get('x')
+            x: @instrument.get('startTime')*hwfinal.canvas.width
             y: @instrument.get('y')
             width: 20
             height: 20
-        
-        @post_render()
 
         return @

@@ -138,7 +138,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		outgoingMessageObject["attributes"] = newInstr->get_attributes();
 
 		std::string outgoingMessage = writer.write(outgoingMessageObject);
-		std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
+		// std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
 
 		this->send_to_all_but_one(msg, client);
 
@@ -146,7 +146,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		outgoingMessageObject["method"] = "update";
 
 		outgoingMessage = writer.write(outgoingMessageObject);
-		std::cout << "outgoingMessage to single client:\n" << outgoingMessage << std::endl;
+		// std::cout << "outgoingMessage to single client:\n" << outgoingMessage << std::endl;
 		client->send(outgoingMessage);
 	}
 	else if(method == "update") {
@@ -158,7 +158,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 
 		// Relay to all other clients
 		std::string outgoingMessage = writer.write(messageObject);
-		std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
+		// std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
 		this->send_to_all_but_one(msg, client);
 	}
 	else if(method == "delete") {
@@ -167,7 +167,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 
 		// Relay message to all other clients
 		std::string outgoingMessage = writer.write(messageObject);
-		std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
+		// std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
 		this->send_to_all_but_one(msg, client);
 	}
 	else {
@@ -287,7 +287,7 @@ void socket_handler::send_to_all_but_one(std::string data, session_ptr one) {
 	std::map<session_ptr,std::string>::iterator it;
 	for (it = m_connections.begin(); it != m_connections.end(); it++) {
 		if((*it).first != one) {
-			std::cout << "Sending message to " << (*it).first << std::endl;
+			// std::cout << "Sending message to " << (*it).first << std::endl;
 			(*it).first->send(data);
 		}
 	}    

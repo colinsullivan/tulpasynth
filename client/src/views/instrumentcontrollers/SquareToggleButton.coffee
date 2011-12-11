@@ -19,7 +19,7 @@ class hwfinal.views.instrumentcontrollers.SquareToggleButton extends hwfinal.vie
 
     render: () ->
         super
-        @el = hwfinal.canvas.circle @instrument.get('x'), @instrument.get('y'), 10
+        @el = hwfinal.canvas.circle @instrument.get('startTime')*hwfinal.canvas.width, @instrument.get('y'), 10
 
         return @
     

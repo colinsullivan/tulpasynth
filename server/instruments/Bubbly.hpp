@@ -17,7 +17,7 @@
 #include <BiQuad.h>
 
 
-#include "Instrument.hpp"
+#include "PitchedInstrument.hpp"
 #include "../Globals.h"
 
 namespace instruments {
@@ -25,7 +25,7 @@ namespace instruments {
 /**
  *  @class  TODO: Description of sound.
  **/
-class Bubbly : private Instrument
+class Bubbly : private PitchedInstrument
 {
 public:
     // Bubbly(stk::StkFloat lowestFrequency) : stk::BlowHole(lowestFrequency){};
@@ -38,7 +38,7 @@ public:
         }
     };
 
-    void freq(stk::StkFloat aFreq);
+    virtual void freq(stk::StkFloat aFreq);
 
     /**
      *  Generate the next audio buffer

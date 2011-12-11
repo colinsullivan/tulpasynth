@@ -5,6 +5,7 @@ OBJS = 	$(EXECUTABLE).o \
 		RtAudioStream.o \
 		Orchestra.o \
 		Instrument.o \
+		PitchedInstrument.o \
 		Glitch.o \
 		Bubbly.o \
 		RAMpler.o \
