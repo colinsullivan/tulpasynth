@@ -43,7 +43,7 @@ public:
     /**
      *  Generate the next audio buffer
      **/
-    virtual stk::StkFrames& next_buf(stk::StkFrames& frames);
+    virtual stk::StkFrames& next_buf(stk::StkFrames& frames, double nextBufferT);
 private:
     stk::StkFloat m_y1;
     stk::StkFloat m_y2;
