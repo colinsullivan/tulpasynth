@@ -32,11 +32,11 @@ class tulpasynth.models.instruments.PitchedInstrument extends tulpasynth.models.
     ###
     set: (attrs, options) ->
         # If pitch index is being changed
-        if attrs?.pitchIndex?
-            # And it is out of bounds, leave at min/max
-            if attrs.pitchIndex < @minPitchIndex
-                attrs.pitchIndex = @minPitchIndex
-            if attrs.pitchIndex > @maxPitchIndex
-                attrs.pitchIndex = @maxPitchIndex
+        # if attrs?.pitchIndex?
+        #     # And it is out of bounds, leave at min/max
+        #     if attrs.pitchIndex < @minPitchIndex
+        #         attrs.pitchIndex = @minPitchIndex
+        #     if attrs.pitchIndex > @maxPitchIndex
+        #         attrs.pitchIndex = @maxPitchIndex
         
         super

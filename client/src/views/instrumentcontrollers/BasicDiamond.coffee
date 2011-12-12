@@ -21,8 +21,9 @@ class tulpasynth.views.instrumentcontrollers.BasicDiamond extends tulpasynth.vie
             @all.push @controller
         
         y = tulpasynth.timeline.get_y_value(@instrument.get('pitchIndex'))+10
+        x = @instrument.get('startTime')*tulpasynth.canvas.width
         @controller.attr
             fill: 'red'
-            path: 'M'+(@instrument.get('startTime')*tulpasynth.canvas.width)+','+y+' l 10,10 l -10,10 l -10,-10 l 10,-10 z '
+            path: "M#{x},#{y} l 10,10 l -10,10 l -10,-10 l 10,-10 z "
 
         @
