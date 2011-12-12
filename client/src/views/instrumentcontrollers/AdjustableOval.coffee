@@ -39,10 +39,12 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
 
         ovalWidth = duration*hwfinal.canvas.width
 
+        y = hwfinal.timeline.get_y_value @instrument.get('pitchIndex')
+
         controllerAttrs = 
             fill: 'green'
             cx: startTime*hwfinal.canvas.width + ovalWidth/2
-            cy: @instrument.get('y')
+            cy: y
             rx: ovalWidth/2
             ry: 15
         if not @controller
@@ -56,7 +58,7 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
             fill: 'white'
             'stroke-width': 2
             r: 5
-            cy: @instrument.get('y')
+            cy: y
             'cursor': 'ew-resize'
         
         leftHandleAttrs = _.extend

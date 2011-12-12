@@ -20,7 +20,7 @@ class hwfinal.views.instrumentcontrollers.BasicDiamond extends hwfinal.views.ins
             @controller = hwfinal.canvas.path()
             @all.push @controller
         
-        y = @instrument.get('y')+10
+        y = hwfinal.timeline.get_y_value(@instrument.get('pitchIndex'))+10
         @controller.attr
             fill: 'red'
             path: 'M'+(@instrument.get('startTime')*hwfinal.canvas.width)+','+y+' l 10,10 l -10,10 l -10,-10 l 10,-10 z '

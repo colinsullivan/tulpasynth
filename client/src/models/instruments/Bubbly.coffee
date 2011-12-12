@@ -11,6 +11,10 @@
 ###
 #   @class  Short bubbly percussive sound.
 ###
-class hwfinal.models.instruments.Bubbly extends hwfinal.models.instruments.Instrument
+class hwfinal.models.instruments.Bubbly extends hwfinal.models.instruments.PitchedInstrument
     
     namespace: "hwfinal.models.instruments.Bubbly"
+
+    initialize: (attributes) ->
+        @maxPitchIndex = 14
+        super

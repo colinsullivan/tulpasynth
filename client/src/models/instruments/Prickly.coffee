@@ -11,6 +11,12 @@
 ###
 #   @class  Prickly instrument
 ###
-class hwfinal.models.instruments.Prickly extends hwfinal.models.instruments.Instrument
+class hwfinal.models.instruments.Prickly extends hwfinal.models.instruments.PitchedInstrument
 
     namespace: 'hwfinal.models.instruments.Prickly'
+
+    initialize: (attributes) ->
+        
+        @minPitchIndex = 16
+
+        super
