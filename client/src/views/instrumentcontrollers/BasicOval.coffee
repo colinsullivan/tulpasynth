@@ -12,7 +12,7 @@
 #   @class  Basic class for an oval that has the same width as
 #   the sound's duration.
 ###
-class hwfinal.views.instrumentcontrollers.BasicOval extends hwfinal.views.instrumentcontrollers.InstrumentController
+class tulpasynth.views.instrumentcontrollers.BasicOval extends tulpasynth.views.instrumentcontrollers.InstrumentController
 
     render: () ->
         super
@@ -22,9 +22,9 @@ class hwfinal.views.instrumentcontrollers.BasicOval extends hwfinal.views.instru
 
         duration = endTime - startTime
 
-        width = duration*hwfinal.canvas.width
+        width = duration*tulpasynth.canvas.width
 
-        @controller = hwfinal.canvas.ellipse startTime*hwfinal.canvas.width, hwfinal.timeline.get_y_value(@instrument.get('pitchIndex')), width/2, 15
+        @controller = tulpasynth.canvas.ellipse startTime*tulpasynth.canvas.width, tulpasynth.timeline.get_y_value(@instrument.get('pitchIndex')), width/2, 15
         
         @controller.attr
             fill: 'green'

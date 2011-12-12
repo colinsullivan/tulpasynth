@@ -128,7 +128,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
             ) && !instr->get_attributes()["disabled"].asBool()
         ) {
             // Play instrument
-            std::cout << "playing instrument #" << instr->get_id() << " at t=" << now << std::endl;
+            // std::cout << "playing instrument #" << instr->get_id() << " at t=" << now << std::endl;
             instr->play();
         }
 
@@ -165,7 +165,7 @@ int callback( void * outputBuffer, void * inputBuffer, unsigned int numFrames,
         // Create JSON response
         Json::Value resp;
         resp["method"] = "update";
-        resp["namespace"] = "hwfinal.models.Orchestra";
+        resp["namespace"] = "tulpasynth.models.Orchestra";
         resp["attributes"]["id"] = "1";
         resp["attributes"]["t"] = orchestra->get_t();
 
@@ -204,7 +204,7 @@ int main(int argc, char* argv[]) {
     /* Parse command line arguments */
     try {
         TCLAP::CmdLine cmd(
-            "Server for hwfinal, the collaborative music making tool.",
+            "Server for tulpasynth, the collaborative music making tool.",
             ' ',
             "0.1"
         );

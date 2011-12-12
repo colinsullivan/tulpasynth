@@ -18,7 +18,7 @@ Backbone.sync = (method, model, options) ->
         message.method = options.method
 
     if not options.nosave
-        hwfinal.socket.send message
+        tulpasynth.socket.send message
 
     options.success()
     

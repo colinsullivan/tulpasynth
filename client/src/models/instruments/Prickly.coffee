@@ -11,9 +11,9 @@
 ###
 #   @class  Prickly instrument
 ###
-class hwfinal.models.instruments.Prickly extends hwfinal.models.instruments.PitchedInstrument
+class tulpasynth.models.instruments.Prickly extends tulpasynth.models.instruments.PitchedInstrument
 
-    namespace: 'hwfinal.models.instruments.Prickly'
+    namespace: 'tulpasynth.models.instruments.Prickly'
 
     initialize: (attributes) ->
         

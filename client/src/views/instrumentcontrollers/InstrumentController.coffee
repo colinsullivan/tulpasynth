@@ -10,7 +10,7 @@
 ###
 #   @class  Base instrument controller class.
 ###
-class hwfinal.views.instrumentcontrollers.InstrumentController extends Backbone.View
+class tulpasynth.views.instrumentcontrollers.InstrumentController extends Backbone.View
     initialize: (options) ->
         options = options || {}
 
@@ -55,7 +55,7 @@ class hwfinal.views.instrumentcontrollers.InstrumentController extends Backbone.
         ###
         #   All objects relating to this controller must reside in this set
         ###
-        @all = hwfinal.canvas.set()
+        @all = tulpasynth.canvas.set()
 
         # When instrument's data is changed, re-render        
         @instrument.bind 'change', () => 
@@ -109,14 +109,14 @@ class hwfinal.views.instrumentcontrollers.InstrumentController extends Backbone.
         x = x - @controllerMousedownPosition.x
         # y = y - @controllerMousedownPosition.y
 
-        snappedY = hwfinal.timeline.snap_y_value y
-        pitchIndex = hwfinal.timeline.get_pitch_index snappedY
+        snappedY = tulpasynth.timeline.snap_y_value y
+        pitchIndex = tulpasynth.timeline.get_pitch_index snappedY
 
         if pitchIndex == -1
             return
 
         duration = @instrument.get('endTime') - @instrument.get('startTime')
-        newStartTime = x/hwfinal.canvas.width
+        newStartTime = x/tulpasynth.canvas.width
         @instrument.set
             startTime: newStartTime
             endTime: newStartTime+duration

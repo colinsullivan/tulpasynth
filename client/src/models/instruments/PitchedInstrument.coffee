@@ -10,7 +10,7 @@
 ###
 #   @class  Base class for all instruments that have a pitch.
 ###
-class hwfinal.models.instruments.PitchedInstrument extends hwfinal.models.instruments.Instrument
+class tulpasynth.models.instruments.PitchedInstrument extends tulpasynth.models.instruments.Instrument
 
     initialize: (attributes) ->
         ###

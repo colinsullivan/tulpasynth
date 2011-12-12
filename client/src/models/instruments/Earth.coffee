@@ -11,6 +11,6 @@
 ###
 #   @class  A deep percussive sound.
 ###
-class hwfinal.models.instruments.Earth extends hwfinal.models.instruments.Instrument
+class tulpasynth.models.instruments.Earth extends tulpasynth.models.instruments.Instrument
 
-    namespace: 'hwfinal.models.instruments.Earth'
+    namespace: 'tulpasynth.models.instruments.Earth'

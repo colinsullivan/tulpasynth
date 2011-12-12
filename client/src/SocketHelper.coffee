@@ -12,7 +12,7 @@ window.WebSocket = window.WebSocket || window.MozWebSocket || null
 ###
 #   @class  A helper class to encapsulate socket connection.
 ###
-class hwfinal.SocketHelper
+class tulpasynth.SocketHelper
     ###
     #   @param  url     The URL to connect the socket to.
     ###
@@ -61,7 +61,7 @@ class hwfinal.SocketHelper
                 id = message.id
 
                 # Get first in line
-                model = hwfinal.models.waitingInstances.shift()
+                model = tulpasynth.models.waitingInstances.shift()
 
                 # Give id
                 model.set
