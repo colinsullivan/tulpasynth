@@ -38,7 +38,7 @@ public:
 protected:
 
     /**
-     *  How many samples we've played so far (in this iteration)
+     *  How many frames we've rendered since the last call to `play`
      **/
     int mPlayedFrames;
 
