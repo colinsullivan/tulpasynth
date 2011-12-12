@@ -112,7 +112,7 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
 
         
 
-        if pitchIndex <= 16
+        if pitchIndex <= 14
             # Bubbly
             bubblyExample = hwfinal.canvas.circle pen.x, pen.y, 10
 
@@ -153,7 +153,7 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
         pen.x += 40
         pen.y += 10
 
-        if pitchIndex >= 18
+        if pitchIndex >= 16
             # Prickly
             pricklyExample = hwfinal.canvas.ellipse pen.x, pen.y, 15, 10
             pricklyExample.attr

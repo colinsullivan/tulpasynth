@@ -22,6 +22,6 @@ class hwfinal.views.instrumentcontrollers.BasicCircle extends hwfinal.views.inst
         @controller.attr
             fill: 'black'
             cx: @instrument.get('startTime')*hwfinal.canvas.width
-            cy: @instrument.get('y')
+            cy: hwfinal.timeline.get_y_value @instrument.get('pitchIndex')
             r: 10
         return @

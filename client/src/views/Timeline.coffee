@@ -119,6 +119,9 @@ class hwfinal.views.Timeline extends Backbone.View
     
     get_pitch_index: (snappedY) ->
         _.indexOf @yGrid, snappedY, true
+    
+    get_y_value: (pitchIndex) ->
+        pitchIndex*@yPxPerGrid
 
     _handle_click: (e) ->
         # Snap y value to grid
