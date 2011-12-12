@@ -110,9 +110,9 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
             x: pen.x
             y: pen.y
 
-        
-
-        if pitchIndex <= 14
+        orchestra = tulpasynth.orchestra
+        instrumentType = tulpasynth.models.instruments.Bubbly
+        if pitchIndex <= 14 && orchestra.new_instrument_allowed(instrumentType)
             # Bubbly
             bubblyExample = tulpasynth.canvas.circle pen.x, pen.y, 10
 
@@ -135,7 +135,8 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
         pen.x += 20
         pen.y -= 10
 
-        if pitchIndex >= 15
+        instrumentType = tulpasynth.models.instruments.Earth
+        if pitchIndex >= 15 && orchestra.new_instrument_allowed(instrumentType)
             # Earth
             earthExample = tulpasynth.canvas.rect pen.x, pen.y, 20, 20
             earthExample.attr
@@ -153,7 +154,8 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
         pen.x += 40
         pen.y += 10
 
-        if pitchIndex >= 16
+        instrumentType = tulpasynth.models.instruments.Prickly
+        if pitchIndex >= 16 && orchestra.new_instrument_allowed(instrumentType)
             # Prickly
             pricklyExample = tulpasynth.canvas.ellipse pen.x, pen.y, 15, 10
             pricklyExample.attr
@@ -174,7 +176,8 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
         pen.x -= 30
         pen.y -= 10
 
-        if pitchIndex < 15
+        instrumentType = tulpasynth.models.instruments.DistortedSnare
+        if pitchIndex < 15 && orchestra.new_instrument_allowed(instrumentType)
             # DistortedSnare
             snareExample = tulpasynth.canvas.path 'M'+pen.x+','+pen.y+' l 10,10 l -10,10 l -10,-10 l 10,-10z'
             snareExample.attr

@@ -16,3 +16,5 @@ Instrument = tulpasynth.models.instruments.Instrument
 class tulpasynth.models.instruments.Glitch extends Instrument
 
     namespace: "tulpasynth.models.instruments.Glitch"
+
+    maxInstances: 25
