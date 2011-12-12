@@ -22,7 +22,7 @@ class hwfinal.views.instrumentcontrollers.BasicSquare extends hwfinal.views.inst
         @controller.attr
             fill: 'black'
             x: @instrument.get('startTime')*hwfinal.canvas.width
-            y: @instrument.get('y')
+            y: hwfinal.timeline.get_y_value(@instrument.get('pitchIndex'))
             width: 20
             height: 20
 
