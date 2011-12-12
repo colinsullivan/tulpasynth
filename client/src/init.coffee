@@ -15,7 +15,7 @@
 ADDRESS = window.location.hostname
 
 # Global namespace
-window.hwfinal = {
+window.tulpasynth = {
     views: {
         instrumentcontrollers: {}
     },
@@ -40,20 +40,20 @@ $(document).ready () ->
     #     $('#info').text e
 
     # Create RaphaelJS canvas
-    hwfinal.canvas = Raphael $('#canvas').get(0), $('#canvas').width(), $('#canvas').height()
+    tulpasynth.canvas = Raphael $('#canvas').get(0), $('#canvas').width(), $('#canvas').height()
 
     # Create our singleton `Orchestra` instance
-    hwfinal.orchestra = new hwfinal.models.Orchestra
+    tulpasynth.orchestra = new tulpasynth.models.Orchestra
         id: 1
     
     # Create our singleton `Timeline` view
-    hwfinal.timeline = new hwfinal.views.Timeline()
+    tulpasynth.timeline = new tulpasynth.views.Timeline()
 
     # Start listening on our socket
-    hwfinal.socket = new hwfinal.SocketHelper "ws://#{ADDRESS}:9090"
+    tulpasynth.socket = new tulpasynth.SocketHelper "ws://#{ADDRESS}:9090"
 
 
-window.hwfinal.create_sequencer = () ->
+window.tulpasynth.create_sequencer = () ->
     for i in [
         0.0546875,
         0.166015625,
@@ -66,7 +66,7 @@ window.hwfinal.create_sequencer = () ->
         0.9453125]
 
         
-        glitchInstance = new hwfinal.models.instruments.Glitch
+        glitchInstance = new tulpasynth.models.instruments.Glitch
             startTime: i
             disabled: true
 

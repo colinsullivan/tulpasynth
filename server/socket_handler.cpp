@@ -107,23 +107,23 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 
 		instruments::Instrument* newInstr = NULL;
 
-		if(clientModelNamespace == "hwfinal.models.instruments.Glitch") {
+		if(clientModelNamespace == "tulpasynth.models.instruments.Glitch") {
 			// Create new glitch object (this will automatically get added to orchestra)
 			newInstr = (instruments::Instrument*)new instruments::Glitch(this->orchestra, messageObject["attributes"], 14);
 		}
-		else if(clientModelNamespace == "hwfinal.models.instruments.Bubbly") {
+		else if(clientModelNamespace == "tulpasynth.models.instruments.Bubbly") {
 			// Create new bubbly object
 			newInstr = (instruments::Instrument*)new instruments::Bubbly(this->orchestra, messageObject["attributes"]);
 		}
-		else if(clientModelNamespace == "hwfinal.models.instruments.Earth") {
+		else if(clientModelNamespace == "tulpasynth.models.instruments.Earth") {
 			// Create new earth instrument
 			newInstr = (instruments::Instrument*)new instruments::Earth(this->orchestra, messageObject["attributes"]);
 		}
-		else if(clientModelNamespace == "hwfinal.models.instruments.Prickly") {
+		else if(clientModelNamespace == "tulpasynth.models.instruments.Prickly") {
 			// Create new Prickly synth
 			newInstr = (instruments::Instrument*)new instruments::PricklySynth(this->orchestra, messageObject["attributes"]);
 		}
-		else if(clientModelNamespace == "hwfinal.models.instruments.DistortedSnare") {
+		else if(clientModelNamespace == "tulpasynth.models.instruments.DistortedSnare") {
 			// Create new snare
 			newInstr = (instruments::Instrument*)new instruments::DistortedSnare(this->orchestra, messageObject["attributes"]);
 		}

@@ -15,7 +15,7 @@
 #   be placed in the location of the first click with its 
 #   corresponding instrument.
 ###
-class hwfinal.views.ControllerChooserPopup extends Backbone.View
+class tulpasynth.views.ControllerChooserPopup extends Backbone.View
     initialize: () ->
 
         ###
@@ -60,7 +60,7 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
         @currentArrowCoords = arrowCoords
         @currentPitchIndex = pitchIndex
 
-        @set = hwfinal.canvas.set()
+        @set = tulpasynth.canvas.set()
 
         pen = 
             x: arrowCoords.x
@@ -69,8 +69,8 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
         # Make sure popup is drawn on the canvas
         rotateDegrees = 0
 
-        canvasHeight = hwfinal.canvas.height
-        canvasWidth = hwfinal.canvas.width        
+        canvasHeight = tulpasynth.canvas.height
+        canvasWidth = tulpasynth.canvas.width        
 
         # If we're in the top left corner
         if pen.x < 100 && pen.y < 100
@@ -114,7 +114,7 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
 
         if pitchIndex <= 14
             # Bubbly
-            bubblyExample = hwfinal.canvas.circle pen.x, pen.y, 10
+            bubblyExample = tulpasynth.canvas.circle pen.x, pen.y, 10
 
             bubblyExample.attr
                 fill: 'black'
@@ -124,8 +124,8 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
 
                 coords = @currentArrowCoords
 
-                new hwfinal.models.instruments.Bubbly
-                    startTime: coords.x/hwfinal.canvas.width
+                new tulpasynth.models.instruments.Bubbly
+                    startTime: coords.x/tulpasynth.canvas.width
                     x: coords.x
                     y: coords.y
                     pitchIndex: @currentPitchIndex
@@ -137,14 +137,14 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
 
         if pitchIndex >= 15
             # Earth
-            earthExample = hwfinal.canvas.rect pen.x, pen.y, 20, 20
+            earthExample = tulpasynth.canvas.rect pen.x, pen.y, 20, 20
             earthExample.attr
                 fill: 'black'
             earthExample.click () =>
                 @hide()
                 coords = @currentArrowCoords
-                new hwfinal.models.instruments.Earth
-                    startTime: coords.x/hwfinal.canvas.width
+                new tulpasynth.models.instruments.Earth
+                    startTime: coords.x/tulpasynth.canvas.width
                     x: coords.x
                     y: coords.y
                     pitchIndex: @currentPitchIndex
@@ -155,14 +155,14 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
 
         if pitchIndex >= 16
             # Prickly
-            pricklyExample = hwfinal.canvas.ellipse pen.x, pen.y, 15, 10
+            pricklyExample = tulpasynth.canvas.ellipse pen.x, pen.y, 15, 10
             pricklyExample.attr
                 fill: 'green'
             pricklyExample.click () =>
                 @hide()
                 coords = @currentArrowCoords
-                startTime = coords.x/hwfinal.canvas.width
-                new hwfinal.models.instruments.Prickly
+                startTime = coords.x/tulpasynth.canvas.width
+                new tulpasynth.models.instruments.Prickly
                     startTime: startTime
                     endTime: startTime+0.11
                     x: coords.x
@@ -176,14 +176,14 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
 
         if pitchIndex < 15
             # DistortedSnare
-            snareExample = hwfinal.canvas.path 'M'+pen.x+','+pen.y+' l 10,10 l -10,10 l -10,-10 l 10,-10z'
+            snareExample = tulpasynth.canvas.path 'M'+pen.x+','+pen.y+' l 10,10 l -10,10 l -10,-10 l 10,-10z'
             snareExample.attr
                 fill: 'red'
             snareExample.click () =>
                 @hide()
                 coords = @currentArrowCoords
-                startTime = coords.x/hwfinal.canvas.width
-                new hwfinal.models.instruments.DistortedSnare
+                startTime = coords.x/tulpasynth.canvas.width
+                new tulpasynth.models.instruments.DistortedSnare
                     startTime: startTime
                     x: coords.x
                     y: coords.y
@@ -225,7 +225,7 @@ class hwfinal.views.ControllerChooserPopup extends Backbone.View
         pathText += ' l '+rectBottomSegmentWidth+' 0';
         pathText += ' z';
 
-        bubble = hwfinal.canvas.path pathText    
+        bubble = tulpasynth.canvas.path pathText    
         @set.push bubble
                 
         @set.rotate rotateDegrees, arrowCoords.x, arrowCoords.y

@@ -11,9 +11,9 @@
 ###
 #   @class  Short bubbly percussive sound.
 ###
-class hwfinal.models.instruments.Bubbly extends hwfinal.models.instruments.PitchedInstrument
+class tulpasynth.models.instruments.Bubbly extends tulpasynth.models.instruments.PitchedInstrument
     
-    namespace: "hwfinal.models.instruments.Bubbly"
+    namespace: "tulpasynth.models.instruments.Bubbly"
 
     initialize: (attributes) ->
         @maxPitchIndex = 14

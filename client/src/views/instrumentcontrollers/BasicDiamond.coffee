@@ -11,18 +11,18 @@
 ###
 #   @class  Basic diamond shape.
 ###
-class hwfinal.views.instrumentcontrollers.BasicDiamond extends hwfinal.views.instrumentcontrollers.InstrumentController
+class tulpasynth.views.instrumentcontrollers.BasicDiamond extends tulpasynth.views.instrumentcontrollers.InstrumentController
 
     render: () ->
         super
 
         if not @controller
-            @controller = hwfinal.canvas.path()
+            @controller = tulpasynth.canvas.path()
             @all.push @controller
         
-        y = hwfinal.timeline.get_y_value(@instrument.get('pitchIndex'))+10
+        y = tulpasynth.timeline.get_y_value(@instrument.get('pitchIndex'))+10
         @controller.attr
             fill: 'red'
-            path: 'M'+(@instrument.get('startTime')*hwfinal.canvas.width)+','+y+' l 10,10 l -10,10 l -10,-10 l 10,-10 z '
+            path: 'M'+(@instrument.get('startTime')*tulpasynth.canvas.width)+','+y+' l 10,10 l -10,10 l -10,-10 l 10,-10 z '
 
         @

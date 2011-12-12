@@ -12,7 +12,7 @@
 #   @class  Basic class for an oval that has the same width as
 #   the sound's duration.
 ###
-class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.instrumentcontrollers.InstrumentController
+class tulpasynth.views.instrumentcontrollers.AdjustableOval extends tulpasynth.views.instrumentcontrollers.InstrumentController
 
     initialize: (options) ->
 
@@ -37,18 +37,18 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
 
         duration = endTime - startTime
 
-        ovalWidth = duration*hwfinal.canvas.width
+        ovalWidth = duration*tulpasynth.canvas.width
 
-        y = hwfinal.timeline.get_y_value @instrument.get('pitchIndex')
+        y = tulpasynth.timeline.get_y_value @instrument.get('pitchIndex')
 
         controllerAttrs = 
             fill: 'green'
-            cx: startTime*hwfinal.canvas.width + ovalWidth/2
+            cx: startTime*tulpasynth.canvas.width + ovalWidth/2
             cy: y
             rx: ovalWidth/2
             ry: 15
         if not @controller
-            @controller = hwfinal.canvas.ellipse()
+            @controller = tulpasynth.canvas.ellipse()
             @all.push @controller
 
         @controller.attr controllerAttrs
@@ -62,22 +62,22 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
             'cursor': 'ew-resize'
         
         leftHandleAttrs = _.extend
-            cx: startTime*hwfinal.canvas.width+1
+            cx: startTime*tulpasynth.canvas.width+1
         , handleAttrs
 
         rightHandleAttrs = _.extend
-            cx: endTime*hwfinal.canvas.width-1
+            cx: endTime*tulpasynth.canvas.width-1
         , handleAttrs
 
 
         if not @leftHandle
-            @leftHandle = hwfinal.canvas.circle()
+            @leftHandle = tulpasynth.canvas.circle()
             @all.push @leftHandle
 
         @leftHandle.attr leftHandleAttrs
         
         if not @rightHandle
-            @rightHandle = hwfinal.canvas.circle()
+            @rightHandle = tulpasynth.canvas.circle()
             @all.push @rightHandle
 
         @rightHandle.attr rightHandleAttrs
@@ -161,11 +161,11 @@ class hwfinal.views.instrumentcontrollers.AdjustableOval extends hwfinal.views.i
         # Left handle changes start time of sound
         @leftHandle.drag (dx, dy, x, y) =>
             @instrument.set
-                startTime: x/hwfinal.canvas.width
+                startTime: x/tulpasynth.canvas.width
         , dragStart, dragEnd
         
         # Right handle changes end time
         @rightHandle.drag (dx, dy, x, y) =>
             @instrument.set
-                endTime: x/hwfinal.canvas.width
+                endTime: x/tulpasynth.canvas.width
         , dragStart, dragEnd

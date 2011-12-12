@@ -10,5 +10,5 @@
 ###
 #   @class  Distorted percussive snare
 ###
-class hwfinal.models.instruments.DistortedSnare extends hwfinal.models.instruments.Instrument
-    namespace: 'hwfinal.models.instruments.DistortedSnare'
+class tulpasynth.models.instruments.DistortedSnare extends tulpasynth.models.instruments.Instrument
+    namespace: 'tulpasynth.models.instruments.DistortedSnare'

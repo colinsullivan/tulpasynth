@@ -7,12 +7,12 @@
 #               Licensed under the MIT license.
 ###
 
-Instrument = hwfinal.models.instruments.Instrument
+Instrument = tulpasynth.models.instruments.Instrument
 
 
 ###
 #   @class  Small percussive hit.
 ###
-class hwfinal.models.instruments.Glitch extends Instrument
+class tulpasynth.models.instruments.Glitch extends Instrument
 
-    namespace: "hwfinal.models.instruments.Glitch"
+    namespace: "tulpasynth.models.instruments.Glitch"
