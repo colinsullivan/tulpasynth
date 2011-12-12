@@ -15,7 +15,7 @@
 #   Width
 #   Height
 ###
-class HarmonicTable extends hwfinal.models.instruments.Instrument
+class HarmonicTable extends tulpasynth.models.instruments.Instrument
 
     initialize: (attributes) ->
         attributes = attributes || {}

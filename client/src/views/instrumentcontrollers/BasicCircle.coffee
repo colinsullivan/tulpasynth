@@ -10,18 +10,18 @@
 ###
 #   @class  A basic black circle
 ###
-class hwfinal.views.instrumentcontrollers.BasicCircle extends hwfinal.views.instrumentcontrollers.InstrumentController
+class tulpasynth.views.instrumentcontrollers.BasicCircle extends tulpasynth.views.instrumentcontrollers.InstrumentController
 
     render: () ->
         super
 
         if not @controller
-            @controller = hwfinal.canvas.circle()
+            @controller = tulpasynth.canvas.circle()
             @all.push @controller
         
         @controller.attr
             fill: 'black'
-            cx: @instrument.get('startTime')*hwfinal.canvas.width
-            cy: hwfinal.timeline.get_y_value @instrument.get('pitchIndex')
+            cx: @instrument.get('startTime')*tulpasynth.canvas.width
+            cy: tulpasynth.timeline.get_y_value @instrument.get('pitchIndex')
             r: 10
         return @

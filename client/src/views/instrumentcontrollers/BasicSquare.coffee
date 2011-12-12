@@ -10,19 +10,19 @@
 ###
 #   @class  Basic black square.
 ###
-class hwfinal.views.instrumentcontrollers.BasicSquare extends hwfinal.views.instrumentcontrollers.InstrumentController
+class tulpasynth.views.instrumentcontrollers.BasicSquare extends tulpasynth.views.instrumentcontrollers.InstrumentController
 
     render: () ->
         super
 
         if not @controller
-            @controller = hwfinal.canvas.rect()
+            @controller = tulpasynth.canvas.rect()
             @all.push @controller
         
         @controller.attr
             fill: 'black'
-            x: @instrument.get('startTime')*hwfinal.canvas.width
-            y: hwfinal.timeline.get_y_value(@instrument.get('pitchIndex'))
+            x: @instrument.get('startTime')*tulpasynth.canvas.width
+            y: tulpasynth.timeline.get_y_value(@instrument.get('pitchIndex'))
             width: 20
             height: 20
 

@@ -10,7 +10,7 @@
 ###
 #   @class  Square that can be toggled on and off.
 ###
-class hwfinal.views.instrumentcontrollers.SquareToggleButton extends hwfinal.views.instrumentcontrollers.InstrumentController
+class tulpasynth.views.instrumentcontrollers.SquareToggleButton extends tulpasynth.views.instrumentcontrollers.InstrumentController
 
     initialize: (options) ->
         super
@@ -19,7 +19,7 @@ class hwfinal.views.instrumentcontrollers.SquareToggleButton extends hwfinal.vie
 
     render: () ->
         super
-        @el = hwfinal.canvas.circle @instrument.get('startTime')*hwfinal.canvas.width, hwfinal.timeline.get_y_value(@instrument.get('pitchIndex')), 10
+        @el = tulpasynth.canvas.circle @instrument.get('startTime')*tulpasynth.canvas.width, tulpasynth.timeline.get_y_value(@instrument.get('pitchIndex')), 10
 
         return @
     

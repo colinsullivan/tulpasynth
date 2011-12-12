@@ -10,12 +10,12 @@
 ###
 #   @class  Base class for all instruments.
 ###
-class hwfinal.models.instruments.Instrument extends Backbone.RelationalModel
+class tulpasynth.models.instruments.Instrument extends Backbone.RelationalModel
 
     ###
     #   All instruments must include their namespace as a string
     ###
-    namespace: 'hwfinal.models.instruments.Instrument'
+    namespace: 'tulpasynth.models.instruments.Instrument'
 
     ###
     #   When an instrument is created, it has no id.  We will ask for
@@ -28,11 +28,11 @@ class hwfinal.models.instruments.Instrument extends Backbone.RelationalModel
         if not attributes['id']            
 
             # Request an id
-            hwfinal.socket.send
+            tulpasynth.socket.send
                 method: 'request/id'
             
             # Wait
-            hwfinal.models.waitingInstances.push this
+            tulpasynth.models.waitingInstances.push this
         else
             @initialized = true
 
@@ -43,7 +43,7 @@ class hwfinal.models.instruments.Instrument extends Backbone.RelationalModel
     #   initializing here.
     ###
     _complete_initialize: () ->
-        hwfinal.orchestra.get('instruments').add(this)
+        tulpasynth.orchestra.get('instruments').add(this)
         @initialized = true
 
     ###
@@ -92,5 +92,5 @@ class hwfinal.models.instruments.Instrument extends Backbone.RelationalModel
 ###
 #   @class  A set of instrument instances.
 ###
-class hwfinal.models.instruments.InstrumentCollection extends Backbone.Collection
-    model: hwfinal.models.instruments.Instrument
+class tulpasynth.models.instruments.InstrumentCollection extends Backbone.Collection
+    model: tulpasynth.models.instruments.Instrument

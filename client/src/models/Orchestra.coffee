@@ -15,12 +15,12 @@
 #   data relating to the synchronization of the 
 #   playhead in the loop.
 ###
-class hwfinal.models.Orchestra extends Backbone.RelationalModel
+class tulpasynth.models.Orchestra extends Backbone.RelationalModel
     relations: [{
         type: Backbone.HasMany,
         key: 'instruments'
-        relatedModel: 'hwfinal.models.instruments.Instrument',
-        collectionType: 'hwfinal.models.instruments.InstrumentCollection',
+        relatedModel: 'tulpasynth.models.instruments.Instrument',
+        collectionType: 'tulpasynth.models.instruments.InstrumentCollection',
         reverseRelation:
             key: 'orchestra',
             includeInJSON: false

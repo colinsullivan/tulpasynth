@@ -10,7 +10,7 @@
 ###
 #   @class  Fixed square toggle button.
 ###
-class hwfinal.views.instrumentcontrollers.FixedSquareToggleButton extends Backbone.View
+class tulpasynth.views.instrumentcontrollers.FixedSquareToggleButton extends Backbone.View
 
     initialize: (options) ->
         options = options || {}

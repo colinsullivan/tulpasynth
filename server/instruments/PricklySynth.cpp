@@ -190,16 +190,14 @@ stk::StkFrames& instruments::PricklySynth::next_buf(stk::StkFrames& frames, doub
                     )
 
                 ) {
-                    std::cout << "startTime:\n" << startTime << std::endl;
-                    std::cout << "endTime:\n" << endTime << std::endl;
-                    std::cout << "Stopping instrument #" << this->get_id() << " at t=" << (startFrame + this->mPlayedFrames)/this->orch->get_duration() << std::endl;
+                    // std::cout << "Stopping instrument #" << this->get_id() << " at t=" << (startFrame + this->mPlayedFrames)/this->orch->get_duration() << std::endl;
                     this->mEnvelope.keyOff();
                     this->mKeyedOff = true;
                 }
 
                 // If we're done
                 if(this->orch->get_t()*this->orch->get_duration() >= endFrame) {
-                    std::cout << "Instrument #" << this->get_id() << " done playing at t=" << (startFrame + this->mPlayedFrames)/this->orch->get_duration() << std::endl;
+                    // std::cout << "Instrument #" << this->get_id() << " done playing at t=" << (startFrame + this->mPlayedFrames)/this->orch->get_duration() << std::endl;
                     this->mPlaying = false;
                     break;
                 }                

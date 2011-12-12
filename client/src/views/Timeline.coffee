@@ -11,7 +11,7 @@
 ###
 #   @class  Master view, Timeline and all Instrument rendering.
 ###
-class hwfinal.views.Timeline extends Backbone.View
+class tulpasynth.views.Timeline extends Backbone.View
     initialize: () ->
         ###
         #   Our entire timeline canvas.
@@ -21,7 +21,7 @@ class hwfinal.views.Timeline extends Backbone.View
         ###
         #   Timeline background
         ###
-        @background = hwfinal.canvas.rect 0, 0, '100%', '100%'
+        @background = tulpasynth.canvas.rect 0, 0, '100%', '100%'
         
         @background.attr
             fill: 'white'
@@ -60,7 +60,7 @@ class hwfinal.views.Timeline extends Backbone.View
         # Draw x-axis grid
         @xGridLines = []
         for i in @xGrid
-            gridLine = hwfinal.canvas.path 'M'+i+',0 L'+i+','+@height+' z'
+            gridLine = tulpasynth.canvas.path 'M'+i+',0 L'+i+','+@height+' z'
             gridLine.attr
                 'stroke-width': 1
                 'opacity': 0.25
@@ -76,7 +76,7 @@ class hwfinal.views.Timeline extends Backbone.View
         ###
         #   Playhead is a line on the canvas
         ###
-        @playhead = hwfinal.canvas.path()
+        @playhead = tulpasynth.canvas.path()
         @playhead.attr
             'stroke-width': 1
         @playhead.node.style["shapeRendering"] = "crispEdges";
@@ -90,9 +90,9 @@ class hwfinal.views.Timeline extends Backbone.View
         #   The chooser popup for when a user is selecting a 
         #   controller.
         ###
-        @chooserPopup = new hwfinal.views.ControllerChooserPopup()
+        @chooserPopup = new tulpasynth.views.ControllerChooserPopup()
 
-        orchestra = hwfinal.orchestra
+        orchestra = tulpasynth.orchestra
 
         # If orchestra's time is updated
         orchestra.bind 'change:t', (orchestra) =>
@@ -142,7 +142,7 @@ class hwfinal.views.Timeline extends Backbone.View
 
 
         # For now, create glitch at point
-        # glitch = new hwfinal.models.instruments.Bubbly
+        # glitch = new tulpasynth.models.instruments.Bubbly
         #     startTime: e.clientX/$(e.currentTarget).width()
         #     x: e.clientX
         #     y: y
@@ -167,9 +167,9 @@ class hwfinal.views.Timeline extends Backbone.View
         # @playhead.translate orchestra.get('t')*@width
     
     create_instrument_controller: (instrument) ->
-        instrumentClassName = instrument.namespace.replace "hwfinal.models.instruments.", ""
+        instrumentClassName = instrument.namespace.replace "tulpasynth.models.instruments.", ""
 
-        instrumentControllerClasses = hwfinal.views.instrumentcontrollers
+        instrumentControllerClasses = tulpasynth.views.instrumentcontrollers
 
 
         instrumentControllerClassMap = 
