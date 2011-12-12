@@ -30,7 +30,7 @@ class tulpasynth.views.instrumentcontrollers.InstrumentController extends Backbo
         #   We'll save instrument after user stops dragging for
         #   a duration.
         ###
-        @draggingTimeout = null
+        @draggingSaveTimeout = null
 
         ###
         #   If the controller is currently being clicked 
@@ -52,6 +52,8 @@ class tulpasynth.views.instrumentcontrollers.InstrumentController extends Backbo
             x: null
             y: null
         
+        @draggingOverRecycleArea = false
+        
         ###
         #   All objects relating to this controller must reside in this set
         ###
@@ -61,13 +63,13 @@ class tulpasynth.views.instrumentcontrollers.InstrumentController extends Backbo
         @instrument.bind 'change', () => 
             @render()
         
-        # When instrument is deleted, delete controller
+        # When instrument is deleted, unbind everything and delete self
         # @instrument.bind 'destroy', () =>
         #     console.log '@controller'
         #     console.log @controller
             
-        #     @controller.hide()
-        #     # delete @
+        #     # @controller.hide()
+        #     delete @
         
         @render()
         @post_render()
@@ -76,6 +78,10 @@ class tulpasynth.views.instrumentcontrollers.InstrumentController extends Backbo
         @
     
     _handle_controller_drag_start: (x, y) ->
+        console.log '_handle_controller_drag_start'
+        # Show delete area
+        tulpasynth.timeline.controllerDeleteArea.show()
+        # @all.toFront()
         @dragging = true
 
         bbox = @controller.getBBox()
@@ -84,26 +90,51 @@ class tulpasynth.views.instrumentcontrollers.InstrumentController extends Backbo
         # @controllerMousedownPosition.y = y - bbox.y
         
 
-        clearTimeout @draggingTimeout
+        clearTimeout @draggingSaveTimeout
     
     _handle_controller_drag_end: (e) ->
         console.log "_handle_controller_drag_end"
+        # Hide delete area
+        tulpasynth.timeline.controllerDeleteArea.hide()
+
         @dragging = false
 
-        # After some time
-        clearTimeout @draggingTimeout
-        @draggingTimeout = setTimeout () =>
-            # If the user is still not dragging
-            if not @dragging
-                # Save the instrument
-                @instrument.save()
-        , 500
+        # If we dropped over the delete area
+        if @_in_recycle_area(e.x, e.y)
+            # Delete instrument
+            @instrument.destroy()
+        else
+            # After some time
+            clearTimeout @draggingSaveTimeout
+            @draggingSaveTimeout = setTimeout () =>
+                # If the user is still not dragging
+                if not @dragging
+                    # Save the instrument
+                    @instrument.save()
+            , 500
 
-        # setTimeout () =>
-        #     @dragging = false
-        # , 250
+    
+    _in_recycle_area: (x, y) ->
+        controllerDeleteArea = tulpasynth.timeline.controllerDeleteArea
+        controllerDeleteAreaBBox = controllerDeleteArea.shownBBox
+        if x > controllerDeleteAreaBBox.x && x < controllerDeleteAreaBBox.x+controllerDeleteAreaBBox.width && y > controllerDeleteAreaBBox.y && y < controllerDeleteAreaBBox.y+controllerDeleteAreaBBox.height
+            return true
+        else
+            return false
+
 
     _handle_controller_drag: (dx, dy, x, y) ->
+
+        # If we're dragging over the recycle area
+        if @_in_recycle_area(x, y)
+            # inform the recycle area
+            tulpasynth.timeline.controllerDeleteArea.handle_drag_over()
+            @draggingOverRecycleArea = true
+        # If we're no longer dragging over the recycle area, but we just were
+        else if @draggingOverRecycleArea
+            @draggingOverRecycleArea = false
+            tulpasynth.timeline.controllerDeleteArea.handle_drag_over_out()
+
 
         # Maintain mouse position relative to element
         x = x - @controllerMousedownPosition.x
