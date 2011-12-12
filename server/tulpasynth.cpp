@@ -22,7 +22,7 @@
 
 #include "Orchestra.hpp"
 
-#include "instruments/DistortedSnare.hpp"
+// #include "instruments/OrganBell.hpp"
 
 
 using boost::asio::ip::tcp;
@@ -36,7 +36,7 @@ RtAudioStream* audio;
 Orchestra* orchestra;
 
 // Test
-// instruments::DistortedSnare* s;
+// instruments::OrganBell* s;
 // bool sPlayed = false;
 
 /**
@@ -288,7 +288,8 @@ int main(int argc, char* argv[]) {
         // Json::Value attributes;
         // attributes["id"] = orchestra->generate_instrument_id();
         // attributes["disabled"] = true;
-        // s = new instruments::DistortedSnare(orchestra, attributes);
+        // s = new instruments::OrganBell(orchestra, attributes);
+        // s->freq(220);
 
 
 		std::cout << "Starting sound server on " << full_host << std::endl;
