@@ -37,7 +37,7 @@ class tulpasynth.models.instruments.Instrument extends Backbone.RelationalModel
             @initialized = true
 
         super
-    
+        
     ###
     #   When the instrument receives its id it will continue 
     #   initializing here.

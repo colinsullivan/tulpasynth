@@ -25,3 +25,30 @@ class tulpasynth.models.Orchestra extends Backbone.RelationalModel
             key: 'orchestra',
             includeInJSON: false
     }]
+
+    initialize: () ->
+        ###
+        #   Keep track of the amount of instances of each.
+        ###
+        @numInstruments = {}
+
+        @bind 'add:instruments', (instrument) =>
+            @numInstruments[instrument.namespace] = @numInstruments[instrument.namespace] || 0
+            @numInstruments[instrument.namespace]++
+        
+        @bind 'remove:instruments', (instrument) =>
+            @numInstruments[instrument.namespace]--
+    
+    ###
+    #   Wether or not the creation of a new instrument of the given 
+    #   type is allowed.
+    ###
+    new_instrument_allowed: (instrumentType) ->
+        namespace = instrumentType.prototype.namespace
+        maxAllowed = instrumentType.prototype.maxInstances
+        
+        @numInstruments[namespace] = @numInstruments[namespace] || 0
+
+        return @numInstruments[namespace] < maxAllowed
+        
+

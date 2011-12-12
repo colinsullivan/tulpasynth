@@ -14,3 +14,4 @@
 class tulpasynth.models.instruments.Earth extends tulpasynth.models.instruments.Instrument
 
     namespace: 'tulpasynth.models.instruments.Earth'
+    maxInstances: 8
