@@ -1,4 +1,4 @@
-EXECUTABLE=sound_server
+EXECUTABLE=tulpasynth
 
 OBJS = 	$(EXECUTABLE).o \
 		socket_handler.o \
@@ -53,10 +53,7 @@ LDFLAGS = $(PRELDFLAGS) -framework CoreAudio \
 endif
 
 $(EXECUTABLE): $(OBJS)
-	# First build websocketpp (Makefile modified)
-	(cd ./vendor/zaphoyd-websocketpp-ec28725;make;)
-
-	$(CXX) -o sound_server $(OBJS) $(LDFLAGS)
+	$(CXX) -o $(EXECUTABLE) $(OBJS) $(LDFLAGS)
 
 RtAudio.o: ./vendor/rtaudio-4.0.10/RtAudio.cpp ./vendor/rtaudio-4.0.10/RtAudio.h ./vendor/rtaudio-4.0.10/RtError.h
 	$(CXX) -c $(CFLAGS) ./vendor/rtaudio-4.0.10/RtAudio.cpp
@@ -71,4 +68,4 @@ RtAudio.o: ./vendor/rtaudio-4.0.10/RtAudio.cpp ./vendor/rtaudio-4.0.10/RtAudio.h
 #
 .PHONY:		clean
 clean:
-	rm -f *.o sound_server
+	rm -f *.o $(EXECUTABLE)

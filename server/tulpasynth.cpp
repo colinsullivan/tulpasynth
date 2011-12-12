@@ -1,5 +1,5 @@
 /**
- *  @file       sound_server.cpp
+ *  @file       tulpasynth.cpp
  *
  *  @author     Colin Sullivan <colinsul [at] gmail.com>
  *
