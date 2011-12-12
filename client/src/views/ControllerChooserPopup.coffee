@@ -187,7 +187,7 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
                     startTime: startTime
                     x: coords.x
                     y: coords.y
-                    pitchIndex = @currentPitchIndex
+                    pitchIndex: @currentPitchIndex
             @set.push(snareExample)
 
 

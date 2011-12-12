@@ -24,7 +24,7 @@ class tulpasynth.views.Timeline extends Backbone.View
         @background = tulpasynth.canvas.rect 0, 0, '100%', '100%'
         
         @background.attr
-            fill: 'white'
+            fill: 'transparent'
             "stroke-width": 0
 
         ###
@@ -67,7 +67,6 @@ class tulpasynth.views.Timeline extends Backbone.View
             gridLine.node.style["shapeRendering"] = 'crispEdges';
             @xGridLines.push gridLine
         
-
         ###
         #   Container for our instrument controllers
         ###
@@ -92,6 +91,9 @@ class tulpasynth.views.Timeline extends Backbone.View
         ###
         @chooserPopup = new tulpasynth.views.ControllerChooserPopup()
 
+        # Controller delete area
+        @controllerDeleteArea = new tulpasynth.views.ControllerDeleteArea()
+
         orchestra = tulpasynth.orchestra
 
         # If orchestra's time is updated
@@ -107,10 +109,13 @@ class tulpasynth.views.Timeline extends Backbone.View
         orchestra.bind 'remove:instruments', (instrument) =>
             controller = @instrumentControllers[instrument.get('id')]
 
+            controller.all.undrag()
+            controller.all.unhover()
             controller.all.remove()
             delete controller
             @instrumentControllers[instrument.get('id')] = null
         
+        @background.toFront()
         @background.click (e) =>
             @_handle_click e
     
