@@ -18,7 +18,7 @@ PRECFLAGS = -O2 -ggdb -Wall \
 	-I./vendor/websocketpp/src \
 	-I./vendor/stk-4.4.3/include \
 	-I./vendor/boost/include \
-	-I./vendor/jsoncpp-src-0.6.0-rc2/include/ \
+	-I./vendor/jsoncpp/include/ \
 	-I./vendor/tclap-1.2.1/include/
 
 PRELDFLAGS = \
@@ -32,7 +32,7 @@ PRELDFLAGS = \
 	-lboost_program_options \
 	./vendor/stk-4.4.3/src/libstk.a \
 	./vendor/websocketpp/libwebsocketpp.a \
-	./vendor/jsoncpp-src-0.6.0-rc2/libs/linux-gcc-4.2.1/libjson_linux-gcc-4.2.1_libmt.a
+	./vendor/jsoncpp/libs/linux-gcc-4.2.1/libjson_linux-gcc-4.2.1_libmt.a
 
 CXX		?= c++
 

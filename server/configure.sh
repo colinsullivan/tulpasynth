@@ -60,7 +60,7 @@ echo "************************"
 echo "*   Building jsoncpp   *"
 echo "************************"
 
-cd ./vendor/jsoncpp-src-0.6.0-rc2
+cd ./vendor/jsoncpp
 
 python scons.py platform=linux-gcc
 
