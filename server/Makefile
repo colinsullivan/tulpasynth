@@ -19,7 +19,7 @@ PRECFLAGS = -O2 -ggdb -Wall \
 	-I./vendor/stk/include \
 	-I./vendor/boost/include \
 	-I./vendor/jsoncpp/include/ \
-	-I./vendor/tclap-1.2.1/include/
+	-I./vendor/tclap/include/
 
 PRELDFLAGS = \
 	-lstdc++ \
@@ -56,8 +56,8 @@ endif
 $(EXECUTABLE): $(OBJS)
 	$(CXX) -o $(EXECUTABLE) $(OBJS) $(LDFLAGS)
 
-RtAudio.o: ./vendor/rtaudio-4.0.10/RtAudio.cpp ./vendor/rtaudio-4.0.10/RtAudio.h ./vendor/rtaudio-4.0.10/RtError.h
-	$(CXX) -c $(CFLAGS) ./vendor/rtaudio-4.0.10/RtAudio.cpp
+# RtAudio.o: ./vendor/rtaudio-4.0.10/RtAudio.cpp ./vendor/rtaudio-4.0.10/RtAudio.h ./vendor/rtaudio-4.0.10/RtError.h
+# 	$(CXX) -c $(CFLAGS) ./vendor/rtaudio-4.0.10/RtAudio.cpp
 
 %.o: %.cpp
 	$(CXX) -c $(CFLAGS) -o $@ $^

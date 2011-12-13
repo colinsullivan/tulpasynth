@@ -74,7 +74,7 @@ echo "************************"
 echo "*    Building TCLAP    *"
 echo "************************"
 
-cd ./vendor/tclap-1.2.1/
+cd ./vendor/tclap/
 
 if [ -e ./Makefile ]; then
     make
