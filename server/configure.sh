@@ -23,7 +23,7 @@ echo "************************"
 echo "* Building websocketpp *"
 echo "************************"
 
-cd ./vendor/zaphoyd-websocketpp-ec28725/
+cd ./vendor/websocketpp/
 export CPLUS_INCLUDE_PATH=../boost/include:$CPLUS_INCLUDE_PATH
 export DYLD_LIBRARY_PATH=../boost/lib:$DYLD_LIBRARY_PATH
 make
