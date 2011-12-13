@@ -146,20 +146,28 @@ class tulpasynth.views.instrumentcontrollers.InstrumentController extends Backbo
         if pitchIndex == -1
             return
 
-        duration = @instrument.get('endTime') - @instrument.get('startTime')
         newStartTime = x/tulpasynth.canvas.width
-        @instrument.set
+
+        attrs = 
             startTime: newStartTime
-            endTime: newStartTime+duration
             y: snappedY
             pitchIndex: pitchIndex
+        
+        if @instrument.get 'endTime'
+            duration = @instrument.get('endTime') - @instrument.get('startTime')
+            attrs.endTime = newStartTime+duration
+
+        
+        @instrument.set attrs
+            
+            
     
-    _handle_controller_mousedown: (e) ->
-        console.log '_handle_controller_mousedown'
-        if @dragging
-            return
-        else
-            @mousedown = true
+    # _handle_controller_mousedown: (e) ->
+    #     console.log '_handle_controller_mousedown'
+    #     if @dragging
+    #         return
+    #     else
+    #         @mousedown = true
 
             # In 500ms
             # @mousedownTimeout = setTimeout () =>

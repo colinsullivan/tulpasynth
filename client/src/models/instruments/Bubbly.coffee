@@ -14,7 +14,7 @@
 class tulpasynth.models.instruments.Bubbly extends tulpasynth.models.instruments.PitchedInstrument
     
     namespace: "tulpasynth.models.instruments.Bubbly"
-    maxInstances: 25
+    maxInstances: 8
     
     initialize: (attributes) ->
         @maxPitchIndex = 14

@@ -14,7 +14,7 @@
 class tulpasynth.models.instruments.Prickly extends tulpasynth.models.instruments.PitchedInstrument
 
     namespace: 'tulpasynth.models.instruments.Prickly'
-    maxInstances: 25
+    maxInstances: 6
 
 
     initialize: (attributes) ->
