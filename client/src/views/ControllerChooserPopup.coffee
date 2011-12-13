@@ -112,7 +112,7 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
 
         orchestra = tulpasynth.orchestra
         instrumentType = tulpasynth.models.instruments.Bubbly
-        if pitchIndex <= 14 && orchestra.new_instrument_allowed(instrumentType)
+        if orchestra.new_instrument_allowed(instrumentType)
             # Bubbly
             bubblyExample = tulpasynth.canvas.circle pen.x, pen.y, 10
 
@@ -136,7 +136,7 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
         pen.y -= 10
 
         instrumentType = tulpasynth.models.instruments.Earth
-        if pitchIndex >= 15 && orchestra.new_instrument_allowed(instrumentType)
+        if orchestra.new_instrument_allowed(instrumentType)
             # Earth
             earthExample = tulpasynth.canvas.rect pen.x, pen.y, 20, 20
             earthExample.attr
@@ -151,11 +151,31 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
                     pitchIndex: @currentPitchIndex
             @set.push earthExample
 
-        pen.x += 40
-        pen.y += 10
+        pen.x += 10
+        pen.y += 30
+
+        instrumentType = tulpasynth.models.instruments.DistortedSnare
+        if orchestra.new_instrument_allowed(instrumentType)
+            # DistortedSnare
+            snareExample = tulpasynth.canvas.path 'M'+pen.x+','+pen.y+' l 10,10 l -10,10 l -10,-10 l 10,-10z'
+            snareExample.attr
+                fill: 'red'
+            snareExample.click () =>
+                @hide()
+                coords = @currentArrowCoords
+                startTime = coords.x/tulpasynth.canvas.width
+                new tulpasynth.models.instruments.DistortedSnare
+                    startTime: startTime
+                    x: coords.x
+                    y: coords.y
+                    pitchIndex: @currentPitchIndex
+            @set.push(snareExample)
+
+        pen.x += 35
+        pen.y -= 20
 
         instrumentType = tulpasynth.models.instruments.Prickly
-        if pitchIndex >= 16 && orchestra.new_instrument_allowed(instrumentType)
+        if orchestra.new_instrument_allowed(instrumentType)
             # Prickly
             pricklyExample = tulpasynth.canvas.ellipse pen.x, pen.y, 15, 10
             pricklyExample.attr
@@ -171,27 +191,29 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
                     y: coords.y
                     pitchIndex: @currentPitchIndex
             @set.push pricklyExample
+        
+        pen.y += 30
+        pen.x -= 12
 
-
-        pen.x -= 30
-        pen.y -= 10
-
-        instrumentType = tulpasynth.models.instruments.DistortedSnare
-        if pitchIndex < 15 && orchestra.new_instrument_allowed(instrumentType)
-            # DistortedSnare
-            snareExample = tulpasynth.canvas.path 'M'+pen.x+','+pen.y+' l 10,10 l -10,10 l -10,-10 l 10,-10z'
-            snareExample.attr
-                fill: 'red'
-            snareExample.click () =>
+        instrumentType = tulpasynth.models.instruments.OrganBell
+        if orchestra.new_instrument_allowed(instrumentType)
+            # Organ bell
+            organBellExample = tulpasynth.canvas.path "M#{pen.x},#{pen.y} l 25,0 z"
+            organBellExample.attr
+                'stroke-width': 15
+            
+            organBellExample.click () =>
                 @hide()
                 coords = @currentArrowCoords
                 startTime = coords.x/tulpasynth.canvas.width
-                new tulpasynth.models.instruments.DistortedSnare
+                new instrumentType
                     startTime: startTime
+                    endTime: startTime+0.11
                     x: coords.x
                     y: coords.y
                     pitchIndex: @currentPitchIndex
-            @set.push(snareExample)
+
+            @set.push organBellExample
 
 
         ###

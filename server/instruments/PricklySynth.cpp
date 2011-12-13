@@ -12,22 +12,55 @@
 
 instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAttributes) : instruments::PitchedInstrument::PitchedInstrument(anOrch, initialAttributes) {
 
-    this->pitches[16] = 440.0000;
-    this->pitches[17] = 369.9944;
-    this->pitches[18] = 311.1270;
-    this->pitches[19] = 261.6256;
-    this->pitches[20] = 220.0000;
-    this->pitches[21] = 184.9972;
-    this->pitches[22] = 155.5635;
-    this->pitches[23] = 130.8128;
-    this->pitches[24] = 110.0000;
-    this->pitches[25] = 92.4986;
-    this->pitches[26] = 77.7817;
-    this->pitches[27] = 65.4064;
-    this->pitches[28] = 55.0000;
-    this->pitches[29] = 46.2493;
-    this->pitches[30] = 38.8909;
-    this->pitches[31] = 32.7032;
+    // this->pitches[16] = 440.0000;
+    // this->pitches[17] = 369.9944;
+    // this->pitches[18] = 311.1270;
+    // this->pitches[19] = 261.6256;
+    // this->pitches[20] = 220.0000;
+    // this->pitches[21] = 184.9972;
+    // this->pitches[22] = 155.5635;
+    // this->pitches[23] = 130.8128;
+    // this->pitches[24] = 110.0000;
+    // this->pitches[25] = 92.4986;
+    // this->pitches[26] = 77.7817;
+    // this->pitches[27] = 65.4064;
+    // this->pitches[28] = 55.0000;
+    // this->pitches[29] = 46.2493;
+    // this->pitches[30] = 38.8909;
+    // this->pitches[31] = 32.7032;
+
+    this->pitches[0] = 1760.0000;  
+    this->pitches[1] = 1479.9777;  
+    this->pitches[2] = 1244.5079;  
+    this->pitches[3] = 1046.5023;  
+    this->pitches[4] = 880.0000;  
+    this->pitches[5] = 739.9888;  
+    this->pitches[6] = 622.2540;  
+    this->pitches[7] = 523.2511;  
+    this->pitches[8] = 440.0000;  
+    this->pitches[9] = 369.9944;  
+    this->pitches[10] = 311.1270;  
+    this->pitches[11] = 261.6256;  
+    this->pitches[12] = 220.0000;  
+    this->pitches[13] = 184.9972;  
+    this->pitches[14] = 155.5635;  
+    this->pitches[15] = 130.8128;  
+    this->pitches[16] = 110.0000;  
+    this->pitches[17] = 92.4986;  
+    this->pitches[18] = 77.7817;  
+    this->pitches[19] = 65.4064;  
+    this->pitches[20] = 55.0000;  
+    this->pitches[21] = 46.2493;  
+    this->pitches[22] = 38.8909;  
+    this->pitches[23] = 32.7032;  
+    this->pitches[24] = 27.5000;  
+    this->pitches[25] = 23.1247;  
+    this->pitches[26] = 19.4454;  
+    this->pitches[27] = 16.3516;  
+    this->pitches[28] = 13.7500;  
+    this->pitches[29] = 11.5623;  
+    this->pitches[30] = 9.7227;  
+    this->pitches[31] = 8.1758;  
 
 
     this->mMinFilterFreq = 110;
@@ -56,7 +89,7 @@ instruments::PricklySynth::PricklySynth(Orchestra* anOrch, Json::Value initialAt
 
     this->filterFreq(this->mMinFilterFreq);
 
-    this->get_attributes()["gain"] = 0.30;
+    // this->get_attributes()["gain"] = 0.30;
 
     this->mPlayedFrames = 0;
 

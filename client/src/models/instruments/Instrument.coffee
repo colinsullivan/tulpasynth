@@ -35,6 +35,11 @@ class tulpasynth.models.instruments.Instrument extends Backbone.RelationalModel
             tulpasynth.models.waitingInstances.push this
         else
             @initialized = true
+        
+        if not @get "gain"
+            @set
+                gain: 1
+
 
         super
         
