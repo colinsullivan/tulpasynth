@@ -15,3 +15,11 @@ class tulpasynth.models.instruments.Earth extends tulpasynth.models.instruments.
 
     namespace: 'tulpasynth.models.instruments.Earth'
     maxInstances: 8
+
+    initialize: () ->
+
+        if not @get 'gain'
+            @set
+                gain: 0.25
+        
+        super

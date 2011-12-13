@@ -182,9 +182,14 @@ class tulpasynth.views.Timeline extends Backbone.View
             "Earth": 'BasicSquare'
             'Prickly': 'AdjustableOval'
             'DistortedSnare': 'BasicDiamond'
+            'OrganBell': 'SeparatingRectangle'
 
+        instrumentControllerClass = instrumentControllerClasses[instrumentControllerClassMap[instrumentClassName]]
+        
+        if not instrumentControllerClass?
+            throw new Error "Instrument controller class not found for `#{instrumentClassName}`"
 
-        instrumentController = new instrumentControllerClasses[instrumentControllerClassMap[instrumentClassName]]
+        instrumentController = new instrumentControllerClass
             instrument: instrument
         
         # Add controller into datastructure

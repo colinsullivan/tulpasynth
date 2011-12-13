@@ -10,6 +10,7 @@
 #include "OrganBell.hpp"
 
 instruments::OrganBell::OrganBell(Orchestra* anOrch, Json::Value initialAttributes) : instruments::PitchedInstrument::PitchedInstrument(anOrch, initialAttributes) {
+    std::cout << "OrganBell::OrganBell" << std::endl;
     // Set gain for each partial (lowest frequency is index 0)
     partialGain[0] = 1.0;
     partialGain[1] = 0.8;
@@ -57,6 +58,10 @@ instruments::OrganBell::OrganBell(Orchestra* anOrch, Json::Value initialAttribut
     // Frequency of FM in Hz
     modulator.setFrequency(10);
 
+    // this->get_attributes()["gain"] = 0.125;
+
+    this->set_attributes(initialAttributes);
+
     this->finish_initializing();
 }
 
@@ -68,12 +73,24 @@ void instruments::OrganBell::freq(stk::StkFloat aFreq) {
     }
 }
 
+void instruments::OrganBell::play() {
+    PitchedInstrument::play();
+
+    // Reset phase of modulator
+    modulator.addPhase(1-modulator.lastOut());
+
+    // Reset attack and release
+    mAttack = 0.0;
+    mRelease = 1.0;
+}
+
 stk::StkFrames& instruments::OrganBell::next_buf(stk::StkFrames& frames, double nextBufferT) {
 
     stk::StkFloat freqModulateValue;
     stk::StkFloat envelopeValue;
 
     if(this->mPlaying) {
+
         // For each frame
         for(int i = 0; i < frames.size(); i++) {
 
@@ -93,9 +110,13 @@ stk::StkFrames& instruments::OrganBell::next_buf(stk::StkFrames& frames, double 
             }
             else if(mAttack >= 1.0 && mRelease <= 0.0) {
                 // We're done playing this note.
+                // std::cout << "Done playing" << std::endl;
                 this->mPlaying = false;
-                envelopeValue = 0;
+                break;
             }
+
+            // std::cout << "freqModulateValue:\n" << freqModulateValue << std::endl;
+            // std::cout << "envelopeValue:\n" << envelopeValue << std::endl;
 
             // For each partial
             for(int j = 0; j < 8; j++) {

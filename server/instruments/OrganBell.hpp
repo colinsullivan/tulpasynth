@@ -32,18 +32,7 @@ namespace instruments {
 
         virtual stk::StkFrames& next_buf(stk::StkFrames& frames, double nextBufferT);
 
-        virtual void play() {
-            PitchedInstrument::play();
-
-            // Reset phase of modulator
-            modulator.addPhase(1-modulator.lastOut());
-
-            // Reset attack and release
-            mAttack = 0;
-            mRelease = 1;
-
-
-        }
+        virtual void play();
 
 
     private:

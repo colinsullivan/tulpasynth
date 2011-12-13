@@ -18,4 +18,9 @@ class tulpasynth.models.instruments.Bubbly extends tulpasynth.models.instruments
     
     initialize: (attributes) ->
         @maxPitchIndex = 14
+
+        if not @get 'gain'
+            @set
+                'gain': 1.5
+
         super
