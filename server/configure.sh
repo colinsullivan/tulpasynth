@@ -37,7 +37,7 @@ echo "*    Building STK    *"
 echo "**********************"
 
 # In the stk folder
-cd ../stk-4.4.3/
+cd ../stk/
 
 # If a makefile already exists
 if [ -e ./Makefile ]; then

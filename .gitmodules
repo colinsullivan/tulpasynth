@@ -7,3 +7,6 @@
 [submodule "server/vendor/jsoncpp"]
 	path = server/vendor/jsoncpp
 	url = git://github.com/mrtazz/json-cpp.git
+[submodule "server/vendor/stk"]
+	path = server/vendor/stk
+	url = git://github.com/colinsullivan/stk.git

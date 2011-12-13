@@ -16,7 +16,7 @@ OBJS = 	$(EXECUTABLE).o \
 
 PRECFLAGS = -O2 -ggdb -Wall \
 	-I./vendor/websocketpp/src \
-	-I./vendor/stk-4.4.3/include \
+	-I./vendor/stk/include \
 	-I./vendor/boost/include \
 	-I./vendor/jsoncpp/include/ \
 	-I./vendor/tclap-1.2.1/include/
@@ -30,7 +30,7 @@ PRELDFLAGS = \
 	-lboost_regex \
 	-lboost_random  \
 	-lboost_program_options \
-	./vendor/stk-4.4.3/src/libstk.a \
+	./vendor/stk/src/libstk.a \
 	./vendor/websocketpp/libwebsocketpp.a \
 	./vendor/jsoncpp/libs/linux-gcc-4.2.1/libjson_linux-gcc-4.2.1_libmt.a
 
