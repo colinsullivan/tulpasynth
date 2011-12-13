@@ -13,7 +13,7 @@
 class tulpasynth.models.instruments.OrganBell extends tulpasynth.models.instruments.PitchedInstrument
 
     namespace: 'tulpasynth.models.instruments.OrganBell'
-    maxInstances: 10
+    maxInstances: 8
 
     initialize: (attributes) ->
 

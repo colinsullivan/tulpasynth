@@ -117,7 +117,8 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
             bubblyExample = tulpasynth.canvas.circle pen.x, pen.y, 10
 
             bubblyExample.attr
-                fill: 'black'
+                fill: '90-#00AB86-#02DEAE:80-#02DEAE'
+                'stroke-width': 1
 
             bubblyExample.click () =>
                 @hide()
@@ -140,7 +141,8 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
             # Earth
             earthExample = tulpasynth.canvas.rect pen.x, pen.y, 20, 20
             earthExample.attr
-                fill: 'black'
+                fill: '90-#0038BA-#1659F5:80-#1659F5'
+                "stroke-width": 1
             earthExample.click () =>
                 @hide()
                 coords = @currentArrowCoords
@@ -179,7 +181,8 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
             # Prickly
             pricklyExample = tulpasynth.canvas.ellipse pen.x, pen.y, 15, 10
             pricklyExample.attr
-                fill: 'green'
+                fill: '90-#C47300-#FF9500:80-#FF9500'
+                'stroke-width': 1
             pricklyExample.click () =>
                 @hide()
                 coords = @currentArrowCoords
@@ -192,15 +195,19 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
                     pitchIndex: @currentPitchIndex
             @set.push pricklyExample
         
-        pen.y += 30
-        pen.x -= 12
+        pen.y += 20
+        pen.x -= 15
 
         instrumentType = tulpasynth.models.instruments.OrganBell
         if orchestra.new_instrument_allowed(instrumentType)
             # Organ bell
-            organBellExample = tulpasynth.canvas.path "M#{pen.x},#{pen.y} l 25,0 z"
+            organBellExample = tulpasynth.canvas.path()
             organBellExample.attr
-                'stroke-width': 15
+                path: "M#{pen.x},#{pen.y} s2.5,2.5,30,10 s-2.5,-2.5,-30,10 z"
+                fill: '90-#0E8A00-#14C900'
+                'stroke-width': 1
+                # transform: 's0.5,0.5'
+
             
             organBellExample.click () =>
                 @hide()
@@ -208,7 +215,7 @@ class tulpasynth.views.ControllerChooserPopup extends Backbone.View
                 startTime = coords.x/tulpasynth.canvas.width
                 new instrumentType
                     startTime: startTime
-                    endTime: startTime+0.11
+                    # endTime: startTime+0.11
                     x: coords.x
                     y: coords.y
                     pitchIndex: @currentPitchIndex

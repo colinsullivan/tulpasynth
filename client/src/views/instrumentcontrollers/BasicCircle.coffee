@@ -20,7 +20,8 @@ class tulpasynth.views.instrumentcontrollers.BasicCircle extends tulpasynth.view
             @all.push @controller
         
         @controller.attr
-            fill: 'black'
+            fill: '90-#00AB86-#02DEAE:80-#02DEAE'
+            'stroke-width': 1
             cx: @instrument.get('startTime')*tulpasynth.canvas.width
             cy: tulpasynth.timeline.get_y_value @instrument.get('pitchIndex')
             r: 10

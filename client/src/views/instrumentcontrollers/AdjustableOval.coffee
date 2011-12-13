@@ -27,6 +27,11 @@ class tulpasynth.views.instrumentcontrollers.AdjustableOval extends tulpasynth.v
         ###
         @dragging = false
 
+        ###
+        #   Hide handles after an amount of time
+        ###
+        @handleHideTimeout = null
+
         super options
 
     render: () ->
@@ -42,7 +47,8 @@ class tulpasynth.views.instrumentcontrollers.AdjustableOval extends tulpasynth.v
         y = tulpasynth.timeline.get_y_value @instrument.get('pitchIndex')
 
         controllerAttrs = 
-            fill: 'green'
+            fill: '90-#C47300-#FF9500:80-#FF9500'
+            'stroke-width': 1
             cx: startTime*tulpasynth.canvas.width + ovalWidth/2
             cy: y
             rx: ovalWidth/2
@@ -105,6 +111,13 @@ class tulpasynth.views.instrumentcontrollers.AdjustableOval extends tulpasynth.v
 
         @leftHandle.animate handleAttrs, 250, 'bounce'
         @rightHandle.animate handleAttrs, 250, 'bounce'
+
+        if @handleHideTimeout
+            clearTimeout @handleHideTimeout
+        @handleHideTimeout = setTimeout () =>
+            @_hide_handles()
+        , 1000
+
 
     
     ###

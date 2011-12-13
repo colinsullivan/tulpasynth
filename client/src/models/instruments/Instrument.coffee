@@ -67,12 +67,13 @@ class tulpasynth.models.instruments.Instrument extends Backbone.RelationalModel
             finishInitializing = true
 
         # If start/end times are being changed
-        if attrs? and (attrs.startTime? or attrs.endTime?)
+        if attrs? and (attrs.startTime? or attrs.endTime?)            
             startTime = attrs.startTime || this.get 'startTime'
             endTime = attrs.endTime || this.get 'endTime'
-            
+
+
             # If duration is going to be changed to too small of a value
-            if endTime - startTime < 0.09
+            if endTime? and endTime - startTime < 0.09
                 # Ignore changes to start/end times
                 delete attrs.startTime
                 delete attrs.endTime
