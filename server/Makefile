@@ -15,7 +15,7 @@ OBJS = 	$(EXECUTABLE).o \
 		OrganBell.o
 
 PRECFLAGS = -O2 -ggdb -Wall \
-	-I./vendor/zaphoyd-websocketpp-ec28725/src \
+	-I./vendor/websocketpp/src \
 	-I./vendor/stk-4.4.3/include \
 	-I./vendor/boost/include \
 	-I./vendor/jsoncpp-src-0.6.0-rc2/include/ \
@@ -31,7 +31,7 @@ PRELDFLAGS = \
 	-lboost_random  \
 	-lboost_program_options \
 	./vendor/stk-4.4.3/src/libstk.a \
-	./vendor/zaphoyd-websocketpp-ec28725/libwebsocketpp.a \
+	./vendor/websocketpp/libwebsocketpp.a \
 	./vendor/jsoncpp-src-0.6.0-rc2/libs/linux-gcc-4.2.1/libjson_linux-gcc-4.2.1_libmt.a
 
 CXX		?= c++
