@@ -182,7 +182,7 @@ class tulpasynth.views.Timeline extends Backbone.View
             "Earth": 'BasicSquare'
             'Prickly': 'AdjustableOval'
             'DistortedSnare': 'BasicDiamond'
-            'OrganBell': 'SeparatingRectangle'
+            'OrganBell': 'WobblingSharpTriangle'
 
         instrumentControllerClass = instrumentControllerClasses[instrumentControllerClassMap[instrumentClassName]]
         

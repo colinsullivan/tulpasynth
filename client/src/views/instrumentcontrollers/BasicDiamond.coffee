@@ -23,7 +23,8 @@ class tulpasynth.views.instrumentcontrollers.BasicDiamond extends tulpasynth.vie
         y = tulpasynth.timeline.get_y_value(@instrument.get('pitchIndex'))+10
         x = @instrument.get('startTime')*tulpasynth.canvas.width
         @controller.attr
-            fill: 'red'
+            fill: '90-#B80909-#FF2E2E:80-#FF2E2E'
+            "stroke-width": 1
             path: "M#{x},#{y} l 10,10 l -10,10 l -10,-10 l 10,-10 z "
 
         @
