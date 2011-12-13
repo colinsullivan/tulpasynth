@@ -10,3 +10,6 @@
 [submodule "server/vendor/stk"]
 	path = server/vendor/stk
 	url = git://github.com/colinsullivan/stk.git
+[submodule "server/vendor/tclap"]
+	path = server/vendor/tclap
+	url = git://tclap.git.sourceforge.net/gitroot/tclap/tclap
