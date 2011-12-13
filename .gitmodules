@@ -4,3 +4,6 @@
 [submodule "server/vendor/websocketpp"]
 	path = server/vendor/websocketpp
 	url = git://github.com/zaphoyd/websocketpp.git
+[submodule "server/vendor/jsoncpp"]
+	path = server/vendor/jsoncpp
+	url = git://github.com/mrtazz/json-cpp.git
