@@ -21,4 +21,8 @@ class tulpasynth.models.instruments.Prickly extends tulpasynth.models.instrument
         
         @minPitchIndex = 16
 
+        if not @get 'gain'
+            @set
+                gain: 0.30
+
         super

@@ -13,3 +13,11 @@
 class tulpasynth.models.instruments.DistortedSnare extends tulpasynth.models.instruments.Instrument
     namespace: 'tulpasynth.models.instruments.DistortedSnare'
     maxInstances: 8
+
+    initialize: () ->
+
+        if not @get 'gain'
+            @set
+                gain: 0.3
+        
+        super

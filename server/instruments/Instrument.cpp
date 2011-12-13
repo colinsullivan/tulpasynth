@@ -30,5 +30,6 @@ instruments::Instrument::Instrument(Orchestra* anOrch, Json::Value initialAttrib
 };
 
 void instruments::Instrument::finish_initializing() {
+    
     this->orch->add_instrument(this);
 }

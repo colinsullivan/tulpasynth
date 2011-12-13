@@ -16,6 +16,7 @@
 
 #include <json/value.h>
 #include <iostream>
+#include <string>
 
 class Orchestra;
 
@@ -58,8 +59,8 @@ namespace instruments {
 
         virtual void set_attributes(Json::Value newAttributes) {
             // Default gain value
-            double gain = newAttributes.get("gain", this->defaultAttributes["gain"].asDouble()).asDouble();
-            newAttributes["gain"] = gain;
+            // double gain = newAttributes.get("gain", this->defaultAttributes["gain"].asDouble()).asDouble();
+            // newAttributes["gain"] = gain;
 
             this->attributes = newAttributes;
         };
@@ -99,6 +100,13 @@ namespace instruments {
             std::cerr << "WARNING: instruments::Instrument::next_buf is a passthrough." << std::endl;
             return frames;
         };
+
+        void set_ns(std::string aNamespace) {
+            this->ns = aNamespace;
+        }
+        std::string get_ns() {
+            return this->ns;
+        }
     protected:
         /**
          *  The attributes of this object (including id)
@@ -119,6 +127,11 @@ namespace instruments {
          *  If this instrument is currently playing.
          **/
         bool mPlaying;
+
+        /**
+         *  Save namespace
+         **/
+        std::string ns;
 
     private:
 

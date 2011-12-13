@@ -21,6 +21,7 @@
 #include "RtAudioStream.h"
 
 #include "Orchestra.hpp"
+#include "instruments/Instrument.hpp"
 
 // #include "instruments/OrganBell.hpp"
 

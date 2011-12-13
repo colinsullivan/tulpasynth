@@ -20,6 +20,7 @@
 #include "instruments/Earth.hpp"
 #include "instruments/PricklySynth.hpp"
 #include "instruments/DistortedSnare.hpp"
+#include "instruments/OrganBell.hpp"
 
 
 using websocketpp::session_ptr;
@@ -44,10 +45,21 @@ void socket_handler::on_open(session_ptr client) {
 	std::cout << "client " << client << " connected." << std::endl;
 	m_connections.insert(std::pair<session_ptr,std::string>(client,get_con_id(client)));
 
-	// send user list and signon message to all clients
-	// send_to_all(serialize_state());
-	// client->send(encode_message("server","Welcome, use the /alias command to set a name, /help for a list of other commands."));
-	// send_to_all(encode_message("server",m_connections[client]+" has joined the chat."));
+	// Send new client current state
+	std::map<int, instruments::Instrument*>* instrs = this->orchestra->get_instruments();
+	std::map<int, instruments::Instrument*>::iterator instr = instrs->begin();
+	Json::StyledWriter writer;
+	Json::Value message;
+	message["method"] = "create";
+	while(instr != instrs->end()) {
+		message["namespace"] = instr->second->get_ns();
+		message["attributes"] = instr->second->get_attributes();
+
+		client->send(writer.write(message));
+		instr++;
+	}
+
+
 }
 
 void socket_handler::on_close(session_ptr client) {
@@ -127,10 +139,16 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 			// Create new snare
 			newInstr = (instruments::Instrument*)new instruments::DistortedSnare(this->orchestra, messageObject["attributes"]);
 		}
+		else if(clientModelNamespace == "tulpasynth.models.instruments.OrganBell") {
+			// Create new organ bell
+			newInstr = (instruments::Instrument*)new instruments::OrganBell(this->orchestra, messageObject["attributes"]);
+		}
 		else {
 			std::cerr << "Namespace " << clientModelNamespace << " unrecognized." << std::endl;
 			return;
 		}
+
+		newInstr->set_ns(messageObject["namespace"].asString());
 
 		// Serialize model and relay to all clients
 		outgoingMessageObject["method"] = "create";
@@ -138,7 +156,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 		outgoingMessageObject["attributes"] = newInstr->get_attributes();
 
 		std::string outgoingMessage = writer.write(outgoingMessageObject);
-		// std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
+		std::cout << "outgoingMessage:\n" << outgoingMessage << std::endl;
 
 		this->send_to_all_but_one(msg, client);
 

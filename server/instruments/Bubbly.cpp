@@ -34,8 +34,24 @@ instruments::Bubbly::Bubbly(Orchestra* anOrch, Json::Value initialAttributes) : 
     this->pitches[12] = 130.8128;
     this->pitches[13] = 103.8262;
     this->pitches[14] = 82.4069;
+    this->pitches[15] = 65.4064;  
+    this->pitches[16] = 51.9131;  
+    this->pitches[17] = 41.2034;  
+    this->pitches[18] = 32.7032;  
+    this->pitches[19] = 25.9565;  
+    this->pitches[20] = 20.6017;  
+    this->pitches[21] = 16.3516;  
+    this->pitches[22] = 12.9783;  
+    this->pitches[23] = 10.3009;  
+    this->pitches[24] = 8.1758;  
+    this->pitches[25] = 6.4891;  
+    this->pitches[26] = 5.1504;  
+    this->pitches[27] = 4.0879;  
+    this->pitches[28] = 3.2446;  
+    this->pitches[29] = 2.5752;  
+    this->pitches[30] = 2.0439;  
+    this->pitches[31] = 1.6223;  
 
-    this->get_attributes()["gain"] = 1.25;
     this->set_attributes(initialAttributes);
 
     // Set low pass parameters
@@ -66,6 +82,14 @@ void instruments::Bubbly::freq(stk::StkFloat aFreq) {
     m_a0 = (SAMPLE)next_a0;
     m_b1 = (SAMPLE)next_b1;
     m_b2 = (SAMPLE)next_b2;
+
+    if(freq > 9 ) {
+        this->get_attributes()["gain"] = 1.5;
+    }
+
+    if(freq > 11) {
+        this->get_attributes()["gain"] = 1.9;
+    }
 
     // // m_freq = freq;
     // // m_Q = 1.0 / qres;
