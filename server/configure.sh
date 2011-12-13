@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+echo "******************************"
+echo "*  Downloading dependencies  *"
+echo "******************************"
+cd ../
+git submodule update --init
+cd ./server/
+
 
 echo "************************"
 echo "*    Building boost    *"
