@@ -1,0 +1,40 @@
+/* line 5, ../../sass/screen.scss */
+body {
+  margin: 0;
+}
+
+/* line 10, ../../sass/screen.scss */
+div#canvas {
+  position: absolute;
+  width: 1024px;
+  height: 768px;
+  margin: auto;
+  border: 1px solid black;
+}
+
+/* line 19, ../../sass/screen.scss */
+div#playhead {
+  height: 100%;
+  width: 1px;
+  background-color: red;
+  position: relative;
+  left: 0%;
+}
+
+/* line 30, ../../sass/screen.scss */
+div.instrument {
+  position: absolute;
+}
+
+/* line 34, ../../sass/screen.scss */
+div.glitch {
+  top: 328px;
+  width: 112px;
+  height: 112px;
+  background-color: black;
+}
+
+/* line 42, ../../sass/screen.scss */
+div.glitch.disabled {
+  opacity: 0.4;
+}
