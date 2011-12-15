@@ -2,7 +2,7 @@
 
  tulpasynth is a real-time collaborative music creation system.
 
-It was initially developed by Colin Sullivan during the Music 256A course[^course] at Stanford's CCRMA.  It is named "tulpasynth" in the spirit of creation without boundaries.
+It was initially developed by Colin Sullivan during the Music 256A [course](https://ccrma.stanford.edu/course-overviews/music-256a) at Stanford's CCRMA.  It is named "tulpasynth" in the spirit of creation without boundaries.
 
 [github.com/colinsullivan/tulpasynth](https://github.com/colinsullivan/tulpasynth)
 
@@ -17,9 +17,9 @@ Currently, the application is built using C++ on the backend, and JavaScript on 
 
 [Overview of the tulpasynth architecture.](https://ccrma.stanford.edu/~colinsul/projects/tulpasynth/Architecture_Overview.png)
 
-The frontend is written using Backbone.js[^backbone] for an MVC organization and Raphael.js[^raphael] for drawing SVG.
+The frontend is written using [Backbone.js](http://documentcloud.github.com/backbone/) for an MVC organization and [Raphael.js](http://raphaeljs.com/) for drawing SVG.
 
-The backend utilizes the elegant websocketpp[^websocketpp] library to synchronize the models between server and client.
+The backend utilizes the elegant [websocketpp](https://github.com/zaphoyd/websocketpp) library to synchronize the models between server and client.
 
 [Dependencies of tulpasynth](https://ccrma.stanford.edu/~colinsul/projects/tulpasynth/Architecture_Dependencies.png)
 
@@ -27,7 +27,7 @@ The backend utilizes the elegant websocketpp[^websocketpp] library to synchroniz
 
 To build tulpasynth, download from github, run `./configure` and `make` on the server-side code, then serve the `client/public` folder for the clientside code.
 
-WARNING: `./configure` will clone and build the "Boost" C++ library, which takes quite a while.  If you already have boost installed and don't want to wait, you can edit the `configure` and `Makefile` files accordingly.  This script will also attempt to install the "jsoncpp"[^jsoncpp] library which requires "scons"[^scons].
+WARNING: `./configure` will clone and build the "Boost" C++ library, which takes quite a while.  If you already have boost installed and don't want to wait, you can edit the `configure` and `Makefile` files accordingly.  This script will also attempt to install the "[jsoncpp](https://github.com/mrtazz/json-cpp" library which requires "[scons](http://www.scons.org/)".
 
 ```bash
 git clone git://github.com/colinsullivan/tulpasynth.git
@@ -46,25 +46,16 @@ cd server/
 ./tulpasynth -a myipaddress
 ```
 
-Then host the `client/public/` directory with an HTTP server on the same IP address.  I like Marak Squires' "http-server"[^httpserver], but that requires Node.js.
+Then host the `client/public/` directory with an HTTP server on the same IP address.  I like Marak Squires' "[http-server](https://github.com/nodeapps/http-server", but that requires Node.js.
 
 ```bash
 cd client/
 http-server -a myipaddress
 ```
 
-Then open a recent Chrome build[^chromedev] to http://myipaddress and all should be well :)
+Then open a recent [Chrome build](http://www.chromium.org/getting-involved/dev-channel) to http://myipaddress and all should be well :)
 
 ## Future
 It would be wonderful to spend more time on the graphics, specifically animations.  I like the idea of sound and interaction influencing the visual aesthetics.
 
 This application could be easily modified to send audio remotely and to render it on the client.  The limitations here seem to be figuring out how to optimize uncompressed audio streaming over WebSockets.
-
-[^course]: [ccrma.stanford.edu/course-overviews/music-256a](https://ccrma.stanford.edu/course-overviews/music-256a)
-[^websocketpp]: [github.com/zaphoyd/websocketpp](https://github.com/zaphoyd/websocketpp)
-[^backbone]: [documentcloud.github.com/backbone](http://documentcloud.github.com/backbone/)
-[^raphael]: [raphaeljs.com](http://raphaeljs.com/)
-[^httpserver]: [github.com/nodeapps/http-server](https://github.com/nodeapps/http-server)
-[^jsoncpp]: [github.com/mrtazz/json-cpp](https://github.com/mrtazz/json-cpp)
-[^scons]: [scons.org](http://www.scons.org/)
-[^chromedev]: [chromium.org/getting-involved/dev-channel](http://www.chromium.org/getting-involved/dev-channel)
