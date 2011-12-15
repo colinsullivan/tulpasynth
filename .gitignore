@@ -2,3 +2,4 @@
 *.DS_Store
 *.dia~
 *.sass-cache
+./server/tulpasynth
