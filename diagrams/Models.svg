@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="38cm" height="28cm" viewBox="747 156 757 553" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="1149" y="189" width="140.9" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1149" y="189" width="140.9" height="70"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:16;font-family:sanserif;font-style:italic;font-weight:700" x="1219.45" y="208">Instrument</text>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1219.45" y="223.5">Some blob on the</text>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1219.45" y="237.5">UI that makes</text>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1219.45" y="251.5">music.</text>
+    <rect style="fill: #ffffff" x="1149" y="259" width="140.9" height="69"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1149" y="259" width="140.9" height="69"/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:monospace;font-style:normal;font-weight:normal" x="1152" y="273">+startTime: float</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1152" y="287.5">Time when this</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1152" y="301.5">instrument</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1152" y="315.5">should play.</text>
+    <rect style="fill: #ffffff" x="1149" y="328" width="140.9" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1149" y="328" width="140.9" height="8"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="958" y="455" width="72.45" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="958" y="455" width="72.45" height="28"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:16;font-family:sanserif;font-style:normal;font-weight:700" x="994.225" y="474">Bubbly</text>
+    <rect style="fill: #ffffff" x="958" y="483" width="72.45" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="958" y="483" width="72.45" height="8"/>
+    <rect style="fill: #ffffff" x="958" y="491" width="72.45" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="958" y="491" width="72.45" height="8"/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1219.45,354.236 1219.45,394.997 994.225,394.997 994.225,453.994 "/>
+    <polygon style="fill: #ffffff" points="1227.45,354.236 1219.45,338.236 1211.45,354.236 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1227.45,354.236 1219.45,338.236 1211.45,354.236 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="748" y="157" width="210.2" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="748" y="157" width="210.2" height="70"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:16;font-family:sanserif;font-style:normal;font-weight:700" x="853.1" y="176">Orchestra</text>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="853.1" y="191.5">The overall</text>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="853.1" y="205.5">composition on</text>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="853.1" y="219.5">the screen.</text>
+    <rect style="fill: #ffffff" x="748" y="227" width="210.2" height="134"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="748" y="227" width="210.2" height="134"/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:monospace;font-style:normal;font-weight:normal" x="751" y="241">+Instruments: Instrument[]</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="751" y="255.5">The list of</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="751" y="269.5">instrument</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="751" y="283.5">instances.</text>
+    <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:monospace;font-style:normal;font-weight:normal" x="751" y="306">+t: float = [0.0 - 1.0]</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="751" y="320.5">The current time</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="751" y="334.5">relative to the</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="751" y="348.5">entire loop.</text>
+    <rect style="fill: #ffffff" x="748" y="361" width="210.2" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="748" y="361" width="210.2" height="8"/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="984.378,263 1053.6,263 1053.6,262.5 1147.99,262.5 "/>
+    <polygon style="fill: #ffffff" points="959.206,263 973.206,258.2 987.206,263 973.206,267.8 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="959.206,263 973.206,258.2 987.206,263 973.206,267.8 "/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.7998;font-family:monospace;font-style:normal;font-weight:normal" x="1055.6" y="259.75">Has many</text>
+    <polygon style="fill: #000000" points="1119.2,259.75 1119.2,251.75 1127.2,255.75 "/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.7998;font-family:monospace;font-style:normal;font-weight:normal" x="991.206" y="260">1</text>
+    <text style="fill: #000000;text-anchor:end;font-size:12.7998;font-family:monospace;font-style:normal;font-weight:normal" x="1143.99" y="259.5">*</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1088.5" y="458.1" width="125.5" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1088.5" y="458.1" width="125.5" height="28"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:16;font-family:sanserif;font-style:normal;font-weight:700" x="1151.25" y="477.1">Prickly</text>
+    <rect style="fill: #ffffff" x="1088.5" y="486.1" width="125.5" height="83"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1088.5" y="486.1" width="125.5" height="83"/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:monospace;font-style:normal;font-weight:normal" x="1091.5" y="500.1">+endTime: float</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1091.5" y="514.6">Time when this</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1091.5" y="528.6">instrument</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1091.5" y="542.6">should stop</text>
+    <text style="fill: #000000;text-anchor:start;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1091.5" y="556.6">playing.</text>
+    <rect style="fill: #ffffff" x="1088.5" y="569.1" width="125.5" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1088.5" y="569.1" width="125.5" height="8"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1300.5" y="457.1" width="96.1" height="84"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1300.5" y="457.1" width="96.1" height="84"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:16;font-family:sanserif;font-style:normal;font-weight:700" x="1348.55" y="476.1">RAMpler</text>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1348.55" y="491.6">Sampler that</text>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1348.55" y="505.6">guarantees</text>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1348.55" y="519.6">samples will be</text>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2;font-family:sanserif;font-style:italic;font-weight:normal" x="1348.55" y="533.6">in RAM.</text>
+    <rect style="fill: #ffffff" x="1300.5" y="541.1" width="96.1" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1300.5" y="541.1" width="96.1" height="8"/>
+    <rect style="fill: #ffffff" x="1300.5" y="549.1" width="96.1" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1300.5" y="549.1" width="96.1" height="8"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1245.5" y="663.1" width="58.7" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1245.5" y="663.1" width="58.7" height="28"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:16;font-family:sanserif;font-style:normal;font-weight:700" x="1274.85" y="682.1">Earth</text>
+    <rect style="fill: #ffffff" x="1245.5" y="691.1" width="58.7" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1245.5" y="691.1" width="58.7" height="8"/>
+    <rect style="fill: #ffffff" x="1245.5" y="699.1" width="58.7" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1245.5" y="699.1" width="58.7" height="8"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1355.5" y="663.1" width="147.25" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1355.5" y="663.1" width="147.25" height="28"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:16;font-family:sanserif;font-style:normal;font-weight:700" x="1429.13" y="682.1">DistortedSnare</text>
+    <rect style="fill: #ffffff" x="1355.5" y="691.1" width="147.25" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1355.5" y="691.1" width="147.25" height="8"/>
+    <rect style="fill: #ffffff" x="1355.5" y="699.1" width="147.25" height="8"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1355.5" y="699.1" width="147.25" height="8"/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1219.45,355.243 1219.45,395 1151.25,395 1151.25,457.101 "/>
+    <polygon style="fill: #ffffff" points="1227.45,355.243 1219.45,339.243 1211.45,355.243 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1227.45,355.243 1219.45,339.243 1211.45,355.243 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1219.45,355.243 1219.45,395 1348.55,395 1348.55,456.195 "/>
+    <polygon style="fill: #ffffff" points="1227.45,355.243 1219.45,339.243 1211.45,355.243 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1227.45,355.243 1219.45,339.243 1211.45,355.243 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1348.55,576.342 1348.55,610.1 1274.85,610.1 1274.85,662.094 "/>
+    <polygon style="fill: #ffffff" points="1356.55,576.342 1348.55,560.342 1340.55,576.342 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1356.55,576.342 1348.55,560.342 1340.55,576.342 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1348.55,576.342 1348.55,610.1 1429.13,610.1 1429.13,662.094 "/>
+    <polygon style="fill: #ffffff" points="1356.55,576.342 1348.55,560.342 1340.55,576.342 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1356.55,576.342 1348.55,560.342 1340.55,576.342 "/>
+  </g>
+</svg>
