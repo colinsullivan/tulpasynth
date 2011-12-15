@@ -92,7 +92,7 @@ void socket_handler::on_message(session_ptr client,const std::string &msg) {
 	if ( !parsingSuccessful ) {
 	    // report to the user the failure and their locations in the document.
 	    std::cout  << "Failed to parse configuration\n"
-	               << reader.getFormattedErrorMessages();
+	               << reader.getFormatedErrorMessages();
 	    return;
 	}
 
