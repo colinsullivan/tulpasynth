@@ -8,26 +8,14 @@
 
 #import "tulpaViewController.h"
 
-typedef struct {
-    float Position[3];
-    float Color[4];
-} Vertex;
+#import "Square.h"
 
-const Vertex Vertices[] = {
-    {{1, -1, 0}, {1, 0, 0, 1}},
-    {{1, 1, 0}, {0, 1, 0, 1}},
-    {{-1, 1, 0}, {0, 0, 1, 1}},
-    {{-1, -1, 0}, {0, 0, 0, 1}}
-};
 
-const GLubyte Indices[] = {
-    0, 1, 2,
-    2, 3, 0
-};
 
 
 @implementation tulpaViewController
 
+Square* s;
 @synthesize context = _context;
 @synthesize effect = _effect;
 
@@ -38,7 +26,7 @@ const GLubyte Indices[] = {
     if (self) {
         // Custom initialization
         _increasing = YES;
-        _curRed = 0.0;
+        _curRed = 0.0;        
     }
     return self;
 }
@@ -76,15 +64,8 @@ const GLubyte Indices[] = {
     
     [EAGLContext setCurrentContext:self.context];
     self.effect = [[GLKBaseEffect alloc] init];
-    
-    glGenBuffers(1, &_vertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
-    
-    glGenBuffers(1, &_indexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
 
+    s = [[Square alloc] init];
 }
 
 - (void)viewDidUnload
@@ -94,16 +75,14 @@ const GLubyte Indices[] = {
     // e.g. self.myOutlet = nil;
 
     [EAGLContext setCurrentContext:self.context];
-    
-    glDeleteBuffers(1, &_vertexBuffer);
-    glDeleteBuffers(1, &_indexBuffer);
-    
+        
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
     }
     self.context = nil;
     self.effect = nil;
 
+    [s release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -116,18 +95,13 @@ const GLubyte Indices[] = {
     glClearColor(_curRed, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     [self.effect prepareToDraw];
-    
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Position));
-    glEnableVertexAttribArray(GLKVertexAttribColor);
-    glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Color));
-    glDrawElements(GL_TRIANGLES, sizeof(Indices)/sizeof(Indices[0]), GL_UNSIGNED_BYTE, 0);
+
+    [s draw];
+
 }
 
 - (void)update {
+    
     if (_increasing) {
         _curRed += 0.5 * self.timeSinceLastUpdate;
     }

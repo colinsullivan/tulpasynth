@@ -15,8 +15,6 @@
     BOOL _increasing;
     
 @private
-    GLuint _vertexBuffer;
-    GLuint _indexBuffer;
     float _rotation;
 }
 
