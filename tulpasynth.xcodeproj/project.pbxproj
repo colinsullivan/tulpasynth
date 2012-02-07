@@ -1,0 +1,287 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3B9D2D1714E1CF8400A042BF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D1614E1CF8400A042BF /* UIKit.framework */; };
+		3B9D2D1914E1CF8400A042BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D1814E1CF8400A042BF /* Foundation.framework */; };
+		3B9D2D1B14E1CF8400A042BF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D1A14E1CF8400A042BF /* CoreGraphics.framework */; };
+		3B9D2D2114E1CF8400A042BF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B9D2D1F14E1CF8400A042BF /* InfoPlist.strings */; };
+		3B9D2D2314E1CF8400A042BF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D2214E1CF8400A042BF /* main.m */; };
+		3B9D2D2714E1CF8400A042BF /* tulpaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D2614E1CF8400A042BF /* tulpaAppDelegate.m */; };
+		3B9D2D3214E1D08700A042BF /* tulpaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D3114E1D08700A042BF /* tulpaViewController.m */; };
+		3B9D2D3414E1D13E00A042BF /* tulpaStoryboardiPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B9D2D3314E1D13E00A042BF /* tulpaStoryboardiPhone.storyboard */; };
+		3B9D2D3614E1D1B600A042BF /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D3514E1D1B600A042BF /* GLKit.framework */; };
+		3B9D2D3814E1D1CE00A042BF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D3714E1D1CE00A042BF /* QuartzCore.framework */; };
+		3B9D2D3A14E1D1D300A042BF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D3914E1D1D300A042BF /* OpenGLES.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3B9D2D1214E1CF8400A042BF /* tulpasynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tulpasynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B9D2D1614E1CF8400A042BF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3B9D2D1814E1CF8400A042BF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3B9D2D1A14E1CF8400A042BF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3B9D2D1E14E1CF8400A042BF /* tulpasynth-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tulpasynth-Info.plist"; sourceTree = "<group>"; };
+		3B9D2D2014E1CF8400A042BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3B9D2D2214E1CF8400A042BF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3B9D2D2414E1CF8400A042BF /* tulpasynth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tulpasynth-Prefix.pch"; sourceTree = "<group>"; };
+		3B9D2D2514E1CF8400A042BF /* tulpaAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tulpaAppDelegate.h; sourceTree = "<group>"; };
+		3B9D2D2614E1CF8400A042BF /* tulpaAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tulpaAppDelegate.m; sourceTree = "<group>"; };
+		3B9D2D3014E1D08700A042BF /* tulpaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tulpaViewController.h; sourceTree = "<group>"; };
+		3B9D2D3114E1D08700A042BF /* tulpaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tulpaViewController.m; sourceTree = "<group>"; };
+		3B9D2D3314E1D13E00A042BF /* tulpaStoryboardiPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = tulpaStoryboardiPhone.storyboard; sourceTree = "<group>"; };
+		3B9D2D3514E1D1B600A042BF /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		3B9D2D3714E1D1CE00A042BF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3B9D2D3914E1D1D300A042BF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3B9D2D0F14E1CF8400A042BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B9D2D3A14E1D1D300A042BF /* OpenGLES.framework in Frameworks */,
+				3B9D2D3814E1D1CE00A042BF /* QuartzCore.framework in Frameworks */,
+				3B9D2D3614E1D1B600A042BF /* GLKit.framework in Frameworks */,
+				3B9D2D1714E1CF8400A042BF /* UIKit.framework in Frameworks */,
+				3B9D2D1914E1CF8400A042BF /* Foundation.framework in Frameworks */,
+				3B9D2D1B14E1CF8400A042BF /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3B9D2D0714E1CF8400A042BF = {
+			isa = PBXGroup;
+			children = (
+				3B9D2D3914E1D1D300A042BF /* OpenGLES.framework */,
+				3B9D2D3714E1D1CE00A042BF /* QuartzCore.framework */,
+				3B9D2D3514E1D1B600A042BF /* GLKit.framework */,
+				3B9D2D1C14E1CF8400A042BF /* tulpasynth */,
+				3B9D2D1514E1CF8400A042BF /* Frameworks */,
+				3B9D2D1314E1CF8400A042BF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3B9D2D1314E1CF8400A042BF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3B9D2D1214E1CF8400A042BF /* tulpasynth.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3B9D2D1514E1CF8400A042BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B9D2D1614E1CF8400A042BF /* UIKit.framework */,
+				3B9D2D1814E1CF8400A042BF /* Foundation.framework */,
+				3B9D2D1A14E1CF8400A042BF /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B9D2D1C14E1CF8400A042BF /* tulpasynth */ = {
+			isa = PBXGroup;
+			children = (
+				3B9D2D2514E1CF8400A042BF /* tulpaAppDelegate.h */,
+				3B9D2D2614E1CF8400A042BF /* tulpaAppDelegate.m */,
+				3B9D2D1D14E1CF8400A042BF /* Supporting Files */,
+				3B9D2D3014E1D08700A042BF /* tulpaViewController.h */,
+				3B9D2D3114E1D08700A042BF /* tulpaViewController.m */,
+				3B9D2D3314E1D13E00A042BF /* tulpaStoryboardiPhone.storyboard */,
+			);
+			path = tulpasynth;
+			sourceTree = "<group>";
+		};
+		3B9D2D1D14E1CF8400A042BF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3B9D2D1E14E1CF8400A042BF /* tulpasynth-Info.plist */,
+				3B9D2D1F14E1CF8400A042BF /* InfoPlist.strings */,
+				3B9D2D2214E1CF8400A042BF /* main.m */,
+				3B9D2D2414E1CF8400A042BF /* tulpasynth-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3B9D2D1114E1CF8400A042BF /* tulpasynth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3B9D2D2A14E1CF8400A042BF /* Build configuration list for PBXNativeTarget "tulpasynth" */;
+			buildPhases = (
+				3B9D2D0E14E1CF8400A042BF /* Sources */,
+				3B9D2D0F14E1CF8400A042BF /* Frameworks */,
+				3B9D2D1014E1CF8400A042BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tulpasynth;
+			productName = tulpasynth;
+			productReference = 3B9D2D1214E1CF8400A042BF /* tulpasynth.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3B9D2D0914E1CF8400A042BF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 3B9D2D0C14E1CF8400A042BF /* Build configuration list for PBXProject "tulpasynth" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3B9D2D0714E1CF8400A042BF;
+			productRefGroup = 3B9D2D1314E1CF8400A042BF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3B9D2D1114E1CF8400A042BF /* tulpasynth */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3B9D2D1014E1CF8400A042BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B9D2D2114E1CF8400A042BF /* InfoPlist.strings in Resources */,
+				3B9D2D3414E1D13E00A042BF /* tulpaStoryboardiPhone.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3B9D2D0E14E1CF8400A042BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B9D2D2314E1CF8400A042BF /* main.m in Sources */,
+				3B9D2D2714E1CF8400A042BF /* tulpaAppDelegate.m in Sources */,
+				3B9D2D3214E1D08700A042BF /* tulpaViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3B9D2D1F14E1CF8400A042BF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3B9D2D2014E1CF8400A042BF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3B9D2D2814E1CF8400A042BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3B9D2D2914E1CF8400A042BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3B9D2D2B14E1CF8400A042BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "tulpasynth/tulpasynth-Prefix.pch";
+				INFOPLIST_FILE = "tulpasynth/tulpasynth-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3B9D2D2C14E1CF8400A042BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "tulpasynth/tulpasynth-Prefix.pch";
+				INFOPLIST_FILE = "tulpasynth/tulpasynth-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3B9D2D0C14E1CF8400A042BF /* Build configuration list for PBXProject "tulpasynth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B9D2D2814E1CF8400A042BF /* Debug */,
+				3B9D2D2914E1CF8400A042BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3B9D2D2A14E1CF8400A042BF /* Build configuration list for PBXNativeTarget "tulpasynth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B9D2D2B14E1CF8400A042BF /* Debug */,
+				3B9D2D2C14E1CF8400A042BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3B9D2D0914E1CF8400A042BF /* Project object */;
+}
