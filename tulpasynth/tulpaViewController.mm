@@ -66,8 +66,8 @@ Square* s;
 
     s = [[Square alloc] init];
 
-    s.position->set(0.9, 0.5, 0);
-    s.width = 0.5;
+    s.position->set(-1.0, -0.5, 0);
+    s.width = 0.25;
     s.height = 0.5;
 }
 

@@ -91,8 +91,9 @@ const GLubyte SquareIndices[] = {
 
 - (void)update {
     // Width and height are switched here because this app only works when rotated
-    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeScale(_height, _width, 1.0f);
-    GLKMatrix4Translate(modelViewMatrix, _position->y, _position->x, _position->z);
+    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(-1.0 * _position->y, -1.0 * _position->x, _position->z);
+    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, _width, _height, 1.0f);
+//    GLKMatrix4Translate(modelViewMatrix, _position->y, _position->x, _position->z);
     //    _rotation += 90 * self.timeSinceLastUpdate;
 //    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, GLKMathDegreesToRadians(_rotation), 0, 0, 1);
     self.effect.transform.modelviewMatrix = modelViewMatrix;
