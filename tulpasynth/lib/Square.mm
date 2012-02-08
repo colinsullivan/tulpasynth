@@ -23,6 +23,7 @@ const GLubyte SquareIndices[] = {
 
 @implementation Square
 
+@synthesize dragger;
 
 - (id)init {
     self = [super init];
@@ -30,8 +31,8 @@ const GLubyte SquareIndices[] = {
         return nil;
     }
     
-    self.width = 0.5;
-    self.height = 0.5;
+    self.width = 50;
+    self.height = 50;
 
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(SquareVertices), SquareVertices, GL_STATIC_DRAW);
@@ -46,6 +47,38 @@ const GLubyte SquareIndices[] = {
     [super draw];
 
     glDrawElements(GL_TRIANGLES, sizeof(SquareIndices)/sizeof(SquareIndices[0]), GL_UNSIGNED_BYTE, 0);
+}
+
+- (void)update {
+    [super update];
+    
+    if (self.dragger) {
+        self.position = self.dragger->position;
+    }
+}
+
+- (GLboolean) handleTouch:(TouchEntity *) touch {
+    
+    if (
+        touch->position->x <= self.position->x + self.width/2
+        &&
+        touch->position->x >= self.position->x - self.width/2
+        &&
+        touch->position->y <= self.position->y + self.width/2
+        &&
+        touch->position->y >= self.position->y - self.width/2
+        ) {
+        
+        self.dragger = touch;
+        
+        return true;
+    }
+    else {
+        self.dragger = nil;
+    }
+    
+    return false;
+    
 }
 
 @end

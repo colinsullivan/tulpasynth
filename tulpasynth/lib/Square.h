@@ -10,6 +10,13 @@
 
 #include "GfxEntity.h"
 
+#include "TouchEntity.h"
+
 @interface Square : GfxEntity
+
+- (GLboolean) handleTouch:(TouchEntity *) touch;
+
+// The touch entity that is currently dragging this object
+@property TouchEntity * dragger;
 
 @end

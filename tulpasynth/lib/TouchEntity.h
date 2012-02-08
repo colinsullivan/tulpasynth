@@ -15,6 +15,8 @@
 //
 //@end
 
+#ifndef _TOUCHENTITY_H_
+#define _TOUCHENTITY_H_
 
 class TouchEntity {
 public:
@@ -25,3 +27,5 @@ public:
     GLboolean active;
     UITouch* touch_ref;
 };
+
+#endif

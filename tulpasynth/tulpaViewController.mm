@@ -79,7 +79,7 @@ Square* s;
     
     s = [[Square alloc] init];
 
-    s.position->set(-1.0, -0.5, 0);
+    s.position->set(480/2, 320/2, 0);
 }
 
 
@@ -121,6 +121,16 @@ Square* s;
 }
 
 - (void)update {
+    
+    // Handle rendering due to touches
+    if (g_numActiveTouches == 1) {
+        
+        [s handleTouch:_touchEntities[0]];
+        
+        
+    }
+    
+    
     
     if (_increasing) {
         _curRed += 0.5 * self.timeSinceLastUpdate;
