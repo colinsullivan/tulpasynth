@@ -19,12 +19,14 @@
                             <outletCollection property="gestureRecognizers" destination="Pip-ot-3yS" appends="YES" id="wE2-jv-e89"/>
                             <outletCollection property="gestureRecognizers" destination="e6Z-c1-aW0" appends="YES" id="0rk-l9-aFf"/>
                             <outletCollection property="gestureRecognizers" destination="ZbX-g5-RLC" appends="YES" id="521-rQ-3i1"/>
+                            <outletCollection property="gestureRecognizers" destination="x1l-du-T65" appends="YES" id="pne-hQ-aen"/>
                         </connections>
                     </view>
                     <connections>
                         <outlet property="panRecognizer" destination="ZbX-g5-RLC" id="GNn-93-R8E"/>
                         <outlet property="pinchRecognizer" destination="Pip-ot-3yS" id="Rqe-0N-4XG"/>
                         <outlet property="rotateRecognizer" destination="e6Z-c1-aW0" id="zod-h8-Brv"/>
+                        <outlet property="tapRecognizer" destination="x1l-du-T65" id="C1k-Pg-ye5"/>
                     </connections>
                 </viewController>
                 <pinchGestureRecognizer id="Pip-ot-3yS">
@@ -32,7 +34,6 @@
                         <action selector="pinchGestureHandler:" destination="d96-Jx-1bP" id="dva-uA-vNv"/>
                     </connections>
                 </pinchGestureRecognizer>
-                <tapGestureRecognizer id="x1l-du-T65"/>
                 <rotationGestureRecognizer id="e6Z-c1-aW0">
                     <connections>
                         <action selector="rotateGestureHandler:" destination="d96-Jx-1bP" id="hZI-fy-CcR"/>
@@ -43,23 +44,15 @@
                         <action selector="panGestureHandler:" destination="d96-Jx-1bP" id="LQF-KG-TvM"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="x1l-du-T65">
+                    <connections>
+                        <action selector="tapGestureHandler:" destination="d96-Jx-1bP" id="szD-dT-X4w"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-165" y="37"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="tulpaViewController" superclassName="GLKViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/tulpaViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="panGestureHandler:"/>
-                <relationship kind="action" name="pinchGestureHandler:"/>
-                <relationship kind="action" name="rotateGestureHandler:"/>
-                <relationship kind="outlet" name="panRecognizer" candidateClass="UIPanGestureRecognizer"/>
-                <relationship kind="outlet" name="pinchRecognizer" candidateClass="UIPinchGestureRecognizer"/>
-                <relationship kind="outlet" name="rotateRecognizer" candidateClass="UIRotationGestureRecognizer"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <nil key="statusBar"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

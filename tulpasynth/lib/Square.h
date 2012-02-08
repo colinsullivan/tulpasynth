@@ -14,6 +14,7 @@
 #include "PinchEntity.h"
 #include "RotateEntity.h"
 #include "PanEntity.h"
+#include "TapEntity.h"
 
 @interface Square : GfxEntity
 
@@ -54,5 +55,7 @@
 - (GLboolean) handlePan:(PanEntity *) pan;
 @property PanEntity * panner;
 @property Vector3D prePanningPosition;
+
+- (GLboolean) handleTap:(TapEntity *) tap;
 
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B4026DE14E25AF00047093F /* FallingBall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B4026DD14E25AF00047093F /* FallingBall.mm */; };
+		3B50FA7614E25920001AD289 /* TapEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B50FA7514E25920001AD289 /* TapEntity.mm */; };
 		3B75A8CF14E2500000F17AB5 /* PanEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B75A8CE14E2500000F17AB5 /* PanEntity.mm */; };
 		3B9D2D1714E1CF8400A042BF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D1614E1CF8400A042BF /* UIKit.framework */; };
 		3B9D2D1914E1CF8400A042BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D1814E1CF8400A042BF /* Foundation.framework */; };
@@ -192,6 +194,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B4026DC14E25AF00047093F /* FallingBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBall.h; sourceTree = "<group>"; };
+		3B4026DD14E25AF00047093F /* FallingBall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBall.mm; sourceTree = "<group>"; };
+		3B50FA7414E25920001AD289 /* TapEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapEntity.h; sourceTree = "<group>"; };
+		3B50FA7514E25920001AD289 /* TapEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TapEntity.mm; sourceTree = "<group>"; };
 		3B75A8CD14E2500000F17AB5 /* PanEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanEntity.h; sourceTree = "<group>"; };
 		3B75A8CE14E2500000F17AB5 /* PanEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PanEntity.mm; sourceTree = "<group>"; };
 		3B9D2D1214E1CF8400A042BF /* tulpasynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tulpasynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -592,6 +598,8 @@
 		3B9D2D3F14E1D77500A042BF /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3B50FA7414E25920001AD289 /* TapEntity.h */,
+				3B50FA7514E25920001AD289 /* TapEntity.mm */,
 				3B75A8CD14E2500000F17AB5 /* PanEntity.h */,
 				3B75A8CE14E2500000F17AB5 /* PanEntity.mm */,
 				3BF8965014E2430F0038780F /* GestureEntity.h */,
@@ -608,6 +616,8 @@
 				3B9D2F1C14E2003600A042BF /* GfxEntity.mm */,
 				3B9D2F1E14E2023E00A042BF /* TouchEntity.h */,
 				3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */,
+				3B4026DC14E25AF00047093F /* FallingBall.h */,
+				3B4026DD14E25AF00047093F /* FallingBall.mm */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -1219,6 +1229,8 @@
 				3BF8964F14E2415E0038780F /* RotateEntity.mm in Sources */,
 				3BF8965214E2430F0038780F /* GestureEntity.mm in Sources */,
 				3B75A8CF14E2500000F17AB5 /* PanEntity.mm in Sources */,
+				3B50FA7614E25920001AD289 /* TapEntity.mm in Sources */,
+				3B4026DE14E25AF00047093F /* FallingBall.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

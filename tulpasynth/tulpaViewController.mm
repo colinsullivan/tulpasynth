@@ -8,13 +8,15 @@
 
 #import "tulpaViewController.h"
 
-#include "TouchEntity.h"
+//#include "TouchEntity.h"
 #include "PinchEntity.h"
 #include "RotateEntity.h"
+#include "TapEntity.h"
 
-
+#import "FallingBall.h"
 #import "Square.h"
 
+NSMutableArray* fallingBalls;
 
 TouchEntity * _touchEntities[MAX_TOUCHES];
 UInt32 g_numActiveTouches = 0;
@@ -24,6 +26,8 @@ PinchEntity * _pinchEntity;
 RotateEntity * _rotateEntity;
 
 PanEntity * _panEntity;
+
+TapEntity * _tapEntity;
 
 
 @implementation tulpaViewController
@@ -36,6 +40,7 @@ Square* squares[2];
 @synthesize pinchRecognizer;
 @synthesize rotateRecognizer;
 @synthesize panRecognizer;
+@synthesize tapRecognizer;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -84,17 +89,18 @@ Square* squares[2];
     [EAGLContext setCurrentContext:self.context];
 
     // Instantiate touch objects
-    for(int i = 0; i < MAX_TOUCHES; i++) {
-        _touchEntities[i] = new TouchEntity();
-    }
+//    for(int i = 0; i < MAX_TOUCHES; i++) {
+//        _touchEntities[i] = new TouchEntity();
+//    }
     
     _pinchEntity = new PinchEntity(self.pinchRecognizer);
     
     _rotateEntity = new RotateEntity(self.rotateRecognizer);
     _panEntity = new PanEntity(self.panRecognizer);
+    _tapEntity = new TapEntity(self.tapRecognizer);
     
 
-    MoTouch::addCallback(touch_callback, NULL);
+//    MoTouch::addCallback(touch_callback, NULL);
 
     
     squares[0] = [[Square alloc] init];
@@ -102,6 +108,8 @@ Square* squares[2];
 
     squares[0].position->set(480/2, 320/2, 0);
     squares[1].position->set(100, 100, 0);
+    
+    fallingBalls = [[NSMutableArray alloc] init];
 }
 
 
@@ -121,9 +129,16 @@ Square* squares[2];
     self.context = nil;
     
     // Delete touch objects
-    for(int i = 0; i < MAX_TOUCHES; i++) {
-        delete _touchEntities[i];
-    }
+//    for(int i = 0; i < MAX_TOUCHES; i++) {
+//        delete _touchEntities[i];
+//    }
+    
+    delete _pinchEntity;
+    delete _rotateEntity;
+    delete _panEntity;
+    delete _tapEntity;
+
+    [fallingBalls release];
 
     [squares[0] release];
     [squares[1] release];
@@ -141,7 +156,10 @@ Square* squares[2];
 
     [squares[0] draw];
     [squares[1] draw];
-
+    
+    for (int i = 0; i < [fallingBalls count]; i++) {
+        [[fallingBalls objectAtIndex:i] draw];
+    }
 }
 
 - (IBAction)pinchGestureHandler:(id)sender {
@@ -169,6 +187,19 @@ Square* squares[2];
     [squares[1] handlePan:_panEntity];
 }
 
+- (IBAction)tapGestureHandler:(id)sender {
+    _tapEntity->update();
+    
+    if (![squares[0] handleTap:_tapEntity] && ![squares[1] handleTap:_tapEntity]) {
+        FallingBall* b = [[FallingBall alloc] initWithViewController:self];
+
+        (*b.position) = (*_tapEntity->touches[0]->position);
+        
+        [fallingBalls addObject:b];
+        
+    }
+}
+
 - (void)update {
 
     // Handle rendering due to touches
@@ -180,6 +211,10 @@ Square* squares[2];
 
     [squares[0] update];
     [squares[1] update];
+    
+    for (int i = 0; i < [fallingBalls count]; i++) {
+        [[fallingBalls objectAtIndex:i] update];
+    }
     
 
     
@@ -216,99 +251,99 @@ Square* squares[2];
 }
 
 
-void touch_callback( NSSet * touches, UIView * view, const std::vector<MoTouchTrack> & tracks, void * data)
-{
-    // iterate over touch points
-    CGPoint location;
-    for( UITouch * touch in touches )
-    {
-        // get the location
-        location = [touch locationInView:nil];
-        
-        // transform: to make landscape
-        double temp = location.x;
-        location.x = location.y;
-        location.y = temp;
-        
-        // NSLog( @"touch: %f, %f,", location.x, location.y );
-        
-        if( touch.phase == UITouchPhaseBegan )
-        {
-            // find idle touch entity
-            TouchEntity * entity = NULL;
-            for( int i = 0; i < MAX_TOUCHES; i++ )
-            {
-                // in case touch already active
-                if( _touchEntities[i]->touch_ref == touch )
-                    break;
-                
-                // find the next non-active touch
-                if( !_touchEntities[i]->active )
-                {
-                    entity = _touchEntities[i];
-                    break;
-                }
-            }
-            
-            // sanity check
-            if( entity != NULL )
-            {
-                // set
-                entity->active = true;
-                entity->touch_ref = touch;
-                entity->position->set(location.x, location.y, 0);
-                // count
-                g_numActiveTouches++;
-                // log it
-                NSLog( @"active touches: %d", g_numActiveTouches );
-            }
-        }
-        else if( touch.phase == UITouchPhaseMoved )
-        {
-            for( int i = 0; i < MAX_TOUCHES; i++ )
-            {
-                if( _touchEntities[i]->touch_ref == touch )
-                {
-                    _touchEntities[i]->position->set(location.x, location.y, 0);
-                    break;
-                }
-            }
-        }
-        else if( (touch.phase == UITouchPhaseEnded) || (touch.phase == UITouchPhaseCancelled) )
-        {
-            for( int i = 0; i < MAX_TOUCHES; i++ )
-            {
-                if( _touchEntities[i]->touch_ref == touch )
-                {
-                    // set
-                    _touchEntities[i]->active = false;
-                    _touchEntities[i]->touch_ref = NULL;
-                    
-                    // pack active touches
-                    for( int j = i+1; j < MAX_TOUCHES; j++ )
-                    {
-                        if( _touchEntities[j]->active )
-                        {
-                            // swap
-                            TouchEntity * swap = _touchEntities[i];
-                            _touchEntities[i] = _touchEntities[j];
-                            _touchEntities[j] = swap;
-                            // dangerous: advance i
-                            i = j;
-                        }
-                    }
-                    
-                    // count
-                    g_numActiveTouches--;
-                    // log
-                    NSLog( @"active touches: %d", g_numActiveTouches );
-                    
-                    break;
-                }
-            }
-        }
-    }
-}
+//void touch_callback( NSSet * touches, UIView * view, const std::vector<MoTouchTrack> & tracks, void * data)
+//{
+//    // iterate over touch points
+//    CGPoint location;
+//    for( UITouch * touch in touches )
+//    {
+//        // get the location
+//        location = [touch locationInView:nil];
+//        
+//        // transform: to make landscape
+//        double temp = location.x;
+//        location.x = location.y;
+//        location.y = temp;
+//        
+//        // NSLog( @"touch: %f, %f,", location.x, location.y );
+//        
+//        if( touch.phase == UITouchPhaseBegan )
+//        {
+//            // find idle touch entity
+//            TouchEntity * entity = NULL;
+//            for( int i = 0; i < MAX_TOUCHES; i++ )
+//            {
+//                // in case touch already active
+//                if( _touchEntities[i]->touch_ref == touch )
+//                    break;
+//                
+//                // find the next non-active touch
+//                if( !_touchEntities[i]->active )
+//                {
+//                    entity = _touchEntities[i];
+//                    break;
+//                }
+//            }
+//            
+//            // sanity check
+//            if( entity != NULL )
+//            {
+//                // set
+//                entity->active = true;
+//                entity->touch_ref = touch;
+//                entity->position->set(location.x, location.y, 0);
+//                // count
+//                g_numActiveTouches++;
+//                // log it
+//                NSLog( @"active touches: %d", g_numActiveTouches );
+//            }
+//        }
+//        else if( touch.phase == UITouchPhaseMoved )
+//        {
+//            for( int i = 0; i < MAX_TOUCHES; i++ )
+//            {
+//                if( _touchEntities[i]->touch_ref == touch )
+//                {
+//                    _touchEntities[i]->position->set(location.x, location.y, 0);
+//                    break;
+//                }
+//            }
+//        }
+//        else if( (touch.phase == UITouchPhaseEnded) || (touch.phase == UITouchPhaseCancelled) )
+//        {
+//            for( int i = 0; i < MAX_TOUCHES; i++ )
+//            {
+//                if( _touchEntities[i]->touch_ref == touch )
+//                {
+//                    // set
+//                    _touchEntities[i]->active = false;
+//                    _touchEntities[i]->touch_ref = NULL;
+//                    
+//                    // pack active touches
+//                    for( int j = i+1; j < MAX_TOUCHES; j++ )
+//                    {
+//                        if( _touchEntities[j]->active )
+//                        {
+//                            // swap
+//                            TouchEntity * swap = _touchEntities[i];
+//                            _touchEntities[i] = _touchEntities[j];
+//                            _touchEntities[j] = swap;
+//                            // dangerous: advance i
+//                            i = j;
+//                        }
+//                    }
+//                    
+//                    // count
+//                    g_numActiveTouches--;
+//                    // log
+//                    NSLog( @"active touches: %d", g_numActiveTouches );
+//                    
+//                    break;
+//                }
+//            }
+//        }
+//    }
+//}
 
 
 @end

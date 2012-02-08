@@ -11,6 +11,8 @@
 
 @implementation GfxEntity
 
+@synthesize controller;
+
 @synthesize effect;
 @synthesize position;
 @synthesize width;
@@ -37,6 +39,12 @@
     glGenBuffers(1, &_indexBuffer);
     
     return self;
+}
+
+- (id)initWithViewController:(tulpaViewController *)controller {
+    self.controller = controller;
+    
+    return [self init];
 }
 
 - (void)dealloc {

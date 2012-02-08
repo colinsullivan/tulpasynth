@@ -11,6 +11,8 @@
 #import <GLKit/GLKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "tulpaViewController.h"
+
 #include "mo_gfx.h"
 #include "Globals.h"
 
@@ -23,6 +25,7 @@
 }
 
 - (id)init;
+- (id)initWithViewController:(tulpaViewController *)controller;
 - (void)dealloc;
 - (void)draw;
 - (void)update;
@@ -31,6 +34,8 @@
 @property (nonatomic) GLfloat width;
 @property (nonatomic) GLfloat height;
 @property (nonatomic) Vector3D* position;
+
+@property (nonatomic) tulpaViewController* controller;
 
 /**
  *  Current rotation of object (in radians)

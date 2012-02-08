@@ -201,4 +201,11 @@ const GLubyte SquareIndices[] = {
     return false;
 }
 
+- (GLboolean) handleTap:(TapEntity *) tap {
+    if ([self _touchIsInside:tap->touches[0]]) {
+        return true;
+    }
+    
+    return false;
+}
 @end

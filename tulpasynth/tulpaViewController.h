@@ -36,6 +36,9 @@
 @property (strong, nonatomic) IBOutlet UIPanGestureRecognizer * panRecognizer;
 - (IBAction)panGestureHandler:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer * tapRecognizer;
+- (IBAction)tapGestureHandler:(id)sender;
+
 void touch_callback( NSSet * touches, UIView * view, const std::vector<MoTouchTrack> & tracks, void * data);
 
 
