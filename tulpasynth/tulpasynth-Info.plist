@@ -40,5 +40,7 @@
 	</array>
 	<key>UIMainStoryboardFile~iphone</key>
 	<string>tulpaStoryboardiPhone</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

@@ -63,9 +63,12 @@ Square* s;
     view.context = self.context;
     
     [EAGLContext setCurrentContext:self.context];
-    self.effect = [[GLKBaseEffect alloc] init];
 
     s = [[Square alloc] init];
+
+    s.position->set(0.9, 0.5, 0);
+    s.width = 0.5;
+    s.height = 0.5;
 }
 
 - (void)viewDidUnload
@@ -80,7 +83,6 @@ Square* s;
         [EAGLContext setCurrentContext:nil];
     }
     self.context = nil;
-    self.effect = nil;
 
     [s release];
 }
@@ -94,7 +96,6 @@ Square* s;
 - (void)glkView:(GLKView*)view drawInRect:(CGRect)rect {
     glClearColor(_curRed, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
-    [self.effect prepareToDraw];
 
     [s draw];
 
@@ -119,14 +120,12 @@ Square* s;
         _increasing = YES;
     }
     
-    float aspect = fabsf(self.view.bounds.size.width/self.view.bounds.size.height);
-    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 4.0f, 10.0f);
-    self.effect.transform.projectionMatrix = projectionMatrix;
-    
-    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -6.0f);
-//    _rotation += 90 * self.timeSinceLastUpdate;
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, GLKMathDegreesToRadians(_rotation), 0, 0, 1);
-    self.effect.transform.modelviewMatrix = modelViewMatrix;
+//    float aspect = fabsf(self.view.bounds.size.width/self.view.bounds.size.height);
+////    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60.0f), aspect, 1.0f, -1.0f);
+//    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(0.125 * 2 * M_PI, 2.0/3.0, 2, -1);
+//    self.effect.transform.projectionMatrix = projectionMatrix;
+
+    [s update];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

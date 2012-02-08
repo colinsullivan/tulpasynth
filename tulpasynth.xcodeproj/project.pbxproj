@@ -13,7 +13,7 @@
 		3B9D2D2114E1CF8400A042BF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B9D2D1F14E1CF8400A042BF /* InfoPlist.strings */; };
 		3B9D2D2314E1CF8400A042BF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D2214E1CF8400A042BF /* main.m */; };
 		3B9D2D2714E1CF8400A042BF /* tulpaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D2614E1CF8400A042BF /* tulpaAppDelegate.m */; };
-		3B9D2D3214E1D08700A042BF /* tulpaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D3114E1D08700A042BF /* tulpaViewController.m */; };
+		3B9D2D3214E1D08700A042BF /* tulpaViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D3114E1D08700A042BF /* tulpaViewController.mm */; };
 		3B9D2D3414E1D13E00A042BF /* tulpaStoryboardiPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B9D2D3314E1D13E00A042BF /* tulpaStoryboardiPhone.storyboard */; };
 		3B9D2D3614E1D1B600A042BF /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D3514E1D1B600A042BF /* GLKit.framework */; };
 		3B9D2D3814E1D1CE00A042BF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D3714E1D1CE00A042BF /* QuartzCore.framework */; };
@@ -197,7 +197,7 @@
 		3B9D2D2514E1CF8400A042BF /* tulpaAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tulpaAppDelegate.h; sourceTree = "<group>"; };
 		3B9D2D2614E1CF8400A042BF /* tulpaAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tulpaAppDelegate.m; sourceTree = "<group>"; };
 		3B9D2D3014E1D08700A042BF /* tulpaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tulpaViewController.h; sourceTree = "<group>"; };
-		3B9D2D3114E1D08700A042BF /* tulpaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tulpaViewController.m; sourceTree = "<group>"; };
+		3B9D2D3114E1D08700A042BF /* tulpaViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tulpaViewController.mm; sourceTree = "<group>"; };
 		3B9D2D3314E1D13E00A042BF /* tulpaStoryboardiPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = tulpaStoryboardiPhone.storyboard; sourceTree = "<group>"; };
 		3B9D2D3514E1D1B600A042BF /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		3B9D2D3714E1D1CE00A042BF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -554,7 +554,7 @@
 				3B9D2D2614E1CF8400A042BF /* tulpaAppDelegate.m */,
 				3B9D2D1D14E1CF8400A042BF /* Supporting Files */,
 				3B9D2D3014E1D08700A042BF /* tulpaViewController.h */,
-				3B9D2D3114E1D08700A042BF /* tulpaViewController.m */,
+				3B9D2D3114E1D08700A042BF /* tulpaViewController.mm */,
 				3B9D2D3314E1D13E00A042BF /* tulpaStoryboardiPhone.storyboard */,
 			);
 			path = tulpasynth;
@@ -1074,7 +1074,7 @@
 			files = (
 				3B9D2D2314E1CF8400A042BF /* main.m in Sources */,
 				3B9D2D2714E1CF8400A042BF /* tulpaAppDelegate.m in Sources */,
-				3B9D2D3214E1D08700A042BF /* tulpaViewController.m in Sources */,
+				3B9D2D3214E1D08700A042BF /* tulpaViewController.mm in Sources */,
 				3B9D2D7E14E1D77500A042BF /* mo_accel.mm in Sources */,
 				3B9D2D7F14E1D77500A042BF /* mo_audio.mm in Sources */,
 				3B9D2D8014E1D77500A042BF /* mo_colormap.mm in Sources */,

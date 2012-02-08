@@ -8,10 +8,6 @@
 
 #import "Square.h"
 
-#include "mo_gfx.h"
-#include "Globals.h"
-
-
 static Vertex SquareVertices[] = {
     {{1, -1, 0}, {0, 0, 0}},
     {{1, 1, 0}, {0, 0, 0}},
@@ -28,20 +24,37 @@ const GLubyte SquareIndices[] = {
 
 @interface Square() {
 
+    
+    
 @private
-    Vector3D pos;
     GLuint _vertexBuffer;
     GLuint _indexBuffer;
 }
+
+
+
 @end
 
+
+
 @implementation Square
+
+@synthesize effect = _effect;
+@synthesize position = _position;
+@synthesize width = _width;
+@synthesize height = _height;
+
 
 - (id)init {
     self = [super init];
     if (!self) {
         return nil;
     }
+    
+    _effect = [[GLKBaseEffect alloc] init];
+    _effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(-1, 1, -1.5, 1.5, -1, 1);
+    
+    _position = new Vector3D(0, 0, 0);
     
     glGenBuffers(1, &_vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
@@ -56,10 +69,15 @@ const GLubyte SquareIndices[] = {
 
 - (void)dealloc {
     glDeleteBuffers(1, &_vertexBuffer);
-    glDeleteBuffers(1, &_indexBuffer);    
+    glDeleteBuffers(1, &_indexBuffer);
+    
+    _effect = nil;
 }
 
 - (void)draw {
+
+    [_effect prepareToDraw];
+
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
 
@@ -69,6 +87,15 @@ const GLubyte SquareIndices[] = {
     glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Color));
     glDrawElements(GL_TRIANGLES, sizeof(SquareIndices)/sizeof(SquareIndices[0]), GL_UNSIGNED_BYTE, 0);
 
+}
+
+- (void)update {
+    // Width and height are switched here because this app only works when rotated
+    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeScale(_height, _width, 1.0f);
+    GLKMatrix4Translate(modelViewMatrix, _position->y, _position->x, _position->z);
+    //    _rotation += 90 * self.timeSinceLastUpdate;
+//    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, GLKMathDegreesToRadians(_rotation), 0, 0, 1);
+    self.effect.transform.modelviewMatrix = modelViewMatrix;
 }
 
 @end
