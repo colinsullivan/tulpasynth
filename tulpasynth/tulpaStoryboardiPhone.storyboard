@@ -18,9 +18,11 @@
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Pip-ot-3yS" appends="YES" id="wE2-jv-e89"/>
                             <outletCollection property="gestureRecognizers" destination="e6Z-c1-aW0" appends="YES" id="0rk-l9-aFf"/>
+                            <outletCollection property="gestureRecognizers" destination="ZbX-g5-RLC" appends="YES" id="521-rQ-3i1"/>
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="panRecognizer" destination="ZbX-g5-RLC" id="GNn-93-R8E"/>
                         <outlet property="pinchRecognizer" destination="Pip-ot-3yS" id="Rqe-0N-4XG"/>
                         <outlet property="rotateRecognizer" destination="e6Z-c1-aW0" id="zod-h8-Brv"/>
                     </connections>
@@ -36,6 +38,11 @@
                         <action selector="rotateGestureHandler:" destination="d96-Jx-1bP" id="hZI-fy-CcR"/>
                     </connections>
                 </rotationGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="ZbX-g5-RLC">
+                    <connections>
+                        <action selector="panGestureHandler:" destination="d96-Jx-1bP" id="LQF-KG-TvM"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-165" y="37"/>
         </scene>
@@ -44,8 +51,10 @@
         <class className="tulpaViewController" superclassName="GLKViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/tulpaViewController.h"/>
             <relationships>
+                <relationship kind="action" name="panGestureHandler:"/>
                 <relationship kind="action" name="pinchGestureHandler:"/>
                 <relationship kind="action" name="rotateGestureHandler:"/>
+                <relationship kind="outlet" name="panRecognizer" candidateClass="UIPanGestureRecognizer"/>
                 <relationship kind="outlet" name="pinchRecognizer" candidateClass="UIPinchGestureRecognizer"/>
                 <relationship kind="outlet" name="rotateRecognizer" candidateClass="UIRotationGestureRecognizer"/>
             </relationships>

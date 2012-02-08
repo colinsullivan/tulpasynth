@@ -32,6 +32,9 @@ const GLubyte SquareIndices[] = {
 
 @synthesize rotator;
 
+@synthesize panner;
+@synthesize prePanningPosition;
+
 
 - (id)init {
     self = [super init];
@@ -60,13 +63,17 @@ const GLubyte SquareIndices[] = {
 - (void)update {
     [super update];
     
-    if (self.dragger) {
-        if (self.dragger->active) {
-            (*self.position) = (*self.dragger->position) + self.draggingOffset;
-        }
-        else {
-            self.dragger = nil;
-        }
+//    if (self.dragger) {
+//        if (self.dragger->active) {
+//            (*self.position) = (*self.dragger->position) + self.draggingOffset;
+//        }
+//        else {
+//            self.dragger = nil;
+//        }
+//    }
+
+    if (self.panner) {
+        (*self.position) = self.prePanningPosition + self.panner->translation;
     }
     
     if (self.pincher) {
@@ -125,9 +132,9 @@ const GLubyte SquareIndices[] = {
     if (pinch->state == GestureEntityStateStart) {
         // If both touches are in us
         if (
-            [self _touchIsInside:pinch->touches[0] withFudge:20]
+            [self _touchIsInside:pinch->touches[0] withFudge:25]
             &&
-            [self _touchIsInside:pinch->touches[1] withFudge:20]
+            [self _touchIsInside:pinch->touches[1] withFudge:25]
         ) {
             self.pincher = pinch;
             self.beforeScalingWidth = self.width;
@@ -169,6 +176,26 @@ const GLubyte SquareIndices[] = {
     // if rotate gesture ended and we were just being rotated
     else if (rotate->state == GestureEntityStateEnd && self.rotator) {
         self.rotator = nil;
+    }
+    
+    return false;
+}
+
+- (GLboolean) handlePan:(PanEntity *) pan {
+    // if pan just started
+    if (pan->state == GestureEntityStateStart) {
+        // if the touch is inside us
+        if ([self _touchIsInside:pan->touches[0]]) {
+            self.panner = pan;
+            self.prePanningPosition = (*self.position);
+            return true;
+        }
+        else if(self.panner) {
+            self.panner = nil;
+        }
+    }
+    else if(pan->state == GestureEntityStateEnd && self.panner) {
+        self.panner = nil;
     }
     
     return false;

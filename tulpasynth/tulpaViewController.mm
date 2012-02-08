@@ -23,6 +23,8 @@ PinchEntity * _pinchEntity;
 
 RotateEntity * _rotateEntity;
 
+PanEntity * _panEntity;
+
 
 @implementation tulpaViewController
 
@@ -33,7 +35,7 @@ Square* squares[2];
 
 @synthesize pinchRecognizer;
 @synthesize rotateRecognizer;
-//@synthesize touchEntities = _touchEntities;
+@synthesize panRecognizer;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -89,6 +91,7 @@ Square* squares[2];
     _pinchEntity = new PinchEntity(self.pinchRecognizer);
     
     _rotateEntity = new RotateEntity(self.rotateRecognizer);
+    _panEntity = new PanEntity(self.panRecognizer);
     
 
     MoTouch::addCallback(touch_callback, NULL);
@@ -133,7 +136,7 @@ Square* squares[2];
 }
 
 - (void)glkView:(GLKView*)view drawInRect:(CGRect)rect {
-    glClearColor(_curRed, 0.0, 0.0, 1.0);
+    glClearColor(1.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
     [squares[0] draw];
@@ -159,35 +162,43 @@ Square* squares[2];
     }
 }
 
+- (IBAction)panGestureHandler:(id)sender {
+    _panEntity->update();
+    
+    [squares[0] handlePan:_panEntity];
+    [squares[1] handlePan:_panEntity];
+}
+
 - (void)update {
 
     // Handle rendering due to touches
-    if (g_numActiveTouches == 1) {
-        [squares[0] handleTouch:_touchEntities[0]];
-        [squares[1] handleTouch:_touchEntities[0]];
-    }
+//    if (g_numActiveTouches == 1) {
+//        if (![squares[0] handleTouch:_touchEntities[0]] && ![squares[1] handleTouch:_touchEntities[0]]) {
+//            NSLog(@"drop ball");
+//        }
+//    }
 
     [squares[0] update];
     [squares[1] update];
     
 
     
-    if (_increasing) {
-        _curRed += 0.5 * self.timeSinceLastUpdate;
-    }
-    else {
-        _curRed -= 0.5 * self.timeSinceLastUpdate;
-    }
-    
-    if (_curRed >= 1.0) {
-        _curRed = 1.0;
-        _increasing = NO;
-    }
-    
-    if (_curRed <= 0.25) {
-        _curRed = 0.25;
-        _increasing = YES;
-    }
+//    if (_increasing) {
+//        _curRed += 0.5 * self.timeSinceLastUpdate;
+//    }
+//    else {
+//        _curRed -= 0.5 * self.timeSinceLastUpdate;
+//    }
+//    
+//    if (_curRed >= 1.0) {
+//        _curRed = 1.0;
+//        _increasing = NO;
+//    }
+//    
+//    if (_curRed <= 0.25) {
+//        _curRed = 0.25;
+//        _increasing = YES;
+//    }
     
 //    float aspect = fabsf(self.view.bounds.size.width/self.view.bounds.size.height);
 ////    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60.0f), aspect, 1.0f, -1.0f);

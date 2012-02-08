@@ -23,7 +23,7 @@ void GestureEntity::update() {
     // Update touch entities
     CGPoint location;
     double temp;
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < [gestureRecognizer numberOfTouches]; i++) {
         location = [gestureRecognizer locationOfTouch:i inView:nil];
         
         // transform: to make landscape

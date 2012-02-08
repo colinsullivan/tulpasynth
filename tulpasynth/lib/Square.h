@@ -13,6 +13,7 @@
 #include "TouchEntity.h"
 #include "PinchEntity.h"
 #include "RotateEntity.h"
+#include "PanEntity.h"
 
 @interface Square : GfxEntity
 
@@ -48,5 +49,10 @@
  **/ 
 @property GLfloat beforeScalingWidth;
 @property GLfloat beforeScalingHeight;
+
+
+- (GLboolean) handlePan:(PanEntity *) pan;
+@property PanEntity * panner;
+@property Vector3D prePanningPosition;
 
 @end
