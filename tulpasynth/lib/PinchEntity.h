@@ -10,30 +10,20 @@
 #ifndef _PINCHENTITY_H_
 #define _PINCHENTITY_H_
 
-#include "TouchEntity.h"
+#include "GestureEntity.h"
 
-typedef enum {
-    PinchEntityStateStart,
-    PinchEntityStateMove,
-    PinchEntityStateEnd
-} PinchEntityState;
-
-class PinchEntity
+class PinchEntity : public GestureEntity
 {
 public:
-    PinchEntity();
+    PinchEntity(UIPinchGestureRecognizer * aPinchGestureRecognizer);
     ~PinchEntity();
-    
-    void set(UIPinchGestureRecognizer* aPinchRecognizer);
-    void update();
 
-    TouchEntity * touches[2];
-    
-    PinchEntityState state;
-    
-    UIPinchGestureRecognizer * pinch_ref;
-    
+    /**
+     *  Scale of pinch as a decimal
+     **/
     GLfloat scale;
+    
+    virtual void update();
 };
 
 #endif

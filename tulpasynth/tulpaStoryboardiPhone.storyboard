@@ -17,22 +17,40 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Pip-ot-3yS" appends="YES" id="wE2-jv-e89"/>
+                            <outletCollection property="gestureRecognizers" destination="e6Z-c1-aW0" appends="YES" id="0rk-l9-aFf"/>
                         </connections>
                     </view>
                     <connections>
                         <outlet property="pinchRecognizer" destination="Pip-ot-3yS" id="Rqe-0N-4XG"/>
+                        <outlet property="rotateRecognizer" destination="e6Z-c1-aW0" id="zod-h8-Brv"/>
                     </connections>
                 </viewController>
                 <pinchGestureRecognizer id="Pip-ot-3yS">
                     <connections>
-                        <action selector="pinchGestureRecognized:" destination="d96-Jx-1bP" id="gHg-Qh-red"/>
+                        <action selector="pinchGestureHandler:" destination="d96-Jx-1bP" id="dva-uA-vNv"/>
                     </connections>
                 </pinchGestureRecognizer>
                 <tapGestureRecognizer id="x1l-du-T65"/>
+                <rotationGestureRecognizer id="e6Z-c1-aW0">
+                    <connections>
+                        <action selector="rotateGestureHandler:" destination="d96-Jx-1bP" id="hZI-fy-CcR"/>
+                    </connections>
+                </rotationGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-165" y="37"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="tulpaViewController" superclassName="GLKViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/tulpaViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="pinchGestureHandler:"/>
+                <relationship kind="action" name="rotateGestureHandler:"/>
+                <relationship kind="outlet" name="pinchRecognizer" candidateClass="UIPinchGestureRecognizer"/>
+                <relationship kind="outlet" name="rotateRecognizer" candidateClass="UIRotationGestureRecognizer"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <nil key="statusBar"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

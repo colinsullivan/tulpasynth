@@ -26,9 +26,12 @@
 
 @property (strong, nonatomic) EAGLContext * context;
 @property (strong, nonatomic) GLKBaseEffect * effect;
-@property (strong, nonatomic) IBOutlet UIPinchGestureRecognizer * pinchRecognizer;
 
-- (IBAction)pinchGestureRecognized:(id)sender;
+@property (strong, nonatomic) IBOutlet UIPinchGestureRecognizer * pinchRecognizer;
+- (IBAction)pinchGestureHandler:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UIRotationGestureRecognizer * rotateRecognizer;
+- (IBAction)rotateGestureHandler:(id)sender;
 
 void touch_callback( NSSet * touches, UIView * view, const std::vector<MoTouchTrack> & tracks, void * data);
 

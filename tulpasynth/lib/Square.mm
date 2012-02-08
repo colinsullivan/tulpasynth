@@ -27,9 +27,11 @@ const GLubyte SquareIndices[] = {
 @synthesize draggingOffset;
 
 @synthesize pincher;
-
 @synthesize beforeScalingWidth;
 @synthesize beforeScalingHeight;
+
+@synthesize rotator;
+
 
 - (id)init {
     self = [super init];
@@ -39,7 +41,7 @@ const GLubyte SquareIndices[] = {
     
     self.width = 50;
     self.height = 50;
-
+    
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(SquareVertices), SquareVertices, GL_STATIC_DRAW);
 
@@ -70,6 +72,14 @@ const GLubyte SquareIndices[] = {
     if (self.pincher) {
         self.width = self.beforeScalingWidth * self.pincher->scale;
         self.height = self.beforeScalingHeight * self.pincher->scale;
+    }
+    
+    if (self.rotator) {
+        self.rotation = self.preGestureRotation + self.rotator->rotation;
+        
+        if (self.rotation > 2 * M_PI) {
+            self.rotation -= 2*M_PI;
+        }
     }
 }
 
@@ -112,14 +122,14 @@ const GLubyte SquareIndices[] = {
 
 - (GLboolean) handlePinch:(PinchEntity *) pinch {
     // If pinch just started
-    if (pinch->state == PinchEntityStateStart) {
+    if (pinch->state == GestureEntityStateStart) {
         // If both touches are in us
         if (
             [self _touchIsInside:pinch->touches[0] withFudge:20]
             &&
             [self _touchIsInside:pinch->touches[1] withFudge:20]
         ) {
-            pincher = pinch;
+            self.pincher = pinch;
             self.beforeScalingWidth = self.width;
             self.beforeScalingHeight = self.height;
             
@@ -127,12 +137,38 @@ const GLubyte SquareIndices[] = {
         }
         // incase we were watching an old pincher
         else if (self.pincher) {
-            pincher = nil;
+            self.pincher = nil;
         }
     }
     // if pinch has ended and we were following this pincher
-    else if(pinch->state == PinchEntityStateEnd && self.pincher) {
-        pincher = nil;
+    else if(pinch->state == GestureEntityStateEnd && self.pincher) {
+        self.pincher = nil;
+    }
+    
+    return false;
+}
+
+- (GLboolean) handleRotate:(RotateEntity *) rotate {
+    // if rotate just started
+    if (rotate->state == GestureEntityStateStart) {
+        // if both touches are in us
+        if (
+            [self _touchIsInside:rotate->touches[0] withFudge:20]
+            &&
+            [self _touchIsInside:rotate->touches[0] withFudge:20]
+        ) {
+            self.rotator = rotate;
+            self.preGestureRotation = self.rotation;
+            
+            return true;
+        }
+        else if(self.rotator) {
+            self.rotator = nil;
+        }
+    }
+    // if rotate gesture ended and we were just being rotated
+    else if (rotate->state == GestureEntityStateEnd && self.rotator) {
+        self.rotator = nil;
     }
     
     return false;

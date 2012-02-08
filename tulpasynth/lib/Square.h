@@ -12,18 +12,28 @@
 
 #include "TouchEntity.h"
 #include "PinchEntity.h"
+#include "RotateEntity.h"
 
 @interface Square : GfxEntity
 
 - (GLboolean) handleTouch:(TouchEntity *) touch;
 - (GLboolean) handlePinch:(PinchEntity *) pinch;
 
+/**
+ *  Called from parent view from rotate gesture callback.
+ **/
+- (GLboolean) handleRotate:(RotateEntity *) rotate;
+
+/**
+ *  The entity that is currently rotating this object.
+ **/
+@property RotateEntity * rotator;
+
 - (GLboolean) _touchIsInside:(TouchEntity *)touch;
 - (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor;
 
 // The touch entity that is currently dragging this object
 @property TouchEntity * dragger;
-
 /**
  *  Point of dragging reference (point on object that user started dragging
  *  relative to center of object)

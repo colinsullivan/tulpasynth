@@ -32,4 +32,14 @@
 @property (nonatomic) GLfloat height;
 @property (nonatomic) Vector3D* position;
 
+/**
+ *  Current rotation of object (in radians)
+ **/
+@property GLfloat rotation;
+
+/**
+ *  Rotation value before rotation gesture.
+ **/
+@property GLfloat preGestureRotation;
+
 @end

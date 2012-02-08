@@ -10,6 +10,7 @@
 
 #include "TouchEntity.h"
 #include "PinchEntity.h"
+#include "RotateEntity.h"
 
 
 #import "Square.h"
@@ -20,6 +21,8 @@ UInt32 g_numActiveTouches = 0;
 
 PinchEntity * _pinchEntity;
 
+RotateEntity * _rotateEntity;
+
 
 @implementation tulpaViewController
 
@@ -29,7 +32,7 @@ Square* squares[2];
 @synthesize effect = _effect;
 
 @synthesize pinchRecognizer;
-
+@synthesize rotateRecognizer;
 //@synthesize touchEntities = _touchEntities;
 
 
@@ -83,8 +86,9 @@ Square* squares[2];
         _touchEntities[i] = new TouchEntity();
     }
     
-    _pinchEntity = new PinchEntity();
-    _pinchEntity->set(self.pinchRecognizer);
+    _pinchEntity = new PinchEntity(self.pinchRecognizer);
+    
+    _rotateEntity = new RotateEntity(self.rotateRecognizer);
     
 
     MoTouch::addCallback(touch_callback, NULL);
@@ -137,12 +141,21 @@ Square* squares[2];
 
 }
 
-- (IBAction)pinchGestureRecognized:(id)sender {
+- (IBAction)pinchGestureHandler:(id)sender {
     if ([pinchRecognizer numberOfTouches] == 2) {
         _pinchEntity->update();
         
         [squares[0] handlePinch:_pinchEntity];
         [squares[1] handlePinch:_pinchEntity];
+    }
+}
+
+- (IBAction)rotateGestureHandler:(id)sender {
+    if ([rotateRecognizer numberOfTouches] == 2) {
+        _rotateEntity->update();
+        
+        [squares[0] handleRotate:_rotateEntity];
+        [squares[1] handleRotate:_rotateEntity];
     }
 }
 
