@@ -17,12 +17,7 @@
 
 #include "Globals.h"
 
-@interface tulpaViewController : GLKViewController {
-    float _curRed;
-    BOOL _increasing;
-@private
-    float _rotation;
-}
+@interface tulpaViewController : GLKViewController
 
 @property (strong, nonatomic) EAGLContext * context;
 @property (strong, nonatomic) GLKBaseEffect * effect;
@@ -40,6 +35,17 @@
 - (IBAction)tapGestureHandler:(id)sender;
 
 void touch_callback( NSSet * touches, UIView * view, const std::vector<MoTouchTrack> & tracks, void * data);
+
+/**
+ *  The list of obstacle objects currently in creation.
+ **/
+@property (strong, nonatomic) NSMutableArray * obstacles;
+
+/**
+ *  The list of falling balls that are currently instantiated.
+ **/
+@property (strong, nonatomic) NSMutableArray * fallingBalls;
+
 
 
 @end
