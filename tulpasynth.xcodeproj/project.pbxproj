@@ -185,6 +185,7 @@
 		3B9D2F1514E1DD1D00A042BF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2F1414E1DD1D00A042BF /* CoreLocation.framework */; };
 		3B9D2F1D14E2003700A042BF /* GfxEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2F1C14E2003600A042BF /* GfxEntity.mm */; };
 		3B9D2F2014E2023E00A042BF /* TouchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */; };
+		3BF8964B14E22F7D0038780F /* PinchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8964A14E22F7D0038780F /* PinchEntity.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -499,6 +500,8 @@
 		3B9D2F1C14E2003600A042BF /* GfxEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GfxEntity.mm; sourceTree = "<group>"; };
 		3B9D2F1E14E2023E00A042BF /* TouchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchEntity.h; sourceTree = "<group>"; };
 		3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchEntity.mm; sourceTree = "<group>"; };
+		3BF8964914E22F7D0038780F /* PinchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinchEntity.h; sourceTree = "<group>"; };
+		3BF8964A14E22F7D0038780F /* PinchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PinchEntity.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -580,6 +583,8 @@
 		3B9D2D3F14E1D77500A042BF /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3BF8964914E22F7D0038780F /* PinchEntity.h */,
+				3BF8964A14E22F7D0038780F /* PinchEntity.mm */,
 				3B9D2D4014E1D77500A042BF /* vendor */,
 				3B9D2F0F14E1DB2E00A042BF /* Square.h */,
 				3B9D2F1014E1DB2E00A042BF /* Square.mm */,
@@ -1195,6 +1200,7 @@
 				3B9D2F1114E1DB2E00A042BF /* Square.mm in Sources */,
 				3B9D2F1D14E2003700A042BF /* GfxEntity.mm in Sources */,
 				3B9D2F2014E2023E00A042BF /* TouchEntity.mm in Sources */,
+				3BF8964B14E22F7D0038780F /* PinchEntity.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

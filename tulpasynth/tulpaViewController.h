@@ -16,7 +16,6 @@
 #include "mo_touch.h"
 
 #include "Globals.h"
-#include "TouchEntity.h"
 
 @interface tulpaViewController : GLKViewController {
     float _curRed;
@@ -27,7 +26,11 @@
 
 @property (strong, nonatomic) EAGLContext * context;
 @property (strong, nonatomic) GLKBaseEffect * effect;
+@property (strong, nonatomic) IBOutlet UIPinchGestureRecognizer * pinchRecognizer;
+
+- (IBAction)pinchGestureRecognized:(id)sender;
 
 void touch_callback( NSSet * touches, UIView * view, const std::vector<MoTouchTrack> & tracks, void * data);
+
 
 @end

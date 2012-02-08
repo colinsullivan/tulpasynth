@@ -24,6 +24,10 @@ const GLubyte SquareIndices[] = {
 @implementation Square
 
 @synthesize dragger;
+@synthesize pincher;
+
+@synthesize beforeScalingWidth;
+@synthesize beforeScalingHeight;
 
 - (id)init {
     self = [super init];
@@ -60,18 +64,37 @@ const GLubyte SquareIndices[] = {
             self.dragger = nil;
         }
     }
+    
+    if (self.pincher) {
+        self.width = self.beforeScalingWidth * self.pincher->scale;
+        self.height = self.beforeScalingHeight * self.pincher->scale;
+    }
+}
+
+- (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor {
+    if (
+        touch->position->x <= self.position->x + self.width/2 + fudgeFactor
+        &&
+        touch->position->x >= self.position->x - self.width/2 - fudgeFactor
+        &&
+        touch->position->y <= self.position->y + self.width/2 + fudgeFactor
+        &&
+        touch->position->y >= self.position->y - self.width/2 - fudgeFactor
+    ) { 
+        return true;
+    }
+    
+    return false;
+}
+
+- (GLboolean) _touchIsInside:(TouchEntity *)touch {
+    return [self _touchIsInside:touch withFudge:0];
 }
 
 - (GLboolean) handleTouch:(TouchEntity *) touch {
     
     if (
-        touch->position->x <= self.position->x + self.width/2
-        &&
-        touch->position->x >= self.position->x - self.width/2
-        &&
-        touch->position->y <= self.position->y + self.width/2
-        &&
-        touch->position->y >= self.position->y - self.width/2
+        [self _touchIsInside:touch]
         &&
         self.dragger != touch
     ) {
@@ -81,7 +104,34 @@ const GLubyte SquareIndices[] = {
     }
     
     return false;
+}
+
+- (GLboolean) handlePinch:(PinchEntity *) pinch {
+    // If pinch just started
+    if (pinch->state == PinchEntityStateStart) {
+        // If both touches are in us
+        if (
+            [self _touchIsInside:pinch->touches[0] withFudge:20]
+            &&
+            [self _touchIsInside:pinch->touches[1] withFudge:20]
+        ) {
+            pincher = pinch;
+            self.beforeScalingWidth = self.width;
+            self.beforeScalingHeight = self.height;
+            
+            return true;
+        }
+        // incase we were watching an old pincher
+        else if (self.pincher) {
+            pincher = nil;
+        }
+    }
+    // if pinch has ended and we were following this pincher
+    else if(pinch->state == PinchEntityStateEnd && self.pincher) {
+        pincher = nil;
+    }
     
+    return false;
 }
 
 @end

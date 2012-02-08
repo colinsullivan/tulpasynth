@@ -8,11 +8,17 @@
 
 #import "tulpaViewController.h"
 
+#include "TouchEntity.h"
+#include "PinchEntity.h"
+
+
 #import "Square.h"
 
 
 TouchEntity * _touchEntities[MAX_TOUCHES];
 UInt32 g_numActiveTouches = 0;
+
+PinchEntity * _pinchEntity;
 
 
 @implementation tulpaViewController
@@ -21,6 +27,8 @@ Square* squares[2];
 
 @synthesize context = _context;
 @synthesize effect = _effect;
+
+@synthesize pinchRecognizer;
 
 //@synthesize touchEntities = _touchEntities;
 
@@ -74,6 +82,10 @@ Square* squares[2];
     for(int i = 0; i < MAX_TOUCHES; i++) {
         _touchEntities[i] = new TouchEntity();
     }
+    
+    _pinchEntity = new PinchEntity();
+    _pinchEntity->set(self.pinchRecognizer);
+    
 
     MoTouch::addCallback(touch_callback, NULL);
 
@@ -123,6 +135,15 @@ Square* squares[2];
     [squares[0] draw];
     [squares[1] draw];
 
+}
+
+- (IBAction)pinchGestureRecognized:(id)sender {
+    if ([pinchRecognizer numberOfTouches] == 2) {
+        _pinchEntity->update();
+        
+        [squares[0] handlePinch:_pinchEntity];
+        [squares[1] handlePinch:_pinchEntity];
+    }
 }
 
 - (void)update {
