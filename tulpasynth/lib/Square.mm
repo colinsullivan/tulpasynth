@@ -24,6 +24,8 @@ const GLubyte SquareIndices[] = {
 @implementation Square
 
 @synthesize dragger;
+@synthesize draggingOffset;
+
 @synthesize pincher;
 
 @synthesize beforeScalingWidth;
@@ -58,7 +60,7 @@ const GLubyte SquareIndices[] = {
     
     if (self.dragger) {
         if (self.dragger->active) {
-            (*self.position) = (*self.dragger->position);
+            (*self.position) = (*self.dragger->position) + self.draggingOffset;
         }
         else {
             self.dragger = nil;
@@ -80,7 +82,8 @@ const GLubyte SquareIndices[] = {
         touch->position->y <= self.position->y + self.width/2 + fudgeFactor
         &&
         touch->position->y >= self.position->y - self.width/2 - fudgeFactor
-    ) { 
+    ) {
+
         return true;
     }
     
@@ -98,6 +101,7 @@ const GLubyte SquareIndices[] = {
         &&
         self.dragger != touch
     ) {
+        self.draggingOffset = (*self.position) - (*touch->position);
         self.dragger = touch;
         
         return true;

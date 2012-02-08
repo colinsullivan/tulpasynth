@@ -24,6 +24,12 @@
 // The touch entity that is currently dragging this object
 @property TouchEntity * dragger;
 
+/**
+ *  Point of dragging reference (point on object that user started dragging
+ *  relative to center of object)
+ **/
+@property Vector3D draggingOffset;
+
 // The pinch gesture recognizer if this object is currently being pinched
 @property PinchEntity * pincher;
 
