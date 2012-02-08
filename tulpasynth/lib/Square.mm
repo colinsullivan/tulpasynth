@@ -53,7 +53,12 @@ const GLubyte SquareIndices[] = {
     [super update];
     
     if (self.dragger) {
-        self.position = self.dragger->position;
+        if (self.dragger->active) {
+            (*self.position) = (*self.dragger->position);
+        }
+        else {
+            self.dragger = nil;
+        }
     }
 }
 
@@ -67,14 +72,12 @@ const GLubyte SquareIndices[] = {
         touch->position->y <= self.position->y + self.width/2
         &&
         touch->position->y >= self.position->y - self.width/2
-        ) {
-        
+        &&
+        self.dragger != touch
+    ) {
         self.dragger = touch;
         
         return true;
-    }
-    else {
-        self.dragger = nil;
     }
     
     return false;

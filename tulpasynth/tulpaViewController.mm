@@ -17,7 +17,8 @@ UInt32 g_numActiveTouches = 0;
 
 @implementation tulpaViewController
 
-Square* s;
+Square* squares[2];
+
 @synthesize context = _context;
 @synthesize effect = _effect;
 
@@ -77,9 +78,11 @@ Square* s;
     MoTouch::addCallback(touch_callback, NULL);
 
     
-    s = [[Square alloc] init];
+    squares[0] = [[Square alloc] init];
+    squares[1] = [[Square alloc] init];
 
-    s.position->set(480/2, 320/2, 0);
+    squares[0].position->set(480/2, 320/2, 0);
+    squares[1].position->set(100, 100, 0);
 }
 
 
@@ -103,7 +106,8 @@ Square* s;
         delete _touchEntities[i];
     }
 
-    [s release];
+    [squares[0] release];
+    [squares[1] release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -116,21 +120,23 @@ Square* s;
     glClearColor(_curRed, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    [s draw];
+    [squares[0] draw];
+    [squares[1] draw];
 
 }
 
 - (void)update {
-    
+
     // Handle rendering due to touches
     if (g_numActiveTouches == 1) {
-        
-        [s handleTouch:_touchEntities[0]];
-        
-        
+        [squares[0] handleTouch:_touchEntities[0]];
+        [squares[1] handleTouch:_touchEntities[0]];
     }
+
+    [squares[0] update];
+    [squares[1] update];
     
-    
+
     
     if (_increasing) {
         _curRed += 0.5 * self.timeSinceLastUpdate;
@@ -144,8 +150,8 @@ Square* s;
         _increasing = NO;
     }
     
-    if (_curRed <= 0.0) {
-        _curRed = 0.0;
+    if (_curRed <= 0.25) {
+        _curRed = 0.25;
         _increasing = YES;
     }
     
@@ -154,7 +160,6 @@ Square* s;
 //    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(0.125 * 2 * M_PI, 2.0/3.0, 2, -1);
 //    self.effect.transform.projectionMatrix = projectionMatrix;
 
-    [s update];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
