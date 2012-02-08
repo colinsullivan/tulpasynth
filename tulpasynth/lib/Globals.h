@@ -14,5 +14,10 @@ typedef struct {
     float Color[4];
 } Vertex;
 
+#define MAX_TOUCHES 6
+
+#define FRAMESIZE 512
+#define NUM_CHANNELS 2
+
 
 #endif

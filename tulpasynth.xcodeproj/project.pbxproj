@@ -183,6 +183,8 @@
 		3B9D2F1114E1DB2E00A042BF /* Square.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2F1014E1DB2E00A042BF /* Square.mm */; };
 		3B9D2F1314E1DD1300A042BF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2F1214E1DD1300A042BF /* AudioToolbox.framework */; };
 		3B9D2F1514E1DD1D00A042BF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2F1414E1DD1D00A042BF /* CoreLocation.framework */; };
+		3B9D2F1D14E2003700A042BF /* GfxEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2F1C14E2003600A042BF /* GfxEntity.mm */; };
+		3B9D2F2014E2023E00A042BF /* TouchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -493,6 +495,10 @@
 		3B9D2F1214E1DD1300A042BF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3B9D2F1414E1DD1D00A042BF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3B9D2F1A14E1E96F00A042BF /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		3B9D2F1B14E2003600A042BF /* GfxEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GfxEntity.h; sourceTree = "<group>"; };
+		3B9D2F1C14E2003600A042BF /* GfxEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GfxEntity.mm; sourceTree = "<group>"; };
+		3B9D2F1E14E2023E00A042BF /* TouchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchEntity.h; sourceTree = "<group>"; };
+		3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchEntity.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -578,6 +584,10 @@
 				3B9D2F0F14E1DB2E00A042BF /* Square.h */,
 				3B9D2F1014E1DB2E00A042BF /* Square.mm */,
 				3B9D2F1A14E1E96F00A042BF /* Globals.h */,
+				3B9D2F1B14E2003600A042BF /* GfxEntity.h */,
+				3B9D2F1C14E2003600A042BF /* GfxEntity.mm */,
+				3B9D2F1E14E2023E00A042BF /* TouchEntity.h */,
+				3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -1183,6 +1193,8 @@
 				3B9D2F0814E1D7A000A042BF /* Whistle.cpp in Sources */,
 				3B9D2F0914E1D7A000A042BF /* Wurley.cpp in Sources */,
 				3B9D2F1114E1DB2E00A042BF /* Square.mm in Sources */,
+				3B9D2F1D14E2003700A042BF /* GfxEntity.mm in Sources */,
+				3B9D2F2014E2023E00A042BF /* TouchEntity.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
