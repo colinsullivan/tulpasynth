@@ -16,7 +16,6 @@
 #import "FallingBall.h"
 #import "Square.h"
 
-NSMutableArray* fallingBalls;
 
 TouchEntity * _touchEntities[MAX_TOUCHES];
 UInt32 g_numActiveTouches = 0;
@@ -32,7 +31,7 @@ TapEntity * _tapEntity;
 
 @implementation tulpaViewController
 
-Square* squares[2];
+@synthesize fallingBalls, obstacles;
 
 @synthesize context = _context;
 @synthesize effect = _effect;
@@ -44,14 +43,12 @@ Square* squares[2];
 
 @synthesize world;
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _increasing = YES;
-        _curRed = 0.0;        
+
     }
     return self;
 }
@@ -101,61 +98,25 @@ Square* squares[2];
     _panEntity = new PanEntity(self.panRecognizer);
     _tapEntity = new TapEntity(self.tapRecognizer);
     
-    // Initialize b2 graphics
-    b2Vec2 gravity(0.0f, -10.0f);
-    self.world = new b2World(gravity);
-    
-    b2BodyDef groundBodyDef;
-    groundBodyDef.position.Set(0.0f, -10.0f);
-    
-    b2Body* groundBody = self.world->CreateBody(&groundBodyDef);
-    
-    b2PolygonShape groundBox;
-    // groundBox is 100m wide and 20m tall
-    groundBox.SetAsBox(50.0f, 10.0f);
-    
-    // Create shape fixture with default fixture definition.  groundBody
-    // is 0.0 kg/m^2
-    groundBody->CreateFixture(&groundBox, 0.0f);
-    
-    
-    b2BodyDef fallingBodyDef;
-    // this body should move in response to forces
-    fallingBodyDef.type = b2_dynamicBody;
-    fallingBodyDef.position.Set(0.0f, 4.0f);
-    b2Body* body = self.world->CreateBody(&fallingBodyDef);
-    
-    // Create a box shape
-    b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(1.0f, 1.0f);
-    
-    // Create fixture definition for box
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &dynamicBox;
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.3f;
-    
-    body->CreateFixture(&fixtureDef);
-    
-    float32 timeStep = 1.0f / 60.0f;
-    
-    // Turn these bitches down to increase performance
-    int32 velocityIterations = 8;
-    int32 positionIterations = 2;
-    
-    
+    // Initialize game object lists
+
+    self.fallingBalls = [[NSMutableArray alloc] init];
+    self.obstacles = [[NSMutableArray alloc] init];
     
 
 //    MoTouch::addCallback(touch_callback, NULL);
 
     
-//    squares[0] = [[Square alloc] init];
-//    squares[1] = [[Square alloc] init];
-//
-//    squares[0].position->set(480/2, 320/2, 0);
-//    squares[1].position->set(100, 100, 0);
+    // Create two starting squares for now
+    Square * s;
     
-    fallingBalls = [[NSMutableArray alloc] init];
+//    s = [[Square alloc] init];
+//    s.position->set(480/2, 320/2, 0);
+//    [self.obstacles addObject:s];
+//
+//    s = [[Square alloc] init];
+//    s.position->set(100, 100, 0);
+//    [self.obstacles addObject:s];
 }
 
 
@@ -186,10 +147,17 @@ Square* squares[2];
     
     delete self.world;
 
-    [fallingBalls release];
+    // Clear lists
 
-    [squares[0] release];
-    [squares[1] release];
+    for (FallingBall * b in self.fallingBalls) {
+        [b release];
+    }    
+    [self.fallingBalls release];
+
+    for (Obstacle * o in self.obstacles) {
+        [o release];
+    }
+    [self.obstacles release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -202,50 +170,69 @@ Square* squares[2];
     glClearColor(1.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    [squares[0] draw];
-    [squares[1] draw];
+    // Draw all obstacles
+    for (Obstacle * o in self.obstacles) {
+        [o draw];
+    }
     
-    for (int i = 0; i < [fallingBalls count]; i++) {
-        [[fallingBalls objectAtIndex:i] draw];
+    // Draw all falling balls
+    for (FallingBall * b in self.fallingBalls) {
+        [b draw];
     }
 }
 
 - (IBAction)pinchGestureHandler:(id)sender {
     if ([pinchRecognizer numberOfTouches] == 2) {
         _pinchEntity->update();
-        
-        [squares[0] handlePinch:_pinchEntity];
-        [squares[1] handlePinch:_pinchEntity];
+
+        // All obstacles get the chance to handle pinch
+        for (Obstacle * o in self.obstacles) {
+            [o handlePinch:_pinchEntity];
+        }
     }
 }
 
 - (IBAction)rotateGestureHandler:(id)sender {
     if ([rotateRecognizer numberOfTouches] == 2) {
         _rotateEntity->update();
-        
-        [squares[0] handleRotate:_rotateEntity];
-        [squares[1] handleRotate:_rotateEntity];
+
+        // All obstacles have chance to handle rotate
+        for (Obstacle * o in self.obstacles) {
+            [o handleRotate:_rotateEntity];
+        }
     }
 }
 
 - (IBAction)panGestureHandler:(id)sender {
     _panEntity->update();
-    
-    [squares[0] handlePan:_panEntity];
-    [squares[1] handlePan:_panEntity];
+
+    // All obstacles can handle pan
+    for (Obstacle * o in self.obstacles) {
+        [o handlePan:_panEntity];
+    }
 }
 
 - (IBAction)tapGestureHandler:(id)sender {
     _tapEntity->update();
     
-    if (![squares[0] handleTap:_tapEntity] && ![squares[1] handleTap:_tapEntity]) {
-        FallingBall* b = [[FallingBall alloc] initWithViewController:self];
+    bool handled = false;
 
-        (*b.position) = (*_tapEntity->touches[0]->position);
+    // All obstacles can handle tap
+    for (Obstacle * o in self.obstacles) {
+        handled = [o handleTap:_tapEntity];
         
+        if (handled) {
+            break;
+        }
+    }
+    
+    if (!handled) {
+        // Handle tap in empty space
+        FallingBall* b = [[FallingBall alloc] initWithViewController:self];        
+        (*b.position) = (*_tapEntity->touches[0]->position);
         [fallingBalls addObject:b];
         
-    }
+    }    
 }
 
 - (void)update {
@@ -256,32 +243,24 @@ Square* squares[2];
 //            NSLog(@"drop ball");
 //        }
 //    }
-
-    [squares[0] update];
-    [squares[1] update];
     
-    for (int i = 0; i < [fallingBalls count]; i++) {
-        [[fallingBalls objectAtIndex:i] update];
+    // Update all obstacles
+    for (Obstacle * o in self.obstacles) {
+        [o update];
     }
     
-
+    // Update all falling balls
+    for (FallingBall * b in self.fallingBalls) {
+        [b update];
+    }
     
-//    if (_increasing) {
-//        _curRed += 0.5 * self.timeSinceLastUpdate;
-//    }
-//    else {
-//        _curRed -= 0.5 * self.timeSinceLastUpdate;
-//    }
-//    
-//    if (_curRed >= 1.0) {
-//        _curRed = 1.0;
-//        _increasing = NO;
-//    }
-//    
-//    if (_curRed <= 0.25) {
-//        _curRed = 0.25;
-//        _increasing = YES;
-//    }
+    // If there is a collision between a falling ball and an obstacle
+    for (Obstacle * o in self.obstacles) {
+        for (FallingBall * b in self.fallingBalls) {
+            
+        }
+    }
+
     
 //    float aspect = fabsf(self.view.bounds.size.width/self.view.bounds.size.height);
 ////    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60.0f), aspect, 1.0f, -1.0f);

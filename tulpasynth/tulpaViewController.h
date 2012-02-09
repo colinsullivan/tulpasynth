@@ -21,12 +21,7 @@
 
 #include "Globals.h"
 
-@interface tulpaViewController : GLKViewController {
-    float _curRed;
-    BOOL _increasing;
-@private
-    float _rotation;
-}
+@interface tulpaViewController : GLKViewController
 
 @property (strong, nonatomic) EAGLContext * context;
 @property (strong, nonatomic) GLKBaseEffect * effect;
@@ -44,5 +39,17 @@
 - (IBAction)tapGestureHandler:(id)sender;
 
 @property (nonatomic) b2World * world;
+
+/**
+ *  The list of obstacle objects currently in creation.
+ **/
+@property (strong, nonatomic) NSMutableArray * obstacles;
+
+/**
+ *  The list of falling balls that are currently instantiated.
+ **/
+@property (strong, nonatomic) NSMutableArray * fallingBalls;
+
+
 
 @end

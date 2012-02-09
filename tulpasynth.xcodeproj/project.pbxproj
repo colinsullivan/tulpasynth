@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B4026DE14E25AF00047093F /* FallingBall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B4026DD14E25AF00047093F /* FallingBall.mm */; };
+		3B4772B214E38BF300AFBDB7 /* Obstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B4772B114E38BF300AFBDB7 /* Obstacle.mm */; };
 		3B50FA7614E25920001AD289 /* TapEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B50FA7514E25920001AD289 /* TapEntity.mm */; };
 		3B75A8CF14E2500000F17AB5 /* PanEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B75A8CE14E2500000F17AB5 /* PanEntity.mm */; };
 		3B9D2D1714E1CF8400A042BF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D1614E1CF8400A042BF /* UIKit.framework */; };
@@ -243,6 +244,8 @@
 /* Begin PBXFileReference section */
 		3B4026DC14E25AF00047093F /* FallingBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBall.h; sourceTree = "<group>"; };
 		3B4026DD14E25AF00047093F /* FallingBall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBall.mm; sourceTree = "<group>"; };
+		3B4772B014E38BF300AFBDB7 /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
+		3B4772B114E38BF300AFBDB7 /* Obstacle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Obstacle.mm; sourceTree = "<group>"; };
 		3B50FA7414E25920001AD289 /* TapEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapEntity.h; sourceTree = "<group>"; };
 		3B50FA7514E25920001AD289 /* TapEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TapEntity.mm; sourceTree = "<group>"; };
 		3B75A8CD14E2500000F17AB5 /* PanEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanEntity.h; sourceTree = "<group>"; };
@@ -738,6 +741,8 @@
 		3B9D2D3F14E1D77500A042BF /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3B4772B014E38BF300AFBDB7 /* Obstacle.h */,
+				3B4772B114E38BF300AFBDB7 /* Obstacle.mm */,
 				3B50FA7414E25920001AD289 /* TapEntity.h */,
 				3B50FA7514E25920001AD289 /* TapEntity.mm */,
 				3B75A8CD14E2500000F17AB5 /* PanEntity.h */,
@@ -1583,6 +1588,7 @@
 				3BF0E15814E38014008B0363 /* b2WeldJoint.cpp in Sources */,
 				3BF0E15914E38014008B0363 /* b2WheelJoint.cpp in Sources */,
 				3BF0E15A14E38014008B0363 /* b2Rope.cpp in Sources */,
+				3B4772B214E38BF300AFBDB7 /* Obstacle.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
