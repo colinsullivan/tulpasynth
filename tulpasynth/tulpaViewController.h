@@ -13,7 +13,11 @@
 #include <iostream>
 #include <vector>
 
-#include "mo_touch.h"
+#include "b2World.h"
+
+#include "b2Body.h"
+#include "b2PolygonShape.h"
+#include "b2Fixture.h"
 
 #include "Globals.h"
 
@@ -39,7 +43,6 @@
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer * tapRecognizer;
 - (IBAction)tapGestureHandler:(id)sender;
 
-void touch_callback( NSSet * touches, UIView * view, const std::vector<MoTouchTrack> & tracks, void * data);
-
+@property (nonatomic) b2World * world;
 
 @end

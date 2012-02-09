@@ -42,6 +42,8 @@ Square* squares[2];
 @synthesize panRecognizer;
 @synthesize tapRecognizer;
 
+@synthesize world;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -99,15 +101,59 @@ Square* squares[2];
     _panEntity = new PanEntity(self.panRecognizer);
     _tapEntity = new TapEntity(self.tapRecognizer);
     
+    // Initialize b2 graphics
+    b2Vec2 gravity(0.0f, -10.0f);
+    self.world = new b2World(gravity);
+    
+    b2BodyDef groundBodyDef;
+    groundBodyDef.position.Set(0.0f, -10.0f);
+    
+    b2Body* groundBody = self.world->CreateBody(&groundBodyDef);
+    
+    b2PolygonShape groundBox;
+    // groundBox is 100m wide and 20m tall
+    groundBox.SetAsBox(50.0f, 10.0f);
+    
+    // Create shape fixture with default fixture definition.  groundBody
+    // is 0.0 kg/m^2
+    groundBody->CreateFixture(&groundBox, 0.0f);
+    
+    
+    b2BodyDef fallingBodyDef;
+    // this body should move in response to forces
+    fallingBodyDef.type = b2_dynamicBody;
+    fallingBodyDef.position.Set(0.0f, 4.0f);
+    b2Body* body = self.world->CreateBody(&fallingBodyDef);
+    
+    // Create a box shape
+    b2PolygonShape dynamicBox;
+    dynamicBox.SetAsBox(1.0f, 1.0f);
+    
+    // Create fixture definition for box
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &dynamicBox;
+    fixtureDef.density = 1.0f;
+    fixtureDef.friction = 0.3f;
+    
+    body->CreateFixture(&fixtureDef);
+    
+    float32 timeStep = 1.0f / 60.0f;
+    
+    // Turn these bitches down to increase performance
+    int32 velocityIterations = 8;
+    int32 positionIterations = 2;
+    
+    
+    
 
 //    MoTouch::addCallback(touch_callback, NULL);
 
     
-    squares[0] = [[Square alloc] init];
-    squares[1] = [[Square alloc] init];
-
-    squares[0].position->set(480/2, 320/2, 0);
-    squares[1].position->set(100, 100, 0);
+//    squares[0] = [[Square alloc] init];
+//    squares[1] = [[Square alloc] init];
+//
+//    squares[0].position->set(480/2, 320/2, 0);
+//    squares[1].position->set(100, 100, 0);
     
     fallingBalls = [[NSMutableArray alloc] init];
 }
@@ -137,6 +183,8 @@ Square* squares[2];
     delete _rotateEntity;
     delete _panEntity;
     delete _tapEntity;
+    
+    delete self.world;
 
     [fallingBalls release];
 
