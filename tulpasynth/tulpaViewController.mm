@@ -251,6 +251,13 @@ TapEntity * _tapEntity;
     for (FallingBall * b in self.fallingBalls) {
         [b update];
     }
+    
+    // If there is a collision between a falling ball and an obstacle
+    for (Obstacle * o in self.obstacles) {
+        for (FallingBall * b in self.fallingBalls) {
+            
+        }
+    }
 
     
 //    float aspect = fabsf(self.view.bounds.size.width/self.view.bounds.size.height);
