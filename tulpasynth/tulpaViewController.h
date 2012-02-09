@@ -17,7 +17,11 @@
 
 #include "Globals.h"
 
-@interface tulpaViewController : GLKViewController
+@interface tulpaViewController : GLKViewController {
+    GLuint _glowingRingTexture;
+    GLuint _texCoordSlot;
+    GLuint _textureUniform;
+}
 
 @property (strong, nonatomic) EAGLContext * context;
 @property (strong, nonatomic) GLKBaseEffect * effect;

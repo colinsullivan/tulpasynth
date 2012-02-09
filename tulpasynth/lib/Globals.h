@@ -12,6 +12,7 @@
 typedef struct {
     float Position[3];
     float Color[4];
+    float TexCoord[2];
 } Vertex;
 
 #define MAX_TOUCHES 6

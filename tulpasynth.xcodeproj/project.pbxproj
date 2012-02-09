@@ -189,6 +189,11 @@
 		3B9D2F1D14E2003700A042BF /* GfxEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2F1C14E2003600A042BF /* GfxEntity.mm */; };
 		3B9D2F2014E2023E00A042BF /* TouchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */; };
 		3BDA873F14E331F6002A6F89 /* Obstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BDA873E14E331F6002A6F89 /* Obstacle.mm */; };
+		3BDA874314E37310002A6F89 /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 3BDA874114E37310002A6F89 /* SimpleFragment.glsl */; };
+		3BDA874414E37310002A6F89 /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 3BDA874214E37310002A6F89 /* SimpleVertex.glsl */; };
+		3BDA874814E37394002A6F89 /* CyanRing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BDA874614E37394002A6F89 /* CyanRing.png */; };
+		3BDA874914E37394002A6F89 /* Textures.psd in Resources */ = {isa = PBXBuildFile; fileRef = 3BDA874714E37394002A6F89 /* Textures.psd */; };
+		3BDA874B14E3795D002A6F89 /* GlowingRing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BDA874A14E3795D002A6F89 /* GlowingRing.png */; };
 		3BF8964B14E22F7D0038780F /* PinchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8964A14E22F7D0038780F /* PinchEntity.mm */; };
 		3BF8964F14E2415E0038780F /* RotateEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8964E14E2415E0038780F /* RotateEntity.mm */; };
 		3BF8965214E2430F0038780F /* GestureEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8965114E2430F0038780F /* GestureEntity.mm */; };
@@ -514,6 +519,11 @@
 		3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchEntity.mm; sourceTree = "<group>"; };
 		3BDA873D14E331F6002A6F89 /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
 		3BDA873E14E331F6002A6F89 /* Obstacle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Obstacle.mm; sourceTree = "<group>"; };
+		3BDA874114E37310002A6F89 /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
+		3BDA874214E37310002A6F89 /* SimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleVertex.glsl; sourceTree = "<group>"; };
+		3BDA874614E37394002A6F89 /* CyanRing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CyanRing.png; sourceTree = "<group>"; };
+		3BDA874714E37394002A6F89 /* Textures.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Textures.psd; sourceTree = "<group>"; };
+		3BDA874A14E3795D002A6F89 /* GlowingRing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GlowingRing.png; sourceTree = "<group>"; };
 		3BF8964914E22F7D0038780F /* PinchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinchEntity.h; sourceTree = "<group>"; };
 		3BF8964A14E22F7D0038780F /* PinchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PinchEntity.mm; sourceTree = "<group>"; };
 		3BF8964D14E2415D0038780F /* RotateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateEntity.h; sourceTree = "<group>"; };
@@ -576,6 +586,7 @@
 		3B9D2D1C14E1CF8400A042BF /* tulpasynth */ = {
 			isa = PBXGroup;
 			children = (
+				3BDA874514E37394002A6F89 /* graphics */,
 				3B9D2D3F14E1D77500A042BF /* lib */,
 				3B9D2D2514E1CF8400A042BF /* tulpaAppDelegate.h */,
 				3B9D2D2614E1CF8400A042BF /* tulpaAppDelegate.m */,
@@ -601,6 +612,8 @@
 		3B9D2D3F14E1D77500A042BF /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3BDA874114E37310002A6F89 /* SimpleFragment.glsl */,
+				3BDA874214E37310002A6F89 /* SimpleVertex.glsl */,
 				3B50FA7414E25920001AD289 /* TapEntity.h */,
 				3B50FA7514E25920001AD289 /* TapEntity.mm */,
 				3B75A8CD14E2500000F17AB5 /* PanEntity.h */,
@@ -1000,6 +1013,16 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		3BDA874514E37394002A6F89 /* graphics */ = {
+			isa = PBXGroup;
+			children = (
+				3BDA874A14E3795D002A6F89 /* GlowingRing.png */,
+				3BDA874614E37394002A6F89 /* CyanRing.png */,
+				3BDA874714E37394002A6F89 /* Textures.psd */,
+			);
+			path = graphics;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1107,6 +1130,11 @@
 				3B9D2EB614E1D7A000A042BF /* README in Resources */,
 				3B9D2F0A14E1D7A000A042BF /* TODO in Resources */,
 				3B9D2F0B14E1D7A000A042BF /* VERSIONS in Resources */,
+				3BDA874314E37310002A6F89 /* SimpleFragment.glsl in Resources */,
+				3BDA874414E37310002A6F89 /* SimpleVertex.glsl in Resources */,
+				3BDA874814E37394002A6F89 /* CyanRing.png in Resources */,
+				3BDA874914E37394002A6F89 /* Textures.psd in Resources */,
+				3BDA874B14E3795D002A6F89 /* GlowingRing.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
