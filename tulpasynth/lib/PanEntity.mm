@@ -28,6 +28,6 @@ void PanEntity::update() {
     temp.y = tempx;
 
     
-    this->translation.x = temp.x;
-    this->translation.y = temp.y;
+    this->translation.x = PX_TO_M(temp.x);
+    this->translation.y = PX_TO_M(temp.y);
 }

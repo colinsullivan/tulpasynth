@@ -44,20 +44,16 @@
 - (b2World*)getWorld;
 - (b2World*)world;
 
-///**
-// *  The list of obstacle objects currently in creation.
-// **/
-//@property (strong, nonatomic) NSMutableArray * obstacles;
-//
-///**
-// *  The list of falling balls that are currently instantiated.
-// **/
-//@property (strong, nonatomic) NSMutableArray * fallingBalls;
+/**
+ *  The list of obstacle objects currently in creation.
+ **/
+@property (strong, nonatomic) NSMutableArray * obstacles;
 
 /**
- *  The list of all physical entities to render.
+ *  The list of falling balls that are currently instantiated.
  **/
-//@property (strong, nonatomic) NSMutableArray* allEntities;
+@property (strong, nonatomic) NSMutableArray * fallingBalls;
+
 
 
 

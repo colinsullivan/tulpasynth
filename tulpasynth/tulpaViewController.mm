@@ -32,7 +32,7 @@ TapEntity * _tapEntity;
 
 @implementation tulpaViewController
 
-//@synthesize fallingBalls, obstacles;
+@synthesize fallingBalls, obstacles;
 
 @synthesize context = _context;
 @synthesize effect = _effect;
@@ -104,8 +104,8 @@ TapEntity * _tapEntity;
     
     // Initialize game object lists
 
-//    self.fallingBalls = [[NSMutableArray alloc] init];
-//    self.obstacles = [[NSMutableArray alloc] init];
+    self.fallingBalls = [[NSMutableArray alloc] init];
+    self.obstacles = [[NSMutableArray alloc] init];
 
     
     // Initialize b2 graphics
@@ -126,11 +126,11 @@ TapEntity * _tapEntity;
 //    groundBody->CreateFixture(&groundBox, 0.0f);
     
     
-    b2BodyDef fallingBodyDef;
-    // this body should move in response to forces
-    fallingBodyDef.type = b2_dynamicBody;
-    fallingBodyDef.position.Set(0.0f, 4.0f);
-    b2Body* fallingBody = self.world->CreateBody(&fallingBodyDef);
+//    b2BodyDef fallingBodyDef;
+//    // this body should move in response to forces
+//    fallingBodyDef.type = b2_dynamicBody;
+//    fallingBodyDef.position.Set(0.0f, 4.0f);
+//    b2Body* fallingBody = self.world->CreateBody(&fallingBodyDef);
     
     // Create a box shape
 //    b2PolygonShape dynamicBox;
@@ -152,11 +152,11 @@ TapEntity * _tapEntity;
     Square * s;
     b2Vec2 pos(25.0, 50.0);
     s = [[Square alloc] initWithController:self withPosition:pos];
-//    [self.obstacles addObject:s];
-//
-//    s = [[Square alloc] init];
-//    s.position->set(100, 100, 0);
-//    [self.obstacles addObject:s];
+    [self.obstacles addObject:s];
+
+    pos.Set(90.0, 40.0);
+    s = [[Square alloc] initWithController:self withPosition:pos];
+    [self.obstacles addObject:s];
 }
 
 
@@ -193,16 +193,6 @@ TapEntity * _tapEntity;
 //        
 //    }
 
-    // Clear lists
-//    for (FallingBall * b in self.fallingBalls) {
-//        [b release];
-//    }    
-//    [self.fallingBalls release];
-//
-//    for (Obstacle * o in self.obstacles) {
-//        [o release];
-//    }
-//    [self.obstacles release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -219,17 +209,7 @@ TapEntity * _tapEntity;
     // Draw all physics entities
     for (PhysicsEntity * e in PhysicsEntity.Instances) {
         [e draw];
-    }
-    
-    // Draw all obstacles
-//    for (Obstacle * o in self.obstacles) {
-//        [o draw];
-//    }
-//    
-//    // Draw all falling balls
-//    for (FallingBall * b in self.fallingBalls) {
-//        [b draw];
-//    }
+    }    
 }
 
 - (IBAction)pinchGestureHandler:(id)sender {
@@ -258,9 +238,9 @@ TapEntity * _tapEntity;
     _panEntity->update();
 
     // All obstacles can handle pan
-//    for (Obstacle * o in self.obstacles) {
-//        [o handlePan:_panEntity];
-//    }
+    for (Obstacle * o in self.obstacles) {
+        [o handlePan:_panEntity];
+    }
 }
 
 - (IBAction)tapGestureHandler:(id)sender {

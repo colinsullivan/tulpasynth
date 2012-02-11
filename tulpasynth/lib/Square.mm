@@ -37,11 +37,11 @@ const GLubyte SquareIndices[] = {
 
 
         // Create square polygon
-        b2PolygonShape mySquare;
-        mySquare.SetAsBox(self.width, self.height);
+        b2PolygonShape* mySquare = new b2PolygonShape();
+        mySquare->SetAsBox(self.width, self.height);
 //        mySquare.Set(vertices, 4);
-        
-        self.body->CreateFixture(&mySquare, 1.0f);
+        self.body->CreateFixture(mySquare, 1.0f);
+        self.shape = mySquare;
         
         
         glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);

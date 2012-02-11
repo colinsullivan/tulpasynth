@@ -6,7 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "GfxEntity.h"
+#import "PhysicsEntity.h"
+
+#include "b2Math.h"
 
 #include "TouchEntity.h"
 #include "PinchEntity.h"
@@ -14,7 +16,7 @@
 #include "PanEntity.h"
 #include "TapEntity.h"
 
-@interface Obstacle : GfxEntity
+@interface Obstacle : PhysicsEntity
 
 - (GLboolean) handlePinch:(PinchEntity *) pinch;
 
@@ -30,11 +32,6 @@
 
 - (GLboolean) _touchIsInside:(TouchEntity *)touch;
 - (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor;
-/**
- *  Point of dragging reference (point on object that user started dragging
- *  relative to center of object)
- **/
-@property Vector3D draggingOffset;
 
 // The pinch gesture recognizer if this object is currently being pinched
 @property PinchEntity * pincher;
@@ -45,10 +42,12 @@
 @property GLfloat beforeScalingWidth;
 @property GLfloat beforeScalingHeight;
 
-
+/**
+ *  Handler for a pan (dragging) gesture.
+ **/
 - (GLboolean) handlePan:(PanEntity *) pan;
 @property PanEntity * panner;
-@property Vector3D prePanningPosition;
+@property b2Vec2* prePanningPosition;
 
 - (GLboolean) handleTap:(TapEntity *) tap;
 

@@ -10,10 +10,14 @@
 
 @implementation PhysicsEntity
 
-@synthesize body, effect, position, controller;
+@synthesize body, effect, controller, shape;
 
 - (const b2Vec2&)position {
     return self.body->GetPosition();
+}
+
+- (void)setPosition:(const b2Vec2 &)aPosition {
+    self.body->SetTransform(aPosition, 0);
 }
 
 - (id)initWithController:(tulpaViewController *)theController withPosition:(b2Vec2)aPosition {
@@ -33,7 +37,6 @@
         b2BodyDef bodyDef;
         bodyDef.position = aPosition;
         bodyDef.type = b2_staticBody;
-//        bodyDef.position.Set(25.0f, 25.0f);
         b2Body* newBody = self.controller.world->CreateBody(&bodyDef);
         self.body = newBody;
     }

@@ -10,10 +10,10 @@
 
 #include "b2PolygonShape.h"
 
-#import "PhysicsEntity.h"
+#import "Obstacle.h"
 
 
-@interface Square : PhysicsEntity
+@interface Square : Obstacle
 
 //@property b2PolygonShape* square;
 

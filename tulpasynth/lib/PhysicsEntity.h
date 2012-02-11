@@ -27,10 +27,16 @@
 @property b2Body* body;
 
 /**
+ *  Keep reference to outermost shape for border detection.
+ **/
+@property b2Shape* shape;
+
+/**
  *  Hook into b2Body::GetPosition.  Setting the position from here
  *  will not do anything.
  **/
-@property (readonly) const b2Vec2& position;
+@property const b2Vec2& position;
+
 
 @property (strong, nonatomic) GLKBaseEffect * effect;
 @property (nonatomic) tulpaViewController* controller;
@@ -45,6 +51,7 @@
  *  Override getter for position so we can hook into b2Body::GetPosition.
  **/
 - (const b2Vec2&)position;
+- (void)setPosition:(const b2Vec2 &)aPosition;
 
 /**
  *  Static list of all physics entity instances.
