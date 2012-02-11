@@ -15,13 +15,14 @@
 
 #include "b2World.h"
 
-#include "b2Body.h"
-#include "b2PolygonShape.h"
-#include "b2Fixture.h"
-
 #include "Globals.h"
 
-@interface tulpaViewController : GLKViewController
+//#import "PhysicsEntity.h"
+
+@interface tulpaViewController : GLKViewController {
+@private
+    b2World* _world;
+}
 
 @property (strong, nonatomic) EAGLContext * context;
 @property (strong, nonatomic) GLKBaseEffect * effect;
@@ -38,17 +39,25 @@
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer * tapRecognizer;
 - (IBAction)tapGestureHandler:(id)sender;
 
-@property (nonatomic) b2World * world;
+@property (readonly) b2World* world;
+
+- (b2World*)getWorld;
+- (b2World*)world;
+
+///**
+// *  The list of obstacle objects currently in creation.
+// **/
+//@property (strong, nonatomic) NSMutableArray * obstacles;
+//
+///**
+// *  The list of falling balls that are currently instantiated.
+// **/
+//@property (strong, nonatomic) NSMutableArray * fallingBalls;
 
 /**
- *  The list of obstacle objects currently in creation.
+ *  The list of all physical entities to render.
  **/
-@property (strong, nonatomic) NSMutableArray * obstacles;
-
-/**
- *  The list of falling balls that are currently instantiated.
- **/
-@property (strong, nonatomic) NSMutableArray * fallingBalls;
+//@property (strong, nonatomic) NSMutableArray* allEntities;
 
 
 

@@ -23,21 +23,33 @@ const GLubyte SquareIndices[] = {
 
 @implementation Square
 
+//@synthesize square;
 
-- (id)init {
-    self = [super init];
-    if (!self) {
-        return nil;
+@synthesize width, height;
+
+- (id)initWithController:(tulpaViewController *)theController withPosition:(b2Vec2)aPosition {
+    
+    if (self = [super initWithController:theController withPosition:aPosition]) {
+
+        self.width = 15;
+        self.height = 15;
+
+
+
+        // Create square polygon
+        b2PolygonShape mySquare;
+        mySquare.SetAsBox(self.width, self.height);
+//        mySquare.Set(vertices, 4);
+        
+        self.body->CreateFixture(&mySquare, 1.0f);
+        
+        
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(SquareVertices), SquareVertices, GL_STATIC_DRAW);
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(SquareIndices), SquareIndices, GL_STATIC_DRAW);        
     }
-    
-    self.width = 50;
-    self.height = 50;
-    
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SquareVertices), SquareVertices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(SquareIndices), SquareIndices, GL_STATIC_DRAW);
 
     return self;
 }
@@ -46,6 +58,12 @@ const GLubyte SquareIndices[] = {
     [super draw];
 
     glDrawElements(GL_TRIANGLES, sizeof(SquareIndices)/sizeof(SquareIndices[0]), GL_UNSIGNED_BYTE, 0);
+}
+
+- (void)update {
+    [super update];
+
+    self.effect.transform.modelviewMatrix = GLKMatrix4Scale(self.effect.transform.modelviewMatrix, M_TO_PX(self.width), M_TO_PX(self.height), 1.0f);
 }
 
 

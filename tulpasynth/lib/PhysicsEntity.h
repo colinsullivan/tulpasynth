@@ -1,0 +1,55 @@
+//
+//  PhysicsEntity.h
+//  tulpasynth
+//
+//  Created by Colin Sullivan on 2/9/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <GLKit/GLKit.h>
+#import <QuartzCore/QuartzCore.h>
+
+#import "tulpaViewController.h"
+
+#include "b2Body.h"
+
+
+@interface PhysicsEntity : NSObject {
+    
+@protected
+    GLuint _vertexBuffer;
+    GLuint _indexBuffer;
+    
+}
+
+@property b2Body* body;
+
+/**
+ *  Hook into b2Body::GetPosition.  Setting the position from here
+ *  will not do anything.
+ **/
+@property (readonly) const b2Vec2& position;
+
+@property (strong, nonatomic) GLKBaseEffect * effect;
+@property (nonatomic) tulpaViewController* controller;
+
+- (id)initWithController:(tulpaViewController*)theController withPosition:(b2Vec2)aPosition;
+
+- (void)draw;
+
+- (void)update;
+
+/**
+ *  Override getter for position so we can hook into b2Body::GetPosition.
+ **/
+- (const b2Vec2&)position;
+
+/**
+ *  Static list of all physics entity instances.
+ **/
++ (NSMutableArray*) Instances;
+
+
+@end

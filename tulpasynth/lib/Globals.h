@@ -19,5 +19,6 @@ typedef struct {
 #define FRAMESIZE 512
 #define NUM_CHANNELS 2
 
+#define M_TO_PX(meters) meters*3
 
 #endif

@@ -8,8 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-#include "Obstacle.h"
+#include "b2PolygonShape.h"
 
-@interface Square : Obstacle
+#import "PhysicsEntity.h"
+
+
+@interface Square : PhysicsEntity
+
+//@property b2PolygonShape* square;
+
+@property float width;
+@property float height;
 
 @end
