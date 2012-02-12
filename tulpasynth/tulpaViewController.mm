@@ -130,7 +130,7 @@ TapEntity * _tapEntity;
     [EAGLContext setCurrentContext:self.context];
     
     // Load shaders
-    _texCoordSlot = glGetAttribLocation(programHandle, "TexCoordIn");
+//    _texCoordSlot = glGetAttribLocation(programHandle, "TexCoordIn");
 
     // Instantiate touch objects
 //    for(int i = 0; i < MAX_TOUCHES; i++) {

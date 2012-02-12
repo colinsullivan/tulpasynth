@@ -45,6 +45,7 @@ const GLubyte BallIndices[] = {
         
         b2MassData myBodyMass;
         myBodyMass.mass = 0.25f;
+        myBodyMass.center.SetZero();
         self.body->SetMassData(&myBodyMass);
         
         self.shape = myShape;
