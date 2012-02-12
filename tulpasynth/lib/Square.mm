@@ -23,6 +23,25 @@ const GLubyte SquareIndices[] = {
 
 @implementation Square
 
+/**
+ *  When width or height is set, change shape.
+ **/
+- (void)setHeight:(float)height {
+    [super setHeight:height];
+    
+    if (self.shape) {        
+        ((b2PolygonShape*)self.shape)->SetAsBox(self.width, height);    
+    }
+    
+}
+- (void)setWidth:(float)width {
+    [super setWidth:width];
+    
+    if (self.shape) {
+        ((b2PolygonShape*)self.shape)->SetAsBox(width, self.height);        
+    }
+    
+}
 
 - (id)initWithController:(tulpaViewController *)theController withPosition:(b2Vec2)aPosition {
     
@@ -59,8 +78,6 @@ const GLubyte SquareIndices[] = {
 
 - (void)update {
     [super update];
-    
-    ((b2PolygonShape*)self.shape)->SetAsBox(self.width, self.height);
 
     self.effect.transform.modelviewMatrix = GLKMatrix4Scale(self.effect.transform.modelviewMatrix, M_TO_PX(self.width/2), M_TO_PX(self.height/2), 1.0f);
 }
