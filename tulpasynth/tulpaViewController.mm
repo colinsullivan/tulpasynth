@@ -217,9 +217,9 @@ TapEntity * _tapEntity;
         _pinchEntity->update();
 
         // All obstacles get the chance to handle pinch
-//        for (Obstacle * o in self.obstacles) {
-//            [o handlePinch:_pinchEntity];
-//        }
+        for (Obstacle * o in self.obstacles) {
+            [o handlePinch:_pinchEntity];
+        }
     }
 }
 

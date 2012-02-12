@@ -19,6 +19,14 @@
 @interface Obstacle : PhysicsEntity
 
 - (GLboolean) handlePinch:(PinchEntity *) pinch;
+/**
+ *  The pinch gesture recognizer if this object is currently being pinched
+ **/
+@property PinchEntity * pincher;
+/**
+ *  Width and height properties for use when scaling (pinching)
+ **/ 
+@property GLfloat preScalingWidth, preScalingHeight;
 
 /**
  *  Called from parent view from rotate gesture callback.
@@ -33,14 +41,6 @@
 - (GLboolean) _touchIsInside:(TouchEntity *)touch;
 - (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor;
 
-// The pinch gesture recognizer if this object is currently being pinched
-@property PinchEntity * pincher;
-
-/**
- *  Width and height properties for use when scaling (pinching)
- **/ 
-@property GLfloat beforeScalingWidth;
-@property GLfloat beforeScalingHeight;
 
 /**
  *  Handler for a pan (dragging) gesture.

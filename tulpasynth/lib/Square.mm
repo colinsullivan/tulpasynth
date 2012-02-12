@@ -23,9 +23,6 @@ const GLubyte SquareIndices[] = {
 
 @implementation Square
 
-//@synthesize square;
-
-@synthesize width, height;
 
 - (id)initWithController:(tulpaViewController *)theController withPosition:(b2Vec2)aPosition {
     
@@ -62,8 +59,10 @@ const GLubyte SquareIndices[] = {
 
 - (void)update {
     [super update];
+    
+    ((b2PolygonShape*)self.shape)->SetAsBox(self.width, self.height);
 
-    self.effect.transform.modelviewMatrix = GLKMatrix4Scale(self.effect.transform.modelviewMatrix, M_TO_PX(self.width), M_TO_PX(self.height), 1.0f);
+    self.effect.transform.modelviewMatrix = GLKMatrix4Scale(self.effect.transform.modelviewMatrix, M_TO_PX(self.width/2), M_TO_PX(self.height/2), 1.0f);
 }
 
 

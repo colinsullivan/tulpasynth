@@ -10,9 +10,7 @@
 
 @implementation Obstacle
 
-@synthesize pincher;
-@synthesize beforeScalingWidth;
-@synthesize beforeScalingHeight;
+@synthesize pincher, preScalingWidth, preScalingHeight;
 
 @synthesize rotator;
 
@@ -37,11 +35,11 @@
     if (self.panner) {
         self.position = (*self.prePanningPosition) + self.panner->translation;
     }
-//    
-//    if (self.pincher) {
-//        self.width = self.beforeScalingWidth * self.pincher->scale;
-//        self.height = self.beforeScalingHeight * self.pincher->scale;
-//    }
+    
+    if (self.pincher) {
+        self.width = self.preScalingWidth * self.pincher->scale;
+        self.height = self.preScalingHeight * self.pincher->scale;
+    }
 //    
 //    if (self.rotator) {
 //        self.rotation = self.preGestureRotation + self.rotator->rotation;
@@ -54,11 +52,20 @@
 
 - (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor {
     b2Rot r(0);
-    b2Transform t(self.position, r);
-    b2Vec2 p = (*touch->position);
+    b2Transform obstaclePostion(self.position, r);
+    b2Vec2 touchPosition(touch->position->x, touch->position->y);
     
-    if (self.shape->TestPoint(t, p)) {
-        return true;
+    b2Vec2 touchPositionFudged[5];
+    touchPositionFudged[0] = touchPosition;
+    touchPositionFudged[1].Set(touch->position->x - fudgeFactor, touch->position->y);
+    touchPositionFudged[2].Set(touch->position->x, touch->position->y - fudgeFactor);
+    touchPositionFudged[3].Set(touch->position->x + fudgeFactor, touch->position->y);
+    touchPositionFudged[4].Set(touch->position->x, touch->position->y + fudgeFactor );
+    
+    for (int i = 0; i < 5; i++) {
+        if (self.shape->TestPoint(obstaclePostion, touchPositionFudged[i])) {
+            return true;
+        }
     }
     
     return false;
@@ -69,29 +76,29 @@
 }
 
 - (GLboolean) handlePinch:(PinchEntity *) pinch {
-//    // If pinch just started
-//    if (pinch->state == GestureEntityStateStart) {
-//        // If both touches are in us
-//        if (
-//            [self _touchIsInside:pinch->touches[0] withFudge:25]
-//            &&
-//            [self _touchIsInside:pinch->touches[1] withFudge:25]
-//            ) {
-//            self.pincher = pinch;
-//            self.beforeScalingWidth = self.width;
-//            self.beforeScalingHeight = self.height;
-//            
-//            return true;
-//        }
-//        // incase we were watching an old pincher
-//        else if (self.pincher) {
-//            self.pincher = nil;
-//        }
-//    }
-//    // if pinch has ended and we were following this pincher
-//    else if(pinch->state == GestureEntityStateEnd && self.pincher) {
-//        self.pincher = nil;
-//    }
+    // If pinch just started
+    if (pinch->state == GestureEntityStateStart) {
+        // If both touches are in us
+        if (
+            [self _touchIsInside:pinch->touches[0] withFudge:25]
+            &&
+            [self _touchIsInside:pinch->touches[1] withFudge:25]
+            ) {
+            self.pincher = pinch;
+            self.preScalingWidth = self.width;
+            self.preScalingHeight = self.height;
+            
+            return true;
+        }
+        // incase we were watching an old pincher
+        else if (self.pincher) {
+            self.pincher = nil;
+        }
+    }
+    // if pinch has ended and we were following this pincher
+    else if(pinch->state == GestureEntityStateEnd && self.pincher) {
+        self.pincher = nil;
+    }
     
     return false;
 }

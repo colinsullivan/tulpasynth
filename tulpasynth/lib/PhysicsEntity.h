@@ -32,6 +32,13 @@
 @property b2Shape* shape;
 
 /**
+ *  Width and height of this object (in world coordinates)
+ **/
+@property float width;
+@property float height;
+
+
+/**
  *  Hook into b2Body::GetPosition.  Setting the position from here
  *  will not do anything.
  **/

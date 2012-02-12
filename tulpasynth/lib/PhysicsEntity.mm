@@ -12,6 +12,8 @@
 
 @synthesize body, effect, controller, shape;
 
+@synthesize width, height;
+
 - (const b2Vec2&)position {
     return self.body->GetPosition();
 }

@@ -17,7 +17,5 @@
 
 //@property b2PolygonShape* square;
 
-@property float width;
-@property float height;
 
 @end
