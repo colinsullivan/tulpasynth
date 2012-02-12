@@ -6,7 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "GfxEntity.h"
+#import "PhysicsEntity.h"
+
+#include "b2Math.h"
 
 #include "TouchEntity.h"
 #include "PinchEntity.h"
@@ -14,9 +16,17 @@
 #include "PanEntity.h"
 #include "TapEntity.h"
 
-@interface Obstacle : GfxEntity
+@interface Obstacle : PhysicsEntity
 
 - (GLboolean) handlePinch:(PinchEntity *) pinch;
+/**
+ *  The pinch gesture recognizer if this object is currently being pinched
+ **/
+@property PinchEntity * pincher;
+/**
+ *  Width and height properties for use when scaling (pinching)
+ **/ 
+@property GLfloat preScalingWidth, preScalingHeight;
 
 /**
  *  Called from parent view from rotate gesture callback.
@@ -27,28 +37,21 @@
  *  The entity that is currently rotating this object.
  **/
 @property RotateEntity * rotator;
+/**
+ *  Rotation value before gesture began
+ **/
+@property float32 preGestureAngle;
 
 - (GLboolean) _touchIsInside:(TouchEntity *)touch;
 - (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor;
+
+
 /**
- *  Point of dragging reference (point on object that user started dragging
- *  relative to center of object)
+ *  Handler for a pan (dragging) gesture.
  **/
-@property Vector3D draggingOffset;
-
-// The pinch gesture recognizer if this object is currently being pinched
-@property PinchEntity * pincher;
-
-/**
- *  Width and height properties for use when scaling (pinching)
- **/ 
-@property GLfloat beforeScalingWidth;
-@property GLfloat beforeScalingHeight;
-
-
 - (GLboolean) handlePan:(PanEntity *) pan;
 @property PanEntity * panner;
-@property Vector3D prePanningPosition;
+@property b2Vec2* prePanningPosition;
 
 - (GLboolean) handleTap:(TapEntity *) tap;
 

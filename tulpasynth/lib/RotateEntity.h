@@ -20,9 +20,9 @@ public:
 
 
     /**
-     *  Amount of rotation in this gesture.
+     *  Amount of rotation in this gesture (in radians).
      **/
-    GLfloat rotation;
+    float32 rotation;
     
     virtual void update();
 

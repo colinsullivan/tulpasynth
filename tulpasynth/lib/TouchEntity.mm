@@ -28,11 +28,10 @@
 //
 //@end
 
-
 TouchEntity::TouchEntity() {
     active = false;
     touch_ref = NULL;
-    position = new Vector3D();
+    position = new b2Vec2();
 }
 
 TouchEntity::~TouchEntity() {

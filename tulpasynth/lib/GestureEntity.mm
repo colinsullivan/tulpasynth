@@ -31,7 +31,7 @@ void GestureEntity::update() {
         location.x = location.y;
         location.y = temp;
         
-        touches[i]->position->set(location.x, location.y, 0);
+        touches[i]->position->Set(PX_TO_M(location.x), PX_TO_M(location.y));
     }
     
     // update state

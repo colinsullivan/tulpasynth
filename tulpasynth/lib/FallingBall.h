@@ -6,10 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "GfxEntity.h"
+#import "PhysicsEntity.h"
 
-@interface FallingBall : GfxEntity
+#include "b2CircleShape.h"
+#include "b2Fixture.h"
 
-@property Vector3D* velocity;
+@interface FallingBall : PhysicsEntity
 
 @end

@@ -13,14 +13,15 @@
 #include <iostream>
 #include <vector>
 
-#include "mo_touch.h"
+#include "b2World.h"
 
 #include "Globals.h"
 
+//#import "PhysicsEntity.h"
+
 @interface tulpaViewController : GLKViewController {
-    GLuint _glowingRingTexture;
-    GLuint _texCoordSlot;
-    GLuint _textureUniform;
+@private
+    b2World* _world;
 }
 
 @property (strong, nonatomic) EAGLContext * context;
@@ -38,7 +39,10 @@
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer * tapRecognizer;
 - (IBAction)tapGestureHandler:(id)sender;
 
-void touch_callback( NSSet * touches, UIView * view, const std::vector<MoTouchTrack> & tracks, void * data);
+@property (readonly) b2World* world;
+
+- (b2World*)getWorld;
+- (b2World*)world;
 
 /**
  *  The list of obstacle objects currently in creation.
@@ -49,6 +53,7 @@ void touch_callback( NSSet * touches, UIView * view, const std::vector<MoTouchTr
  *  The list of falling balls that are currently instantiated.
  **/
 @property (strong, nonatomic) NSMutableArray * fallingBalls;
+
 
 
 

@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-#include "Obstacle.h"
+#include "b2PolygonShape.h"
+#include "b2Fixture.h"
+
+#import "Obstacle.h"
+
 
 @interface Square : Obstacle
+
+//@property b2PolygonShape* square;
+
 
 @end

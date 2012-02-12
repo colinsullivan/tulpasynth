@@ -6,7 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "GfxEntity.h"
+#import "b2Math.h"
+
+//#import "GfxEntity.h"
 
 //@interface TouchEntity : GfxEntity
 //
@@ -23,7 +25,7 @@ public:
     TouchEntity();
     ~TouchEntity();
 
-    Vector3D * position;
+    b2Vec2 * position;
     GLboolean active;
     UITouch* touch_ref;
 };

@@ -10,6 +10,9 @@
 #ifndef _GESTUREENTITY_H_
 #define _GESTUREENTITY_H_
 
+#include "b2Math.h"
+
+#include "Globals.h"
 #include "TouchEntity.h"
 
 

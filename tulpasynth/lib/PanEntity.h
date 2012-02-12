@@ -23,7 +23,7 @@ public:
     /**
      *  Translation vector of amount dragged.
      **/
-    Vector3D translation;
+    b2Vec2 translation;
 };
 
 #endif

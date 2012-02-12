@@ -23,21 +23,61 @@ const GLubyte SquareIndices[] = {
 
 @implementation Square
 
-
-- (id)init {
-    self = [super init];
-    if (!self) {
-        return nil;
+/**
+ *  When width or height is set, change shape.
+ **/
+- (void)setHeight:(float)height {
+    [super setHeight:height];
+    
+    if (self.shape) {        
+        ((b2PolygonShape*)self.shape)->SetAsBox(self.width, height);    
     }
     
-    self.width = 50;
-    self.height = 50;
+}
+- (void)setWidth:(float)width {
+    [super setWidth:width];
     
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SquareVertices), SquareVertices, GL_STATIC_DRAW);
+    if (self.shape) {
+        ((b2PolygonShape*)self.shape)->SetAsBox(width, self.height);        
+    }
+    
+}
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(SquareIndices), SquareIndices, GL_STATIC_DRAW);
+- (id)initWithController:(tulpaViewController *)theController withPosition:(b2Vec2)aPosition {
+    
+    if (self = [super initWithController:theController withPosition:aPosition]) {
+
+        self.width = 15;
+        self.height = 15;
+
+
+
+        // Create square polygon
+        b2PolygonShape* mySquare = new b2PolygonShape();
+        mySquare->SetAsBox(self.width, self.height);
+        mySquare->m_radius = self.width/2;
+        
+        b2FixtureDef mySquareFixture;
+        mySquareFixture.shape = mySquare;
+        mySquareFixture.density = 1.0f;
+        mySquareFixture.friction = 0.1f;
+        mySquareFixture.restitution = 0.75f;
+
+        self.body->CreateFixture(&mySquareFixture);
+        
+        b2MassData myBodyMass;
+        myBodyMass.mass = 10.0f;
+        self.body->SetMassData(&myBodyMass);
+        
+        self.shape = mySquare;
+        
+        
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(SquareVertices), SquareVertices, GL_STATIC_DRAW);
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(SquareIndices), SquareIndices, GL_STATIC_DRAW);        
+    }
 
     return self;
 }
@@ -47,6 +87,11 @@ const GLubyte SquareIndices[] = {
 
     glDrawElements(GL_TRIANGLES, sizeof(SquareIndices)/sizeof(SquareIndices[0]), GL_UNSIGNED_BYTE, 0);
 }
+
+//- (void)update {
+//    [super update];
+//
+//}
 
 
 @end
