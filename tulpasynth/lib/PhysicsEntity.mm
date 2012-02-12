@@ -52,7 +52,7 @@
         // Create static body
         b2BodyDef bodyDef;
         bodyDef.position = aPosition;
-        bodyDef.type = b2_staticBody;
+        bodyDef.type = [self bodyType];
         b2Body* newBody = self.controller.world->CreateBody(&bodyDef);
         self.body = newBody;
     }
@@ -72,6 +72,10 @@
     return instancesList;
 }
 
+- (b2BodyType) bodyType {
+    return b2_staticBody;
+}
+
 - (void)draw {
     [self.effect prepareToDraw];
     
@@ -88,6 +92,7 @@
     // Width and height are switched here because this app only works when rotated
     GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(M_TO_PX(self.position.y), M_TO_PX(self.position.x), 0.0);
     modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, self.angle, 0.0, 0.0, 1.0);
+    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, M_TO_PX(self.width)+4, M_TO_PX(self.height)+4, 1.0f);
     //    GLKMatrix4Translate(modelViewMatrix, _position->y, _position->x, _position->z);
     //    _rotation += 90 * self.timeSinceLastUpdate;
     //    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, GLKMathDegreesToRadians(_rotation), 0, 0, 1);

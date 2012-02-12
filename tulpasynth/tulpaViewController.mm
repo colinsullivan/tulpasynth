@@ -109,7 +109,7 @@ TapEntity * _tapEntity;
 
     
     // Initialize b2 graphics
-    b2Vec2 gravity(0.0f, -10.0f);
+    b2Vec2 gravity(0.0f, -20.0f);
     self->_world = new b2World(gravity);
     
 //    b2BodyDef groundBodyDef;
@@ -255,11 +255,10 @@ TapEntity * _tapEntity;
     
     if (!handled) {
         // Handle tap in empty space
-//        FallingBall* b = [[FallingBall alloc] initWithViewController:self];        
-//        (*b.position) = (*_tapEntity->touches[0]->position);
-//        [fallingBalls addObject:b];
+        FallingBall* b = [[FallingBall alloc] initWithController:self withPosition:(*_tapEntity->touches[0]->position)];
+        [fallingBalls addObject:b];
 
-        NSLog(@"empty!");
+//        NSLog(@"empty!");
     }    
 }
 

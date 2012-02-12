@@ -55,6 +55,7 @@ const GLubyte SquareIndices[] = {
         // Create square polygon
         b2PolygonShape* mySquare = new b2PolygonShape();
         mySquare->SetAsBox(self.width, self.height);
+        mySquare->m_radius = self.width/2;
 //        mySquare.Set(vertices, 4);
         self.body->CreateFixture(mySquare, 1.0f);
         self.shape = mySquare;
@@ -76,11 +77,10 @@ const GLubyte SquareIndices[] = {
     glDrawElements(GL_TRIANGLES, sizeof(SquareIndices)/sizeof(SquareIndices[0]), GL_UNSIGNED_BYTE, 0);
 }
 
-- (void)update {
-    [super update];
-
-    self.effect.transform.modelviewMatrix = GLKMatrix4Scale(self.effect.transform.modelviewMatrix, M_TO_PX(self.width/2), M_TO_PX(self.height/2), 1.0f);
-}
+//- (void)update {
+//    [super update];
+//
+//}
 
 
 @end

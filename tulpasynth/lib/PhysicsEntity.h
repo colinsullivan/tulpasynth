@@ -70,5 +70,10 @@
  **/
 + (NSMutableArray*) Instances;
 
+/**
+ *  Static method for defining body type.  Should be overridden in child
+ *  classes that wish to be dynamic bodies.
+ **/
+- (b2BodyType)bodyType;
 
 @end
