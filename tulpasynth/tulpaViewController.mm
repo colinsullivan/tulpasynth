@@ -109,7 +109,7 @@ TapEntity * _tapEntity;
 
     
     // Initialize b2 graphics
-    b2Vec2 gravity(0.0f, -20.0f);
+    b2Vec2 gravity(0.0f, -50.0f);
     self->_world = new b2World(gravity);
     
 //    b2BodyDef groundBodyDef;

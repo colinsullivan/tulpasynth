@@ -56,8 +56,19 @@ const GLubyte SquareIndices[] = {
         b2PolygonShape* mySquare = new b2PolygonShape();
         mySquare->SetAsBox(self.width, self.height);
         mySquare->m_radius = self.width/2;
-//        mySquare.Set(vertices, 4);
-        self.body->CreateFixture(mySquare, 1.0f);
+        
+        b2FixtureDef mySquareFixture;
+        mySquareFixture.shape = mySquare;
+        mySquareFixture.density = 1.0f;
+        mySquareFixture.friction = 0.1f;
+        mySquareFixture.restitution = 0.75f;
+
+        self.body->CreateFixture(&mySquareFixture);
+        
+        b2MassData myBodyMass;
+        myBodyMass.mass = 10.0f;
+        self.body->SetMassData(&myBodyMass);
+        
         self.shape = mySquare;
         
         

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #include "b2PolygonShape.h"
+#include "b2Fixture.h"
 
 #import "Obstacle.h"
 

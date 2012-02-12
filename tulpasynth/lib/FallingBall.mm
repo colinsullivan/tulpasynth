@@ -34,7 +34,19 @@ const GLubyte BallIndices[] = {
         // Create circle shape
         b2CircleShape* myShape = new b2CircleShape();
         myShape->m_radius = self.width/2;
-        self.body->CreateFixture(myShape, 1.0f);
+        
+        b2FixtureDef myShapeFixture;
+        myShapeFixture.shape = myShape;
+        myShapeFixture.friction = 0.1f;
+        myShapeFixture.density = 0.75f;
+        myShapeFixture.restitution = 2.0f;
+        
+        self.body->CreateFixture(&myShapeFixture);
+        
+        b2MassData myBodyMass;
+        myBodyMass.mass = 0.25f;
+        self.body->SetMassData(&myBodyMass);
+        
         self.shape = myShape;
 
         

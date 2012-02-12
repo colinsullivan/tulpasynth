@@ -9,6 +9,7 @@
 #import "PhysicsEntity.h"
 
 #include "b2CircleShape.h"
+#include "b2Fixture.h"
 
 @interface FallingBall : PhysicsEntity
 
