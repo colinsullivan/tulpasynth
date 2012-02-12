@@ -12,7 +12,7 @@
 
 @synthesize pincher, preScalingWidth, preScalingHeight;
 
-@synthesize rotator;
+@synthesize rotator, preGestureAngle;
 
 @synthesize panner;
 @synthesize prePanningPosition;
@@ -40,14 +40,10 @@
         self.width = self.preScalingWidth * self.pincher->scale;
         self.height = self.preScalingHeight * self.pincher->scale;
     }
-//    
-//    if (self.rotator) {
-//        self.rotation = self.preGestureRotation + self.rotator->rotation;
-//        
-//        if (self.rotation > 2 * M_PI) {
-//            self.rotation -= 2*M_PI;
-//        }
-//    }
+    
+    if (self.rotator) {
+        self.angle = self.preGestureAngle + self.rotator->rotation;        
+    }
 }
 
 - (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor {
@@ -104,28 +100,28 @@
 }
 
 - (GLboolean) handleRotate:(RotateEntity *) rotate {
-//    // if rotate just started
-//    if (rotate->state == GestureEntityStateStart) {
-//        // if both touches are in us
-//        if (
-//            [self _touchIsInside:rotate->touches[0] withFudge:20]
-//            &&
-//            [self _touchIsInside:rotate->touches[0] withFudge:20]
-//            ) {
-//            self.rotator = rotate;
-//            self.preGestureRotation = self.rotation;
-//            
-//            return true;
-//        }
-//        else if(self.rotator) {
-//            self.rotator = nil;
-//        }
-//    }
-//    // if rotate gesture ended and we were just being rotated
-//    else if (rotate->state == GestureEntityStateEnd && self.rotator) {
-//        self.rotator = nil;
-//    }
-//    
+    // if rotate just started
+    if (rotate->state == GestureEntityStateStart) {
+        // if both touches are in us
+        if (
+            [self _touchIsInside:rotate->touches[0] withFudge:20]
+            &&
+            [self _touchIsInside:rotate->touches[1] withFudge:20]
+            ) {
+            self.rotator = rotate;
+            self.preGestureAngle = self.angle;
+            
+            return true;
+        }
+        else if(self.rotator) {
+            self.rotator = nil;
+        }
+    }
+    // if rotate gesture ended and we were just being rotated
+    else if (rotate->state == GestureEntityStateEnd && self.rotator) {
+        self.rotator = nil;
+    }
+    
     return false;
 }
 
@@ -134,13 +130,9 @@
     if (pan->state == GestureEntityStateStart) {
         // if the touch is inside us
         if ([self _touchIsInside:pan->touches[0]]) {
-            self.panner = pan;
-            
-            NSLog(@"self.position.x: %f, self.position.y: %f", self.position.x, self.position.y);
-            
+            self.panner = pan;            
             self.prePanningPosition->Set(self.position.x, self.position.y);
-            
-            NSLog(@"self.prePanningPosition.x: %f, self.prePanningPosition.y: %f", self.prePanningPosition->x, self.prePanningPosition->y);
+    
             return true;
         }
         else if(self.panner) {
@@ -155,9 +147,9 @@
 }
 
 - (GLboolean) handleTap:(TapEntity *) tap {
-//    if ([self _touchIsInside:tap->touches[0]]) {
-//        return true;
-//    }
+    if ([self _touchIsInside:tap->touches[0]]) {
+        return true;
+    }
     
     return false;
 }

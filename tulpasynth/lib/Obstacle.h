@@ -37,6 +37,10 @@
  *  The entity that is currently rotating this object.
  **/
 @property RotateEntity * rotator;
+/**
+ *  Rotation value before gesture began
+ **/
+@property float32 preGestureAngle;
 
 - (GLboolean) _touchIsInside:(TouchEntity *)touch;
 - (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor;

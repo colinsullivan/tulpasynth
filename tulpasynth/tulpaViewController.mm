@@ -213,24 +213,20 @@ TapEntity * _tapEntity;
 }
 
 - (IBAction)pinchGestureHandler:(id)sender {
-    if ([pinchRecognizer numberOfTouches] == 2) {
-        _pinchEntity->update();
+    _pinchEntity->update();
 
-        // All obstacles get the chance to handle pinch
-        for (Obstacle * o in self.obstacles) {
-            [o handlePinch:_pinchEntity];
-        }
+    // All obstacles get the chance to handle pinch
+    for (Obstacle * o in self.obstacles) {
+        [o handlePinch:_pinchEntity];
     }
 }
 
 - (IBAction)rotateGestureHandler:(id)sender {
-    if ([rotateRecognizer numberOfTouches] == 2) {
-        _rotateEntity->update();
+    _rotateEntity->update();
 
-        // All obstacles have chance to handle rotate
-//        for (Obstacle * o in self.obstacles) {
-//            [o handleRotate:_rotateEntity];
-//        }
+    // All obstacles have chance to handle rotate
+    for (Obstacle * o in self.obstacles) {
+        [o handleRotate:_rotateEntity];
     }
 }
 
@@ -249,21 +245,22 @@ TapEntity * _tapEntity;
     bool handled = false;
 
     // All obstacles can handle tap
-//    for (Obstacle * o in self.obstacles) {
-//        handled = [o handleTap:_tapEntity];
-//        
-//        if (handled) {
-//            break;
-//        }
-//    }
-//    
-//    if (!handled) {
-//        // Handle tap in empty space
+    for (Obstacle * o in self.obstacles) {
+        handled = [o handleTap:_tapEntity];
+        
+        if (handled) {
+            break;
+        }
+    }
+    
+    if (!handled) {
+        // Handle tap in empty space
 //        FallingBall* b = [[FallingBall alloc] initWithViewController:self];        
 //        (*b.position) = (*_tapEntity->touches[0]->position);
 //        [fallingBalls addObject:b];
-//        
-//    }    
+
+        NSLog(@"empty!");
+    }    
 }
 
 - (void)update {

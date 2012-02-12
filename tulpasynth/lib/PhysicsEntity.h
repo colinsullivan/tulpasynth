@@ -37,6 +37,11 @@
 @property float width;
 @property float height;
 
+/**
+ *  Rotation of this object (in radians)
+ **/
+@property (nonatomic) float32 angle;
+
 
 /**
  *  Hook into b2Body::GetPosition.  Setting the position from here
