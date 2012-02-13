@@ -5,6 +5,35 @@ Step unity => Envelope env => CurveTable attackCurve => Gain vca;
 
 SinOsc carrier => vca => Gain out => dac;
 
+carrier.sync(2);
+
+unity => Envelope modulatorEnv => CurveTable modulatorEnvCurve => Gain modulatorVca;
+3 => modulatorVca.op;
+SinOsc modulator => modulatorVca => carrier;
+
+// p4
+1.0 => float carrierGain;
+// p5
+0 => float carrierFreq;
+// p6
+2000 => float modulatorFreq;
+
+0 => float modulatorGain;
+
+fun void freq(float aFreq) {
+    aFreq => carrierFreq;
+    25 * carrierFreq => modulatorGain;
+    // Math.pow(carrierFreq*400/modulatorFreq, 3) => modulatorGain;
+
+    carrier.freq(carrierFreq);
+    modulator.freq(modulatorFreq);
+}
+freq(80);
+
+
+carrier.gain(carrierGain);
+modulator.gain(modulatorGain);
+
 
 // [0., 0.5, 1., 0.5, 0.] => curve.coefs;
 [
@@ -18,20 +47,52 @@ SinOsc carrier => vca => Gain out => dac;
     1.0, 0.0
 ] => attackCurve.coefs;
 
+[
+    // initial decay
+    0.0, 1.0, -2.5,
+    0.25, 0.0, 0,
+    1.0, 0.0
+] => modulatorEnvCurve.coefs;
 
 out.gain(0.5);
 
-carrier.freq(440);
 
-env.duration(0.4::second);
+env.duration(0.25::second);
 env.target(0.999);
-env.keyOn();
 
-2::second => now;
+modulatorEnv.duration(0.05::second);
+modulatorEnv.target(0.999);
 
-3::second => now;
+fun void noteOn() {
+    modulator.phase(0);
+    modulatorEnv.value(0);
+    env.value(0);
+    env.keyOn();
+    modulatorEnv.keyOn();
+    0.15::second => now;
+}
+
+69 => int base;
+base => int note;
+
+1 => int direction;
+
+while(true) {
+    freq(Std.mtof(note));
+    noteOn();
+    direction*3 +=> note;
+
+    if(note > base+(3 * 8)) {
+        -1 => direction;
+    }
+    else if(note < base) {
+        1 => direction;
+    }
+}
+
+1::second => now;
 
 
-// for(0 => float i; i < 1.0; 0.01 +=> i) {
-//     <<< i, ",", curve.lookup(i) >>>;
-// }
+for(0 => float i; i < 1.0; 0.01 +=> i) {
+    <<< i, ",", modulatorEnvCurve.lookup(i) >>>;
+}
