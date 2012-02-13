@@ -54,7 +54,7 @@ const GLubyte SquareIndices[] = {
 
         // Create square polygon
         b2PolygonShape* mySquare = new b2PolygonShape();
-        mySquare->SetAsBox(self.width, self.height);
+        mySquare->SetAsBox(self.width/2, self.height/2);
         mySquare->m_radius = self.width/2;
         
         b2FixtureDef mySquareFixture;

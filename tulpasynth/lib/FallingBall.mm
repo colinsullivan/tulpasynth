@@ -33,7 +33,7 @@ const GLubyte BallIndices[] = {
 
         // Create circle shape
         b2CircleShape* myShape = new b2CircleShape();
-        myShape->m_radius = self.width/2;
+        myShape->m_radius = self.width;
         
         b2FixtureDef myShapeFixture;
         myShapeFixture.shape = myShape;
@@ -75,10 +75,21 @@ const GLubyte BallIndices[] = {
 //    self.velocity->y -= 100 * self.controller.timeSinceLastUpdate;
 //}
 
+-(void)prepareToDraw {
+    self.effect.texture2d0.enabled = GL_TRUE;
+    self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
+    self.effect.texture2d0.target = GLKTextureTarget2D;
+    self.effect.texture2d0.name = self.controller.glowingCircleTexture.name;
+
+    [super prepareToDraw];
+
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+    
+}
+
 - (void)draw {    
     [super draw];
 
-    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, TexCoord));
 
 //    glVertexAttribPointer(self.controller._texCoordSlot, 2, GL_FLOAT, GL_FALSE, 
@@ -88,8 +99,12 @@ const GLubyte BallIndices[] = {
 //    glUniform1i(self.controller._textureUniform, 0);
     glDrawElements(GL_TRIANGLES, sizeof(BallIndices)/sizeof(BallIndices[0]), GL_UNSIGNED_BYTE, 0);
     
+}
+
+- (void)postDraw {
+    [super postDraw];
+
     glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
-    glDisable(GL_BLEND);
 }
 
 

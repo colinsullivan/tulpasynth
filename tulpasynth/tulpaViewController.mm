@@ -169,16 +169,16 @@ TapEntity * _tapEntity;
 //    MoTouch::addCallback(touch_callback, NULL);
     
     // Create two starting squares for now
-//    Square * s;
-//    b2Vec2 pos(25.0, 50.0);
-//    s = [[Square alloc] initWithController:self withPosition:pos];
-//    [self.obstacles addObject:s];
-//    [[PhysicsEntity Instances] addObject:s];
-//
-//    pos.Set(90.0, 40.0);
-//    s = [[Square alloc] initWithController:self withPosition:pos];
-//    [self.obstacles addObject:s];
-//    [[PhysicsEntity Instances] addObject:s];
+    Square * s;
+    b2Vec2 pos(25.0, 50.0);
+    s = [[Square alloc] initWithController:self withPosition:pos];
+    [self.obstacles addObject:s];
+    [[PhysicsEntity Instances] addObject:s];
+
+    pos.Set(90.0, 40.0);
+    s = [[Square alloc] initWithController:self withPosition:pos];
+    [self.obstacles addObject:s];
+    [[PhysicsEntity Instances] addObject:s];
 }
 
 
@@ -232,7 +232,9 @@ TapEntity * _tapEntity;
     
     // Draw all physics entities
     for (PhysicsEntity * e in PhysicsEntity.Instances) {
+        [e prepareToDraw];
         [e draw];
+        [e postDraw];
     }    
 }
 

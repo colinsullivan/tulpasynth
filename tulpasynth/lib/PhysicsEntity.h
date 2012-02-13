@@ -55,7 +55,9 @@
 
 - (id)initWithController:(tulpaViewController*)theController withPosition:(b2Vec2)aPosition;
 
+- (void)prepareToDraw;
 - (void)draw;
+- (void)postDraw;
 
 - (void)update;
 
