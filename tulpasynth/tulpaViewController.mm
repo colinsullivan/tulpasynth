@@ -224,7 +224,7 @@ TapEntity * _tapEntity;
 }
 
 - (void)glkView:(GLKView*)view drawInRect:(CGRect)rect {
-    glClearColor(0.0, 0.25, 0.0, 1.0);
+    glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     
     

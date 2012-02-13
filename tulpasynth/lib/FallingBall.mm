@@ -89,6 +89,7 @@ const GLubyte BallIndices[] = {
     glDrawElements(GL_TRIANGLES, sizeof(BallIndices)/sizeof(BallIndices[0]), GL_UNSIGNED_BYTE, 0);
     
     glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
+    glDisable(GL_BLEND);
 }
 
 

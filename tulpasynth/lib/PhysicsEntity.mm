@@ -86,6 +86,8 @@
     self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
     self.effect.texture2d0.target = GLKTextureTarget2D;
     self.effect.texture2d0.name = self.controller.glowingCircleTexture.name;
+    self.effect.useConstantColor = YES;
+    self.effect.constantColor = GLKVector4Make(1.0, 0.0, 0.0, 1.0);
 
     [self.effect prepareToDraw];
     
@@ -93,8 +95,12 @@
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Position));
     glEnableVertexAttribArray(GLKVertexAttribColor);
+    
+    glEnable(GL_BLEND);
+    glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Position));
     glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Color));    
 }
 
