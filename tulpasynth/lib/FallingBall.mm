@@ -9,10 +9,10 @@
 #import "FallingBall.h"
 
 static Vertex BallVertices[] = {
-    {{1, -1, 0}, {0, 0.5, 0.5}},
-    {{1, 1, 0}, {0, 0.5, 0.5}},
-    {{-1, 1, 0}, {0, 0.5, 0.5}},
-    {{-1, -1, 0}, {0, 0.5, 0.5}}
+    {{1, -1, 0}, {0, 0.5, 0.5, 1.0}, {1, 0}},
+    {{1, 1, 0}, {0, 0.5, 0.5, 1.0}, {1, 1}},
+    {{-1, 1, 0}, {0, 0.5, 0.5, 1.0}, {0, 1}},
+    {{-1, -1, 0}, {0, 0.5, 0.5, 1.0}, {0, 0}}
 };
 
 
@@ -49,7 +49,6 @@ const GLubyte BallIndices[] = {
         self.body->SetMassData(&myBodyMass);
         
         self.shape = myShape;
-
         
         glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
         glBufferData(GL_ARRAY_BUFFER, sizeof(BallVertices), BallVertices, GL_STATIC_DRAW);
@@ -76,10 +75,20 @@ const GLubyte BallIndices[] = {
 //    self.velocity->y -= 100 * self.controller.timeSinceLastUpdate;
 //}
 
-- (void)draw {
+- (void)draw {    
     [super draw];
-    
+
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, TexCoord));
+
+//    glVertexAttribPointer(self.controller._texCoordSlot, 2, GL_FLOAT, GL_FALSE, 
+//                          sizeof(Vertex), (GLvoid*) (sizeof(float) * 7));     
+//    glActiveTexture(GL_TEXTURE0); 
+//    glBindTexture(GL_TEXTURE_2D, self.controller.glowingCircleTexture);
+//    glUniform1i(self.controller._textureUniform, 0);
     glDrawElements(GL_TRIANGLES, sizeof(BallIndices)/sizeof(BallIndices[0]), GL_UNSIGNED_BYTE, 0);
+    
+    glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
 }
 
 

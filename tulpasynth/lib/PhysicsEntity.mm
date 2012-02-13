@@ -43,7 +43,14 @@
         self.effect = [[GLKBaseEffect alloc] init];
         self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, self.controller.view.frame.size.width, self.controller.view.frame.size.height, 0, -1, 1);
 
-        // Vertex buffers
+//        [self setupDepthBuffer];
+//        [self setupRenderBuffer];        
+//        [self setupFrameBuffer];     
+//        [self compileShaders];
+//        [self setupVBOs];
+
+
+        //        // Vertex buffers
         glGenBuffers(1, &_vertexBuffer);        
         glGenBuffers(1, &_indexBuffer);
         
@@ -56,9 +63,7 @@
         b2Body* newBody = self.controller.world->CreateBody(&bodyDef);
         self.body = newBody;
     }
-    
-    [PhysicsEntity.Instances addObject:self];
-    
+
     return self;
 }
 
@@ -77,6 +82,11 @@
 }
 
 - (void)draw {
+    self.effect.texture2d0.enabled = GL_TRUE;
+    self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
+    self.effect.texture2d0.target = GLKTextureTarget2D;
+    self.effect.texture2d0.name = self.controller.glowingCircleTexture.name;
+
     [self.effect prepareToDraw];
     
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
@@ -105,5 +115,6 @@
     
     self.effect = nil;
 }
+
 
 @end

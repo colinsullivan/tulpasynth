@@ -32,6 +32,8 @@ TapEntity * _tapEntity;
 
 @implementation tulpaViewController
 
+@synthesize glowingCircleTexture;
+
 @synthesize fallingBalls, obstacles;
 
 @synthesize context = _context;
@@ -62,44 +64,6 @@ TapEntity * _tapEntity;
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (GLuint)setupTexture:(NSString *)fileName {
-    CGImageRef spriteImage = [UIImage imageNamed:fileName].CGImage;
-    if (!spriteImage) {
-        NSLog(@"Failed to load image %@", fileName);
-        exit(1);
-    }
-
-    size_t width = CGImageGetWidth(spriteImage);
-    size_t height = CGImageGetHeight(spriteImage);
-    
-    GLubyte * spriteData = (GLubyte *) calloc(width*height*4, sizeof(GLubyte));
-    
-    CGContextRef spriteContext = CGBitmapContextCreate(
-                                                       spriteData,
-                                                       width,
-                                                       height,
-                                                       8,
-                                                       width*4,
-                                                       CGImageGetColorSpace(spriteImage),
-                                                       kCGImageAlphaPremultipliedLast
-                                                       );
-    
-    CGContextDrawImage(spriteContext, CGRectMake(0, 0, width, height), spriteImage);
-    
-    CGContextRelease(spriteContext);
-    
-    GLuint texName;
-    glGenTextures(1, &texName);
-    glBindTexture(GL_TEXTURE_2D, texName);
-    
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
-    
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
-    
-    free(spriteData);        
-    return texName;    
-}
-
 #pragma mark - View lifecycle
 
 /*
@@ -128,9 +92,24 @@ TapEntity * _tapEntity;
     view.context = self.context;
     
     [EAGLContext setCurrentContext:self.context];
-    
-    // Load shaders
-//    _texCoordSlot = glGetAttribLocation(programHandle, "TexCoordIn");
+        
+    // load textures
+    NSError *error = nil;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"GlowingRing" ofType:@"png"];
+    self.glowingCircleTexture = [GLKTextureLoader textureWithContentsOfFile:path options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:GLKTextureLoaderOriginBottomLeft] error:&error];
+    if (error != nil) {
+        NSLog(@"Error loading texture from image: %@", [error localizedDescription]);
+    }
+
+//    glActiveTexture(GL_TEXTURE0);
+//    
+//    NSError *error;
+//    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] 
+//                                                        forKey:GLKTextureLoaderOriginBottomLeft];
+//    self.glowingCircleTexture = [GLKTextureLoader textureWithContentsOfFile:path 
+//                                                       options:options error:&error];
+//    if (self.glowingCircleTexture == nil)
+//        NSLog(@"Error loading texture: %@", [error localizedDescription]);
 
     // Instantiate touch objects
 //    for(int i = 0; i < MAX_TOUCHES; i++) {
@@ -190,14 +169,16 @@ TapEntity * _tapEntity;
 //    MoTouch::addCallback(touch_callback, NULL);
     
     // Create two starting squares for now
-    Square * s;
-    b2Vec2 pos(25.0, 50.0);
-    s = [[Square alloc] initWithController:self withPosition:pos];
-    [self.obstacles addObject:s];
-
-    pos.Set(90.0, 40.0);
-    s = [[Square alloc] initWithController:self withPosition:pos];
-    [self.obstacles addObject:s];
+//    Square * s;
+//    b2Vec2 pos(25.0, 50.0);
+//    s = [[Square alloc] initWithController:self withPosition:pos];
+//    [self.obstacles addObject:s];
+//    [[PhysicsEntity Instances] addObject:s];
+//
+//    pos.Set(90.0, 40.0);
+//    s = [[Square alloc] initWithController:self withPosition:pos];
+//    [self.obstacles addObject:s];
+//    [[PhysicsEntity Instances] addObject:s];
 }
 
 
@@ -243,8 +224,10 @@ TapEntity * _tapEntity;
 }
 
 - (void)glkView:(GLKView*)view drawInRect:(CGRect)rect {
-    glClearColor(1.0, 0.0, 0.0, 1.0);
+    glClearColor(0.0, 0.25, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
+    
+    
 
     
     // Draw all physics entities
@@ -298,6 +281,7 @@ TapEntity * _tapEntity;
         // Handle tap in empty space
         FallingBall* b = [[FallingBall alloc] initWithController:self withPosition:(*_tapEntity->touches[0]->position)];
         [fallingBalls addObject:b];
+        [[PhysicsEntity Instances] addObject:b];
 
 //        NSLog(@"empty!");
     }    

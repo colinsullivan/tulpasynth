@@ -73,12 +73,10 @@
 		3B9D2D3A14E1D1D300A042BF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2D3914E1D1D300A042BF /* OpenGLES.framework */; };
 		3B9D2D7E14E1D77500A042BF /* mo_accel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D4414E1D77500A042BF /* mo_accel.mm */; };
 		3B9D2D7F14E1D77500A042BF /* mo_audio.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D4614E1D77500A042BF /* mo_audio.mm */; };
-		3B9D2D8014E1D77500A042BF /* mo_colormap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D4814E1D77500A042BF /* mo_colormap.mm */; };
 		3B9D2D8114E1D77500A042BF /* mo_compass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D4A14E1D77500A042BF /* mo_compass.mm */; };
 		3B9D2D8214E1D77500A042BF /* mo_fft.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D4D14E1D77500A042BF /* mo_fft.mm */; };
 		3B9D2D8314E1D77500A042BF /* mo_filter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D4F14E1D77500A042BF /* mo_filter.mm */; };
 		3B9D2D8414E1D77500A042BF /* mo_fun.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D5114E1D77500A042BF /* mo_fun.mm */; };
-		3B9D2D8514E1D77500A042BF /* mo_gfx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D5314E1D77500A042BF /* mo_gfx.mm */; };
 		3B9D2D8614E1D77500A042BF /* mo_io.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D5514E1D77500A042BF /* mo_io.mm */; };
 		3B9D2D8714E1D77500A042BF /* mo_location.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D5714E1D77500A042BF /* mo_location.mm */; };
 		3B9D2D8814E1D77500A042BF /* mo_net.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2D5914E1D77500A042BF /* mo_net.mm */; };
@@ -236,11 +234,16 @@
 		3B9D2F1114E1DB2E00A042BF /* Square.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2F1014E1DB2E00A042BF /* Square.mm */; };
 		3B9D2F1314E1DD1300A042BF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2F1214E1DD1300A042BF /* AudioToolbox.framework */; };
 		3B9D2F1514E1DD1D00A042BF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2F1414E1DD1D00A042BF /* CoreLocation.framework */; };
-		3B9D2F1D14E2003700A042BF /* GfxEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2F1C14E2003600A042BF /* GfxEntity.mm */; };
 		3B9D2F2014E2023E00A042BF /* TouchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */; };
 		3BF8964B14E22F7D0038780F /* PinchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8964A14E22F7D0038780F /* PinchEntity.mm */; };
 		3BF8964F14E2415E0038780F /* RotateEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8964E14E2415E0038780F /* RotateEntity.mm */; };
 		3BF8965214E2430F0038780F /* GestureEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8965114E2430F0038780F /* GestureEntity.mm */; };
+		3BFDB8CA14E9A360002B8F6B /* CyanRing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8C714E9A360002B8F6B /* CyanRing.png */; };
+		3BFDB8CB14E9A360002B8F6B /* GlowingRing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8C814E9A360002B8F6B /* GlowingRing.png */; };
+		3BFDB8CC14E9A360002B8F6B /* Textures.psd in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8C914E9A360002B8F6B /* Textures.psd */; };
+		3BFDB8D014E9A428002B8F6B /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8CE14E9A428002B8F6B /* SimpleFragment.glsl */; };
+		3BFDB8D114E9A428002B8F6B /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8CF14E9A428002B8F6B /* SimpleVertex.glsl */; };
+		3BFDB8D814E9B550002B8F6B /* mo_gfx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8D714E9B550002B8F6B /* mo_gfx.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -369,8 +372,6 @@
 		3B9D2D4414E1D77500A042BF /* mo_accel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_accel.mm; sourceTree = "<group>"; };
 		3B9D2D4514E1D77500A042BF /* mo_audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_audio.h; sourceTree = "<group>"; };
 		3B9D2D4614E1D77500A042BF /* mo_audio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_audio.mm; sourceTree = "<group>"; };
-		3B9D2D4714E1D77500A042BF /* mo_colormap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_colormap.h; sourceTree = "<group>"; };
-		3B9D2D4814E1D77500A042BF /* mo_colormap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_colormap.mm; sourceTree = "<group>"; };
 		3B9D2D4914E1D77500A042BF /* mo_compass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_compass.h; sourceTree = "<group>"; };
 		3B9D2D4A14E1D77500A042BF /* mo_compass.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_compass.mm; sourceTree = "<group>"; };
 		3B9D2D4B14E1D77500A042BF /* mo_def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_def.h; sourceTree = "<group>"; };
@@ -380,8 +381,6 @@
 		3B9D2D4F14E1D77500A042BF /* mo_filter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_filter.mm; sourceTree = "<group>"; };
 		3B9D2D5014E1D77500A042BF /* mo_fun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_fun.h; sourceTree = "<group>"; };
 		3B9D2D5114E1D77500A042BF /* mo_fun.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_fun.mm; sourceTree = "<group>"; };
-		3B9D2D5214E1D77500A042BF /* mo_gfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_gfx.h; sourceTree = "<group>"; };
-		3B9D2D5314E1D77500A042BF /* mo_gfx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_gfx.mm; sourceTree = "<group>"; };
 		3B9D2D5414E1D77500A042BF /* mo_io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_io.h; sourceTree = "<group>"; };
 		3B9D2D5514E1D77500A042BF /* mo_io.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_io.mm; sourceTree = "<group>"; };
 		3B9D2D5614E1D77500A042BF /* mo_location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_location.h; sourceTree = "<group>"; };
@@ -656,8 +655,6 @@
 		3B9D2F1214E1DD1300A042BF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3B9D2F1414E1DD1D00A042BF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3B9D2F1A14E1E96F00A042BF /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
-		3B9D2F1B14E2003600A042BF /* GfxEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GfxEntity.h; sourceTree = "<group>"; };
-		3B9D2F1C14E2003600A042BF /* GfxEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GfxEntity.mm; sourceTree = "<group>"; };
 		3B9D2F1E14E2023E00A042BF /* TouchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchEntity.h; sourceTree = "<group>"; };
 		3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchEntity.mm; sourceTree = "<group>"; };
 		3BF8964914E22F7D0038780F /* PinchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinchEntity.h; sourceTree = "<group>"; };
@@ -666,6 +663,13 @@
 		3BF8964E14E2415E0038780F /* RotateEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RotateEntity.mm; sourceTree = "<group>"; };
 		3BF8965014E2430F0038780F /* GestureEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureEntity.h; sourceTree = "<group>"; };
 		3BF8965114E2430F0038780F /* GestureEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GestureEntity.mm; sourceTree = "<group>"; };
+		3BFDB8C714E9A360002B8F6B /* CyanRing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CyanRing.png; sourceTree = "<group>"; };
+		3BFDB8C814E9A360002B8F6B /* GlowingRing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GlowingRing.png; sourceTree = "<group>"; };
+		3BFDB8C914E9A360002B8F6B /* Textures.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Textures.psd; sourceTree = "<group>"; };
+		3BFDB8CE14E9A428002B8F6B /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
+		3BFDB8CF14E9A428002B8F6B /* SimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleVertex.glsl; sourceTree = "<group>"; };
+		3BFDB8D614E9B550002B8F6B /* mo_gfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_gfx.h; sourceTree = "<group>"; };
+		3BFDB8D714E9B550002B8F6B /* mo_gfx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_gfx.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -879,6 +883,7 @@
 		3B9D2D1C14E1CF8400A042BF /* tulpasynth */ = {
 			isa = PBXGroup;
 			children = (
+				3BFDB8C614E9A360002B8F6B /* graphics */,
 				3B9D2D3F14E1D77500A042BF /* lib */,
 				3B9D2D2514E1CF8400A042BF /* tulpaAppDelegate.h */,
 				3B9D2D2614E1CF8400A042BF /* tulpaAppDelegate.m */,
@@ -904,6 +909,8 @@
 		3B9D2D3F14E1D77500A042BF /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3BFDB8CE14E9A428002B8F6B /* SimpleFragment.glsl */,
+				3BFDB8CF14E9A428002B8F6B /* SimpleVertex.glsl */,
 				3B4772B014E38BF300AFBDB7 /* Obstacle.h */,
 				3B4772B114E38BF300AFBDB7 /* Obstacle.mm */,
 				3B50FA7414E25920001AD289 /* TapEntity.h */,
@@ -920,8 +927,6 @@
 				3B9D2F0F14E1DB2E00A042BF /* Square.h */,
 				3B9D2F1014E1DB2E00A042BF /* Square.mm */,
 				3B9D2F1A14E1E96F00A042BF /* Globals.h */,
-				3B9D2F1B14E2003600A042BF /* GfxEntity.h */,
-				3B9D2F1C14E2003600A042BF /* GfxEntity.mm */,
 				3B9D2F1E14E2023E00A042BF /* TouchEntity.h */,
 				3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */,
 				3B4026DC14E25AF00047093F /* FallingBall.h */,
@@ -962,12 +967,12 @@
 		3B9D2D4214E1D77500A042BF /* api */ = {
 			isa = PBXGroup;
 			children = (
+				3BFDB8D614E9B550002B8F6B /* mo_gfx.h */,
+				3BFDB8D714E9B550002B8F6B /* mo_gfx.mm */,
 				3B9D2D4314E1D77500A042BF /* mo_accel.h */,
 				3B9D2D4414E1D77500A042BF /* mo_accel.mm */,
 				3B9D2D4514E1D77500A042BF /* mo_audio.h */,
 				3B9D2D4614E1D77500A042BF /* mo_audio.mm */,
-				3B9D2D4714E1D77500A042BF /* mo_colormap.h */,
-				3B9D2D4814E1D77500A042BF /* mo_colormap.mm */,
 				3B9D2D4914E1D77500A042BF /* mo_compass.h */,
 				3B9D2D4A14E1D77500A042BF /* mo_compass.mm */,
 				3B9D2D4B14E1D77500A042BF /* mo_def.h */,
@@ -977,8 +982,6 @@
 				3B9D2D4F14E1D77500A042BF /* mo_filter.mm */,
 				3B9D2D5014E1D77500A042BF /* mo_fun.h */,
 				3B9D2D5114E1D77500A042BF /* mo_fun.mm */,
-				3B9D2D5214E1D77500A042BF /* mo_gfx.h */,
-				3B9D2D5314E1D77500A042BF /* mo_gfx.mm */,
 				3B9D2D5414E1D77500A042BF /* mo_io.h */,
 				3B9D2D5514E1D77500A042BF /* mo_io.mm */,
 				3B9D2D5614E1D77500A042BF /* mo_location.h */,
@@ -1308,6 +1311,16 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		3BFDB8C614E9A360002B8F6B /* graphics */ = {
+			isa = PBXGroup;
+			children = (
+				3BFDB8C714E9A360002B8F6B /* CyanRing.png */,
+				3BFDB8C814E9A360002B8F6B /* GlowingRing.png */,
+				3BFDB8C914E9A360002B8F6B /* Textures.psd */,
+			);
+			path = graphics;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1417,6 +1430,11 @@
 				3B9D2F0B14E1D7A000A042BF /* VERSIONS in Resources */,
 				3B5A99D914E61ED200FF52D2 /* Box2DConfig.cmake in Resources */,
 				3B5A99DA14E61ED200FF52D2 /* CMakeLists.txt in Resources */,
+				3BFDB8CA14E9A360002B8F6B /* CyanRing.png in Resources */,
+				3BFDB8CB14E9A360002B8F6B /* GlowingRing.png in Resources */,
+				3BFDB8CC14E9A360002B8F6B /* Textures.psd in Resources */,
+				3BFDB8D014E9A428002B8F6B /* SimpleFragment.glsl in Resources */,
+				3BFDB8D114E9A428002B8F6B /* SimpleVertex.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1432,12 +1450,10 @@
 				3B9D2D3214E1D08700A042BF /* tulpaViewController.mm in Sources */,
 				3B9D2D7E14E1D77500A042BF /* mo_accel.mm in Sources */,
 				3B9D2D7F14E1D77500A042BF /* mo_audio.mm in Sources */,
-				3B9D2D8014E1D77500A042BF /* mo_colormap.mm in Sources */,
 				3B9D2D8114E1D77500A042BF /* mo_compass.mm in Sources */,
 				3B9D2D8214E1D77500A042BF /* mo_fft.mm in Sources */,
 				3B9D2D8314E1D77500A042BF /* mo_filter.mm in Sources */,
 				3B9D2D8414E1D77500A042BF /* mo_fun.mm in Sources */,
-				3B9D2D8514E1D77500A042BF /* mo_gfx.mm in Sources */,
 				3B9D2D8614E1D77500A042BF /* mo_io.mm in Sources */,
 				3B9D2D8714E1D77500A042BF /* mo_location.mm in Sources */,
 				3B9D2D8814E1D77500A042BF /* mo_net.mm in Sources */,
@@ -1538,7 +1554,6 @@
 				3B9D2F0814E1D7A000A042BF /* Whistle.cpp in Sources */,
 				3B9D2F0914E1D7A000A042BF /* Wurley.cpp in Sources */,
 				3B9D2F1114E1DB2E00A042BF /* Square.mm in Sources */,
-				3B9D2F1D14E2003700A042BF /* GfxEntity.mm in Sources */,
 				3B9D2F2014E2023E00A042BF /* TouchEntity.mm in Sources */,
 				3BF8964B14E22F7D0038780F /* PinchEntity.mm in Sources */,
 				3BF8964F14E2415E0038780F /* RotateEntity.mm in Sources */,
@@ -1594,6 +1609,7 @@
 				3B5A9A0514E61ED200FF52D2 /* b2WeldJoint.cpp in Sources */,
 				3B5A9A0614E61ED200FF52D2 /* b2WheelJoint.cpp in Sources */,
 				3B5A9A0714E61ED200FF52D2 /* b2Rope.cpp in Sources */,
+				3BFDB8D814E9B550002B8F6B /* mo_gfx.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

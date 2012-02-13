@@ -24,6 +24,8 @@
     b2World* _world;
 }
 
+@property (strong) GLKTextureInfo* glowingCircleTexture;
+
 @property (strong, nonatomic) EAGLContext * context;
 @property (strong, nonatomic) GLKBaseEffect * effect;
 
@@ -54,7 +56,8 @@
  **/
 @property (strong, nonatomic) NSMutableArray * fallingBalls;
 
-
+- (GLuint)setupTexture:(NSString *)fileName;
+- (GLuint)compileShader:(NSString*)shaderName withType:(GLenum)shaderType;
 
 
 @end
