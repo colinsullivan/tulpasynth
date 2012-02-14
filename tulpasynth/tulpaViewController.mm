@@ -41,12 +41,9 @@ TapEntity * _tapEntity;
 @synthesize context = _context;
 @synthesize effect = _effect;
 
-@synthesize pinchRecognizer;
-@synthesize rotateRecognizer;
-@synthesize panRecognizer;
-@synthesize tapRecognizer;
+@synthesize pinchRecognizer, rotateRecognizer, panRecognizer, tapRecognizer;
 
-@synthesize world;
+@synthesize world, collisionDetector;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -168,6 +165,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     // Initialize b2 graphics
     b2Vec2 gravity(0.0f, -50.0f);
     self->_world = new b2World(gravity);
+    collisionDetector = new CollisionDetector((id*)self);
+    self->_world->SetContactListener(collisionDetector);
     
     //    MoTouch::addCallback(touch_callback, NULL);
     
@@ -204,7 +203,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
 }
 
-
+- (void)beginCollision:(b2Contact*) contact {
+    NSLog(@"Collision occurred!");
+}
 
 
 - (void)viewDidUnload
@@ -231,6 +232,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     delete _tapEntity;
     
     delete self->_world;
+    delete collisionDetector;
     
 
     // TODO: Delete all physical entities

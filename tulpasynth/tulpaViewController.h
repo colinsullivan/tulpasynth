@@ -15,8 +15,11 @@
 
 #import "mo_audio.h"
 #include "b2World.h"
+#include "b2WorldCallbacks.h"
 
 #include "Globals.h"
+
+#import "CollisionDetector.mm"
 
 #import "Instrument.hpp"
 
@@ -55,6 +58,17 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 - (IBAction)tapGestureHandler:(id)sender;
 
 @property (readonly) b2World* world;
+
+/**
+ *  This `CollisionDetector` instance will inform us when fixtures have 
+ *  collided.
+ **/
+@property (readonly) CollisionDetector* collisionDetector;
+
+/**
+ *  Called from our `CollisionDetector` when two fixtures begin to touch.
+ **/
+- (void)beginCollision:(b2Contact*) contact;
 
 - (b2World*)getWorld;
 - (b2World*)world;
