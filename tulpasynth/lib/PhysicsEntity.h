@@ -49,6 +49,13 @@
  **/
 @property const b2Vec2& position;
 
+/**
+ *  Scale of this entity.
+ **/
+@property (nonatomic) float32 scale;
+
+@property b2Fixture* shapeFixture;
+
 
 @property (strong, nonatomic) GLKBaseEffect * effect;
 @property (nonatomic) tulpaViewController* controller;

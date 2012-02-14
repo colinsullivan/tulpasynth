@@ -39,6 +39,7 @@
     if (self.pincher) {
         self.width = self.preScalingWidth * self.pincher->scale;
         self.height = self.preScalingHeight * self.pincher->scale;
+        
     }
     
     if (self.rotator) {
@@ -56,7 +57,7 @@
     touchPositionFudged[1].Set(touch->position->x - fudgeFactor, touch->position->y);
     touchPositionFudged[2].Set(touch->position->x, touch->position->y - fudgeFactor);
     touchPositionFudged[3].Set(touch->position->x + fudgeFactor, touch->position->y);
-    touchPositionFudged[4].Set(touch->position->x, touch->position->y + fudgeFactor );
+    touchPositionFudged[4].Set(touch->position->x, touch->position->y + fudgeFactor);
     
     for (int i = 0; i < 5; i++) {
         if (self.shape->TestPoint(obstaclePostion, touchPositionFudged[i])) {

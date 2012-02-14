@@ -28,18 +28,33 @@ const GLubyte SquareIndices[] = {
  **/
 - (void)setHeight:(float)height {
     [super setHeight:height];
-    
-    if (self.shape) {        
-        ((b2PolygonShape*)self.shape)->SetAsBox(self.width, height);    
-    }
+      
+    ((b2PolygonShape*)self.shape)->SetAsBox(self.width/2, self.height/2);
     
 }
 - (void)setWidth:(float)width {
     [super setWidth:width];
-    
-    if (self.shape) {
-        ((b2PolygonShape*)self.shape)->SetAsBox(width, self.height);        
+
+    if (self.shapeFixture) {
+        self.body->DestroyFixture(self.shapeFixture);        
     }
+    
+    ((b2PolygonShape*)self.shape)->SetAsBox(self.width/2, self.height/2);
+    
+    b2FixtureDef mySquareFixture;
+    mySquareFixture.shape = self.shape;
+    mySquareFixture.density = 1.0f;
+    mySquareFixture.friction = 0.1f;
+    mySquareFixture.restitution = 0.75f;
+    
+    self.shapeFixture = self.body->CreateFixture(&mySquareFixture);
+}
+
+- (void)setScale:(float32)aScale {
+    [super setScale:aScale];
+    
+    self.width = self.width*aScale;
+    self.height = self.height*aScale;
     
 }
 
@@ -47,29 +62,17 @@ const GLubyte SquareIndices[] = {
     
     if (self = [super initWithController:theController withPosition:aPosition]) {
 
-        self.width = 15;
-        self.height = 15;
-
-
-
         // Create square polygon
         b2PolygonShape* mySquare = new b2PolygonShape();
-        mySquare->SetAsBox(self.width/2, self.height/2);
-        mySquare->m_radius = self.width/2;
-        
-        b2FixtureDef mySquareFixture;
-        mySquareFixture.shape = mySquare;
-        mySquareFixture.density = 1.0f;
-        mySquareFixture.friction = 0.1f;
-        mySquareFixture.restitution = 0.75f;
-
-        self.body->CreateFixture(&mySquareFixture);
-        
+        self.shape = mySquare;
+        self.height = 30;
+        self.width = 30;
+        self.shape->m_radius = 1;
+                
         b2MassData myBodyMass;
         myBodyMass.mass = 10.0f;
         self.body->SetMassData(&myBodyMass);
         
-        self.shape = mySquare;
         
         
         glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
