@@ -94,15 +94,21 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         }
     }
 
-    static int i = 0;
-    static bool played = false;
-
-    i += numFrames;
-    if (!played && i > stk::SRATE*2) {
-        NSLog(@"playing");
-        self->instrs[0]->play();
-        played = true;
-    }
+    /**
+     *  Instrument test.
+     **/
+//    static int i = 0;
+//    static bool played = false;
+//
+//    i += numFrames;
+//    if (!played && i > stk::SRATE*2) {
+//        NSLog(@"playing");
+//        self->instrs[0]->play();
+//        played = true;
+//    }
+    /**
+     *  End instrument test.
+     **/
     
     // Clear temporary output buffer
     tempFrames->resize(numFrames, NUM_CHANNELS, 0.0);

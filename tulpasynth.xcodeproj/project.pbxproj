@@ -662,6 +662,7 @@
 		3B9D2F1A14E1E96F00A042BF /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		3B9D2F1E14E2023E00A042BF /* TouchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchEntity.h; sourceTree = "<group>"; };
 		3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchEntity.mm; sourceTree = "<group>"; };
+		3BB644AB14EA41E4007D4D91 /* Envelopes.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Envelopes.hpp; sourceTree = "<group>"; };
 		3BF8964914E22F7D0038780F /* PinchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinchEntity.h; sourceTree = "<group>"; };
 		3BF8964A14E22F7D0038780F /* PinchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PinchEntity.mm; sourceTree = "<group>"; };
 		3BF8964D14E2415D0038780F /* RotateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateEntity.h; sourceTree = "<group>"; };
@@ -1350,6 +1351,7 @@
 				3BFDB8EA14EA0204002B8F6B /* RAMpler.hpp */,
 				3BFDB8EB14EA0204002B8F6B /* SimpleString.hpp */,
 				3BFDB8EC14EA0204002B8F6B /* SimpleString.mm */,
+				3BB644AB14EA41E4007D4D91 /* Envelopes.hpp */,
 			);
 			path = instruments;
 			sourceTree = "<group>";

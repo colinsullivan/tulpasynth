@@ -78,22 +78,22 @@ base => int note;
 
 1 => int direction;
 
-// while(true) {
-//     freq(Std.mtof(note));
-//     noteOn();
-//     direction*3 +=> note;
+while(true) {
+    freq(Std.mtof(note));
+    noteOn();
+    direction*3 +=> note;
 
-//     if(note > base+(3 * 8)) {
-//         -1 => direction;
-//     }
-//     else if(note < base) {
-//         1 => direction;
-//     }
-// }
+    if(note > base+(3 * 8)) {
+        -1 => direction;
+    }
+    else if(note < base) {
+        1 => direction;
+    }
+}
 
 // 1::second => now;
 
 
-for(0 => float i; i < 1.0; 0.0001 +=> i) {
-    <<< "", attackCurve.lookup(i) >>>;
-}
+// for(0 => float i; i < 1.0; 0.0001 +=> i) {
+//     <<< "", attackCurve.lookup(i) >>>;
+// }
