@@ -28,8 +28,8 @@ const GLubyte BallIndices[] = {
 
     if (self = [super initWithController:theController withPosition:aPosition]) {
         
-        self.width = 10;
-        self.height = 10;
+        self.width = 20;
+        self.height = 20;
 
         // Create circle shape
         b2CircleShape* myShape = new b2CircleShape();

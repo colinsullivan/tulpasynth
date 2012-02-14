@@ -77,9 +77,9 @@
     if (pinch->state == GestureEntityStateStart) {
         // If both touches are in us
         if (
-            [self _touchIsInside:pinch->touches[0] withFudge:25]
+            [self _touchIsInside:pinch->touches[0] withFudge:15]
             &&
-            [self _touchIsInside:pinch->touches[1] withFudge:25]
+            [self _touchIsInside:pinch->touches[1] withFudge:15]
             ) {
             self.pincher = pinch;
             self.preScalingWidth = self.width;
