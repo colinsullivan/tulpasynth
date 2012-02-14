@@ -17,6 +17,8 @@
 #import "FallingBall.h"
 #import "Square.h"
 
+#include "FMPercussion.hpp"
+
 
 TouchEntity * _touchEntities[MAX_TOUCHES];
 UInt32 g_numActiveTouches = 0;
@@ -77,6 +79,49 @@ TapEntity * _tapEntity;
     return self->_world;
 }
 
+
+void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
+    
+    tulpaViewController* self = (tulpaViewController*)userData;
+    
+    static stk::StkFrames* tempFrames = new stk::StkFrames(0.0, FRAMESIZE, NUM_CHANNELS);
+    
+    /* Zero output buffer */
+    Float32* outputSamples = buffer;
+    for(unsigned int i = 0; i < numFrames; i++) {
+        for(int c = 0; c < NUM_CHANNELS; c++) {
+            outputSamples[i*NUM_CHANNELS+c] = 0.0;
+        }
+    }
+
+    static int i = 0;
+    static bool played = false;
+
+    i += numFrames;
+    if (!played && i > stk::SRATE*2) {
+        NSLog(@"playing");
+        self->instrs[0]->play();
+        played = true;
+    }
+    
+    // Clear temporary output buffer
+    tempFrames->resize(numFrames, NUM_CHANNELS, 0.0);
+    
+    // Render all instruments into output
+    for (unsigned int i = 0; i < self->instrs.size(); i++) {
+        self->instrs[i]->next_buf((*tempFrames));
+
+        for(int i = 0; i < NUM_CHANNELS; i++) {
+            // Add samples to master output for each channel
+            for(unsigned int k = 0; k < numFrames; k++) {
+                outputSamples[k*NUM_CHANNELS+i] += (Float32)(*tempFrames)[k*NUM_CHANNELS+i];
+            }
+        }
+    }
+    
+    
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -101,20 +146,6 @@ TapEntity * _tapEntity;
         NSLog(@"Error loading texture from image: %@", [error localizedDescription]);
     }
 
-//    glActiveTexture(GL_TEXTURE0);
-//    
-//    NSError *error;
-//    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] 
-//                                                        forKey:GLKTextureLoaderOriginBottomLeft];
-//    self.glowingCircleTexture = [GLKTextureLoader textureWithContentsOfFile:path 
-//                                                       options:options error:&error];
-//    if (self.glowingCircleTexture == nil)
-//        NSLog(@"Error loading texture: %@", [error localizedDescription]);
-
-    // Instantiate touch objects
-//    for(int i = 0; i < MAX_TOUCHES; i++) {
-//        _touchEntities[i] = new TouchEntity();
-//    }
     
     _pinchEntity = new PinchEntity(self.pinchRecognizer);
     
@@ -132,41 +163,7 @@ TapEntity * _tapEntity;
     b2Vec2 gravity(0.0f, -50.0f);
     self->_world = new b2World(gravity);
     
-//    b2BodyDef groundBodyDef;
-//    groundBodyDef.position.Set(0.0f, -10.0f);
-//    
-//    b2Body* groundBody = self.world->CreateBody(&groundBodyDef);
-//    
-//    b2PolygonShape groundBox;
-//    // groundBox is 100m wide and 20m tall
-//    groundBox.SetAsBox(50.0f, 10.0f);
-//    
-//    // Create shape fixture with default fixture definition.  groundBody
-//    // is 0.0 kg/m^2
-//    groundBody->CreateFixture(&groundBox, 0.0f);
-    
-    
-//    b2BodyDef fallingBodyDef;
-//    // this body should move in response to forces
-//    fallingBodyDef.type = b2_dynamicBody;
-//    fallingBodyDef.position.Set(0.0f, 4.0f);
-//    b2Body* fallingBody = self.world->CreateBody(&fallingBodyDef);
-    
-    // Create a box shape
-//    b2PolygonShape dynamicBox;
-//    dynamicBox.SetAsBox(1.0f, 1.0f);
-    
-    // Create fixture definition for box
-//    b2FixtureDef fixtureDef;
-//    fixtureDef.shape = &dynamicBox;
-//    fixtureDef.density = 1.0f;
-//    fixtureDef.friction = 0.3f;
-//    
-//    body->CreateFixture(&fixtureDef);
-        
-    
-
-//    MoTouch::addCallback(touch_callback, NULL);
+    //    MoTouch::addCallback(touch_callback, NULL);
     
     // Create two starting squares for now
     Square * s;
@@ -174,11 +171,31 @@ TapEntity * _tapEntity;
     s = [[Square alloc] initWithController:self withPosition:pos];
     [self.obstacles addObject:s];
     [[PhysicsEntity Instances] addObject:s];
-
+    
     pos.Set(90.0, 40.0);
     s = [[Square alloc] initWithController:self withPosition:pos];
     [self.obstacles addObject:s];
     [[PhysicsEntity Instances] addObject:s];
+    
+    // Create a single FM percussion instrument for now
+    instruments::FMPercussion* fmPerc = new instruments::FMPercussion();
+    self->instrs.push_back(fmPerc);
+    
+    // Audio setup
+    NSLog(@"starting real-time audio...");    
+    bool result = MoAudio::init(stk::SRATE, FRAMESIZE, NUM_CHANNELS);
+    if (!result) {
+        NSLog(@"cannot initialize real-time audio!");
+        return;
+    }
+    result = MoAudio::start(audioCallback, (void*)self);
+    if (!result) {
+        // something went wrong
+        NSLog(@"cannot start real-time audio!");
+        return;
+    }
+    
+
 }
 
 

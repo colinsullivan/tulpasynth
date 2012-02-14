@@ -13,13 +13,26 @@
 #include <iostream>
 #include <vector>
 
+#import "mo_audio.h"
 #include "b2World.h"
 
 #include "Globals.h"
 
+#import "Instrument.hpp"
+
 //#import "PhysicsEntity.h"
 
+/**
+ *  Global audio callback.  userData will be the `tulpaViewController` 
+ *  instance.
+ **/
+void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
+
 @interface tulpaViewController : GLKViewController {
+    /**
+     *  The list of instrument instances whose audio will be rendered.
+     **/
+    std::vector<instruments::Instrument*> instrs;
 @private
     b2World* _world;
 }
@@ -56,8 +69,8 @@
  **/
 @property (strong, nonatomic) NSMutableArray * fallingBalls;
 
+
 - (GLuint)setupTexture:(NSString *)fileName;
 - (GLuint)compileShader:(NSString*)shaderName withType:(GLenum)shaderType;
-
 
 @end

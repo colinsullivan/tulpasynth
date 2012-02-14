@@ -244,6 +244,11 @@
 		3BFDB8D014E9A428002B8F6B /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8CE14E9A428002B8F6B /* SimpleFragment.glsl */; };
 		3BFDB8D114E9A428002B8F6B /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8CF14E9A428002B8F6B /* SimpleVertex.glsl */; };
 		3BFDB8D814E9B550002B8F6B /* mo_gfx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8D714E9B550002B8F6B /* mo_gfx.mm */; };
+		3BFDB8ED14EA0204002B8F6B /* Boing.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8E414EA0204002B8F6B /* Boing.mm */; };
+		3BFDB8EE14EA0204002B8F6B /* FMPercussion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8E514EA0204002B8F6B /* FMPercussion.cpp */; };
+		3BFDB8EF14EA0204002B8F6B /* Instrument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8E714EA0204002B8F6B /* Instrument.cpp */; };
+		3BFDB8F014EA0204002B8F6B /* RAMpler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8E914EA0204002B8F6B /* RAMpler.cpp */; };
+		3BFDB8F114EA0204002B8F6B /* SimpleString.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8EC14EA0204002B8F6B /* SimpleString.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -670,6 +675,16 @@
 		3BFDB8CF14E9A428002B8F6B /* SimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleVertex.glsl; sourceTree = "<group>"; };
 		3BFDB8D614E9B550002B8F6B /* mo_gfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_gfx.h; sourceTree = "<group>"; };
 		3BFDB8D714E9B550002B8F6B /* mo_gfx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_gfx.mm; sourceTree = "<group>"; };
+		3BFDB8E314EA0204002B8F6B /* Boing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boing.h; sourceTree = "<group>"; };
+		3BFDB8E414EA0204002B8F6B /* Boing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Boing.mm; sourceTree = "<group>"; };
+		3BFDB8E514EA0204002B8F6B /* FMPercussion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FMPercussion.cpp; sourceTree = "<group>"; };
+		3BFDB8E614EA0204002B8F6B /* FMPercussion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FMPercussion.hpp; sourceTree = "<group>"; };
+		3BFDB8E714EA0204002B8F6B /* Instrument.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Instrument.cpp; sourceTree = "<group>"; };
+		3BFDB8E814EA0204002B8F6B /* Instrument.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Instrument.hpp; sourceTree = "<group>"; };
+		3BFDB8E914EA0204002B8F6B /* RAMpler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAMpler.cpp; sourceTree = "<group>"; };
+		3BFDB8EA14EA0204002B8F6B /* RAMpler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAMpler.hpp; sourceTree = "<group>"; };
+		3BFDB8EB14EA0204002B8F6B /* SimpleString.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SimpleString.hpp; sourceTree = "<group>"; };
+		3BFDB8EC14EA0204002B8F6B /* SimpleString.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SimpleString.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -909,6 +924,7 @@
 		3B9D2D3F14E1D77500A042BF /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3BFDB8E214EA0204002B8F6B /* instruments */,
 				3BFDB8CE14E9A428002B8F6B /* SimpleFragment.glsl */,
 				3BFDB8CF14E9A428002B8F6B /* SimpleVertex.glsl */,
 				3B4772B014E38BF300AFBDB7 /* Obstacle.h */,
@@ -1321,6 +1337,23 @@
 			path = graphics;
 			sourceTree = SOURCE_ROOT;
 		};
+		3BFDB8E214EA0204002B8F6B /* instruments */ = {
+			isa = PBXGroup;
+			children = (
+				3BFDB8E314EA0204002B8F6B /* Boing.h */,
+				3BFDB8E414EA0204002B8F6B /* Boing.mm */,
+				3BFDB8E514EA0204002B8F6B /* FMPercussion.cpp */,
+				3BFDB8E614EA0204002B8F6B /* FMPercussion.hpp */,
+				3BFDB8E714EA0204002B8F6B /* Instrument.cpp */,
+				3BFDB8E814EA0204002B8F6B /* Instrument.hpp */,
+				3BFDB8E914EA0204002B8F6B /* RAMpler.cpp */,
+				3BFDB8EA14EA0204002B8F6B /* RAMpler.hpp */,
+				3BFDB8EB14EA0204002B8F6B /* SimpleString.hpp */,
+				3BFDB8EC14EA0204002B8F6B /* SimpleString.mm */,
+			);
+			path = instruments;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1610,6 +1643,11 @@
 				3B5A9A0614E61ED200FF52D2 /* b2WheelJoint.cpp in Sources */,
 				3B5A9A0714E61ED200FF52D2 /* b2Rope.cpp in Sources */,
 				3BFDB8D814E9B550002B8F6B /* mo_gfx.mm in Sources */,
+				3BFDB8ED14EA0204002B8F6B /* Boing.mm in Sources */,
+				3BFDB8EE14EA0204002B8F6B /* FMPercussion.cpp in Sources */,
+				3BFDB8EF14EA0204002B8F6B /* Instrument.cpp in Sources */,
+				3BFDB8F014EA0204002B8F6B /* RAMpler.cpp in Sources */,
+				3BFDB8F114EA0204002B8F6B /* SimpleString.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

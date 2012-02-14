@@ -28,7 +28,7 @@ fun void freq(float aFreq) {
     carrier.freq(carrierFreq);
     modulator.freq(modulatorFreq);
 }
-freq(80);
+freq(440);
 
 
 carrier.gain(carrierGain);
@@ -38,7 +38,8 @@ modulator.gain(modulatorGain);
 // [0., 0.5, 1., 0.5, 0.] => curve.coefs;
 [
     // initial attack
-    0.0, 0.75, 2.5,
+    0.0, 0.0, 2.5,
+    0.01, 0.75, 2.5,
     // peak
     0.12, 0.9, -2.5,
     0.2, 1.0, 2.5,
@@ -77,22 +78,22 @@ base => int note;
 
 1 => int direction;
 
-while(true) {
-    freq(Std.mtof(note));
-    noteOn();
-    direction*3 +=> note;
+// while(true) {
+//     freq(Std.mtof(note));
+//     noteOn();
+//     direction*3 +=> note;
 
-    if(note > base+(3 * 8)) {
-        -1 => direction;
-    }
-    else if(note < base) {
-        1 => direction;
-    }
-}
+//     if(note > base+(3 * 8)) {
+//         -1 => direction;
+//     }
+//     else if(note < base) {
+//         1 => direction;
+//     }
+// }
 
-1::second => now;
+// 1::second => now;
 
 
-for(0 => float i; i < 1.0; 0.01 +=> i) {
-    <<< i, ",", modulatorEnvCurve.lookup(i) >>>;
+for(0 => float i; i < 1.0; 0.0001 +=> i) {
+    <<< "", attackCurve.lookup(i) >>>;
 }
