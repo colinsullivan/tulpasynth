@@ -40,7 +40,9 @@ namespace instruments {
         
         virtual void play();
         virtual void stop();
-        
+
+        virtual void velocity(stk::StkFloat aVelocity);
+
         void freq(stk::StkFloat aFreq);
 
     private:

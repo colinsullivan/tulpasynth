@@ -111,6 +111,12 @@ void FMPercussion::play() {
     this->_carrierEnvelope.keyOn();
 }
 
+void FMPercussion::velocity(stk::StkFloat aVelocity) {
+    Instrument::velocity(aVelocity);
+
+    this->modulationIndex(this->_velocity * 25);
+}
+
 void FMPercussion::stop() {
     Instrument::stop();
     

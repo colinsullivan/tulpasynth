@@ -78,6 +78,11 @@ namespace instruments {
             this->mPlaying = false;
             return;
         };
+        
+        
+        virtual void velocity(stk::StkFloat aVelocity) {
+            this->_velocity = aVelocity;
+        }
 
         /**
          *  Pull the next sample from this unit generator
@@ -133,6 +138,8 @@ namespace instruments {
          *  If this instrument is currently playing.
          **/
         bool mPlaying;
+        
+        stk::StkFloat _velocity;
 
         /**
          *  Save namespace

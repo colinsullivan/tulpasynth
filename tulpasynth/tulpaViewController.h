@@ -15,6 +15,7 @@
 
 #import "mo_audio.h"
 #include "b2World.h"
+#include "b2Contact.h"
 #include "b2WorldCallbacks.h"
 
 #include "Globals.h"

@@ -204,7 +204,19 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 }
 
 - (void)beginCollision:(b2Contact*) contact {
-    NSLog(@"Collision occurred!");
+    static float32 collisionStrength;
+    
+    static b2Body* body;
+    
+    body = contact->GetFixtureA()->GetBody();
+    collisionStrength = body->GetLinearVelocity().LengthSquared()*body->GetMass();
+    body = contact->GetFixtureB()->GetBody();
+    collisionStrength += body->GetLinearVelocity().LengthSquared()*body->GetMass();
+    
+    collisionStrength /= 2000;
+//    NSLog(@"collisionStrength: %f", collisionStrength);
+    self->instrs[0]->velocity(collisionStrength);
+    self->instrs[0]->play();
 }
 
 
