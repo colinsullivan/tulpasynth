@@ -190,6 +190,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     pos.Set(90.0, 40.0);
     s = [[Square alloc] initWithController:self withPosition:pos];
+    [s setWidth:50 withHeight:20];
     [self.obstacles addObject:s];
     
     // Audio setup
@@ -296,8 +297,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (void)glkView:(GLKView*)view drawInRect:(CGRect)rect {
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
-    
-    
 
     
     // Draw all physics entities
