@@ -33,7 +33,7 @@ const GLubyte BallIndices[] = {
 
         // Create circle shape
         b2CircleShape* myShape = new b2CircleShape();
-        myShape->m_radius = self.width;
+        myShape->m_radius = self.width/2;
         
         b2FixtureDef myShapeFixture;
         myShapeFixture.shape = myShape;

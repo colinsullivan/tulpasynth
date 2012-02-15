@@ -106,20 +106,22 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     /**
      *  End instrument test.
      **/
-    
-    // Clear temporary output buffer
-    tempFrames->resize(numFrames, NUM_CHANNELS, 0.0);
-    
+        
     // Render all instruments into output
-    for (unsigned int i = 0; i < self->instrs.size(); i++) {
-        self->instrs[i]->next_buf((*tempFrames));
+    for (unsigned int i = 0; i < instruments::Instrument::Instances->size(); i++) {
 
-        for(int i = 0; i < NUM_CHANNELS; i++) {
+        // Clear temporary output buffer
+        tempFrames->resize(numFrames, NUM_CHANNELS, 0.0);
+
+        (*instruments::Instrument::Instances)[i]->next_buf((*tempFrames));
+
+        for(int j = 0; j < NUM_CHANNELS; j++) {
             // Add samples to master output for each channel
             for(unsigned int k = 0; k < numFrames; k++) {
-                outputSamples[k*NUM_CHANNELS+i] += (Float32)(*tempFrames)[k*NUM_CHANNELS+i];
+                outputSamples[k*NUM_CHANNELS+j] += 0.4*(Float32)(*tempFrames)[k*NUM_CHANNELS+j];
             }
         }
+
     }
     
     
@@ -160,7 +162,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
     self.fallingBalls = [[NSMutableArray alloc] init];
     self.obstacles = [[NSMutableArray alloc] init];
-
     
     // Initialize b2 graphics
     b2Vec2 gravity(0.0f, -50.0f);
@@ -175,16 +176,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     b2Vec2 pos(25.0, 50.0);
     s = [[Square alloc] initWithController:self withPosition:pos];
     [self.obstacles addObject:s];
-    [[PhysicsEntity Instances] addObject:s];
     
     pos.Set(90.0, 40.0);
     s = [[Square alloc] initWithController:self withPosition:pos];
     [self.obstacles addObject:s];
-    [[PhysicsEntity Instances] addObject:s];
-    
-    // Create a single FM percussion instrument for now
-    instruments::FMPercussion* fmPerc = new instruments::FMPercussion();
-    self->instrs.push_back(fmPerc);
     
     // Audio setup
     NSLog(@"starting real-time audio...");    
@@ -208,15 +203,37 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     static b2Body* body;
     
+    static float32 widthOfSquare;
+    widthOfSquare = nil;
+    
+    static id entityOne, entityTwo;
+    
     body = contact->GetFixtureA()->GetBody();
     collisionStrength = body->GetLinearVelocity().LengthSquared()*body->GetMass();
+
+    // Given a body, get its PhysicsEntity instance
+    entityOne = ((id)body->GetUserData());
+    
     body = contact->GetFixtureB()->GetBody();
     collisionStrength += body->GetLinearVelocity().LengthSquared()*body->GetMass();
     
+    
+    // Given a body, get its PhysicsEntity instance
+    entityTwo = ((id)body->GetUserData());
+
     collisionStrength /= 2000;
-//    NSLog(@"collisionStrength: %f", collisionStrength);
-    self->instrs[0]->velocity(collisionStrength);
-    self->instrs[0]->play();
+
+    if([entityOne isKindOfClass:[Square class]]) {
+        [entityOne instr]->freq((30/[entityOne width]) * 880);
+        [entityOne instr]->velocity(collisionStrength);
+        [entityOne instr]->play();
+    }
+    else if([entityTwo isKindOfClass:[Square class]]) {
+        [entityTwo instr]->freq((30/[entityTwo width]) * 880);
+        [entityTwo instr]->velocity(collisionStrength);
+        [entityTwo instr]->play();
+    }
+        
 }
 
 
@@ -245,6 +262,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     delete self->_world;
     delete collisionDetector;
+    
+    self.fallingBalls = nil;
+    self.obstacles = nil;
+//    self.bodyToEntityMap = nil;
+
     
 
     // TODO: Delete all physical entities

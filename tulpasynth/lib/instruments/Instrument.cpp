@@ -11,8 +11,11 @@
 
 //#include "../Orchestra.hpp"
 
+using namespace instruments;
 
-instruments::Instrument::Instrument(/*Orchestra* anOrch, Json::Value initialAttributes*/) {
+std::vector<Instrument*>* Instrument::Instances = new std::vector<Instrument*>();
+
+Instrument::Instrument(/*Orchestra* anOrch, Json::Value initialAttributes*/) {
     // this->orch = anOrch;
 
     // this->defaultAttributes["gain"] = 1.0;
@@ -27,6 +30,8 @@ instruments::Instrument::Instrument(/*Orchestra* anOrch, Json::Value initialAttr
 //        // Read in all attributes
 //        this->set_attributes(initialAttributes);
 //    }
+    
+    Instrument::Instances->push_back(this);
 
 };
 

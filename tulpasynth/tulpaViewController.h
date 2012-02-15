@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import <Foundation/Foundation.h>
 
 #include <iostream>
 #include <vector>
@@ -33,10 +34,6 @@
 void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 
 @interface tulpaViewController : GLKViewController {
-    /**
-     *  The list of instrument instances whose audio will be rendered.
-     **/
-    std::vector<instruments::Instrument*> instrs;
 @private
     b2World* _world;
 }
@@ -84,6 +81,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  **/
 @property (strong, nonatomic) NSMutableArray * fallingBalls;
 
+/**
+ *  Mapping of `b2Body` instances to `PhysicsEntity` (or subclass) instances.
+ **/
+//@property (strong, nonatomic) NSMapTable* bodyToEntityMap;
 
 - (GLuint)setupTexture:(NSString *)fileName;
 - (GLuint)compileShader:(NSString*)shaderName withType:(GLenum)shaderType;

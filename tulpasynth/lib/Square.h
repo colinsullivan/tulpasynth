@@ -13,10 +13,13 @@
 
 #import "Obstacle.h"
 
+#import "FMPercussion.hpp"
 
 @interface Square : Obstacle
 
 //@property b2PolygonShape* square;
+
+@property instruments::FMPercussion* instr;
 
 
 @end

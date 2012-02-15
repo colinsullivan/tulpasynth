@@ -37,8 +37,8 @@
     }
     
     if (self.pincher) {
-        self.width = self.preScalingWidth * self.pincher->scale;
         self.height = self.preScalingHeight * self.pincher->scale;
+        self.width = self.preScalingWidth * self.pincher->scale;
         
     }
     

@@ -43,7 +43,7 @@ namespace instruments {
 
         virtual void velocity(stk::StkFloat aVelocity);
 
-        void freq(stk::StkFloat aFreq);
+        virtual void freq(stk::StkFloat aFreq);
 
     private:
         /**
@@ -64,6 +64,13 @@ namespace instruments {
          **/
         stk::Envelope _carrierEnvelope;
         stk::Envelope _modulatorEnvelope;
+        
+        /**
+         *  Phase and state used for rendering.
+         **/
+        // Instantaneous phase of both carrier and modulator waves
+        stk::StkFloat _modulatorPhase;
+        stk::StkFloat _carrierPhase;
         
         /**
          *  This attack curve was generated with the `CurveTable`

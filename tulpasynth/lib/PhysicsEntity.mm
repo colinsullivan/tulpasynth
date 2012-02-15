@@ -62,6 +62,10 @@
         bodyDef.type = [self bodyType];
         b2Body* newBody = self.controller.world->CreateBody(&bodyDef);
         self.body = newBody;
+        
+        self.body->SetUserData(((void*)self));
+        
+        [[PhysicsEntity Instances] addObject:self];
     }
 
     return self;
@@ -125,6 +129,10 @@
     glDeleteBuffers(1, &_indexBuffer);
     
     self.effect = nil;
+}
+
+- (NSString*) instanceType {
+    return @"PhysicsEntity";
 }
 
 

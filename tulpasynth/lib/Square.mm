@@ -23,6 +23,8 @@ const GLubyte SquareIndices[] = {
 
 @implementation Square
 
+@synthesize instr;
+
 /**
  *  When width or height is set, change shape.
  **/
@@ -73,7 +75,7 @@ const GLubyte SquareIndices[] = {
         myBodyMass.mass = 10.0f;
         self.body->SetMassData(&myBodyMass);
         
-        
+        self.instr = new instruments::FMPercussion();
         
         glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
         glBufferData(GL_ARRAY_BUFFER, sizeof(SquareVertices), SquareVertices, GL_STATIC_DRAW);
@@ -95,6 +97,5 @@ const GLubyte SquareIndices[] = {
 //    [super update];
 //
 //}
-
 
 @end

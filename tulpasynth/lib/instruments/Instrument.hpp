@@ -83,6 +83,11 @@ namespace instruments {
         virtual void velocity(stk::StkFloat aVelocity) {
             this->_velocity = aVelocity;
         }
+        
+        virtual void freq(stk::StkFloat aFreq) {
+            this->_freq = aFreq;
+        };
+
 
         /**
          *  Pull the next sample from this unit generator
@@ -118,6 +123,8 @@ namespace instruments {
 //        std::string get_ns() {
 //            return this->ns;
 //        }
+        
+        static std::vector<Instrument*>* Instances;
     protected:
         /**
          *  The attributes of this object (including id)
@@ -140,6 +147,7 @@ namespace instruments {
         bool mPlaying;
         
         stk::StkFloat _velocity;
+        stk::StkFloat _freq;
 
         /**
          *  Save namespace
