@@ -12,7 +12,7 @@
 
 @synthesize body, effect, controller, shape, shapeFixture;
 
-@synthesize width, height, angle, scale;
+@synthesize width, height, angle;
 
 - (const b2Vec2&)position {
     return self.body->GetPosition();
@@ -86,8 +86,8 @@
 }
 
 - (void)prepareToDraw {
-    self.effect.useConstantColor = YES;
-    self.effect.constantColor = GLKVector4Make(1.0, 0.0, 0.0, 1.0);
+//    self.effect.useConstantColor = YES;
+//    self.effect.constantColor = GLKVector4Make(1.0, 0.0, 0.0, 1.0);
 
     [self.effect prepareToDraw];
 

@@ -19,9 +19,10 @@
 #include "b2Contact.h"
 #include "b2WorldCallbacks.h"
 
+#import "CollisionDetector.h"
+
 #include "Globals.h"
 
-#import "CollisionDetector.mm"
 
 #import "Instrument.hpp"
 
@@ -39,6 +40,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 }
 
 @property (strong) GLKTextureInfo* glowingCircleTexture;
+@property (strong) GLKTextureInfo* glowingBoxTexture;
+
+- (GLKTextureInfo*)loadTexture:(NSString*)imageFileName;
 
 @property (strong, nonatomic) EAGLContext * context;
 @property (strong, nonatomic) GLKBaseEffect * effect;

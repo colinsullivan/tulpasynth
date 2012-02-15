@@ -9,10 +9,10 @@
 #import "Square.h"
 
 static Vertex SquareVertices[] = {
-    {{1, -1, 0}, {0.15, 0.88, 0.49}, {1, 0}},
-    {{1, 1, 0}, {0.15, 0.88, 0.49}, {1, 1}},
-    {{-1, 1, 0}, {0.15, 0.88, 0.49}, {0, 1}},
-    {{-1, -1, 0}, {0.15, 0.88, 0.49}, {0, 0}}
+    {{1, -1, 0}, {0.15, 0.88, 0.49, 1.0}, {1, 0}},
+    {{1, 1, 0}, {0.15, 0.88, 0.49, 1.0}, {1, 1}},
+    {{-1, 1, 0}, {0.15, 0.88, 0.49, 1.0}, {0, 1}},
+    {{-1, -1, 0}, {0.15, 0.88, 0.49, 1.0}, {0, 0}}
 };
 
 
@@ -28,20 +28,21 @@ const GLubyte SquareIndices[] = {
 /**
  *  When width or height is set, change shape.
  **/
-- (void)setHeight:(float)height {
-    [super setHeight:height];
-      
-    ((b2PolygonShape*)self.shape)->SetAsBox(self.width/2, self.height/2);
-    
-}
-- (void)setWidth:(float)width {
-    [super setWidth:width];
+- (void)setWidth:(float32)aWidth withHeight:(float32)aHeight {
+    self.width = aWidth;
+    self.height = aHeight;
 
     if (self.shapeFixture) {
         self.body->DestroyFixture(self.shapeFixture);        
     }
     
-    ((b2PolygonShape*)self.shape)->SetAsBox(self.width/2, self.height/2);
+    if (self.shape) {
+        delete self.shape;
+    }
+    
+    self.shape = new b2PolygonShape();
+    self.shape->m_radius = 1.0f;
+    ((b2PolygonShape*)self.shape)->SetAsBox(self.width/2 - (self.width/15), self.height/2 - (self.height/15));
     
     b2FixtureDef mySquareFixture;
     mySquareFixture.shape = self.shape;
@@ -52,24 +53,11 @@ const GLubyte SquareIndices[] = {
     self.shapeFixture = self.body->CreateFixture(&mySquareFixture);
 }
 
-- (void)setScale:(float32)aScale {
-    [super setScale:aScale];
-    
-    self.width = self.width*aScale;
-    self.height = self.height*aScale;
-    
-}
-
 - (id)initWithController:(tulpaViewController *)theController withPosition:(b2Vec2)aPosition {
     
     if (self = [super initWithController:theController withPosition:aPosition]) {
 
-        // Create square polygon
-        b2PolygonShape* mySquare = new b2PolygonShape();
-        self.shape = mySquare;
-        self.height = 30;
-        self.width = 30;
-        self.shape->m_radius = 1;
+        [self setWidth:120 withHeight:120];
                 
         b2MassData myBodyMass;
         myBodyMass.mass = 10.0f;
@@ -87,10 +75,30 @@ const GLubyte SquareIndices[] = {
     return self;
 }
 
+-(void)prepareToDraw {
+    self.effect.texture2d0.enabled = GL_TRUE;
+    self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
+    self.effect.texture2d0.target = GLKTextureTarget2D;
+    self.effect.texture2d0.name = self.controller.glowingBoxTexture.name;
+    
+    [super prepareToDraw];
+    
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+    
+}
+
 - (void)draw {
     [super draw];
 
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, TexCoord));
+
     glDrawElements(GL_TRIANGLES, sizeof(SquareIndices)/sizeof(SquareIndices[0]), GL_UNSIGNED_BYTE, 0);
+}
+
+- (void)postDraw {
+    [super postDraw];
+    
+    glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
 }
 
 //- (void)update {

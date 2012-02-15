@@ -49,11 +49,6 @@
  **/
 @property const b2Vec2& position;
 
-/**
- *  Scale of this entity.
- **/
-@property (nonatomic) float32 scale;
-
 @property b2Fixture* shapeFixture;
 
 
@@ -67,6 +62,8 @@
 - (void)postDraw;
 
 - (void)update;
+
+- (void)setWidth:(float32)aWidth withHeight:(float32)aHeight;
 
 /**
  *  Override getter for position so we can hook into b2Body::GetPosition.

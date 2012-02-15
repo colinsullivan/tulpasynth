@@ -235,6 +235,8 @@
 		3B9D2F1314E1DD1300A042BF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2F1214E1DD1300A042BF /* AudioToolbox.framework */; };
 		3B9D2F1514E1DD1D00A042BF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9D2F1414E1DD1D00A042BF /* CoreLocation.framework */; };
 		3B9D2F2014E2023E00A042BF /* TouchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */; };
+		3BA4196814EC470B00647985 /* GlowingBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA4196714EC470B00647985 /* GlowingBox.png */; };
+		3BA4196B14EC47D400647985 /* CollisionDetector.h in Sources */ = {isa = PBXBuildFile; fileRef = 3BA4196A14EC47D400647985 /* CollisionDetector.h */; };
 		3BF8964B14E22F7D0038780F /* PinchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8964A14E22F7D0038780F /* PinchEntity.mm */; };
 		3BF8964F14E2415E0038780F /* RotateEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8964E14E2415E0038780F /* RotateEntity.mm */; };
 		3BF8965214E2430F0038780F /* GestureEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8965114E2430F0038780F /* GestureEntity.mm */; };
@@ -662,8 +664,9 @@
 		3B9D2F1A14E1E96F00A042BF /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		3B9D2F1E14E2023E00A042BF /* TouchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchEntity.h; sourceTree = "<group>"; };
 		3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchEntity.mm; sourceTree = "<group>"; };
+		3BA4196714EC470B00647985 /* GlowingBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GlowingBox.png; sourceTree = "<group>"; };
+		3BA4196A14EC47D400647985 /* CollisionDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetector.h; sourceTree = "<group>"; };
 		3BB644AB14EA41E4007D4D91 /* Envelopes.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Envelopes.hpp; sourceTree = "<group>"; };
-		3BB644B014EAF686007D4D91 /* CollisionDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; path = CollisionDetector.mm; sourceTree = "<group>"; };
 		3BF8964914E22F7D0038780F /* PinchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinchEntity.h; sourceTree = "<group>"; };
 		3BF8964A14E22F7D0038780F /* PinchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PinchEntity.mm; sourceTree = "<group>"; };
 		3BF8964D14E2415D0038780F /* RotateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateEntity.h; sourceTree = "<group>"; };
@@ -926,6 +929,7 @@
 		3B9D2D3F14E1D77500A042BF /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3BA4196A14EC47D400647985 /* CollisionDetector.h */,
 				3BFDB8E214EA0204002B8F6B /* instruments */,
 				3BFDB8CE14E9A428002B8F6B /* SimpleFragment.glsl */,
 				3BFDB8CF14E9A428002B8F6B /* SimpleVertex.glsl */,
@@ -953,7 +957,6 @@
 				3B4772BD14E49A3E00AFBDB7 /* StaticPhysicsEntity.mm */,
 				3B4772BF14E49D0C00AFBDB7 /* PhysicsEntity.h */,
 				3B4772C014E49D0C00AFBDB7 /* PhysicsEntity.mm */,
-				3BB644B014EAF686007D4D91 /* CollisionDetector.mm */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -1333,6 +1336,7 @@
 		3BFDB8C614E9A360002B8F6B /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				3BA4196714EC470B00647985 /* GlowingBox.png */,
 				3BFDB8C714E9A360002B8F6B /* CyanRing.png */,
 				3BFDB8C814E9A360002B8F6B /* GlowingRing.png */,
 				3BFDB8C914E9A360002B8F6B /* Textures.psd */,
@@ -1472,6 +1476,7 @@
 				3BFDB8CC14E9A360002B8F6B /* Textures.psd in Resources */,
 				3BFDB8D014E9A428002B8F6B /* SimpleFragment.glsl in Resources */,
 				3BFDB8D114E9A428002B8F6B /* SimpleVertex.glsl in Resources */,
+				3BA4196814EC470B00647985 /* GlowingBox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1652,6 +1657,7 @@
 				3BFDB8EF14EA0204002B8F6B /* Instrument.cpp in Sources */,
 				3BFDB8F014EA0204002B8F6B /* RAMpler.cpp in Sources */,
 				3BFDB8F114EA0204002B8F6B /* SimpleString.mm in Sources */,
+				3BA4196B14EC47D400647985 /* CollisionDetector.h in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

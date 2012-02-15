@@ -34,7 +34,7 @@ TapEntity * _tapEntity;
 
 @implementation tulpaViewController
 
-@synthesize glowingCircleTexture;
+@synthesize glowingCircleTexture, glowingBoxTexture;
 
 @synthesize fallingBalls, obstacles;
 
@@ -127,6 +127,22 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
 }
 
+- (GLKTextureInfo*)loadTexture:(NSString*)imageFileName {
+    NSError *error = nil;
+    GLKTextureInfo* tex = nil;
+    NSString *path = [[NSBundle mainBundle] pathForResource:imageFileName ofType:@"png"];
+    tex = [GLKTextureLoader textureWithContentsOfFile:path options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:GLKTextureLoaderOriginBottomLeft] error:&error];
+    if (error != nil) {
+        NSLog(@"Error loading texture from image: %@", [error localizedDescription]);
+        
+        return nil;
+    }
+    else {
+        return tex;
+    }
+
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -144,13 +160,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     [EAGLContext setCurrentContext:self.context];
         
     // load textures
-    NSError *error = nil;
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"GlowingRing" ofType:@"png"];
-    self.glowingCircleTexture = [GLKTextureLoader textureWithContentsOfFile:path options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:GLKTextureLoaderOriginBottomLeft] error:&error];
-    if (error != nil) {
-        NSLog(@"Error loading texture from image: %@", [error localizedDescription]);
-    }
-
+    self.glowingCircleTexture = [self loadTexture:@"GlowingRing"];
+    self.glowingBoxTexture = [self loadTexture:@"GlowingBox"];
     
     _pinchEntity = new PinchEntity(self.pinchRecognizer);
     
@@ -361,7 +372,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     // Turn these bitches down to increase performance
     int32 velocityIterations = 8;
-    int32 positionIterations = 2;
+    int32 positionIterations = 3;
 
     self.world->Step(self.timeSinceLastUpdate, velocityIterations, positionIterations);
     
