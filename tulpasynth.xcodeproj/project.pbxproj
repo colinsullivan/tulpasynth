@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B2096C814EC67BD0047CB5C /* LongPressEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B2096C714EC67BD0047CB5C /* LongPressEntity.mm */; };
 		3B4026DE14E25AF00047093F /* FallingBall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B4026DD14E25AF00047093F /* FallingBall.mm */; };
 		3B4772B214E38BF300AFBDB7 /* Obstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B4772B114E38BF300AFBDB7 /* Obstacle.mm */; };
 		3B4772BE14E49A3E00AFBDB7 /* StaticPhysicsEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B4772BD14E49A3E00AFBDB7 /* StaticPhysicsEntity.mm */; };
@@ -254,6 +255,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B2096C514EC67A50047CB5C /* LongPressEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongPressEntity.h; sourceTree = "<group>"; };
+		3B2096C714EC67BD0047CB5C /* LongPressEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LongPressEntity.mm; sourceTree = "<group>"; };
 		3B4026DC14E25AF00047093F /* FallingBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBall.h; sourceTree = "<group>"; };
 		3B4026DD14E25AF00047093F /* FallingBall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBall.mm; sourceTree = "<group>"; };
 		3B4772B014E38BF300AFBDB7 /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
@@ -957,6 +960,8 @@
 				3B4772BD14E49A3E00AFBDB7 /* StaticPhysicsEntity.mm */,
 				3B4772BF14E49D0C00AFBDB7 /* PhysicsEntity.h */,
 				3B4772C014E49D0C00AFBDB7 /* PhysicsEntity.mm */,
+				3B2096C514EC67A50047CB5C /* LongPressEntity.h */,
+				3B2096C714EC67BD0047CB5C /* LongPressEntity.mm */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -1658,6 +1663,7 @@
 				3BFDB8F014EA0204002B8F6B /* RAMpler.cpp in Sources */,
 				3BFDB8F114EA0204002B8F6B /* SimpleString.mm in Sources */,
 				3BA4196B14EC47D400647985 /* CollisionDetector.h in Sources */,
+				3B2096C814EC67BD0047CB5C /* LongPressEntity.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

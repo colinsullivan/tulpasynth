@@ -20,9 +20,11 @@
                             <outletCollection property="gestureRecognizers" destination="e6Z-c1-aW0" appends="YES" id="0rk-l9-aFf"/>
                             <outletCollection property="gestureRecognizers" destination="ZbX-g5-RLC" appends="YES" id="521-rQ-3i1"/>
                             <outletCollection property="gestureRecognizers" destination="x1l-du-T65" appends="YES" id="pne-hQ-aen"/>
+                            <outletCollection property="gestureRecognizers" destination="F1Y-7H-Soh" appends="YES" id="X9d-Xm-oku"/>
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="longPressRecognizer" destination="F1Y-7H-Soh" id="gni-bx-wfT"/>
                         <outlet property="panRecognizer" destination="ZbX-g5-RLC" id="GNn-93-R8E"/>
                         <outlet property="pinchRecognizer" destination="Pip-ot-3yS" id="Rqe-0N-4XG"/>
                         <outlet property="rotateRecognizer" destination="e6Z-c1-aW0" id="zod-h8-Brv"/>
@@ -49,10 +51,32 @@
                         <action selector="tapGestureHandler:" destination="d96-Jx-1bP" id="szD-dT-X4w"/>
                     </connections>
                 </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="1" id="F1Y-7H-Soh">
+                    <connections>
+                        <action selector="longPressHandler:" destination="d96-Jx-1bP" id="GWA-fe-ecu"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-165" y="37"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="tulpaViewController" superclassName="GLKViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/tulpaViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="longPressHandler:"/>
+                <relationship kind="action" name="panGestureHandler:"/>
+                <relationship kind="action" name="pinchGestureHandler:"/>
+                <relationship kind="action" name="rotateGestureHandler:"/>
+                <relationship kind="action" name="tapGestureHandler:"/>
+                <relationship kind="outlet" name="longPressRecognizer" candidateClass="UILongPressGestureRecognizer"/>
+                <relationship kind="outlet" name="panRecognizer" candidateClass="UIPanGestureRecognizer"/>
+                <relationship kind="outlet" name="pinchRecognizer" candidateClass="UIPinchGestureRecognizer"/>
+                <relationship kind="outlet" name="rotateRecognizer" candidateClass="UIRotationGestureRecognizer"/>
+                <relationship kind="outlet" name="tapRecognizer" candidateClass="UITapGestureRecognizer"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <nil key="statusBar"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

@@ -59,6 +59,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer * tapRecognizer;
 - (IBAction)tapGestureHandler:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer * longPressRecognizer;
+- (IBAction)longPressHandler:(id)sender;
+
 @property (readonly) b2World* world;
 
 /**

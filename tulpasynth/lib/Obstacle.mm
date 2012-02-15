@@ -129,7 +129,7 @@
     // if pan just started
     if (pan->state == GestureEntityStateStart) {
         // if the touch is inside us
-        if ([self _touchIsInside:pan->touches[0]]) {
+        if ([self _touchIsInside:pan->touches[0] withFudge:20]) {
             self.panner = pan;            
             self.prePanningPosition->Set(self.position.x, self.position.y);
     

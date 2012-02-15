@@ -13,6 +13,7 @@
 #include "RotateEntity.h"
 #include "TapEntity.h"
 #include "PanEntity.h"
+#include "LongPressEntity.h"
 
 #import "FallingBall.h"
 #import "Square.h"
@@ -30,6 +31,7 @@ RotateEntity * _rotateEntity;
 PanEntity * _panEntity;
 
 TapEntity * _tapEntity;
+LongPressEntity * _longPressEntity;
 
 
 @implementation tulpaViewController
@@ -41,7 +43,7 @@ TapEntity * _tapEntity;
 @synthesize context = _context;
 @synthesize effect = _effect;
 
-@synthesize pinchRecognizer, rotateRecognizer, panRecognizer, tapRecognizer;
+@synthesize pinchRecognizer, rotateRecognizer, panRecognizer, tapRecognizer, longPressRecognizer;
 
 @synthesize world, collisionDetector;
 
@@ -168,6 +170,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     _rotateEntity = new RotateEntity(self.rotateRecognizer);
     _panEntity = new PanEntity(self.panRecognizer);
     _tapEntity = new TapEntity(self.tapRecognizer);
+    _longPressEntity = new LongPressEntity(self.longPressRecognizer);
     
     // Initialize game object lists
 
@@ -190,7 +193,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     pos.Set(90.0, 40.0);
     s = [[Square alloc] initWithController:self withPosition:pos];
-    [s setWidth:50 withHeight:20];
     [self.obstacles addObject:s];
     
     // Audio setup
@@ -236,12 +238,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     collisionStrength /= 2000;
 
     if([entityOne isKindOfClass:[Square class]]) {
-        [entityOne instr]->freq((30/[entityOne width]) * 880);
+        [entityOne instr]->freq((30/[entityOne width]) * 1320);
         [entityOne instr]->velocity(collisionStrength);
         [entityOne instr]->play();
     }
     else if([entityTwo isKindOfClass:[Square class]]) {
-        [entityTwo instr]->freq((30/[entityTwo width]) * 880);
+        [entityTwo instr]->freq((30/[entityTwo width]) * 1320);
         [entityTwo instr]->velocity(collisionStrength);
         [entityTwo instr]->play();
     }
@@ -356,6 +358,17 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
 //        NSLog(@"empty!");
     }    
+}
+
+- (IBAction)longPressHandler:(id)sender {
+    _longPressEntity->update();
+    
+    if (_longPressEntity->state == GestureEntityStateStart) {
+        // Create new square obstacle at point
+        Square* s = [[Square alloc] initWithController:self withPosition:(*_longPressEntity->touches[0]->position)];
+        [self.obstacles addObject:s];        
+    }
+    
 }
 
 - (void)update {

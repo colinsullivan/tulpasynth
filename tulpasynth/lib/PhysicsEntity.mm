@@ -19,7 +19,7 @@
 }
 
 - (void)setPosition:(const b2Vec2 &)aPosition {
-    self.body->SetTransform(aPosition, self.angle);
+    self.body->SetTransform(aPosition, -1*self.angle);
 }
 
 - (void)setAngle:(float32)anAngle {
@@ -28,7 +28,7 @@
     }
     
     if (self.body) {
-        self.body->SetTransform(self.position, anAngle);        
+        self.body->SetTransform(self.position, -1*anAngle);        
     }
 
     angle = anAngle;
@@ -129,10 +129,6 @@
     glDeleteBuffers(1, &_indexBuffer);
     
     self.effect = nil;
-}
-
-- (NSString*) instanceType {
-    return @"PhysicsEntity";
 }
 
 
