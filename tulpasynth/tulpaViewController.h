@@ -63,6 +63,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 - (IBAction)longPressHandler:(id)sender;
 
 @property (readonly) b2World* world;
+@property (readonly) b2Body* walls;
 
 /**
  *  This `CollisionDetector` instance will inform us when fixtures have 

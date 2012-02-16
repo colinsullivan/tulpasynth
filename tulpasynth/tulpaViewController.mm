@@ -15,6 +15,8 @@
 #include "PanEntity.h"
 #include "LongPressEntity.h"
 
+#import "b2EdgeShape.h"
+
 #import "FallingBall.h"
 #import "Square.h"
 
@@ -45,7 +47,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize pinchRecognizer, rotateRecognizer, panRecognizer, tapRecognizer, longPressRecognizer;
 
-@synthesize world, collisionDetector;
+@synthesize world, collisionDetector, walls;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -166,14 +168,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.glowingBoxTexture = [self loadTexture:@"GlowingBox"];
     
     _pinchEntity = new PinchEntity(self.pinchRecognizer);
-    
     _rotateEntity = new RotateEntity(self.rotateRecognizer);
     _panEntity = new PanEntity(self.panRecognizer);
     _tapEntity = new TapEntity(self.tapRecognizer);
     _longPressEntity = new LongPressEntity(self.longPressRecognizer);
     
     // Initialize game object lists
-
     self.fallingBalls = [[NSMutableArray alloc] init];
     self.obstacles = [[NSMutableArray alloc] init];
     
@@ -182,8 +182,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self->_world = new b2World(gravity);
     collisionDetector = new CollisionDetector((id*)self);
     self->_world->SetContactListener(collisionDetector);
-    
-    //    MoTouch::addCallback(touch_callback, NULL);
     
     // Create two starting squares for now
     Square * s;
@@ -194,6 +192,31 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     pos.Set(90.0, 40.0);
     s = [[Square alloc] initWithController:self withPosition:pos];
     [self.obstacles addObject:s];
+    
+    // Left and right screen edges
+    b2BodyDef wallsDef;
+    walls = self.world->CreateBody(&wallsDef);
+    
+    b2EdgeShape wallShape;
+
+    b2Vec2 topLeft(0.0, PX_TO_M(self.view.frame.size.width));
+    b2Vec2 topRight(PX_TO_M(self.view.frame.size.height), PX_TO_M(self.view.frame.size.width));
+    b2Vec2 bottomLeft(0.0, 0.0);
+    b2Vec2 bottomRight(PX_TO_M(self.view.frame.size.height), 0.0);
+
+    b2FixtureDef wallFixtureDef;
+    wallFixtureDef.friction = 0.1f;
+    wallFixtureDef.restitution = 0.75f;
+    wallFixtureDef.shape = &wallShape;
+
+    // Create left wall
+    wallShape.Set(bottomLeft, topLeft);
+    walls->CreateFixture(&wallFixtureDef);
+    
+    // Create right wall
+    wallShape.Set(bottomRight, topRight);
+//    wallFixtureDef.shape = &wallShape;
+    walls->CreateFixture(&wallFixtureDef);
     
     // Audio setup
     NSLog(@"starting real-time audio...");    
