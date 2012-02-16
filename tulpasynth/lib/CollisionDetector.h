@@ -1,10 +1,12 @@
-//
-//  CollisionDetector.hpp
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/14/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       CollisionDetector.h
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
+
 
 #ifndef tulpasynth_CollisionDetector_hpp
 #define tulpasynth_CollisionDetector_hpp
@@ -13,7 +15,10 @@
 
 #import "tulpaViewController.h"
 
-
+/**
+ *  @class  Wrapper class around `b2ContactListener` so collision callbacks
+ *  can be forwarded to the view controller.
+ **/
 class CollisionDetector : public b2ContactListener {    
 
 public:

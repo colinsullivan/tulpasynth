@@ -1,25 +1,21 @@
-//
-//  TouchEntity.h
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/7/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       TouchEntity.h
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #import "b2Math.h"
-
-//#import "GfxEntity.h"
-
-//@interface TouchEntity : GfxEntity
-//
-//@property GLboolean active;
-//@property (strong) UITouch* touch_ref;
-//
-//@end
 
 #ifndef _TOUCHENTITY_H_
 #define _TOUCHENTITY_H_
 
+/**
+ *  @class Basic touch entity that has a position.  Used by all `GestureEntity`
+ *  subclasses.
+ **/
 class TouchEntity {
 public:
     TouchEntity();

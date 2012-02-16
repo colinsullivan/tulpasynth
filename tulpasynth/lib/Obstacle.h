@@ -1,10 +1,11 @@
-//
-//  Obstacle.h
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/8/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       Obstacle.h
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #import "PhysicsEntity.h"
 
@@ -16,6 +17,10 @@
 #include "PanEntity.h"
 #include "TapEntity.h"
 
+/**
+ *  @class Abstraction around touch handlers for an obstacle that the falling
+ *  balls can collide with.
+ **/
 @interface Obstacle : PhysicsEntity
 
 - (GLboolean) handlePinch:(PinchEntity *) pinch;

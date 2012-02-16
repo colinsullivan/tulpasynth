@@ -1,10 +1,11 @@
-//
-//  Square.m
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/7/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       Square.mm
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #import "Square.h"
 
@@ -57,7 +58,7 @@ const GLubyte SquareIndices[] = {
     
     if (self = [super initWithController:theController withPosition:aPosition]) {
 
-        [self setWidth:50 withHeight:20];
+        [self setWidth:60 withHeight:30];
                 
         b2MassData myBodyMass;
         myBodyMass.mass = 10.0f;

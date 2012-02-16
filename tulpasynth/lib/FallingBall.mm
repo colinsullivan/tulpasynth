@@ -1,10 +1,11 @@
-//
-//  FallingBall.m
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/7/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       FallingBall.mm
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #import "FallingBall.h"
 
@@ -20,7 +21,6 @@ const GLubyte BallIndices[] = {
     0, 1, 2,
     2, 3, 0
 };
-
 
 @implementation FallingBall
 

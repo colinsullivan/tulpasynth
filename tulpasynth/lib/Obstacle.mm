@@ -1,10 +1,11 @@
-//
-//  Obstacle.m
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/8/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       Obstacle.mm
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #import "Obstacle.h"
 

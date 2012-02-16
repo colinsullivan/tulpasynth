@@ -1,13 +1,19 @@
-//
-//  Envelopes.h
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/13/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       Envelopes.hpp
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
+
 
 #ifndef tulpasynth_Envelopes_h
 #define tulpasynth_Envelopes_h
+
+/**
+ *  Envelope lookup tables for FMPercussion carrier and modulator waves.
+ **/
 
 stk::StkFloat instruments::FMPercussion::CarrierAttackEnvelopeLookup[10001] = { 
     0.000000,

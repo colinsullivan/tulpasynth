@@ -1,10 +1,11 @@
-//
-//  tulpaViewController.m
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/7/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       tulpaViewController.mm
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #import "tulpaViewController.h"
 
@@ -127,8 +128,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         }
 
     }
-    
-    
 }
 
 - (GLKTextureInfo*)loadTexture:(NSString*)imageFileName {
@@ -184,14 +183,14 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self->_world->SetContactListener(collisionDetector);
     
     // Create two starting squares for now
-    Square * s;
-    b2Vec2 pos(25.0, 50.0);
-    s = [[Square alloc] initWithController:self withPosition:pos];
-    [self.obstacles addObject:s];
-    
-    pos.Set(90.0, 40.0);
-    s = [[Square alloc] initWithController:self withPosition:pos];
-    [self.obstacles addObject:s];
+//    Square * s;
+//    b2Vec2 pos(25.0, 50.0);
+//    s = [[Square alloc] initWithController:self withPosition:pos];
+//    [self.obstacles addObject:s];
+//    
+//    pos.Set(90.0, 40.0);
+//    s = [[Square alloc] initWithController:self withPosition:pos];
+//    [self.obstacles addObject:s];
     
     // Left and right screen edges
     b2BodyDef wallsDef;
@@ -260,6 +259,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
     collisionStrength /= 2000;
 
+    // TODO: Get rid of this uglyness and scale pitches better
     if([entityOne isKindOfClass:[Square class]]) {
         [entityOne instr]->freq((30/[entityOne width]) * 1320);
         [entityOne instr]->velocity(collisionStrength);

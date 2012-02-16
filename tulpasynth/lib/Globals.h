@@ -1,14 +1,18 @@
-//
-//  Globals.h
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/7/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       Globals.h
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #ifndef tulpasynth_Globals_h
 #define tulpasynth_Globals_h
 
+/**
+ *  @struct Basic data structure for OpenGL vertices.
+ **/
 typedef struct {
     float Position[3];
     float Color[4];
@@ -22,6 +26,9 @@ typedef struct {
 
 #define PX_PER_M 2
 
+/**
+ *  Macros for converting between meters and pixels.
+ **/
 #define M_TO_PX(meters) meters*PX_PER_M
 #define PX_TO_M(px) px/PX_PER_M
 

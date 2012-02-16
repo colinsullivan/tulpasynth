@@ -4,7 +4,7 @@
  *  @author     Colin Sullivan <colinsul [at] gmail.com>
  *
  *              Copyright (c) 2012 Colin Sullivan
- *              Licensed under the MIT license.
+ *              Licensed under the GPLv3 license.
  **/
 
 #ifndef _GESTUREENTITY_H_
@@ -16,13 +16,19 @@
 #include "TouchEntity.h"
 
 
+/**
+ *  Basic structure for types of gesture states.
+ **/
 typedef enum {
     GestureEntityStateStart,
     GestureEntityStateMove,
     GestureEntityStateEnd
 } GestureEntityState;
 
-
+/**
+ *  @class  Base class for all gesture entities.  Used for minor
+ *  encapsulation of gesture recognizer properties from Apple.
+ **/
 class GestureEntity
 {
 public:

@@ -10,7 +10,6 @@
 		3B2096C814EC67BD0047CB5C /* LongPressEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B2096C714EC67BD0047CB5C /* LongPressEntity.mm */; };
 		3B4026DE14E25AF00047093F /* FallingBall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B4026DD14E25AF00047093F /* FallingBall.mm */; };
 		3B4772B214E38BF300AFBDB7 /* Obstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B4772B114E38BF300AFBDB7 /* Obstacle.mm */; };
-		3B4772BE14E49A3E00AFBDB7 /* StaticPhysicsEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B4772BD14E49A3E00AFBDB7 /* StaticPhysicsEntity.mm */; };
 		3B4772C114E49D0C00AFBDB7 /* PhysicsEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B4772C014E49D0C00AFBDB7 /* PhysicsEntity.mm */; };
 		3B50FA7614E25920001AD289 /* TapEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B50FA7514E25920001AD289 /* TapEntity.mm */; };
 		3B5A99D914E61ED200FF52D2 /* Box2DConfig.cmake in Resources */ = {isa = PBXBuildFile; fileRef = 3B5A997614E61ED200FF52D2 /* Box2DConfig.cmake */; };
@@ -244,14 +243,9 @@
 		3BFDB8CA14E9A360002B8F6B /* CyanRing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8C714E9A360002B8F6B /* CyanRing.png */; };
 		3BFDB8CB14E9A360002B8F6B /* GlowingRing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8C814E9A360002B8F6B /* GlowingRing.png */; };
 		3BFDB8CC14E9A360002B8F6B /* Textures.psd in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8C914E9A360002B8F6B /* Textures.psd */; };
-		3BFDB8D014E9A428002B8F6B /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8CE14E9A428002B8F6B /* SimpleFragment.glsl */; };
-		3BFDB8D114E9A428002B8F6B /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 3BFDB8CF14E9A428002B8F6B /* SimpleVertex.glsl */; };
 		3BFDB8D814E9B550002B8F6B /* mo_gfx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8D714E9B550002B8F6B /* mo_gfx.mm */; };
-		3BFDB8ED14EA0204002B8F6B /* Boing.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8E414EA0204002B8F6B /* Boing.mm */; };
 		3BFDB8EE14EA0204002B8F6B /* FMPercussion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8E514EA0204002B8F6B /* FMPercussion.cpp */; };
 		3BFDB8EF14EA0204002B8F6B /* Instrument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8E714EA0204002B8F6B /* Instrument.cpp */; };
-		3BFDB8F014EA0204002B8F6B /* RAMpler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8E914EA0204002B8F6B /* RAMpler.cpp */; };
-		3BFDB8F114EA0204002B8F6B /* SimpleString.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8EC14EA0204002B8F6B /* SimpleString.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -261,8 +255,6 @@
 		3B4026DD14E25AF00047093F /* FallingBall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBall.mm; sourceTree = "<group>"; };
 		3B4772B014E38BF300AFBDB7 /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
 		3B4772B114E38BF300AFBDB7 /* Obstacle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Obstacle.mm; sourceTree = "<group>"; };
-		3B4772BC14E49A3E00AFBDB7 /* StaticPhysicsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticPhysicsEntity.h; sourceTree = "<group>"; };
-		3B4772BD14E49A3E00AFBDB7 /* StaticPhysicsEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StaticPhysicsEntity.mm; sourceTree = "<group>"; };
 		3B4772BF14E49D0C00AFBDB7 /* PhysicsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsEntity.h; sourceTree = "<group>"; };
 		3B4772C014E49D0C00AFBDB7 /* PhysicsEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsEntity.mm; sourceTree = "<group>"; };
 		3B50FA7414E25920001AD289 /* TapEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapEntity.h; sourceTree = "<group>"; };
@@ -679,20 +671,12 @@
 		3BFDB8C714E9A360002B8F6B /* CyanRing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CyanRing.png; sourceTree = "<group>"; };
 		3BFDB8C814E9A360002B8F6B /* GlowingRing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GlowingRing.png; sourceTree = "<group>"; };
 		3BFDB8C914E9A360002B8F6B /* Textures.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Textures.psd; sourceTree = "<group>"; };
-		3BFDB8CE14E9A428002B8F6B /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
-		3BFDB8CF14E9A428002B8F6B /* SimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleVertex.glsl; sourceTree = "<group>"; };
 		3BFDB8D614E9B550002B8F6B /* mo_gfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_gfx.h; sourceTree = "<group>"; };
 		3BFDB8D714E9B550002B8F6B /* mo_gfx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_gfx.mm; sourceTree = "<group>"; };
-		3BFDB8E314EA0204002B8F6B /* Boing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boing.h; sourceTree = "<group>"; };
-		3BFDB8E414EA0204002B8F6B /* Boing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Boing.mm; sourceTree = "<group>"; };
 		3BFDB8E514EA0204002B8F6B /* FMPercussion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FMPercussion.cpp; sourceTree = "<group>"; };
 		3BFDB8E614EA0204002B8F6B /* FMPercussion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FMPercussion.hpp; sourceTree = "<group>"; };
 		3BFDB8E714EA0204002B8F6B /* Instrument.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Instrument.cpp; sourceTree = "<group>"; };
 		3BFDB8E814EA0204002B8F6B /* Instrument.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Instrument.hpp; sourceTree = "<group>"; };
-		3BFDB8E914EA0204002B8F6B /* RAMpler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAMpler.cpp; sourceTree = "<group>"; };
-		3BFDB8EA14EA0204002B8F6B /* RAMpler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAMpler.hpp; sourceTree = "<group>"; };
-		3BFDB8EB14EA0204002B8F6B /* SimpleString.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SimpleString.hpp; sourceTree = "<group>"; };
-		3BFDB8EC14EA0204002B8F6B /* SimpleString.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SimpleString.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -933,35 +917,31 @@
 			isa = PBXGroup;
 			children = (
 				3BA4196A14EC47D400647985 /* CollisionDetector.h */,
-				3BFDB8E214EA0204002B8F6B /* instruments */,
-				3BFDB8CE14E9A428002B8F6B /* SimpleFragment.glsl */,
-				3BFDB8CF14E9A428002B8F6B /* SimpleVertex.glsl */,
-				3B4772B014E38BF300AFBDB7 /* Obstacle.h */,
-				3B4772B114E38BF300AFBDB7 /* Obstacle.mm */,
-				3B50FA7414E25920001AD289 /* TapEntity.h */,
-				3B50FA7514E25920001AD289 /* TapEntity.mm */,
-				3B75A8CD14E2500000F17AB5 /* PanEntity.h */,
-				3B75A8CE14E2500000F17AB5 /* PanEntity.mm */,
-				3BF8965014E2430F0038780F /* GestureEntity.h */,
-				3BF8965114E2430F0038780F /* GestureEntity.mm */,
-				3BF8964D14E2415D0038780F /* RotateEntity.h */,
-				3BF8964E14E2415E0038780F /* RotateEntity.mm */,
-				3BF8964914E22F7D0038780F /* PinchEntity.h */,
-				3BF8964A14E22F7D0038780F /* PinchEntity.mm */,
-				3B9D2D4014E1D77500A042BF /* vendor */,
-				3B9D2F0F14E1DB2E00A042BF /* Square.h */,
-				3B9D2F1014E1DB2E00A042BF /* Square.mm */,
-				3B9D2F1A14E1E96F00A042BF /* Globals.h */,
-				3B9D2F1E14E2023E00A042BF /* TouchEntity.h */,
-				3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */,
 				3B4026DC14E25AF00047093F /* FallingBall.h */,
 				3B4026DD14E25AF00047093F /* FallingBall.mm */,
-				3B4772BC14E49A3E00AFBDB7 /* StaticPhysicsEntity.h */,
-				3B4772BD14E49A3E00AFBDB7 /* StaticPhysicsEntity.mm */,
-				3B4772BF14E49D0C00AFBDB7 /* PhysicsEntity.h */,
-				3B4772C014E49D0C00AFBDB7 /* PhysicsEntity.mm */,
+				3BF8965014E2430F0038780F /* GestureEntity.h */,
+				3BF8965114E2430F0038780F /* GestureEntity.mm */,
+				3B9D2F1A14E1E96F00A042BF /* Globals.h */,
+				3BFDB8E214EA0204002B8F6B /* instruments */,
 				3B2096C514EC67A50047CB5C /* LongPressEntity.h */,
 				3B2096C714EC67BD0047CB5C /* LongPressEntity.mm */,
+				3B4772B014E38BF300AFBDB7 /* Obstacle.h */,
+				3B4772B114E38BF300AFBDB7 /* Obstacle.mm */,
+				3B75A8CD14E2500000F17AB5 /* PanEntity.h */,
+				3B75A8CE14E2500000F17AB5 /* PanEntity.mm */,
+				3B4772BF14E49D0C00AFBDB7 /* PhysicsEntity.h */,
+				3B4772C014E49D0C00AFBDB7 /* PhysicsEntity.mm */,
+				3BF8964914E22F7D0038780F /* PinchEntity.h */,
+				3BF8964A14E22F7D0038780F /* PinchEntity.mm */,
+				3BF8964D14E2415D0038780F /* RotateEntity.h */,
+				3BF8964E14E2415E0038780F /* RotateEntity.mm */,
+				3B9D2F0F14E1DB2E00A042BF /* Square.h */,
+				3B9D2F1014E1DB2E00A042BF /* Square.mm */,
+				3B50FA7414E25920001AD289 /* TapEntity.h */,
+				3B50FA7514E25920001AD289 /* TapEntity.mm */,
+				3B9D2F1E14E2023E00A042BF /* TouchEntity.h */,
+				3B9D2F1F14E2023E00A042BF /* TouchEntity.mm */,
+				3B9D2D4014E1D77500A042BF /* vendor */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -1352,16 +1332,10 @@
 		3BFDB8E214EA0204002B8F6B /* instruments */ = {
 			isa = PBXGroup;
 			children = (
-				3BFDB8E314EA0204002B8F6B /* Boing.h */,
-				3BFDB8E414EA0204002B8F6B /* Boing.mm */,
 				3BFDB8E514EA0204002B8F6B /* FMPercussion.cpp */,
 				3BFDB8E614EA0204002B8F6B /* FMPercussion.hpp */,
 				3BFDB8E714EA0204002B8F6B /* Instrument.cpp */,
 				3BFDB8E814EA0204002B8F6B /* Instrument.hpp */,
-				3BFDB8E914EA0204002B8F6B /* RAMpler.cpp */,
-				3BFDB8EA14EA0204002B8F6B /* RAMpler.hpp */,
-				3BFDB8EB14EA0204002B8F6B /* SimpleString.hpp */,
-				3BFDB8EC14EA0204002B8F6B /* SimpleString.mm */,
 				3BB644AB14EA41E4007D4D91 /* Envelopes.hpp */,
 			);
 			path = instruments;
@@ -1479,8 +1453,6 @@
 				3BFDB8CA14E9A360002B8F6B /* CyanRing.png in Resources */,
 				3BFDB8CB14E9A360002B8F6B /* GlowingRing.png in Resources */,
 				3BFDB8CC14E9A360002B8F6B /* Textures.psd in Resources */,
-				3BFDB8D014E9A428002B8F6B /* SimpleFragment.glsl in Resources */,
-				3BFDB8D114E9A428002B8F6B /* SimpleVertex.glsl in Resources */,
 				3BA4196814EC470B00647985 /* GlowingBox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1609,7 +1581,6 @@
 				3B50FA7614E25920001AD289 /* TapEntity.mm in Sources */,
 				3B4026DE14E25AF00047093F /* FallingBall.mm in Sources */,
 				3B4772B214E38BF300AFBDB7 /* Obstacle.mm in Sources */,
-				3B4772BE14E49A3E00AFBDB7 /* StaticPhysicsEntity.mm in Sources */,
 				3B4772C114E49D0C00AFBDB7 /* PhysicsEntity.mm in Sources */,
 				3B5A99DB14E61ED200FF52D2 /* b2BroadPhase.cpp in Sources */,
 				3B5A99DC14E61ED200FF52D2 /* b2CollideCircle.cpp in Sources */,
@@ -1657,11 +1628,8 @@
 				3B5A9A0614E61ED200FF52D2 /* b2WheelJoint.cpp in Sources */,
 				3B5A9A0714E61ED200FF52D2 /* b2Rope.cpp in Sources */,
 				3BFDB8D814E9B550002B8F6B /* mo_gfx.mm in Sources */,
-				3BFDB8ED14EA0204002B8F6B /* Boing.mm in Sources */,
 				3BFDB8EE14EA0204002B8F6B /* FMPercussion.cpp in Sources */,
 				3BFDB8EF14EA0204002B8F6B /* Instrument.cpp in Sources */,
-				3BFDB8F014EA0204002B8F6B /* RAMpler.cpp in Sources */,
-				3BFDB8F114EA0204002B8F6B /* SimpleString.mm in Sources */,
 				3BA4196B14EC47D400647985 /* CollisionDetector.h in Sources */,
 				3B2096C814EC67BD0047CB5C /* LongPressEntity.mm in Sources */,
 			);

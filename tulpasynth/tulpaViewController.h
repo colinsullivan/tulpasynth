@@ -1,10 +1,11 @@
-//
-//  tulpaViewController.h
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/7/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       tulpaViewController.h
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
@@ -34,19 +35,37 @@
  **/
 void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 
+/**
+ *  @class  Master view controller class, handles interactions between
+ *  various components in the application, initializes everything, etc.
+ **/
 @interface tulpaViewController : GLKViewController {
 @private
     b2World* _world;
 }
 
+/**
+ *  Textures used for circles and boxes.
+ **/
 @property (strong) GLKTextureInfo* glowingCircleTexture;
 @property (strong) GLKTextureInfo* glowingBoxTexture;
 
+/**
+ *  Load a texture given a filename (.png assumed).
+ *
+ *  @param  imageFileName - the name of the image file to load.
+ **/
 - (GLKTextureInfo*)loadTexture:(NSString*)imageFileName;
 
+/**
+ *  OpenGL references.
+ **/
 @property (strong, nonatomic) EAGLContext * context;
 @property (strong, nonatomic) GLKBaseEffect * effect;
 
+/**
+ *  `UIGestureRecognizer` instances and handlers for various gestures.
+ **/
 @property (strong, nonatomic) IBOutlet UIPinchGestureRecognizer * pinchRecognizer;
 - (IBAction)pinchGestureHandler:(id)sender;
 
@@ -62,7 +81,16 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer * longPressRecognizer;
 - (IBAction)longPressHandler:(id)sender;
 
+/**
+ *  Box2D world instance.
+ **/
 @property (readonly) b2World* world;
+- (b2World*)getWorld;
+- (b2World*)world;
+
+/**
+ *  Body that represents the left and right walls.
+ **/
 @property (readonly) b2Body* walls;
 
 /**
@@ -76,9 +104,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  **/
 - (void)beginCollision:(b2Contact*) contact;
 
-- (b2World*)getWorld;
-- (b2World*)world;
-
 /**
  *  The list of obstacle objects currently in creation.
  **/
@@ -88,11 +113,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  The list of falling balls that are currently instantiated.
  **/
 @property (strong, nonatomic) NSMutableArray * fallingBalls;
-
-/**
- *  Mapping of `b2Body` instances to `PhysicsEntity` (or subclass) instances.
- **/
-//@property (strong, nonatomic) NSMapTable* bodyToEntityMap;
 
 - (GLuint)setupTexture:(NSString *)fileName;
 - (GLuint)compileShader:(NSString*)shaderName withType:(GLenum)shaderType;

@@ -1,10 +1,11 @@
-//
-//  PhysicsEntity.h
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/9/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       PhysicsEntity.h
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -15,7 +16,10 @@
 
 #include "b2Body.h"
 
-
+/**
+ *  @class Base class for all graphics entities, all of which are subject
+ *  to Box2D physics.
+ **/
 @interface PhysicsEntity : NSObject {
     
 @protected
