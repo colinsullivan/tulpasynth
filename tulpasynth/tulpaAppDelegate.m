@@ -8,8 +8,8 @@
  **/
 
 #import "tulpaAppDelegate.h"
-
 @implementation tulpaAppDelegate {
+
 }
 
 @synthesize window = _window;
