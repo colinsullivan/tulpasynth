@@ -76,6 +76,12 @@ const GLubyte SquareIndices[] = {
     return self;
 }
 
+- (void) dealloc {
+    delete self.instr;
+    
+    [super dealloc];
+}
+
 -(void)prepareToDraw {
     self.effect.texture2d0.enabled = GL_TRUE;
     self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
