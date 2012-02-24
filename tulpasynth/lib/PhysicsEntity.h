@@ -14,19 +14,24 @@
 
 #import "tulpaViewController.h"
 
+#import "View.h"
+#import "PhysicsEntityModel.h"
+
 #include "b2Body.h"
 
 /**
  *  @class Base class for all graphics entities, all of which are subject
  *  to Box2D physics.
  **/
-@interface PhysicsEntity : NSObject {
+@interface PhysicsEntity : View {
     
 @protected
     GLuint _vertexBuffer;
     GLuint _indexBuffer;
     
 }
+
+@property PhysicsEntityModel* model;
 
 @property b2Body* body;
 

@@ -183,14 +183,14 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self->_world->SetContactListener(collisionDetector);
     
     // Create two starting squares for now
-    Square * s;
-    b2Vec2 pos(25.0, 50.0);
-    s = [[Square alloc] initWithController:self withPosition:pos];
-    [self.obstacles addObject:s];
-    
-    pos.Set(90.0, 40.0);
-    s = [[Square alloc] initWithController:self withPosition:pos];
-    [self.obstacles addObject:s];
+//    Square * s;
+//    b2Vec2 pos(25.0, 50.0);
+//    s = [[Square alloc] initWithController:self withPosition:pos];
+//    [self.obstacles addObject:s];
+//    
+//    pos.Set(90.0, 40.0);
+//    s = [[Square alloc] initWithController:self withPosition:pos];
+//    [self.obstacles addObject:s];
     
     // Left and right screen edges
     b2BodyDef wallsDef;
@@ -380,12 +380,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         FallingBallModel* bm = [[FallingBallModel alloc] initWithPosition:[[NSDictionary alloc] initWithObjectsAndKeys:
                                                                            [NSNumber numberWithFloat:touchPosition->x], @"x",
                                                                            [NSNumber numberWithFloat:touchPosition->y], @"y", nil]];
-        
-        NSLog(@"[bm serialize]:\n%@", [bm serialize]);
-        
-//        FallingBall* b = [[FallingBall alloc] initWithController:self withPosition:];
-//        [fallingBalls addObject:b];
-//        [[PhysicsEntity Instances] addObject:b];
+        FallingBall* b = [[FallingBall alloc] initWithController:self withModel:bm];
+        [fallingBalls addObject:b];
 
 //        NSLog(@"empty!");
     }    

@@ -24,9 +24,9 @@ const GLubyte BallIndices[] = {
 
 @implementation FallingBall
 
-- (id)initWithController:(tulpaViewController *)theController withPosition:(b2Vec2)aPosition {
+- (id)initWithController:(tulpaViewController *)theController withModel:(FallingBallModel*)aModel {
 
-    if (self = [super initWithController:theController withPosition:aPosition]) {
+    if (self = [super initWithController:theController withModel:aModel]) {
         
         self.width = 20;
         self.height = 20;

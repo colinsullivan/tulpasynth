@@ -11,6 +11,7 @@
 		3B7EB07514F8444E00452194 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.m */; };
 		3B7EB07614F8444E00452194 /* PhysicsEntityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.m */; };
 		3B7EB48E14F8462D00452194 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7EB46C14F845C700452194 /* libRestKit.a */; };
+		3BBE9FA014F8513F0013CB1A /* View.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE9F9F14F8513F0013CB1A /* View.m */; };
 		3BE2566914F837CD00AFC61E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE2566814F837CD00AFC61E /* UIKit.framework */; };
 		3BE2566B14F837CD00AFC61E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE2566A14F837CD00AFC61E /* Foundation.framework */; };
 		3BE2566D14F837CD00AFC61E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE2566C14F837CD00AFC61E /* CoreGraphics.framework */; };
@@ -295,13 +296,6 @@
 			remoteGlobalIDString = 25160E78145651060060A5C5;
 			remoteInfo = RestKitFrameworkTests;
 		};
-		3B7EB48C14F845EB00452194 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3B7EB21114F845C600452194 /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 25160D1514564E810060A5C5;
-			remoteInfo = RestKit;
-		};
 		3BE267C214F83F8500AFC61E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3BE262C014F83F8200AFC61E /* Box2D.xcodeproj */;
@@ -340,6 +334,8 @@
 		3B7EB07214F8444E00452194 /* PhysicsEntityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsEntityModel.h; sourceTree = "<group>"; };
 		3B7EB07314F8444E00452194 /* PhysicsEntityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsEntityModel.m; sourceTree = "<group>"; };
 		3B7EB21114F845C600452194 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RestKit.xcodeproj; sourceTree = "<group>"; };
+		3BBE9F9E14F8513F0013CB1A /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
+		3BBE9F9F14F8513F0013CB1A /* View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = View.m; sourceTree = "<group>"; };
 		3BE2566414F837CD00AFC61E /* tulpasynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tulpasynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BE2566814F837CD00AFC61E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3BE2566A14F837CD00AFC61E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -847,6 +843,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3BBE9F9D14F8513F0013CB1A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				3BBE9F9E14F8513F0013CB1A /* View.h */,
+				3BBE9F9F14F8513F0013CB1A /* View.m */,
+			);
+			name = view;
+			path = lib/view;
+			sourceTree = "<group>";
+		};
 		3BE2565914F837CC00AFC61E = {
 			isa = PBXGroup;
 			children = (
@@ -913,6 +919,7 @@
 		3BE2568C14F8387100AFC61E /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3BBE9F9D14F8513F0013CB1A /* view */,
 				3B7EB06D14F8444E00452194 /* model */,
 				3BE269C514F8430D00AFC61E /* instruments */,
 				3BE267DE14F840B000AFC61E /* PinchEntity.h */,
@@ -1561,7 +1568,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3B7EB48D14F845EB00452194 /* PBXTargetDependency */,
 			);
 			name = tulpasynth;
 			productName = tulpasynth;
@@ -1919,18 +1925,11 @@
 				3B7EB07414F8444E00452194 /* FallingBallModel.m in Sources */,
 				3B7EB07514F8444E00452194 /* Model.m in Sources */,
 				3B7EB07614F8444E00452194 /* PhysicsEntityModel.m in Sources */,
+				3BBE9FA014F8513F0013CB1A /* View.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3B7EB48D14F845EB00452194 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RestKit;
-			targetProxy = 3B7EB48C14F845EB00452194 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3BE2567114F837CD00AFC61E /* InfoPlist.strings */ = {

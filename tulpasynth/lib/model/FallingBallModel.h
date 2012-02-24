@@ -6,12 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Model.h"
+#import "PhysicsEntityModel.h"
 
-@interface FallingBallModel : Model
+@interface FallingBallModel : PhysicsEntityModel
 
-@property (strong, nonatomic) NSDictionary* initialPosition;
-
-- (id) initWithPosition:(NSDictionary*)aPosition;
 
 @end

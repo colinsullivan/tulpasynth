@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Model.h"
+
 @interface View : NSObject
 
 /**

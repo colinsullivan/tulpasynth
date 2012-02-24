@@ -35,7 +35,7 @@
     angle = anAngle;
 }
 
-- (id)initWithController:(tulpaViewController *)theController withPosition:(b2Vec2)aPosition {
+- (id)initWithController:(tulpaViewController *)theController withModel:(PhysicsEntityModel*)aModel {
     if (self = [self init]) {
         
         self.controller = theController;
@@ -59,7 +59,7 @@
         
         // Create static body
         b2BodyDef bodyDef;
-        bodyDef.position = aPosition;
+        bodyDef.position = b2Vec2([[aModel.initialPosition valueForKey:@"x"] floatValue], [[aModel.initialPosition valueForKey:@"y"] floatValue]);
         bodyDef.type = [self bodyType];
         b2Body* newBody = self.controller.world->CreateBody(&bodyDef);
         self.body = newBody;
