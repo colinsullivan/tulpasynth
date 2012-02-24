@@ -41,7 +41,7 @@
 //        NSLog(@"m is an invalid JSON object!");
 //    }
 //    
-    NSError* error;
+//    NSError* error;
 //    NSData* serializedModel = [NSJSONSerialization dataWithJSONObject:m.attributes options:NSJSONWritingPrettyPrinted error:&error];
 //    
 //    if (serializedModel) {
@@ -79,43 +79,52 @@
     // Serialization
     m = [[Model alloc] init];
     m.name = @"Colin";
-    Model* another = [[Model alloc] init];
-    
-    NSLog(@"m.id: %@", m.id);
-    NSLog(@"another.id: %@", another.id);
-    
+
+    NSLog(@"m.id: %@", m.id);    
     NSLog(@"m.name: %@", m.name);
     
-    RKObjectMappingProvider* mappingProvider = [RKObjectMappingProvider objectMappingProvider];
+//    NSMutableDictionary* mserialized = [m serialize];
+//    NSLog(@"mserialized:\n%@", mserialized);
     
-    RKObjectMapping* modelMapping = [RKObjectMapping mappingForClass:[Model class]];
-    [modelMapping mapAttributes:@"id", @"name", nil];
+    View* v = [[View alloc] init];
+    [m addObserver:v forKeyPath:@"name" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial context:NULL];
     
-    [mappingProvider addObjectMapping:modelMapping];
+    m.name = @"Locky";
     
-    RKObjectSerializer* modelSerializer = [RKObjectSerializer serializerWithObject:m mapping:modelMapping];
-    NSMutableDictionary* serializedModel = [modelSerializer serializedObject:&error];
+    [m dealloc];
     
-    if (serializedModel) {
-        NSLog(@"serializedModel:\n%@", serializedModel);
-    }
-    else {
-        NSLog(@"An error occurred while serializing:\n%@", error);
-    }
+    
+    
+//    RKObjectMappingProvider* mappingProvider = [RKObjectMappingProvider objectMappingProvider];
+    
+//    RKObjectMapping* modelMapping = [RKObjectMapping mappingForClass:[Model class]];
+//    [modelMapping mapAttributes:@"id", @"name", nil];
+    
+//    [mappingProvider addObjectMapping:modelMapping];
+    
+//    RKObjectSerializer* modelSerializer = [RKObjectSerializer serializerWithObject:m mapping:modelMapping];
+//    NSMutableDictionary* serializedModel = [modelSerializer serializedObject:&error];
+    
+//    if (serializedModel) {
+//        NSLog(@"serializedModel:\n%@", serializedModel);
+//    }
+//    else {
+//        NSLog(@"An error occurred while serializing:\n%@", error);
+//    }
     
     // De-serialization, instantiation
-    [m dealloc];
-    m = [[Model alloc] init];
-    
-    NSLog(@"De-serializing");
-    RKObjectMappingOperation* mapperOperation = [RKObjectMappingOperation mappingOperationFromObject:serializedModel toObject:m withMapping:modelMapping];
-    if ([mapperOperation performMapping:&error]) {
-        NSLog(@"m.id: %@", m.id);
-        NSLog(@"m.name: %@", m.name);
-    }
-    else {
-        NSLog(@"An error occurred while de-serializing:\n%@", [error localizedDescription]);
-    }
+//    [m dealloc];
+//    m = [[Model alloc] init];
+//    
+//    NSLog(@"De-serializing");
+//    RKObjectMappingOperation* mapperOperation = [RKObjectMappingOperation mappingOperationFromObject:serializedModel toObject:m withMapping:modelMapping];
+//    if ([mapperOperation performMapping:&error]) {
+//        NSLog(@"m.id: %@", m.id);
+//        NSLog(@"m.name: %@", m.name);
+//    }
+//    else {
+//        NSLog(@"An error occurred while de-serializing:\n%@", [error localizedDescription]);
+//    }
     
     
 
