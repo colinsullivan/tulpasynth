@@ -87,7 +87,7 @@
 //    NSLog(@"mserialized:\n%@", mserialized);
     
     View* v = [[View alloc] init];
-    [m addObserver:v forKeyPath:@"name" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial context:NULL];
+    [v startObservingKeyPaths:[NSArray arrayWithObjects:@"name", nil] ofObject:m];
     
     m.name = @"Locky";
     

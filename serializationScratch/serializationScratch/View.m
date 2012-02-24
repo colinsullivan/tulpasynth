@@ -16,4 +16,10 @@
     
 }
 
+- (void) startObservingKeyPaths:(NSArray*)keyPaths ofObject:(id)object {
+    for (NSString* keyPath in keyPaths) {
+        [object addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial context:NULL];
+    }
+}
+
 @end
