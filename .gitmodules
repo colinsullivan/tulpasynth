@@ -13,3 +13,6 @@
 [submodule "server/vendor/tclap"]
 	path = server/vendor/tclap
 	url = git://tclap.git.sourceforge.net/gitroot/tclap/tclap
+[submodule "tulpasynth/lib/vendor/RestKit"]
+	path = tulpasynth/lib/vendor/RestKit
+	url = git://github.com/RestKit/RestKit.git

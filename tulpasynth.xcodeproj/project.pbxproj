@@ -248,9 +248,20 @@
 		3BFDB8EF14EA0204002B8F6B /* Instrument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BFDB8E714EA0204002B8F6B /* Instrument.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3B2DD98214F6E0A200A01126 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B2DD97E14F6E0A100A01126 /* serializationScratch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3B2DD95D14F6E0A100A01126;
+			remoteInfo = serializationScratch;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		3B2096C514EC67A50047CB5C /* LongPressEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongPressEntity.h; sourceTree = "<group>"; };
 		3B2096C714EC67BD0047CB5C /* LongPressEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LongPressEntity.mm; sourceTree = "<group>"; };
+		3B2DD97E14F6E0A100A01126 /* serializationScratch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = serializationScratch.xcodeproj; path = serializationScratch/serializationScratch.xcodeproj; sourceTree = "<group>"; };
 		3B4026DC14E25AF00047093F /* FallingBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBall.h; sourceTree = "<group>"; };
 		3B4026DD14E25AF00047093F /* FallingBall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBall.mm; sourceTree = "<group>"; };
 		3B4772B014E38BF300AFBDB7 /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
@@ -698,6 +709,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B2DD97F14F6E0A100A01126 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3B2DD98314F6E0A200A01126 /* serializationScratch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3B5A997414E61ED200FF52D2 /* Box2D */ = {
 			isa = PBXGroup;
 			children = (
@@ -858,6 +877,7 @@
 		3B9D2D0714E1CF8400A042BF = {
 			isa = PBXGroup;
 			children = (
+				3B2DD97E14F6E0A100A01126 /* serializationScratch.xcodeproj */,
 				3B9D2F1414E1DD1D00A042BF /* CoreLocation.framework */,
 				3B9D2F1214E1DD1300A042BF /* AudioToolbox.framework */,
 				3B9D2D3914E1D1D300A042BF /* OpenGLES.framework */,
@@ -1379,12 +1399,28 @@
 			mainGroup = 3B9D2D0714E1CF8400A042BF;
 			productRefGroup = 3B9D2D1314E1CF8400A042BF /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3B2DD97F14F6E0A100A01126 /* Products */;
+					ProjectRef = 3B2DD97E14F6E0A100A01126 /* serializationScratch.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3B9D2D1114E1CF8400A042BF /* tulpasynth */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3B2DD98314F6E0A200A01126 /* serializationScratch.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = serializationScratch.app;
+			remoteRef = 3B2DD98214F6E0A200A01126 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3B9D2D1014E1CF8400A042BF /* Resources */ = {

@@ -29,3 +29,29 @@ psuedocode for user action synchronization:
         // action
         potentiallySafe = action.time;
     }
+
+UserAction.perform:
+
+    obj = g_objects.getAtKeyPath(this.path)
+
+    switch this.method:
+        
+        case "CREATE":
+            // assuming path is to an array
+            obj.create(attributes);
+        
+        case "UPDATE":
+            // assuming path is to an array
+            obj.get(attributes.id).set(attributes);
+        
+        case "DELETE":
+            // assuming path is to an array
+            obj.delete(attributes.id);
+
+Model.Collection.create(json attributes):
+    [[this.type alloc] init]
+    
+        
+    
+    
+            
