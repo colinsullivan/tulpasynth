@@ -26,6 +26,8 @@
 
 #import "Instrument.hpp"
 
+#import "FallingBallModel.h"
+
 /**
  *  Global audio callback.  userData will be the `tulpaViewController` 
  *  instance.

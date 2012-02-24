@@ -373,11 +373,19 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         }
     }
     
+    // Handle tap in empty space
     if (!handled) {
-        // Handle tap in empty space
-        FallingBall* b = [[FallingBall alloc] initWithController:self withPosition:(*_tapEntity->touches[0]->position)];
-        [fallingBalls addObject:b];
-        [[PhysicsEntity Instances] addObject:b];
+        b2Vec2* touchPosition = _tapEntity->touches[0]->position;
+        // Create falling ball model
+        FallingBallModel* bm = [[FallingBallModel alloc] initWithPosition:[[NSDictionary alloc] initWithObjectsAndKeys:
+                                                                           [NSNumber numberWithFloat:touchPosition->x], @"x",
+                                                                           [NSNumber numberWithFloat:touchPosition->y], @"y", nil]];
+        
+        NSLog(@"[bm serialize]:\n%@", [bm serialize]);
+        
+//        FallingBall* b = [[FallingBall alloc] initWithController:self withPosition:];
+//        [fallingBalls addObject:b];
+//        [[PhysicsEntity Instances] addObject:b];
 
 //        NSLog(@"empty!");
     }    
