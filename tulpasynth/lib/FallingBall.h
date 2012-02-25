@@ -12,9 +12,13 @@
 #include "b2CircleShape.h"
 #include "b2Fixture.h"
 
+#import "FallingBallModel.h"
+
 /**
  *  @class  Ball that falls and collides with other entities.
  **/
 @interface FallingBall : PhysicsEntity
+
+- (id)initWithController:(tulpaViewController *)theController withModel:(FallingBallModel*)aModel;
 
 @end

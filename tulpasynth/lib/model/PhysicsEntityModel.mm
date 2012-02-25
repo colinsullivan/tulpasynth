@@ -10,13 +10,7 @@
 
 @implementation PhysicsEntityModel
 
-- (id) initWithPosition:(NSDictionary*)aPosition {
-    if (self = [super init]) {
-        self.initialPosition = aPosition;
-    }
-    
-    return self;
-}
+@synthesize initialPosition;
 
 - (NSMutableArray*) serializableAttributes {
     NSMutableArray* attributes = [super serializableAttributes];

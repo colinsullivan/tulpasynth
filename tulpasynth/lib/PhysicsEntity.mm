@@ -9,9 +9,11 @@
 
 #import "PhysicsEntity.h"
 
+#import "tulpaViewController.h"
+
 @implementation PhysicsEntity
 
-@synthesize body, effect, controller, shape, shapeFixture;
+@synthesize body, effect, controller, shape, shapeFixture, model;
 
 @synthesize width, height, angle;
 
@@ -39,6 +41,7 @@
     if (self = [self init]) {
         
         self.controller = theController;
+        self.model = aModel;
         
         // Shader for this object
         self.effect = [[GLKBaseEffect alloc] init];

@@ -16,6 +16,8 @@
 
 #import "FMPercussion.hpp"
 
+#import "SquareModel.h"
+
 /**
  *  @class A rectangular obstacle.
  **/
@@ -24,6 +26,8 @@
 //@property b2PolygonShape* square;
 
 @property instruments::FMPercussion* instr;
+
+- (id)initWithController:(tulpaViewController *)theController withModel:(SquareModel*)aModel;
 
 
 @end

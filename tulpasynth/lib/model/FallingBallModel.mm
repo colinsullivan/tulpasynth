@@ -12,7 +12,5 @@
 
 @implementation FallingBallModel
 
-@synthesize initialPosition;
-
 
 @end

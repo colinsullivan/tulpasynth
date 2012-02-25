@@ -18,8 +18,8 @@
 @synthesize panner;
 @synthesize prePanningPosition;
 
-- (id)initWithController:(tulpaViewController *)theController withPosition:(b2Vec2)aPosition {
-    if (self = [super initWithController:theController withPosition:aPosition]) {
+- (id)initWithController:(tulpaViewController *)theController withModel:(PhysicsEntityModel*)aModel {
+    if (self = [super initWithController:theController withModel:aModel]) {
         self.prePanningPosition = new b2Vec2();
     }
     

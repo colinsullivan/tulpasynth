@@ -9,6 +9,8 @@
 
 #import "Square.h"
 
+#import "tulpaViewController.h"
+
 static Vertex SquareVertices[] = {
     {{1, -1, 0}, {0.15, 0.88, 0.49, 1.0}, {1, 0}},
     {{1, 1, 0}, {0.15, 0.88, 0.49, 1.0}, {1, 1}},
@@ -54,9 +56,9 @@ const GLubyte SquareIndices[] = {
     self.shapeFixture = self.body->CreateFixture(&mySquareFixture);
 }
 
-- (id)initWithController:(tulpaViewController *)theController withPosition:(b2Vec2)aPosition {
+- (id)initWithController:(tulpaViewController *)theController withModel:(SquareModel*)aModel {
     
-    if (self = [super initWithController:theController withPosition:aPosition]) {
+    if (self = [super initWithController:theController withModel:aModel]) {
 
         [self setWidth:60 withHeight:30];
                 

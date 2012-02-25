@@ -12,15 +12,30 @@
 #import <Foundation/Foundation.h>
 #import <RestKit/RestKit.h>
 
+#import "ModelCollection.h"
+
+@class tulpaViewController;
+
 @interface Model : NSObject
 
-
 @property (nonatomic, retain) NSNumber* id;
+@property (nonatomic, assign) tulpaViewController* controller;
 
-- (id) init;
+- (id) initWithController:(tulpaViewController*)theController withAttributes:(NSMutableDictionary*)attributes;
 
 - (NSMutableArray*) serializableAttributes;
 - (NSMutableDictionary*) serialize;
+
+/**
+ *  A global list of all model instances.
+ **/
++ (ModelCollection*) Instances;
+
+/**
+ *  `RKObjectMapping` instance for this object.  Used for 
+ *  serialization/de-serialization.
+ **/
+- (RKObjectMapping*) modelMapping;
 
 
 

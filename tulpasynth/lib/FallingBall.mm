@@ -9,6 +9,8 @@
 
 #import "FallingBall.h"
 
+#import "tulpaViewController.h"
+
 static Vertex BallVertices[] = {
     {{1, -1, 0}, {0, 0.5, 0.5, 1.0}, {1, 0}},
     {{1, 1, 0}, {0, 0.5, 0.5, 1.0}, {1, 1}},

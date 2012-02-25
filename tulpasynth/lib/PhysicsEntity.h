@@ -12,12 +12,14 @@
 #import <GLKit/GLKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "tulpaViewController.h"
+#include "Globals.h"
 
 #import "View.h"
 #import "PhysicsEntityModel.h"
 
 #include "b2Body.h"
+
+@class tulpaViewController;
 
 /**
  *  @class Base class for all graphics entities, all of which are subject

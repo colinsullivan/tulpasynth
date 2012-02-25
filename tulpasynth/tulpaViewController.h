@@ -12,21 +12,14 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
 
-#include <iostream>
-#include <vector>
-
-#import "mo_audio.h"
 #include "b2World.h"
 #include "b2Contact.h"
 #include "b2WorldCallbacks.h"
 
-#import "CollisionDetector.h"
-
+#include "CollisionDetector.h"
 #include "Globals.h"
 
-#import "Instrument.hpp"
 
-#import "FallingBallModel.h"
 
 /**
  *  Global audio callback.  userData will be the `tulpaViewController` 
@@ -112,6 +105,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  The list of falling balls that are currently instantiated.
  **/
 @property (strong, nonatomic) NSMutableArray * fallingBalls;
+
+/**
+ *  Callback primarily used to handle all model changes and synchronize
+ **/
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 - (GLuint)setupTexture:(NSString *)fileName;
 - (GLuint)compileShader:(NSString*)shaderName withType:(GLenum)shaderType;

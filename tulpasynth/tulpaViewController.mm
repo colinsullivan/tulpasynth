@@ -9,6 +9,13 @@
 
 #import "tulpaViewController.h"
 
+#include "mo_audio.h"
+
+#import "Instrument.hpp"
+
+#import "FallingBallModel.h"
+#import "SquareModel.h"
+
 #include "TouchEntity.h"
 #include "PinchEntity.h"
 #include "RotateEntity.h"
@@ -84,7 +91,7 @@ LongPressEntity * _longPressEntity;
 
 void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
-    tulpaViewController* self = (tulpaViewController*)userData;
+//    tulpaViewController* self = (tulpaViewController*)userData;
     
     static stk::StkFrames* tempFrames = new stk::StkFrames(0.0, FRAMESIZE, NUM_CHANNELS);
     
@@ -216,6 +223,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     wallShape.Set(bottomRight, topRight);
 //    wallFixtureDef.shape = &wallShape;
     walls->CreateFixture(&wallFixtureDef);
+    
+    // Register for model creation and deletion updates
+    [[Model Instances] addObserver:self forKeyPath:@"objects" options:NSKeyValueObservingOptionNew context:NULL];
     
     // Audio setup
     NSLog(@"starting real-time audio...");    
@@ -377,9 +387,13 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     if (!handled) {
         b2Vec2* touchPosition = _tapEntity->touches[0]->position;
         // Create falling ball model
-        FallingBallModel* bm = [[FallingBallModel alloc] initWithPosition:[[NSDictionary alloc] initWithObjectsAndKeys:
-                                                                           [NSNumber numberWithFloat:touchPosition->x], @"x",
-                                                                           [NSNumber numberWithFloat:touchPosition->y], @"y", nil]];
+        FallingBallModel* bm = [[FallingBallModel alloc] initWithController:self withAttributes:
+                                [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSDictionary dictionaryWithObjectsAndKeys:
+                                  [NSNumber numberWithFloat:touchPosition->x], @"x",
+                                  [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
+                                 nil]];
+                                                                                   
         FallingBall* b = [[FallingBall alloc] initWithController:self withModel:bm];
         [fallingBalls addObject:b];
 
@@ -392,7 +406,19 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     if (_longPressEntity->state == GestureEntityStateStart) {
         // Create new square obstacle at point
-        Square* s = [[Square alloc] initWithController:self withPosition:(*_longPressEntity->touches[0]->position)];
+        b2Vec2* touchPosition = _tapEntity->touches[0]->position;
+
+        SquareModel* sm = [[SquareModel alloc] initWithController:self withAttributes:
+                           [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithFloat:touchPosition->x], @"x",
+                             [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
+                            nil]];
+
+        Square* s = [[Square alloc] 
+                     initWithController:self 
+                     withModel:sm];
+
         [self.obstacles addObject:s];        
     }
     
@@ -427,6 +453,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 //    NSLog(@"timeSinceFirstResume: %f", self.timeSinceFirstResume);
 //    NSLog(@"timeSinceLastResume: %f", self.timeSinceLastResume);
 //    self.paused = !self.paused;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSLog(@"keyPath:\t%@\nchange:\t%@", keyPath, change);
 }
 
 

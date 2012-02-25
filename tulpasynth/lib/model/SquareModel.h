@@ -1,5 +1,5 @@
 //
-//  FallingBallModel.h
+//  SquareModel.h
 //  tulpasynth
 //
 //  Created by Colin Sullivan on 2/24/12.
@@ -8,6 +8,6 @@
 
 #import "PhysicsEntityModel.h"
 
-@interface FallingBallModel : PhysicsEntityModel
+@interface SquareModel : PhysicsEntityModel
 
 @end

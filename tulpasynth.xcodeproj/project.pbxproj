@@ -7,17 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B7EB07414F8444E00452194 /* FallingBallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB06F14F8444E00452194 /* FallingBallModel.m */; };
-		3B7EB07514F8444E00452194 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.m */; };
-		3B7EB07614F8444E00452194 /* PhysicsEntityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.m */; };
+		3B043F8714F8737D00DE16A3 /* SquareModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B043F8614F8737D00DE16A3 /* SquareModel.mm */; };
+		3B043F8914F878CA00DE16A3 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B043F8814F878CA00DE16A3 /* libc++.dylib */; };
+		3B043F8B14F878DB00DE16A3 /* libc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B043F8A14F878DB00DE16A3 /* libc.dylib */; };
+		3B043F8D14F8794300DE16A3 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B043F8C14F8794300DE16A3 /* libstdc++.dylib */; };
+		3B043F9214F880E000DE16A3 /* ModelCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B043F9114F880E000DE16A3 /* ModelCollection.m */; };
+		3B7EB07414F8444E00452194 /* FallingBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB06F14F8444E00452194 /* FallingBallModel.mm */; };
+		3B7EB07514F8444E00452194 /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.mm */; };
+		3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */; };
 		3B7EB48E14F8462D00452194 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7EB46C14F845C700452194 /* libRestKit.a */; };
-		3BBE9FA014F8513F0013CB1A /* View.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE9F9F14F8513F0013CB1A /* View.m */; };
+		3BBE9FA014F8513F0013CB1A /* View.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE9F9F14F8513F0013CB1A /* View.mm */; };
 		3BE2566914F837CD00AFC61E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE2566814F837CD00AFC61E /* UIKit.framework */; };
 		3BE2566B14F837CD00AFC61E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE2566A14F837CD00AFC61E /* Foundation.framework */; };
 		3BE2566D14F837CD00AFC61E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE2566C14F837CD00AFC61E /* CoreGraphics.framework */; };
 		3BE2567314F837CD00AFC61E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BE2567114F837CD00AFC61E /* InfoPlist.strings */; };
 		3BE2567514F837CD00AFC61E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2567414F837CD00AFC61E /* main.m */; };
-		3BE2568914F8385700AFC61E /* tulpaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2568514F8385700AFC61E /* tulpaAppDelegate.m */; };
+		3BE2568914F8385700AFC61E /* tulpaAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2568514F8385700AFC61E /* tulpaAppDelegate.mm */; };
 		3BE2568A14F8385700AFC61E /* tulpaStoryboardiPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BE2568614F8385700AFC61E /* tulpaStoryboardiPhone.storyboard */; };
 		3BE2568B14F8385700AFC61E /* tulpaViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2568814F8385700AFC61E /* tulpaViewController.mm */; };
 		3BE2622F14F839E200AFC61E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE2622E14F839E200AFC61E /* CFNetwork.framework */; };
@@ -327,15 +332,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B043F8514F8737D00DE16A3 /* SquareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareModel.h; sourceTree = "<group>"; };
+		3B043F8614F8737D00DE16A3 /* SquareModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SquareModel.mm; sourceTree = "<group>"; };
+		3B043F8814F878CA00DE16A3 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		3B043F8A14F878DB00DE16A3 /* libc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libc.dylib; path = usr/lib/libc.dylib; sourceTree = SDKROOT; };
+		3B043F8C14F8794300DE16A3 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		3B043F8E14F8798B00DE16A3 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		3B043F9014F880E000DE16A3 /* ModelCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCollection.h; sourceTree = "<group>"; };
+		3B043F9114F880E000DE16A3 /* ModelCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCollection.m; sourceTree = "<group>"; };
 		3B7EB06E14F8444E00452194 /* FallingBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBallModel.h; sourceTree = "<group>"; };
-		3B7EB06F14F8444E00452194 /* FallingBallModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FallingBallModel.m; sourceTree = "<group>"; };
+		3B7EB06F14F8444E00452194 /* FallingBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBallModel.mm; sourceTree = "<group>"; };
 		3B7EB07014F8444E00452194 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
-		3B7EB07114F8444E00452194 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		3B7EB07114F8444E00452194 /* Model.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Model.mm; sourceTree = "<group>"; };
 		3B7EB07214F8444E00452194 /* PhysicsEntityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsEntityModel.h; sourceTree = "<group>"; };
-		3B7EB07314F8444E00452194 /* PhysicsEntityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsEntityModel.m; sourceTree = "<group>"; };
+		3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsEntityModel.mm; sourceTree = "<group>"; };
 		3B7EB21114F845C600452194 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RestKit.xcodeproj; sourceTree = "<group>"; };
 		3BBE9F9E14F8513F0013CB1A /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
-		3BBE9F9F14F8513F0013CB1A /* View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = View.m; sourceTree = "<group>"; };
+		3BBE9F9F14F8513F0013CB1A /* View.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = View.mm; sourceTree = "<group>"; };
 		3BE2566414F837CD00AFC61E /* tulpasynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tulpasynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BE2566814F837CD00AFC61E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3BE2566A14F837CD00AFC61E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -345,7 +358,7 @@
 		3BE2567414F837CD00AFC61E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3BE2567614F837CD00AFC61E /* tulpasynth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tulpasynth-Prefix.pch"; sourceTree = "<group>"; };
 		3BE2568414F8385700AFC61E /* tulpaAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tulpaAppDelegate.h; sourceTree = "<group>"; };
-		3BE2568514F8385700AFC61E /* tulpaAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tulpaAppDelegate.m; sourceTree = "<group>"; };
+		3BE2568514F8385700AFC61E /* tulpaAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tulpaAppDelegate.mm; sourceTree = "<group>"; };
 		3BE2568614F8385700AFC61E /* tulpaStoryboardiPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = tulpaStoryboardiPhone.storyboard; sourceTree = "<group>"; };
 		3BE2568714F8385700AFC61E /* tulpaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tulpaViewController.h; sourceTree = "<group>"; };
 		3BE2568814F8385700AFC61E /* tulpaViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = tulpaViewController.mm; sourceTree = "<group>"; };
@@ -788,6 +801,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B043F8D14F8794300DE16A3 /* libstdc++.dylib in Frameworks */,
+				3B043F8B14F878DB00DE16A3 /* libc.dylib in Frameworks */,
+				3B043F8914F878CA00DE16A3 /* libc++.dylib in Frameworks */,
 				3B7EB48E14F8462D00452194 /* libRestKit.a in Frameworks */,
 				3BE269C414F842FE00AFC61E /* CoreLocation.framework in Frameworks */,
 				3BE269C214F842F200AFC61E /* AudioToolbox.framework in Frameworks */,
@@ -813,11 +829,15 @@
 			isa = PBXGroup;
 			children = (
 				3B7EB06E14F8444E00452194 /* FallingBallModel.h */,
-				3B7EB06F14F8444E00452194 /* FallingBallModel.m */,
+				3B7EB06F14F8444E00452194 /* FallingBallModel.mm */,
 				3B7EB07014F8444E00452194 /* Model.h */,
-				3B7EB07114F8444E00452194 /* Model.m */,
+				3B7EB07114F8444E00452194 /* Model.mm */,
 				3B7EB07214F8444E00452194 /* PhysicsEntityModel.h */,
-				3B7EB07314F8444E00452194 /* PhysicsEntityModel.m */,
+				3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */,
+				3B043F8514F8737D00DE16A3 /* SquareModel.h */,
+				3B043F8614F8737D00DE16A3 /* SquareModel.mm */,
+				3B043F9014F880E000DE16A3 /* ModelCollection.h */,
+				3B043F9114F880E000DE16A3 /* ModelCollection.m */,
 			);
 			name = model;
 			path = lib/model;
@@ -847,7 +867,7 @@
 			isa = PBXGroup;
 			children = (
 				3BBE9F9E14F8513F0013CB1A /* View.h */,
-				3BBE9F9F14F8513F0013CB1A /* View.m */,
+				3BBE9F9F14F8513F0013CB1A /* View.mm */,
 			);
 			name = view;
 			path = lib/view;
@@ -856,6 +876,10 @@
 		3BE2565914F837CC00AFC61E = {
 			isa = PBXGroup;
 			children = (
+				3B043F8E14F8798B00DE16A3 /* AudioUnit.framework */,
+				3B043F8C14F8794300DE16A3 /* libstdc++.dylib */,
+				3B043F8A14F878DB00DE16A3 /* libc.dylib */,
+				3B043F8814F878CA00DE16A3 /* libc++.dylib */,
 				3BE269C314F842FE00AFC61E /* CoreLocation.framework */,
 				3BE269C114F842F200AFC61E /* AudioToolbox.framework */,
 				3BE269BF14F842E500AFC61E /* CoreAudio.framework */,
@@ -896,7 +920,7 @@
 			children = (
 				3BE2568C14F8387100AFC61E /* lib */,
 				3BE2568414F8385700AFC61E /* tulpaAppDelegate.h */,
-				3BE2568514F8385700AFC61E /* tulpaAppDelegate.m */,
+				3BE2568514F8385700AFC61E /* tulpaAppDelegate.mm */,
 				3BE2568614F8385700AFC61E /* tulpaStoryboardiPhone.storyboard */,
 				3BE2568714F8385700AFC61E /* tulpaViewController.h */,
 				3BE2568814F8385700AFC61E /* tulpaViewController.mm */,
@@ -1755,7 +1779,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BE2567514F837CD00AFC61E /* main.m in Sources */,
-				3BE2568914F8385700AFC61E /* tulpaAppDelegate.m in Sources */,
+				3BE2568914F8385700AFC61E /* tulpaAppDelegate.mm in Sources */,
 				3BE2568B14F8385700AFC61E /* tulpaViewController.mm in Sources */,
 				3BE2654A14F83F8300AFC61E /* b2BroadPhase.cpp in Sources */,
 				3BE2654B14F83F8300AFC61E /* b2CollideCircle.cpp in Sources */,
@@ -1922,10 +1946,12 @@
 				3BE269BC14F842B800AFC61E /* Wurley.cpp in Sources */,
 				3BE269CB14F8430D00AFC61E /* FMPercussion.cpp in Sources */,
 				3BE269CC14F8430D00AFC61E /* Instrument.cpp in Sources */,
-				3B7EB07414F8444E00452194 /* FallingBallModel.m in Sources */,
-				3B7EB07514F8444E00452194 /* Model.m in Sources */,
-				3B7EB07614F8444E00452194 /* PhysicsEntityModel.m in Sources */,
-				3BBE9FA014F8513F0013CB1A /* View.m in Sources */,
+				3B7EB07414F8444E00452194 /* FallingBallModel.mm in Sources */,
+				3B7EB07514F8444E00452194 /* Model.mm in Sources */,
+				3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */,
+				3BBE9FA014F8513F0013CB1A /* View.mm in Sources */,
+				3B043F8714F8737D00DE16A3 /* SquareModel.mm in Sources */,
+				3B043F9214F880E000DE16A3 /* ModelCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,4 @@
 
 @property (strong, nonatomic) NSDictionary* initialPosition;
 
-- (id) initWithPosition:(NSDictionary*)aPosition;
-
 @end
