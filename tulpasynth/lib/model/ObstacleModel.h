@@ -11,6 +11,7 @@
 @interface ObstacleModel : PhysicsEntityModel
 
 @property (strong, nonatomic) NSMutableDictionary* position;
+@property (strong, nonatomic) NSNumber* angle;
 
 - (NSMutableArray*) serializableAttributes;
 

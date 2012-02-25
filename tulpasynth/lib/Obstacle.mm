@@ -123,6 +123,10 @@
     // if rotate gesture ended and we were just being rotated
     else if (rotate->state == GestureEntityStateEnd && self.rotator) {
         self.rotator = nil;
+        
+        // save angle to model
+        ObstacleModel* model = ((ObstacleModel*)(self.model));
+        model.angle = [NSNumber numberWithFloat:self.angle];
     }
     
     return false;

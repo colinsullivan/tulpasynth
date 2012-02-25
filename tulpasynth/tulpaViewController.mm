@@ -406,13 +406,14 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     if (_longPressEntity->state == GestureEntityStateStart) {
         // Create new square obstacle at point
-        b2Vec2* touchPosition = _tapEntity->touches[0]->position;
+        b2Vec2* touchPosition = _longPressEntity->touches[0]->position;
 
         SquareModel* sm = [[SquareModel alloc] initWithController:self withAttributes:
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             [NSDictionary dictionaryWithObjectsAndKeys:
                              [NSNumber numberWithFloat:touchPosition->x], @"x",
                              [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
+                            [NSNumber numberWithFloat:0.0], @"rotation",
                             nil]];
 
         Square* s = [[Square alloc] 
