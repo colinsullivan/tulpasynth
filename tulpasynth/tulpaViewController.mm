@@ -413,7 +413,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
                             [NSDictionary dictionaryWithObjectsAndKeys:
                              [NSNumber numberWithFloat:touchPosition->x], @"x",
                              [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
-                            [NSNumber numberWithFloat:0.0], @"rotation",
+                            [NSNumber numberWithFloat:0.0], @"angle",
+                            [NSNumber numberWithFloat:60.0], @"width",
+                            [NSNumber numberWithFloat:30.0], @"height",
                             nil]];
 
         Square* s = [[Square alloc] 

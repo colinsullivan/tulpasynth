@@ -97,6 +97,11 @@
     // if pinch has ended and we were following this pincher
     else if(pinch->state == GestureEntityStateEnd && self.pincher) {
         self.pincher = nil;
+        
+        // save height and width to model
+        ObstacleModel* model = ((ObstacleModel*)(self.model));
+        model.height = [NSNumber numberWithFloat:self.height];
+        model.width = [NSNumber numberWithFloat:self.width];
     }
     
     return false;

@@ -10,13 +10,15 @@
 
 @implementation ObstacleModel
 
-@synthesize position, angle;
+@synthesize position, angle, height, width;
 
 - (NSMutableArray*) serializableAttributes {
     NSMutableArray* attributes = [super serializableAttributes];
 
     [attributes addObject:@"position"];
     [attributes addObject:@"angle"];
+    [attributes addObject:@"height"];
+    [attributes addObject:@"width"];
     
     return attributes;
 }

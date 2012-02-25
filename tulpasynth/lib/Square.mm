@@ -60,7 +60,8 @@ const GLubyte SquareIndices[] = {
     
     if (self = [super initWithController:theController withModel:aModel]) {
 
-        [self setWidth:60 withHeight:30];
+        [self setWidth:[aModel.width floatValue] withHeight:[aModel.height floatValue]];
+        
                 
         b2MassData myBodyMass;
         myBodyMass.mass = 10.0f;

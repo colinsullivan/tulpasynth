@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) NSMutableDictionary* position;
 @property (strong, nonatomic) NSNumber* angle;
+@property (strong, nonatomic) NSNumber* height;
+@property (strong, nonatomic) NSNumber* width;
 
 - (NSMutableArray*) serializableAttributes;
 
