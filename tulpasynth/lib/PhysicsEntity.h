@@ -33,7 +33,7 @@
     
 }
 
-@property PhysicsEntityModel* model;
+@property (strong, nonatomic) PhysicsEntityModel* model;
 
 @property b2Body* body;
 
@@ -64,9 +64,9 @@
 
 
 @property (strong, nonatomic) GLKBaseEffect * effect;
-@property (nonatomic) tulpaViewController* controller;
+@property (assign, nonatomic) tulpaViewController* controller;
 
-- (id)initWithController:(tulpaViewController*)theController withPosition:(b2Vec2)aPosition;
+- (id)initWithController:(tulpaViewController *)theController withModel:(PhysicsEntityModel*)aModel;
 
 - (void)prepareToDraw;
 - (void)draw;

@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "PhysicsEntityModel.h"
+#import "ObstacleModel.h"
 
-@interface SquareModel : PhysicsEntityModel
+@interface SquareModel : ObstacleModel
 
 @end

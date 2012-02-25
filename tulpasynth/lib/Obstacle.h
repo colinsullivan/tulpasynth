@@ -17,11 +17,17 @@
 #include "PanEntity.h"
 #include "TapEntity.h"
 
+#import "ObstacleModel.h"
+
+@class tulpaViewController;
+
 /**
  *  @class Abstraction around touch handlers for an obstacle that the falling
  *  balls can collide with.
  **/
 @interface Obstacle : PhysicsEntity
+
+- (id)initWithController:(tulpaViewController *)theController withModel:(ObstacleModel*)aModel;
 
 - (GLboolean) handlePinch:(PinchEntity *) pinch;
 /**

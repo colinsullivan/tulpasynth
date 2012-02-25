@@ -16,4 +16,6 @@
 
 @property (strong, nonatomic) NSDictionary* initialPosition;
 
+- (NSMutableArray*) serializableAttributes;
+
 @end

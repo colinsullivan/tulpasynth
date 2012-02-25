@@ -9,6 +9,8 @@
 
 #import "Obstacle.h"
 
+#import "tulpaViewController.h"
+
 @implementation Obstacle
 
 @synthesize pincher, preScalingWidth, preScalingHeight;
@@ -18,7 +20,7 @@
 @synthesize panner;
 @synthesize prePanningPosition;
 
-- (id)initWithController:(tulpaViewController *)theController withModel:(PhysicsEntityModel*)aModel {
+- (id)initWithController:(tulpaViewController *)theController withModel:(ObstacleModel*)aModel {
     if (self = [super initWithController:theController withModel:aModel]) {
         self.prePanningPosition = new b2Vec2();
     }
@@ -142,6 +144,13 @@
     }
     else if(pan->state == GestureEntityStateEnd && self.panner) {
         self.panner = nil;
+        
+        // save position to model
+        ObstacleModel* model = ((ObstacleModel*)(self.model));
+        model.position = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                          [NSNumber numberWithFloat:self.position.x], @"x",
+                          [NSNumber numberWithFloat:self.position.y], @"y",
+                          nil];
     }
     
     return false;
