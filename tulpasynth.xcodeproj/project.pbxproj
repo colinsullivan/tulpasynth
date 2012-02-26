@@ -13,6 +13,13 @@
 		3B043F8D14F8794300DE16A3 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B043F8C14F8794300DE16A3 /* libstdc++.dylib */; };
 		3B043F9214F880E000DE16A3 /* ModelCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B043F9114F880E000DE16A3 /* ModelCollection.m */; };
 		3B043FAC14F957E900DE16A3 /* ObstacleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B043FAB14F957E900DE16A3 /* ObstacleModel.m */; };
+		3B043FFA14F9AAC900DE16A3 /* Catcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF314F9AAC900DE16A3 /* Catcher.png */; };
+		3B043FFB14F9AAC900DE16A3 /* CyanRing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF414F9AAC900DE16A3 /* CyanRing.png */; };
+		3B043FFC14F9AAC900DE16A3 /* GlowingBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF514F9AAC900DE16A3 /* GlowingBox.png */; };
+		3B043FFD14F9AAC900DE16A3 /* GlowingRing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF614F9AAC900DE16A3 /* GlowingRing.png */; };
+		3B043FFE14F9AAC900DE16A3 /* Instrument-Stage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF714F9AAC900DE16A3 /* Instrument-Stage.png */; };
+		3B043FFF14F9AAC900DE16A3 /* Shooter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF814F9AAC900DE16A3 /* Shooter.png */; };
+		3B04400014F9AAC900DE16A3 /* Textures.psd in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF914F9AAC900DE16A3 /* Textures.psd */; };
 		3B7EB07414F8444E00452194 /* FallingBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB06F14F8444E00452194 /* FallingBallModel.mm */; };
 		3B7EB07514F8444E00452194 /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.mm */; };
 		3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */; };
@@ -343,6 +350,13 @@
 		3B043F9114F880E000DE16A3 /* ModelCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCollection.m; sourceTree = "<group>"; };
 		3B043FAA14F957E900DE16A3 /* ObstacleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstacleModel.h; sourceTree = "<group>"; };
 		3B043FAB14F957E900DE16A3 /* ObstacleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObstacleModel.m; sourceTree = "<group>"; };
+		3B043FF314F9AAC900DE16A3 /* Catcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Catcher.png; sourceTree = "<group>"; };
+		3B043FF414F9AAC900DE16A3 /* CyanRing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CyanRing.png; sourceTree = "<group>"; };
+		3B043FF514F9AAC900DE16A3 /* GlowingBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GlowingBox.png; sourceTree = "<group>"; };
+		3B043FF614F9AAC900DE16A3 /* GlowingRing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GlowingRing.png; sourceTree = "<group>"; };
+		3B043FF714F9AAC900DE16A3 /* Instrument-Stage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Instrument-Stage.png"; sourceTree = "<group>"; };
+		3B043FF814F9AAC900DE16A3 /* Shooter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shooter.png; sourceTree = "<group>"; };
+		3B043FF914F9AAC900DE16A3 /* Textures.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Textures.psd; sourceTree = "<group>"; };
 		3B7EB06E14F8444E00452194 /* FallingBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBallModel.h; sourceTree = "<group>"; };
 		3B7EB06F14F8444E00452194 /* FallingBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBallModel.mm; sourceTree = "<group>"; };
 		3B7EB07014F8444E00452194 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -828,6 +842,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B043FF214F9AAC900DE16A3 /* graphics */ = {
+			isa = PBXGroup;
+			children = (
+				3B043FF314F9AAC900DE16A3 /* Catcher.png */,
+				3B043FF414F9AAC900DE16A3 /* CyanRing.png */,
+				3B043FF514F9AAC900DE16A3 /* GlowingBox.png */,
+				3B043FF614F9AAC900DE16A3 /* GlowingRing.png */,
+				3B043FF714F9AAC900DE16A3 /* Instrument-Stage.png */,
+				3B043FF814F9AAC900DE16A3 /* Shooter.png */,
+				3B043FF914F9AAC900DE16A3 /* Textures.psd */,
+			);
+			path = graphics;
+			sourceTree = SOURCE_ROOT;
+		};
 		3B7EB06D14F8444E00452194 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -881,21 +909,6 @@
 		3BE2565914F837CC00AFC61E = {
 			isa = PBXGroup;
 			children = (
-				3B043F8E14F8798B00DE16A3 /* AudioUnit.framework */,
-				3B043F8C14F8794300DE16A3 /* libstdc++.dylib */,
-				3B043F8A14F878DB00DE16A3 /* libc.dylib */,
-				3B043F8814F878CA00DE16A3 /* libc++.dylib */,
-				3BE269C314F842FE00AFC61E /* CoreLocation.framework */,
-				3BE269C114F842F200AFC61E /* AudioToolbox.framework */,
-				3BE269BF14F842E500AFC61E /* CoreAudio.framework */,
-				3BE2623D14F83A2400AFC61E /* OpenGLES.framework */,
-				3BE2623B14F83A1A00AFC61E /* GLKit.framework */,
-				3BE2623814F83A0300AFC61E /* libxml2.dylib */,
-				3BE2623614F839FC00AFC61E /* SystemConfiguration.framework */,
-				3BE2623414F839F400AFC61E /* MobileCoreServices.framework */,
-				3BE2623214F839EF00AFC61E /* Security.framework */,
-				3BE2623014F839E800AFC61E /* CoreData.framework */,
-				3BE2622E14F839E200AFC61E /* CFNetwork.framework */,
 				3BE2566E14F837CD00AFC61E /* tulpasynth */,
 				3BE2566714F837CD00AFC61E /* Frameworks */,
 				3BE2566514F837CD00AFC61E /* Products */,
@@ -913,6 +926,21 @@
 		3BE2566714F837CD00AFC61E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B043F8E14F8798B00DE16A3 /* AudioUnit.framework */,
+				3B043F8C14F8794300DE16A3 /* libstdc++.dylib */,
+				3B043F8A14F878DB00DE16A3 /* libc.dylib */,
+				3B043F8814F878CA00DE16A3 /* libc++.dylib */,
+				3BE269C314F842FE00AFC61E /* CoreLocation.framework */,
+				3BE269C114F842F200AFC61E /* AudioToolbox.framework */,
+				3BE269BF14F842E500AFC61E /* CoreAudio.framework */,
+				3BE2623D14F83A2400AFC61E /* OpenGLES.framework */,
+				3BE2623B14F83A1A00AFC61E /* GLKit.framework */,
+				3BE2623814F83A0300AFC61E /* libxml2.dylib */,
+				3BE2623614F839FC00AFC61E /* SystemConfiguration.framework */,
+				3BE2623414F839F400AFC61E /* MobileCoreServices.framework */,
+				3BE2623214F839EF00AFC61E /* Security.framework */,
+				3BE2623014F839E800AFC61E /* CoreData.framework */,
+				3BE2622E14F839E200AFC61E /* CFNetwork.framework */,
 				3BE2566814F837CD00AFC61E /* UIKit.framework */,
 				3BE2566A14F837CD00AFC61E /* Foundation.framework */,
 				3BE2566C14F837CD00AFC61E /* CoreGraphics.framework */,
@@ -923,6 +951,7 @@
 		3BE2566E14F837CD00AFC61E /* tulpasynth */ = {
 			isa = PBXGroup;
 			children = (
+				3B043FF214F9AAC900DE16A3 /* graphics */,
 				3BE2568C14F8387100AFC61E /* lib */,
 				3BE2568414F8385700AFC61E /* tulpaAppDelegate.h */,
 				3BE2568514F8385700AFC61E /* tulpaAppDelegate.mm */,
@@ -1773,6 +1802,13 @@
 				3BE2696914F842B800AFC61E /* README in Resources */,
 				3BE269BD14F842B800AFC61E /* TODO in Resources */,
 				3BE269BE14F842B800AFC61E /* VERSIONS in Resources */,
+				3B043FFA14F9AAC900DE16A3 /* Catcher.png in Resources */,
+				3B043FFB14F9AAC900DE16A3 /* CyanRing.png in Resources */,
+				3B043FFC14F9AAC900DE16A3 /* GlowingBox.png in Resources */,
+				3B043FFD14F9AAC900DE16A3 /* GlowingRing.png in Resources */,
+				3B043FFE14F9AAC900DE16A3 /* Instrument-Stage.png in Resources */,
+				3B043FFF14F9AAC900DE16A3 /* Shooter.png in Resources */,
+				3B04400014F9AAC900DE16A3 /* Textures.psd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

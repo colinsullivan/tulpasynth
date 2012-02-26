@@ -37,6 +37,11 @@
  **/
 - (RKObjectMapping*) modelMapping;
 
+/**
+ *  When this model is to be synchronized across nodes.
+ **/
+- (void) synchronize;
+
 
 
 @end

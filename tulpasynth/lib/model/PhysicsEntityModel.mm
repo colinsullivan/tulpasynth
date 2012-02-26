@@ -10,12 +10,16 @@
 
 @implementation PhysicsEntityModel
 
-@synthesize initialPosition;
+@synthesize initialPosition, position, angle, height, width;
 
 - (NSMutableArray*) serializableAttributes {
     NSMutableArray* attributes = [super serializableAttributes];
     
     [attributes addObject:@"initialPosition"];
+    [attributes addObject:@"position"];
+    [attributes addObject:@"angle"];
+    [attributes addObject:@"height"];
+    [attributes addObject:@"width"];
     
     return attributes;
 }

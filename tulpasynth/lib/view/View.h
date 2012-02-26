@@ -10,7 +10,13 @@
 
 #import "Model.h"
 
+@class tulpaViewController;
+
 @interface View : NSObject
+
+@property (strong, nonatomic) Model* model;
+@property (assign, nonatomic) tulpaViewController* controller;
+
 
 /**
  *  Helper method to begin observing an object
@@ -22,4 +28,13 @@
  **/
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
+/**
+ *  Use this function when instantiating any views.
+ **/
+- (id)initWithController:(tulpaViewController *)theController withModel:(Model*)aModel;
+
+/**
+ *  Override this function in view subclasses to handle initialization.
+ **/
+- (void) initialize;
 @end

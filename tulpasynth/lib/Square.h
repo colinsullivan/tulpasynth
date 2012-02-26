@@ -29,5 +29,7 @@
 
 - (id)initWithController:(tulpaViewController *)theController withModel:(SquareModel*)aModel;
 
+- (void)resize;
+
 
 @end

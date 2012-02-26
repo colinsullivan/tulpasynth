@@ -19,6 +19,8 @@
 #include "CollisionDetector.h"
 #include "Globals.h"
 
+#include "Model.h"
+
 
 
 /**
@@ -35,6 +37,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @private
     b2World* _world;
 }
+
+/**
+ *  When a model is to be synchronized
+ **/
+- (void) synchronizeModel:(Model*)aModel;
 
 /**
  *  Textures used for circles and boxes.

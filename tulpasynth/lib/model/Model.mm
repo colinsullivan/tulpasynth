@@ -85,4 +85,8 @@
     return modelInstances;
 }
 
+- (void) synchronize {
+    
+}
+
 @end

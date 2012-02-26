@@ -34,9 +34,17 @@
 
 - (void)update {
     [super update];
-    
+
+    ObstacleModel* model = ((ObstacleModel*)(self.model));
+
     if (self.panner) {
-        self.position = (*self.prePanningPosition) + self.panner->translation;
+        b2Vec2 newPos = (*self.prePanningPosition) + self.panner->translation;
+        
+        // save position to model
+        model.position = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                          [NSNumber numberWithFloat:newPos.x], @"x",
+                          [NSNumber numberWithFloat:newPos.y], @"y",
+                          nil];
     }
     
     if (self.pincher) {
@@ -154,12 +162,6 @@
     else if(pan->state == GestureEntityStateEnd && self.panner) {
         self.panner = nil;
         
-        // save position to model
-        ObstacleModel* model = ((ObstacleModel*)(self.model));
-        model.position = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                          [NSNumber numberWithFloat:self.position.x], @"x",
-                          [NSNumber numberWithFloat:self.position.y], @"y",
-                          nil];
     }
     
     return false;

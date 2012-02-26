@@ -19,7 +19,6 @@
 
 #include "b2Body.h"
 
-@class tulpaViewController;
 
 /**
  *  @class Base class for all graphics entities, all of which are subject
@@ -33,7 +32,11 @@
     
 }
 
-@property (strong, nonatomic) PhysicsEntityModel* model;
+
+/**
+ *  Callback used when model changes
+ **/
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 @property b2Body* body;
 
@@ -64,17 +67,14 @@
 
 
 @property (strong, nonatomic) GLKBaseEffect * effect;
-@property (assign, nonatomic) tulpaViewController* controller;
 
-- (id)initWithController:(tulpaViewController *)theController withModel:(PhysicsEntityModel*)aModel;
+- (void) initialize;
 
 - (void)prepareToDraw;
 - (void)draw;
 - (void)postDraw;
 
 - (void)update;
-
-- (void)setWidth:(float32)aWidth withHeight:(float32)aHeight;
 
 /**
  *  Override getter for position so we can hook into b2Body::GetPosition.

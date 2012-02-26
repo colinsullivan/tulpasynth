@@ -462,5 +462,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     NSLog(@"keyPath:\t%@\nchange:\t%@", keyPath, change);
 }
 
+- (void) synchronizeModel:(Model*)aModel {
+    NSLog(@"tulpaViewController.synchronizeModel\nmodel:\n%@", [aModel serialize]);
+}
+
 
 @end

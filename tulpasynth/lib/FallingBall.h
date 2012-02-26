@@ -19,6 +19,6 @@
  **/
 @interface FallingBall : PhysicsEntity
 
-- (id)initWithController:(tulpaViewController *)theController withModel:(FallingBallModel*)aModel;
+- (void) initialize;
 
 @end

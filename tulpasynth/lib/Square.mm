@@ -28,13 +28,22 @@ const GLubyte SquareIndices[] = {
 
 @synthesize instr;
 
+- (void)setHeight:(float)height {
+    [super setHeight:height];
+    
+    [self resize];
+}
+
+- (void)setWidth:(float)width {
+    [super setWidth:width];
+    
+    [self resize];
+}
+
 /**
  *  When width or height is set, change shape.
  **/
-- (void)setWidth:(float32)aWidth withHeight:(float32)aHeight {
-    self.width = aWidth;
-    self.height = aHeight;
-
+- (void)resize {
     if (self.shapeFixture) {
         self.body->DestroyFixture(self.shapeFixture);        
     }
@@ -59,10 +68,6 @@ const GLubyte SquareIndices[] = {
 - (id)initWithController:(tulpaViewController *)theController withModel:(SquareModel*)aModel {
     
     if (self = [super initWithController:theController withModel:aModel]) {
-
-        [self setWidth:[aModel.width floatValue] withHeight:[aModel.height floatValue]];
-        
-                
         b2MassData myBodyMass;
         myBodyMass.mass = 10.0f;
         self.body->SetMassData(&myBodyMass);

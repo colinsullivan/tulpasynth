@@ -13,7 +13,7 @@
 
 @implementation PhysicsEntity
 
-@synthesize body, effect, controller, shape, shapeFixture, model;
+@synthesize body, effect, shape, shapeFixture;
 
 @synthesize width, height, angle;
 
@@ -37,15 +37,14 @@
     angle = anAngle;
 }
 
-- (id)initWithController:(tulpaViewController *)theController withModel:(PhysicsEntityModel*)aModel {
-    if (self = [self init]) {
+- (void) initialize {
+    
+    PhysicsEntityModel* model = ((PhysicsEntityModel*)self.model);
         
-        self.controller = theController;
-        self.model = aModel;
         
-        // Shader for this object
-        self.effect = [[GLKBaseEffect alloc] init];
-        self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, self.controller.view.frame.size.width, self.controller.view.frame.size.height, 0, -1, 1);
+    // Shader for this object
+    self.effect = [[GLKBaseEffect alloc] init];
+    self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, self.controller.view.frame.size.width, self.controller.view.frame.size.height, 0, -1, 1);
 
 //        [self setupDepthBuffer];
 //        [self setupRenderBuffer];        
@@ -54,25 +53,35 @@
 //        [self setupVBOs];
 
 
-        //        // Vertex buffers
-        glGenBuffers(1, &_vertexBuffer);        
-        glGenBuffers(1, &_indexBuffer);
+    //        // Vertex buffers
+    glGenBuffers(1, &_vertexBuffer);        
+    glGenBuffers(1, &_indexBuffer);
+    
+    // Create static body using initial position from model
+    b2BodyDef bodyDef;
+    bodyDef.position = b2Vec2([[model.initialPosition valueForKey:@"x"] floatValue], [[model.initialPosition valueForKey:@"y"] floatValue]);
+    bodyDef.type = [self bodyType];
+    b2Body* newBody = self.controller.world->CreateBody(&bodyDef);
+    self.body = newBody;
+    
+    self.body->SetUserData(((void*)self));
+    
+    [[PhysicsEntity Instances] addObject:self];
         
-        self.angle = 0;
-        
-        // Create static body
-        b2BodyDef bodyDef;
-        bodyDef.position = b2Vec2([[aModel.initialPosition valueForKey:@"x"] floatValue], [[aModel.initialPosition valueForKey:@"y"] floatValue]);
-        bodyDef.type = [self bodyType];
-        b2Body* newBody = self.controller.world->CreateBody(&bodyDef);
-        self.body = newBody;
-        
-        self.body->SetUserData(((void*)self));
-        
-        [[PhysicsEntity Instances] addObject:self];
-    }
+}
 
-    return self;
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSLog(@"keyPath:\t%@\nchange:\t%@", keyPath, change);
+    
+    if ([keyPath isEqualToString:@"angle"]) {
+        self.angle = [[change valueForKey:@"new"] floatValue];
+    }
+    else if ([keyPath isEqualToString:@"width"]) {
+        self.width = [[change valueForKey:@"new"] floatValue];
+    }
+    else if ([keyPath isEqualToString:@"height"]) {
+        self.height = [[change valueForKey:@"new"] floatValue];
+    }
 }
 
 + (NSMutableArray*) Instances {
