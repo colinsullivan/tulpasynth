@@ -27,7 +27,7 @@
 
 @property instruments::FMPercussion* instr;
 
-- (id)initWithController:(tulpaViewController *)theController withModel:(SquareModel*)aModel;
+- (void) initialize;
 
 - (void)resize;
 

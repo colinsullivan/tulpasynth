@@ -44,6 +44,7 @@
  *  Keep reference to outermost shape for border detection.
  **/
 @property b2Shape* shape;
+@property b2Fixture* shapeFixture;
 
 /**
  *  Width and height of this object (in world coordinates)
@@ -63,7 +64,6 @@
  **/
 @property const b2Vec2& position;
 
-@property b2Fixture* shapeFixture;
 
 
 @property (strong, nonatomic) GLKBaseEffect * effect;

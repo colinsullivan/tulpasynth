@@ -65,23 +65,21 @@ const GLubyte SquareIndices[] = {
     self.shapeFixture = self.body->CreateFixture(&mySquareFixture);
 }
 
-- (id)initWithController:(tulpaViewController *)theController withModel:(SquareModel*)aModel {
+- (void) initialize {
     
-    if (self = [super initWithController:theController withModel:aModel]) {
-        b2MassData myBodyMass;
-        myBodyMass.mass = 10.0f;
-        self.body->SetMassData(&myBodyMass);
-        
-        self.instr = new instruments::FMPercussion();
-        
-        glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(SquareVertices), SquareVertices, GL_STATIC_DRAW);
-        
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(SquareIndices), SquareIndices, GL_STATIC_DRAW);        
-    }
+    [super initialize];
 
-    return self;
+    b2MassData myBodyMass;
+    myBodyMass.mass = 10.0f;
+    self.body->SetMassData(&myBodyMass);
+    
+    self.instr = new instruments::FMPercussion();
+    
+    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(SquareVertices), SquareVertices, GL_STATIC_DRAW);
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(SquareIndices), SquareIndices, GL_STATIC_DRAW);
 }
 
 - (void) dealloc {

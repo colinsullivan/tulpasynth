@@ -392,8 +392,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
                                  [NSDictionary dictionaryWithObjectsAndKeys:
                                   [NSNumber numberWithFloat:touchPosition->x], @"x",
                                   [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
-                                 nil]];
-                                                                                   
+                                 [NSNumber numberWithFloat:20.0], @"width",
+                                 [NSNumber numberWithFloat:20.0], @"height",
+                                nil]];
+
+        // create corresponding view
         FallingBall* b = [[FallingBall alloc] initWithController:self withModel:bm];
         [fallingBalls addObject:b];
 
@@ -459,7 +462,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"keyPath:\t%@\nchange:\t%@", keyPath, change);
+    NSLog(@"tulpaViewController.observeValueForKeyPath\nkeyPath:\t%@\nchange:\t%@", keyPath, change);
 }
 
 - (void) synchronizeModel:(Model*)aModel {

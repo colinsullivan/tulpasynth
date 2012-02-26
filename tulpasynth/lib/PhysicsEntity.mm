@@ -40,8 +40,7 @@
 - (void) initialize {
     
     PhysicsEntityModel* model = ((PhysicsEntityModel*)self.model);
-        
-        
+    
     // Shader for this object
     self.effect = [[GLKBaseEffect alloc] init];
     self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, self.controller.view.frame.size.width, self.controller.view.frame.size.height, 0, -1, 1);
@@ -71,7 +70,9 @@
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"keyPath:\t%@\nchange:\t%@", keyPath, change);
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+
+    NSLog(@"PhysicsEntity.observeValueForKeyPath\nkeyPath:\t%@\nchange:\t%@", keyPath, change);
     
     if ([keyPath isEqualToString:@"angle"]) {
         self.angle = [[change valueForKey:@"new"] floatValue];
@@ -81,6 +82,9 @@
     }
     else if ([keyPath isEqualToString:@"height"]) {
         self.height = [[change valueForKey:@"new"] floatValue];
+    }
+    else if ([keyPath isEqualToString:@"position"]) {
+        self.position = b2Vec2([[[change valueForKey:@"new"] valueForKey:@"x"] floatValue], [[[change valueForKey:@"new"] valueForKey:@"y"] floatValue]);
     }
 }
 

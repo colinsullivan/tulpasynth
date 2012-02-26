@@ -23,6 +23,11 @@
 
 - (id) initWithController:(tulpaViewController*)theController withAttributes:(NSMutableDictionary*)attributes;
 
+/**
+ *  Override in subclasses to initialize default attributes;
+ **/
+- (void) initialize;
+
 - (NSMutableArray*) serializableAttributes;
 - (NSMutableDictionary*) serialize;
 

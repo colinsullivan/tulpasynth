@@ -48,7 +48,7 @@
     }
     
     if (self.pincher) {
-        [self setWidth:self.preScalingWidth * self.pincher->scale withHeight:self.preScalingHeight*self.pincher->scale];
+//        [self setWidth:self.preScalingWidth * self.pincher->scale withHeight:self.preScalingHeight*self.pincher->scale];
         
     }
     
@@ -162,6 +162,7 @@
     else if(pan->state == GestureEntityStateEnd && self.panner) {
         self.panner = nil;
         
+        [self.model synchronize];
     }
     
     return false;

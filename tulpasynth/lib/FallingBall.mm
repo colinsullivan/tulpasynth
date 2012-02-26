@@ -26,39 +26,36 @@ const GLubyte BallIndices[] = {
 
 @implementation FallingBall
 
+- (void) setWidth:(float)width {
+    [super setWidth:width];
+    
+    self.shape->m_radius = self.width/2;
+}
+
 - (void) initialize {
+    [super initialize];
+    
     // Create circle shape
-    b2CircleShape* myShape = new b2CircleShape();
-    myShape->m_radius = self.width/2;
+    self.shape = new b2CircleShape();
     
     b2FixtureDef myShapeFixture;
-    myShapeFixture.shape = myShape;
+    myShapeFixture.shape = self.shape;
     myShapeFixture.friction = 0.1f;
     myShapeFixture.density = 0.75f;
     myShapeFixture.restitution = 2.0f;
     
-    self.body->CreateFixture(&myShapeFixture);
-    
+    self.shapeFixture = self.body->CreateFixture(&myShapeFixture);
+
     b2MassData myBodyMass;
     myBodyMass.mass = 0.25f;
     myBodyMass.center.SetZero();
     self.body->SetMassData(&myBodyMass);
-    
-    self.shape = myShape;
     
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(BallVertices), BallVertices, GL_STATIC_DRAW);
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(BallIndices), BallIndices, GL_STATIC_DRAW);
-}
-
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    
-    if ([keyPath isEqualToString:@"width"]) {
-        
-    }
 }
 
 - (b2BodyType)bodyType {

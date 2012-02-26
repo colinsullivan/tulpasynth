@@ -31,16 +31,23 @@
             NSLog(@"An error occurred while applying attributes:\n%@", [error localizedDescription]);
         }
         
+        // Set any default attributes
+        [self initialize];
+        
         // add instance to global list
         [[Model Instances] addObject:self];
         
         // controller should be informed of our creation, and begin watching for changes
-        for (NSString* keyPath in [self serializableAttributes]) {
-            [self addObserver:self.controller forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:NULL];
-        }
+//        for (NSString* keyPath in [self serializableAttributes]) {
+//            [self addObserver:self.controller forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:NULL];
+//        }
     }
     
     return self;
+}
+
+- (void) initialize {
+    
 }
 
 - (NSMutableArray*) serializableAttributes {
@@ -86,7 +93,7 @@
 }
 
 - (void) synchronize {
-    
+    [self.controller synchronizeModel:self];
 }
 
 @end

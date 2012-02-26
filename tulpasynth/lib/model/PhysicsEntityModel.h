@@ -15,12 +15,13 @@
 @interface PhysicsEntityModel : Model
 
 @property (strong, nonatomic) NSDictionary* initialPosition;
-@property (strong, nonatomic) NSDictionary* dimensions;
 @property (strong, nonatomic) NSNumber* angle;
 @property (strong, nonatomic) NSNumber* height;
 @property (strong, nonatomic) NSNumber* width;
 @property (strong, nonatomic) NSMutableDictionary* position;
 
 - (NSMutableArray*) serializableAttributes;
+
+- (void) initialize;
 
 @end
