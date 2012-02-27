@@ -20,6 +20,22 @@
 		3B043FFE14F9AAC900DE16A3 /* Instrument-Stage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF714F9AAC900DE16A3 /* Instrument-Stage.png */; };
 		3B043FFF14F9AAC900DE16A3 /* Shooter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF814F9AAC900DE16A3 /* Shooter.png */; };
 		3B04400014F9AAC900DE16A3 /* Textures.psd in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF914F9AAC900DE16A3 /* Textures.psd */; };
+		3B04404C14FB535900DE16A3 /* FallingBall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04404B14FB535900DE16A3 /* FallingBall.mm */; };
+		3B04405114FB537300DE16A3 /* Obstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04404E14FB537300DE16A3 /* Obstacle.mm */; };
+		3B04405214FB537300DE16A3 /* Square.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04405014FB537300DE16A3 /* Square.mm */; };
+		3B04406214FB53AA00DE16A3 /* GestureEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04405514FB53AA00DE16A3 /* GestureEntity.mm */; };
+		3B04406314FB53AA00DE16A3 /* LongPressEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04405714FB53AA00DE16A3 /* LongPressEntity.mm */; };
+		3B04406414FB53AA00DE16A3 /* PanEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04405914FB53AA00DE16A3 /* PanEntity.mm */; };
+		3B04406514FB53AA00DE16A3 /* PinchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04405B14FB53AA00DE16A3 /* PinchEntity.mm */; };
+		3B04406614FB53AA00DE16A3 /* RotateEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04405D14FB53AA00DE16A3 /* RotateEntity.mm */; };
+		3B04406714FB53AA00DE16A3 /* TapEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04405F14FB53AA00DE16A3 /* TapEntity.mm */; };
+		3B04406814FB53AA00DE16A3 /* TouchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04406114FB53AA00DE16A3 /* TouchEntity.mm */; };
+		3B04406B14FB53BA00DE16A3 /* PhysicsEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04406A14FB53BA00DE16A3 /* PhysicsEntity.mm */; };
+		3B04406E14FB546E00DE16A3 /* Shooter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04406D14FB546E00DE16A3 /* Shooter.mm */; };
+		3B04407114FB547500DE16A3 /* ShooterModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04407014FB547500DE16A3 /* ShooterModel.mm */; };
+		3B04407314FB5A9F00DE16A3 /* Toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B04407214FB5A9F00DE16A3 /* Toolbar.png */; };
+		3B04407614FB5BB400DE16A3 /* Toolbar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04407514FB5BB400DE16A3 /* Toolbar.mm */; };
+		3B04407914FB5D6A00DE16A3 /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04407814FB5D6900DE16A3 /* GLView.mm */; };
 		3B7EB07414F8444E00452194 /* FallingBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB06F14F8444E00452194 /* FallingBallModel.mm */; };
 		3B7EB07514F8444E00452194 /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.mm */; };
 		3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */; };
@@ -100,17 +116,6 @@
 		3BE2658014F83F8300AFC61E /* HelloWorld.vcxproj.filters in Resources */ = {isa = PBXBuildFile; fileRef = 3BE262BC14F83F8200AFC61E /* HelloWorld.vcxproj.filters */; };
 		3BE2658114F83F8300AFC61E /* Testbed.vcxproj in Resources */ = {isa = PBXBuildFile; fileRef = 3BE262BD14F83F8200AFC61E /* Testbed.vcxproj */; };
 		3BE2658214F83F8300AFC61E /* Testbed.vcxproj.filters in Resources */ = {isa = PBXBuildFile; fileRef = 3BE262BE14F83F8200AFC61E /* Testbed.vcxproj.filters */; };
-		3BE267CE14F8408D00AFC61E /* GestureEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267CC14F8408D00AFC61E /* GestureEntity.mm */; };
-		3BE267D114F8409300AFC61E /* FallingBall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267D014F8409300AFC61E /* FallingBall.mm */; };
-		3BE267D414F8409900AFC61E /* LongPressEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267D314F8409900AFC61E /* LongPressEntity.mm */; };
-		3BE267DB14F840A200AFC61E /* Obstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267D614F840A200AFC61E /* Obstacle.mm */; };
-		3BE267DC14F840A200AFC61E /* PanEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267D814F840A200AFC61E /* PanEntity.mm */; };
-		3BE267DD14F840A200AFC61E /* PhysicsEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267DA14F840A200AFC61E /* PhysicsEntity.mm */; };
-		3BE267E814F840B000AFC61E /* PinchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267DF14F840B000AFC61E /* PinchEntity.mm */; };
-		3BE267E914F840B000AFC61E /* RotateEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267E114F840B000AFC61E /* RotateEntity.mm */; };
-		3BE267EA14F840B000AFC61E /* Square.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267E314F840B000AFC61E /* Square.mm */; };
-		3BE267EB14F840B000AFC61E /* TapEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267E514F840B000AFC61E /* TapEntity.mm */; };
-		3BE267EC14F840B000AFC61E /* TouchEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267E714F840B000AFC61E /* TouchEntity.mm */; };
 		3BE2683214F842A700AFC61E /* mo_accel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267F814F842A700AFC61E /* mo_accel.mm */; };
 		3BE2683314F842A700AFC61E /* mo_audio.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267FA14F842A700AFC61E /* mo_audio.mm */; };
 		3BE2683414F842A700AFC61E /* mo_colormap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267FC14F842A700AFC61E /* mo_colormap.mm */; };
@@ -357,6 +362,37 @@
 		3B043FF714F9AAC900DE16A3 /* Instrument-Stage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Instrument-Stage.png"; sourceTree = "<group>"; };
 		3B043FF814F9AAC900DE16A3 /* Shooter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shooter.png; sourceTree = "<group>"; };
 		3B043FF914F9AAC900DE16A3 /* Textures.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Textures.psd; sourceTree = "<group>"; };
+		3B04404A14FB535900DE16A3 /* FallingBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBall.h; sourceTree = "<group>"; };
+		3B04404B14FB535900DE16A3 /* FallingBall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBall.mm; sourceTree = "<group>"; };
+		3B04404D14FB537300DE16A3 /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
+		3B04404E14FB537300DE16A3 /* Obstacle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Obstacle.mm; sourceTree = "<group>"; };
+		3B04404F14FB537300DE16A3 /* Square.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Square.h; sourceTree = "<group>"; };
+		3B04405014FB537300DE16A3 /* Square.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Square.mm; sourceTree = "<group>"; };
+		3B04405414FB53AA00DE16A3 /* GestureEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureEntity.h; sourceTree = "<group>"; };
+		3B04405514FB53AA00DE16A3 /* GestureEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GestureEntity.mm; sourceTree = "<group>"; };
+		3B04405614FB53AA00DE16A3 /* LongPressEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongPressEntity.h; sourceTree = "<group>"; };
+		3B04405714FB53AA00DE16A3 /* LongPressEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LongPressEntity.mm; sourceTree = "<group>"; };
+		3B04405814FB53AA00DE16A3 /* PanEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanEntity.h; sourceTree = "<group>"; };
+		3B04405914FB53AA00DE16A3 /* PanEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PanEntity.mm; sourceTree = "<group>"; };
+		3B04405A14FB53AA00DE16A3 /* PinchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinchEntity.h; sourceTree = "<group>"; };
+		3B04405B14FB53AA00DE16A3 /* PinchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PinchEntity.mm; sourceTree = "<group>"; };
+		3B04405C14FB53AA00DE16A3 /* RotateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateEntity.h; sourceTree = "<group>"; };
+		3B04405D14FB53AA00DE16A3 /* RotateEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RotateEntity.mm; sourceTree = "<group>"; };
+		3B04405E14FB53AA00DE16A3 /* TapEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapEntity.h; sourceTree = "<group>"; };
+		3B04405F14FB53AA00DE16A3 /* TapEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TapEntity.mm; sourceTree = "<group>"; };
+		3B04406014FB53AA00DE16A3 /* TouchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchEntity.h; sourceTree = "<group>"; };
+		3B04406114FB53AA00DE16A3 /* TouchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchEntity.mm; sourceTree = "<group>"; };
+		3B04406914FB53BA00DE16A3 /* PhysicsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsEntity.h; sourceTree = "<group>"; };
+		3B04406A14FB53BA00DE16A3 /* PhysicsEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsEntity.mm; sourceTree = "<group>"; };
+		3B04406C14FB546E00DE16A3 /* Shooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shooter.h; sourceTree = "<group>"; };
+		3B04406D14FB546E00DE16A3 /* Shooter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shooter.mm; sourceTree = "<group>"; };
+		3B04406F14FB547500DE16A3 /* ShooterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterModel.h; sourceTree = "<group>"; };
+		3B04407014FB547500DE16A3 /* ShooterModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShooterModel.mm; sourceTree = "<group>"; };
+		3B04407214FB5A9F00DE16A3 /* Toolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Toolbar.png; sourceTree = "<group>"; };
+		3B04407414FB5BB400DE16A3 /* Toolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toolbar.h; sourceTree = "<group>"; };
+		3B04407514FB5BB400DE16A3 /* Toolbar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Toolbar.mm; sourceTree = "<group>"; };
+		3B04407714FB5D6900DE16A3 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
+		3B04407814FB5D6900DE16A3 /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
 		3B7EB06E14F8444E00452194 /* FallingBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBallModel.h; sourceTree = "<group>"; };
 		3B7EB06F14F8444E00452194 /* FallingBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBallModel.mm; sourceTree = "<group>"; };
 		3B7EB07014F8444E00452194 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -494,29 +530,7 @@
 		3BE262BE14F83F8200AFC61E /* Testbed.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Testbed.vcxproj.filters; sourceTree = "<group>"; };
 		3BE262C014F83F8200AFC61E /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Box2D.xcodeproj; sourceTree = "<group>"; };
 		3BE267CA14F8408300AFC61E /* CollisionDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionDetector.h; path = lib/CollisionDetector.h; sourceTree = "<group>"; };
-		3BE267CB14F8408D00AFC61E /* GestureEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GestureEntity.h; path = lib/GestureEntity.h; sourceTree = "<group>"; };
-		3BE267CC14F8408D00AFC61E /* GestureEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GestureEntity.mm; path = lib/GestureEntity.mm; sourceTree = "<group>"; };
 		3BE267CD14F8408D00AFC61E /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = lib/Globals.h; sourceTree = "<group>"; };
-		3BE267CF14F8409300AFC61E /* FallingBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FallingBall.h; path = lib/FallingBall.h; sourceTree = "<group>"; };
-		3BE267D014F8409300AFC61E /* FallingBall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FallingBall.mm; path = lib/FallingBall.mm; sourceTree = "<group>"; };
-		3BE267D214F8409900AFC61E /* LongPressEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LongPressEntity.h; path = lib/LongPressEntity.h; sourceTree = "<group>"; };
-		3BE267D314F8409900AFC61E /* LongPressEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LongPressEntity.mm; path = lib/LongPressEntity.mm; sourceTree = "<group>"; };
-		3BE267D514F840A200AFC61E /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Obstacle.h; path = lib/Obstacle.h; sourceTree = "<group>"; };
-		3BE267D614F840A200AFC61E /* Obstacle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Obstacle.mm; path = lib/Obstacle.mm; sourceTree = "<group>"; };
-		3BE267D714F840A200AFC61E /* PanEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PanEntity.h; path = lib/PanEntity.h; sourceTree = "<group>"; };
-		3BE267D814F840A200AFC61E /* PanEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PanEntity.mm; path = lib/PanEntity.mm; sourceTree = "<group>"; };
-		3BE267D914F840A200AFC61E /* PhysicsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsEntity.h; path = lib/PhysicsEntity.h; sourceTree = "<group>"; };
-		3BE267DA14F840A200AFC61E /* PhysicsEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PhysicsEntity.mm; path = lib/PhysicsEntity.mm; sourceTree = "<group>"; };
-		3BE267DE14F840B000AFC61E /* PinchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PinchEntity.h; path = lib/PinchEntity.h; sourceTree = "<group>"; };
-		3BE267DF14F840B000AFC61E /* PinchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PinchEntity.mm; path = lib/PinchEntity.mm; sourceTree = "<group>"; };
-		3BE267E014F840B000AFC61E /* RotateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RotateEntity.h; path = lib/RotateEntity.h; sourceTree = "<group>"; };
-		3BE267E114F840B000AFC61E /* RotateEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RotateEntity.mm; path = lib/RotateEntity.mm; sourceTree = "<group>"; };
-		3BE267E214F840B000AFC61E /* Square.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Square.h; path = lib/Square.h; sourceTree = "<group>"; };
-		3BE267E314F840B000AFC61E /* Square.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Square.mm; path = lib/Square.mm; sourceTree = "<group>"; };
-		3BE267E414F840B000AFC61E /* TapEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TapEntity.h; path = lib/TapEntity.h; sourceTree = "<group>"; };
-		3BE267E514F840B000AFC61E /* TapEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TapEntity.mm; path = lib/TapEntity.mm; sourceTree = "<group>"; };
-		3BE267E614F840B000AFC61E /* TouchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchEntity.h; path = lib/TouchEntity.h; sourceTree = "<group>"; };
-		3BE267E714F840B000AFC61E /* TouchEntity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TouchEntity.mm; path = lib/TouchEntity.mm; sourceTree = "<group>"; };
 		3BE267F714F842A700AFC61E /* mo_accel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_accel.h; sourceTree = "<group>"; };
 		3BE267F814F842A700AFC61E /* mo_accel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mo_accel.mm; sourceTree = "<group>"; };
 		3BE267F914F842A700AFC61E /* mo_audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mo_audio.h; sourceTree = "<group>"; };
@@ -845,6 +859,7 @@
 		3B043FF214F9AAC900DE16A3 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				3B04407214FB5A9F00DE16A3 /* Toolbar.png */,
 				3B043FF314F9AAC900DE16A3 /* Catcher.png */,
 				3B043FF414F9AAC900DE16A3 /* CyanRing.png */,
 				3B043FF514F9AAC900DE16A3 /* GlowingBox.png */,
@@ -856,9 +871,33 @@
 			path = graphics;
 			sourceTree = SOURCE_ROOT;
 		};
+		3B04405314FB53AA00DE16A3 /* gestures */ = {
+			isa = PBXGroup;
+			children = (
+				3B04405414FB53AA00DE16A3 /* GestureEntity.h */,
+				3B04405514FB53AA00DE16A3 /* GestureEntity.mm */,
+				3B04405614FB53AA00DE16A3 /* LongPressEntity.h */,
+				3B04405714FB53AA00DE16A3 /* LongPressEntity.mm */,
+				3B04405814FB53AA00DE16A3 /* PanEntity.h */,
+				3B04405914FB53AA00DE16A3 /* PanEntity.mm */,
+				3B04405A14FB53AA00DE16A3 /* PinchEntity.h */,
+				3B04405B14FB53AA00DE16A3 /* PinchEntity.mm */,
+				3B04405C14FB53AA00DE16A3 /* RotateEntity.h */,
+				3B04405D14FB53AA00DE16A3 /* RotateEntity.mm */,
+				3B04405E14FB53AA00DE16A3 /* TapEntity.h */,
+				3B04405F14FB53AA00DE16A3 /* TapEntity.mm */,
+				3B04406014FB53AA00DE16A3 /* TouchEntity.h */,
+				3B04406114FB53AA00DE16A3 /* TouchEntity.mm */,
+			);
+			name = gestures;
+			path = lib/gestures;
+			sourceTree = "<group>";
+		};
 		3B7EB06D14F8444E00452194 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				3B04406F14FB547500DE16A3 /* ShooterModel.h */,
+				3B04407014FB547500DE16A3 /* ShooterModel.mm */,
 				3B7EB06E14F8444E00452194 /* FallingBallModel.h */,
 				3B7EB06F14F8444E00452194 /* FallingBallModel.mm */,
 				3B7EB07014F8444E00452194 /* Model.h */,
@@ -899,8 +938,22 @@
 		3BBE9F9D14F8513F0013CB1A /* view */ = {
 			isa = PBXGroup;
 			children = (
+				3B04406C14FB546E00DE16A3 /* Shooter.h */,
+				3B04406D14FB546E00DE16A3 /* Shooter.mm */,
+				3B04406914FB53BA00DE16A3 /* PhysicsEntity.h */,
+				3B04406A14FB53BA00DE16A3 /* PhysicsEntity.mm */,
+				3B04404D14FB537300DE16A3 /* Obstacle.h */,
+				3B04404E14FB537300DE16A3 /* Obstacle.mm */,
+				3B04404F14FB537300DE16A3 /* Square.h */,
+				3B04405014FB537300DE16A3 /* Square.mm */,
+				3B04404A14FB535900DE16A3 /* FallingBall.h */,
+				3B04404B14FB535900DE16A3 /* FallingBall.mm */,
 				3BBE9F9E14F8513F0013CB1A /* View.h */,
 				3BBE9F9F14F8513F0013CB1A /* View.mm */,
+				3B04407414FB5BB400DE16A3 /* Toolbar.h */,
+				3B04407514FB5BB400DE16A3 /* Toolbar.mm */,
+				3B04407714FB5D6900DE16A3 /* GLView.h */,
+				3B04407814FB5D6900DE16A3 /* GLView.mm */,
 			);
 			name = view;
 			path = lib/view;
@@ -977,31 +1030,10 @@
 		3BE2568C14F8387100AFC61E /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3B04405314FB53AA00DE16A3 /* gestures */,
 				3BBE9F9D14F8513F0013CB1A /* view */,
 				3B7EB06D14F8444E00452194 /* model */,
 				3BE269C514F8430D00AFC61E /* instruments */,
-				3BE267DE14F840B000AFC61E /* PinchEntity.h */,
-				3BE267DF14F840B000AFC61E /* PinchEntity.mm */,
-				3BE267E014F840B000AFC61E /* RotateEntity.h */,
-				3BE267E114F840B000AFC61E /* RotateEntity.mm */,
-				3BE267E214F840B000AFC61E /* Square.h */,
-				3BE267E314F840B000AFC61E /* Square.mm */,
-				3BE267E414F840B000AFC61E /* TapEntity.h */,
-				3BE267E514F840B000AFC61E /* TapEntity.mm */,
-				3BE267E614F840B000AFC61E /* TouchEntity.h */,
-				3BE267E714F840B000AFC61E /* TouchEntity.mm */,
-				3BE267D514F840A200AFC61E /* Obstacle.h */,
-				3BE267D614F840A200AFC61E /* Obstacle.mm */,
-				3BE267D714F840A200AFC61E /* PanEntity.h */,
-				3BE267D814F840A200AFC61E /* PanEntity.mm */,
-				3BE267D914F840A200AFC61E /* PhysicsEntity.h */,
-				3BE267DA14F840A200AFC61E /* PhysicsEntity.mm */,
-				3BE267D214F8409900AFC61E /* LongPressEntity.h */,
-				3BE267D314F8409900AFC61E /* LongPressEntity.mm */,
-				3BE267CF14F8409300AFC61E /* FallingBall.h */,
-				3BE267D014F8409300AFC61E /* FallingBall.mm */,
-				3BE267CB14F8408D00AFC61E /* GestureEntity.h */,
-				3BE267CC14F8408D00AFC61E /* GestureEntity.mm */,
 				3BE267CD14F8408D00AFC61E /* Globals.h */,
 				3BE267CA14F8408300AFC61E /* CollisionDetector.h */,
 				3BE256C514F838E400AFC61E /* vendor */,
@@ -1809,6 +1841,7 @@
 				3B043FFE14F9AAC900DE16A3 /* Instrument-Stage.png in Resources */,
 				3B043FFF14F9AAC900DE16A3 /* Shooter.png in Resources */,
 				3B04400014F9AAC900DE16A3 /* Textures.psd in Resources */,
+				3B04407314FB5A9F00DE16A3 /* Toolbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1867,17 +1900,6 @@
 				3BE2657414F83F8300AFC61E /* b2WeldJoint.cpp in Sources */,
 				3BE2657514F83F8300AFC61E /* b2WheelJoint.cpp in Sources */,
 				3BE2657614F83F8300AFC61E /* b2Rope.cpp in Sources */,
-				3BE267CE14F8408D00AFC61E /* GestureEntity.mm in Sources */,
-				3BE267D114F8409300AFC61E /* FallingBall.mm in Sources */,
-				3BE267D414F8409900AFC61E /* LongPressEntity.mm in Sources */,
-				3BE267DB14F840A200AFC61E /* Obstacle.mm in Sources */,
-				3BE267DC14F840A200AFC61E /* PanEntity.mm in Sources */,
-				3BE267DD14F840A200AFC61E /* PhysicsEntity.mm in Sources */,
-				3BE267E814F840B000AFC61E /* PinchEntity.mm in Sources */,
-				3BE267E914F840B000AFC61E /* RotateEntity.mm in Sources */,
-				3BE267EA14F840B000AFC61E /* Square.mm in Sources */,
-				3BE267EB14F840B000AFC61E /* TapEntity.mm in Sources */,
-				3BE267EC14F840B000AFC61E /* TouchEntity.mm in Sources */,
 				3BE2683214F842A700AFC61E /* mo_accel.mm in Sources */,
 				3BE2683314F842A700AFC61E /* mo_audio.mm in Sources */,
 				3BE2683414F842A700AFC61E /* mo_colormap.mm in Sources */,
@@ -1994,6 +2016,21 @@
 				3B043F8714F8737D00DE16A3 /* SquareModel.mm in Sources */,
 				3B043F9214F880E000DE16A3 /* ModelCollection.m in Sources */,
 				3B043FAC14F957E900DE16A3 /* ObstacleModel.m in Sources */,
+				3B04404C14FB535900DE16A3 /* FallingBall.mm in Sources */,
+				3B04405114FB537300DE16A3 /* Obstacle.mm in Sources */,
+				3B04405214FB537300DE16A3 /* Square.mm in Sources */,
+				3B04406214FB53AA00DE16A3 /* GestureEntity.mm in Sources */,
+				3B04406314FB53AA00DE16A3 /* LongPressEntity.mm in Sources */,
+				3B04406414FB53AA00DE16A3 /* PanEntity.mm in Sources */,
+				3B04406514FB53AA00DE16A3 /* PinchEntity.mm in Sources */,
+				3B04406614FB53AA00DE16A3 /* RotateEntity.mm in Sources */,
+				3B04406714FB53AA00DE16A3 /* TapEntity.mm in Sources */,
+				3B04406814FB53AA00DE16A3 /* TouchEntity.mm in Sources */,
+				3B04406B14FB53BA00DE16A3 /* PhysicsEntity.mm in Sources */,
+				3B04406E14FB546E00DE16A3 /* Shooter.mm in Sources */,
+				3B04407114FB547500DE16A3 /* ShooterModel.mm in Sources */,
+				3B04407614FB5BB400DE16A3 /* Toolbar.mm in Sources */,
+				3B04407914FB5D6A00DE16A3 /* GLView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

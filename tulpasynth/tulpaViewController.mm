@@ -46,7 +46,7 @@ LongPressEntity * _longPressEntity;
 
 @implementation tulpaViewController
 
-@synthesize glowingCircleTexture, glowingBoxTexture;
+@synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolbarTexture;
 
 @synthesize fallingBalls, obstacles;
 
@@ -172,6 +172,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     // load textures
     self.glowingCircleTexture = [self loadTexture:@"GlowingRing"];
     self.glowingBoxTexture = [self loadTexture:@"GlowingBox"];
+    self.shooterTexture = [self loadTexture:@"Shooter"];
+    self.toolbarTexture = [self loadTexture:@"Toolbar"];
     
     _pinchEntity = new PinchEntity(self.pinchRecognizer);
     _rotateEntity = new RotateEntity(self.rotateRecognizer);
