@@ -48,6 +48,7 @@
 
 
 -(void)prepareToDraw {
+    self.effect.useConstantColor = YES;
     self.effect.constantColor = GLKVector4Make(0, 0.5, 0.5, 1.0);
     self.effect.texture2d0.name = self.controller.glowingCircleTexture.name;
 

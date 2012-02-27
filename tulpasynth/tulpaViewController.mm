@@ -55,7 +55,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize pinchRecognizer, rotateRecognizer, panRecognizer, tapRecognizer, longPressRecognizer;
 
-@synthesize world, collisionDetector, walls;
+@synthesize world, collisionDetector, walls, toolbar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -226,6 +226,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 //    wallFixtureDef.shape = &wallShape;
     walls->CreateFixture(&wallFixtureDef);
     
+    // create toolbar
+    self.toolbar = [[Toolbar alloc] initWithController:self withModel:NULL];
+    
     // Register for model creation and deletion updates
     [[Model Instances] addObserver:self forKeyPath:@"objects" options:NSKeyValueObservingOptionNew context:NULL];
     
@@ -336,8 +339,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     glClear(GL_COLOR_BUFFER_BIT);
 
     
-    // Draw all physics entities
-    for (PhysicsEntity * e in PhysicsEntity.Instances) {
+    // Draw all GLViews
+    for (GLView* e in [GLView Instances]) {
         [e prepareToDraw];
         [e draw];
         [e postDraw];
@@ -442,8 +445,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
     self.world->Step(self.timeSinceLastUpdate, velocityIterations, positionIterations);
     
-    // Update all physics entities
-    for (PhysicsEntity * e in PhysicsEntity.Instances) {
+    // Update all GLView instances
+    for (GLView* e in [GLView Instances]) {
         [e update];
     }
     

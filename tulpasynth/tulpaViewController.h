@@ -21,6 +21,8 @@
 
 #include "Model.h"
 
+#import "Toolbar.h"
+
 
 
 /**
@@ -115,6 +117,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  The list of falling balls that are currently instantiated.
  **/
 @property (strong, nonatomic) NSMutableArray * fallingBalls;
+
+/**
+ *  Toolbar
+ **/
+@property (strong, nonatomic) Toolbar* toolbar;
 
 /**
  *  Callback primarily used to handle all model changes and synchronize

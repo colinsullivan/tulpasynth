@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#include "Globals.h"
-#import "tulpaViewController.h"
+#import "GLView.h"
 
-@interface Toolbar : NSObject
+@interface Toolbar : GLView
 
+- (void) initialize;
 
-
+- (GLKMatrix4)currentModelViewTransform;
 @end

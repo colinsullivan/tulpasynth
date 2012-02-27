@@ -9,11 +9,13 @@
 #import "GLView.h"
 #import "tulpaViewController.h"
 
+// Texture coordinates are rotated 90 degrees because this app only works in
+// landscape.  I know, how budget.
 static Vertex SquareVertices[] = {
-    {{1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 0}},
-    {{1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 1}},
-    {{-1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 1}},
-    {{-1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 0}}
+    {{1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 1}},
+    {{1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 1}},
+    {{-1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 0}},
+    {{-1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 0}}
 };
 
 
@@ -46,6 +48,7 @@ static GLubyte SquareIndices[] = {
 //    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof([self indices]), [self indices], GL_STATIC_DRAW);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(SquareIndices), SquareIndices, GL_DYNAMIC_DRAW);
 
+    [[GLView Instances] addObject:self];
 }
 
 - (Vertex*)vertices {
@@ -56,7 +59,6 @@ static GLubyte SquareIndices[] = {
 }
 
 - (void)prepareToDraw {
-    self.effect.useConstantColor = YES;
     self.effect.texture2d0.enabled = GL_TRUE;
     self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
     self.effect.texture2d0.target = GLKTextureTarget2D;
@@ -108,6 +110,16 @@ static GLubyte SquareIndices[] = {
     glDeleteBuffers(1, &_indexBuffer);
     
     self.effect = nil;
+}
+
++ (NSMutableArray*) Instances {
+    static NSMutableArray* instancesList = nil;
+    
+    if (instancesList == nil) {
+        instancesList = [[NSMutableArray alloc] init];
+    }
+    
+    return instancesList;
 }
 
 

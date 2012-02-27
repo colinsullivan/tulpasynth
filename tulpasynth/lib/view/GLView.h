@@ -34,6 +34,11 @@
 - (void)update;
 
 /**
+ *  Static list of all GLView instances
+ **/
++ (NSMutableArray*) Instances;
+
+/**
  *  Should be overridden in subclasses to create a transformation matrix used
  *  in `update`.
  **/
