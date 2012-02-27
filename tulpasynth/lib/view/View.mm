@@ -16,7 +16,7 @@
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
-    NSLog(@"View.observeValueForKeyPath\n\tkeyPath:\t%@\n\tchange:\t%@", keyPath, change);
+//    NSLog(@"View.observeValueForKeyPath\n\tkeyPath:\t%@\n\tchange:\t%@", keyPath, change);
     
 }
 

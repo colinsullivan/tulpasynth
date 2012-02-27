@@ -48,12 +48,12 @@
     }
     
     if (self.pincher) {
-//        [self setWidth:self.preScalingWidth * self.pincher->scale withHeight:self.preScalingHeight*self.pincher->scale];
-        
+        model.width = [NSNumber numberWithFloat:self.preScalingWidth * self.pincher->scale];
+        model.height = [NSNumber numberWithFloat:self.preScalingHeight * self.pincher->scale];
     }
     
     if (self.rotator) {
-        self.angle = self.preGestureAngle + self.rotator->rotation;        
+        model.angle = [NSNumber numberWithFloat:self.preGestureAngle + self.rotator->rotation];
     }
 }
 
@@ -106,10 +106,7 @@
     else if(pinch->state == GestureEntityStateEnd && self.pincher) {
         self.pincher = nil;
         
-        // save height and width to model
-        ObstacleModel* model = ((ObstacleModel*)(self.model));
-        model.height = [NSNumber numberWithFloat:self.height];
-        model.width = [NSNumber numberWithFloat:self.width];
+        [self.model synchronize];
     }
     
     return false;
@@ -137,9 +134,7 @@
     else if (rotate->state == GestureEntityStateEnd && self.rotator) {
         self.rotator = nil;
         
-        // save angle to model
-        ObstacleModel* model = ((ObstacleModel*)(self.model));
-        model.angle = [NSNumber numberWithFloat:self.angle];
+        [self.model synchronize];
     }
     
     return false;
