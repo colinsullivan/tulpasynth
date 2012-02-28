@@ -17,6 +17,8 @@
 
 @synthesize width, height, angle;
 
+@synthesize pannable, panner, prePanningPosition;
+
 - (const b2Vec2&)position {
     return self.body->GetPosition();
 }
@@ -41,6 +43,10 @@
     
     [super initialize];
     
+    self.prePanningPosition = new b2Vec2();
+    self.pannable = false;
+
+    
     PhysicsEntityModel* model = ((PhysicsEntityModel*)self.model);
 
     // Create static body using initial position from model
@@ -55,6 +61,11 @@
     [[PhysicsEntity Instances] addObject:self];
         
 }
+
+- (void)dealloc {
+    delete self.prePanningPosition;
+}
+
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -98,5 +109,66 @@
     
     return modelViewMatrix;
 }
+
+- (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor {
+    b2Rot r(0);
+    b2Transform obstaclePostion(self.position, r);
+    b2Vec2 touchPosition(touch->position->x, touch->position->y);
+    
+    b2Vec2 touchPositionFudged[5];
+    touchPositionFudged[0] = touchPosition;
+    touchPositionFudged[1].Set(touch->position->x - fudgeFactor, touch->position->y);
+    touchPositionFudged[2].Set(touch->position->x, touch->position->y - fudgeFactor);
+    touchPositionFudged[3].Set(touch->position->x + fudgeFactor, touch->position->y);
+    touchPositionFudged[4].Set(touch->position->x, touch->position->y + fudgeFactor);
+    
+    for (int i = 0; i < 5; i++) {
+        if (self.shape->TestPoint(obstaclePostion, touchPositionFudged[i])) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+- (GLboolean) _touchIsInside:(TouchEntity *)touch {
+    return [self _touchIsInside:touch withFudge:0];
+}
+
+
+- (GLboolean) handlePan:(PanEntity *) pan {
+    // if pan just started
+    if (pan->state == GestureEntityStateStart) {
+        // if the touch is inside us
+        if ([self _touchIsInside:pan->touches[0] withFudge:20]) {
+            self.panner = pan;            
+            
+            [self handlePanStarted];
+            
+            
+            
+            return true;
+        }
+        else if(self.panner) {
+            self.panner = nil;
+        }
+    }
+    else if(pan->state == GestureEntityStateEnd && self.panner) {
+        [self handlePanEnded];
+        self.panner = nil;
+    }
+    
+    return false;
+}
+
+- (void) handlePanStarted {
+    self.prePanningPosition->Set(self.position.x, self.position.y);    
+}
+
+- (void) handlePanEnded {
+    [self.model synchronize];
+}
+
+
 
 @end

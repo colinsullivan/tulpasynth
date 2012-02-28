@@ -24,7 +24,7 @@ typedef struct {
 #define FRAMESIZE 512
 #define NUM_CHANNELS 2
 
-#define PX_PER_M 2
+#define PX_PER_M 20
 
 /**
  *  Macros for converting between meters and pixels.

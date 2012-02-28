@@ -28,6 +28,11 @@ public:
      *  Translation vector of amount dragged.
      **/
     b2Vec2 translation;
+    
+    /**
+     *  Velocity vector of dragging.
+     **/
+    b2Vec2 velocity;
 };
 
 #endif

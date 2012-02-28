@@ -393,6 +393,7 @@
 		3B04407514FB5BB400DE16A3 /* Toolbar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Toolbar.mm; sourceTree = "<group>"; };
 		3B04407714FB5D6900DE16A3 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
 		3B04407814FB5D6900DE16A3 /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
+		3B0440CB14FCBC9700DE16A3 /* CollisionFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionFilter.h; sourceTree = "<group>"; };
 		3B7EB06E14F8444E00452194 /* FallingBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBallModel.h; sourceTree = "<group>"; };
 		3B7EB06F14F8444E00452194 /* FallingBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBallModel.mm; sourceTree = "<group>"; };
 		3B7EB07014F8444E00452194 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -1037,6 +1038,7 @@
 				3BE267CD14F8408D00AFC61E /* Globals.h */,
 				3BE267CA14F8408300AFC61E /* CollisionDetector.h */,
 				3BE256C514F838E400AFC61E /* vendor */,
+				3B0440CB14FCBC9700DE16A3 /* CollisionFilter.h */,
 			);
 			name = lib;
 			sourceTree = "<group>";

@@ -10,4 +10,16 @@
 
 @implementation SquareModel
 
+- (void) initialize {
+    [super initialize];
+    
+    if (!self.height) {
+        self.height = [NSNumber numberWithFloat:2.0];
+    }
+    
+    if (!self.width) {
+        self.width = [NSNumber numberWithFloat:6.0];
+    }
+}
+
 @end

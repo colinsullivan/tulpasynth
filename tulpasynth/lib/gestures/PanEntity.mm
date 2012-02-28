@@ -20,14 +20,16 @@ PanEntity::~PanEntity() {
 
 void PanEntity::update() {
     GestureEntity::update();
-
-    CGPoint temp = [((UIPanGestureRecognizer *)gestureRecognizer) translationInView:nil];
-    // transform: to make landscape
-    double tempx = temp.x;
-    temp.x = temp.y;
-    temp.y = tempx;
-
     
-    this->translation.x = PX_TO_M(temp.x);
-    this->translation.y = PX_TO_M(temp.y);
+    UIPanGestureRecognizer* gesture = ((UIPanGestureRecognizer *)gestureRecognizer);
+
+    CGPoint temp = [gesture translationInView:nil];
+    this->translation.x = PX_TO_M(temp.y);
+    this->translation.y = PX_TO_M(temp.x);
+    
+    CGPoint tempVelocity = [gesture velocityInView:nil];
+    // transform velocity vector and save in m/s
+    this->velocity.x = PX_TO_M(tempVelocity.y);
+    this->velocity.y = PX_TO_M(tempVelocity.x);
+    
 }

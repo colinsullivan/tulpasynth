@@ -9,13 +9,13 @@
 #import "GLView.h"
 #import "tulpaViewController.h"
 
-// Texture coordinates are rotated 90 degrees because this app only works in
+// Texture coordinates are rotated -90 degrees because this app only works in
 // landscape.  I know, how budget.
 static Vertex SquareVertices[] = {
-    {{1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 1}},
-    {{1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 1}},
-    {{-1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 0}},
-    {{-1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 0}}
+    {{1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 0}},
+    {{1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 0}},
+    {{-1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 1}},
+    {{-1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 1}}
 };
 
 

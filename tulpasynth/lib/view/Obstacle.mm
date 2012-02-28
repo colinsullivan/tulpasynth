@@ -17,19 +17,11 @@
 
 @synthesize rotator, preGestureAngle;
 
-@synthesize panner;
-@synthesize prePanningPosition;
 
-- (id)initWithController:(tulpaViewController *)theController withModel:(ObstacleModel*)aModel {
-    if (self = [super initWithController:theController withModel:aModel]) {
-        self.prePanningPosition = new b2Vec2();
-    }
+- (void) initialize {
+    [super initialize];
     
-    return self;
-}
-
-- (void)dealloc {
-    delete self.prePanningPosition;
+    self.pannable = true;
 }
 
 - (void)update {
@@ -57,30 +49,6 @@
     }
 }
 
-- (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor {
-    b2Rot r(0);
-    b2Transform obstaclePostion(self.position, r);
-    b2Vec2 touchPosition(touch->position->x, touch->position->y);
-    
-    b2Vec2 touchPositionFudged[5];
-    touchPositionFudged[0] = touchPosition;
-    touchPositionFudged[1].Set(touch->position->x - fudgeFactor, touch->position->y);
-    touchPositionFudged[2].Set(touch->position->x, touch->position->y - fudgeFactor);
-    touchPositionFudged[3].Set(touch->position->x + fudgeFactor, touch->position->y);
-    touchPositionFudged[4].Set(touch->position->x, touch->position->y + fudgeFactor);
-    
-    for (int i = 0; i < 5; i++) {
-        if (self.shape->TestPoint(obstaclePostion, touchPositionFudged[i])) {
-            return true;
-        }
-    }
-    
-    return false;
-}
-
-- (GLboolean) _touchIsInside:(TouchEntity *)touch {
-    return [self _touchIsInside:touch withFudge:0];
-}
 
 - (GLboolean) handlePinch:(PinchEntity *) pinch {
     // If pinch just started
@@ -140,28 +108,7 @@
     return false;
 }
 
-- (GLboolean) handlePan:(PanEntity *) pan {
-    // if pan just started
-    if (pan->state == GestureEntityStateStart) {
-        // if the touch is inside us
-        if ([self _touchIsInside:pan->touches[0] withFudge:20]) {
-            self.panner = pan;            
-            self.prePanningPosition->Set(self.position.x, self.position.y);
-    
-            return true;
-        }
-        else if(self.panner) {
-            self.panner = nil;
-        }
-    }
-    else if(pan->state == GestureEntityStateEnd && self.panner) {
-        self.panner = nil;
-        
-        [self.model synchronize];
-    }
-    
-    return false;
-}
+
 
 - (GLboolean) handleTap:(TapEntity *) tap {
     if ([self _touchIsInside:tap->touches[0]]) {

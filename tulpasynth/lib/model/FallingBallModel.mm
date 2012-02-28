@@ -12,5 +12,14 @@
 
 @implementation FallingBallModel
 
+- (void) initialize {
+    [super initialize];
+    
+    if (!self.height || !self.width) {
+        self.height = [NSNumber numberWithFloat:2.0];
+        self.width = [NSNumber numberWithFloat:2.0];
+    }
+}
+
 
 @end

@@ -17,6 +17,7 @@
 #include "b2WorldCallbacks.h"
 
 #include "CollisionDetector.h"
+#include "CollisionFilter.h"
 #include "Globals.h"
 
 #include "Model.h"
@@ -104,6 +105,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (readonly) CollisionDetector* collisionDetector;
 
 /**
+ *  This collision filter ensures that only fixtures with the same
+ *  `groupIndex` property will collide.
+ **/
+@property (readonly) CollisionFilter* collisionFilter;
+
+/**
  *  Called from our `CollisionDetector` when two fixtures begin to touch.
  **/
 - (void)beginCollision:(b2Contact*) contact;
@@ -122,6 +129,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  Toolbar
  **/
 @property (strong, nonatomic) Toolbar* toolbar;
+
+/**
+ *  When we started rendering
+ **/
+@property (strong, nonatomic) NSDate* startTime;
 
 /**
  *  Callback primarily used to handle all model changes and synchronize

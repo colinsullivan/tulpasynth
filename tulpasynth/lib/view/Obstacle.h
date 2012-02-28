@@ -14,7 +14,6 @@
 #include "TouchEntity.h"
 #include "PinchEntity.h"
 #include "RotateEntity.h"
-#include "PanEntity.h"
 #include "TapEntity.h"
 
 #import "ObstacleModel.h"
@@ -27,7 +26,7 @@
  **/
 @interface Obstacle : PhysicsEntity
 
-- (id)initWithController:(tulpaViewController *)theController withModel:(ObstacleModel*)aModel;
+- (void) initialize;
 
 - (GLboolean) handlePinch:(PinchEntity *) pinch;
 /**
@@ -53,16 +52,6 @@
  **/
 @property float32 preGestureAngle;
 
-- (GLboolean) _touchIsInside:(TouchEntity *)touch;
-- (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor;
-
-
-/**
- *  Handler for a pan (dragging) gesture.
- **/
-- (GLboolean) handlePan:(PanEntity *) pan;
-@property PanEntity * panner;
-@property b2Vec2* prePanningPosition;
 
 - (GLboolean) handleTap:(TapEntity *) tap;
 

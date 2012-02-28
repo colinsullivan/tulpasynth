@@ -7,12 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#include "b2PolygonShape.h"
+#include "b2MouseJoint.h"
 
-#import "GLView.h"
+#import "PhysicsEntity.h"
 
-@interface Toolbar : GLView
+
+@interface Toolbar : PhysicsEntity {
+    b2Vec2 offsetPosition;
+}
+
+@property (nonatomic) b2MouseJoint* mouseJoint;
 
 - (void) initialize;
+- (b2BodyType) bodyType;
+-(void)prepareToDraw;
+- (void) update;
 
-- (GLKMatrix4)currentModelViewTransform;
+//- (GLKMatrix4)currentModelViewTransform;
 @end

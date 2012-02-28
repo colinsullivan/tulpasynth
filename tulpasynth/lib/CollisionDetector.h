@@ -28,7 +28,7 @@ public:
         this->controller = theController;
     }
     ~CollisionDetector() {
-        
+        b2ContactListener::~b2ContactListener();
     }
     
     /**

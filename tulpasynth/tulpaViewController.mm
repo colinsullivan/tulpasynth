@@ -30,7 +30,6 @@
 
 //#include "FMPercussion.hpp"
 
-
 TouchEntity * _touchEntities[MAX_TOUCHES];
 UInt32 g_numActiveTouches = 0;
 
@@ -46,6 +45,8 @@ LongPressEntity * _longPressEntity;
 
 @implementation tulpaViewController
 
+@synthesize startTime;
+
 @synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolbarTexture;
 
 @synthesize fallingBalls, obstacles;
@@ -55,7 +56,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize pinchRecognizer, rotateRecognizer, panRecognizer, tapRecognizer, longPressRecognizer;
 
-@synthesize world, collisionDetector, walls, toolbar;
+@synthesize world, collisionDetector, walls, toolbar, collisionFilter;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -158,6 +159,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 {
     [super viewDidLoad];
 
+    self.startTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
+
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
     if (!self.context) {
@@ -187,9 +190,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     // Initialize b2 graphics
     b2Vec2 gravity(0.0f, -50.0f);
+//    b2Vec2 gravity(0.0f, 0.0f);
     self->_world = new b2World(gravity);
     collisionDetector = new CollisionDetector((id*)self);
     self->_world->SetContactListener(collisionDetector);
+    collisionFilter = new CollisionFilter();
+    self->_world->SetContactFilter(collisionFilter);
     
     // Create two starting squares for now
 //    Square * s;
@@ -203,28 +209,29 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     // Left and right screen edges
     b2BodyDef wallsDef;
+//    wallsDef.position = b2Vec2(PX_TO_M(self.view.frame.size.height/2), PX_TO_M(self.view.frame.size.width/2));
     walls = self.world->CreateBody(&wallsDef);
     
-    b2EdgeShape wallShape;
-
-    b2Vec2 topLeft(0.0, PX_TO_M(self.view.frame.size.width));
-    b2Vec2 topRight(PX_TO_M(self.view.frame.size.height), PX_TO_M(self.view.frame.size.width));
-    b2Vec2 bottomLeft(0.0, 0.0);
-    b2Vec2 bottomRight(PX_TO_M(self.view.frame.size.height), 0.0);
-
-    b2FixtureDef wallFixtureDef;
-    wallFixtureDef.friction = 0.1f;
-    wallFixtureDef.restitution = 0.75f;
-    wallFixtureDef.shape = &wallShape;
-
-    // Create left wall
-    wallShape.Set(bottomLeft, topLeft);
-    walls->CreateFixture(&wallFixtureDef);
-    
-    // Create right wall
-    wallShape.Set(bottomRight, topRight);
+//    b2EdgeShape wallShape;
+//
+//    b2Vec2 topLeft(0.0, PX_TO_M(self.view.frame.size.width));
+//    b2Vec2 topRight(PX_TO_M(self.view.frame.size.height), PX_TO_M(self.view.frame.size.width));
+//    b2Vec2 bottomLeft(0.0, 0.0);
+//    b2Vec2 bottomRight(PX_TO_M(self.view.frame.size.height), 0.0);
+//
+//    b2FixtureDef wallFixtureDef;
+//    wallFixtureDef.friction = 0.1f;
+//    wallFixtureDef.restitution = 0.75f;
 //    wallFixtureDef.shape = &wallShape;
-    walls->CreateFixture(&wallFixtureDef);
+//
+//    // Create left wall
+//    wallShape.Set(bottomLeft, topLeft);
+//    walls->CreateFixture(&wallFixtureDef);
+//    
+//    // Create right wall
+//    wallShape.Set(bottomRight, topRight);
+////    wallFixtureDef.shape = &wallShape;
+//    walls->CreateFixture(&wallFixtureDef);
     
     // create toolbar
     self.toolbar = [[Toolbar alloc] initWithController:self withModel:NULL];
@@ -246,7 +253,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         return;
     }
     
-
 }
 
 - (void)beginCollision:(b2Contact*) contact {
@@ -335,7 +341,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 }
 
 - (void)glkView:(GLKView*)view drawInRect:(CGRect)rect {
-    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClearColor(1.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
     
@@ -367,6 +373,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
 - (IBAction)panGestureHandler:(id)sender {
     _panEntity->update();
+    
+    // Allow toolbar to handle pan
+    [self.toolbar handlePan:_panEntity];
 
     // All obstacles can handle pan
     for (Obstacle * o in self.obstacles) {
@@ -397,8 +406,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
                                  [NSDictionary dictionaryWithObjectsAndKeys:
                                   [NSNumber numberWithFloat:touchPosition->x], @"x",
                                   [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
-                                 [NSNumber numberWithFloat:20.0], @"width",
-                                 [NSNumber numberWithFloat:20.0], @"height",
                                 nil]];
 
         // create corresponding view
@@ -421,9 +428,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
                             [NSDictionary dictionaryWithObjectsAndKeys:
                              [NSNumber numberWithFloat:touchPosition->x], @"x",
                              [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
-                            [NSNumber numberWithFloat:0.0], @"angle",
-                            [NSNumber numberWithFloat:60.0], @"width",
-                            [NSNumber numberWithFloat:30.0], @"height",
                             nil]];
 
         Square* s = [[Square alloc] 
@@ -449,6 +453,15 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     for (GLView* e in [GLView Instances]) {
         [e update];
     }
+    
+//    static BOOL done = false;
+//    if (!done && [self.startTime timeIntervalSinceNow] < -10.0) {
+//        NSLog(@"10 passed");
+//        
+//        self.toolbar.mouseJoint->SetTarget(b2Vec2(100, 0));
+//        
+//        done = true;
+//    }
     
     
 //    float aspect = fabsf(self.view.bounds.size.width/self.view.bounds.size.height);
