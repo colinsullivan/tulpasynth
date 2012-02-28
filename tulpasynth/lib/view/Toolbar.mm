@@ -92,7 +92,7 @@
 }
 
 -(void)prepareToDraw {
-    self.effect.texture2d0.name = self.controller.toolbarTexture.name;
+    self.effect.texture2d0.name = self.controller.toolboxTexture.name;
     
     [super prepareToDraw];
 }

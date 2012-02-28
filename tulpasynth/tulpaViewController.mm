@@ -47,7 +47,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize startTime;
 
-@synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolbarTexture;
+@synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolboxTexture;
 
 @synthesize fallingBalls, obstacles;
 
@@ -56,7 +56,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize pinchRecognizer, rotateRecognizer, panRecognizer, tapRecognizer, longPressRecognizer;
 
-@synthesize world, collisionDetector, walls, toolbar, collisionFilter;
+@synthesize world, collisionDetector, walls, toolbox, collisionFilter;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -176,7 +176,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.glowingCircleTexture = [self loadTexture:@"GlowingRing"];
     self.glowingBoxTexture = [self loadTexture:@"GlowingBox"];
     self.shooterTexture = [self loadTexture:@"Shooter"];
-    self.toolbarTexture = [self loadTexture:@"Toolbar"];
+    self.toolboxTexture = [self loadTexture:@"Radial-Menu"];
     
     _pinchEntity = new PinchEntity(self.pinchRecognizer);
     _rotateEntity = new RotateEntity(self.rotateRecognizer);
@@ -233,8 +233,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 ////    wallFixtureDef.shape = &wallShape;
 //    walls->CreateFixture(&wallFixtureDef);
     
-    // create toolbar
-    self.toolbar = [[Toolbar alloc] initWithController:self withModel:NULL];
+    self.toolbox = [[RadialToolbox alloc] initWithController:self withModel:NULL];
     
     // Register for model creation and deletion updates
     [[Model Instances] addObserver:self forKeyPath:@"objects" options:NSKeyValueObservingOptionNew context:NULL];
@@ -323,6 +322,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     self.fallingBalls = nil;
     self.obstacles = nil;
+    
+    [self.toolbox dealloc];
 //    self.bodyToEntityMap = nil;
 
     
@@ -375,7 +376,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     _panEntity->update();
     
     // Allow toolbar to handle pan
-    [self.toolbar handlePan:_panEntity];
+//    [self.toolbar handlePan:_panEntity];
 
     // All obstacles can handle pan
     for (Obstacle * o in self.obstacles) {
@@ -385,6 +386,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
 - (IBAction)tapGestureHandler:(id)sender {
     _tapEntity->update();
+    
+    if (self.toolbox.active) {
+        self.toolbox.active = false;
+        return;
+    }
     
     bool handled = false;
 
@@ -420,21 +426,25 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     _longPressEntity->update();
     
     if (_longPressEntity->state == GestureEntityStateStart) {
-        // Create new square obstacle at point
-        b2Vec2* touchPosition = _longPressEntity->touches[0]->position;
-
-        SquareModel* sm = [[SquareModel alloc] initWithController:self withAttributes:
-                           [NSDictionary dictionaryWithObjectsAndKeys:
-                            [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithFloat:touchPosition->x], @"x",
-                             [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
-                            nil]];
-
-        Square* s = [[Square alloc] 
-                     initWithController:self 
-                     withModel:sm];
-
-        [self.obstacles addObject:s];        
+//        // Create new square obstacle at point
+//        b2Vec2* touchPosition = _longPressEntity->touches[0]->position;
+//
+//        SquareModel* sm = [[SquareModel alloc] initWithController:self withAttributes:
+//                           [NSDictionary dictionaryWithObjectsAndKeys:
+//                            [NSDictionary dictionaryWithObjectsAndKeys:
+//                             [NSNumber numberWithFloat:touchPosition->x], @"x",
+//                             [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
+//                            nil]];
+//
+//        Square* s = [[Square alloc] 
+//                     initWithController:self 
+//                     withModel:sm];
+//
+//        [self.obstacles addObject:s];        
+        
+        // Move toolbox to that point and display
+        self.toolbox.position = (*_longPressEntity->touches[0]->position);
+        self.toolbox.active = true;
     }
     
 }

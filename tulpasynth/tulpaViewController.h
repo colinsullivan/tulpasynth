@@ -22,7 +22,7 @@
 
 #include "Model.h"
 
-#import "Toolbar.h"
+#import "RadialToolbox.h"
 
 
 
@@ -52,7 +52,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong) GLKTextureInfo* glowingCircleTexture;
 @property (strong) GLKTextureInfo* glowingBoxTexture;
 @property (strong) GLKTextureInfo* shooterTexture;
-@property (strong) GLKTextureInfo* toolbarTexture;
+@property (strong) GLKTextureInfo* toolboxTexture;
 
 
 /**
@@ -126,9 +126,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong, nonatomic) NSMutableArray * fallingBalls;
 
 /**
- *  Toolbar
+ *  Popup radial toolbox
  **/
-@property (strong, nonatomic) Toolbar* toolbar;
+@property (strong, nonatomic) RadialToolbox* toolbox;
 
 /**
  *  When we started rendering
