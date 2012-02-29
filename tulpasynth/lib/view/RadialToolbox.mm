@@ -81,8 +81,8 @@
 }
 
 -(void)prepareToDraw {
-    self.effect.useConstantColor = YES;
-    self.effect.constantColor = GLKVector4Make(0.15, 0.88, 0.49, 1.0);
+//    self.effect.useConstantColor = YES;
+//    self.effect.constantColor = GLKVector4Make(0.15, 0.88, 0.49, 1.0);
     self.effect.texture2d0.name = self.controller.toolboxTexture.name;
     
     [super prepareToDraw];

@@ -9,13 +9,13 @@
 #import "GLView.h"
 #import "tulpaViewController.h"
 
-// Texture coordinates are rotated -90 degrees because this app only works in
-// landscape.  I know, how budget.
+// Texture coordinates are rotated -90 degrees and flipped vertically because
+// this app only works in landscape.  I know, how budget.
 static Vertex SquareVertices[] = {
-    {{1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 0}},
-    {{1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 0}},
-    {{-1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 1}},
-    {{-1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 1}}
+    {{1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 1}},
+    {{1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 1}},
+    {{-1, 1, 0}, {0.0, 0.0, 0.0, 1.0}, {1, 0}},
+    {{-1, -1, 0}, {0.0, 0.0, 0.0, 1.0}, {0, 0}}
 };
 
 
@@ -34,7 +34,13 @@ static GLubyte SquareIndices[] = {
     
     // Shader for this object
     self.effect = [[GLKBaseEffect alloc] init];
-    self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, self.controller.view.frame.size.width, self.controller.view.frame.size.height, 0, -1, 1);
+    self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(
+                                                                 0,
+                                                                 self.controller.view.frame.size.width,
+                                                                 self.controller.view.frame.size.height,
+                                                                 0,
+                                                                 -1,
+                                                                 1);
 
     // Vertex buffers
     glGenBuffers(1, &_vertexBuffer);        

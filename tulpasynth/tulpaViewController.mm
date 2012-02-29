@@ -343,7 +343,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 }
 
 - (void)glkView:(GLKView*)view drawInRect:(CGRect)rect {
-    glClearColor(1.0, 0.0, 0.0, 1.0);
+    glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     
     // Draw toolbox
@@ -461,8 +461,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 //    float32 timeStep = 1.0f / 60.0f;
     
     // Turn these bitches down to increase performance
-    int32 velocityIterations = 8;
-    int32 positionIterations = 3;
+    int32 velocityIterations = 5;
+    int32 positionIterations = 2;
 
     self.world->Step(self.timeSinceLastUpdate, velocityIterations, positionIterations);
 
