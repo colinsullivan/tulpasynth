@@ -90,7 +90,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  Box2D world instance.
  **/
 @property (readonly) b2World* world;
-- (b2World*)getWorld;
 - (b2World*)world;
 
 /**
@@ -139,8 +138,5 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  Callback primarily used to handle all model changes and synchronize
  **/
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
-
-- (GLuint)setupTexture:(NSString *)fileName;
-- (GLuint)compileShader:(NSString*)shaderName withType:(GLenum)shaderType;
 
 @end
