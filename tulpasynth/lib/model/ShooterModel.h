@@ -10,4 +10,6 @@
 
 @interface ShooterModel : ObstacleModel
 
+- (void) initialize;
+
 @end

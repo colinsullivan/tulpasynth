@@ -21,8 +21,9 @@
 @interface Shooter : Obstacle
 
 - (void) initialize;
-
-- (void)resize;
+- (void) setWidth:(float)width;
+-(void)prepareToDraw;
+- (b2BodyType)bodyType;
 
 
 @end

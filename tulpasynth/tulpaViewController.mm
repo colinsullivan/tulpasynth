@@ -344,14 +344,25 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (void)glkView:(GLKView*)view drawInRect:(CGRect)rect {
     glClearColor(1.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
+    
+    // Draw toolbox
+    [self.toolbox prepareToDraw];
+    [self.toolbox draw];
+    [self.toolbox postDraw];
+    
+    for (Obstacle* o in self.obstacles) {
+        [o prepareToDraw];
+        [o draw];
+        [o postDraw];
+    }
 
     
-    // Draw all GLViews
-    for (GLView* e in [GLView Instances]) {
-        [e prepareToDraw];
-        [e draw];
-        [e postDraw];
-    }    
+//    // Draw all GLViews
+//    for (GLView* e in [GLView Instances]) {
+//        [e prepareToDraw];
+//        [e draw];
+//        [e postDraw];
+//    }    
 }
 
 - (IBAction)pinchGestureHandler:(id)sender {
@@ -375,8 +386,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (IBAction)panGestureHandler:(id)sender {
     _panEntity->update();
     
-    // Allow toolbar to handle pan
-//    [self.toolbar handlePan:_panEntity];
+    // Allow toolbox to handle pan
+    [self.toolbox handlePan:_panEntity];
 
     // All obstacles can handle pan
     for (Obstacle * o in self.obstacles) {
@@ -388,8 +399,13 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     _tapEntity->update();
     
     if (self.toolbox.active) {
-        self.toolbox.active = false;
-        return;
+        if ([self.toolbox handleTap:_tapEntity]) {
+            return;
+        }
+        else {
+            self.toolbox.active = false;
+            return;            
+        }
     }
     
     bool handled = false;
@@ -425,23 +441,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (IBAction)longPressHandler:(id)sender {
     _longPressEntity->update();
     
-    if (_longPressEntity->state == GestureEntityStateStart) {
-//        // Create new square obstacle at point
-//        b2Vec2* touchPosition = _longPressEntity->touches[0]->position;
-//
-//        SquareModel* sm = [[SquareModel alloc] initWithController:self withAttributes:
-//                           [NSDictionary dictionaryWithObjectsAndKeys:
-//                            [NSDictionary dictionaryWithObjectsAndKeys:
-//                             [NSNumber numberWithFloat:touchPosition->x], @"x",
-//                             [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
-//                            nil]];
-//
-//        Square* s = [[Square alloc] 
-//                     initWithController:self 
-//                     withModel:sm];
-//
-//        [self.obstacles addObject:s];        
-        
+    if (_longPressEntity->state == GestureEntityStateStart) {        
         // Move toolbox to that point and display
         self.toolbox.position = (*_longPressEntity->touches[0]->position);
         self.toolbox.active = true;
@@ -458,11 +458,19 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     int32 positionIterations = 3;
 
     self.world->Step(self.timeSinceLastUpdate, velocityIterations, positionIterations);
+
+    // Update toolbox
+    [self.toolbox update];
+    
+    // update all obstacles
+    for (Obstacle* o in self.obstacles) {
+        [o update];
+    }
     
     // Update all GLView instances
-    for (GLView* e in [GLView Instances]) {
-        [e update];
-    }
+//    for (GLView* e in [GLView Instances]) {
+//        [e update];
+//    }
     
 //    static BOOL done = false;
 //    if (!done && [self.startTime timeIntervalSinceNow] < -10.0) {

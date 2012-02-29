@@ -13,6 +13,7 @@
 
 #include "Globals.h"
 #include "PanEntity.h"
+#include "TapEntity.h"
 
 #import "GLView.h"
 #import "PhysicsEntityModel.h"
@@ -103,6 +104,10 @@
  **/
 - (void) handlePanStarted;
 /**
+ *  Handler for update when a pan gesture was active.
+ **/
+- (void) handlePanUpdate;
+/**
  *  Pointer to pan gesture if it is currently happening on self
  **/
 @property PanEntity * panner;
@@ -111,5 +116,13 @@
  **/
 @property b2Vec2* prePanningPosition;
 
+/**
+ *  Handler for new tap as invoked by the view
+ **/
+- (GLboolean) handleTap:(TapEntity *) tap;
+/**
+ *  Handler for when tap occurs inside ourself.
+ **/
+- (void) handleTapOccurred:(TapEntity*)tap;
 
 @end

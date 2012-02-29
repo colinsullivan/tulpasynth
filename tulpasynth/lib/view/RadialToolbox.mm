@@ -12,7 +12,8 @@
 
 @implementation RadialToolbox
 
-@synthesize active;
+@synthesize active, prototypes;
+@synthesize squarePrototype, shooterPrototype;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -20,15 +21,29 @@
     self.shape->m_radius = self.width/2;
 }
 
+- (void) setPosition:(const b2Vec2 &)aPosition {
+    [super setPosition:aPosition];
+    
+    self.squarePrototype.position = b2Vec2(
+                                           self.position.x + 6.5,
+                                           self.position.y + 6.5
+                                           );
+    
+    self.shooterPrototype.position = b2Vec2(
+                                            self.position.x - 6.5,
+                                            self.position.y + 6.5
+                                            );
+}
+
 - (void) initialize {
     
     [super initialize];
+    
+    self.prototypes = [[NSMutableArray alloc] init];
         
     self.angle = 0.0;
     
     self.active = false;
-    
-    self.position = b2Vec2(20, 10);
     
     self.shape = new b2CircleShape();
     b2FixtureDef myShapeFixture;
@@ -45,6 +60,18 @@
     b2Filter filterData;
     filterData.groupIndex = 1;
     self.shapeFixture->SetFilterData(filterData);
+    
+    // Create object prototypes
+    self.squarePrototype = [[Square alloc] initWithController:self.controller withModel:NULL];
+    self.squarePrototype.width = 6.0;
+    self.squarePrototype.height = 2.0;
+    [self.prototypes addObject:self.squarePrototype];
+    
+    self.shooterPrototype = [[Shooter alloc] initWithController:self.controller withModel:NULL];
+    self.shooterPrototype.width = 5.0;
+    self.shooterPrototype.height = 5.0;
+    [self.prototypes addObject:self.shooterPrototype];
+    
 }
 
 - (void) dealloc {
@@ -62,8 +89,62 @@
 
 - (void) draw {
     if (self.active) {
-        [super draw];
+        [super draw];        
     }
+}
+
+- (void) postDraw {
+    [super postDraw];
+    if (self.active) {
+        
+        for (PhysicsEntity* e in self.prototypes) {
+            [e prepareToDraw];
+            [e draw];
+            [e postDraw];
+        }
+    }
+}
+
+- (void) update {
+    [super update];
+    
+    for (PhysicsEntity* e in self.prototypes) {
+        [e update];
+    }
+}
+
+- (void) handleTapOccurred:(TapEntity*)tap {
+    // if tap was in square prototype
+    if ([self.squarePrototype handleTap:tap]) {
+        
+        // Create new square obstacle at point
+        SquareModel* sm = [[SquareModel alloc] initWithController:self.controller withAttributes:
+                           [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithFloat:self.position.x], @"x",
+                             [NSNumber numberWithFloat:self.position.y], @"y", nil], @"initialPosition",
+                            nil]];
+
+        Square* s = [[Square alloc] 
+                     initWithController:self.controller
+                     withModel:sm];
+
+        [self.controller.obstacles addObject:s];
+    }
+    else if ([self.shooterPrototype handleTap:tap]) {
+        // Create new shooter at that point
+        ShooterModel* sm = [[ShooterModel alloc] initWithController:self.controller withAttributes:
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSDictionary dictionaryWithObjectsAndKeys:
+                              [NSNumber numberWithFloat:self.position.x], @"x",
+                              [NSNumber numberWithFloat:self.position.y], @"y", nil], @"initialPosition",
+                             nil]];
+        Shooter* s = [[Shooter alloc] initWithController:self.controller withModel:sm];
+        
+        [self.controller.obstacles addObject:s];
+    }
+    
+    self.active = false;
 }
 
 @end

@@ -67,6 +67,14 @@
 }
 
 
+- (void) update {
+    [super update];
+    
+    if (self.pannable && self.panner) {
+        [self handlePanUpdate];
+    }
+}
+
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 
@@ -169,6 +177,22 @@
     [self.model synchronize];
 }
 
+- (void) handlePanUpdate {
+    
+}
+
+- (GLboolean) handleTap:(TapEntity *) tap {
+    if ([self _touchIsInside:tap->touches[0]]) {
+        [self handleTapOccurred:tap];
+        return true;
+    }
+    
+    return false;
+}
+
+- (void) handleTapOccurred:(TapEntity*)tap {
+    
+}
 
 
 @end

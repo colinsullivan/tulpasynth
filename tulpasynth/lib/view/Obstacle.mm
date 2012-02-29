@@ -29,16 +29,6 @@
 
     ObstacleModel* model = ((ObstacleModel*)(self.model));
 
-    if (self.panner) {
-        b2Vec2 newPos = (*self.prePanningPosition) + self.panner->translation;
-        
-        // save position to model
-        model.position = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                          [NSNumber numberWithFloat:newPos.x], @"x",
-                          [NSNumber numberWithFloat:newPos.y], @"y",
-                          nil];
-    }
-    
     if (self.pincher) {
         model.width = [NSNumber numberWithFloat:self.preScalingWidth * self.pincher->scale];
         model.height = [NSNumber numberWithFloat:self.preScalingHeight * self.pincher->scale];
@@ -47,6 +37,21 @@
     if (self.rotator) {
         model.angle = [NSNumber numberWithFloat:self.preGestureAngle + self.rotator->rotation];
     }
+}
+
+- (void) handlePanUpdate {
+    
+    [super handlePanUpdate];
+    
+    ObstacleModel* model = ((ObstacleModel*)(self.model));
+
+    b2Vec2 newPos = (*self.prePanningPosition) + self.panner->translation;
+    
+    // save position to model
+    model.position = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                      [NSNumber numberWithFloat:newPos.x], @"x",
+                      [NSNumber numberWithFloat:newPos.y], @"y",
+                      nil];
 }
 
 
@@ -103,16 +108,6 @@
         self.rotator = nil;
         
         [self.model synchronize];
-    }
-    
-    return false;
-}
-
-
-
-- (GLboolean) handleTap:(TapEntity *) tap {
-    if ([self _touchIsInside:tap->touches[0]]) {
-        return true;
     }
     
     return false;

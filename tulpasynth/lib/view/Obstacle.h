@@ -52,7 +52,4 @@
  **/
 @property float32 preGestureAngle;
 
-
-- (GLboolean) handleTap:(TapEntity *) tap;
-
 @end

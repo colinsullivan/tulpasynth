@@ -10,4 +10,13 @@
 
 @implementation ShooterModel
 
+- (void) initialize {
+    [super initialize];
+    
+    if (!self.width && !self.height) {
+        self.width = [NSNumber numberWithFloat:5.0];
+        self.height = [NSNumber numberWithFloat:5.0];
+    }
+}
+
 @end
