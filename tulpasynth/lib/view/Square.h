@@ -31,5 +31,7 @@
 
 - (void)resize;
 
+- (void) handleCollision:(float)collisionStrength;
+
 
 @end

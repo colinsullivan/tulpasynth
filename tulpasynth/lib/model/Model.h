@@ -52,6 +52,16 @@
  **/
 + (NSMutableDictionary*) defaultAttributes;
 
+///**
+// *  Constraints on attributes for this model.
+// **/
+//+ (NSMutableDictionary*) constraints;
+//
+///**
+// *  Actual constraining logic.
+// **/
+//- (NSNumber*) constrainAttribute:(NSString*)attributeName value:(NSNumber*)anAttributeValue;
+
 
 
 @end

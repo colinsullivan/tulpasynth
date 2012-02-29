@@ -29,7 +29,7 @@
     
     b2FixtureDef myShapeFixture;
     myShapeFixture.shape = self.shape;
-    myShapeFixture.friction = 0.1f;
+    myShapeFixture.friction = 0.0f;
     myShapeFixture.density = 0.75f;
     myShapeFixture.restitution = 1.0f;
     
@@ -60,7 +60,5 @@
     self.effect.texture2d0.name = self.controller.glowingCircleTexture.name;
     
     [super prepareToDraw];
-    
 }
-
 @end

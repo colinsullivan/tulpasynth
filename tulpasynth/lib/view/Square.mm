@@ -51,7 +51,7 @@
     mySquareFixture.shape = self.shape;
     mySquareFixture.density = 1.0f;
     mySquareFixture.friction = 0.1f;
-    mySquareFixture.restitution = 0.75f;
+    mySquareFixture.restitution = 1.5f;
     
     self.shapeFixture = self.body->CreateFixture(&mySquareFixture);
 }
@@ -80,6 +80,13 @@
     self.effect.texture2d0.name = self.controller.glowingBoxTexture.name;
     
     [super prepareToDraw];
+}
+
+- (void) handleCollision:(float)collisionStrength {
+
+        self.instr->freq((5/self.width) * 1320);
+        self.instr->velocity(collisionStrength);
+        self.instr->play();
 }
 
 //- (void)update {

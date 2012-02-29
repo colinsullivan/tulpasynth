@@ -111,4 +111,22 @@
     return [[NSMutableDictionary alloc] init];
 }
 
+//+ (NSMutableDictionary*) constraints {
+//    return [[NSMutableDictionary alloc] init];
+//}
+//
+//- (NSNumber*) constrainAttribute:(NSString*)attributeName value:(NSNumber*)anAttributeValue {
+//    
+//    NSDictionary* attributeConstraint = [[[self class] constraints] valueForKey:attributeName];
+//
+//    if (anAttributeValue < [attributeConstraint valueForKey:@"min"]) {
+//        anAttributeValue = [attributeConstraint valueForKey:@"min"];
+//    }
+//    else if (anAttributeValue > [attributeConstraint valueForKey:@"max"]) {
+//        anAttributeValue = [attributeConstraint valueForKey:@"max"];
+//    }
+//    
+//    return anAttributeValue;
+//}
+
 @end

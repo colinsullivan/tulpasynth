@@ -280,17 +280,16 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
     collisionStrength /= 2000;
 
-    // TODO: Get rid of this uglyness and scale pitches better
-//    if([entityOne isKindOfClass:[Square class]]) {
-//        [entityOne instr]->freq((30/[entityOne width]) * 1320);
-//        [entityOne instr]->velocity(collisionStrength);
-//        [entityOne instr]->play();
-//    }
-//    else if([entityTwo isKindOfClass:[Square class]]) {
-//        [entityTwo instr]->freq((30/[entityTwo width]) * 1320);
-//        [entityTwo instr]->velocity(collisionStrength);
-//        [entityTwo instr]->play();
-//    }
+    if ([entityOne isKindOfClass:[Square class]] || [entityTwo isKindOfClass:[Square class]]) {
+        Square* collidedSquare;
+        if([entityOne isKindOfClass:[Square class]]) {
+            collidedSquare = entityOne;
+        }
+        else if([entityTwo isKindOfClass:[Square class]]) {
+            collidedSquare = entityTwo;
+        }
+        [collidedSquare handleCollision:collisionStrength];
+    }
         
 }
 
@@ -474,9 +473,31 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         [o update];
     }
     
+    NSMutableArray* ballsToDelete = [[NSMutableArray alloc] init];
+    
     // update all wild balls
     for (WildBall* b in self.wildBalls) {
         [b update];
+        
+        // if ball is off screen
+        if (
+            b.position->x > PX_TO_M(self.view.frame.size.height)
+            ||
+            b.position->x < 0
+            ||
+            b.position->y > PX_TO_M(self.view.frame.size.width)
+            ||
+            b.position->y < 0
+            ) {
+            
+            [ballsToDelete addObject:b];
+        }
+
+    }
+    
+    // delete all balls that moved offscreen
+    for (WildBall* b in ballsToDelete) {
+        [self.wildBalls removeObject:b];
     }
     
     // Update all GLView instances
