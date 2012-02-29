@@ -25,5 +25,12 @@
 -(void)prepareToDraw;
 - (b2BodyType)bodyType;
 
+/**
+ *  Time we fired the last ball.
+ **/
+@property (strong, nonatomic) NSDate* lastShotTime;
+
+- (void) shootBall;
+
 
 @end

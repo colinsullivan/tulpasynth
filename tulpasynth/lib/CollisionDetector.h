@@ -7,13 +7,12 @@
  *              Licensed under the GPLv3 license.
  **/
 
-
-#ifndef tulpasynth_CollisionDetector_hpp
-#define tulpasynth_CollisionDetector_hpp
-
 #include "b2WorldCallbacks.h"
 
-#import "tulpaViewController.h"
+@class tulpaViewController;
+
+#ifndef __COLLISIONDETECTOR_H_
+#define __COLLISIONDETECTOR_H_
 
 /**
  *  @class  Wrapper class around `b2ContactListener` so collision callbacks
@@ -22,7 +21,7 @@
 class CollisionDetector : public b2ContactListener {    
 
 public:
-    CollisionDetector(id* theController) {
+    CollisionDetector(tulpaViewController* theController) {
         b2ContactListener::b2ContactListener();
 
         this->controller = theController;
@@ -34,13 +33,11 @@ public:
     /**
      *  Called when two fixtures begin to touch.
      **/
-    void BeginContact(b2Contact* contact) {
-        [(id)controller beginCollision:contact];
-    }
+    void BeginContact(b2Contact* contact);
 
 private:
     
-    id* controller;
+    tulpaViewController* controller;
     
 };
 

@@ -68,7 +68,7 @@
 - (void) dealloc {
     delete self.instr;
     
-    [super dealloc];
+//    [super dealloc];
 }
 
 -(void)prepareToDraw {

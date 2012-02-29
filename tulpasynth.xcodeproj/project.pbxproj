@@ -38,6 +38,7 @@
 		3B04407914FB5D6A00DE16A3 /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04407814FB5D6900DE16A3 /* GLView.mm */; };
 		3B0440E414FD87D800DE16A3 /* Radial-Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B0440E314FD87D800DE16A3 /* Radial-Menu.png */; };
 		3B0440E714FD884600DE16A3 /* RadialToolbox.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B0440E614FD884500DE16A3 /* RadialToolbox.mm */; };
+		3B04411714FDA8E100DE16A3 /* CollisionDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04411614FDA8DF00DE16A3 /* CollisionDetector.mm */; };
 		3B7EB07414F8444E00452194 /* FallingBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB06F14F8444E00452194 /* FallingBallModel.mm */; };
 		3B7EB07514F8444E00452194 /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.mm */; };
 		3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */; };
@@ -121,13 +122,13 @@
 		3BE2683214F842A700AFC61E /* mo_accel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267F814F842A700AFC61E /* mo_accel.mm */; };
 		3BE2683314F842A700AFC61E /* mo_audio.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267FA14F842A700AFC61E /* mo_audio.mm */; };
 		3BE2683414F842A700AFC61E /* mo_colormap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267FC14F842A700AFC61E /* mo_colormap.mm */; };
-		3BE2683514F842A700AFC61E /* mo_compass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267FE14F842A700AFC61E /* mo_compass.mm */; };
+		3BE2683514F842A700AFC61E /* mo_compass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE267FE14F842A700AFC61E /* mo_compass.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3BE2683614F842A700AFC61E /* mo_fft.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2680114F842A700AFC61E /* mo_fft.mm */; };
 		3BE2683714F842A700AFC61E /* mo_filter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2680314F842A700AFC61E /* mo_filter.mm */; };
 		3BE2683814F842A700AFC61E /* mo_fun.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2680514F842A700AFC61E /* mo_fun.mm */; };
-		3BE2683914F842A700AFC61E /* mo_gfx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2680714F842A700AFC61E /* mo_gfx.mm */; };
+		3BE2683914F842A700AFC61E /* mo_gfx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2680714F842A700AFC61E /* mo_gfx.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3BE2683A14F842A700AFC61E /* mo_io.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2680914F842A700AFC61E /* mo_io.mm */; };
-		3BE2683B14F842A700AFC61E /* mo_location.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2680B14F842A700AFC61E /* mo_location.mm */; };
+		3BE2683B14F842A700AFC61E /* mo_location.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2680B14F842A700AFC61E /* mo_location.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3BE2683C14F842A700AFC61E /* mo_net.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2680D14F842A700AFC61E /* mo_net.mm */; };
 		3BE2683D14F842A700AFC61E /* mo_thread.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2680F14F842A700AFC61E /* mo_thread.mm */; };
 		3BE2683E14F842A700AFC61E /* mo_touch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2681114F842A700AFC61E /* mo_touch.mm */; };
@@ -399,6 +400,7 @@
 		3B0440E314FD87D800DE16A3 /* Radial-Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radial-Menu.png"; sourceTree = "<group>"; };
 		3B0440E514FD884500DE16A3 /* RadialToolbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadialToolbox.h; sourceTree = "<group>"; };
 		3B0440E614FD884500DE16A3 /* RadialToolbox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RadialToolbox.mm; sourceTree = "<group>"; };
+		3B04411614FDA8DF00DE16A3 /* CollisionDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CollisionDetector.mm; sourceTree = "<group>"; };
 		3B7EB06E14F8444E00452194 /* FallingBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBallModel.h; sourceTree = "<group>"; };
 		3B7EB06F14F8444E00452194 /* FallingBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBallModel.mm; sourceTree = "<group>"; };
 		3B7EB07014F8444E00452194 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -1047,6 +1049,7 @@
 				3BE267CA14F8408300AFC61E /* CollisionDetector.h */,
 				3BE256C514F838E400AFC61E /* vendor */,
 				3B0440CB14FCBC9700DE16A3 /* CollisionFilter.h */,
+				3B04411614FDA8DF00DE16A3 /* CollisionDetector.mm */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -2043,6 +2046,7 @@
 				3B04407614FB5BB400DE16A3 /* Toolbar.mm in Sources */,
 				3B04407914FB5D6A00DE16A3 /* GLView.mm in Sources */,
 				3B0440E714FD884600DE16A3 /* RadialToolbox.mm in Sources */,
+				3B04411714FDA8E100DE16A3 /* CollisionDetector.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2065,6 +2069,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -2099,6 +2104,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";

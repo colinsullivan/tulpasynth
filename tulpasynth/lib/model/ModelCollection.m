@@ -20,9 +20,9 @@
     return self;
 }
 
-- (void)dealloc {
-    [self.objects dealloc];
-}
+//- (void)dealloc {
+//    [self.objects dealloc];
+//}
 
 - (void)addObject:(id)anObject {
     NSIndexSet* insertIndex = [NSIndexSet indexSetWithIndex:[self.objects count]];

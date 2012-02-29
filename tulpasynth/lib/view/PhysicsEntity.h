@@ -57,7 +57,7 @@
  *  Hook into b2Body::GetPosition.  Setting the position from here
  *  will not do anything.
  **/
-@property const b2Vec2& position;
+@property b2Vec2* position;
 
 - (void) initialize;
 - (void)dealloc;
@@ -65,8 +65,8 @@
 /**
  *  Override getter for position so we can hook into b2Body::GetPosition.
  **/
-- (const b2Vec2&)position;
-- (void)setPosition:(const b2Vec2 &)aPosition;
+- (b2Vec2*)position;
+- (void)setPosition:(b2Vec2*)aPosition;
 
 /**
  *  Static list of all physics entity instances.

@@ -12,4 +12,9 @@
 
 - (void) initialize;
 
+/**
+ *  Rate at which this shooter will fire balls (in Hz).
+ **/
+@property (strong, nonatomic) NSNumber* rate;
+
 @end

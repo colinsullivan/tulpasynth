@@ -21,17 +21,16 @@
     self.shape->m_radius = self.width/2;
 }
 
-- (void) setPosition:(const b2Vec2 &)aPosition {
+- (void) setPosition:(b2Vec2*)aPosition {
     [super setPosition:aPosition];
     
-    self.squarePrototype.position = b2Vec2(
-                                           self.position.x + 6.5,
-                                           self.position.y + 6.5
-                                           );
-    
-    self.shooterPrototype.position = b2Vec2(
-                                            self.position.x - 6.5,
-                                            self.position.y + 6.5
+    self.squarePrototype.position = new b2Vec2(
+                                               self.position->x + 6.5,
+                                               self.position->y + 6.5
+                                               );
+    self.shooterPrototype.position = new b2Vec2(
+                                            self.position->x - 6.5,
+                                            self.position->y + 6.5
                                             );
 }
 
@@ -75,7 +74,7 @@
 }
 
 - (void) dealloc {
-    [self dealloc];
+//    [self dealloc];
     delete self.shape;
 }
 
@@ -121,8 +120,8 @@
         SquareModel* sm = [[SquareModel alloc] initWithController:self.controller withAttributes:
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithFloat:self.position.x], @"x",
-                             [NSNumber numberWithFloat:self.position.y], @"y", nil], @"initialPosition",
+                             [NSNumber numberWithFloat:self.position->x], @"x",
+                             [NSNumber numberWithFloat:self.position->y], @"y", nil], @"initialPosition",
                             nil]];
 
         Square* s = [[Square alloc] 
@@ -136,8 +135,8 @@
         ShooterModel* sm = [[ShooterModel alloc] initWithController:self.controller withAttributes:
                             [NSDictionary dictionaryWithObjectsAndKeys:
                              [NSDictionary dictionaryWithObjectsAndKeys:
-                              [NSNumber numberWithFloat:self.position.x], @"x",
-                              [NSNumber numberWithFloat:self.position.y], @"y", nil], @"initialPosition",
+                              [NSNumber numberWithFloat:self.position->x], @"x",
+                              [NSNumber numberWithFloat:self.position->y], @"y", nil], @"initialPosition",
                              nil]];
         Shooter* s = [[Shooter alloc] initWithController:self.controller withModel:sm];
         

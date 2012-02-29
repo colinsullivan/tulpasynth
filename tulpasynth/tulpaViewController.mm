@@ -192,7 +192,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     b2Vec2 gravity(0.0f, -50.0f);
 //    b2Vec2 gravity(0.0f, 0.0f);
     self->_world = new b2World(gravity);
-    collisionDetector = new CollisionDetector((id*)self);
+    collisionDetector = new CollisionDetector(self);
     self->_world->SetContactListener(collisionDetector);
     collisionFilter = new CollisionFilter();
     self->_world->SetContactFilter(collisionFilter);
@@ -245,7 +245,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         NSLog(@"cannot initialize real-time audio!");
         return;
     }
-    result = MoAudio::start(audioCallback, (void*)self);
+    result = MoAudio::start(audioCallback, (__bridge void*)self);
     if (!result) {
         // something went wrong
         NSLog(@"cannot start real-time audio!");
@@ -268,28 +268,28 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     collisionStrength = body->GetLinearVelocity().LengthSquared()*body->GetMass();
 
     // Given a body, get its PhysicsEntity instance
-    entityOne = ((id)body->GetUserData());
+    entityOne = ((__bridge id)body->GetUserData());
     
     body = contact->GetFixtureB()->GetBody();
     collisionStrength += body->GetLinearVelocity().LengthSquared()*body->GetMass();
     
     
     // Given a body, get its PhysicsEntity instance
-    entityTwo = ((id)body->GetUserData());
+    entityTwo = ((__bridge id)body->GetUserData());
 
     collisionStrength /= 2000;
 
     // TODO: Get rid of this uglyness and scale pitches better
-    if([entityOne isKindOfClass:[Square class]]) {
-        [entityOne instr]->freq((30/[entityOne width]) * 1320);
-        [entityOne instr]->velocity(collisionStrength);
-        [entityOne instr]->play();
-    }
-    else if([entityTwo isKindOfClass:[Square class]]) {
-        [entityTwo instr]->freq((30/[entityTwo width]) * 1320);
-        [entityTwo instr]->velocity(collisionStrength);
-        [entityTwo instr]->play();
-    }
+//    if([entityOne isKindOfClass:[Square class]]) {
+//        [entityOne instr]->freq((30/[entityOne width]) * 1320);
+//        [entityOne instr]->velocity(collisionStrength);
+//        [entityOne instr]->play();
+//    }
+//    else if([entityTwo isKindOfClass:[Square class]]) {
+//        [entityTwo instr]->freq((30/[entityTwo width]) * 1320);
+//        [entityTwo instr]->velocity(collisionStrength);
+//        [entityTwo instr]->play();
+//    }
         
 }
 
@@ -323,7 +323,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.fallingBalls = nil;
     self.obstacles = nil;
     
-    [self.toolbox dealloc];
+//    [self.toolbox dealloc];
 //    self.bodyToEntityMap = nil;
 
     
@@ -443,7 +443,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     if (_longPressEntity->state == GestureEntityStateStart) {        
         // Move toolbox to that point and display
-        self.toolbox.position = (*_longPressEntity->touches[0]->position);
+        self.toolbox.position = _longPressEntity->touches[0]->position;
         self.toolbox.active = true;
     }
     

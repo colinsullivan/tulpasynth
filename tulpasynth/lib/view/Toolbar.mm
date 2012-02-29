@@ -28,18 +28,17 @@
 //    return offsetPosition;
 //}
 
-- (void) setPosition:(const b2Vec2 &)aPosition {
-    offsetPosition = aPosition;
+- (void) setPosition:(b2Vec2*)aPosition {
     // max position
-    if (offsetPosition.x < 0) {
-        offsetPosition.x = 0;
+    if (aPosition->x < 0) {
+        aPosition->x = 0;
     }
     
-    if (offsetPosition.x > -10.0 + self.width + self.width/2.0) {
-        offsetPosition.x = -10.0 + self.width + self.width/2.0;
+    if (aPosition->x > -10.0 + self.width + self.width/2.0) {
+        aPosition->x = -10.0 + self.width + self.width/2.0;
     }
     
-    [super setPosition:offsetPosition];
+    [super setPosition:aPosition];
 }
 
 - (void) initialize {
@@ -52,7 +51,7 @@
     
     self.angle = 0.0;
     
-    self.position = b2Vec2(-10.0 + self.width + self.width/2.0, self.height/2.0);
+    self.position = new b2Vec2(-10.0 + self.width + self.width/2.0, self.height/2.0);
     
     self.shape = new b2PolygonShape();
     self.shape->m_radius = 1.0f;
@@ -102,8 +101,8 @@
     [super update];
     
     if (self.panner) {
-        b2Vec2 newPos = (*self.prePanningPosition);
-        newPos.x += self.panner->translation.x;
+        b2Vec2* newPos = self.prePanningPosition;
+        newPos->x += self.panner->translation.x;
         self.position = newPos;
         
     }
@@ -121,7 +120,10 @@
     NSLog(@"self.panner->velocity.x: %f", self.panner->velocity.x);
 //    self.body->SetLinearVelocity(b2Vec2(self.panner->velocity.x, 0));
 //    self.body->ApplyForceToCenter(b2Vec2(self.panner->velocity.x, 0.0));
-    self.body->ApplyLinearImpulse(b2Vec2(self.panner->velocity.x, 0.0), self.position);
+    self.body->ApplyLinearImpulse(
+                                  b2Vec2(self.panner->velocity.x, 0.0),
+                                  (*self.position)
+                                  );
 }
 
 

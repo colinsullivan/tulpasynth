@@ -13,18 +13,21 @@
 
 @implementation PhysicsEntity
 
-@synthesize body, shape, shapeFixture;
+@synthesize position, body, shape, shapeFixture;
 
 @synthesize width, height, angle;
 
 @synthesize pannable, panner, prePanningPosition;
 
-- (const b2Vec2&)position {
-    return self.body->GetPosition();
+- (b2Vec2*)position {
+    b2Vec2 bodyPosition = self.body->GetPosition();
+    
+    position = new b2Vec2(bodyPosition.x, bodyPosition.y);
+    return position;
 }
 
-- (void)setPosition:(const b2Vec2 &)aPosition {
-    self.body->SetTransform(aPosition, -1*self.angle);
+- (void)setPosition:(b2Vec2*)aPosition {
+    self.body->SetTransform(b2Vec2(aPosition->x, aPosition->y), -1*self.angle);
 }
 
 - (void)setAngle:(float32)anAngle {
@@ -33,7 +36,7 @@
     }
     
     if (self.body) {
-        self.body->SetTransform(self.position, -1*anAngle);        
+        self.body->SetTransform(self.body->GetPosition(), -1*anAngle);        
     }
 
     angle = anAngle;
@@ -56,7 +59,7 @@
     b2Body* newBody = self.controller.world->CreateBody(&bodyDef);
     self.body = newBody;
     
-    self.body->SetUserData(((void*)self));
+    self.body->SetUserData(((__bridge void*)self));
     
     [[PhysicsEntity Instances] addObject:self];
         
@@ -90,7 +93,7 @@
         self.height = [[change valueForKey:@"new"] floatValue];
     }
     else if ([keyPath isEqualToString:@"position"]) {
-        self.position = b2Vec2([[[change valueForKey:@"new"] valueForKey:@"x"] floatValue], [[[change valueForKey:@"new"] valueForKey:@"y"] floatValue]);
+        self.position = new b2Vec2([[[change valueForKey:@"new"] valueForKey:@"x"] floatValue], [[[change valueForKey:@"new"] valueForKey:@"y"] floatValue]);
     }
 }
 
@@ -111,7 +114,7 @@
 - (GLKMatrix4)currentModelViewTransform {
     GLKMatrix4 modelViewMatrix = [super currentModelViewTransform];
 
-    modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, M_TO_PX(self.position.y), M_TO_PX(self.position.x), 0.0);
+    modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, M_TO_PX(self.position->y), M_TO_PX(self.position->x), 0.0);
     modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, self.angle, 0.0, 0.0, 1.0);
     modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, M_TO_PX(self.height/2), M_TO_PX(self.width/2), 1.0f);
     
@@ -120,7 +123,7 @@
 
 - (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor {
     b2Rot r(0);
-    b2Transform obstaclePostion(self.position, r);
+    b2Transform obstaclePostion((*self.position), r);
     b2Vec2 touchPosition(touch->position->x, touch->position->y);
     
     b2Vec2 touchPositionFudged[5];
@@ -170,7 +173,7 @@
 }
 
 - (void) handlePanStarted {
-    self.prePanningPosition->Set(self.position.x, self.position.y);    
+    self.prePanningPosition->Set(self.position->x, self.position->y);    
 }
 
 - (void) handlePanEnded {

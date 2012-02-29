@@ -13,6 +13,8 @@
 
 @implementation Shooter
 
+@synthesize lastShotTime;
+
 - (void) setWidth:(float)width {
     [super setWidth:width];
     
@@ -22,8 +24,7 @@
 
 - (void) initialize {
     
-    [super initialize];
-
+    [super initialize];    
     ShooterModel* model = ((ShooterModel*)self.model);
     
     // Create circle shape
@@ -41,7 +42,10 @@
     b2MassData myBodyMass;
     myBodyMass.mass = 0.25f;
     myBodyMass.center.SetZero();
-    self.body->SetMassData(&myBodyMass);    
+    self.body->SetMassData(&myBodyMass);
+    
+    self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
+    [self shootBall];
 }
 
 
@@ -57,11 +61,17 @@
     return b2_staticBody;
 }
 
+- (void) shootBall {
+    NSLog(@"Shooting ball");
+    
+    self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
+}
 
+- (void)update {
+    [super update];
+    
+    
 
-//- (void)update {
-//    [super update];
-//
-//}
+}
 
 @end
