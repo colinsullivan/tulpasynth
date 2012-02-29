@@ -49,7 +49,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolboxTexture;
 
-@synthesize fallingBalls, obstacles;
+@synthesize fallingBalls, obstacles, wildBalls;
 
 @synthesize context = _context;
 @synthesize effect = _effect;
@@ -187,10 +187,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     // Initialize game object lists
     self.fallingBalls = [[NSMutableArray alloc] init];
     self.obstacles = [[NSMutableArray alloc] init];
+    self.wildBalls = [[NSMutableArray alloc] init];
     
     // Initialize b2 graphics
-    b2Vec2 gravity(0.0f, -50.0f);
-//    b2Vec2 gravity(0.0f, 0.0f);
+//    b2Vec2 gravity(0.0f, -50.0f);
+    b2Vec2 gravity(0.0f, 0.0f);
     self->_world = new b2World(gravity);
     collisionDetector = new CollisionDetector(self);
     self->_world->SetContactListener(collisionDetector);
@@ -355,6 +356,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         [o draw];
         [o postDraw];
     }
+    
+    for (WildBall* b in self.wildBalls) {
+        [b prepareToDraw];
+        [b draw];
+        [b postDraw];
+    }
 
     
 //    // Draw all GLViews
@@ -420,22 +427,22 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     }
     
     // Handle tap in empty space
-    if (!handled) {
-        b2Vec2* touchPosition = _tapEntity->touches[0]->position;
-        // Create falling ball model
-        FallingBallModel* bm = [[FallingBallModel alloc] initWithController:self withAttributes:
-                                [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSDictionary dictionaryWithObjectsAndKeys:
-                                  [NSNumber numberWithFloat:touchPosition->x], @"x",
-                                  [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
-                                nil]];
-
-        // create corresponding view
-        FallingBall* b = [[FallingBall alloc] initWithController:self withModel:bm];
-        [fallingBalls addObject:b];
-
-//        NSLog(@"empty!");
-    }    
+//    if (!handled) {
+//        b2Vec2* touchPosition = _tapEntity->touches[0]->position;
+//        // Create falling ball model
+//        FallingBallModel* bm = [[FallingBallModel alloc] initWithController:self withAttributes:
+//                                [NSDictionary dictionaryWithObjectsAndKeys:
+//                                 [NSDictionary dictionaryWithObjectsAndKeys:
+//                                  [NSNumber numberWithFloat:touchPosition->x], @"x",
+//                                  [NSNumber numberWithFloat:touchPosition->y], @"y", nil], @"initialPosition",
+//                                nil]];
+//
+//        // create corresponding view
+//        FallingBall* b = [[FallingBall alloc] initWithController:self withModel:bm];
+//        [fallingBalls addObject:b];
+//
+////        NSLog(@"empty!");
+//    }    
 }
 
 - (IBAction)longPressHandler:(id)sender {
@@ -465,6 +472,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     // update all obstacles
     for (Obstacle* o in self.obstacles) {
         [o update];
+    }
+    
+    // update all wild balls
+    for (WildBall* b in self.wildBalls) {
+        [b update];
     }
     
     // Update all GLView instances

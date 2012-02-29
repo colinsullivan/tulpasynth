@@ -125,6 +125,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong, nonatomic) NSMutableArray * fallingBalls;
 
 /**
+ *  The list of wild balls currently in play.
+ **/
+@property (strong, nonatomic) NSMutableArray* wildBalls;
+
+/**
  *  Popup radial toolbox
  **/
 @property (strong, nonatomic) RadialToolbox* toolbox;

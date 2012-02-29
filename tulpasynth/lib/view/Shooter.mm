@@ -44,8 +44,10 @@
     myBodyMass.center.SetZero();
     self.body->SetMassData(&myBodyMass);
     
-    self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
-    [self shootBall];
+    if ([model.rate floatValue] != 0) {
+        self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
+        [self shootBall];        
+    }
 }
 
 
@@ -62,16 +64,36 @@
 }
 
 - (void) shootBall {
-    NSLog(@"Shooting ball");
-    
     self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
+    
+    // Create wild ball
+    WildBallModel* m = [[WildBallModel alloc] initWithController:self.controller withAttributes:
+                        [NSMutableDictionary dictionaryWithKeysAndObjects:
+                         @"initialPosition", [NSDictionary dictionaryWithKeysAndObjects:
+                                              @"x", [NSNumber numberWithFloat:self.position->x],
+                                              @"y", [NSNumber numberWithFloat:self.position->y + self.height], nil],
+                         @"initialLinearVelocity", [NSDictionary dictionaryWithKeysAndObjects:
+                                              @"x", [NSNumber numberWithFloat:0.0],
+                                              @"y", [NSNumber numberWithFloat:6.0],
+                                              nil],
+                         nil]];
+    
+    WildBall* b = [[WildBall alloc] initWithController:self.controller withModel:m];
+    
+    [self.controller.wildBalls addObject:b];
+    
 }
 
 - (void)update {
     [super update];
     
+    ShooterModel* model = ((ShooterModel*)self.model);
     
-
+    // if it is time to shoot another ball
+    if ([self.lastShotTime timeIntervalSinceNow] < -1.0*[model.rate floatValue]) {
+        [self shootBall];
+    }
+    
 }
 
 @end

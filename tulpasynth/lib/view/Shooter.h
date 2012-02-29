@@ -15,6 +15,9 @@
 #import "Obstacle.h"
 #import "ShooterModel.h"
 
+#import "WildBallModel.h"
+#import "WildBall.h"
+
 /**
  *  @class A shooting obstacle.
  **/

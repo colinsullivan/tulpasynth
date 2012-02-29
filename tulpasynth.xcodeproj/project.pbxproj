@@ -11,8 +11,8 @@
 		3B043F8914F878CA00DE16A3 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B043F8814F878CA00DE16A3 /* libc++.dylib */; };
 		3B043F8B14F878DB00DE16A3 /* libc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B043F8A14F878DB00DE16A3 /* libc.dylib */; };
 		3B043F8D14F8794300DE16A3 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B043F8C14F8794300DE16A3 /* libstdc++.dylib */; };
-		3B043F9214F880E000DE16A3 /* ModelCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B043F9114F880E000DE16A3 /* ModelCollection.m */; };
-		3B043FAC14F957E900DE16A3 /* ObstacleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B043FAB14F957E900DE16A3 /* ObstacleModel.m */; };
+		3B043F9214F880E000DE16A3 /* ModelCollection.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B043F9114F880E000DE16A3 /* ModelCollection.mm */; };
+		3B043FAC14F957E900DE16A3 /* ObstacleModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B043FAB14F957E900DE16A3 /* ObstacleModel.mm */; };
 		3B043FFA14F9AAC900DE16A3 /* Catcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF314F9AAC900DE16A3 /* Catcher.png */; };
 		3B043FFB14F9AAC900DE16A3 /* CyanRing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF414F9AAC900DE16A3 /* CyanRing.png */; };
 		3B043FFC14F9AAC900DE16A3 /* GlowingBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B043FF514F9AAC900DE16A3 /* GlowingBox.png */; };
@@ -39,6 +39,8 @@
 		3B0440E414FD87D800DE16A3 /* Radial-Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B0440E314FD87D800DE16A3 /* Radial-Menu.png */; };
 		3B0440E714FD884600DE16A3 /* RadialToolbox.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B0440E614FD884500DE16A3 /* RadialToolbox.mm */; };
 		3B04411714FDA8E100DE16A3 /* CollisionDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04411614FDA8DF00DE16A3 /* CollisionDetector.mm */; };
+		3B04414814FDB61700DE16A3 /* WildBall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04414714FDB61500DE16A3 /* WildBall.mm */; };
+		3B04414B14FDB66E00DE16A3 /* WildBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04414A14FDB66E00DE16A3 /* WildBallModel.mm */; };
 		3B7EB07414F8444E00452194 /* FallingBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB06F14F8444E00452194 /* FallingBallModel.mm */; };
 		3B7EB07514F8444E00452194 /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.mm */; };
 		3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */; };
@@ -355,9 +357,9 @@
 		3B043F8C14F8794300DE16A3 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		3B043F8E14F8798B00DE16A3 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		3B043F9014F880E000DE16A3 /* ModelCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCollection.h; sourceTree = "<group>"; };
-		3B043F9114F880E000DE16A3 /* ModelCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCollection.m; sourceTree = "<group>"; };
+		3B043F9114F880E000DE16A3 /* ModelCollection.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelCollection.mm; sourceTree = "<group>"; };
 		3B043FAA14F957E900DE16A3 /* ObstacleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstacleModel.h; sourceTree = "<group>"; };
-		3B043FAB14F957E900DE16A3 /* ObstacleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObstacleModel.m; sourceTree = "<group>"; };
+		3B043FAB14F957E900DE16A3 /* ObstacleModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObstacleModel.mm; sourceTree = "<group>"; };
 		3B043FF314F9AAC900DE16A3 /* Catcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Catcher.png; sourceTree = "<group>"; };
 		3B043FF414F9AAC900DE16A3 /* CyanRing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CyanRing.png; sourceTree = "<group>"; };
 		3B043FF514F9AAC900DE16A3 /* GlowingBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GlowingBox.png; sourceTree = "<group>"; };
@@ -401,6 +403,10 @@
 		3B0440E514FD884500DE16A3 /* RadialToolbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadialToolbox.h; sourceTree = "<group>"; };
 		3B0440E614FD884500DE16A3 /* RadialToolbox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RadialToolbox.mm; sourceTree = "<group>"; };
 		3B04411614FDA8DF00DE16A3 /* CollisionDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CollisionDetector.mm; sourceTree = "<group>"; };
+		3B04414614FDB61300DE16A3 /* WildBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WildBall.h; sourceTree = "<group>"; };
+		3B04414714FDB61500DE16A3 /* WildBall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WildBall.mm; sourceTree = "<group>"; };
+		3B04414914FDB66E00DE16A3 /* WildBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WildBallModel.h; sourceTree = "<group>"; };
+		3B04414A14FDB66E00DE16A3 /* WildBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WildBallModel.mm; sourceTree = "<group>"; };
 		3B7EB06E14F8444E00452194 /* FallingBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBallModel.h; sourceTree = "<group>"; };
 		3B7EB06F14F8444E00452194 /* FallingBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBallModel.mm; sourceTree = "<group>"; };
 		3B7EB07014F8444E00452194 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -916,9 +922,11 @@
 				3B043F8514F8737D00DE16A3 /* SquareModel.h */,
 				3B043F8614F8737D00DE16A3 /* SquareModel.mm */,
 				3B043F9014F880E000DE16A3 /* ModelCollection.h */,
-				3B043F9114F880E000DE16A3 /* ModelCollection.m */,
+				3B043F9114F880E000DE16A3 /* ModelCollection.mm */,
 				3B043FAA14F957E900DE16A3 /* ObstacleModel.h */,
-				3B043FAB14F957E900DE16A3 /* ObstacleModel.m */,
+				3B043FAB14F957E900DE16A3 /* ObstacleModel.mm */,
+				3B04414914FDB66E00DE16A3 /* WildBallModel.h */,
+				3B04414A14FDB66E00DE16A3 /* WildBallModel.mm */,
 			);
 			name = model;
 			path = lib/model;
@@ -965,6 +973,8 @@
 				3B04407814FB5D6900DE16A3 /* GLView.mm */,
 				3B0440E514FD884500DE16A3 /* RadialToolbox.h */,
 				3B0440E614FD884500DE16A3 /* RadialToolbox.mm */,
+				3B04414614FDB61300DE16A3 /* WildBall.h */,
+				3B04414714FDB61500DE16A3 /* WildBall.mm */,
 			);
 			name = view;
 			path = lib/view;
@@ -2028,8 +2038,8 @@
 				3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */,
 				3BBE9FA014F8513F0013CB1A /* View.mm in Sources */,
 				3B043F8714F8737D00DE16A3 /* SquareModel.mm in Sources */,
-				3B043F9214F880E000DE16A3 /* ModelCollection.m in Sources */,
-				3B043FAC14F957E900DE16A3 /* ObstacleModel.m in Sources */,
+				3B043F9214F880E000DE16A3 /* ModelCollection.mm in Sources */,
+				3B043FAC14F957E900DE16A3 /* ObstacleModel.mm in Sources */,
 				3B04404C14FB535900DE16A3 /* FallingBall.mm in Sources */,
 				3B04405114FB537300DE16A3 /* Obstacle.mm in Sources */,
 				3B04405214FB537300DE16A3 /* Square.mm in Sources */,
@@ -2047,6 +2057,8 @@
 				3B04407914FB5D6A00DE16A3 /* GLView.mm in Sources */,
 				3B0440E714FD884600DE16A3 /* RadialToolbox.mm in Sources */,
 				3B04411714FDA8E100DE16A3 /* CollisionDetector.mm in Sources */,
+				3B04414814FDB61700DE16A3 /* WildBall.mm in Sources */,
+				3B04414B14FDB66E00DE16A3 /* WildBallModel.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
