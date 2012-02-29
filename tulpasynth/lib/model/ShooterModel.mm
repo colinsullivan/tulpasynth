@@ -12,17 +12,14 @@
 
 @synthesize rate;
 
-- (void) initialize {
-    [super initialize];
++ (NSMutableDictionary*) defaultAttributes {
+    NSMutableDictionary* defaults = [super defaultAttributes];
     
-    if (!self.width && !self.height) {
-        self.width = [NSNumber numberWithFloat:5.0];
-        self.height = [NSNumber numberWithFloat:5.0];
-    }
+    [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"width"];
+    [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"height"];
+    [defaults setValue:[NSNumber numberWithFloat:1.0] forKey:@"rate"];
     
-    if (!self.rate) {
-        self.rate = [NSNumber numberWithFloat:1.0];
-    }
+    return defaults;
 }
 
 @end

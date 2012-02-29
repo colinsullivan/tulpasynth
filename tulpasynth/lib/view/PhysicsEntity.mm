@@ -122,7 +122,7 @@
 }
 
 - (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor {
-    b2Rot r(0);
+    b2Rot r(-1*self.angle);
     b2Transform obstaclePostion((*self.position), r);
     b2Vec2 touchPosition(touch->position->x, touch->position->y);
     
@@ -151,8 +151,8 @@
     // if pan just started
     if (pan->state == GestureEntityStateStart) {
         // if the touch is inside us
-        if ([self _touchIsInside:pan->touches[0] withFudge:20]) {
-            self.panner = pan;            
+        if ([self _touchIsInside:pan->touches[0]]) {
+            self.panner = pan;    
             
             [self handlePanStarted];
             

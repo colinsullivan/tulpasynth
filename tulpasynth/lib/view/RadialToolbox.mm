@@ -62,13 +62,15 @@
     
     // Create object prototypes
     self.squarePrototype = [[Square alloc] initWithController:self.controller withModel:NULL];
-    self.squarePrototype.width = 6.0;
-    self.squarePrototype.height = 2.0;
+    self.squarePrototype.width = [[[SquareModel defaultAttributes] valueForKey:@"width"] floatValue];
+    self.squarePrototype.height = [[[SquareModel defaultAttributes] valueForKey:@"height"] floatValue];
+    self.squarePrototype.shapeFixture->SetFilterData(filterData);
     [self.prototypes addObject:self.squarePrototype];
     
     self.shooterPrototype = [[Shooter alloc] initWithController:self.controller withModel:NULL];
-    self.shooterPrototype.width = 5.0;
-    self.shooterPrototype.height = 5.0;
+    self.shooterPrototype.width = [[[ShooterModel defaultAttributes] valueForKey:@"width"] floatValue];
+    self.shooterPrototype.height = [[[ShooterModel defaultAttributes] valueForKey:@"height"] floatValue];
+    self.shooterPrototype.shapeFixture->SetFilterData(filterData);
     [self.prototypes addObject:self.shooterPrototype];
     
 }

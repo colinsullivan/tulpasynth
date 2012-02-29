@@ -48,6 +48,17 @@
 
 - (void) initialize {
     
+    NSMutableDictionary* defaults = [[self class] defaultAttributes];
+    
+    // for each default attribute
+    for (NSString* attributeName in [defaults keyEnumerator]) {
+        // if value is not set
+        if (![self valueForKey:attributeName]) {
+            // set it
+            [self setValue:[defaults valueForKey:attributeName] forKey:attributeName];
+        }
+    }
+    
 }
 
 - (NSMutableArray*) serializableAttributes {
@@ -94,6 +105,10 @@
 
 - (void) synchronize {
     [self.controller synchronizeModel:self];
+}
+
++ (NSMutableDictionary*) defaultAttributes {
+    return [[NSMutableDictionary alloc] init];
 }
 
 @end

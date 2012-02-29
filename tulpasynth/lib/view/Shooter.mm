@@ -66,15 +66,32 @@
 - (void) shootBall {
     self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
     
+    float velocityScalar = 5.0;
+    
+    float wildBallWidth = [[[WildBallModel defaultAttributes] valueForKey:@"width"] floatValue];
+    
     // Create wild ball
     WildBallModel* m = [[WildBallModel alloc] initWithController:self.controller withAttributes:
                         [NSMutableDictionary dictionaryWithKeysAndObjects:
                          @"initialPosition", [NSDictionary dictionaryWithKeysAndObjects:
-                                              @"x", [NSNumber numberWithFloat:self.position->x],
-                                              @"y", [NSNumber numberWithFloat:self.position->y + self.height], nil],
+                                              @"x", [NSNumber numberWithFloat:
+                                                     self.position->x
+                                                     +
+                                                     cosf(self.angle)*(self.width/2.0 + 1)
+                                                     +
+                                                     cosf(self.angle)*(wildBallWidth/2.0)
+                                                     ],
+                                              @"y", [NSNumber numberWithFloat:
+                                                     self.position->y
+                                                     +
+                                                     -sinf(self.angle)*(self.height/2.0)
+                                                     +
+                                                     -sinf(self.angle)*(wildBallWidth/2.0)
+                                                     ]
+                                              , nil],
                          @"initialLinearVelocity", [NSDictionary dictionaryWithKeysAndObjects:
-                                              @"x", [NSNumber numberWithFloat:0.0],
-                                              @"y", [NSNumber numberWithFloat:6.0],
+                                              @"x", [NSNumber numberWithFloat:cosf(self.angle)*velocityScalar],
+                                              @"y", [NSNumber numberWithFloat:-sinf(self.angle)*velocityScalar],
                                               nil],
                          nil]];
     

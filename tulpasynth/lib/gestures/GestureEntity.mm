@@ -22,16 +22,11 @@ GestureEntity::~GestureEntity() {
 void GestureEntity::update() {
     // Update touch entities
     CGPoint location;
-    double temp;
     for (int i = 0; i < [gestureRecognizer numberOfTouches]; i++) {
         location = [gestureRecognizer locationOfTouch:i inView:nil];
         
         // transform: to make landscape
-        temp = location.x;
-        location.x = location.y;
-        location.y = temp;
-        
-        touches[i]->position->Set(PX_TO_M(location.x), PX_TO_M(location.y));
+        touches[i]->position->Set(PX_TO_M(location.y), PX_TO_M(location.x));
     }
     
     // update state

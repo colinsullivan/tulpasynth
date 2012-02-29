@@ -47,6 +47,11 @@
  **/
 - (void) synchronize;
 
+/**
+ *  Default attributes for this model.
+ **/
++ (NSMutableDictionary*) defaultAttributes;
+
 
 
 @end

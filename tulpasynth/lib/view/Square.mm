@@ -41,8 +41,11 @@
     }
     
     self.shape = new b2PolygonShape();
-    self.shape->m_radius = 1.0f;
-    ((b2PolygonShape*)self.shape)->SetAsBox(self.width/2 - (self.width/15), self.height/2 - (self.height/15));
+    self.shape->m_radius = 0.5f;
+    ((b2PolygonShape*)self.shape)->SetAsBox(
+                                            self.width/2.0 - 0.5,
+                                            self.height/2.0 - 0.5
+                                            );
     
     b2FixtureDef mySquareFixture;
     mySquareFixture.shape = self.shape;

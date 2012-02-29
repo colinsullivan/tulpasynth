@@ -394,7 +394,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     _panEntity->update();
     
     // Allow toolbox to handle pan
-    [self.toolbox handlePan:_panEntity];
+//    [self.toolbox handlePan:_panEntity];
 
     // All obstacles can handle pan
     for (Obstacle * o in self.obstacles) {

@@ -11,15 +11,16 @@
 @implementation SquareModel
 
 - (void) initialize {
-    [super initialize];
+    [super initialize];    
+}
+
++ (NSMutableDictionary*) defaultAttributes {
+    NSMutableDictionary* defaults = [super defaultAttributes];
     
-    if (!self.height) {
-        self.height = [NSNumber numberWithFloat:2.0];
-    }
+    [defaults setValue:[NSNumber numberWithFloat:6.0] forKey:@"width"];
+    [defaults setValue:[NSNumber numberWithFloat:3.0] forKey:@"height"];
     
-    if (!self.width) {
-        self.width = [NSNumber numberWithFloat:6.0];
-    }
+    return defaults;
 }
 
 @end

@@ -20,13 +20,13 @@
     return attributes;
 }
 
-- (void) initialize {
-    [super initialize];
++ (NSMutableDictionary*) defaultAttributes {
+    NSMutableDictionary* defaults = [super defaultAttributes];
     
-    if (!self.height || !self.width) {
-        self.height = [NSNumber numberWithFloat:2.0];
-        self.width = [NSNumber numberWithFloat:2.0];
-    }    
+    [defaults setValue:[NSNumber numberWithFloat:2.0] forKey:@"height"];
+    [defaults setValue:[NSNumber numberWithFloat:2.0] forKey:@"width"];
+    
+    return defaults;
 }
 
 @end
