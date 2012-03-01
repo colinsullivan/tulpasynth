@@ -41,6 +41,8 @@
 		3B04411714FDA8E100DE16A3 /* CollisionDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04411614FDA8DF00DE16A3 /* CollisionDetector.mm */; };
 		3B04414814FDB61700DE16A3 /* WildBall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04414714FDB61500DE16A3 /* WildBall.mm */; };
 		3B04414B14FDB66E00DE16A3 /* WildBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04414A14FDB66E00DE16A3 /* WildBallModel.mm */; };
+		3B624C04150036B80066A1CB /* RAMpler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C02150036B80066A1CB /* RAMpler.cpp */; };
+		3B624C0B150038010066A1CB /* NoisePercussionReversed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */; };
 		3B7EB07414F8444E00452194 /* FallingBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB06F14F8444E00452194 /* FallingBallModel.mm */; };
 		3B7EB07514F8444E00452194 /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.mm */; };
 		3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */; };
@@ -407,6 +409,9 @@
 		3B04414714FDB61500DE16A3 /* WildBall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WildBall.mm; sourceTree = "<group>"; };
 		3B04414914FDB66E00DE16A3 /* WildBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WildBallModel.h; sourceTree = "<group>"; };
 		3B04414A14FDB66E00DE16A3 /* WildBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WildBallModel.mm; sourceTree = "<group>"; };
+		3B624C02150036B80066A1CB /* RAMpler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAMpler.cpp; sourceTree = "<group>"; };
+		3B624C03150036B80066A1CB /* RAMpler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAMpler.hpp; sourceTree = "<group>"; };
+		3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = NoisePercussionReversed.wav; sourceTree = "<group>"; };
 		3B7EB06E14F8444E00452194 /* FallingBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBallModel.h; sourceTree = "<group>"; };
 		3B7EB06F14F8444E00452194 /* FallingBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBallModel.mm; sourceTree = "<group>"; };
 		3B7EB07014F8444E00452194 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -908,6 +913,14 @@
 			path = lib/gestures;
 			sourceTree = "<group>";
 		};
+		3B624C05150037120066A1CB /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */,
+			);
+			path = sounds;
+			sourceTree = SOURCE_ROOT;
+		};
 		3B7EB06D14F8444E00452194 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1025,6 +1038,7 @@
 		3BE2566E14F837CD00AFC61E /* tulpasynth */ = {
 			isa = PBXGroup;
 			children = (
+				3B624C05150037120066A1CB /* sounds */,
 				3B043FF214F9AAC900DE16A3 /* graphics */,
 				3BE2568C14F8387100AFC61E /* lib */,
 				3BE2568414F8385700AFC61E /* tulpaAppDelegate.h */,
@@ -1657,6 +1671,8 @@
 		3BE269C514F8430D00AFC61E /* instruments */ = {
 			isa = PBXGroup;
 			children = (
+				3B624C02150036B80066A1CB /* RAMpler.cpp */,
+				3B624C03150036B80066A1CB /* RAMpler.hpp */,
 				3BE269C614F8430D00AFC61E /* Envelopes.hpp */,
 				3BE269C714F8430D00AFC61E /* FMPercussion.cpp */,
 				3BE269C814F8430D00AFC61E /* FMPercussion.hpp */,
@@ -1866,6 +1882,7 @@
 				3B04400014F9AAC900DE16A3 /* Textures.psd in Resources */,
 				3B04407314FB5A9F00DE16A3 /* Toolbar.png in Resources */,
 				3B0440E414FD87D800DE16A3 /* Radial-Menu.png in Resources */,
+				3B624C0B150038010066A1CB /* NoisePercussionReversed.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2059,6 +2076,7 @@
 				3B04411714FDA8E100DE16A3 /* CollisionDetector.mm in Sources */,
 				3B04414814FDB61700DE16A3 /* WildBall.mm in Sources */,
 				3B04414B14FDB66E00DE16A3 /* WildBallModel.mm in Sources */,
+				3B624C04150036B80066A1CB /* RAMpler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

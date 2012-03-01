@@ -18,6 +18,8 @@
 #import "WildBallModel.h"
 #import "WildBall.h"
 
+#include "RAMpler.hpp"
+
 /**
  *  @class A shooting obstacle.
  **/
@@ -29,9 +31,18 @@
 - (b2BodyType)bodyType;
 
 /**
+ *  Instrument to play each time ball is fired 
+ **/
+@property instruments::RAMpler* instr;
+
+/**
  *  Time we fired the last ball.
  **/
 @property (strong, nonatomic) NSDate* lastShotTime;
+/**
+ *  Time the next shot will occur
+ **/
+@property (strong, nonatomic) NSDate* nextShotTime;
 
 - (void) shootBall;
 

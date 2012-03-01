@@ -13,7 +13,7 @@
 
 @implementation Shooter
 
-@synthesize lastShotTime;
+@synthesize lastShotTime, nextShotTime, instr;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -44,10 +44,18 @@
     myBodyMass.center.SetZero();
     self.body->SetMassData(&myBodyMass);
     
-    if ([model.rate floatValue] != 0) {
-        self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
-        [self shootBall];        
+    instr = new instruments::RAMpler();
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"NoisePercussionReversed" ofType:@"wav"];
+    instr->set_clip([path UTF8String]);
+    
+    if ([model.rate floatValue] > 0.0f) {
+        self.lastShotTime = nil;
+        self.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:[model.rate floatValue]];        
     }
+}
+
+- (void) dealloc {
+    delete instr;
 }
 
 
@@ -64,7 +72,8 @@
 }
 
 - (void) shootBall {
-    self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
+    ShooterModel* model = ((ShooterModel*)self.model);
+
     
     float velocityScalar = 5.0;
     
@@ -99,17 +108,41 @@
     
     [self.controller.wildBalls addObject:b];
     
+    self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
+    self.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:[model.rate floatValue]];
 }
 
 - (void)update {
     [super update];
-    
-    ShooterModel* model = ((ShooterModel*)self.model);
-    
+        
     // if it is time to shoot another ball
-    if ([self.lastShotTime timeIntervalSinceNow] < -1.0*[model.rate floatValue]) {
+//    if (self.lastShotTime && self.nextShotTime) {
+//        NSLog(@"[self.nextShotTime timeIntervalSinceNow]: %f", [self.nextShotTime timeIntervalSinceNow]);
+//    }
+    
+    // If it is time to shoot another ball
+    if ([self.nextShotTime timeIntervalSinceNow] < 0) {
+        // start playing sound
+        instr->play();
+    }
+
+    // actually shoot ball 1.12 seconds later, when sound transient occurs
+    if ([self.nextShotTime timeIntervalSinceNow] < -1.12) {        
         [self shootBall];
     }
+    
+//    // if it is time to trigger shooting sound
+//    // (transient is at 01.12 seconds into file)
+//    stk::StkFloat transientPoint = 49572;
+//    unsigned long sampleDuration = instr->duration();
+//    // if duration is longer than the time we have to wait
+//    if (sampleDuration > -1.0*[self.nextShotTime timeIntervalSinceNow]) {
+//        // we must start
+//    }
+    
+    // play 1.25 seconds before shoot time
+//    if ([self.lastShotTime timeIntervalSinceNow] < -1.0*[model.rate floatValue]) {
+//    }
     
 }
 
