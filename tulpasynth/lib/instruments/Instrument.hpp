@@ -94,11 +94,11 @@ namespace instruments {
          *
          *  @param  chan  Channel of sample to retrieve
          **/
-        virtual stk::StkFloat next_samp(int channel) {
-            // Should be overridden in subclasses
-            std::cerr << "WARNING: instruments::Instrument::next_samp returns zeros." << std::endl;
-            return 0.0;
-        };
+//        virtual stk::StkFloat next_samp(int channel) {
+//            // Should be overridden in subclasses
+//            std::cerr << "WARNING: instruments::Instrument::next_samp returns zeros." << std::endl;
+//            return 0.0;
+//        };
 
         /**
          *  Fill a channel of the StkFrames object with 

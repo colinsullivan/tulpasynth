@@ -23,7 +23,7 @@ namespace instruments {
      *  @class      A sampler which keeps audio in RAM.
      *  @extends    instruments::Instrument
      **/
-    class RAMpler : protected Instrument
+    class RAMpler : protected Instrument, protected stk::FileWvIn
     {
     public:
         /**
@@ -31,7 +31,6 @@ namespace instruments {
          **/
         RAMpler(/*Orchestra* anOrch, Json::Value initialAttributes*/);
         ~RAMpler() {
-            delete this->mClip;
         };
 
         /**
@@ -50,19 +49,13 @@ namespace instruments {
             return Instrument::play();
         };
 
-        virtual stk::StkFloat next_samp(int channel);
+//        virtual stk::StkFloat next_samp(int channel);
         virtual stk::StkFrames& next_buf(stk::StkFrames& frames);
         
         /**
          *  Getter for currently loaded sample duration.
          **/
-        unsigned long duration();
-    
-    private:
-        /**
-         *  Clip to play
-         **/
-        stk::FileWvIn* mClip;        
+        unsigned long duration();    
     };    
 };
 #endif
