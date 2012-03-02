@@ -74,3 +74,6 @@ unsigned long instruments::RAMpler::duration() {
         return NULL;
     }
 }
+float instruments::RAMpler::percentComplete() {
+    return (time_ / this->getSize());    
+}

@@ -16,3 +16,6 @@
 [submodule "tulpasynth/lib/vendor/RestKit"]
 	path = tulpasynth/lib/vendor/RestKit
 	url = git://github.com/RestKit/RestKit.git
+[submodule "tulpasynth/lib/vendor/CocoaAsyncSocket"]
+	path = tulpasynth/lib/vendor/CocoaAsyncSocket
+	url = git://github.com/robbiehanson/CocoaAsyncSocket.git

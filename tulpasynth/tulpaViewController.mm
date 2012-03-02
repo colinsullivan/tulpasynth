@@ -28,6 +28,7 @@
 #import "FallingBall.h"
 #import "Square.h"
 
+
 //#include "FMPercussion.hpp"
 
 TouchEntity * _touchEntities[MAX_TOUCHES];
@@ -57,6 +58,8 @@ LongPressEntity * _longPressEntity;
 @synthesize pinchRecognizer, rotateRecognizer, panRecognizer, tapRecognizer, longPressRecognizer;
 
 @synthesize world, collisionDetector, walls, toolbox, collisionFilter;
+
+@synthesize socketHandler;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -158,6 +161,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.socketHandler = [[SocketHandler alloc] init];
 
     self.startTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
 

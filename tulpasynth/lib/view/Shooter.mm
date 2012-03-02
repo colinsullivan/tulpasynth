@@ -126,8 +126,8 @@
         instr->play();
     }
 
-    // actually shoot ball 1.12 seconds later, when sound transient occurs
-    if ([self.nextShotTime timeIntervalSinceNow] < -1.12) {        
+    // actually shoot ball when sound transient occurs
+    if (instr->percentComplete() > (49572.0/50969.0)) {        
         [self shootBall];
     }
     

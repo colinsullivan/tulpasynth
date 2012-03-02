@@ -23,7 +23,7 @@
 #include "Model.h"
 
 #import "RadialToolbox.h"
-
+#import "SocketHandler.h"
 
 
 /**
@@ -143,5 +143,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  Callback primarily used to handle all model changes and synchronize
  **/
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
+
+/**
+ *  Socket delegate
+ **/
+@property (strong, nonatomic) SocketHandler* socketHandler;
 
 @end

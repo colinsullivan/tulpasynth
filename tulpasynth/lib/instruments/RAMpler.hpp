@@ -56,6 +56,11 @@ namespace instruments {
          *  Getter for currently loaded sample duration.
          **/
         unsigned long duration();    
+        
+        /**
+         *  Percent of sample currently played
+         **/
+        float percentComplete();
     };    
 };
 #endif
