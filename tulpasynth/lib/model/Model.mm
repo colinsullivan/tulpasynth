@@ -15,13 +15,14 @@
 
 @implementation Model
 
-@synthesize id, controller;
+@synthesize id, controller, initialized;
 
 - (id) initWithController:(tulpaViewController*)theController withAttributes:(NSMutableDictionary*)attributes {
-    static int nextId = 0;
+//    static int nextId = 0;
     
     if (self = [super init]) {
-        self.id = [[NSNumber alloc] initWithInt:nextId++];
+        self.initialized = false;
+//        self.id = [[NSNumber alloc] initWithInt:nextId++];
         self.controller = theController;
         
         // De-serialization, instantiation
@@ -36,6 +37,11 @@
         
         // add instance to global list
         [[Model Instances] addObject:self];
+        
+        // request ID from the server
+        [self.controller.socketHandler send:[NSMutableDictionary dictionaryWithKeysAndObjects:
+                                             @"method", @"request_id", nil]];
+        [self.controller.waitingForIds addObject:self];
         
         // controller should be informed of our creation, and begin watching for changes
 //        for (NSString* keyPath in [self serializableAttributes]) {

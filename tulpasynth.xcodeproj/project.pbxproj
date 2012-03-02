@@ -45,20 +45,9 @@
 		3B624C0B150038010066A1CB /* NoisePercussionReversed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */; };
 		3B62509F1500AB430066A1CB /* SocketHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B62509E1500AB430066A1CB /* SocketHandler.m */; };
 		3B62512D1500AF370066A1CB /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B62512C1500AF370066A1CB /* libicucore.dylib */; };
-		3B6255B61500C6130066A1CB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3B62549B1500C6120066A1CB /* .gitignore */; };
-		3B6255B71500C6130066A1CB /* CocoaAsyncSocket.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 3B62549C1500C6120066A1CB /* CocoaAsyncSocket.podspec */; };
-		3B6255B81500C6130066A1CB /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 3B62549E1500C6120066A1CB /* Documentation.html */; };
-		3B6255B91500C6130066A1CB /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6254A01500C6120066A1CB /* GCDAsyncSocket.m */; };
-		3B6255BA1500C6130066A1CB /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6254A21500C6120066A1CB /* GCDAsyncUdpSocket.m */; };
-		3B6255F81500C6130066A1CB /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 3B6255421500C6120066A1CB /* README.markdown */; };
-		3B6255F91500C6130066A1CB /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6255451500C6120066A1CB /* AsyncSocket.m */; };
-		3B6255FA1500C6130066A1CB /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6255471500C6120066A1CB /* AsyncUdpSocket.m */; };
-		3B6255FB1500C6130066A1CB /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 3B6255481500C6120066A1CB /* Documentation.html */; };
-		3B62560F1500C6130066A1CB /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6255791500C6120066A1CB /* DDAbstractDatabaseLogger.m */; };
-		3B6256101500C6130066A1CB /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B62557B1500C6120066A1CB /* DDASLLogger.m */; };
-		3B6256111500C6130066A1CB /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B62557D1500C6120066A1CB /* DDFileLogger.m */; };
-		3B6256121500C6130066A1CB /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B62557F1500C6120066A1CB /* DDLog.m */; };
-		3B6256131500C6130066A1CB /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6255811500C6120066A1CB /* DDTTYLogger.m */; };
+		3B6256B915016EBD0066A1CB /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 3B6256B215016EBD0066A1CB /* base64.c */; };
+		3B6256BA15016EBD0066A1CB /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6256B515016EBD0066A1CB /* NSData+SRB64Additions.m */; };
+		3B6256BB15016EBD0066A1CB /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6256B815016EBD0066A1CB /* SRWebSocket.m */; };
 		3B7EB07414F8444E00452194 /* FallingBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB06F14F8444E00452194 /* FallingBallModel.mm */; };
 		3B7EB07514F8444E00452194 /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.mm */; };
 		3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */; };
@@ -432,29 +421,13 @@
 		3B62509E1500AB430066A1CB /* SocketHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocketHandler.m; path = lib/SocketHandler.m; sourceTree = "<group>"; };
 		3B62512C1500AF370066A1CB /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		3B62512E1500AF680066A1CB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		3B62549B1500C6120066A1CB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		3B62549C1500C6120066A1CB /* CocoaAsyncSocket.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CocoaAsyncSocket.podspec; sourceTree = "<group>"; };
-		3B62549E1500C6120066A1CB /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
-		3B62549F1500C6120066A1CB /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
-		3B6254A01500C6120066A1CB /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
-		3B6254A11500C6120066A1CB /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
-		3B6254A21500C6120066A1CB /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
-		3B6255421500C6120066A1CB /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
-		3B6255441500C6120066A1CB /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
-		3B6255451500C6120066A1CB /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
-		3B6255461500C6120066A1CB /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
-		3B6255471500C6120066A1CB /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
-		3B6255481500C6120066A1CB /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
-		3B6255781500C6120066A1CB /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
-		3B6255791500C6120066A1CB /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
-		3B62557A1500C6120066A1CB /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
-		3B62557B1500C6120066A1CB /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
-		3B62557C1500C6120066A1CB /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
-		3B62557D1500C6120066A1CB /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
-		3B62557E1500C6120066A1CB /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
-		3B62557F1500C6120066A1CB /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
-		3B6255801500C6120066A1CB /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
-		3B6255811500C6120066A1CB /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		3B6256B215016EBD0066A1CB /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
+		3B6256B315016EBD0066A1CB /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
+		3B6256B415016EBD0066A1CB /* NSData+SRB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SRB64Additions.h"; sourceTree = "<group>"; };
+		3B6256B515016EBD0066A1CB /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SRB64Additions.m"; sourceTree = "<group>"; };
+		3B6256B615016EBD0066A1CB /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		3B6256B715016EBD0066A1CB /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		3B6256B815016EBD0066A1CB /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		3B7EB06E14F8444E00452194 /* FallingBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBallModel.h; sourceTree = "<group>"; };
 		3B7EB06F14F8444E00452194 /* FallingBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBallModel.mm; sourceTree = "<group>"; };
 		3B7EB07014F8444E00452194 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -965,67 +938,27 @@
 			path = sounds;
 			sourceTree = SOURCE_ROOT;
 		};
-		3B62549A1500C6120066A1CB /* CocoaAsyncSocket */ = {
+		3B62563B15016E410066A1CB /* SocketRocket */ = {
 			isa = PBXGroup;
 			children = (
-				3B62549B1500C6120066A1CB /* .gitignore */,
-				3B62549C1500C6120066A1CB /* CocoaAsyncSocket.podspec */,
-				3B62549D1500C6120066A1CB /* GCD */,
-				3B6255421500C6120066A1CB /* README.markdown */,
-				3B6255431500C6120066A1CB /* RunLoop */,
-				3B6255761500C6120066A1CB /* Vendor */,
+				3B6256B115016EBD0066A1CB /* SocketRocket */,
 			);
-			name = CocoaAsyncSocket;
-			path = lib/vendor/CocoaAsyncSocket;
+			name = SocketRocket;
+			path = lib/vendor/SocketRocket;
 			sourceTree = "<group>";
 		};
-		3B62549D1500C6120066A1CB /* GCD */ = {
+		3B6256B115016EBD0066A1CB /* SocketRocket */ = {
 			isa = PBXGroup;
 			children = (
-				3B62549E1500C6120066A1CB /* Documentation.html */,
-				3B62549F1500C6120066A1CB /* GCDAsyncSocket.h */,
-				3B6254A01500C6120066A1CB /* GCDAsyncSocket.m */,
-				3B6254A11500C6120066A1CB /* GCDAsyncUdpSocket.h */,
-				3B6254A21500C6120066A1CB /* GCDAsyncUdpSocket.m */,
+				3B6256B215016EBD0066A1CB /* base64.c */,
+				3B6256B315016EBD0066A1CB /* base64.h */,
+				3B6256B415016EBD0066A1CB /* NSData+SRB64Additions.h */,
+				3B6256B515016EBD0066A1CB /* NSData+SRB64Additions.m */,
+				3B6256B615016EBD0066A1CB /* SocketRocket-Prefix.pch */,
+				3B6256B715016EBD0066A1CB /* SRWebSocket.h */,
+				3B6256B815016EBD0066A1CB /* SRWebSocket.m */,
 			);
-			path = GCD;
-			sourceTree = "<group>";
-		};
-		3B6255431500C6120066A1CB /* RunLoop */ = {
-			isa = PBXGroup;
-			children = (
-				3B6255441500C6120066A1CB /* AsyncSocket.h */,
-				3B6255451500C6120066A1CB /* AsyncSocket.m */,
-				3B6255461500C6120066A1CB /* AsyncUdpSocket.h */,
-				3B6255471500C6120066A1CB /* AsyncUdpSocket.m */,
-				3B6255481500C6120066A1CB /* Documentation.html */,
-			);
-			path = RunLoop;
-			sourceTree = "<group>";
-		};
-		3B6255761500C6120066A1CB /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				3B6255771500C6120066A1CB /* CocoaLumberjack */,
-			);
-			path = Vendor;
-			sourceTree = "<group>";
-		};
-		3B6255771500C6120066A1CB /* CocoaLumberjack */ = {
-			isa = PBXGroup;
-			children = (
-				3B6255781500C6120066A1CB /* DDAbstractDatabaseLogger.h */,
-				3B6255791500C6120066A1CB /* DDAbstractDatabaseLogger.m */,
-				3B62557A1500C6120066A1CB /* DDASLLogger.h */,
-				3B62557B1500C6120066A1CB /* DDASLLogger.m */,
-				3B62557C1500C6120066A1CB /* DDFileLogger.h */,
-				3B62557D1500C6120066A1CB /* DDFileLogger.m */,
-				3B62557E1500C6120066A1CB /* DDLog.h */,
-				3B62557F1500C6120066A1CB /* DDLog.m */,
-				3B6255801500C6120066A1CB /* DDTTYLogger.h */,
-				3B6255811500C6120066A1CB /* DDTTYLogger.m */,
-			);
-			path = CocoaLumberjack;
+			path = SocketRocket;
 			sourceTree = "<group>";
 		};
 		3B7EB06D14F8444E00452194 /* model */ = {
@@ -1192,7 +1125,7 @@
 		3BE256C514F838E400AFC61E /* vendor */ = {
 			isa = PBXGroup;
 			children = (
-				3B62549A1500C6120066A1CB /* CocoaAsyncSocket */,
+				3B62563B15016E410066A1CB /* SocketRocket */,
 				3B7EB07714F845C600452194 /* RestKit */,
 				3BE2684D14F842B800AFC61E /* MoMu-STK-1.0.0 */,
 				3BE267F514F842A700AFC61E /* momu-1.0.0 */,
@@ -1996,11 +1929,6 @@
 				3B04407314FB5A9F00DE16A3 /* Toolbar.png in Resources */,
 				3B0440E414FD87D800DE16A3 /* Radial-Menu.png in Resources */,
 				3B624C0B150038010066A1CB /* NoisePercussionReversed.wav in Resources */,
-				3B6255B61500C6130066A1CB /* .gitignore in Resources */,
-				3B6255B71500C6130066A1CB /* CocoaAsyncSocket.podspec in Resources */,
-				3B6255B81500C6130066A1CB /* Documentation.html in Resources */,
-				3B6255F81500C6130066A1CB /* README.markdown in Resources */,
-				3B6255FB1500C6130066A1CB /* Documentation.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2196,15 +2124,9 @@
 				3B04414B14FDB66E00DE16A3 /* WildBallModel.mm in Sources */,
 				3B624C04150036B80066A1CB /* RAMpler.cpp in Sources */,
 				3B62509F1500AB430066A1CB /* SocketHandler.m in Sources */,
-				3B6255B91500C6130066A1CB /* GCDAsyncSocket.m in Sources */,
-				3B6255BA1500C6130066A1CB /* GCDAsyncUdpSocket.m in Sources */,
-				3B6255F91500C6130066A1CB /* AsyncSocket.m in Sources */,
-				3B6255FA1500C6130066A1CB /* AsyncUdpSocket.m in Sources */,
-				3B62560F1500C6130066A1CB /* DDAbstractDatabaseLogger.m in Sources */,
-				3B6256101500C6130066A1CB /* DDASLLogger.m in Sources */,
-				3B6256111500C6130066A1CB /* DDFileLogger.m in Sources */,
-				3B6256121500C6130066A1CB /* DDLog.m in Sources */,
-				3B6256131500C6130066A1CB /* DDTTYLogger.m in Sources */,
+				3B6256B915016EBD0066A1CB /* base64.c in Sources */,
+				3B6256BA15016EBD0066A1CB /* NSData+SRB64Additions.m in Sources */,
+				3B6256BB15016EBD0066A1CB /* SRWebSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2227,7 +2149,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -2262,7 +2184,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";

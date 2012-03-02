@@ -149,4 +149,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  **/
 @property (strong, nonatomic) SocketHandler* socketHandler;
 
+/**
+ *  List of models that are waiting for ids
+ **/
+@property (strong, nonatomic) NSMutableArray* waitingForIds;
+
 @end

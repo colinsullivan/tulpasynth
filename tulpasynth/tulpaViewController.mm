@@ -59,7 +59,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize world, collisionDetector, walls, toolbox, collisionFilter;
 
-@synthesize socketHandler;
+@synthesize socketHandler, waitingForIds;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -163,6 +163,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     [super viewDidLoad];
     
     self.socketHandler = [[SocketHandler alloc] init];
+    self.waitingForIds = [[NSMutableArray alloc] init];
 
     self.startTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
 

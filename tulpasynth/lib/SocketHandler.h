@@ -14,25 +14,31 @@
 
 //#import "SRWebSocket.h"
 
-#import "GCDAsyncSocket.h"
+//#import "AsyncSocket.h"
+//
+//#define USE_SECURE_CONNECTION 0
+//#define ENABLE_BACKGROUNDING  1
+//
+//#if USE_SECURE_CONNECTION
+//#define HOST @"128.12.158.62"
+//#define PORT 6666
+//#else
+//#define HOST @"128.12.158.62"
+//#define PORT 6666
+//#endif
 
-#define USE_SECURE_CONNECTION 0
-#define ENABLE_BACKGROUNDING  1
-
-#if USE_SECURE_CONNECTION
-#define HOST @"128.12.158.62"
-#define PORT 6666
-#else
-#define HOST @"128.12.158.62"
-#define PORT 6666
-#endif
+#import "SRWebSocket.h"
 
 
-@interface SocketHandler : NSObject <UIApplicationDelegate>
+
+@interface SocketHandler : NSObject <SRWebSocketDelegate>
 
 - (id) init;
 
-@property (strong, nonatomic) GCDAsyncSocket* socket;
+@property (strong, nonatomic) SRWebSocket* socket;
+//@property dispatch_queue_t* socketQueue;
+
+- (void) send:(NSMutableDictionary*)message;
 
 //- (void) socketIODidConnect:(SocketIO *)socket;
 //- (void) socketIODidDisconnect:(SocketIO *)socket;
@@ -42,9 +48,9 @@
 //- (void) socketIO:(SocketIO *)socket didSendMessage:(SocketIOPacket *)packet;
 //- (void) socketIOHandshakeFailed:(SocketIO *)socket;
 
-//- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message;
-//- (void)webSocketDidOpen:(SRWebSocket *)webSocket;
-//- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
-//- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message;
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket;
+- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
 
 @end
