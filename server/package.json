@@ -1,0 +1,11 @@
+{
+    "name": "tulpasynth-server",
+    "description": "Server side components for tulpasynth app",
+    "author": "Colin Sullivan <colin@colin-sullivan.net>",
+    "dependencies": {
+        "colors": "0.6.x",
+        "faye-websocket": "0.4.x",
+        "redis": "0.7.x"
+    },
+    "engine": "node 0.6.x"
+}
