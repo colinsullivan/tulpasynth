@@ -31,7 +31,7 @@
 /**
  *  Has this model finished initializing? (i.e. received an id from the server)
  **/
-@property BOOL initialized;
+@property (nonatomic) BOOL initialized;
 
 - (NSMutableArray*) serializableAttributes;
 - (NSMutableDictionary*) serialize;

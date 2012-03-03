@@ -104,9 +104,6 @@
                                               nil],
                          nil]];
     
-    WildBall* b = [[WildBall alloc] initWithController:self.controller withModel:m];
-    
-    [self.controller.wildBalls addObject:b];
     
     self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
     self.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:[model.rate floatValue]];

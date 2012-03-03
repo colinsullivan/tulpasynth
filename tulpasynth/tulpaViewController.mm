@@ -539,7 +539,39 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     NSLog(@"tulpaViewController.observeValueForKeyPath\nkeyPath:\t%@\nchange:\t%@", keyPath, change);
     
-    // instantiate views for created models here, removing similar logic entirely from elsewhere.
+    // if the list of model instances has changed
+    if (object == [Model Instances]) {
+        
+        // if a model was added
+        if ([[change valueForKey:@"kind"] intValue] == NSKeyValueChangeInsertion) {
+            
+            Model* addedModel = [[[Model Instances] objects] objectAtIndex:[[change valueForKey:@"indexes"] firstIndex]];
+            Class addedModelClass = [addedModel class];
+            
+            // if a square model was added
+            if (addedModelClass == [SquareModel class]) {
+                // create square view
+                Square* s = [[Square alloc] 
+                             initWithController:self
+                             withModel:addedModel];
+                [self.obstacles addObject:s];
+            }
+            // if a shooter model was added
+            else if(addedModelClass == [ShooterModel class]) {
+                Shooter* s = [[Shooter alloc] initWithController:self withModel:addedModel];
+                [self.obstacles addObject:s];
+                
+            }
+            else if(addedModelClass == [WildBallModel class]) {
+                WildBall* b = [[WildBall alloc] initWithController:self withModel:addedModel];
+                [self.wildBalls addObject:b];
+
+            }
+            
+        }
+        
+    }
+
 }
 
 - (void) synchronizeModel:(Model*)aModel {

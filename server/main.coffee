@@ -41,19 +41,20 @@ db.on "ready", () ->
 
         ws.onopen = (event) ->
             debugMsg "Client connected"
+            debugMsg "#{openConnections.length} connections now open"
 
-            # Get current state
-            db.hgetall "model", (err, obj) ->
-                if err
-                    throw err
+            # # Get current state
+            # db.hgetall "model", (err, obj) ->
+            #     if err
+            #         throw err
                 
-                console.log 'obj'
-                console.log obj
+            #     console.log 'obj'
+            #     console.log obj
 
-                for id, model of obj
-                    message = JSON.parse(model)
-                    message.method = "create"
-                    ws.send JSON.stringify(message)
+            #     for id, model of obj
+            #         message = JSON.parse(model)
+            #         message.method = "create"
+            #         ws.send JSON.stringify(message)
                     
                 
 
@@ -85,11 +86,30 @@ db.on "ready", () ->
                 debugMsg "Storing model #{data.attributes.id}"
                 db.hmset "model", "#{data.attributes.id}", JSON.stringify(data)
 
+                # Relay create message to other connected clients
+                data.method = "create"
+                for client in openConnections
+                    if client != ws
+                        client.send JSON.stringify(data)
+            
+            else if data.method == "update"
+                # Update data in redis
+                delete data.method
+                debugMsg "Updating model #{data.attributes.id}"
+                db.hmset "model", "#{data.attributes.id}", JSON.stringify(data)
+
+                # Relay update message to other connected clients
+                data.method = "update"
+                for client in openConnections
+                    if client != ws
+                        client.send JSON.stringify(data)
+
         
         # ws.send event.data
 
         ws.onclose = (event) ->
             debugMsg 'Client disconnected'
+            debugMsg "#{openConnections.length} connections now open"
             ws = null
     
     server.on "listening", () ->
@@ -99,8 +119,12 @@ db.on "ready", () ->
         if e.code == "EADDRINUSE"
             errorMsg "Address in use, retrying..."
             setTimeout () ->
-                server.close()
-                server.listen 6666, "128.12.158.62"
+                try
+                    server.close()
+                catch error
+                    return
+                finally
+                    server.listen 6666, "128.12.158.62"
             , 1000
     
     server.listen 6666, "128.12.158.62"

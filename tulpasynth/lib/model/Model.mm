@@ -17,6 +17,15 @@
 
 @synthesize id, controller, initialized;
 
+- (void) setInitialized:(BOOL)anInitialized {
+    if (anInitialized) {
+        // add instance to global list
+        [[Model Instances] addObject:self];
+    }
+    
+    initialized = anInitialized;
+}
+
 - (id) initWithController:(tulpaViewController*)theController withAttributes:(NSMutableDictionary*)attributes {
 //    static int nextId = 0;
     
@@ -37,20 +46,14 @@
         }
         else {
             self.initialized = false;
-        }
-        
-        // Set any default attributes
-        [self initialize];
-        
-        // add instance to global list
-        [[Model Instances] addObject:self];
-
-        if (!self.initialized) {
             // request ID from the server
             [self.controller.socketHandler send:[NSMutableDictionary dictionaryWithKeysAndObjects:
                                                  @"method", @"request_id", nil]];
             [self.controller.waitingForIds addObject:self];            
         }
+        
+        // Set any default attributes
+        [self initialize];
         
         // controller should be informed of our creation, and begin watching for changes
 //        for (NSString* keyPath in [self serializableAttributes]) {
@@ -109,9 +112,17 @@
 }
 
 - (void)deserialize:(NSMutableDictionary *)attributes {
-//    RKObjectSerializer* modelSerializer = [RKObjectSerializer serializerWithObject:self mapping:[self modelMapping]];
-//    NSMutableDictionary* modelAttributes = [modelSerializer serialized]
+    NSError* error;
+    RKObjectMappingOperation* mapperOperation = [RKObjectMappingOperation mappingOperationFromObject:attributes toObject:self withMapping:[self modelMapping]];
 
+    [mapperOperation performMapping:&error];
+    if (error) {
+        NSLog(@"An error occurred while de-serializing:\n%@", [error localizedDescription]);
+        exit(-1);
+    }
+    else {
+        NSLog(@"Model updated");
+    }
 }
 
 + (ModelCollection*) Instances {

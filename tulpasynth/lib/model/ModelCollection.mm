@@ -8,13 +8,16 @@
 
 #import "ModelCollection.h"
 
+#import "Model.h"
+
 @implementation ModelCollection
 
-@synthesize objects;
+@synthesize objects, objectsById;
 
 - (id)init {
     if (self = [super init]) {
         self.objects = [[NSMutableArray alloc] init];
+        self.objectsById = [NSMutableDictionary dictionary];
     }
     
     return self;
@@ -24,13 +27,20 @@
 //    [self.objects dealloc];
 //}
 
-- (void)addObject:(id)anObject {
+
+- (void)addObject:(Model*)anObject {
     NSIndexSet* insertIndex = [NSIndexSet indexSetWithIndex:[self.objects count]];
     [self willChange:NSKeyValueChangeInsertion valuesAtIndexes:insertIndex  forKey:@"objects"];
-    
     [[self objects] addObject:anObject];
-    
     [self didChange:NSKeyValueChangeInsertion valuesAtIndexes:insertIndex forKey:@"objects"];
+    
+    NSString* modelId = [anObject.id stringValue];
+    [self.objectsById setObject:anObject forKey:modelId];
+}
+
+- (Model*)getById:(NSString*)anId {
+    Model* m = [self.objectsById objectForKey:anId];
+    return m;
 }
 
 @end

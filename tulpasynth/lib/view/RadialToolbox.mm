@@ -126,11 +126,6 @@
                              [NSNumber numberWithFloat:self.position->y], @"y", nil], @"initialPosition",
                             nil]];
 
-        Square* s = [[Square alloc] 
-                     initWithController:self.controller
-                     withModel:sm];
-
-        [self.controller.obstacles addObject:s];
     }
     else if ([self.shooterPrototype handleTap:tap]) {
         // Create new shooter at that point
@@ -140,9 +135,6 @@
                               [NSNumber numberWithFloat:self.position->x], @"x",
                               [NSNumber numberWithFloat:self.position->y], @"y", nil], @"initialPosition",
                              nil]];
-        Shooter* s = [[Shooter alloc] initWithController:self.controller withModel:sm];
-        
-        [self.controller.obstacles addObject:s];
     }
     
     self.active = false;

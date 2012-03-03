@@ -412,6 +412,7 @@
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message {
     NSError* error = nil;
 
+    NSLog(@"didReceiveMessage - parsing...");
     NSMutableDictionary* data = [NSJSONSerialization JSONObjectWithData:[message dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments|NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:&error];
     if (error) {
         NSLog(@"An error occurred while parsing response from server: %@", [error localizedDescription]);
@@ -424,6 +425,9 @@
     if ([method isEqualToString:@"response_id"]) {
         // Get model that is currently waiting for an id
         Model* m = [self.controller.waitingForIds objectAtIndex:0];
+        
+        // remove from queue
+        [self.controller.waitingForIds removeObjectAtIndex:0];
         
         // finish initializing model    
         m.id = [NSNumber numberWithInt:[[data valueForKey:@"id"] intValue]];
@@ -440,12 +444,25 @@
         // create corresponding model
         Model* m = [[NSClassFromString([data valueForKey:@"class"]) alloc] initWithController:self.controller withAttributes:[data valueForKey:@"attributes"]];
     }
+    else if ([method isEqualToString:@"update"]) {
+        // Get model by id and set attributes
+        NSString* modelId = [[data valueForKey:@"attributes"] valueForKey:@"id"];
+        Model* m = [[Model Instances] getById:modelId];
+        if (!m) {
+            NSLog(@"Model not found!");
+            exit(-1);
+        }
+
+        [m deserialize:[data valueForKey:@"attributes"]];
+    }
 }
 
 - (void) synchronizeModel:(Model*)aModel {
     NSMutableDictionary* message = [NSMutableDictionary dictionaryWithKeysAndObjects:
                                     @"method", @"update",
-                                    @"attributes", [aModel serialize], nil];
+                                    @"attributes", [aModel serialize],
+                                    @"class", NSStringFromClass([aModel class]), nil];
+                                    
     [self send:message];
 }
 
