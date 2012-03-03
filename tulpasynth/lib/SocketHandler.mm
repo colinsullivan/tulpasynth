@@ -7,15 +7,17 @@
 //
 
 #import "SocketHandler.h"
-
+#import "tulpaViewController.h"
 
 @implementation SocketHandler
 
-@synthesize socket;
+@synthesize socket, controller;
 
-- (id) init {
+- (id) initWithController:(tulpaViewController*)theController {
     if (self = [super init]) {
-        
+
+        self.controller = theController;
+
         self.socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://128.12.158.62:6666"]]];
         self.socket.delegate = self;
         [self.socket open];
@@ -416,7 +418,37 @@
         exit(-1);
     }
     NSLog(@"didReceiveMessage: %@", data);
+
+    NSString* method = [data valueForKey:@"method"];
+    
+    if ([method isEqualToString:@"response_id"]) {
+        // Get model that is currently waiting for an id
+        Model* m = [self.controller.waitingForIds objectAtIndex:0];
+        
+        // finish initializing model    
+        m.id = [NSNumber numberWithInt:[[data valueForKey:@"id"] intValue]];
+        m.initialized = true;
+
+        // send create message to other clients
+        NSMutableDictionary* createMessage = [NSMutableDictionary dictionaryWithKeysAndObjects:
+                                              @"method", @"create",
+                                              @"attributes", [m serialize],
+                                              @"class", NSStringFromClass([m class]), nil];
+        [self send:createMessage];
+    }
+    else if ([method isEqualToString:@"create"]) {
+        // create corresponding model
+        Model* m = [[NSClassFromString([data valueForKey:@"class"]) alloc] initWithController:self.controller withAttributes:[data valueForKey:@"attributes"]];
+    }
 }
+
+- (void) synchronizeModel:(Model*)aModel {
+    NSMutableDictionary* message = [NSMutableDictionary dictionaryWithKeysAndObjects:
+                                    @"method", @"update",
+                                    @"attributes", [aModel serialize], nil];
+    [self send:message];
+}
+
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
     NSLog(@"didOpen");
 }

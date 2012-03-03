@@ -43,7 +43,7 @@
 		3B04414B14FDB66E00DE16A3 /* WildBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04414A14FDB66E00DE16A3 /* WildBallModel.mm */; };
 		3B624C04150036B80066A1CB /* RAMpler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C02150036B80066A1CB /* RAMpler.cpp */; };
 		3B624C0B150038010066A1CB /* NoisePercussionReversed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */; };
-		3B62509F1500AB430066A1CB /* SocketHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B62509E1500AB430066A1CB /* SocketHandler.m */; };
+		3B62509F1500AB430066A1CB /* SocketHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B62509E1500AB430066A1CB /* SocketHandler.mm */; };
 		3B62512D1500AF370066A1CB /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B62512C1500AF370066A1CB /* libicucore.dylib */; };
 		3B6256B915016EBD0066A1CB /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 3B6256B215016EBD0066A1CB /* base64.c */; };
 		3B6256BA15016EBD0066A1CB /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6256B515016EBD0066A1CB /* NSData+SRB64Additions.m */; };
@@ -418,7 +418,7 @@
 		3B624C03150036B80066A1CB /* RAMpler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAMpler.hpp; sourceTree = "<group>"; };
 		3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = NoisePercussionReversed.wav; sourceTree = "<group>"; };
 		3B62509D1500AB430066A1CB /* SocketHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocketHandler.h; path = lib/SocketHandler.h; sourceTree = "<group>"; };
-		3B62509E1500AB430066A1CB /* SocketHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocketHandler.m; path = lib/SocketHandler.m; sourceTree = "<group>"; };
+		3B62509E1500AB430066A1CB /* SocketHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SocketHandler.mm; path = lib/SocketHandler.mm; sourceTree = "<group>"; };
 		3B62512C1500AF370066A1CB /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		3B62512E1500AF680066A1CB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3B6256B215016EBD0066A1CB /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
@@ -1117,7 +1117,7 @@
 				3B0440CB14FCBC9700DE16A3 /* CollisionFilter.h */,
 				3B04411614FDA8DF00DE16A3 /* CollisionDetector.mm */,
 				3B62509D1500AB430066A1CB /* SocketHandler.h */,
-				3B62509E1500AB430066A1CB /* SocketHandler.m */,
+				3B62509E1500AB430066A1CB /* SocketHandler.mm */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -2123,7 +2123,7 @@
 				3B04414814FDB61700DE16A3 /* WildBall.mm in Sources */,
 				3B04414B14FDB66E00DE16A3 /* WildBallModel.mm in Sources */,
 				3B624C04150036B80066A1CB /* RAMpler.cpp in Sources */,
-				3B62509F1500AB430066A1CB /* SocketHandler.m in Sources */,
+				3B62509F1500AB430066A1CB /* SocketHandler.mm in Sources */,
 				3B6256B915016EBD0066A1CB /* base64.c in Sources */,
 				3B6256BA15016EBD0066A1CB /* NSData+SRB64Additions.m in Sources */,
 				3B6256BB15016EBD0066A1CB /* SRWebSocket.m in Sources */,

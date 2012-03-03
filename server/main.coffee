@@ -14,25 +14,53 @@ console.log "
 
 ".bold
 
+debugMsg = (msg) ->
+    console.log "info".cyan+" - "+msg
 
-client = redis.createClient()
-client.on "ready", () ->
-    console.log "Redis connection ready"
+errorMsg = (msg) ->
+    console.log "error".bold.red+" - "+msg
 
-    if not client.exists("next_id")
-        client.set("next_id", "1")
+###
+#   Maintain a list of currently open connections, identified by
+###
+openConnections = []
+
+db = redis.createClient()
+db.on "ready", () ->
+    debugMsg "Redis connection ready"
+
+    if not db.exists("next_id")
+        db.set("next_id", "1")
 
 
     server = http.createServer();
 
     server.addListener 'upgrade', (request, socket, head) ->
         ws = new WebSocket request, socket, head
+        openConnections.push ws
+
+        ws.onopen = (event) ->
+            debugMsg "Client connected"
+
+            # Get current state
+            db.hgetall "model", (err, obj) ->
+                if err
+                    throw err
+                
+                console.log 'obj'
+                console.log obj
+
+                for id, model of obj
+                    message = JSON.parse(model)
+                    message.method = "create"
+                    ws.send JSON.stringify(message)
+                    
+                
 
         ws.onmessage = (event) ->
             data = JSON.parse(event.data)
-            console.log "Data received:\n\n--------\n\n"
+            debugMsg "Data received:"
             console.log data
-            console.log "\n\n--------\n\n"
 
             response = {}
 
@@ -40,28 +68,44 @@ client.on "ready", () ->
                 response.method = "response_id"
 
                 # Get next id
-                client.get "next_id", (err, nextId) =>
+                db.get "next_id", (err, nextId) =>
                     response.id = nextId
 
                     # Increment next id
-                    client.incr("next_id")
+                    db.incr("next_id")
             
-                    ws.send JSON.stringify(response)+"\n"
-                    
-                    console.log "Data written:\n\n--------\n\n"
+                    ws.send JSON.stringify(response)
+
+                    debugMsg "Data written:"
                     console.log response
-                    console.log "\n\n--------\n\n"
+            
+            else if data.method == "create"
+                # Store data in redis
+                delete data.method
+                debugMsg "Storing model #{data.attributes.id}"
+                db.hmset "model", "#{data.attributes.id}", JSON.stringify(data)
 
         
         # ws.send event.data
 
         ws.onclose = (event) ->
-            console.log 'close', event.code, event.reason
+            debugMsg 'Client disconnected'
             ws = null
+    
+    server.on "listening", () ->
+        debugMsg "Server listening on port 6666"
 
-    server.listen 6666
+    server.on "error", (e) ->
+        if e.code == "EADDRINUSE"
+            errorMsg "Address in use, retrying..."
+            setTimeout () ->
+                server.close()
+                server.listen 6666, "128.12.158.62"
+            , 1000
+    
+    server.listen 6666, "128.12.158.62"
 
-client.on "error", () ->
+db.on "error", () ->
     console.log "Redis connection error"
 
 
@@ -75,7 +119,7 @@ client.on "error", () ->
 
 
 # socket = ws.createServer()
-#     # debug: true
+#     # debugMsg: true
 #     # version: "draft75"
 
 # socket.addListener "connection", (connection) ->

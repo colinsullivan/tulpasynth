@@ -162,7 +162,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 {
     [super viewDidLoad];
     
-    self.socketHandler = [[SocketHandler alloc] init];
+    self.socketHandler = [[SocketHandler alloc] initWithController:self];
     self.waitingForIds = [[NSMutableArray alloc] init];
 
     self.startTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
@@ -538,6 +538,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     NSLog(@"tulpaViewController.observeValueForKeyPath\nkeyPath:\t%@\nchange:\t%@", keyPath, change);
+    
+    // instantiate views for created models here, removing similar logic entirely from elsewhere.
 }
 
 - (void) synchronizeModel:(Model*)aModel {

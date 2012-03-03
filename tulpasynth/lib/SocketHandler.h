@@ -28,17 +28,27 @@
 //#endif
 
 #import "SRWebSocket.h"
+#import "Model.h"
 
-
+@class tulpaViewController;
 
 @interface SocketHandler : NSObject <SRWebSocketDelegate>
 
-- (id) init;
+- (id) initWithController:(tulpaViewController*)theController;
 
+@property (weak) tulpaViewController* controller;
 @property (strong, nonatomic) SRWebSocket* socket;
 //@property dispatch_queue_t* socketQueue;
 
+/**
+ *  Serialize and send a dictionary.
+ **/
 - (void) send:(NSMutableDictionary*)message;
+
+/**
+ *  When a model is to be synchronized across clients
+ **/
+- (void) synchronizeModel:(Model*)aModel;
 
 //- (void) socketIODidConnect:(SocketIO *)socket;
 //- (void) socketIODidDisconnect:(SocketIO *)socket;

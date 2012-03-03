@@ -35,6 +35,7 @@
 
 - (NSMutableArray*) serializableAttributes;
 - (NSMutableDictionary*) serialize;
+- (void) deserialize:(NSMutableDictionary*)attributes;
 
 /**
  *  A global list of all model instances.

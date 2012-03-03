@@ -21,7 +21,6 @@
 //    static int nextId = 0;
     
     if (self = [super init]) {
-        self.initialized = false;
 //        self.id = [[NSNumber alloc] initWithInt:nextId++];
         self.controller = theController;
         
@@ -32,16 +31,26 @@
             NSLog(@"An error occurred while applying attributes:\n%@", [error localizedDescription]);
         }
         
+        
+        if (self.id) {
+            self.initialized = true;
+        }
+        else {
+            self.initialized = false;
+        }
+        
         // Set any default attributes
         [self initialize];
         
         // add instance to global list
         [[Model Instances] addObject:self];
-        
-        // request ID from the server
-        [self.controller.socketHandler send:[NSMutableDictionary dictionaryWithKeysAndObjects:
-                                             @"method", @"request_id", nil]];
-        [self.controller.waitingForIds addObject:self];
+
+        if (!self.initialized) {
+            // request ID from the server
+            [self.controller.socketHandler send:[NSMutableDictionary dictionaryWithKeysAndObjects:
+                                                 @"method", @"request_id", nil]];
+            [self.controller.waitingForIds addObject:self];            
+        }
         
         // controller should be informed of our creation, and begin watching for changes
 //        for (NSString* keyPath in [self serializableAttributes]) {
@@ -99,6 +108,12 @@
     }
 }
 
+- (void)deserialize:(NSMutableDictionary *)attributes {
+//    RKObjectSerializer* modelSerializer = [RKObjectSerializer serializerWithObject:self mapping:[self modelMapping]];
+//    NSMutableDictionary* modelAttributes = [modelSerializer serialized]
+
+}
+
 + (ModelCollection*) Instances {
     static ModelCollection* modelInstances = nil;
     
@@ -110,7 +125,7 @@
 }
 
 - (void) synchronize {
-    [self.controller synchronizeModel:self];
+    [self.controller.socketHandler synchronizeModel:self];
 }
 
 + (NSMutableDictionary*) defaultAttributes {
