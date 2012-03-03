@@ -1036,8 +1036,6 @@
 		3BE2565914F837CC00AFC61E = {
 			isa = PBXGroup;
 			children = (
-				3B62512E1500AF680066A1CB /* libz.dylib */,
-				3B62512C1500AF370066A1CB /* libicucore.dylib */,
 				3BE2566E14F837CD00AFC61E /* tulpasynth */,
 				3BE2566714F837CD00AFC61E /* Frameworks */,
 				3BE2566514F837CD00AFC61E /* Products */,
@@ -1055,6 +1053,8 @@
 		3BE2566714F837CD00AFC61E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B62512E1500AF680066A1CB /* libz.dylib */,
+				3B62512C1500AF370066A1CB /* libicucore.dylib */,
 				3B043F8E14F8798B00DE16A3 /* AudioUnit.framework */,
 				3B043F8C14F8794300DE16A3 /* libstdc++.dylib */,
 				3B043F8A14F878DB00DE16A3 /* libc.dylib */,

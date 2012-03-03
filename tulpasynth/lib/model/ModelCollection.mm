@@ -34,11 +34,10 @@
     [[self objects] addObject:anObject];
     [self didChange:NSKeyValueChangeInsertion valuesAtIndexes:insertIndex forKey:@"objects"];
     
-    NSString* modelId = [anObject.id stringValue];
-    [self.objectsById setObject:anObject forKey:modelId];
+    [self.objectsById setObject:anObject forKey:anObject.id];
 }
 
-- (Model*)getById:(NSString*)anId {
+- (Model*)getById:(NSNumber*)anId {
     Model* m = [self.objectsById objectForKey:anId];
     return m;
 }

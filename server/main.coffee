@@ -21,9 +21,11 @@ errorMsg = (msg) ->
     console.log "error".bold.red+" - "+msg
 
 ###
-#   Maintain a list of currently open connections, identified by
+#   Maintain a list of currently open connections, identified by an arbitrary
+#   counter.
 ###
-openConnections = []
+connectionId = 1
+openConnections = {}
 
 db = redis.createClient()
 db.on "ready", () ->
@@ -37,11 +39,12 @@ db.on "ready", () ->
 
     server.addListener 'upgrade', (request, socket, head) ->
         ws = new WebSocket request, socket, head
-        openConnections.push ws
+        ws.connectionId = connectionId
+        openConnections[connectionId++] = ws
 
         ws.onopen = (event) ->
-            debugMsg "Client connected"
-            debugMsg "#{openConnections.length} connections now open"
+            debugMsg "Client #{ws.connectionId} connected"
+            debugMsg "#{Object.keys(openConnections).length} connections now open"
 
             # # Get current state
             # db.hgetall "model", (err, obj) ->
@@ -108,8 +111,9 @@ db.on "ready", () ->
         # ws.send event.data
 
         ws.onclose = (event) ->
-            debugMsg 'Client disconnected'
-            debugMsg "#{openConnections.length} connections now open"
+            debugMsg "Client #{ws.connectionId} disconnected"
+            delete openConnections[ws.connectionId]
+            debugMsg "#{Object.keys(openConnections).length} connections now open"
             ws = null
     
     server.on "listening", () ->

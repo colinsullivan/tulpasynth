@@ -446,7 +446,7 @@
     }
     else if ([method isEqualToString:@"update"]) {
         // Get model by id and set attributes
-        NSString* modelId = [[data valueForKey:@"attributes"] valueForKey:@"id"];
+        NSNumber* modelId = [[data valueForKey:@"attributes"] valueForKey:@"id"];
         Model* m = [[Model Instances] getById:modelId];
         if (!m) {
             NSLog(@"Model not found!");

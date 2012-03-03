@@ -62,8 +62,8 @@ namespace instruments {
         /**
          *  Envelope to use for turning on and off
          **/
-        stk::Envelope _carrierEnvelope;
-        stk::Envelope _modulatorEnvelope;
+        stk::Envelope* _carrierEnvelope;
+        stk::Envelope* _modulatorEnvelope;
         
         /**
          *  Phase and state used for rendering.

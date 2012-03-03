@@ -42,5 +42,7 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>idleTimerDisabled</key>
+	<true/>
 </dict>
 </plist>

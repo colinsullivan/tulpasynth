@@ -19,9 +19,12 @@ FMPercussion::FMPercussion() {
     this->modulatorFrequency(2000);    
     this->modulationIndex(2);
     
+    this->_carrierEnvelope = new stk::Envelope();
+    this->_modulatorEnvelope = new stk::Envelope();
+    
     // Envelope duration
-    this->_carrierEnvelope.setTime(0.25);
-    this->_modulatorEnvelope.setTime(0.05);
+    this->_carrierEnvelope->setTime(0.25);
+    this->_modulatorEnvelope->setTime(0.05);
     
     this->_modulatorPhase = 0.0;
     this->_carrierPhase = 0.0;
@@ -50,7 +53,7 @@ stk::StkFrames& FMPercussion::next_buf(stk::StkFrames& frames) {
         // [-0.33, 0.33] if index is 0.33, etc
         modulationValue = this->_modulationIndex*(stk::StkFloat)sin(stk::TWO_PI*this->_modulatorPhase);
         
-        modulatorEnvelopeValue = FMPercussion::ModulatorAttackEnvelopeLookup[(int)floor(this->_modulatorEnvelope.tick()*10000.0)];
+        modulatorEnvelopeValue = FMPercussion::ModulatorAttackEnvelopeLookup[(int)floor(this->_modulatorEnvelope->tick()*10000.0)];
         
         modulationValue *= modulatorEnvelopeValue;
         
@@ -61,13 +64,13 @@ stk::StkFrames& FMPercussion::next_buf(stk::StkFrames& frames) {
         }
         
         // Carrier envelope value from lookup table
-        carrierEnvelopeValue = FMPercussion::CarrierAttackEnvelopeLookup[(int)floor(this->_carrierEnvelope.tick()*10000.0)];
+        carrierEnvelopeValue = FMPercussion::CarrierAttackEnvelopeLookup[(int)floor(this->_carrierEnvelope->tick()*10000.0)];
                 
         // Resulting sample is output of carrier wave
         frames[i*NUM_CHANNELS+0] = frames[i*NUM_CHANNELS+1] = carrierEnvelopeValue*(stk::StkFloat)sin(stk::TWO_PI * this->_carrierPhase);
         
         // if we're done
-        if (this->_carrierEnvelope.getState() == 0.0) {
+        if (this->_carrierEnvelope->getState() == 0.0) {
             this->stop();
         }
     }
@@ -123,10 +126,10 @@ void FMPercussion::freq(stk::StkFloat aFreq) {
 void FMPercussion::play() {
     Instrument::play();
  
-    this->_modulatorEnvelope.setValue(0.0);
-    this->_modulatorEnvelope.keyOn();
-    this->_carrierEnvelope.setValue(0.0);
-    this->_carrierEnvelope.keyOn();
+    this->_modulatorEnvelope->setValue(0.0);
+    this->_modulatorEnvelope->keyOn();
+    this->_carrierEnvelope->setValue(0.0);
+    this->_carrierEnvelope->keyOn();
 }
 
 void FMPercussion::velocity(stk::StkFloat aVelocity) {
@@ -138,6 +141,6 @@ void FMPercussion::velocity(stk::StkFloat aVelocity) {
 void FMPercussion::stop() {
     Instrument::stop();
     
-    this->_carrierEnvelope.setValue(1.0);
-    this->_modulatorEnvelope.setValue(1.0);
+    this->_carrierEnvelope->setValue(1.0);
+    this->_modulatorEnvelope->setValue(1.0);
 }

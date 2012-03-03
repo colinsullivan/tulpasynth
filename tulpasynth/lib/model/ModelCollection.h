@@ -26,6 +26,6 @@
 /**
  *  Retreive a model instance by id
  **/
-- (Model*)getById:(NSString*)anId;
+- (Model*)getById:(NSNumber*)anId;
 
 @end
