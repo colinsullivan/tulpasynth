@@ -48,6 +48,7 @@
 		3B6256B915016EBD0066A1CB /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 3B6256B215016EBD0066A1CB /* base64.c */; };
 		3B6256BA15016EBD0066A1CB /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6256B515016EBD0066A1CB /* NSData+SRB64Additions.m */; };
 		3B6256BB15016EBD0066A1CB /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6256B815016EBD0066A1CB /* SRWebSocket.m */; };
+		3B78923F15033890007F2268 /* ShooterGlowing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B78923E15033890007F2268 /* ShooterGlowing.png */; };
 		3B7EB07414F8444E00452194 /* FallingBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB06F14F8444E00452194 /* FallingBallModel.mm */; };
 		3B7EB07514F8444E00452194 /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.mm */; };
 		3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */; };
@@ -428,6 +429,7 @@
 		3B6256B615016EBD0066A1CB /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
 		3B6256B715016EBD0066A1CB /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		3B6256B815016EBD0066A1CB /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		3B78923E15033890007F2268 /* ShooterGlowing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShooterGlowing.png; sourceTree = "<group>"; };
 		3B7EB06E14F8444E00452194 /* FallingBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBallModel.h; sourceTree = "<group>"; };
 		3B7EB06F14F8444E00452194 /* FallingBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBallModel.mm; sourceTree = "<group>"; };
 		3B7EB07014F8444E00452194 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -895,6 +897,7 @@
 		3B043FF214F9AAC900DE16A3 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				3B78923E15033890007F2268 /* ShooterGlowing.png */,
 				3B0440E314FD87D800DE16A3 /* Radial-Menu.png */,
 				3B04407214FB5A9F00DE16A3 /* Toolbar.png */,
 				3B043FF314F9AAC900DE16A3 /* Catcher.png */,
@@ -1929,6 +1932,7 @@
 				3B04407314FB5A9F00DE16A3 /* Toolbar.png in Resources */,
 				3B0440E414FD87D800DE16A3 /* Radial-Menu.png in Resources */,
 				3B624C0B150038010066A1CB /* NoisePercussionReversed.wav in Resources */,
+				3B78923F15033890007F2268 /* ShooterGlowing.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

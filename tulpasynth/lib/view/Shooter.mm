@@ -13,7 +13,7 @@
 
 @implementation Shooter
 
-@synthesize lastShotTime, nextShotTime, instr;
+@synthesize lastShotTime, nextShotTime, instr, effect1, glow;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -24,7 +24,18 @@
 
 - (void) initialize {
     
-    [super initialize];    
+    [super initialize];
+    
+    self.effect1 = [[GLKBaseEffect alloc] init];
+    self.effect1.transform.projectionMatrix = GLKMatrix4MakeOrtho(
+                                                                 0,
+                                                                 self.controller.view.frame.size.width,
+                                                                 self.controller.view.frame.size.height,
+                                                                 0,
+                                                                 -1,
+                                                                 1);
+    self.glow = 0.0;
+    
     ShooterModel* model = ((ShooterModel*)self.model);
     
     // Create circle shape
@@ -60,11 +71,41 @@
 
 
 -(void)prepareToDraw {
+    float shooterOpacity = 1.0 - self.glow;
     self.effect.useConstantColor = YES;
-    self.effect.constantColor = GLKVector4Make(0.15, 0.88, 0.49, 1.0);
+    self.effect.constantColor = GLKVector4Make(0.15 * shooterOpacity, 0.88 * shooterOpacity, 0.49 * shooterOpacity, shooterOpacity);
     self.effect.texture2d0.name = self.controller.shooterTexture.name;
-    
+
     [super prepareToDraw];
+
+}
+
+- (void) postDraw {
+    [super postDraw];
+    
+    self.effect1.texture2d0.enabled = GL_TRUE;
+    self.effect1.texture2d0.envMode = GLKTextureEnvModeModulate;
+    self.effect1.texture2d0.target = GLKTextureTarget2D;
+    self.effect1.useConstantColor = YES;
+    self.effect1.constantColor = GLKVector4Make(0.15 * self.glow, 0.88 * self.glow, 0.49 * self.glow, self.glow);
+    self.effect1.texture2d0.name = self.controller.shooterGlowingTexture.name;
+    
+    [self.effect1 prepareToDraw];
+
+    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+    
+    glEnableVertexAttribArray(GLKVertexAttribPosition);
+    //    glEnableVertexAttribArray(GLKVertexAttribColor);
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+    
+    glEnable(GL_BLEND);
+    glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+
+    
+    [super draw];
+    [super postDraw];
+
 }
 
 - (b2BodyType)bodyType {
@@ -111,7 +152,8 @@
 
 - (void)update {
     [super update];
-        
+    self.effect1.transform.modelviewMatrix = [self currentModelViewTransform];
+    
     // if it is time to shoot another ball
 //    if (self.lastShotTime && self.nextShotTime) {
 //        NSLog(@"[self.nextShotTime timeIntervalSinceNow]: %f", [self.nextShotTime timeIntervalSinceNow]);
@@ -126,6 +168,10 @@
     // actually shoot ball when sound transient occurs
     if (instr->percentComplete() > (49572.0/50969.0)) {        
         [self shootBall];
+    }
+    else {
+        // increase glow
+        self.glow = (instr->percentComplete() / (49572.0/50969.0));
     }
     
 //    // if it is time to trigger shooting sound

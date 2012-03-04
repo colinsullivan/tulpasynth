@@ -48,7 +48,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize startTime;
 
-@synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolboxTexture;
+@synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolboxTexture, shooterGlowingTexture;
 
 @synthesize fallingBalls, obstacles, wildBalls;
 
@@ -182,6 +182,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.glowingCircleTexture = [self loadTexture:@"GlowingRing"];
     self.glowingBoxTexture = [self loadTexture:@"GlowingBox"];
     self.shooterTexture = [self loadTexture:@"Shooter"];
+    self.shooterGlowingTexture = [self loadTexture:@"ShooterGlowing"];
     self.toolboxTexture = [self loadTexture:@"Radial-Menu"];
     
     _pinchEntity = new PinchEntity(self.pinchRecognizer);

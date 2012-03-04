@@ -30,6 +30,10 @@
 -(void)prepareToDraw;
 - (b2BodyType)bodyType;
 
+@property (strong, nonatomic) GLKBaseEffect* effect1;
+
+@property float glow;
+
 /**
  *  Instrument to play each time ball is fired 
  **/

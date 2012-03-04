@@ -52,6 +52,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong) GLKTextureInfo* glowingCircleTexture;
 @property (strong) GLKTextureInfo* glowingBoxTexture;
 @property (strong) GLKTextureInfo* shooterTexture;
+@property (strong) GLKTextureInfo* shooterGlowingTexture;
 @property (strong) GLKTextureInfo* toolboxTexture;
 
 
