@@ -19,7 +19,9 @@ Instrument::Instrument(/*Orchestra* anOrch, Json::Value initialAttributes*/) {
     // this->orch = anOrch;
 
     // this->defaultAttributes["gain"] = 1.0;
+    
     this->mPlaying = false;
+    
 
     // If the initial attributes did not include an id, error
 //    if(initialAttributes.get("id", false) == false) {
@@ -31,11 +33,12 @@ Instrument::Instrument(/*Orchestra* anOrch, Json::Value initialAttributes*/) {
 //        this->set_attributes(initialAttributes);
 //    }
     
-    Instrument::Instances->push_back(this);
-
+    
 };
 
-//void instruments::Instrument::finish_initializing() {
-//    
+
+void instruments::Instrument::finish_initializing() {
+    
+    Instrument::Instances->push_back(this);
 //    // this->orch->add_instrument(this);
-//}
+}

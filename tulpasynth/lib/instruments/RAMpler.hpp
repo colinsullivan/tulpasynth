@@ -29,7 +29,7 @@ namespace instruments {
         /**
          *  Create a `RAMpler` object.
          **/
-        RAMpler(/*Orchestra* anOrch, Json::Value initialAttributes*/);
+        RAMpler(/*Orchestra* anOrch, Json::Value initialAttributes*/){};
         ~RAMpler() {
         };
 
@@ -61,6 +61,10 @@ namespace instruments {
          *  Percent of sample currently played
          **/
         float percentComplete();
+        
+        virtual void finish_initializing() {
+            Instrument::finish_initializing();
+        }
     };    
 };
 #endif

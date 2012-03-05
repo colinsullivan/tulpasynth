@@ -65,6 +65,7 @@
     self.body->SetMassData(&myBodyMass);
     
     self.instr = new instruments::FMPercussion();
+    self.instr->finish_initializing();
     
 }
 

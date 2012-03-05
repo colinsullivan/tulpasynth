@@ -58,6 +58,7 @@
     instr = new instruments::RAMpler();
     NSString* path = [[NSBundle mainBundle] pathForResource:@"NoisePercussionReversed" ofType:@"wav"];
     instr->set_clip([path UTF8String]);
+    instr->finish_initializing();
     
     if ([model.rate floatValue] > 0.0f) {
         self.lastShotTime = nil;

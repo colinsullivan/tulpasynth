@@ -9,10 +9,10 @@
 
 #include "RAMpler.hpp"
 
-instruments::RAMpler::RAMpler(/*Orchestra* anOrch, Json::Value initialAttributes*/) : instruments::Instrument::Instrument(/*anOrch, initialAttributes*/), stk::FileWvIn() {
-
-    return;
-};
+//instruments::RAMpler::RAMpler(/*Orchestra* anOrch, Json::Value initialAttributes*/) : instruments::Instrument::Instrument(/*anOrch, initialAttributes*/), stk::FileWvIn() {
+//
+//    return;
+//};
 
 void instruments::RAMpler::set_clip(std::string clipPath) {
     // Load clip

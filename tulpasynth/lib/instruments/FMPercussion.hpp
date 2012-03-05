@@ -22,6 +22,7 @@ namespace instruments {
         FMPercussion();
         ~FMPercussion();
         
+        
         virtual stk::StkFrames& next_buf(stk::StkFrames& frames);
 
         /**
@@ -44,6 +45,10 @@ namespace instruments {
         virtual void velocity(stk::StkFloat aVelocity);
 
         virtual void freq(stk::StkFloat aFreq);
+        
+        virtual void finish_initializing() {
+            Instrument::finish_initializing();
+        }
 
     private:
         /**

@@ -121,15 +121,15 @@ db.on "ready", () ->
 
     server.on "error", (e) ->
         if e.code == "EADDRINUSE"
-            errorMsg "Address in use, retrying..."
-            setTimeout () ->
-                try
-                    server.close()
-                catch error
-                    return
-                finally
-                    server.listen 6666, "128.12.158.62"
-            , 1000
+            errorMsg "Address in use error."
+            # setTimeout () ->
+            #     try
+            #         server.close()
+            #     catch error
+            #         return
+            #     finally
+            #         server.listen 6666, "128.12.158.62"
+            # , 1000
     
     server.listen 6666, "128.12.158.62"
 
