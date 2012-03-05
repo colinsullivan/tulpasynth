@@ -18,7 +18,11 @@
 
         self.controller = theController;
 
-        self.socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://128.12.158.62:6666"]]];
+        NSString* SERVER_IP = [[NSUserDefaults standardUserDefaults] stringForKey:@"server_ip"];
+        NSString* SERVER_PORT = [[NSUserDefaults standardUserDefaults] stringForKey:@"server_port"];
+        NSString* SERVER_URL = [NSString stringWithFormat:@"ws://%@:%@", SERVER_IP, SERVER_PORT];
+        
+        self.socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SERVER_URL]]];
         self.socket.delegate = self;
         [self.socket open];
 //        self.socketQueue = dispatch_queue_create("socketQueue", NULL);

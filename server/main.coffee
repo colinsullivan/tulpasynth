@@ -14,6 +14,9 @@ console.log "
 
 ".bold
 
+SERVER_IP = "128.12.158.62"
+SERVER_PORT = 6666
+
 debugMsg = (msg) ->
     console.log "info".cyan+" - "+msg
 
@@ -117,7 +120,7 @@ db.on "ready", () ->
             ws = null
     
     server.on "listening", () ->
-        debugMsg "Server listening on port 6666"
+        debugMsg "Server listening on #{SERVER_IP}:#{SERVER_PORT}"
 
     server.on "error", (e) ->
         if e.code == "EADDRINUSE"
@@ -131,7 +134,7 @@ db.on "ready", () ->
             #         server.listen 6666, "128.12.158.62"
             # , 1000
     
-    server.listen 6666, "128.12.158.62"
+    server.listen SERVER_PORT, SERVER_IP
 
 db.on "error", () ->
     console.log "Redis connection error"

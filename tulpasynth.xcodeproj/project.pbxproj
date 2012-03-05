@@ -49,6 +49,7 @@
 		3B6256BA15016EBD0066A1CB /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6256B515016EBD0066A1CB /* NSData+SRB64Additions.m */; };
 		3B6256BB15016EBD0066A1CB /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6256B815016EBD0066A1CB /* SRWebSocket.m */; };
 		3B78923F15033890007F2268 /* ShooterGlowing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B78923E15033890007F2268 /* ShooterGlowing.png */; };
+		3B78925815049377007F2268 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3B78925715049377007F2268 /* Settings.bundle */; };
 		3B7EB07414F8444E00452194 /* FallingBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB06F14F8444E00452194 /* FallingBallModel.mm */; };
 		3B7EB07514F8444E00452194 /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.mm */; };
 		3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */; };
@@ -430,6 +431,7 @@
 		3B6256B715016EBD0066A1CB /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		3B6256B815016EBD0066A1CB /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		3B78923E15033890007F2268 /* ShooterGlowing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShooterGlowing.png; sourceTree = "<group>"; };
+		3B78925715049377007F2268 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		3B7EB06E14F8444E00452194 /* FallingBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FallingBallModel.h; sourceTree = "<group>"; };
 		3B7EB06F14F8444E00452194 /* FallingBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FallingBallModel.mm; sourceTree = "<group>"; };
 		3B7EB07014F8444E00452194 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -1103,6 +1105,7 @@
 				3BE2567114F837CD00AFC61E /* InfoPlist.strings */,
 				3BE2567414F837CD00AFC61E /* main.m */,
 				3BE2567614F837CD00AFC61E /* tulpasynth-Prefix.pch */,
+				3B78925715049377007F2268 /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1933,6 +1936,7 @@
 				3B0440E414FD87D800DE16A3 /* Radial-Menu.png in Resources */,
 				3B624C0B150038010066A1CB /* NoisePercussionReversed.wav in Resources */,
 				3B78923F15033890007F2268 /* ShooterGlowing.png in Resources */,
+				3B78925815049377007F2268 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
