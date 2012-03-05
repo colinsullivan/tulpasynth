@@ -15,7 +15,7 @@
 
 @implementation Model
 
-@synthesize id, controller, initialized;
+@synthesize id, controller, initialized, nosync;
 
 - (void) setInitialized:(BOOL)anInitialized {
     if (anInitialized) {
@@ -39,19 +39,10 @@
         if (![mapperOperation performMapping:&error]) {
             NSLog(@"An error occurred while applying attributes:\n%@", [error localizedDescription]);
         }
-        
-        
-        if (self.id) {
-            self.initialized = true;
-        }
-        else {
-            self.initialized = false;
-            // request ID from the server
-            [self.controller.socketHandler send:[NSMutableDictionary dictionaryWithKeysAndObjects:
-                                                 @"method", @"request_id", nil]];
-            [self.controller.waitingForIds addObject:self];            
-        }
-        
+
+        // by default we will synchronize model
+        self.nosync = false;
+                
         // Set any default attributes
         [self initialize];
         
@@ -77,6 +68,16 @@
         }
     }
     
+    if (self.id || self.nosync) {
+        self.initialized = true;
+    }
+    else {
+        self.initialized = false;
+        // request ID from the server
+        [self.controller.socketHandler send:[NSMutableDictionary dictionaryWithKeysAndObjects:
+                                             @"method", @"request_id", nil]];
+        [self.controller.waitingForIds addObject:self];            
+    }
 }
 
 - (NSMutableArray*) serializableAttributes {

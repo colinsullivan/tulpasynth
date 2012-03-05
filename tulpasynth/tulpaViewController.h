@@ -145,6 +145,20 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong, nonatomic) NSDate* startTime;
 
 /**
+ *  When it is safe to update to
+ **/
+@property (strong, nonatomic) NSDate* safeUpdateTime;
+
+/**
+ *  When was the last time we updated.
+ **/
+@property (strong, nonatomic) NSDate* lastUpdateTime;
+
+
+@property BOOL waiting;
+
+
+/**
  *  Callback primarily used to handle all model changes and synchronize
  **/
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;

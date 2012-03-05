@@ -46,7 +46,7 @@ LongPressEntity * _longPressEntity;
 
 @implementation tulpaViewController
 
-@synthesize startTime;
+@synthesize startTime, safeUpdateTime, lastUpdateTime, waiting;
 
 @synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolboxTexture, shooterGlowingTexture;
 
@@ -265,6 +265,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         return;
     }
     
+    self.startTime = [NSDate dateWithTimeIntervalSinceNow:0.0];
+    self.safeUpdateTime = [NSDate dateWithTimeInterval:0.0 sinceDate:self.startTime];
+    self.lastUpdateTime = [NSDate dateWithTimeInterval:0.0 sinceDate:self.startTime];
+    self.waiting = false;
 }
 
 - (void)beginCollision:(b2Contact*) contact {
@@ -481,13 +485,20 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     // Turn these bitches down to increase performance
     int32 velocityIterations = 5;
-    int32 positionIterations = 2;
-
-    self.world->Step(self.timeSinceLastUpdate, velocityIterations, positionIterations);
-
-    // Update toolbox
+    int32 positionIterations = 3;
+    
+    // Update toolbox no matter what
     [self.toolbox update];
     
+    if (self.waiting) {
+        return;
+    }
+
+    // if it is safe to update
+//    static NSTimeInterval safeUpdateInterval;
+//    safeUpdateInterval = [self.safeUpdateTime timeIntervalSinceDate:self.lastUpdateTime];
+    self.world->Step(self.timeSinceLastUpdate, velocityIterations, positionIterations);
+
     // update all obstacles
     for (Obstacle* o in self.obstacles) {
         [o update];
@@ -512,7 +523,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             
             [ballsToDelete addObject:b];
         }
-
+        
     }
     
     // delete all balls that moved offscreen
@@ -521,25 +532,26 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     }
     
     // Update all GLView instances
-//    for (GLView* e in [GLView Instances]) {
-//        [e update];
-//    }
+    //    for (GLView* e in [GLView Instances]) {
+    //        [e update];
+    //    }
     
-//    static BOOL done = false;
-//    if (!done && [self.startTime timeIntervalSinceNow] < -10.0) {
-//        NSLog(@"10 passed");
-//        
-//        self.toolbar.mouseJoint->SetTarget(b2Vec2(100, 0));
-//        
-//        done = true;
-//    }
+    //    static BOOL done = false;
+    //    if (!done && [self.startTime timeIntervalSinceNow] < -10.0) {
+    //        NSLog(@"10 passed");
+    //        
+    //        self.toolbar.mouseJoint->SetTarget(b2Vec2(100, 0));
+    //        
+    //        done = true;
+    //    }
     
     
-//    float aspect = fabsf(self.view.bounds.size.width/self.view.bounds.size.height);
-////    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60.0f), aspect, 1.0f, -1.0f);
-//    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(0.125 * 2 * M_PI, 2.0/3.0, 2, -1);
-//    self.effect.transform.projectionMatrix = projectionMatrix;
-
+    //    float aspect = fabsf(self.view.bounds.size.width/self.view.bounds.size.height);
+    ////    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60.0f), aspect, 1.0f, -1.0f);
+    //    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(0.125 * 2 * M_PI, 2.0/3.0, 2, -1);
+    //    self.effect.transform.projectionMatrix = projectionMatrix;
+    
+//        self.lastUpdateTime = [NSDate dateWithTimeIntervalSinceNow:0.0];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -28,7 +28,43 @@ errorMsg = (msg) ->
 #   counter.
 ###
 connectionId = 1
-openConnections = {}
+openConnections = []
+
+serverStartTime = new Date();
+
+sendToAll = (data) ->
+    debugMsg "Sending to all:"
+    console.log data
+
+    message = JSON.stringify data
+
+    for connectionId, client of openConnections
+        client.send message
+
+sendToAllButOne = (data, one) ->
+    debugMsg "Sending to all but one:"
+    console.log data
+
+    message = JSON.stringify data
+
+    for connectionId, client of openConnections
+        if client != one
+            client.send message
+
+sendToOne = (data, one) ->
+    debugMsg "Sending to one:"
+    console.log data
+    message = JSON.stringify data
+
+    one.send message
+
+unpauseAll = () ->
+    # Unpause all clients
+    message = 
+        method: "unpause"
+
+    sendToAll message
+
 
 db = redis.createClient()
 db.on "ready", () ->
@@ -66,6 +102,12 @@ db.on "ready", () ->
 
         ws.onmessage = (event) ->
             data = JSON.parse(event.data)
+
+            if data.time
+                temp = new Date()
+                temp.setTime(data.time*1000)
+                data.time = temp
+
             debugMsg "Data received:"
             console.log data
 
@@ -81,10 +123,8 @@ db.on "ready", () ->
                     # Increment next id
                     db.incr("next_id")
             
-                    ws.send JSON.stringify(response)
+                    sendToOne response, ws
 
-                    debugMsg "Data written:"
-                    console.log response
             
             else if data.method == "create"
                 # Store data in redis
@@ -94,9 +134,9 @@ db.on "ready", () ->
 
                 # Relay create message to other connected clients
                 data.method = "create"
-                for client in openConnections
-                    if client != ws
-                        client.send JSON.stringify(data)
+                sendToAllButOne data, ws
+
+                unpauseAll()
             
             else if data.method == "update"
                 # Update data in redis
@@ -106,9 +146,9 @@ db.on "ready", () ->
 
                 # Relay update message to other connected clients
                 data.method = "update"
-                for client in openConnections
-                    if client != ws
-                        client.send JSON.stringify(data)
+                sendToAllButOne data, ws
+
+                unpauseAll()
 
         
         # ws.send event.data

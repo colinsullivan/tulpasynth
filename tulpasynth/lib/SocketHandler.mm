@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#include <time.h>
+#include <xlocale.h>
+
 #import "SocketHandler.h"
 #import "tulpaViewController.h"
 
@@ -427,6 +430,9 @@
     NSString* method = [data valueForKey:@"method"];
     
     if ([method isEqualToString:@"response_id"]) {
+        // pause rendering
+        self.controller.paused = true;
+        
         // Get model that is currently waiting for an id
         Model* m = [self.controller.waitingForIds objectAtIndex:0];
         
@@ -440,15 +446,20 @@
         // send create message to other clients
         NSMutableDictionary* createMessage = [NSMutableDictionary dictionaryWithKeysAndObjects:
                                               @"method", @"create",
+//                                              @"time", [NSString stringWithFormat:@"%f", [[NSDate dateWithTimeIntervalSinceNow:0.0f] timeIntervalSince1970]],
                                               @"attributes", [m serialize],
                                               @"class", NSStringFromClass([m class]), nil];
         [self send:createMessage];
     }
     else if ([method isEqualToString:@"create"]) {
+        // pause rendering
+        self.controller.paused = true;
+
         // create corresponding model
         Model* m = [[NSClassFromString([data valueForKey:@"class"]) alloc] initWithController:self.controller withAttributes:[data valueForKey:@"attributes"]];
     }
     else if ([method isEqualToString:@"update"]) {
+        self.controller.paused = true;
         // Get model by id and set attributes
         NSNumber* modelId = [[data valueForKey:@"attributes"] valueForKey:@"id"];
         Model* m = [[Model Instances] getById:modelId];
@@ -459,9 +470,24 @@
 
         [m deserialize:[data valueForKey:@"attributes"]];
     }
+    else if([method isEqualToString:@"unpause"]) {
+        self.controller.paused = false;
+    }
+    else {
+        NSLog(@"Unrecognized method: %@", method);
+    }
 }
 
 - (void) synchronizeModel:(Model*)aModel {
+//    struct tm now;
+//    const char *formatString = "%Y-%m-%d %H:%M:%S %z";
+//    (void)strptime("2005-07-01 12:00:00 -0700", formatString, &sometime, NULL);
+//    NSLog(@"NSDate is %@", [NSDate dateWithTimeIntervalSince1970:mktime(&sometime)]);
+//    // Output: NSDate is 2005-07-01 12:00:00 -0700
+//    char* dateString;
+//    char* sampleDate = "2005-07-01 12:00:00 -0700";
+//    (void)strftime_l(dateString, sizeof(char)*25, formatString, <#const struct tm *#>, <#locale_t#>)(dateString, );
+    self.controller.paused = true;
     NSMutableDictionary* message = [NSMutableDictionary dictionaryWithKeysAndObjects:
                                     @"method", @"update",
                                     @"attributes", [aModel serialize],

@@ -58,6 +58,11 @@
  **/
 + (NSMutableDictionary*) defaultAttributes;
 
+/**
+ *  Wether or not to track this model for synchronization changes
+ **/
+@property BOOL nosync;
+
 ///**
 // *  Constraints on attributes for this model.
 // **/

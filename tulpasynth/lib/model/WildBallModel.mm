@@ -12,8 +12,15 @@
 
 @synthesize initialLinearVelocity;
 
+- (void) initialize {
+    self.nosync = true;
+    [super initialize];
+}
+
 - (NSMutableArray*) serializableAttributes {
     NSMutableArray* attributes = [super serializableAttributes];
+    
+    [attributes removeObject:@"id"];
     
     [attributes addObject:@"initialLinearVelocity"];
     
