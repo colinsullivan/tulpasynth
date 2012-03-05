@@ -73,7 +73,8 @@
 -(void)prepareToDraw {
     float shooterOpacity = 1.0 - self.glow;
     self.effect.useConstantColor = YES;
-    self.effect.constantColor = GLKVector4Make(0.15 * shooterOpacity, 0.88 * shooterOpacity, 0.49 * shooterOpacity, shooterOpacity);
+    GLKVector4 greenColor = self.controller.greenColor;
+    self.effect.constantColor = GLKVector4Make(greenColor.r * shooterOpacity, greenColor.g * shooterOpacity, greenColor.b * shooterOpacity, shooterOpacity);
     self.effect.texture2d0.name = self.controller.shooterTexture.name;
 
     [super prepareToDraw];
@@ -82,12 +83,12 @@
 
 - (void) postDraw {
     [super postDraw];
-    
+    GLKVector4 greenColor = self.controller.greenColor;    
     self.effect1.texture2d0.enabled = GL_TRUE;
     self.effect1.texture2d0.envMode = GLKTextureEnvModeModulate;
     self.effect1.texture2d0.target = GLKTextureTarget2D;
     self.effect1.useConstantColor = YES;
-    self.effect1.constantColor = GLKVector4Make(0.15 * self.glow, 0.88 * self.glow, 0.49 * self.glow, self.glow);
+    self.effect1.constantColor = GLKVector4Make(greenColor.r * self.glow, greenColor.g * self.glow, greenColor.b * self.glow, self.glow);
     self.effect1.texture2d0.name = self.controller.shooterGlowingTexture.name;
     
     [self.effect1 prepareToDraw];

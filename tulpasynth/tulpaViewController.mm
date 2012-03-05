@@ -61,6 +61,8 @@ LongPressEntity * _longPressEntity;
 
 @synthesize socketHandler, waitingForIds;
 
+@synthesize greenColor;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -184,6 +186,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.shooterTexture = [self loadTexture:@"Shooter"];
     self.shooterGlowingTexture = [self loadTexture:@"ShooterGlowing"];
     self.toolboxTexture = [self loadTexture:@"Radial-Menu"];
+    
+    self.greenColor = GLKVector4Make(43.0/255.0, 208.0/255.0, 5.0/255.0, 1.0);
+    
     
     _pinchEntity = new PinchEntity(self.pinchRecognizer);
     _rotateEntity = new RotateEntity(self.rotateRecognizer);

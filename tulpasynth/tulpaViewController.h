@@ -55,6 +55,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong) GLKTextureInfo* shooterGlowingTexture;
 @property (strong) GLKTextureInfo* toolboxTexture;
 
+/**
+ *  Colors 
+ **/
+@property GLKVector4 greenColor;
 
 /**
  *  Load a texture given a filename (.png assumed).
