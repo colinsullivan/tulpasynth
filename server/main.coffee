@@ -1,8 +1,11 @@
+#!/usr/bin/env coffee
+
 colors = require "colors"
 net = require "net"
 redis = require "redis"
 WebSocket = require "faye-websocket"
 http = require "http"
+argv = require("optimist").argv;
 
 
 console.log "
@@ -14,8 +17,8 @@ console.log "
 
 ".bold
 
-SERVER_IP = "128.12.158.62"
-SERVER_PORT = 6666
+SERVER_IP = argv.address || "128.12.158.62"
+SERVER_PORT = argv.port || 6666
 
 debugMsg = (msg) ->
     console.log "info".cyan+" - "+msg
@@ -174,6 +177,7 @@ db.on "ready", () ->
             #         server.listen 6666, "128.12.158.62"
             # , 1000
     
+    debugMsg "Attempting to listen on #{SERVER_IP}:#{SERVER_PORT}"
     server.listen SERVER_PORT, SERVER_IP
 
 db.on "error", () ->
