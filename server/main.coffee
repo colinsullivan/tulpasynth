@@ -1,8 +1,11 @@
+#!/usr/bin/env coffee
+
 colors = require "colors"
 net = require "net"
 redis = require "redis"
 WebSocket = require "faye-websocket"
 http = require "http"
+argv = require("optimist").argv;
 
 
 console.log "
@@ -14,8 +17,8 @@ console.log "
 
 ".bold
 
-SERVER_IP = "128.12.158.62"
-SERVER_PORT = 6666
+SERVER_IP = argv.address || "128.12.158.62"
+SERVER_PORT = argv.port || 6666
 
 debugMsg = (msg) ->
     console.log "info".cyan+" - "+msg
@@ -28,7 +31,43 @@ errorMsg = (msg) ->
 #   counter.
 ###
 connectionId = 1
-openConnections = {}
+openConnections = []
+
+serverStartTime = new Date();
+
+sendToAll = (data) ->
+    debugMsg "Sending to all:"
+    console.log data
+
+    message = JSON.stringify data
+
+    for connectionId, client of openConnections
+        client.send message
+
+sendToAllButOne = (data, one) ->
+    debugMsg "Sending to all but one:"
+    console.log data
+
+    message = JSON.stringify data
+
+    for connectionId, client of openConnections
+        if client != one
+            client.send message
+
+sendToOne = (data, one) ->
+    debugMsg "Sending to one:"
+    console.log data
+    message = JSON.stringify data
+
+    one.send message
+
+unpauseAll = () ->
+    # Unpause all clients
+    message = 
+        method: "unpause"
+
+    sendToAll message
+
 
 db = redis.createClient()
 db.on "ready", () ->
@@ -66,6 +105,12 @@ db.on "ready", () ->
 
         ws.onmessage = (event) ->
             data = JSON.parse(event.data)
+
+            if data.time
+                temp = new Date()
+                temp.setTime(data.time*1000)
+                data.time = temp
+
             debugMsg "Data received:"
             console.log data
 
@@ -81,10 +126,8 @@ db.on "ready", () ->
                     # Increment next id
                     db.incr("next_id")
             
-                    ws.send JSON.stringify(response)
+                    sendToOne response, ws
 
-                    debugMsg "Data written:"
-                    console.log response
             
             else if data.method == "create"
                 # Store data in redis
@@ -94,9 +137,9 @@ db.on "ready", () ->
 
                 # Relay create message to other connected clients
                 data.method = "create"
-                for client in openConnections
-                    if client != ws
-                        client.send JSON.stringify(data)
+                sendToAllButOne data, ws
+
+                unpauseAll()
             
             else if data.method == "update"
                 # Update data in redis
@@ -106,9 +149,9 @@ db.on "ready", () ->
 
                 # Relay update message to other connected clients
                 data.method = "update"
-                for client in openConnections
-                    if client != ws
-                        client.send JSON.stringify(data)
+                sendToAllButOne data, ws
+
+                unpauseAll()
 
         
         # ws.send event.data
@@ -134,6 +177,7 @@ db.on "ready", () ->
             #         server.listen 6666, "128.12.158.62"
             # , 1000
     
+    debugMsg "Attempting to listen on #{SERVER_IP}:#{SERVER_PORT}"
     server.listen SERVER_PORT, SERVER_IP
 
 db.on "error", () ->
