@@ -168,6 +168,7 @@
     // actually shoot ball when sound transient occurs
     if (instr->percentComplete() > (49572.0/50969.0)) {        
         [self shootBall];
+        self.glow = 1.0;
     }
     else {
         // increase glow
