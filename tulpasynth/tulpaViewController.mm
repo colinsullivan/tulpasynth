@@ -416,30 +416,41 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (IBAction)tapGestureHandler:(id)sender {
     _tapEntity->update();
     
+    bool handled = false;
+    
     if (self.toolbox.active) {
         if ([self.toolbox handleTap:_tapEntity]) {
-            return;
+            handled = true;
         }
         else {
             self.toolbox.active = false;
-            return;            
+            handled = true;          
         }
     }
     
-    bool handled = false;
+    
 
-    // All obstacles can handle tap
-    for (Obstacle * o in self.obstacles) {
-        handled = [o handleTap:_tapEntity];
-        
-        if (handled) {
-            break;
+    if (!handled) {
+        // All obstacles can handle tap
+        for (Obstacle * o in self.obstacles) {
+            handled = [o handleTap:_tapEntity];
+            
+            if (handled) {
+                break;
+            }
         }
     }
     
     // Handle tap in empty space
+    if (!handled) {
+        // Move toolbox to that point and display
+        self.toolbox.position = _tapEntity->touches[0]->position;
+        self.toolbox.active = true;
+    }
+    
+
 //    if (!handled) {
-//        b2Vec2* touchPosition = _tapEntity->touches[0]->position;
+//        
 //        // Create falling ball model
 //        FallingBallModel* bm = [[FallingBallModel alloc] initWithController:self withAttributes:
 //                                [NSDictionary dictionaryWithObjectsAndKeys:
@@ -459,10 +470,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (IBAction)longPressHandler:(id)sender {
     _longPressEntity->update();
     
-    if (_longPressEntity->state == GestureEntityStateStart) {        
-        // Move toolbox to that point and display
-        self.toolbox.position = _longPressEntity->touches[0]->position;
-        self.toolbox.active = true;
+    if (_longPressEntity->state == GestureEntityStateStart) {      
     }
     
 }
