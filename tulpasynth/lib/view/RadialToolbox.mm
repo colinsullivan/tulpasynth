@@ -77,7 +77,7 @@
 
 - (void) dealloc {
 //    [self dealloc];
-    delete self.shape;
+    delete (b2CircleShape*)self.shape;
 }
 
 -(void)prepareToDraw {

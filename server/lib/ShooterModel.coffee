@@ -21,7 +21,7 @@ class tulpasynth.models.ShooterModel extends Backbone.Model
 
             setTimeout () =>
                 @updateNextShotTime()
-            , @get("rate")*1000.0
+            , @get("rate")*500.0
 
     updateNextShotTime: () ->
         console.log "updateNextShotTime"

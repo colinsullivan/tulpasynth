@@ -66,7 +66,7 @@
 }
 
 - (void)dealloc {
-    delete self.prePanningPosition;
+    delete (b2Vec2*)self.prePanningPosition;
 }
 
 
