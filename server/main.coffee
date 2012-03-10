@@ -7,6 +7,10 @@ WebSocket = require "faye-websocket"
 http = require "http"
 argv = require("optimist").argv;
 
+tulpasynth = require "./lib/tulpasynth.coffee"
+require "./lib/ShooterModel.coffee"
+
+
 
 console.log "
  __          __                                     __   __    \n
@@ -135,11 +139,32 @@ db.on "ready", () ->
                 debugMsg "Storing model #{data.attributes.id}"
                 db.hmset "model", "#{data.attributes.id}", JSON.stringify(data)
 
+                # If this is a shooter model, we'll need to synchronize
+                # shooting times.
+                if data.class is "ShooterModel"
+                    debugMsg "Creating a ShooterModel on server"
+                    shooter = new tulpasynth.models.ShooterModel data.attributes
+                    data.attributes.nextShotTime = shooter.get("nextShotTime")
+
+                    # Update initial client
+                    data.method = "update"
+                    sendToOne data, ws
+
+                    # When shooter updates the next shot time
+                    shooter.on "change:nextShotTime", () =>
+                        # Inform all clients
+                        message =
+                            method: "update"
+                            class: "ShooterModel"
+                            attributes: shooter.attributes
+                        sendToAll message
+
                 # Relay create message to other connected clients
                 data.method = "create"
                 sendToAllButOne data, ws
-
                 unpauseAll()
+
+
             
             else if data.method == "update"
                 # Update data in redis
@@ -151,7 +176,7 @@ db.on "ready", () ->
                 data.method = "update"
                 sendToAllButOne data, ws
 
-                unpauseAll()
+                # unpauseAll()
 
         
         # ws.send event.data

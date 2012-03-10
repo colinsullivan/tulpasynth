@@ -26,8 +26,6 @@
 
 - (void) initialize {
     
-    [super initialize];
-    
     if (!self.angle) {
         self.angle = [NSNumber numberWithFloat:0.0];
     }
@@ -36,6 +34,8 @@
     if(!self.position) {
         self.position = [NSMutableDictionary dictionaryWithDictionary:self.initialPosition];
     }
+    
+    [super initialize];
 }
 
 @end

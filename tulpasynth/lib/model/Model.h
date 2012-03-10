@@ -63,6 +63,11 @@
  **/
 @property BOOL nosync;
 
+/**
+ *  Static helper method for parsing dates.
+ **/
++ (NSDate*) dateFromString:(NSString*)theString;
+
 ///**
 // *  Constraints on attributes for this model.
 // **/

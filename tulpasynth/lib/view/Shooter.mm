@@ -13,7 +13,7 @@
 
 @implementation Shooter
 
-@synthesize lastShotTime, nextShotTime, instr, effect1, glow;
+@synthesize lastShotTime, instr, effect1, glow;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -62,9 +62,15 @@
     
     if ([model.rate floatValue] > 0.0f) {
         self.lastShotTime = nil;
-        self.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:[model.rate floatValue]];        
     }
 }
+
+//- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+//    
+//    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+//    
+////    ShooterModel* model = ((ShooterModel*)object);    
+//}
 
 - (void) dealloc {
     delete instr;
@@ -148,8 +154,8 @@
                          nil]];
     
     
-    self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
-    self.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:[model.rate floatValue]];
+    self.lastShotTime = model.nextShotTime;
+//    self.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:[model.rate floatValue]];
 }
 
 - (void)update {
@@ -161,14 +167,16 @@
 //        NSLog(@"[self.nextShotTime timeIntervalSinceNow]: %f", [self.nextShotTime timeIntervalSinceNow]);
 //    }
     
+    ShooterModel* model = ((ShooterModel*)self.model);
+    
     // If it is time to shoot another ball
-    if ([self.nextShotTime timeIntervalSinceNow] < 0) {
+    if ([model.nextShotTime timeIntervalSinceNow] < 0 && self.lastShotTime != model.nextShotTime) {
         // start playing sound
         instr->play();
     }
 
     // actually shoot ball when sound transient occurs
-    if (instr->percentComplete() > (49572.0/50969.0)) {        
+    if (instr->percentComplete() > (49572.0/50969.0)) {
         [self shootBall];
         self.glow = 1.0;
     }

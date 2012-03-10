@@ -10,7 +10,16 @@
 
 @implementation ShooterModel
 
-@synthesize rate;
+@synthesize rate, nextShotTime;
+
+- (NSMutableArray*) serializableAttributes {
+    NSMutableArray* attrs = [super serializableAttributes];
+    
+    [attrs addObject:@"rate"];
+    [attrs addObject:@"nextShotTime"];
+    
+    return attrs;
+}
 
 + (NSMutableDictionary*) defaultAttributes {
     NSMutableDictionary* defaults = [super defaultAttributes];

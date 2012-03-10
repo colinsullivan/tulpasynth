@@ -440,10 +440,6 @@
         m.id = [NSNumber numberWithInt:[[data valueForKey:@"id"] intValue]];
         m.initialized = true;
         
-        if (m.nosync) {
-            return;
-        }
-
         // pause rendering
         self.controller.paused = true;
 
@@ -463,7 +459,7 @@
         Model* m = [[NSClassFromString([data valueForKey:@"class"]) alloc] initWithController:self.controller withAttributes:[data valueForKey:@"attributes"]];
     }
     else if ([method isEqualToString:@"update"]) {
-        self.controller.paused = true;
+//        self.controller.paused = true;
         // Get model by id and set attributes
         NSNumber* modelId = [[data valueForKey:@"attributes"] valueForKey:@"id"];
         Model* m = [[Model Instances] getById:modelId];

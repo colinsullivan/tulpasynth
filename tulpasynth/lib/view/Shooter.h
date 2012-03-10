@@ -43,10 +43,6 @@
  *  Time we fired the last ball.
  **/
 @property (strong, nonatomic) NSDate* lastShotTime;
-/**
- *  Time the next shot will occur
- **/
-@property (strong, nonatomic) NSDate* nextShotTime;
 
 - (void) shootBall;
 

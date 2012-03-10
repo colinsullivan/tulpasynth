@@ -68,7 +68,8 @@
         }
     }
     
-    if (self.id) {
+    if (self.id || self.nosync) {
+        if(self.nosync) self.id = 0;
         self.initialized = true;
     }
     else {
@@ -86,11 +87,16 @@
     return attributes;
 }
 
++ (NSDate*)dateFromString:(NSString*)theString {
+    return [NSDate dateWithTimeIntervalSince1970:[theString floatValue]];
+}
+
 - (RKObjectMapping*) modelMapping {
     RKObjectMapping* modelMapping = nil;
     if (!modelMapping) {
         modelMapping = [RKObjectMapping mappingForClass:[self class]];
         [modelMapping mapAttributesFromArray:[self serializableAttributes]];
+        modelMapping.dateFormatters = [NSArray arrayWithObject:[Model class]];
     }
     
     return modelMapping;

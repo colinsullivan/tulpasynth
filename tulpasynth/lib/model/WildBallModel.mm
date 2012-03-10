@@ -20,7 +20,7 @@
 - (NSMutableArray*) serializableAttributes {
     NSMutableArray* attributes = [super serializableAttributes];
     
-    [attributes removeObject:@"id"];
+//    [attributes removeObject:@"id"];
     
     [attributes addObject:@"initialLinearVelocity"];
     

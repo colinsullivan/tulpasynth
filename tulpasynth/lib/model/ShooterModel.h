@@ -10,11 +10,14 @@
 
 @interface ShooterModel : ObstacleModel
 
-- (void) initialize;
-
 /**
  *  Rate at which this shooter will fire balls (in Hz).
  **/
 @property (strong, nonatomic) NSNumber* rate;
+
+/**
+ *  Time the next shot will occur
+ **/
+@property (strong, nonatomic) NSDate* nextShotTime;
 
 @end

@@ -268,7 +268,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.startTime = [NSDate dateWithTimeIntervalSinceNow:0.0];
     self.safeUpdateTime = [NSDate dateWithTimeInterval:0.0 sinceDate:self.startTime];
     self.lastUpdateTime = [NSDate dateWithTimeInterval:0.0 sinceDate:self.startTime];
-    self.waiting = false;
+    self.waiting = false;    
 }
 
 - (void)beginCollision:(b2Contact*) contact {
@@ -573,7 +573,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             
             Model* addedModel = [[[Model Instances] objects] objectAtIndex:[[change valueForKey:@"indexes"] firstIndex]];
             Class addedModelClass = [addedModel class];
-            
+
             // if a square model was added
             if (addedModelClass == [SquareModel class]) {
                 // create square view
@@ -591,7 +591,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             else if(addedModelClass == [WildBallModel class]) {
                 WildBall* b = [[WildBall alloc] initWithController:self withModel:addedModel];
                 [self.wildBalls addObject:b];
-
             }
             
         }
