@@ -429,10 +429,7 @@
 
     NSString* method = [data valueForKey:@"method"];
     
-    if ([method isEqualToString:@"response_id"]) {
-        // pause rendering
-        self.controller.paused = true;
-        
+    if ([method isEqualToString:@"response_id"]) {        
         // Get model that is currently waiting for an id
         Model* m = [self.controller.waitingForIds objectAtIndex:0];
         
@@ -442,6 +439,13 @@
         // finish initializing model    
         m.id = [NSNumber numberWithInt:[[data valueForKey:@"id"] intValue]];
         m.initialized = true;
+        
+        if (m.nosync) {
+            return;
+        }
+
+        // pause rendering
+        self.controller.paused = true;
 
         // send create message to other clients
         NSMutableDictionary* createMessage = [NSMutableDictionary dictionaryWithKeysAndObjects:
@@ -487,6 +491,10 @@
 //    char* dateString;
 //    char* sampleDate = "2005-07-01 12:00:00 -0700";
 //    (void)strftime_l(dateString, sizeof(char)*25, formatString, <#const struct tm *#>, <#locale_t#>)(dateString, );
+    if (aModel.nosync) {
+        return;
+    }
+
     self.controller.paused = true;
     NSMutableDictionary* message = [NSMutableDictionary dictionaryWithKeysAndObjects:
                                     @"method", @"update",

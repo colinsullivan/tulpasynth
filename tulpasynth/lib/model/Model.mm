@@ -68,7 +68,7 @@
         }
     }
     
-    if (self.id || self.nosync) {
+    if (self.id) {
         self.initialized = true;
     }
     else {
