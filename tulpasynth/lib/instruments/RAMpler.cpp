@@ -49,7 +49,7 @@ stk::StkFrames& instruments::RAMpler::next_buf(stk::StkFrames& frames) {
         // Grab samples from clip
         this->tick(frames);
 
-        this->_reset_if_needed();
+//        this->_reset_if_needed();
     }
 
     return frames;
@@ -78,7 +78,8 @@ float instruments::RAMpler::percentComplete() {
     return (time_ / this->getSize());    
 }
 
-void instruments::RAMpler::play(float aRate) {
-    this->setRate(aRate);
-    instruments::Instrument::play();    
+void instruments::RAMpler::freq(stk::StkFloat aFreq) {
+    instruments::Instrument::freq(aFreq);
+    
+    this->setFrequency(aFreq);
 }

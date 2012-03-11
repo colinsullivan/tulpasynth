@@ -55,6 +55,7 @@
  *  Wether or not we've shot a ball this round.
  **/
 @property (nonatomic) BOOL waitingToShoot;
+@property float lastPerc;
 
 - (void) shootBall;
 

@@ -13,7 +13,7 @@
 #include <string.h>
 
 #include "Stk.h"
-#include "FileWvIn.h"
+#include "FileLoop.h"
 
 #include "Instrument.hpp"
 
@@ -23,7 +23,7 @@ namespace instruments {
      *  @class      A sampler which keeps audio in RAM.
      *  @extends    instruments::Instrument
      **/
-    class RAMpler : protected Instrument, protected stk::FileWvIn
+    class RAMpler : protected Instrument, protected stk::FileLoop
     {
     public:
         /**
@@ -53,11 +53,11 @@ namespace instruments {
             return Instrument::playing();
         }
         
-        /**
-         *  Play sample at a given rate.
-         **/
-        void play(float aRate);
+        virtual void freq(stk::StkFloat aFreq);
 
+
+        
+        
 //        virtual stk::StkFloat next_samp(int channel);
         virtual stk::StkFrames& next_buf(stk::StkFrames& frames);
         

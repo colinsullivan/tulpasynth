@@ -40,7 +40,7 @@
     
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"width"];
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"height"];
-    [defaults setValue:[NSNumber numberWithFloat:50969.0/stk::SRATE] forKey:@"rate"];
+    [defaults setValue:[NSNumber numberWithFloat:1.0] forKey:@"rate"];
     
     return defaults;
 }

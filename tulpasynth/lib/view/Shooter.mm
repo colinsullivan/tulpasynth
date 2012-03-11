@@ -13,7 +13,7 @@
 
 @implementation Shooter
 
-@synthesize lastShotTime, instr, effect1, glow, rateSlider, rateBeforeSliding, nextShotTime, waitingToShoot;
+@synthesize lastShotTime, instr, effect1, glow, rateSlider, rateBeforeSliding, nextShotTime, waitingToShoot, lastPerc;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -68,15 +68,13 @@
     if ([model.rate floatValue] > 0.0f) {
         self.lastShotTime = nil;
         self.waitingToShoot = true;
+        instr->freq([model.rate floatValue]);
+        instr->play();
     }
+    
+    lastPerc = 0.0;
+    
 }
-
-//- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-//    
-//    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-//    
-////    ShooterModel* model = ((ShooterModel*)object);    
-//}
 
 - (void) dealloc {
     delete instr;
@@ -163,10 +161,9 @@
     
     
     self.lastShotTime = model.nextShotTime;
-    self.waitingToShoot = false;
     if (model.ignoreUpdates) {
         // determine own next shot time
-        self.nextShotTime = [NSDate dateWithTimeInterval:[model.rate floatValue] sinceDate:self.lastShotTime];
+        self.nextShotTime = [NSDate dateWithTimeInterval:(1.0/[model.rate floatValue]) sinceDate:self.lastShotTime];
     }
 }
 
@@ -178,6 +175,12 @@
     if ([keyPath isEqualToString:@"nextShotTime"]) {
         self.nextShotTime = model.nextShotTime;
     }
+    // if the rate has changed
+    else if ([keyPath isEqualToString:@"rate"]) {
+        // play loop at same rate
+        instr->freq([model.rate floatValue]);
+    }
+
 }
 
 - (void)update {
@@ -189,24 +192,36 @@
 //    if (self.lastShotTime && self.nextShotTime) {
 //        NSLog(@"[self.nextShotTime timeIntervalSinceNow]: %f", [self.nextShotTime timeIntervalSinceNow]);
 //    }
-        
-    // actually shoot ball when sound transient occurs
-    if (instr->percentComplete() > (49572.0/50969.0) && self.waitingToShoot) {
-        [self shootBall];
-        self.glow = 1.0;
+
+    float currentPerc = instr->percentComplete();
+    float shootPerc = (49572.0/50969.0);
+
+    if (self.waitingToShoot) {
+        // actually shoot ball when sound transient occurs
+//        NSLog(@"instr->percentComplete(): %f", instr->percentComplete());
+        if (
+            // current playhead is past shoot marker, and previous playhead was in front
+            (currentPerc > shootPerc && lastPerc < shootPerc)
+            ||
+            // prev playhead was in front, and current playhead has wrapped around
+            (lastPerc < shootPerc && currentPerc < lastPerc)
+        ) {
+            self.waitingToShoot = false;
+            self.glow = 1.0;
+            [self shootBall];
+        }
+        else {
+            // increase glow
+            self.glow = (instr->percentComplete() / (49572.0/50969.0));
+        }
     }
     else {
-        // increase glow
-        self.glow = (instr->percentComplete() / (49572.0/50969.0));
+        // If it is time to shoot another ball
+        if ([self.nextShotTime timeIntervalSinceNow] < 0) {
+            self.waitingToShoot = true;
+        }
     }
-    
-    // If it is time to shoot another ball
-    if ([self.nextShotTime timeIntervalSinceNow] < 0 && !instr->playing()) {
-        // start playing sound at current rate
-        instr->play([model.rate floatValue]);
-        self.waitingToShoot = true;
-    }
-
+    lastPerc = currentPerc;
     
 //    // if it is time to trigger shooting sound
 //    // (transient is at 01.12 seconds into file)
@@ -246,10 +261,12 @@
     NSLog(@"Shooter.handleLongPressEnded");
     ShooterModel* model = ((ShooterModel*)self.model);
 
+    // TODO: synchronization race condition here.  ignoreUpdates should be
+    // turned off in callback
+    [model synchronize];
+    
     model.ignoreUpdates = false;
     rateSlider.active = false;
-
-    
 }
 
 
