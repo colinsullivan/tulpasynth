@@ -87,8 +87,11 @@
     return attributes;
 }
 
-+ (NSDate*)dateFromString:(NSString*)theString {
-    return [NSDate dateWithTimeIntervalSince1970:[theString floatValue]];
++ (NSDate*)dateFromString:(NSString*)aString {
+    return [NSDate dateWithTimeIntervalSince1970:[aString floatValue]];
+}
++ (NSString*)stringFromDate:(NSDate*)aDate {
+    return [NSString stringWithFormat:@"%f", [aDate timeIntervalSince1970]];
 }
 
 - (RKObjectMapping*) modelMapping {
@@ -97,6 +100,7 @@
         modelMapping = [RKObjectMapping mappingForClass:[self class]];
         [modelMapping mapAttributesFromArray:[self serializableAttributes]];
         modelMapping.dateFormatters = [NSArray arrayWithObject:[Model class]];
+        modelMapping.preferredDateFormatter = [Model class];
     }
     
     return modelMapping;
@@ -127,9 +131,9 @@
         NSLog(@"An error occurred while de-serializing:\n%@", [error localizedDescription]);
         exit(-1);
     }
-    else {
-        NSLog(@"Model updated");
-    }
+//    else {
+//        NSLog(@"Model updated");
+//    }
 }
 
 + (ModelCollection*) Instances {

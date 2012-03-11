@@ -419,13 +419,13 @@
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message {
     NSError* error = nil;
 
-    NSLog(@"didReceiveMessage - parsing...");
+//    NSLog(@"didReceiveMessage - parsing...");
     NSMutableDictionary* data = [NSJSONSerialization JSONObjectWithData:[message dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments|NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:&error];
     if (error) {
         NSLog(@"An error occurred while parsing response from server: %@", [error localizedDescription]);
         exit(-1);
     }
-    NSLog(@"didReceiveMessage: %@", data);
+//    NSLog(@"didReceiveMessage: %@", data);
 
     NSString* method = [data valueForKey:@"method"];
     

@@ -268,7 +268,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.startTime = [NSDate dateWithTimeIntervalSinceNow:0.0];
     self.safeUpdateTime = [NSDate dateWithTimeInterval:0.0 sinceDate:self.startTime];
     self.lastUpdateTime = [NSDate dateWithTimeInterval:0.0 sinceDate:self.startTime];
-    self.waiting = false;    
+    self.waiting = false;
+    
+    glEnable(GL_BLEND);
+    glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+
 }
 
 - (void)beginCollision:(b2Contact*) contact {
@@ -360,6 +364,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (void)glkView:(GLKView*)view drawInRect:(CGRect)rect {
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
+
     
     // Draw toolbox
     [self.toolbox prepareToDraw];
@@ -563,7 +568,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"tulpaViewController.observeValueForKeyPath\nkeyPath:\t%@\nchange:\t%@", keyPath, change);
+//    NSLog(@"tulpaViewController.observeValueForKeyPath\nkeyPath:\t%@\nchange:\t%@", keyPath, change);
     
     // if the list of model instances has changed
     if (object == [Model Instances]) {
@@ -597,10 +602,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         
     }
 
-}
-
-- (void) synchronizeModel:(Model*)aModel {
-    NSLog(@"tulpaViewController.synchronizeModel\nmodel:\n%@", [aModel serialize]);
 }
 
 

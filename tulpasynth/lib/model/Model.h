@@ -66,7 +66,8 @@
 /**
  *  Static helper method for parsing dates.
  **/
-+ (NSDate*) dateFromString:(NSString*)theString;
++ (NSDate*) dateFromString:(NSString*)aString;
++ (NSString*) stringFromDate:(NSDate*)aDate;
 
 ///**
 // *  Constraints on attributes for this model.

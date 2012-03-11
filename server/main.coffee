@@ -170,7 +170,14 @@ db.on "ready", () ->
                 # Update data in redis
                 delete data.method
                 debugMsg "Updating model #{data.attributes.id}"
+
+                if data.class is "ShooterModel"
+                    delete data.attributes.nextShotTime
+
                 db.hmset "model", "#{data.attributes.id}", JSON.stringify(data)
+
+                if tulpasynth.modelInstances[data.attributes.id]
+                    tulpasynth.modelInstances[data.attributes.id].set data.attributes
 
                 # Relay update message to other connected clients
                 data.method = "update"

@@ -42,11 +42,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 }
 
 /**
- *  When a model is to be synchronized
- **/
-- (void) synchronizeModel:(Model*)aModel;
-
-/**
  *  Textures used for circles and boxes.
  **/
 @property (strong) GLKTextureInfo* glowingCircleTexture;
