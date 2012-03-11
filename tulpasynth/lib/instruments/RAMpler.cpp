@@ -77,3 +77,8 @@ unsigned long instruments::RAMpler::duration() {
 float instruments::RAMpler::percentComplete() {
     return (time_ / this->getSize());    
 }
+
+void instruments::RAMpler::play(float aRate) {
+    this->setRate(aRate);
+    instruments::Instrument::play();    
+}

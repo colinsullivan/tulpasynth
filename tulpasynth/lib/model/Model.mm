@@ -15,7 +15,7 @@
 
 @implementation Model
 
-@synthesize id, controller, initialized, nosync;
+@synthesize id, controller, initialized, nosync, ignoreUpdates;
 
 - (void) setInitialized:(BOOL)anInitialized {
     if (anInitialized) {
@@ -42,6 +42,9 @@
 
         // by default we will synchronize model
         self.nosync = false;
+        
+        // by default we will accept all incoming updates
+        self.ignoreUpdates = false;
                 
         // Set any default attributes
         [self initialize];
@@ -123,6 +126,10 @@
 }
 
 - (void)deserialize:(NSMutableDictionary *)attributes {
+    if (ignoreUpdates) {
+        return;
+    }
+    
     NSError* error;
     RKObjectMappingOperation* mapperOperation = [RKObjectMappingOperation mappingOperationFromObject:attributes toObject:self withMapping:[self modelMapping]];
 

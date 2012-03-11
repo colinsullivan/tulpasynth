@@ -79,6 +79,10 @@ namespace instruments {
             return;
         };
         
+        virtual bool playing() {
+            return this->mPlaying;
+        }
+        
         
         virtual void velocity(stk::StkFloat aVelocity) {
             this->_velocity = aVelocity;

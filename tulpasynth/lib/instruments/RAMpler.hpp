@@ -48,6 +48,15 @@ namespace instruments {
         virtual void play() {
             return Instrument::play();
         };
+        
+        virtual bool playing() {
+            return Instrument::playing();
+        }
+        
+        /**
+         *  Play sample at a given rate.
+         **/
+        void play(float aRate);
 
 //        virtual stk::StkFloat next_samp(int channel);
         virtual stk::StkFrames& next_buf(stk::StkFrames& frames);

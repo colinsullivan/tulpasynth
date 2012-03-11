@@ -48,7 +48,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize startTime, safeUpdateTime, lastUpdateTime, waiting;
 
-@synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolboxTexture, shooterGlowingTexture;
+@synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolboxTexture, shooterGlowingTexture, shooterRadialMenuPointer, shooterRadialMenuBackground;
 
 @synthesize fallingBalls, obstacles, wildBalls;
 
@@ -186,6 +186,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.shooterTexture = [self loadTexture:@"Shooter"];
     self.shooterGlowingTexture = [self loadTexture:@"ShooterGlowing"];
     self.toolboxTexture = [self loadTexture:@"Radial-Menu"];
+    self.shooterRadialMenuBackground = [self loadTexture:@"Shooter-Radial-Menu-Background"];
+    self.shooterRadialMenuPointer = [self loadTexture:@"Shooter-Radial-Menu-Pointer"];
     
     self.greenColor = GLKVector4Make(43.0/255.0, 208.0/255.0, 5.0/255.0, 1.0);
     
@@ -425,37 +427,29 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (IBAction)tapGestureHandler:(id)sender {
     _tapEntity->update();
     
-    bool handled = false;
     
     if (self.toolbox.active) {
         if ([self.toolbox handleTap:_tapEntity]) {
-            handled = true;
+            return;
         }
         else {
             self.toolbox.active = false;
-            handled = true;          
+            return;        
         }
     }
-    
-    
 
-    if (!handled) {
-        // All obstacles can handle tap
-        for (Obstacle * o in self.obstacles) {
-            handled = [o handleTap:_tapEntity];
-            
-            if (handled) {
-                break;
-            }
+    // All obstacles can handle tap
+    for (Obstacle * o in self.obstacles) {
+        if ([o handleTap:_tapEntity]) {
+            return;
         }
     }
     
     // Handle tap in empty space
-    if (!handled) {
-        // Move toolbox to that point and display
-        self.toolbox.position = _tapEntity->touches[0]->position;
-        self.toolbox.active = true;
-    }
+
+    // Move toolbox to that point and display
+    self.toolbox.position = _tapEntity->touches[0]->position;
+    self.toolbox.active = true;
     
 
 //    if (!handled) {
@@ -478,9 +472,16 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
 - (IBAction)longPressHandler:(id)sender {
     _longPressEntity->update();
+
     
-    if (_longPressEntity->state == GestureEntityStateStart) {      
+    for (Obstacle* ob in self.obstacles) {
+        if ([ob handleLongPress:_longPressEntity]) {
+            return;
+        }
     }
+    
+//    if (_longPressEntity->state == GestureEntityStateStart) {      
+//    }
     
 }
 

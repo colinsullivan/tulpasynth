@@ -19,6 +19,8 @@
 
 @synthesize pannable, panner, prePanningPosition;
 
+@synthesize longPressable, longPresser;
+
 - (b2Vec2*)position {
     b2Vec2 bodyPosition = self.body->GetPosition();
     
@@ -48,6 +50,8 @@
     
     self.prePanningPosition = new b2Vec2();
     self.pannable = false;
+    
+    self.longPressable = false;
 
     
     PhysicsEntityModel* model = ((PhysicsEntityModel*)self.model);
@@ -70,13 +74,10 @@
 }
 
 
-- (void) update {
-    [super update];
-    
-    if (self.pannable && self.panner) {
-        [self handlePanUpdate];
-    }
-}
+//- (void) update {
+//    [super update];
+//    
+//}
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -148,27 +149,34 @@
 
 
 - (GLboolean) handlePan:(PanEntity *) pan {
-    // if pan just started
-    if (pan->state == GestureEntityStateStart) {
-        // if the touch is inside us
-        if ([self _touchIsInside:pan->touches[0]]) {
-            self.panner = pan;    
-            
-            [self handlePanStarted];
-            
-            
-            
+    if (self.pannable) {
+        // if pan just started and we are allowing a pan
+        if (pan->state == GestureEntityStateStart) {
+            // if the touch is inside us
+            if ([self _touchIsInside:pan->touches[0]]) {
+                self.panner = pan;    
+                
+                [self handlePanStarted];
+                
+                
+                
+                return true;
+            }
+//            else if(self.panner) {
+//                self.panner = nil;
+//            }
+        }
+        else if (pan->state == GestureEntityStateUpdate && self.panner == pan) {
+            [self handlePanUpdate];
             return true;
         }
-        else if(self.panner) {
+        else if(pan->state == GestureEntityStateEnd && self.panner == pan) {
+            [self handlePanEnded];
             self.panner = nil;
+            return true;
         }
     }
-    else if(pan->state == GestureEntityStateEnd && self.panner) {
-        [self handlePanEnded];
-        self.panner = nil;
-    }
-    
+
     return false;
 }
 
@@ -197,5 +205,31 @@
     
 }
 
+- (GLboolean) handleLongPress:(LongPressEntity*)longPress {
+    if (self.longPressable) {
+        
+        if (longPress->state == GestureEntityStateStart) {
+            if ([self _touchIsInside:longPress->touches[0]]) {
+                self.longPresser = longPress;
+                [self handleLongPressStarted];
+                return true;
+            }
+//            else if(self.longPresser) {
+//                self.longPresser = nil;
+//            }
+        }
+        else if (longPress->state == GestureEntityStateUpdate && self.longPresser == longPress) {
+            [self handleLongPressUpdated];
+            return true;
+        }
+        else if(longPress->state == GestureEntityStateEnd && self.longPresser == longPress) {
+            [self handleLongPressEnded];
+            self.longPresser = nil;
+            return true;
+        }
+    }
+    
+    return false;
+}
 
 @end

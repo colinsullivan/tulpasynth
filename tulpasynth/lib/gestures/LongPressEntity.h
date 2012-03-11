@@ -23,6 +23,17 @@ public:
     ~LongPressEntity();
     
     virtual void update();
+    
+    /**
+     *  Translation vector for the amount dragged after a long press.
+     **/
+    b2Vec2 translation;
+private:
+    
+    /**
+     *  The initial position of this gesture.
+     **/
+    b2Vec2 _initialPosition;
 };
 
 #endif

@@ -69,15 +69,12 @@
 + (NSDate*) dateFromString:(NSString*)aString;
 + (NSString*) stringFromDate:(NSDate*)aDate;
 
-///**
-// *  Constraints on attributes for this model.
-// **/
-//+ (NSMutableDictionary*) constraints;
-//
-///**
-// *  Actual constraining logic.
-// **/
-//- (NSNumber*) constrainAttribute:(NSString*)attributeName value:(NSNumber*)anAttributeValue;
+/**
+ *  If updates should be ignored on this model (i.e. if the user is currently
+ *  changing it via GUI)
+ **/
+@property BOOL ignoreUpdates;
+
 
 
 

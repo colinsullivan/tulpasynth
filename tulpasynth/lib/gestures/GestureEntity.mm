@@ -22,7 +22,8 @@ GestureEntity::~GestureEntity() {
 void GestureEntity::update() {
     // Update touch entities
     CGPoint location;
-    // HACK: This ignores other touches 
+
+    // HACK: This ignores touches > 2
     for (int i = 0; i < MIN([gestureRecognizer numberOfTouches], 2); i++) {
         location = [gestureRecognizer locationOfTouch:i inView:nil];
         
@@ -35,7 +36,7 @@ void GestureEntity::update() {
         state = GestureEntityStateStart;
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged) {
-        state = GestureEntityStateMove;
+        state = GestureEntityStateUpdate;
     }
     else {
         state = GestureEntityStateEnd;
