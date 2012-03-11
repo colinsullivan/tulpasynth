@@ -441,7 +441,7 @@
         m.initialized = true;
         
         // pause rendering
-        self.controller.paused = true;
+//        self.controller.paused = true;
 
         // send create message to other clients
         NSMutableDictionary* createMessage = [NSMutableDictionary dictionaryWithKeysAndObjects:
@@ -453,7 +453,7 @@
     }
     else if ([method isEqualToString:@"create"]) {
         // pause rendering
-        self.controller.paused = true;
+//        self.controller.paused = true;
 
         // create corresponding model
         Model* m = [[NSClassFromString([data valueForKey:@"class"]) alloc] initWithController:self.controller withAttributes:[data valueForKey:@"attributes"]];
@@ -471,7 +471,7 @@
         [m deserialize:[data valueForKey:@"attributes"]];
     }
     else if([method isEqualToString:@"unpause"]) {
-        self.controller.paused = false;
+//        self.controller.paused = false;
     }
     else {
         NSLog(@"Unrecognized method: %@", method);
@@ -491,7 +491,7 @@
         return;
     }
 
-    self.controller.paused = true;
+//    self.controller.paused = true;
     NSMutableDictionary* message = [NSMutableDictionary dictionaryWithKeysAndObjects:
                                     @"method", @"update",
                                     @"attributes", [aModel serialize],

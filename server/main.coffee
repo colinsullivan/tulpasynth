@@ -162,7 +162,7 @@ db.on "ready", () ->
                 # Relay create message to other connected clients
                 data.method = "create"
                 sendToAllButOne data, ws
-                unpauseAll()
+                # unpauseAll()
 
 
             

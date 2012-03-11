@@ -481,10 +481,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
 - (void)update {
     
-//    float32 timeStep = 1.0f / 60.0f;
+//    float32 timeStep = 1.0f / 40.0f;
     
     // Turn these bitches down to increase performance
-    int32 velocityIterations = 5;
+    int32 velocityIterations = 7;
     int32 positionIterations = 3;
     
     // Update toolbox no matter what
