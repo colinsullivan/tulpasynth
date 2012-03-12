@@ -14,12 +14,13 @@
 
 @implementation SocketHandler
 
-@synthesize socket, controller;
+@synthesize socket, controller, timeSyncMessages, timeOffset;
 
 - (id) initWithController:(tulpaViewController*)theController {
     if (self = [super init]) {
 
         self.controller = theController;
+        self.timeSyncMessages = [[NSMutableArray alloc] init];
 
         NSString* SERVER_IP = [[NSUserDefaults standardUserDefaults] stringForKey:@"server_ip"];
         NSString* SERVER_PORT = [[NSUserDefaults standardUserDefaults] stringForKey:@"server_port"];
@@ -28,6 +29,7 @@
         self.socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SERVER_URL]]];
         self.socket.delegate = self;
         [self.socket open];
+        
     }
     
     return self;
@@ -112,9 +114,62 @@
     else if([method isEqualToString:@"unpause"]) {
 //        self.controller.paused = false;
     }
+    else if([method isEqualToString:@"time_sync"]) {
+//        // store time received back to client
+//        [data setValue:[[Model class] stringFromDate:[NSDate dateWithTimeIntervalSinceNow:0.0]] forKey:@"time_received_back"];
+//        
+//        // store timesync message
+        [self.timeSyncMessages addObject:data];
+        if ([self.timeSyncMessages count] < 10) {
+            // go again until we've got 10.
+//            [NSThread sleepForTimeInterval:0.5];
+            [self sendTimeSyncMessage];
+        }
+//        else {
+//            // done, determine time offset
+////            [self determineTimeOffset];
+//        }
+        
+    }
     else {
         NSLog(@"Unrecognized method: %@", method);
     }
+}
+
+- (void) sendTimeSyncMessage {
+    // send current time
+    NSMutableDictionary* message = [NSDictionary dictionaryWithKeysAndObjects:
+                                    @"method", @"time_sync",
+                                    @"time_sent", [[Model class] stringFromDate:[NSDate dateWithTimeIntervalSinceNow:0.0]],
+                                    nil];
+    [self send:message];
+}
+
+- (void) determineTimeOffset {
+    float timeDiffSum = 0.0;
+    int timeDiffCount = 0;
+
+    // for each time sync message
+    for (NSDictionary* timeSyncMessage in self.timeSyncMessages) {
+        float time_sent = [[timeSyncMessage valueForKey:@"time_sent"] floatValue];
+        float time_received_back = [[timeSyncMessage valueForKey:@"time_received_back"] floatValue];
+        float time_server_received = [[timeSyncMessage valueForKey:@"time_received"] floatValue];
+        NSLog(@"time_received_back: %f", time_received_back);
+        NSLog(@"time_server_received: %f", time_server_received);
+        NSLog(@"time_sent: %f", time_sent);
+
+        // time it took to get to server
+        timeDiffSum += time_server_received - time_sent;
+        timeDiffCount++;
+        
+        // time it took to get back from server
+//        timeDiffSum += time_received_back - time_server_received;
+//        timeDiffCount++;
+    }
+    
+    self.timeOffset = (timeDiffSum / ((float)timeDiffCount));
+    
+    NSLog(@"self.timeOffset: %f", self.timeOffset);
 }
 
 - (void) synchronizeModel:(Model*)aModel {
@@ -134,6 +189,8 @@
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
     NSLog(@"didOpen");
+    
+    [self sendTimeSyncMessage];
 }
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
     NSLog(@"didFailWithError: %@", [error localizedDescription]);
@@ -141,6 +198,4 @@
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
     NSLog(@"didCloseWithCode: %@\n\treason:%@\n\twasClean:%@", code, reason, wasClean);
 }
-
-
 @end

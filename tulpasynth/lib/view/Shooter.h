@@ -56,6 +56,12 @@
  **/
 @property (nonatomic) BOOL waitingToShoot;
 @property float lastPerc;
+@property NSTimeInterval prevTimeUntilNextShot;
+
+/**
+ *  If we're currently animating a "shot"
+ **/
+@property (nonatomic) BOOL animating;
 
 - (void) shootBall;
 

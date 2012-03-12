@@ -21,16 +21,28 @@ class tulpasynth.models.ShooterModel extends Backbone.Model
 
             setTimeout () =>
                 @updateNextShotTime()
-            , (1.0/@get("rate"))*500.0
+            , (1.0/@get("rate"))*700.0
+
+        tulpasynth.modelInstances[@get "id"] = this
 
     updateNextShotTime: () ->
         console.log "updateNextShotTime"
-        # Update next shot time to previous shot time plus rate
-        @set "nextShotTime", @get("nextShotTime") + (1.0 / @get "rate")
 
-        # Update again
+        now = new Date()
+        now = now.getTime()/1000.0
+        
+        # if next shot has passed
+        console.log '@get "nextShotTime"'
+        console.log @get "nextShotTime"
+        console.log 'now'
+        console.log now
+        
+        if @get("nextShotTime")*1.0 < now
+            # Update next shot time to previous shot time plus rate
+            @set "nextShotTime", @get("nextShotTime") + (1.0 / @get "rate")
+
+
+        # Update again in the future
         setTimeout () =>
             @updateNextShotTime()
-        , (1.0 / @get("rate"))*1000.0
-
-        tulpasynth.modelInstances[@get "id"] = this
+        , (1.0 / @get("rate"))*700.0

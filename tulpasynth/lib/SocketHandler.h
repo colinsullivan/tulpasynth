@@ -50,6 +50,27 @@
  **/
 - (void) synchronizeModel:(Model*)aModel;
 
+/**
+ *  List of time_sync messages for averaging to determine our client's
+ *  time offset from server.
+ **/
+@property (strong, nonatomic) NSMutableArray* timeSyncMessages;
+
+/**
+ *  Send a time sync message to server so we can get measurements
+ **/
+- (void) sendTimeSyncMessage;
+
+/**
+ *  Determine time offset based on time sync messsages received from server.
+ **/
+- (void) determineTimeOffset;
+
+/**
+ *  The time offset for this client
+ **/
+@property float timeOffset;
+
 //- (void) socketIODidConnect:(SocketIO *)socket;
 //- (void) socketIODidDisconnect:(SocketIO *)socket;
 //- (void) socketIO:(SocketIO *)socket didReceiveMessage:(SocketIOPacket *)packet;
@@ -62,5 +83,7 @@
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket;
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
+
+
 
 @end

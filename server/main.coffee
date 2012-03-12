@@ -6,6 +6,7 @@ redis = require "redis"
 WebSocket = require "faye-websocket"
 http = require "http"
 argv = require("optimist").argv;
+_ = require("underscore")._;
 
 tulpasynth = require "./lib/tulpasynth.coffee"
 require "./lib/ShooterModel.coffee"
@@ -39,31 +40,37 @@ openConnections = []
 
 serverStartTime = new Date();
 
-sendToAll = (data) ->
+offsetTimeAttributes = (data, attributesToOffset, offsetAmt) ->
+    dataClone = _.clone data
+    dataClone.attributes = _.clone data.attributes
+    if attributesToOffset
+        for timeOffsetAttribute in attributesToOffset
+            dataClone.attributes[timeOffsetAttribute] -= offsetAmt
+
+    dataClone
+
+sendToAll = (data, timeOffsetAttributes) ->
     debugMsg "Sending to all:"
     console.log data
 
-    message = JSON.stringify data
-
     for connectionId, client of openConnections
-        client.send message
+        debugMsg "To client #{connectionId} with offset #{client.timeOffset}"
+        client.send JSON.stringify(offsetTimeAttributes(data, timeOffsetAttributes, client.timeOffset))
 
-sendToAllButOne = (data, one) ->
+sendToAllButOne = (data, one, timeOffsetAttributes) ->
     debugMsg "Sending to all but one:"
     console.log data
 
-    message = JSON.stringify data
-
     for connectionId, client of openConnections
         if client != one
-            client.send message
+            client.send JSON.stringify(offsetTimeAttributes(data, timeOffsetAttributes, client.timeOffset))
 
-sendToOne = (data, one) ->
+sendToOne = (data, one, timeOffsetAttributes) ->
     debugMsg "Sending to one:"
     console.log data
-    message = JSON.stringify data
 
-    one.send message
+    debugMsg "To client #{one.connectionId} with offset #{one.timeOffset}"
+    one.send JSON.stringify(offsetTimeAttributes(data, timeOffsetAttributes, one.timeOffset))
 
 unpauseAll = () ->
     # Unpause all clients
@@ -87,6 +94,9 @@ db.on "ready", () ->
         ws = new WebSocket request, socket, head
         ws.connectionId = connectionId
         openConnections[connectionId++] = ws
+
+        ws.timeOffset = 0.0
+        ws.timeSyncMessages = []
 
         ws.onopen = (event) ->
             debugMsg "Client #{ws.connectionId} connected"
@@ -148,7 +158,7 @@ db.on "ready", () ->
 
                     # Update initial client
                     data.method = "update"
-                    sendToOne data, ws
+                    sendToOne data, ws, ["nextShotTime"]
 
                     # When shooter updates the next shot time
                     shooter.on "change:nextShotTime", () =>
@@ -156,12 +166,12 @@ db.on "ready", () ->
                         message =
                             method: "update"
                             class: "ShooterModel"
-                            attributes: shooter.attributes
-                        sendToAll message
+                            attributes: shooter.toJSON()
+                        sendToAll message, ["nextShotTime"]
 
                 # Relay create message to other connected clients
                 data.method = "create"
-                sendToAllButOne data, ws
+                sendToAllButOne data, ws, ["nextShotTime"]
                 # unpauseAll()
 
 
@@ -184,6 +194,28 @@ db.on "ready", () ->
                 sendToAllButOne data, ws
 
                 # unpauseAll()
+            else if data.method == "time_sync"
+                # Record time received
+                time_received = new Date()
+                data.time_received = (time_received.getTime()/1000.0)
+                ws.timeSyncMessages.push data
+
+                if ws.timeSyncMessages.length == 10
+                    # Determine time offset of this client
+                    latencySum = 0.0
+                    for timeSyncMessage in ws.timeSyncMessages
+                        latencySum += timeSyncMessage.time_received - timeSyncMessage.time_sent
+
+                    ws.timeOffset = latencySum / ws.timeSyncMessages.length
+                    console.log 'ws.timeOffset'
+                    console.log ws.timeOffset
+
+                # send back
+                sendToOne data, ws
+
+                
+
+
 
         
         # ws.send event.data
