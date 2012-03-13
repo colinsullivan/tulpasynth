@@ -31,6 +31,7 @@
     
     [attrs addObject:@"rate"];
     [attrs addObject:@"nextShotTime"];
+//    [attrs addObject:@"shotTimes"];
     
     return attrs;
 }
@@ -41,6 +42,7 @@
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"width"];
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"height"];
     [defaults setValue:[NSNumber numberWithFloat:1.0] forKey:@"rate"];
+//    [defaults setValue:[[NSMutableArray alloc] init] forKey:@"shotTimes"];
     
     return defaults;
 }

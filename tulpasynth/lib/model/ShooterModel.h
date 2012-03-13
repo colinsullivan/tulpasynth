@@ -22,4 +22,9 @@
  **/
 @property (strong, nonatomic) NSDate* nextShotTime;
 
+/**
+ *  List of all shot times in order
+ **/
+//@property (strong, nonatomic) NSMutableArray* shotTimes;
+
 @end

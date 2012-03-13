@@ -13,7 +13,7 @@
 #include <string.h>
 
 #include "Stk.h"
-#include "FileWvIn.h"
+#include "FileLoop.h"
 
 #include "Instrument.hpp"
 
@@ -23,7 +23,7 @@ namespace instruments {
      *  @class      A sampler which keeps audio in RAM.
      *  @extends    instruments::Instrument
      **/
-    class RAMpler : protected Instrument, protected stk::FileWvIn
+    class RAMpler : protected Instrument, protected stk::FileLoop
     {
     public:
         /**
@@ -52,6 +52,10 @@ namespace instruments {
         }
         
         virtual void freq(stk::StkFloat aFreq);
+        
+        void reset() {
+            return FileLoop::reset();
+        }
 
 
         

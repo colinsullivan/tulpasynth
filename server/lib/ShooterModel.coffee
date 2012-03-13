@@ -21,7 +21,7 @@ class tulpasynth.models.ShooterModel extends Backbone.Model
 
             setTimeout () =>
                 @updateNextShotTime()
-            , (1.0/@get("rate"))*700.0
+            , (1.0/@get("rate"))*1000.0
 
         tulpasynth.modelInstances[@get "id"] = this
 
@@ -45,4 +45,4 @@ class tulpasynth.models.ShooterModel extends Backbone.Model
         # Update again in the future
         setTimeout () =>
             @updateNextShotTime()
-        , (1.0 / @get("rate"))*700.0
+        , (1.0 / @get("rate"))*1000.0

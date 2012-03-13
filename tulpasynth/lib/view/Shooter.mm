@@ -68,6 +68,7 @@
     self.lastShotTime = nil;
     if ([model.rate floatValue] > 0.0f) {
         self.waitingToShoot = true;
+        instr->play();
     }
     else {
         self.waitingToShoot = false;
@@ -165,7 +166,7 @@
     self.lastShotTime = model.nextShotTime;
     if (model.ignoreUpdates) {
         // determine own next shot time
-        self.nextShotTime = [NSDate dateWithTimeInterval:(1.0/[model.rate floatValue]) sinceDate:self.lastShotTime];
+        model.nextShotTime = [NSDate dateWithTimeInterval:(1.0/[model.rate floatValue]) sinceDate:self.lastShotTime];
     }
 }
 
@@ -179,13 +180,19 @@
         if (model.nextShotTime != self.nextShotTime) {
             self.nextShotTime = model.nextShotTime;
             self.prevTimeUntilNextShot = [model.rate floatValue];
-            self.waitingToShoot = true;            
+            self.waitingToShoot = true;          
+            self.animating = true;
         }
     }
     // if the rate has changed
     else if ([keyPath isEqualToString:@"rate"]) {
         // play loop at same rate
         instr->freq([model.rate floatValue]);
+        
+//        if (model.ignoreUpdates) {
+//            // determine own next shot time
+//            model.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:(1.0/[model.rate floatValue])];
+//        }
     }
 
 }
@@ -229,7 +236,7 @@
 //    if ([model.rate floatValue] != 0.0) {
 //        NSLog(@"nextShotTime: %f", [self.nextShotTime timeIntervalSince1970]);
 //        NSLog(@"timeUntilNextShot: %f", timeUntilNextShot);
-//        NSLog(@"now: %f", [[NSDate dateWithTimeIntervalSinceNow:0.0] timeIntervalSince1970]);        
+//        NSLog(@"now: %f", [[NSDate dateWithTimeIntervalSinceNow:0.0] timeIntervalSince1970]);
 //    }
 
     // If it is time to shoot another ball
@@ -242,10 +249,8 @@
         if (self.waitingToShoot) {
             [self shootBall];
         }
-        self.waitingToShoot = true;
-        self.animating = true;
-        instr->freq([model.rate floatValue]);
-        instr->play();
+//        instr->freq([model.rate floatValue]);
+        instr->reset();
     }
     prevTimeUntilNextShot = timeUntilNextShot;
     lastPerc = currentPerc;
