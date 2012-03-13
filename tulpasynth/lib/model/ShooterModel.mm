@@ -12,9 +12,25 @@
 
 @synthesize rate, nextShotTime;
 
++ (NSNumber*) maxRate {
+    static NSNumber* theMaxRate;
+    if (!theMaxRate) {
+        theMaxRate = [NSNumber numberWithFloat:5.5];
+    }
+    return theMaxRate;
+}
+
++ (NSNumber*) minRate {
+    static NSNumber* theMinRate;
+    if (!theMinRate) {
+        theMinRate = [NSNumber numberWithFloat:0.25];
+    }
+    return theMinRate;
+}
+
 - (void) setRate:(NSNumber *)aRate {
-    NSNumber* minRate = [NSNumber numberWithFloat:0.25];
-    NSNumber* maxRate = [NSNumber numberWithFloat:5.5];
+    NSNumber* minRate = [[self class] minRate];
+    NSNumber* maxRate = [[self class] maxRate];
     
     if ([aRate floatValue] < [minRate floatValue]) {
         aRate = minRate;

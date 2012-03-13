@@ -180,7 +180,7 @@
         if (model.nextShotTime != self.nextShotTime) {
             self.nextShotTime = model.nextShotTime;
             self.prevTimeUntilNextShot = [model.rate floatValue];
-            self.waitingToShoot = true;          
+            self.waitingToShoot = true;   
             self.animating = true;
         }
     }
@@ -284,7 +284,7 @@
 - (void) handleLongPressUpdated {
     
     ShooterModel* model = ((ShooterModel*)self.model);
-    float newRate = [rateBeforeSliding floatValue] + (0.2*self.longPresser->translation.y);
+    float newRate = [rateBeforeSliding floatValue] + (0.3*self.longPresser->translation.y);
     NSLog(@"newRate: %f", newRate);
     model.rate = [NSNumber numberWithFloat:newRate];
     NSLog(@"model.rate: %f", [model.rate floatValue]);

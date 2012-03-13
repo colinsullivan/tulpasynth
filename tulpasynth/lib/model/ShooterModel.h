@@ -27,4 +27,7 @@
  **/
 //@property (strong, nonatomic) NSMutableArray* shotTimes;
 
++ (NSNumber*) maxRate;
++ (NSNumber*) minRate;
+
 @end

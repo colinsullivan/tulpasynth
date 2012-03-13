@@ -8,8 +8,12 @@
 
 #import "PhysicsEntity.h"
 
+#import "ShooterRateSliderArrow.h"
+
 @interface ShooterRateSlider : PhysicsEntity
 
 @property BOOL active;
+
+@property (strong, nonatomic) ShooterRateSliderArrow* arrow;
 
 @end

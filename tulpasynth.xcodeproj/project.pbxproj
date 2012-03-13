@@ -41,6 +41,7 @@
 		3B04411714FDA8E100DE16A3 /* CollisionDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04411614FDA8DF00DE16A3 /* CollisionDetector.mm */; };
 		3B04414814FDB61700DE16A3 /* WildBall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04414714FDB61500DE16A3 /* WildBall.mm */; };
 		3B04414B14FDB66E00DE16A3 /* WildBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04414A14FDB66E00DE16A3 /* WildBallModel.mm */; };
+		3B2A4AED150F156300F2DF5E /* ShooterRateSliderArrow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A4AEC150F156300F2DF5E /* ShooterRateSliderArrow.mm */; };
 		3B624C04150036B80066A1CB /* RAMpler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C02150036B80066A1CB /* RAMpler.cpp */; };
 		3B624C0B150038010066A1CB /* NoisePercussionReversed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */; };
 		3B62509F1500AB430066A1CB /* SocketHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B62509E1500AB430066A1CB /* SocketHandler.mm */; };
@@ -419,6 +420,8 @@
 		3B04414714FDB61500DE16A3 /* WildBall.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WildBall.mm; sourceTree = "<group>"; };
 		3B04414914FDB66E00DE16A3 /* WildBallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WildBallModel.h; sourceTree = "<group>"; };
 		3B04414A14FDB66E00DE16A3 /* WildBallModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WildBallModel.mm; sourceTree = "<group>"; };
+		3B2A4AEB150F156300F2DF5E /* ShooterRateSliderArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterRateSliderArrow.h; sourceTree = "<group>"; };
+		3B2A4AEC150F156300F2DF5E /* ShooterRateSliderArrow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShooterRateSliderArrow.mm; sourceTree = "<group>"; };
 		3B624C02150036B80066A1CB /* RAMpler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAMpler.cpp; sourceTree = "<group>"; };
 		3B624C03150036B80066A1CB /* RAMpler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAMpler.hpp; sourceTree = "<group>"; };
 		3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = NoisePercussionReversed.wav; sourceTree = "<group>"; };
@@ -1044,6 +1047,8 @@
 				3B04414714FDB61500DE16A3 /* WildBall.mm */,
 				3BCEB90B150D2C26007CFA08 /* ShooterRateSlider.h */,
 				3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */,
+				3B2A4AEB150F156300F2DF5E /* ShooterRateSliderArrow.h */,
+				3B2A4AEC150F156300F2DF5E /* ShooterRateSliderArrow.mm */,
 			);
 			name = view;
 			path = lib/view;
@@ -2149,6 +2154,7 @@
 				3B6256BA15016EBD0066A1CB /* NSData+SRB64Additions.m in Sources */,
 				3B6256BB15016EBD0066A1CB /* SRWebSocket.m in Sources */,
 				3BCEB90D150D2C26007CFA08 /* ShooterRateSlider.mm in Sources */,
+				3B2A4AED150F156300F2DF5E /* ShooterRateSliderArrow.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
