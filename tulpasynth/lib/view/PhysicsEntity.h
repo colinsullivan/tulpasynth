@@ -14,6 +14,7 @@
 #include "Globals.h"
 #include "PanEntity.h"
 #include "TapEntity.h"
+#include "LongPressEntity.h"
 
 #import "GLView.h"
 #import "PhysicsEntityModel.h"
@@ -116,6 +117,7 @@
  **/
 @property b2Vec2* prePanningPosition;
 
+
 /**
  *  Handler for new tap as invoked by the view
  **/
@@ -124,5 +126,28 @@
  *  Handler for when tap occurs inside ourself.
  **/
 - (void) handleTapOccurred:(TapEntity*)tap;
+
+
+/**
+ *  Wether or not this object responds to a long press gesture
+ **/
+@property (nonatomic) BOOL longPressable;
+/**
+ *  Handler for a long press gesture as invoked by the view.
+ **/
+- (GLboolean) handleLongPress:(LongPressEntity*)longPress;
+/**
+ *  Pointer to LongPressEntity that is currently "pressing" on self.
+ **/
+@property LongPressEntity* longPresser;
+/**
+ *  Handlers for when a long press on this entity have started, updated, 
+ *  and ended.
+ **/
+- (void) handleLongPressStarted;
+- (void) handleLongPressUpdated;
+- (void) handleLongPressEnded;
+
+
 
 @end

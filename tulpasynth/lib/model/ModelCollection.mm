@@ -34,7 +34,9 @@
     [[self objects] addObject:anObject];
     [self didChange:NSKeyValueChangeInsertion valuesAtIndexes:insertIndex forKey:@"objects"];
     
-    [self.objectsById setObject:anObject forKey:anObject.id];
+    if (anObject.id) {
+        [self.objectsById setObject:anObject forKey:anObject.id];
+    }
 }
 
 - (Model*)getById:(NSNumber*)anId {

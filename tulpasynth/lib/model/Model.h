@@ -58,15 +58,23 @@
  **/
 + (NSMutableDictionary*) defaultAttributes;
 
-///**
-// *  Constraints on attributes for this model.
-// **/
-//+ (NSMutableDictionary*) constraints;
-//
-///**
-// *  Actual constraining logic.
-// **/
-//- (NSNumber*) constrainAttribute:(NSString*)attributeName value:(NSNumber*)anAttributeValue;
+/**
+ *  Wether or not to track this model for synchronization changes
+ **/
+@property BOOL nosync;
+
+/**
+ *  Static helper method for parsing dates.
+ **/
++ (NSDate*) dateFromString:(NSString*)aString;
++ (NSString*) stringFromDate:(NSDate*)aDate;
+
+/**
+ *  If updates should be ignored on this model (i.e. if the user is currently
+ *  changing it via GUI)
+ **/
+@property BOOL ignoreUpdates;
+
 
 
 

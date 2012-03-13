@@ -46,9 +46,9 @@ LongPressEntity * _longPressEntity;
 
 @implementation tulpaViewController
 
-@synthesize startTime;
+@synthesize startTime, safeUpdateTime, lastUpdateTime, waiting;
 
-@synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolboxTexture, shooterGlowingTexture;
+@synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolboxTexture, shooterGlowingTexture, shooterRadialMenuPointer, shooterRadialMenuBackground;
 
 @synthesize fallingBalls, obstacles, wildBalls;
 
@@ -186,6 +186,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.shooterTexture = [self loadTexture:@"Shooter"];
     self.shooterGlowingTexture = [self loadTexture:@"ShooterGlowing"];
     self.toolboxTexture = [self loadTexture:@"Radial-Menu"];
+    self.shooterRadialMenuBackground = [self loadTexture:@"Shooter-Radial-Menu-Background"];
+    self.shooterRadialMenuPointer = [self loadTexture:@"Shooter-Radial-Menu-Pointer"];
     
     self.greenColor = GLKVector4Make(43.0/255.0, 208.0/255.0, 5.0/255.0, 1.0);
     
@@ -265,6 +267,14 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         return;
     }
     
+    self.startTime = [NSDate dateWithTimeIntervalSinceNow:0.0];
+    self.safeUpdateTime = [NSDate dateWithTimeInterval:0.0 sinceDate:self.startTime];
+    self.lastUpdateTime = [NSDate dateWithTimeInterval:0.0 sinceDate:self.startTime];
+    self.waiting = false;
+    
+    glEnable(GL_BLEND);
+    glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+
 }
 
 - (void)beginCollision:(b2Contact*) contact {
@@ -356,6 +366,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (void)glkView:(GLKView*)view drawInRect:(CGRect)rect {
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
+
     
     // Draw toolbox
     [self.toolbox prepareToDraw];
@@ -416,37 +427,29 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (IBAction)tapGestureHandler:(id)sender {
     _tapEntity->update();
     
-    bool handled = false;
     
     if (self.toolbox.active) {
         if ([self.toolbox handleTap:_tapEntity]) {
-            handled = true;
+            return;
         }
         else {
             self.toolbox.active = false;
-            handled = true;          
+            return;        
         }
     }
-    
-    
 
-    if (!handled) {
-        // All obstacles can handle tap
-        for (Obstacle * o in self.obstacles) {
-            handled = [o handleTap:_tapEntity];
-            
-            if (handled) {
-                break;
-            }
+    // All obstacles can handle tap
+    for (Obstacle * o in self.obstacles) {
+        if ([o handleTap:_tapEntity]) {
+            return;
         }
     }
     
     // Handle tap in empty space
-    if (!handled) {
-        // Move toolbox to that point and display
-        self.toolbox.position = _tapEntity->touches[0]->position;
-        self.toolbox.active = true;
-    }
+
+    // Move toolbox to that point and display
+    self.toolbox.position = _tapEntity->touches[0]->position;
+    self.toolbox.active = true;
     
 
 //    if (!handled) {
@@ -469,25 +472,39 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
 - (IBAction)longPressHandler:(id)sender {
     _longPressEntity->update();
+
     
-    if (_longPressEntity->state == GestureEntityStateStart) {      
+    for (Obstacle* ob in self.obstacles) {
+        if ([ob handleLongPress:_longPressEntity]) {
+            return;
+        }
     }
+    
+//    if (_longPressEntity->state == GestureEntityStateStart) {      
+//    }
     
 }
 
 - (void)update {
     
-//    float32 timeStep = 1.0f / 60.0f;
+//    float32 timeStep = 1.0f / 40.0f;
     
     // Turn these bitches down to increase performance
-    int32 velocityIterations = 5;
-    int32 positionIterations = 2;
-
-    self.world->Step(self.timeSinceLastUpdate, velocityIterations, positionIterations);
-
-    // Update toolbox
+    int32 velocityIterations = 7;
+    int32 positionIterations = 3;
+    
+    // Update toolbox no matter what
     [self.toolbox update];
     
+    if (self.waiting) {
+        return;
+    }
+
+    // if it is safe to update
+//    static NSTimeInterval safeUpdateInterval;
+//    safeUpdateInterval = [self.safeUpdateTime timeIntervalSinceDate:self.lastUpdateTime];
+    self.world->Step(self.timeSinceLastUpdate, velocityIterations, positionIterations);
+
     // update all obstacles
     for (Obstacle* o in self.obstacles) {
         [o update];
@@ -512,7 +529,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             
             [ballsToDelete addObject:b];
         }
-
+        
     }
     
     // delete all balls that moved offscreen
@@ -521,25 +538,26 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     }
     
     // Update all GLView instances
-//    for (GLView* e in [GLView Instances]) {
-//        [e update];
-//    }
+    //    for (GLView* e in [GLView Instances]) {
+    //        [e update];
+    //    }
     
-//    static BOOL done = false;
-//    if (!done && [self.startTime timeIntervalSinceNow] < -10.0) {
-//        NSLog(@"10 passed");
-//        
-//        self.toolbar.mouseJoint->SetTarget(b2Vec2(100, 0));
-//        
-//        done = true;
-//    }
+    //    static BOOL done = false;
+    //    if (!done && [self.startTime timeIntervalSinceNow] < -10.0) {
+    //        NSLog(@"10 passed");
+    //        
+    //        self.toolbar.mouseJoint->SetTarget(b2Vec2(100, 0));
+    //        
+    //        done = true;
+    //    }
     
     
-//    float aspect = fabsf(self.view.bounds.size.width/self.view.bounds.size.height);
-////    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60.0f), aspect, 1.0f, -1.0f);
-//    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(0.125 * 2 * M_PI, 2.0/3.0, 2, -1);
-//    self.effect.transform.projectionMatrix = projectionMatrix;
-
+    //    float aspect = fabsf(self.view.bounds.size.width/self.view.bounds.size.height);
+    ////    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60.0f), aspect, 1.0f, -1.0f);
+    //    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(0.125 * 2 * M_PI, 2.0/3.0, 2, -1);
+    //    self.effect.transform.projectionMatrix = projectionMatrix;
+    
+//        self.lastUpdateTime = [NSDate dateWithTimeIntervalSinceNow:0.0];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -551,7 +569,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"tulpaViewController.observeValueForKeyPath\nkeyPath:\t%@\nchange:\t%@", keyPath, change);
+//    NSLog(@"tulpaViewController.observeValueForKeyPath\nkeyPath:\t%@\nchange:\t%@", keyPath, change);
     
     // if the list of model instances has changed
     if (object == [Model Instances]) {
@@ -561,7 +579,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             
             Model* addedModel = [[[Model Instances] objects] objectAtIndex:[[change valueForKey:@"indexes"] firstIndex]];
             Class addedModelClass = [addedModel class];
-            
+
             // if a square model was added
             if (addedModelClass == [SquareModel class]) {
                 // create square view
@@ -579,17 +597,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             else if(addedModelClass == [WildBallModel class]) {
                 WildBall* b = [[WildBall alloc] initWithController:self withModel:addedModel];
                 [self.wildBalls addObject:b];
-
             }
             
         }
         
     }
 
-}
-
-- (void) synchronizeModel:(Model*)aModel {
-    NSLog(@"tulpaViewController.synchronizeModel\nmodel:\n%@", [aModel serialize]);
 }
 
 

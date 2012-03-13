@@ -13,7 +13,7 @@
 
 @implementation Shooter
 
-@synthesize lastShotTime, nextShotTime, instr, effect1, glow;
+@synthesize lastShotTime, instr, effect1, glow, rateSlider, rateBeforeSliding, nextShotTime, waitingToShoot, lastPerc, prevTimeUntilNextShot, animating;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -26,6 +26,8 @@
     
     [super initialize];
     
+    self.longPressable = true;
+    
     self.effect1 = [[GLKBaseEffect alloc] init];
     self.effect1.transform.projectionMatrix = GLKMatrix4MakeOrtho(
                                                                  0,
@@ -35,9 +37,12 @@
                                                                  -1,
                                                                  1);
     self.glow = 0.0;
-    
+        
     ShooterModel* model = ((ShooterModel*)self.model);
-    
+
+    // create rate slider which is initially hidden by default
+    rateSlider = [[ShooterRateSlider alloc] initWithController:self.controller withModel:model];
+
     // Create circle shape
     self.shape = new b2CircleShape();
     self.width = [model.width floatValue];
@@ -60,10 +65,18 @@
     instr->set_clip([path UTF8String]);
     instr->finish_initializing();
     
+    self.lastShotTime = nil;
     if ([model.rate floatValue] > 0.0f) {
-        self.lastShotTime = nil;
-        self.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:[model.rate floatValue]];        
+        self.waitingToShoot = true;
+        instr->play();
     }
+    else {
+        self.waitingToShoot = false;
+    }
+    self.animating = false;
+    
+    lastPerc = 0.0;
+    prevTimeUntilNextShot = -1.0;
 }
 
 - (void) dealloc {
@@ -84,6 +97,8 @@
 
 - (void) postDraw {
     [super postDraw];
+
+    // draw again with second texture.
     GLKVector4 greenColor = self.controller.greenColor;    
     self.effect1.texture2d0.enabled = GL_TRUE;
     self.effect1.texture2d0.envMode = GLKTextureEnvModeModulate;
@@ -101,13 +116,13 @@
     //    glEnableVertexAttribArray(GLKVertexAttribColor);
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     
-    glEnable(GL_BLEND);
-    glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
-
-    
     [super draw];
     [super postDraw];
 
+    // draw rate slider
+    [rateSlider prepareToDraw];
+    [rateSlider draw];
+    [rateSlider postDraw];
 }
 
 - (b2BodyType)bodyType {
@@ -148,34 +163,97 @@
                          nil]];
     
     
-    self.lastShotTime = [NSDate dateWithTimeIntervalSinceNow:0.0f];
-    self.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:[model.rate floatValue]];
+    self.lastShotTime = model.nextShotTime;
+    if (model.ignoreUpdates) {
+        // determine own next shot time
+        model.nextShotTime = [NSDate dateWithTimeInterval:(1.0/[model.rate floatValue]) sinceDate:self.lastShotTime];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    
+    ShooterModel* model = ((ShooterModel*)self.model);
+    
+    if ([keyPath isEqualToString:@"nextShotTime"]) {
+//        self.nextShotTime = [NSDate dateWithTimeInterval:-1.0*self.controller.socketHandler.timeOffset sinceDate:model.nextShotTime];
+        if (model.nextShotTime != self.nextShotTime) {
+            self.nextShotTime = model.nextShotTime;
+            self.prevTimeUntilNextShot = [model.rate floatValue];
+            self.waitingToShoot = true;          
+            self.animating = true;
+        }
+    }
+    // if the rate has changed
+    else if ([keyPath isEqualToString:@"rate"]) {
+        // play loop at same rate
+        instr->freq([model.rate floatValue]);
+        
+//        if (model.ignoreUpdates) {
+//            // determine own next shot time
+//            model.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:(1.0/[model.rate floatValue])];
+//        }
+    }
+
 }
 
 - (void)update {
     [super update];
     self.effect1.transform.modelviewMatrix = [self currentModelViewTransform];
+    ShooterModel* model = ((ShooterModel*)self.model);
     
     // if it is time to shoot another ball
 //    if (self.lastShotTime && self.nextShotTime) {
 //        NSLog(@"[self.nextShotTime timeIntervalSinceNow]: %f", [self.nextShotTime timeIntervalSinceNow]);
 //    }
-    
-    // If it is time to shoot another ball
-    if ([self.nextShotTime timeIntervalSinceNow] < 0) {
-        // start playing sound
-        instr->play();
+
+    float currentPerc = instr->percentComplete();
+    float shootPerc = (49572.0/50969.0);
+
+    NSTimeInterval timeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
+
+    if (self.animating) {
+        // actually shoot ball when sound transient occurs
+//        NSLog(@"instr->percentComplete(): %f", instr->percentComplete());
+        if (
+            // current playhead is past shoot marker, and previous playhead was in front
+            (currentPerc > shootPerc && lastPerc < shootPerc)
+            ||
+            // prev playhead was in front, and current playhead has wrapped around
+            (lastPerc < shootPerc && currentPerc < lastPerc)
+        ) {
+            self.animating = false;
+            self.glow = 1.0;
+            [self shootBall];
+            self.waitingToShoot = false;
+        }
+        else {
+            // increase glow
+            self.glow = (instr->percentComplete() / (49572.0/50969.0));
+        }
     }
 
-    // actually shoot ball when sound transient occurs
-    if (instr->percentComplete() > (49572.0/50969.0)) {        
-        [self shootBall];
-        self.glow = 1.0;
+//    if ([model.rate floatValue] != 0.0) {
+//        NSLog(@"nextShotTime: %f", [self.nextShotTime timeIntervalSince1970]);
+//        NSLog(@"timeUntilNextShot: %f", timeUntilNextShot);
+//        NSLog(@"now: %f", [[NSDate dateWithTimeIntervalSinceNow:0.0] timeIntervalSince1970]);
+//    }
+
+    // If it is time to shoot another ball
+    if (
+        timeUntilNextShot < 0 && prevTimeUntilNextShot > 0
+    ) {
+//        NSLog(@"shooting");
+        
+        // and we still haven't fired the ball for this round
+        if (self.waitingToShoot) {
+            [self shootBall];
+        }
+//        instr->freq([model.rate floatValue]);
+        instr->reset();
     }
-    else {
-        // increase glow
-        self.glow = (instr->percentComplete() / (49572.0/50969.0));
-    }
+    prevTimeUntilNextShot = timeUntilNextShot;
+    lastPerc = currentPerc;
     
 //    // if it is time to trigger shooting sound
 //    // (transient is at 01.12 seconds into file)
@@ -190,6 +268,38 @@
 //    if ([self.lastShotTime timeIntervalSinceNow] < -1.0*[model.rate floatValue]) {
 //    }
     
+    [rateSlider update];
+    
 }
+
+- (void) handleLongPressStarted {
+    NSLog(@"Shooter.handleLongPressStarted");
+    ShooterModel* model = ((ShooterModel*)self.model);
+    
+    model.ignoreUpdates = true;
+    
+    rateSlider.active = true;
+    rateBeforeSliding = model.rate;
+}
+- (void) handleLongPressUpdated {
+    
+    ShooterModel* model = ((ShooterModel*)self.model);
+    float newRate = [rateBeforeSliding floatValue] + (0.2*self.longPresser->translation.y);
+    NSLog(@"newRate: %f", newRate);
+    model.rate = [NSNumber numberWithFloat:newRate];
+    NSLog(@"model.rate: %f", [model.rate floatValue]);
+}
+- (void) handleLongPressEnded {
+    NSLog(@"Shooter.handleLongPressEnded");
+    ShooterModel* model = ((ShooterModel*)self.model);
+
+    // TODO: synchronization race condition here.  ignoreUpdates should be
+    // turned off in callback
+    [model synchronize];
+    
+    model.ignoreUpdates = false;
+    rateSlider.active = false;
+}
+
 
 @end

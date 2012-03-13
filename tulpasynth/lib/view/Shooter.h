@@ -20,6 +20,8 @@
 
 #include "RAMpler.hpp"
 
+#import "ShooterRateSlider.h"
+
 /**
  *  @class A shooting obstacle.
  **/
@@ -43,12 +45,35 @@
  *  Time we fired the last ball.
  **/
 @property (strong, nonatomic) NSDate* lastShotTime;
+
 /**
- *  Time the next shot will occur
+ *  Time when the next ball will be fired
  **/
 @property (strong, nonatomic) NSDate* nextShotTime;
 
+/**
+ *  Wether or not we've shot a ball this round.
+ **/
+@property (nonatomic) BOOL waitingToShoot;
+@property float lastPerc;
+@property NSTimeInterval prevTimeUntilNextShot;
+
+/**
+ *  If we're currently animating a "shot"
+ **/
+@property (nonatomic) BOOL animating;
+
 - (void) shootBall;
+
+/**
+ *  Radial menu that pops up to change rate
+ **/
+@property (strong, nonatomic) ShooterRateSlider* rateSlider;
+
+/**
+ *  What the shooting rate was before user started changing it.
+ **/
+@property (strong, nonatomic) NSNumber* rateBeforeSliding;
 
 
 @end

@@ -20,8 +20,4 @@
 @property (strong, nonatomic) NSNumber* width;
 @property (strong, nonatomic) NSMutableDictionary* position;
 
-- (NSMutableArray*) serializableAttributes;
-
-- (void) initialize;
-
 @end

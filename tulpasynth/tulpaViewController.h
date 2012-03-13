@@ -42,11 +42,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 }
 
 /**
- *  When a model is to be synchronized
- **/
-- (void) synchronizeModel:(Model*)aModel;
-
-/**
  *  Textures used for circles and boxes.
  **/
 @property (strong) GLKTextureInfo* glowingCircleTexture;
@@ -54,6 +49,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong) GLKTextureInfo* shooterTexture;
 @property (strong) GLKTextureInfo* shooterGlowingTexture;
 @property (strong) GLKTextureInfo* toolboxTexture;
+@property (strong) GLKTextureInfo* shooterRadialMenuBackground;
+@property (strong) GLKTextureInfo* shooterRadialMenuPointer;
 
 /**
  *  Colors 
@@ -143,6 +140,20 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  When we started rendering
  **/
 @property (strong, nonatomic) NSDate* startTime;
+
+/**
+ *  When it is safe to update to
+ **/
+@property (strong, nonatomic) NSDate* safeUpdateTime;
+
+/**
+ *  When was the last time we updated.
+ **/
+@property (strong, nonatomic) NSDate* lastUpdateTime;
+
+
+@property BOOL waiting;
+
 
 /**
  *  Callback primarily used to handle all model changes and synchronize

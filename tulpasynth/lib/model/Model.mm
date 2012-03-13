@@ -15,7 +15,7 @@
 
 @implementation Model
 
-@synthesize id, controller, initialized;
+@synthesize id, controller, initialized, nosync, ignoreUpdates;
 
 - (void) setInitialized:(BOOL)anInitialized {
     if (anInitialized) {
@@ -39,19 +39,13 @@
         if (![mapperOperation performMapping:&error]) {
             NSLog(@"An error occurred while applying attributes:\n%@", [error localizedDescription]);
         }
+
+        // by default we will synchronize model
+        self.nosync = false;
         
-        
-        if (self.id) {
-            self.initialized = true;
-        }
-        else {
-            self.initialized = false;
-            // request ID from the server
-            [self.controller.socketHandler send:[NSMutableDictionary dictionaryWithKeysAndObjects:
-                                                 @"method", @"request_id", nil]];
-            [self.controller.waitingForIds addObject:self];            
-        }
-        
+        // by default we will accept all incoming updates
+        self.ignoreUpdates = false;
+                
         // Set any default attributes
         [self initialize];
         
@@ -77,6 +71,17 @@
         }
     }
     
+    if (self.id || self.nosync) {
+        if(self.nosync) self.id = 0;
+        self.initialized = true;
+    }
+    else {
+        self.initialized = false;
+        // request ID from the server
+        [self.controller.socketHandler send:[NSMutableDictionary dictionaryWithKeysAndObjects:
+                                             @"method", @"request_id", nil]];
+        [self.controller.waitingForIds addObject:self];            
+    }
 }
 
 - (NSMutableArray*) serializableAttributes {
@@ -85,11 +90,20 @@
     return attributes;
 }
 
++ (NSDate*)dateFromString:(NSString*)aString {
+    return [NSDate dateWithTimeIntervalSince1970:[aString floatValue]];
+}
++ (NSString*)stringFromDate:(NSDate*)aDate {
+    return [NSString stringWithFormat:@"%f", [aDate timeIntervalSince1970]];
+}
+
 - (RKObjectMapping*) modelMapping {
     RKObjectMapping* modelMapping = nil;
     if (!modelMapping) {
         modelMapping = [RKObjectMapping mappingForClass:[self class]];
         [modelMapping mapAttributesFromArray:[self serializableAttributes]];
+        modelMapping.dateFormatters = [NSArray arrayWithObject:[Model class]];
+        modelMapping.preferredDateFormatter = [Model class];
     }
     
     return modelMapping;
@@ -112,6 +126,10 @@
 }
 
 - (void)deserialize:(NSMutableDictionary *)attributes {
+    if (ignoreUpdates) {
+        return;
+    }
+    
     NSError* error;
     RKObjectMappingOperation* mapperOperation = [RKObjectMappingOperation mappingOperationFromObject:attributes toObject:self withMapping:[self modelMapping]];
 
@@ -120,9 +138,9 @@
         NSLog(@"An error occurred while de-serializing:\n%@", [error localizedDescription]);
         exit(-1);
     }
-    else {
-        NSLog(@"Model updated");
-    }
+//    else {
+//        NSLog(@"Model updated");
+//    }
 }
 
 + (ModelCollection*) Instances {

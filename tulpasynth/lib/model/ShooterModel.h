@@ -8,13 +8,23 @@
 
 #import "ObstacleModel.h"
 
-@interface ShooterModel : ObstacleModel
+#include "Stk.h"
 
-- (void) initialize;
+@interface ShooterModel : ObstacleModel
 
 /**
  *  Rate at which this shooter will fire balls (in Hz).
  **/
 @property (strong, nonatomic) NSNumber* rate;
+
+/**
+ *  Time the next shot will occur
+ **/
+@property (strong, nonatomic) NSDate* nextShotTime;
+
+/**
+ *  List of all shot times in order
+ **/
+//@property (strong, nonatomic) NSMutableArray* shotTimes;
 
 @end

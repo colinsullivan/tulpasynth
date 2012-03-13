@@ -21,7 +21,7 @@
  **/
 typedef enum {
     GestureEntityStateStart,
-    GestureEntityStateMove,
+    GestureEntityStateUpdate,
     GestureEntityStateEnd
 } GestureEntityState;
 

@@ -12,7 +12,4 @@
 
 @property (strong, nonatomic) NSDictionary* initialLinearVelocity;
 
-- (void) initialize;
-- (NSMutableArray*) serializableAttributes;
-
 @end

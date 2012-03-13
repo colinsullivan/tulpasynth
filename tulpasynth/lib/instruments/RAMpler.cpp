@@ -49,7 +49,7 @@ stk::StkFrames& instruments::RAMpler::next_buf(stk::StkFrames& frames) {
         // Grab samples from clip
         this->tick(frames);
 
-        this->_reset_if_needed();
+//        this->_reset_if_needed();
     }
 
     return frames;
@@ -76,4 +76,16 @@ unsigned long instruments::RAMpler::duration() {
 }
 float instruments::RAMpler::percentComplete() {
     return (time_ / this->getSize());    
+}
+
+void instruments::RAMpler::freq(stk::StkFloat aFreq) {
+    instruments::Instrument::freq(aFreq);
+    
+    this->setRate(file_.fileSize() * aFreq / Stk::sampleRate());
+}
+
+void instruments::RAMpler::play() {
+    Instrument::play();
+    
+//    this->reset();
 }

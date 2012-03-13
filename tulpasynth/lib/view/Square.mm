@@ -37,7 +37,7 @@
     }
     
     if (self.shape) {
-        delete self.shape;
+        delete (b2PolygonShape*)self.shape;
     }
     
     self.shape = new b2PolygonShape();
@@ -70,7 +70,7 @@
 }
 
 - (void) dealloc {
-    delete self.instr;
+    delete (instruments::FMPercussion*)self.instr;
     
 //    [super dealloc];
 }

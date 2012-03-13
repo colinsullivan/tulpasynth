@@ -77,9 +77,6 @@ static GLubyte SquareIndices[] = {
     glEnableVertexAttribArray(GLKVertexAttribPosition);
 //    glEnableVertexAttribArray(GLKVertexAttribColor);
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-
-    glEnable(GL_BLEND);
-    glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
 }
 
 - (void)draw {
@@ -96,7 +93,7 @@ static GLubyte SquareIndices[] = {
 - (void)postDraw {
     glDisableVertexAttribArray(GLKVertexAttribPosition);
 //    glDisableVertexAttribArray(GLKVertexAttribColor);
-    glDisable(GL_BLEND);
+//    glDisable(GL_BLEND);
     glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
 }
 
