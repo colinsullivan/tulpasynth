@@ -15,8 +15,10 @@
 @synthesize active, arrow;
 
 - (void) setPosition:(b2Vec2 *)aPosition {
-    // Move menu to the left of the shooter
-    aPosition->x -= 0.5;
+    // Move menu behind the shooter
+//    aPosition->x -= 0.5;
+    aPosition->x -= 0.5 * cosf(self.angle);
+    aPosition->y -= 0.5 * sinf(self.angle);
     [super setPosition:aPosition];
 }
 

@@ -21,9 +21,9 @@
     // fudge factor because the "slider" graphic fades out before 180°
     static float radianFudge = 0.5;
     
-    static float minRadians = -stk::PI/2.0 + radianFudge;
-    static float maxRadians = stk::PI/2.0 - radianFudge;
-    static float rangeRadians = maxRadians - minRadians;
+    float minRadians = self.slider.angle + -stk::PI/2.0 + radianFudge;
+    float maxRadians = self.slider.angle + stk::PI/2.0 - radianFudge;
+    float rangeRadians = maxRadians - minRadians;
     
     static float rangeSliderValues = [[ShooterModel maxRate] floatValue] - [[ShooterModel minRate] floatValue];
     
@@ -40,7 +40,7 @@
     
     // orientation
 //    self.angle = stk::PI/2.0 + stk::PI/4.0 + [model.rate floatValue]*(stk::PI/rangeSliderValues);
-    self.angle = stk::PI + positionRadians - radianFudge;
+    super.angle = self.slider.angle + stk::PI + positionRadians - radianFudge;
     
     [super setPosition:aPosition];
 }
@@ -49,6 +49,9 @@
     return;
 }
 - (void) setHeight:(float)aHeight {
+    return;
+}
+- (void) setAngle:(float32)anAngle {
     return;
 }
 
@@ -83,9 +86,9 @@
     
     self.effect.texture2d0.name = self.controller.shooterRadialMenuPointer.name;
     
-    if (self.slider.position) {
-        self.position = self.slider.position;
-    }
+//    if (self.slider.position) {
+//        self.position = self.model.;
+//    }
 }
 
 - (void) draw {
@@ -103,10 +106,29 @@
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     
+    ShooterModel* model = ((ShooterModel*)self.model);
+    
     if ([keyPath isEqualToString:@"rate"]) {
-        if (self.slider.position) {
-            self.position = self.slider.position;
-        }
+//        if (self.slider.position) {
+//            self.position = self.slider.position;
+//        }
+        self.position = new b2Vec2([[model.position valueForKey:@"x"] floatValue], [[model.position valueForKey:@"y"] floatValue]);
     }
 }
+
+//- (GLKMatrix4)currentModelViewTransform {
+//    GLKMatrix4 modelViewMatrix = GLKMatrix4Identity;
+//    
+//    // frst translate and rotate to slider position
+////    modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, M_TO_PX(self.slider.position->y), M_TO_PX(self.slider.position->x), 0.0);
+//    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, self.slider.angle, 0.0, 0.0, 1.0);
+//    
+//    // then to ours
+//    modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, M_TO_PX(self.position->y), M_TO_PX(self.position->x), 0.0);
+//    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, self.angle, 0.0, 0.0, 1.0);
+//    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, M_TO_PX(self.height/2), M_TO_PX(self.width/2), 1.0f);
+//    
+//    return modelViewMatrix;
+//}
+
 @end
