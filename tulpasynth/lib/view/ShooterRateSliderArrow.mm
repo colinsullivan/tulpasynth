@@ -40,7 +40,7 @@
     
     // orientation
 //    self.angle = stk::PI/2.0 + stk::PI/4.0 + [model.rate floatValue]*(stk::PI/rangeSliderValues);
-    super.angle = self.slider.angle + stk::PI + positionRadians - radianFudge;
+    super.angle = self.slider.angle + stk::PI + positionRadians - radianFudge/2.0;
     
     [super setPosition:aPosition];
 }

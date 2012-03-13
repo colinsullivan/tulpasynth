@@ -14,7 +14,7 @@
 #import "Instrument.hpp"
 
 #import "FallingBallModel.h"
-#import "SquareModel.h"
+#import "BlockModel.h"
 
 #include "TouchEntity.h"
 #include "PinchEntity.h"
@@ -26,7 +26,7 @@
 #import "b2EdgeShape.h"
 
 #import "FallingBall.h"
-#import "Square.h"
+#import "BlockObstacle.h"
 
 
 //#include "FMPercussion.hpp"
@@ -213,13 +213,13 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self->_world->SetContactFilter(collisionFilter);
     
     // Create two starting squares for now
-//    Square * s;
+//    BlockObstacle * s;
 //    b2Vec2 pos(25.0, 50.0);
-//    s = [[Square alloc] initWithController:self withPosition:pos];
+//    s = [[BlockObstacle alloc] initWithController:self withPosition:pos];
 //    [self.obstacles addObject:s];
 //    
 //    pos.Set(90.0, 40.0);
-//    s = [[Square alloc] initWithController:self withPosition:pos];
+//    s = [[BlockObstacle alloc] initWithController:self withPosition:pos];
 //    [self.obstacles addObject:s];
     
     // Left and right screen edges
@@ -302,12 +302,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
     collisionStrength /= 2000;
 
-    if ([entityOne isKindOfClass:[Square class]] || [entityTwo isKindOfClass:[Square class]]) {
-        Square* collidedSquare;
-        if([entityOne isKindOfClass:[Square class]]) {
+    if ([entityOne isKindOfClass:[BlockObstacle class]] || [entityTwo isKindOfClass:[BlockObstacle class]]) {
+        BlockObstacle* collidedSquare;
+        if([entityOne isKindOfClass:[BlockObstacle class]]) {
             collidedSquare = entityOne;
         }
-        else if([entityTwo isKindOfClass:[Square class]]) {
+        else if([entityTwo isKindOfClass:[BlockObstacle class]]) {
             collidedSquare = entityTwo;
         }
         [collidedSquare handleCollision:collisionStrength];
@@ -580,10 +580,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             Model* addedModel = [[[Model Instances] objects] objectAtIndex:[[change valueForKey:@"indexes"] firstIndex]];
             Class addedModelClass = [addedModel class];
 
-            // if a square model was added
-            if (addedModelClass == [SquareModel class]) {
-                // create square view
-                Square* s = [[Square alloc] 
+            // if a BlockObstacle model was added
+            if (addedModelClass == [BlockModel class]) {
+                // create BlockObstacle view
+                BlockObstacle* s = [[BlockObstacle alloc] 
                              initWithController:self
                              withModel:addedModel];
                 [self.obstacles addObject:s];

@@ -61,9 +61,9 @@
     self.shapeFixture->SetFilterData(filterData);
     
     // Create object prototypes
-    self.squarePrototype = [[Square alloc] initWithController:self.controller withModel:NULL];
-    self.squarePrototype.width = [[[SquareModel defaultAttributes] valueForKey:@"width"] floatValue];
-    self.squarePrototype.height = [[[SquareModel defaultAttributes] valueForKey:@"height"] floatValue];
+    self.squarePrototype = [[BlockObstacle alloc] initWithController:self.controller withModel:NULL];
+    self.squarePrototype.width = [[[BlockModel defaultAttributes] valueForKey:@"width"] floatValue];
+    self.squarePrototype.height = [[[BlockModel defaultAttributes] valueForKey:@"height"] floatValue];
     self.squarePrototype.shapeFixture->SetFilterData(filterData);
     [self.prototypes addObject:self.squarePrototype];
     
@@ -115,11 +115,11 @@
 }
 
 - (void) handleTapOccurred:(TapEntity*)tap {
-    // if tap was in square prototype
+    // if tap was in block obstacle prototype
     if ([self.squarePrototype handleTap:tap]) {
         
-        // Create new square obstacle at point
-        SquareModel* sm = [[SquareModel alloc] initWithController:self.controller withAttributes:
+        // Create new block obstacle obstacle at point
+        BlockModel* sm = [[BlockModel alloc] initWithController:self.controller withAttributes:
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             [NSDictionary dictionaryWithObjectsAndKeys:
                              [NSNumber numberWithFloat:self.position->x], @"x",

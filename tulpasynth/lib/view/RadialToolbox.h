@@ -10,8 +10,8 @@
 #include "b2Fixture.h"
 
 #import "PhysicsEntity.h"
-#import "Square.h"
-#import "SquareModel.h"
+#import "BlockObstacle.h"
+#import "BlockModel.h"
 #import "Shooter.h"
 
 @interface RadialToolbox : PhysicsEntity
@@ -20,7 +20,7 @@
 
 @property (strong, nonatomic) NSMutableArray* prototypes;
 
-@property (strong, nonatomic) Square* squarePrototype;
+@property (strong, nonatomic) BlockObstacle* squarePrototype;
 @property (strong, nonatomic) Shooter* shooterPrototype;
 
 - (void) initialize;
