@@ -15,32 +15,14 @@
 
 @synthesize instr;
 
-- (void)setHeight:(float)height {
-    [super setHeight:height];
-    
-    [self resize];
-}
-
-- (void)setWidth:(float)width {
-    [super setWidth:width];
-    
-    [self resize];
-}
 
 
 /**
  *  When width or height is set, change shape.
  **/
-- (void)resize {
-    if (self.shapeFixture) {
-        self.body->DestroyFixture(self.shapeFixture);        
-    }
+- (void)createShape {
+    [super createShape];
     
-    if (self.shape) {
-        delete (b2PolygonShape*)self.shape;
-    }
-    
-    self.shape = new b2PolygonShape();
     self.shape->m_radius = 0.5f;
     ((b2PolygonShape*)self.shape)->SetAsBox(
                                             self.width/2.0 - 0.5,
@@ -66,21 +48,16 @@
     
     self.instr = new instruments::FMPercussion();
     self.instr->finish_initializing();
-    
+
+    self.effect.useConstantColor = YES;
+    self.effect.constantColor = self.controller.greenColor;
+    self.effect.texture2d0.name = self.controller.glowingBoxTexture.name;
 }
 
 - (void) dealloc {
     delete (instruments::FMPercussion*)self.instr;
     
 //    [super dealloc];
-}
-
--(void)prepareToDraw {
-    self.effect.useConstantColor = YES;
-    self.effect.constantColor = self.controller.greenColor;
-    self.effect.texture2d0.name = self.controller.glowingBoxTexture.name;
-    
-    [super prepareToDraw];
 }
 
 - (void) handleCollision:(float)collisionStrength {

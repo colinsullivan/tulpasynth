@@ -9,10 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-#include "b2PolygonShape.h"
-#include "b2Fixture.h"
-
-#import "Obstacle.h"
+#import "PolygonObstacle.h"
 
 #import "FMPercussion.hpp"
 
@@ -21,15 +18,11 @@
 /**
  *  @class A rectangular obstacle.
  **/
-@interface BlockObstacle : Obstacle
+@interface BlockObstacle : PolygonObstacle
 
 //@property b2PolygonShape* square;
 
 @property instruments::FMPercussion* instr;
-
-- (void) initialize;
-
-- (void)resize;
 
 - (void) handleCollision:(float)collisionStrength;
 

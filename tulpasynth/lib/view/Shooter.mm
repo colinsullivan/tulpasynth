@@ -51,7 +51,7 @@
     myShapeFixture.shape = self.shape;
     myShapeFixture.friction = 0.1f;
     myShapeFixture.density = 0.75f;
-    myShapeFixture.restitution = 2.0f;
+    myShapeFixture.restitution = 1.0f;
     
     self.shapeFixture = self.body->CreateFixture(&myShapeFixture);
     

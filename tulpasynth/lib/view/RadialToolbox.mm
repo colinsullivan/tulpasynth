@@ -13,7 +13,7 @@
 @implementation RadialToolbox
 
 @synthesize active, prototypes;
-@synthesize squarePrototype, shooterPrototype;
+@synthesize squarePrototype, shooterPrototype, triPrototype;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -25,13 +25,16 @@
     [super setPosition:aPosition];
     
     self.squarePrototype.position = new b2Vec2(
-                                               self.position->x + 6.5,
-                                               self.position->y + 6.5
+                                               self.position->x + 7,
+                                               self.position->y + 7
                                                );
     self.shooterPrototype.position = new b2Vec2(
-                                            self.position->x - 6.5,
-                                            self.position->y + 6.5
+                                            self.position->x - 7,
+                                            self.position->y + 7
                                             );
+    
+    self.triPrototype.position = new b2Vec2(self.position->x + 10,
+                                            self.position->y + 2);
 }
 
 - (void) initialize {
@@ -53,8 +56,8 @@
     
     self.shapeFixture = self.body->CreateFixture(&myShapeFixture);
     
-    self.width = 30;
-    self.height = 30;
+    self.width = 32;
+    self.height = 32;
     
     b2Filter filterData;
     filterData.groupIndex = 1;
@@ -73,19 +76,19 @@
     self.shooterPrototype.shapeFixture->SetFilterData(filterData);
     [self.prototypes addObject:self.shooterPrototype];
     
+    self.triPrototype = [[TriObstacle alloc] initWithController:self.controller withModel:NULL];
+    [self.triPrototype setWidth:[[[TriObstacleModel defaultAttributes] valueForKey:@"width"] floatValue] withHeight:[[[TriObstacleModel defaultAttributes] valueForKey:@"height"] floatValue]];
+    self.triPrototype.angle = [[[TriObstacleModel defaultAttributes] valueForKey:@"angle"] floatValue];
+    self.triPrototype.shapeFixture->SetFilterData(filterData);
+    [self.prototypes addObject:self.triPrototype];
+    
+    
+    self.effect.texture2d0.name = self.controller.toolboxTexture.name;
 }
 
 - (void) dealloc {
 //    [self dealloc];
     delete (b2CircleShape*)self.shape;
-}
-
--(void)prepareToDraw {
-//    self.effect.useConstantColor = YES;
-//    self.effect.constantColor = GLKVector4Make(0.15, 0.88, 0.49, 1.0);
-    self.effect.texture2d0.name = self.controller.toolboxTexture.name;
-    
-    [super prepareToDraw];
 }
 
 - (void) draw {
@@ -135,6 +138,14 @@
                               [NSNumber numberWithFloat:self.position->x], @"x",
                               [NSNumber numberWithFloat:self.position->y], @"y", nil], @"initialPosition",
                              nil]];
+    }
+    else if ([self.triPrototype handleTap:tap]) {
+        // create new tri obstacle
+        [[TriObstacleModel alloc] initWithController:self.controller withAttributes:[NSDictionary dictionaryWithKeysAndObjects:
+                                                                           @"initialPosition", [NSDictionary dictionaryWithKeysAndObjects:
+                                                                                                @"x", [NSNumber numberWithFloat:self.position->x],
+                                                                                                @"y", [NSNumber numberWithFloat:self.position->y], nil],
+                                                                           nil]];
     }
     
     self.active = false;

@@ -24,12 +24,15 @@
     return attributes;
 }
 
++ (NSMutableDictionary*) defaultAttributes {
+    NSMutableDictionary* defaults = [super defaultAttributes];
+    
+    [defaults setValue:[NSNumber numberWithFloat:0.0] forKey:@"angle"];
+    
+    return defaults;
+}
+
 - (void) initialize {
-    
-    if (!self.angle) {
-        self.angle = [NSNumber numberWithFloat:0.0];
-    }
-    
     
     if(!self.position) {
         self.position = [NSMutableDictionary dictionaryWithDictionary:self.initialPosition];

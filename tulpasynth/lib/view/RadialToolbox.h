@@ -13,6 +13,8 @@
 #import "BlockObstacle.h"
 #import "BlockModel.h"
 #import "Shooter.h"
+#import "TriObstacle.h"
+#import "TriObstacleModel.h"
 
 @interface RadialToolbox : PhysicsEntity
 
@@ -22,6 +24,7 @@
 
 @property (strong, nonatomic) BlockObstacle* squarePrototype;
 @property (strong, nonatomic) Shooter* shooterPrototype;
+@property (strong, nonatomic) TriObstacle* triPrototype;
 
 - (void) initialize;
 

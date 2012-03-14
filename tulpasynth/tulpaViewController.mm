@@ -48,7 +48,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize startTime, safeUpdateTime, lastUpdateTime, waiting;
 
-@synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolboxTexture, shooterGlowingTexture, shooterRadialMenuPointer, shooterRadialMenuBackground;
+@synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture, toolboxTexture, shooterGlowingTexture, shooterRadialMenuPointer, shooterRadialMenuBackground, triObstacleTexture;
 
 @synthesize fallingBalls, obstacles, wildBalls;
 
@@ -188,6 +188,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.toolboxTexture = [self loadTexture:@"Radial-Menu"];
     self.shooterRadialMenuBackground = [self loadTexture:@"Shooter-Radial-Menu-Background"];
     self.shooterRadialMenuPointer = [self loadTexture:@"Shooter-Radial-Menu-Pointer"];
+    self.triObstacleTexture = [self loadTexture:@"triobstacle"];
     
     self.greenColor = GLKVector4Make(43.0/255.0, 208.0/255.0, 5.0/255.0, 1.0);
     
@@ -594,9 +595,14 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
                 [self.obstacles addObject:s];
                 
             }
+            // a wild ball was created
             else if(addedModelClass == [WildBallModel class]) {
                 WildBall* b = [[WildBall alloc] initWithController:self withModel:addedModel];
                 [self.wildBalls addObject:b];
+            }
+            else if (addedModelClass == [TriObstacleModel class]) {
+                TriObstacle* t = [[TriObstacle alloc] initWithController:self withModel:addedModel];
+                [self.obstacles addObject:t];
             }
             
         }

@@ -42,8 +42,10 @@
 		3B04414814FDB61700DE16A3 /* WildBall.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04414714FDB61500DE16A3 /* WildBall.mm */; };
 		3B04414B14FDB66E00DE16A3 /* WildBallModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B04414A14FDB66E00DE16A3 /* WildBallModel.mm */; };
 		3B2A4AED150F156300F2DF5E /* ShooterRateSliderArrow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A4AEC150F156300F2DF5E /* ShooterRateSliderArrow.mm */; };
-		3B2A4B1E150FE9BD00F2DF5E /* TriObstacleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A4B1D150FE9BD00F2DF5E /* TriObstacleModel.m */; };
-		3B2A4B21150FE9D500F2DF5E /* TriObstacle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A4B20150FE9D500F2DF5E /* TriObstacle.m */; };
+		3B2A4B1E150FE9BD00F2DF5E /* TriObstacleModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A4B1D150FE9BD00F2DF5E /* TriObstacleModel.mm */; };
+		3B2A4B21150FE9D500F2DF5E /* TriObstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A4B20150FE9D500F2DF5E /* TriObstacle.mm */; };
+		3B2A4B241510058500F2DF5E /* PolygonObstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A4B231510058400F2DF5E /* PolygonObstacle.mm */; };
+		3B2A4B2615100B7500F2DF5E /* triobstacle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A4B2515100B7500F2DF5E /* triobstacle.png */; };
 		3B624C04150036B80066A1CB /* RAMpler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C02150036B80066A1CB /* RAMpler.cpp */; };
 		3B624C0B150038010066A1CB /* NoisePercussionReversed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */; };
 		3B62509F1500AB430066A1CB /* SocketHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B62509E1500AB430066A1CB /* SocketHandler.mm */; };
@@ -425,9 +427,12 @@
 		3B2A4AEB150F156300F2DF5E /* ShooterRateSliderArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterRateSliderArrow.h; sourceTree = "<group>"; };
 		3B2A4AEC150F156300F2DF5E /* ShooterRateSliderArrow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShooterRateSliderArrow.mm; sourceTree = "<group>"; };
 		3B2A4B1C150FE9BD00F2DF5E /* TriObstacleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriObstacleModel.h; sourceTree = "<group>"; };
-		3B2A4B1D150FE9BD00F2DF5E /* TriObstacleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriObstacleModel.m; sourceTree = "<group>"; };
+		3B2A4B1D150FE9BD00F2DF5E /* TriObstacleModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TriObstacleModel.mm; sourceTree = "<group>"; };
 		3B2A4B1F150FE9D500F2DF5E /* TriObstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriObstacle.h; sourceTree = "<group>"; };
-		3B2A4B20150FE9D500F2DF5E /* TriObstacle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriObstacle.m; sourceTree = "<group>"; };
+		3B2A4B20150FE9D500F2DF5E /* TriObstacle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TriObstacle.mm; sourceTree = "<group>"; };
+		3B2A4B221510058400F2DF5E /* PolygonObstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonObstacle.h; sourceTree = "<group>"; };
+		3B2A4B231510058400F2DF5E /* PolygonObstacle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PolygonObstacle.mm; sourceTree = "<group>"; };
+		3B2A4B2515100B7500F2DF5E /* triobstacle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triobstacle.png; sourceTree = "<group>"; };
 		3B624C02150036B80066A1CB /* RAMpler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAMpler.cpp; sourceTree = "<group>"; };
 		3B624C03150036B80066A1CB /* RAMpler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAMpler.hpp; sourceTree = "<group>"; };
 		3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = NoisePercussionReversed.wav; sourceTree = "<group>"; };
@@ -915,6 +920,7 @@
 		3B043FF214F9AAC900DE16A3 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				3B2A4B2515100B7500F2DF5E /* triobstacle.png */,
 				3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */,
 				3BCEB90F150D2CCC007CFA08 /* Shooter-Radial-Menu-Pointer.png */,
 				3B78923E15033890007F2268 /* ShooterGlowing.png */,
@@ -1004,7 +1010,7 @@
 				3B04414914FDB66E00DE16A3 /* WildBallModel.h */,
 				3B04414A14FDB66E00DE16A3 /* WildBallModel.mm */,
 				3B2A4B1C150FE9BD00F2DF5E /* TriObstacleModel.h */,
-				3B2A4B1D150FE9BD00F2DF5E /* TriObstacleModel.m */,
+				3B2A4B1D150FE9BD00F2DF5E /* TriObstacleModel.mm */,
 			);
 			name = model;
 			path = lib/model;
@@ -1058,7 +1064,9 @@
 				3B2A4AEB150F156300F2DF5E /* ShooterRateSliderArrow.h */,
 				3B2A4AEC150F156300F2DF5E /* ShooterRateSliderArrow.mm */,
 				3B2A4B1F150FE9D500F2DF5E /* TriObstacle.h */,
-				3B2A4B20150FE9D500F2DF5E /* TriObstacle.m */,
+				3B2A4B20150FE9D500F2DF5E /* TriObstacle.mm */,
+				3B2A4B221510058400F2DF5E /* PolygonObstacle.h */,
+				3B2A4B231510058400F2DF5E /* PolygonObstacle.mm */,
 			);
 			name = view;
 			path = lib/view;
@@ -1965,6 +1973,7 @@
 				3B78925815049377007F2268 /* Settings.bundle in Resources */,
 				3BCEB910150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png in Resources */,
 				3BCEB911150D2CCC007CFA08 /* Shooter-Radial-Menu-Pointer.png in Resources */,
+				3B2A4B2615100B7500F2DF5E /* triobstacle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2165,8 +2174,9 @@
 				3B6256BB15016EBD0066A1CB /* SRWebSocket.m in Sources */,
 				3BCEB90D150D2C26007CFA08 /* ShooterRateSlider.mm in Sources */,
 				3B2A4AED150F156300F2DF5E /* ShooterRateSliderArrow.mm in Sources */,
-				3B2A4B1E150FE9BD00F2DF5E /* TriObstacleModel.m in Sources */,
-				3B2A4B21150FE9D500F2DF5E /* TriObstacle.m in Sources */,
+				3B2A4B1E150FE9BD00F2DF5E /* TriObstacleModel.mm in Sources */,
+				3B2A4B21150FE9D500F2DF5E /* TriObstacle.mm in Sources */,
+				3B2A4B241510058500F2DF5E /* PolygonObstacle.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

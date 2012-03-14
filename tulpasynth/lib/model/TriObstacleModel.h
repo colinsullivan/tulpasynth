@@ -8,6 +8,8 @@
 
 #import "ObstacleModel.h"
 
+#include "Stk.h"
+
 @interface TriObstacleModel : ObstacleModel
 
 @end
