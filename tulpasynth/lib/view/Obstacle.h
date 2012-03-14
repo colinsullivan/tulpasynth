@@ -52,4 +52,6 @@
  **/
 @property float32 preGestureAngle;
 
+- (void) handleCollision:(float)collisionStrength;
+
 @end

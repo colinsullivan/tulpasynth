@@ -8,11 +8,29 @@
 
 #import "PolygonObstacle.h"
 
+#include <vector>
+#include "FMPercussion.hpp"
+#include "SecondOrderMarkovChain.hpp"
+
 /**
  *  @class  A triangular obstacle.
  **/
-@interface TriObstacle : PolygonObstacle
+@interface TriObstacle : PolygonObstacle {
+    /**
+     *  Instruments we will use to sonify collisions.
+     **/
+    std::vector<instruments::FMPercussion*> instrs;
+    /**
+     *  Index of next instrument to play, polyphony for multiple
+     *  collisions.
+     **/
+    int nextInstr;
+}
 
-
+/**
+ *  The markov chain that will be used to generate pitches for all instances
+ *  of TriObstacles.
+ **/
++ (SecondOrderMarkovChain*) pitchGenerator;
 
 @end

@@ -59,6 +59,8 @@
 		3B7EB07514F8444E00452194 /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07114F8444E00452194 /* Model.mm */; };
 		3B7EB07614F8444E00452194 /* PhysicsEntityModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */; };
 		3B7EB48E14F8462D00452194 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7EB46C14F845C700452194 /* libRestKit.a */; };
+		3BAAEE0F15102DBC00353521 /* MarkovChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAEE0D15102DB700353521 /* MarkovChain.cpp */; };
+		3BAAEE1215104D5E00353521 /* SecondOrderMarkovChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAEE1015104D5E00353521 /* SecondOrderMarkovChain.cpp */; };
 		3BBE9FA014F8513F0013CB1A /* View.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE9F9F14F8513F0013CB1A /* View.mm */; };
 		3BCEB90D150D2C26007CFA08 /* ShooterRateSlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */; };
 		3BCEB910150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */; };
@@ -456,6 +458,10 @@
 		3B7EB07214F8444E00452194 /* PhysicsEntityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsEntityModel.h; sourceTree = "<group>"; };
 		3B7EB07314F8444E00452194 /* PhysicsEntityModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsEntityModel.mm; sourceTree = "<group>"; };
 		3B7EB21114F845C600452194 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RestKit.xcodeproj; sourceTree = "<group>"; };
+		3BAAEE0D15102DB700353521 /* MarkovChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MarkovChain.cpp; path = lib/MarkovChain.cpp; sourceTree = "<group>"; };
+		3BAAEE0E15102DB900353521 /* MarkovChain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MarkovChain.hpp; path = lib/MarkovChain.hpp; sourceTree = "<group>"; };
+		3BAAEE1015104D5E00353521 /* SecondOrderMarkovChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecondOrderMarkovChain.cpp; path = lib/SecondOrderMarkovChain.cpp; sourceTree = "<group>"; };
+		3BAAEE1115104D5E00353521 /* SecondOrderMarkovChain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SecondOrderMarkovChain.hpp; path = lib/SecondOrderMarkovChain.hpp; sourceTree = "<group>"; };
 		3BBE9F9E14F8513F0013CB1A /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
 		3BBE9F9F14F8513F0013CB1A /* View.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = View.mm; sourceTree = "<group>"; };
 		3BCEB90B150D2C26007CFA08 /* ShooterRateSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterRateSlider.h; sourceTree = "<group>"; };
@@ -1147,6 +1153,10 @@
 		3BE2568C14F8387100AFC61E /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3BAAEE1015104D5E00353521 /* SecondOrderMarkovChain.cpp */,
+				3BAAEE1115104D5E00353521 /* SecondOrderMarkovChain.hpp */,
+				3BAAEE0D15102DB700353521 /* MarkovChain.cpp */,
+				3BAAEE0E15102DB900353521 /* MarkovChain.hpp */,
 				3B04405314FB53AA00DE16A3 /* gestures */,
 				3BBE9F9D14F8513F0013CB1A /* view */,
 				3B7EB06D14F8444E00452194 /* model */,
@@ -2177,6 +2187,8 @@
 				3B2A4B1E150FE9BD00F2DF5E /* TriObstacleModel.mm in Sources */,
 				3B2A4B21150FE9D500F2DF5E /* TriObstacle.mm in Sources */,
 				3B2A4B241510058500F2DF5E /* PolygonObstacle.mm in Sources */,
+				3BAAEE0F15102DBC00353521 /* MarkovChain.cpp in Sources */,
+				3BAAEE1215104D5E00353521 /* SecondOrderMarkovChain.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

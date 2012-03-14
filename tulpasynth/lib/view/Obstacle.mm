@@ -113,4 +113,8 @@
     return false;
 }
 
+- (void) handleCollision:(float)collisionStrength {
+    
+}
+
 @end

@@ -24,7 +24,5 @@
 
 @property instruments::FMPercussion* instr;
 
-- (void) handleCollision:(float)collisionStrength;
-
 
 @end

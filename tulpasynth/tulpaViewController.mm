@@ -255,7 +255,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     [[Model Instances] addObserver:self forKeyPath:@"objects" options:NSKeyValueObservingOptionNew context:NULL];
     
     // Audio setup
-    NSLog(@"starting real-time audio...");    
+    NSLog(@"starting real-time audio...");
     bool result = MoAudio::init(stk::SRATE, FRAMESIZE, NUM_CHANNELS);
     if (!result) {
         NSLog(@"cannot initialize real-time audio!");
@@ -312,6 +312,16 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             collidedSquare = entityTwo;
         }
         [collidedSquare handleCollision:collisionStrength];
+    }
+    else if ([entityOne isKindOfClass:[TriObstacle class]] || [entityTwo isKindOfClass:[TriObstacle class]]) {
+        TriObstacle* collidedTri;
+        if ([entityOne isKindOfClass:[TriObstacle class]]) {
+            collidedTri = entityOne;
+        }
+        else if ([entityTwo isKindOfClass:[TriObstacle class]]) {
+            collidedTri = entityTwo;
+        }
+        [collidedTri handleCollision:collisionStrength];
     }
         
 }
