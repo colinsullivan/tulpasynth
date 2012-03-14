@@ -35,6 +35,13 @@ class tulpasynth.models.ShooterModel extends Backbone.Model
         while last < latestShotTime+1.0
             shotTimes.push(last + (1.0/@get("rate")))
             last = shotTimes[shotTimes.length-1]
+
+        currentShotIndex = @get("nextShotIndex")*1
+        now = ((new Date()).getTime()/1000)
+        while now > shotTimes[currentShotIndex]
+            currentShotIndex++
+
+        @set "nextShotIndex", currentShotIndex
         
         @set "shotTimes", shotTimes
         # TODO: this should be triggered automatically but it is not

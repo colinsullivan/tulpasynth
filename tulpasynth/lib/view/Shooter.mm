@@ -199,6 +199,10 @@
     
     ShooterModel* model = ((ShooterModel*)self.model);
     
+    if ([keyPath isEqualToString:@"nextShotIndex"]) {
+        self.nextShotIndex = model.nextShotIndex;
+    }
+    
 //    if ([keyPath isEqualToString:@"nextShotTime"]) {
 ////        self.nextShotTime = [NSDate dateWithTimeInterval:-1.0*self.controller.socketHandler.timeOffset sinceDate:model.nextShotTime];
 //        if (model.nextShotTime != self.nextShotTime) {
