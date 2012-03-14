@@ -75,6 +75,13 @@
  *  If we're currently animating a "shot"
  **/
 @property (nonatomic) BOOL animating;
+/**
+ *  Percent of animation that is complete (0 to 1)
+ **/
+@property (nonatomic) float animatingPerc;
+@property (nonatomic) float lastAnimatingPerc;
+
+- (void) startAnimating;
 
 - (void) shootBall;
 

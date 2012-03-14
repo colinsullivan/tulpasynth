@@ -13,7 +13,7 @@
 
 @implementation Shooter
 
-@synthesize instr, effect1, glow, rateSlider, rateBeforeSliding, nextShotTime, prevTimeUntilNextShot, animating, nextShotIndex;
+@synthesize instr, effect1, glow, rateSlider, rateBeforeSliding, nextShotTime, prevTimeUntilNextShot, animating, nextShotIndex, animatingPerc, lastAnimatingPerc;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -218,16 +218,24 @@
 ////            self.animating = true;
 //        }
 //    }
-//    // if the rate has changed
-//    else if ([keyPath isEqualToString:@"rate"]) {
-//        // play loop at same rate
-//        instr->freq([model.rate floatValue]);
+    // if the rate has changed
+    else if ([keyPath isEqualToString:@"rate"]) {
+        // play loop at same rate
+        instr->freq([model.rate floatValue]);
 //        
 ////        if (model.ignoreUpdates) {
 ////            // determine own next shot time
 ////            model.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:(1.0/[model.rate floatValue])];
 ////        }
-//    }
+    }
+}
+
+- (void) startAnimating {
+    self.animating = true;
+    self.animatingPerc = 0.0;
+    self.lastAnimatingPerc = 0.0;
+    instr->reset();
+    instr->play();
 }
 
 - (void)update {
@@ -240,8 +248,6 @@
 //        NSLog(@"[self.nextShotTime timeIntervalSinceNow]: %f", [self.nextShotTime timeIntervalSinceNow]);
 //    }
 
-//    float currentPerc = instr->percentComplete();
-//    float shootPerc = (49572.0/50969.0);
 
     NSTimeInterval timeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
 
@@ -251,13 +257,38 @@
 //        NSLog(@"now: %f", [[NSDate dateWithTimeIntervalSinceNow:0.0] timeIntervalSince1970]);
 //    }
 
+
+    self.animatingPerc = instr->percentComplete();
+    float shootPerc = (49572.0/50969.0);
+    if (self.animating) {
+        // actually shoot ball when sound transient occurs
+        //        NSLog(@"instr->percentComplete(): %f", instr->percentComplete());
+        if (
+            // current playhead is past shoot marker, and previous playhead was in front
+            (animatingPerc > shootPerc && lastAnimatingPerc < shootPerc)
+            ||
+            // prev playhead was in front, and current playhead has wrapped around
+            (lastAnimatingPerc < shootPerc && animatingPerc < lastAnimatingPerc)
+            ) {
+            self.animating = false;
+            self.glow = 1.0;
+            [self shootBall];
+        }
+        else {
+            // increase glow
+            self.glow = (instr->percentComplete() / shootPerc);
+        }
+    }
+    lastAnimatingPerc = animatingPerc;
+
+
     // If it is time to shoot another ball because we're on time
     if (
         timeUntilNextShot < 0 && prevTimeUntilNextShot > 0
         ) {
         //        NSLog(@"shooting");
         
-        [self shootBall];
+        [self startAnimating];
         
         //        instr->freq([model.rate floatValue]);
 //        instr->reset();
@@ -272,28 +303,6 @@
     }
     prevTimeUntilNextShot = timeUntilNextShot;
 
-//    if (self.animating) {
-//        // actually shoot ball when sound transient occurs
-////        NSLog(@"instr->percentComplete(): %f", instr->percentComplete());
-//        if (
-//            // current playhead is past shoot marker, and previous playhead was in front
-//            (currentPerc > shootPerc && lastPerc < shootPerc)
-//            ||
-//            // prev playhead was in front, and current playhead has wrapped around
-//            (lastPerc < shootPerc && currentPerc < lastPerc)
-//        ) {
-//            self.animating = false;
-//            self.glow = 1.0;
-//            [self shootBall];
-//            self.waitingToShoot = false;
-//        }
-//        else {
-//            // increase glow
-//            self.glow = (instr->percentComplete() / (49572.0/50969.0));
-//        }
-//    }
-
-//    lastPerc = currentPerc;
     
 //    // if it is time to trigger shooting sound
 //    // (transient is at 01.12 seconds into file)
