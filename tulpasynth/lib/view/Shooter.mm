@@ -71,10 +71,6 @@
 //        self.waitingToShoot = true;
 //        instr->play();
 //        self.animating = true;
-        self.nextShotIndex = model.nextShotIndex;
-        self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex integerValue]];
-        NSLog(@"self.nextShotTime: %@", self.nextShotTime);
-        self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
     }
 //    else {
 //        self.waitingToShoot = false;
@@ -173,6 +169,7 @@
     if (model.ignoreUpdates) {
         // determine own next shot time
         self.nextShotTime = [NSDate dateWithTimeInterval:(1.0/[model.rate floatValue]) sinceDate:self.nextShotTime];
+        self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
     }
     else {
         [self advanceToNextShot];
@@ -187,8 +184,9 @@
     if (nextIndex < [model.shotTimes count]) {
         // assume next shot time will be the next indexed value in the array
         self.nextShotIndex = [NSNumber numberWithInt:nextIndex];
-        self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex intValue]];
 //        NSLog(@"automatically advancing to shot %d", [self.nextShotIndex intValue]);
+        self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex intValue]];
+        self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
 //        NSLog(@"nextShotTime: %f", [self.nextShotTime timeIntervalSince1970]);        
     }
 }
@@ -200,7 +198,15 @@
     ShooterModel* model = ((ShooterModel*)self.model);
     
     if ([keyPath isEqualToString:@"nextShotIndex"]) {
-        self.nextShotIndex = model.nextShotIndex;
+        NSLog(@"nextShotIndex changed");
+        if ([model.rate floatValue] > 0.0) {
+            self.nextShotIndex = model.nextShotIndex;
+            self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex integerValue]];
+            self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
+        }
+//        self.nextShotIndex = model.nextShotIndex;
+//        self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex intValue]];
+//        self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
     }
     
 //    if ([keyPath isEqualToString:@"nextShotTime"]) {
@@ -236,8 +242,6 @@
 
 //    float currentPerc = instr->percentComplete();
 //    float shootPerc = (49572.0/50969.0);
-    
-
 
     NSTimeInterval timeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
 
@@ -326,9 +330,12 @@
 - (void) handleLongPressEnded {
 //    NSLog(@"Shooter.handleLongPressEnded");
     ShooterModel* model = ((ShooterModel*)self.model);
+    
+    
 
     // TODO: synchronization race condition here.  ignoreUpdates should be
     // turned off in callback
+    [model generateNewShotTimes];
     [model synchronize];
     
     model.ignoreUpdates = false;

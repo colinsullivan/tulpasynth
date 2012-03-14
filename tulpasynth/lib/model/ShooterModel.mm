@@ -42,6 +42,32 @@
     rate = aRate;
 }
 
+- (void) setShotTimes:(NSMutableArray *)someShotTimes {
+    // if shot times are numbers
+//    NSLog(@"setShotTimes: %@", someShotTimes);
+    if ([[someShotTimes objectAtIndex:0] class] == [NSDecimalNumber class]) {
+//        NSLog(@"converting from decimal number to dates");
+        // convert to dates
+        NSMutableArray* shotTimeNumbers = someShotTimes;
+        NSMutableArray* shotTimeDates = [[NSMutableArray alloc] init];
+        for (NSNumber* shotTimeNumber in shotTimeNumbers) {
+            [shotTimeDates addObject:[NSDate dateWithTimeIntervalSince1970:[shotTimeNumber doubleValue]]];
+        }
+//        NSLog(@"shotTimeDates: %@", shotTimeDates);
+        shotTimes = shotTimeDates;
+    }
+//    else if ([[someShotTimes objectAtIndex:0] class] == [NSString class]) {
+//        NSLog(@"converting from string to dates");
+//    }
+    // assume they're dates otherwise
+    else {
+//        NSLog(@"type was: %@", NSStringFromClass([[someShotTimes objectAtIndex:0] class]));
+        shotTimes = someShotTimes;
+    }
+}
+
+
+
 - (NSMutableArray*) serializableAttributes {
     NSMutableArray* attrs = [super serializableAttributes];
     
@@ -102,15 +128,35 @@
                           [NSDate dateWithTimeInterval:2.0 sinceDate:now],
                           nil];        
     }
-    else {
-        // shot times were initialized as doubles, convert to dates
-        NSMutableArray* shotTimeNumbers = self.shotTimes;
-        NSMutableArray* shotTimeDates = [[NSMutableArray alloc] init];
-        for (NSNumber* shotTimeNumber in shotTimeNumbers) {
-            [shotTimeDates addObject:[NSDate dateWithTimeIntervalSince1970:[shotTimeNumber doubleValue]]];
-        }
-        self.shotTimes = shotTimeDates;
-    }
+//    else {
+//        // shot times were initialized as doubles, convert to dates
+//        NSMutableArray* shotTimeNumbers = self.shotTimes;
+//        NSMutableArray* shotTimeDates = [[NSMutableArray alloc] init];
+//        for (NSNumber* shotTimeNumber in shotTimeNumbers) {
+//            [shotTimeDates addObject:[NSDate dateWithTimeIntervalSince1970:[shotTimeNumber doubleValue]]];
+//        }
+//        self.shotTimes = shotTimeDates;
+//    }
     [super initialize];
+}
+
+
+- (void) generateNewShotTimes {
+    NSDate* now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+    self.shotTimes = [[NSMutableArray alloc] initWithObjects:
+                      now,
+                      [NSDate dateWithTimeInterval:(1.0/[self.rate doubleValue]) sinceDate:now],
+                      [NSDate dateWithTimeInterval:(1.0/[self.rate doubleValue])*2.0 sinceDate:now],
+                      [NSDate dateWithTimeInterval:(1.0/[self.rate doubleValue])    *3.0 sinceDate:now],
+                      nil];
+    self.nextShotIndex = [NSNumber numberWithInt:0];
+//    // generate a few more shot times
+//    NSDate* last = [self.shotTimes objectAtIndex:[self.shotTimes count]-1];
+//    while ([last timeIntervalSinceDate:now] > 2.0) {
+//        [self.shotTimes addObject:[NSDate dateWithTimeInterval:[self.rate doubleValue] sinceDate:last]];
+//        last = [self.shotTimes objectAtIndex:[self.shotTimes count]-1];
+//    }
+    
+    NSLog(@"self.shotTimes: %@", self.shotTimes);
 }
 @end

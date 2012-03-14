@@ -35,4 +35,9 @@
 + (NSNumber*) maxRate;
 + (NSNumber*) minRate;
 
+/**
+ *  Called when rate is done being modified, and we're ready to synchronize
+ **/
+- (void) generateNewShotTimes;
+
 @end

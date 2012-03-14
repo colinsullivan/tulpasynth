@@ -57,6 +57,7 @@ offsetTimeAttributes = (data, attributesToOffset, offsetAmt) ->
     dataClone
 
 sendToAll = (data, timeOffsetAttributes) ->
+    debugMsg "now: #{(new Date()).getTime()/1000}"
     debugMsg "Sending to all:"
     console.log data
 
@@ -163,16 +164,12 @@ db.on "ready", () ->
 
                     # Offset shoot times based on this client's time offset
                     # amount, putting the shotTimes in server time
-                    console.log 'data.attributes.shotTimes'
-                    console.log data.attributes.shotTimes
                     
                     compensatedShotTimes = []
                     for shotTime in data.attributes.shotTimes
                         compensatedShotTimes.push shotTime+ws.timeOffset
 
                     data.attributes.shotTimes = compensatedShotTimes
-                    console.log 'data.attributes.shotTimes'
-                    console.log data.attributes.shotTimes
                     
 
                     shooter = new tulpasynth.models.ShooterModel data.attributes
@@ -227,12 +224,22 @@ db.on "ready", () ->
                         if data.attributes.rate == instance.get "rate"
                             # ignore shot times
                             delete data.attributes.shotTimes
+                            # ignore shot index
+                            delete data.attributes.nextShotIndex
+                        # Rate has changed, compensate shot times
+                        else
+                            compensatedShotTimes = []
+                            for shotTime in data.attributes.shotTimes
+                                compensatedShotTimes.push shotTime+ws.timeOffset
+
+                            data.attributes.shotTimes = compensatedShotTimes
+
 
                     instance.set data.attributes
 
                 # Relay update message to other connected clients
                 data.method = "update"
-                sendToAllButOne data, ws
+                sendToAllButOne data, ws, ["shotTimes"]
 
                 # unpauseAll()
             else if data.method == "time_sync"
