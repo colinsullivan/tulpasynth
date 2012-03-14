@@ -35,8 +35,8 @@
     // map rate to a radian value
     float positionRadians = [model.rate floatValue] * radianPerSliderValue;
     
-    aPosition->x -= cosf(minRadians + positionRadians)*(self.slider.width/2.0);
-    aPosition->y += sinf(minRadians + positionRadians)*(self.slider.width/2.0);
+    aPosition->x -= cosf(minRadians + positionRadians)*(self.slider.width/2.0 + 1);
+    aPosition->y += sinf(minRadians + positionRadians)*(self.slider.width/2.0 + 1);
     
     // orientation
 //    self.angle = stk::PI/2.0 + stk::PI/4.0 + [model.rate floatValue]*(stk::PI/rangeSliderValues);

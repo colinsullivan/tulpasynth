@@ -273,7 +273,7 @@
 }
 
 - (void) handleLongPressStarted {
-    NSLog(@"Shooter.handleLongPressStarted");
+//    NSLog(@"Shooter.handleLongPressStarted");
     ShooterModel* model = ((ShooterModel*)self.model);
     
     model.ignoreUpdates = true;
@@ -285,12 +285,10 @@
     
     ShooterModel* model = ((ShooterModel*)self.model);
     float newRate = [rateBeforeSliding floatValue] + (0.3*self.longPresser->translation.y);
-    NSLog(@"newRate: %f", newRate);
     model.rate = [NSNumber numberWithFloat:newRate];
-    NSLog(@"model.rate: %f", [model.rate floatValue]);
 }
 - (void) handleLongPressEnded {
-    NSLog(@"Shooter.handleLongPressEnded");
+//    NSLog(@"Shooter.handleLongPressEnded");
     ShooterModel* model = ((ShooterModel*)self.model);
 
     // TODO: synchronization race condition here.  ignoreUpdates should be
