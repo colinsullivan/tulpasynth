@@ -25,7 +25,12 @@
 /**
  *  List of all shot times in order
  **/
-//@property (strong, nonatomic) NSMutableArray* shotTimes;
+@property (strong, nonatomic) NSMutableArray* shotTimes;
+
+/**
+ *  Index of next shot time in list of shot times
+ **/
+@property (strong, nonatomic) NSNumber* nextShotIndex;
 
 + (NSNumber*) maxRate;
 + (NSNumber*) minRate;

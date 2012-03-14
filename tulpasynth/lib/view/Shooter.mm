@@ -13,7 +13,7 @@
 
 @implementation Shooter
 
-@synthesize lastShotTime, instr, effect1, glow, rateSlider, rateBeforeSliding, nextShotTime, waitingToShoot, lastPerc, prevTimeUntilNextShot, animating;
+@synthesize instr, effect1, glow, rateSlider, rateBeforeSliding, nextShotTime, prevTimeUntilNextShot, animating, nextShotIndex;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -65,19 +65,25 @@
     instr->set_clip([path UTF8String]);
     instr->finish_initializing();
     
-    self.lastShotTime = nil;
+//    self.lastShotTime = nil;
+
     if ([model.rate floatValue] > 0.0f) {
-        self.waitingToShoot = true;
-        instr->play();
+//        self.waitingToShoot = true;
+//        instr->play();
+//        self.animating = true;
+        self.nextShotIndex = model.nextShotIndex;
+        self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex integerValue]];
+        self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
     }
-    else {
-        self.waitingToShoot = false;
-    }
-    self.animating = false;
+//    else {
+//        self.waitingToShoot = false;
+//    }
+//    self.animating = false;
     
-    lastPerc = 0.0;
-    prevTimeUntilNextShot = -1.0;
+//    lastPerc = 0.0;
+//    prevTimeUntilNextShot = -1.0;
 }
+
 
 - (void) dealloc {
     delete instr;
@@ -162,39 +168,55 @@
                                               nil],
                          nil]];
     
-    
-    self.lastShotTime = model.nextShotTime;
+//    self.lastShotTime = model.nextShotTime;
     if (model.ignoreUpdates) {
         // determine own next shot time
-        model.nextShotTime = [NSDate dateWithTimeInterval:(1.0/[model.rate floatValue]) sinceDate:self.lastShotTime];
+        self.nextShotTime = [NSDate dateWithTimeInterval:(1.0/[model.rate floatValue]) sinceDate:self.nextShotTime];
+    }
+    else {
+        [self advanceToNextShot];
+    }
+    self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
+}
+
+- (void) advanceToNextShot {
+    ShooterModel* model = ((ShooterModel*)self.model);
+    float nextIndex = [self.nextShotIndex intValue]+1;
+    
+    if (nextIndex < [model.shotTimes count]) {
+        // assume next shot time will be the next indexed value in the array
+        self.nextShotIndex = [NSNumber numberWithInt:nextIndex];
+        self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex intValue]];
+        NSLog(@"automatically advancing to shot %d", [self.nextShotIndex intValue]);
+        NSLog(@"nextShotTime: %f", [self.nextShotTime timeIntervalSince1970]);        
     }
 }
+
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     
     ShooterModel* model = ((ShooterModel*)self.model);
     
-    if ([keyPath isEqualToString:@"nextShotTime"]) {
-//        self.nextShotTime = [NSDate dateWithTimeInterval:-1.0*self.controller.socketHandler.timeOffset sinceDate:model.nextShotTime];
-        if (model.nextShotTime != self.nextShotTime) {
-            self.nextShotTime = model.nextShotTime;
-            self.prevTimeUntilNextShot = [model.rate floatValue];
-            self.waitingToShoot = true;   
-            self.animating = true;
-        }
-    }
-    // if the rate has changed
-    else if ([keyPath isEqualToString:@"rate"]) {
-        // play loop at same rate
-        instr->freq([model.rate floatValue]);
-        
-//        if (model.ignoreUpdates) {
-//            // determine own next shot time
-//            model.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:(1.0/[model.rate floatValue])];
+//    if ([keyPath isEqualToString:@"nextShotTime"]) {
+////        self.nextShotTime = [NSDate dateWithTimeInterval:-1.0*self.controller.socketHandler.timeOffset sinceDate:model.nextShotTime];
+//        if (model.nextShotTime != self.nextShotTime) {
+//            self.nextShotTime = model.nextShotTime;
+//            self.prevTimeUntilNextShot = [model.rate floatValue];
+////            self.waitingToShoot = true;
+////            self.animating = true;
 //        }
-    }
-
+//    }
+//    // if the rate has changed
+//    else if ([keyPath isEqualToString:@"rate"]) {
+//        // play loop at same rate
+//        instr->freq([model.rate floatValue]);
+//        
+////        if (model.ignoreUpdates) {
+////            // determine own next shot time
+////            model.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:(1.0/[model.rate floatValue])];
+////        }
+//    }
 }
 
 - (void)update {
@@ -207,31 +229,12 @@
 //        NSLog(@"[self.nextShotTime timeIntervalSinceNow]: %f", [self.nextShotTime timeIntervalSinceNow]);
 //    }
 
-    float currentPerc = instr->percentComplete();
-    float shootPerc = (49572.0/50969.0);
+//    float currentPerc = instr->percentComplete();
+//    float shootPerc = (49572.0/50969.0);
+    
+
 
     NSTimeInterval timeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
-
-    if (self.animating) {
-        // actually shoot ball when sound transient occurs
-//        NSLog(@"instr->percentComplete(): %f", instr->percentComplete());
-        if (
-            // current playhead is past shoot marker, and previous playhead was in front
-            (currentPerc > shootPerc && lastPerc < shootPerc)
-            ||
-            // prev playhead was in front, and current playhead has wrapped around
-            (lastPerc < shootPerc && currentPerc < lastPerc)
-        ) {
-            self.animating = false;
-            self.glow = 1.0;
-            [self shootBall];
-            self.waitingToShoot = false;
-        }
-        else {
-            // increase glow
-            self.glow = (instr->percentComplete() / (49572.0/50969.0));
-        }
-    }
 
 //    if ([model.rate floatValue] != 0.0) {
 //        NSLog(@"nextShotTime: %f", [self.nextShotTime timeIntervalSince1970]);
@@ -239,21 +242,49 @@
 //        NSLog(@"now: %f", [[NSDate dateWithTimeIntervalSinceNow:0.0] timeIntervalSince1970]);
 //    }
 
-    // If it is time to shoot another ball
+    // If it is time to shoot another ball because we're on time
     if (
         timeUntilNextShot < 0 && prevTimeUntilNextShot > 0
-    ) {
-//        NSLog(@"shooting");
+        ) {
+        //        NSLog(@"shooting");
         
-        // and we still haven't fired the ball for this round
-        if (self.waitingToShoot) {
-            [self shootBall];
-        }
-//        instr->freq([model.rate floatValue]);
-        instr->reset();
+        [self shootBall];
+        
+        //        instr->freq([model.rate floatValue]);
+//        instr->reset();
+    }
+    // if we're behind schedule
+    else if (timeUntilNextShot < 0 && prevTimeUntilNextShot < 0 && [self.nextShotIndex integerValue] < [model.shotTimes count]) {
+        [self advanceToNextShot];
+    }
+    // if we've run out of shoots
+    else if ([self.nextShotIndex integerValue] == [model.shotTimes count]-1) {
+//        NSLog(@"No 'mo shoots!");
     }
     prevTimeUntilNextShot = timeUntilNextShot;
-    lastPerc = currentPerc;
+
+//    if (self.animating) {
+//        // actually shoot ball when sound transient occurs
+////        NSLog(@"instr->percentComplete(): %f", instr->percentComplete());
+//        if (
+//            // current playhead is past shoot marker, and previous playhead was in front
+//            (currentPerc > shootPerc && lastPerc < shootPerc)
+//            ||
+//            // prev playhead was in front, and current playhead has wrapped around
+//            (lastPerc < shootPerc && currentPerc < lastPerc)
+//        ) {
+//            self.animating = false;
+//            self.glow = 1.0;
+//            [self shootBall];
+//            self.waitingToShoot = false;
+//        }
+//        else {
+//            // increase glow
+//            self.glow = (instr->percentComplete() / (49572.0/50969.0));
+//        }
+//    }
+
+//    lastPerc = currentPerc;
     
 //    // if it is time to trigger shooting sound
 //    // (transient is at 01.12 seconds into file)

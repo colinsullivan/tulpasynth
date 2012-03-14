@@ -52,11 +52,24 @@
 @property (strong, nonatomic) NSDate* nextShotTime;
 
 /**
+ *  Index into the model's shotTimes array
+ **/
+@property (strong, nonatomic) NSNumber* nextShotIndex;
+
+/**
+ *  Last measure taken of the time until the next shot will be fired.
+ **/
+@property NSTimeInterval prevTimeUntilNextShot;
+
+/**
  *  Wether or not we've shot a ball this round.
  **/
-@property (nonatomic) BOOL waitingToShoot;
-@property float lastPerc;
-@property NSTimeInterval prevTimeUntilNextShot;
+//@property (nonatomic) BOOL waitingToShoot;
+
+///**
+// *  Last measure taken of the animation 
+// **/
+//@property float lastPerc;
 
 /**
  *  If we're currently animating a "shot"
@@ -74,6 +87,8 @@
  *  What the shooting rate was before user started changing it.
  **/
 @property (strong, nonatomic) NSNumber* rateBeforeSliding;
+
+- (void) advanceToNextShot;
 
 
 @end

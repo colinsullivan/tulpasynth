@@ -10,7 +10,7 @@
 
 @implementation ShooterModel
 
-@synthesize rate, nextShotTime;
+@synthesize rate, nextShotTime, shotTimes, nextShotIndex;
 
 + (NSNumber*) maxRate {
     static NSNumber* theMaxRate;
@@ -47,7 +47,8 @@
     
     [attrs addObject:@"rate"];
     [attrs addObject:@"nextShotTime"];
-//    [attrs addObject:@"shotTimes"];
+    [attrs addObject:@"shotTimes"];
+    [attrs addObject:@"nextShotIndex"];
     
     return attrs;
 }
@@ -58,9 +59,48 @@
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"width"];
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"height"];
     [defaults setValue:[NSNumber numberWithFloat:1.0] forKey:@"rate"];
-//    [defaults setValue:[[NSMutableArray alloc] init] forKey:@"shotTimes"];
+    [defaults setValue:[NSNumber numberWithInt:0] forKey:@"nextShotIndex"];
+    
     
     return defaults;
 }
 
+// ghetto serialize and deserialize for shotTimes
+- (NSMutableDictionary*) serialize {
+    NSMutableDictionary* attributes = [super serialize];
+    
+    NSMutableArray* shotTimesDates = [attributes objectForKey:@"shotTimes"];
+    NSMutableArray* shotTimeNumbers = [[NSMutableArray alloc] init];
+    for (NSDate* shotTime in shotTimesDates) {
+        [shotTimeNumbers addObject:[NSNumber numberWithDouble:[shotTime timeIntervalSince1970]]];
+    }
+    [attributes setValue:shotTimeNumbers forKey:@"shotTimes"];
+    return attributes;
+}
+
+- (void) deserialize:(NSMutableDictionary *)attributes {
+    if (!self.ignoreUpdates) {
+        [super deserialize:attributes];
+        
+        NSMutableArray* shotTimeNumbers = [attributes valueForKey:@"shotTimes"];
+        NSMutableArray* shotTimeDates = [[NSMutableArray alloc] init];
+        for (NSNumber* shotTimeNumber in shotTimeNumbers) {
+            [shotTimeDates addObject:[NSDate dateWithTimeIntervalSince1970:[shotTimeNumber doubleValue]]];
+        }
+        self.shotTimes = shotTimeDates;
+    }
+}
+
+- (void) initialize {
+    [super initialize];
+    
+    NSDate* now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+    self.shotTimes = [[NSMutableArray alloc] initWithObjects:
+                      now,
+                      // next shot is 1 second in the future
+                      [NSDate dateWithTimeInterval:1.0 sinceDate:now],
+                      // then 1 second after that
+                      [NSDate dateWithTimeInterval:2.0 sinceDate:now],
+                      nil];
+}
 @end
