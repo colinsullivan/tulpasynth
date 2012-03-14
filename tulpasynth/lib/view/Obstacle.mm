@@ -60,9 +60,9 @@
     if (pinch->state == GestureEntityStateStart) {
         // If both touches are in us
         if (
-            [self _touchIsInside:pinch->touches[0]]
+            [self _touchIsInside:pinch->touches[0] withFudge:2.0]
             &&
-            [self _touchIsInside:pinch->touches[1]]
+            [self _touchIsInside:pinch->touches[1] withFudge:2.0]
             ) {
             self.pincher = pinch;
             self.preScalingWidth = self.width;
@@ -90,9 +90,9 @@
     if (rotate->state == GestureEntityStateStart) {
         // if both touches are in us
         if (
-            [self _touchIsInside:rotate->touches[0]]
+            [self _touchIsInside:rotate->touches[0] withFudge:2.0]
             &&
-            [self _touchIsInside:rotate->touches[1]]
+            [self _touchIsInside:rotate->touches[1] withFudge:2.0]
             ) {
             self.rotator = rotate;
             self.preGestureAngle = self.angle;
