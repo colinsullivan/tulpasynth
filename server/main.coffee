@@ -45,7 +45,14 @@ offsetTimeAttributes = (data, attributesToOffset, offsetAmt) ->
     dataClone.attributes = _.clone data.attributes
     if attributesToOffset
         for timeOffsetAttribute in attributesToOffset
-            dataClone.attributes[timeOffsetAttribute] -= offsetAmt
+            attribute = dataClone.attributes[timeOffsetAttribute]
+            if _.isArray attribute
+                newArray = []
+                for value in attribute
+                    newArray.push value-offsetAmt
+                dataClone.attributes[timeOffsetAttribute] = newArray
+            else
+                attribute -= offsetAmt
 
     dataClone
 
@@ -153,12 +160,30 @@ db.on "ready", () ->
                 # shooting times.
                 if data.class is "ShooterModel"
                     debugMsg "Creating a ShooterModel on server"
+
+                    # Offset shoot times based on this client's time offset
+                    # amount, putting the shotTimes in server time
+                    console.log 'data.attributes.shotTimes'
+                    console.log data.attributes.shotTimes
+                    
+                    compensatedShotTimes = []
+                    for shotTime in data.attributes.shotTimes
+                        compensatedShotTimes.push shotTime+ws.timeOffset
+
+                    data.attributes.shotTimes = compensatedShotTimes
+                    console.log 'data.attributes.shotTimes'
+                    console.log data.attributes.shotTimes
+                    
+
                     shooter = new tulpasynth.models.ShooterModel data.attributes
-                    data.attributes.nextShotTime = shooter.get("nextShotTime")
+
+
+
+                    # data.attributes.nextShotTime = shooter.get("nextShotTime")
 
                     # Update initial client
                     data.method = "update"
-                    sendToOne data, ws, ["nextShotTime"]
+                    sendToOne data, ws, ["shotTimes"]
 
                     # When shooter updates the next shot time
                     shooter.on "change:nextShotTime", () =>
@@ -167,11 +192,11 @@ db.on "ready", () ->
                             method: "update"
                             class: "ShooterModel"
                             attributes: shooter.toJSON()
-                        sendToAll message, ["nextShotTime"]
+                        sendToAll message, ["shotTimes"]
 
                 # Relay create message to other connected clients
                 data.method = "create"
-                sendToAllButOne data, ws, ["nextShotTime"]
+                sendToAllButOne data, ws, ["shotTimes"]
                 # unpauseAll()
 
 

@@ -15,13 +15,13 @@ Backbone = require "backbone"
 ###
 class tulpasynth.models.ShooterModel extends Backbone.Model
     initialize: () ->
-        if @get "rate"
-            nextShotTime = new Date()
-            @set "nextShotTime", (nextShotTime.getTime()/1000) + (1.0 / @get "rate")
+        # if @get "rate"
+            # nextShotTime = new Date()
+            # @set "nextShotTime", (nextShotTime.getTime()/1000) + (1.0 / @get "rate")
 
-            setTimeout () =>
-                @updateNextShotTime()
-            , (1.0/@get("rate"))*1000.0
+            # setTimeout () =>
+            #     @updateNextShotTime()
+            # , (1.0/@get("rate"))*1000.0
 
         tulpasynth.modelInstances[@get "id"] = this
 
