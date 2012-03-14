@@ -30,9 +30,9 @@ class tulpasynth.models.ShooterModel extends Backbone.Model
         shotTimes = @get("shotTimes")
         latestShotTime = shotTimes[shotTimes.length-1]
 
-        # Calculate the next 1.5 seconds worth of shots
+        # Calculate the next 1 seconds worth of shots
         last = shotTimes[shotTimes.length-1]
-        while last < latestShotTime+1.5
+        while last < latestShotTime+1.0
             shotTimes.push(last + (1.0/@get("rate")))
             last = shotTimes[shotTimes.length-1]
         
@@ -42,7 +42,7 @@ class tulpasynth.models.ShooterModel extends Backbone.Model
 
         setTimeout () =>
             @updateNextShotTimes()
-        , 1500.0
+        , 1000.0
 
 
     # updateNextShotTime: () ->

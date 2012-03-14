@@ -198,9 +198,12 @@ db.on "ready", () ->
 
                     # start updating shot times
                     shooter.updateNextShotTimes()
-                
-                data.method = "create"
-                sendToAllButOne data, ws
+
+                # Other models, just relay message
+                else
+                    
+                    data.method = "create"
+                    sendToAllButOne data, ws
 
 
 
@@ -213,13 +216,19 @@ db.on "ready", () ->
                 delete data.method
                 debugMsg "Updating model #{data.attributes.id}"
 
-                if data.class is "ShooterModel"
-                    delete data.attributes.nextShotTime
-
                 db.hmset "model", "#{data.attributes.id}", JSON.stringify(data)
 
                 if tulpasynth.modelInstances[data.attributes.id]
-                    tulpasynth.modelInstances[data.attributes.id].set data.attributes
+                    instance = tulpasynth.modelInstances[data.attributes.id]
+                    if data.class is "ShooterModel"
+                        # delete data.attributes.nextShotTime
+
+                        # If rate has not changed
+                        if data.attributes.rate == instance.get "rate"
+                            # ignore shot times
+                            delete data.attributes.shotTimes
+
+                    instance.set data.attributes
 
                 # Relay update message to other connected clients
                 data.method = "update"

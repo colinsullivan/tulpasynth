@@ -73,6 +73,7 @@
 //        self.animating = true;
         self.nextShotIndex = model.nextShotIndex;
         self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex integerValue]];
+        NSLog(@"self.nextShotTime: %@", self.nextShotTime);
         self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
     }
 //    else {

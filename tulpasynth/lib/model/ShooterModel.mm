@@ -92,8 +92,6 @@
 }
 
 - (void) initialize {
-    [super initialize];
-    
     if (!self.shotTimes) {
         NSDate* now = [NSDate dateWithTimeIntervalSinceNow:0.0];
         self.shotTimes = [[NSMutableArray alloc] initWithObjects:
@@ -104,5 +102,15 @@
                           [NSDate dateWithTimeInterval:2.0 sinceDate:now],
                           nil];        
     }
+    else {
+        // shot times were initialized as doubles, convert to dates
+        NSMutableArray* shotTimeNumbers = self.shotTimes;
+        NSMutableArray* shotTimeDates = [[NSMutableArray alloc] init];
+        for (NSNumber* shotTimeNumber in shotTimeNumbers) {
+            [shotTimeDates addObject:[NSDate dateWithTimeIntervalSince1970:[shotTimeNumber doubleValue]]];
+        }
+        self.shotTimes = shotTimeDates;
+    }
+    [super initialize];
 }
 @end
