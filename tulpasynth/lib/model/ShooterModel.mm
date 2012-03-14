@@ -94,13 +94,15 @@
 - (void) initialize {
     [super initialize];
     
-    NSDate* now = [NSDate dateWithTimeIntervalSinceNow:0.0];
-    self.shotTimes = [[NSMutableArray alloc] initWithObjects:
-                      now,
-                      // next shot is 1 second in the future
-                      [NSDate dateWithTimeInterval:1.0 sinceDate:now],
-                      // then 1 second after that
-                      [NSDate dateWithTimeInterval:2.0 sinceDate:now],
-                      nil];
+    if (!self.shotTimes) {
+        NSDate* now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+        self.shotTimes = [[NSMutableArray alloc] initWithObjects:
+                          now,
+                          // next shot is 1 second in the future
+                          [NSDate dateWithTimeInterval:1.0 sinceDate:now],
+                          // then 1 second after that
+                          [NSDate dateWithTimeInterval:2.0 sinceDate:now],
+                          nil];        
+    }
 }
 @end

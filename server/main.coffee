@@ -177,8 +177,6 @@ db.on "ready", () ->
 
                     shooter = new tulpasynth.models.ShooterModel data.attributes
 
-
-
                     # data.attributes.nextShotTime = shooter.get("nextShotTime")
 
                     # Update initial client
@@ -186,7 +184,7 @@ db.on "ready", () ->
                     sendToOne data, ws, ["shotTimes"]
 
                     # When shooter updates the next shot time
-                    shooter.on "change:nextShotTime", () =>
+                    shooter.on "change:shotTimes", () =>
                         # Inform all clients
                         message =
                             method: "update"
@@ -194,9 +192,18 @@ db.on "ready", () ->
                             attributes: shooter.toJSON()
                         sendToAll message, ["shotTimes"]
 
-                # Relay create message to other connected clients
+                    # Relay create message to other connected clients
+                    data.method = "create"
+                    sendToAllButOne data, ws, ["shotTimes"]
+
+                    # start updating shot times
+                    shooter.updateNextShotTimes()
+                
                 data.method = "create"
-                sendToAllButOne data, ws, ["shotTimes"]
+                sendToAllButOne data, ws
+
+
+
                 # unpauseAll()
 
 

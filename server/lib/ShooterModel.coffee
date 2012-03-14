@@ -16,6 +16,7 @@ Backbone = require "backbone"
 class tulpasynth.models.ShooterModel extends Backbone.Model
     initialize: () ->
         # if @get "rate"
+            # @updateNextShotTimes()
             # nextShotTime = new Date()
             # @set "nextShotTime", (nextShotTime.getTime()/1000) + (1.0 / @get "rate")
 
@@ -25,24 +26,43 @@ class tulpasynth.models.ShooterModel extends Backbone.Model
 
         tulpasynth.modelInstances[@get "id"] = this
 
-    updateNextShotTime: () ->
-        console.log "updateNextShotTime"
+    updateNextShotTimes: () ->
+        shotTimes = @get("shotTimes")
+        latestShotTime = shotTimes[shotTimes.length-1]
 
-        now = new Date()
-        now = now.getTime()/1000.0
+        # Calculate the next 1.5 seconds worth of shots
+        last = shotTimes[shotTimes.length-1]
+        while last < latestShotTime+1.5
+            shotTimes.push(last + (1.0/@get("rate")))
+            last = shotTimes[shotTimes.length-1]
         
-        # if next shot has passed
-        console.log '@get "nextShotTime"'
-        console.log @get "nextShotTime"
-        console.log 'now'
-        console.log now
-        
-        if @get("nextShotTime")*1.0 < now
-            # Update next shot time to previous shot time plus rate
-            @set "nextShotTime", @get("nextShotTime") + (1.0 / @get "rate")
+        @set "shotTimes", shotTimes
+        # TODO: this should be triggered automatically but it is not
+        @trigger "change:shotTimes"
 
-
-        # Update again in the future
         setTimeout () =>
-            @updateNextShotTime()
-        , (1.0 / @get("rate"))*1000.0
+            @updateNextShotTimes()
+        , 1500.0
+
+
+    # updateNextShotTime: () ->
+    #     console.log "updateNextShotTime"
+
+    #     now = new Date()
+    #     now = now.getTime()/1000.0
+        
+    #     # if next shot has passed
+    #     console.log '@get "nextShotTime"'
+    #     console.log @get "nextShotTime"
+    #     console.log 'now'
+    #     console.log now
+        
+    #     if @get("nextShotTime")*1.0 < now
+    #         # Update next shot time to previous shot time plus rate
+    #         @set "nextShotTime", @get("nextShotTime") + (1.0 / @get "rate")
+
+
+    #     # Update again in the future
+    #     setTimeout () =>
+    #         @updateNextShotTime()
+    #     , (1.0 / @get("rate"))*1000.0

@@ -187,8 +187,8 @@
         // assume next shot time will be the next indexed value in the array
         self.nextShotIndex = [NSNumber numberWithInt:nextIndex];
         self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex intValue]];
-        NSLog(@"automatically advancing to shot %d", [self.nextShotIndex intValue]);
-        NSLog(@"nextShotTime: %f", [self.nextShotTime timeIntervalSince1970]);        
+//        NSLog(@"automatically advancing to shot %d", [self.nextShotIndex intValue]);
+//        NSLog(@"nextShotTime: %f", [self.nextShotTime timeIntervalSince1970]);        
     }
 }
 
