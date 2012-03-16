@@ -67,9 +67,9 @@
     static const int pitchGeneratorOutputMapping[] = {0, 4, 5, 7, 10, 12, 14, 17};
 
     int pitchTableIndex = [[self class] pitchGenerator]->nextIndex();
-    NSLog(@"pitchTableIndex: %d", pitchTableIndex);
+//    NSLog(@"pitchTableIndex: %d", pitchTableIndex);
     int pitch = pitchGeneratorOutputMapping[pitchTableIndex];
-    NSLog(@"pitch: %d", pitch);
+//    NSLog(@"pitch: %d", pitch);
     int note = 60 + pitch;
     float freq = 440 * pow(2, (note - 69.0)/12.0);
     

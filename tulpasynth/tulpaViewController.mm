@@ -23,6 +23,8 @@
 #include "PanEntity.h"
 #include "LongPressEntity.h"
 
+#include "TrigLookupTables.h"
+
 #import "b2EdgeShape.h"
 
 #import "FallingBall.h"
@@ -163,6 +165,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    TrigLookupTables::generate();
     
     self.socketHandler = [[SocketHandler alloc] initWithController:self];
     self.waitingForIds = [[NSMutableArray alloc] init];

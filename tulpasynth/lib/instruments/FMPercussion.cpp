@@ -6,7 +6,6 @@
  *              Copyright (c) 2012 Colin Sullivan
  *              Licensed under the GPLv3 license.
  **/
-#include <math.h>
 
 #include "FMPercussion.hpp"
 #include "Envelopes.hpp"
@@ -43,37 +42,44 @@ stk::StkFrames& FMPercussion::next_buf(stk::StkFrames& frames) {
     stk::StkFloat carrierEnvelopeValue;
     stk::StkFloat modulatorEnvelopeValue;
     
-    for(int i = 0; i < frames.frames(); i++) {
-        // Modulator wave is a sine wave
-        this->_modulatorPhase += this->_modulatorFrequency/stk::SRATE;
-        if(this->_modulatorPhase > 1.0f) {
-            this->_modulatorPhase -= 1.0f;
-        }
-        // Modulation value will oscillate between [-0.5, 0.5] if index is 0.5,
-        // [-0.33, 0.33] if index is 0.33, etc
-        modulationValue = this->_modulationIndex*(stk::StkFloat)sin(stk::TWO_PI*this->_modulatorPhase);
-        
-        modulatorEnvelopeValue = FMPercussion::ModulatorAttackEnvelopeLookup[(int)floor(this->_modulatorEnvelope->tick()*10000.0)];
-        
-        modulationValue *= modulatorEnvelopeValue;
-        
-        // Carrier wave is also a sine wave, with a frequency modulated by above
-        _carrierPhase += (this->_carrierFrequency + this->_carrierFrequency*modulationValue)/stk::SRATE;
-        if(_carrierPhase > 1.0f) {
-            _carrierPhase -= 1.0f;
-        }
-        
-        // Carrier envelope value from lookup table
-        carrierEnvelopeValue = FMPercussion::CarrierAttackEnvelopeLookup[(int)floor(this->_carrierEnvelope->tick()*10000.0)];
-                
-        // Resulting sample is output of carrier wave
-        frames[i*NUM_CHANNELS+0] = frames[i*NUM_CHANNELS+1] = carrierEnvelopeValue*(stk::StkFloat)sin(stk::TWO_PI * this->_carrierPhase);
-        
-        // if we're done
-        if (this->_carrierEnvelope->getState() == 0.0) {
-            this->stop();
-        }
+    
+//    
+    
+    if (this->mPlaying) {
+        for(int i = 0; i < frames.frames(); i++) {
+            // Modulator wave is a sine wave
+            this->_modulatorPhase += this->_modulatorFrequency/stk::SRATE;
+            if(this->_modulatorPhase > 1.0f) {
+                this->_modulatorPhase -= 1.0f;
+            }
+            // Modulation value will oscillate between [-0.5, 0.5] if index is 0.5,
+            // [-0.33, 0.33] if index is 0.33, etc
+            modulationValue = this->_modulationIndex*TrigLookupTables::SIN_LOOKUP[(int)floor(this->_modulatorPhase*10000.0)];
+            
+            modulatorEnvelopeValue = FMPercussion::ModulatorAttackEnvelopeLookup[(int)floor(this->_modulatorEnvelope->tick()*10000.0)];
+            
+            modulationValue *= modulatorEnvelopeValue;
+            
+            // Carrier wave is also a sine wave, with a frequency modulated by above
+            _carrierPhase += (this->_carrierFrequency + this->_carrierFrequency*modulationValue)/stk::SRATE;
+            if(_carrierPhase > 1.0f) {
+                _carrierPhase -= 1.0f;
+            }
+            
+            // Carrier envelope value from lookup table
+            carrierEnvelopeValue = FMPercussion::CarrierAttackEnvelopeLookup[(int)floor(this->_carrierEnvelope->tick()*10000.0)];
+            
+            // Resulting sample is output of carrier wave
+            //        frames[i*NUM_CHANNELS+0] = frames[i*NUM_CHANNELS+1] = carrierEnvelopeValue*(stk::StkFloat)SIN_LOOKUP[(int)floor(this->_carrierPhase * 10000.0)];
+            frames[i*NUM_CHANNELS+0] = frames[i*NUM_CHANNELS+1] = carrierEnvelopeValue*TrigLookupTables::SIN_LOOKUP[(int)floor(this->_carrierPhase*10000.0)];
+            
+            // if we're done
+            if (this->_carrierEnvelope->getState() == 0.0) {
+                this->stop();
+            }
+        }        
     }
+    
     return frames;
         
 

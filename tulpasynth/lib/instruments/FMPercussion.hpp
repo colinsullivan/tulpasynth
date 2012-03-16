@@ -14,6 +14,8 @@
 
 #include "Instrument.hpp"
 
+#include "TrigLookupTables.h"
+
 namespace instruments {
 
     class FMPercussion : public Instrument

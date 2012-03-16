@@ -61,6 +61,7 @@
 		3B7EB48E14F8462D00452194 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7EB46C14F845C700452194 /* libRestKit.a */; };
 		3BAAEE0F15102DBC00353521 /* MarkovChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAEE0D15102DB700353521 /* MarkovChain.cpp */; };
 		3BAAEE1215104D5E00353521 /* SecondOrderMarkovChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAEE1015104D5E00353521 /* SecondOrderMarkovChain.cpp */; };
+		3BB550EB1513CD97005106A3 /* TrigLookupTables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB550EA1513CD97005106A3 /* TrigLookupTables.cpp */; };
 		3BBE9FA014F8513F0013CB1A /* View.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE9F9F14F8513F0013CB1A /* View.mm */; };
 		3BCEB90D150D2C26007CFA08 /* ShooterRateSlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */; };
 		3BCEB910150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */; };
@@ -462,6 +463,8 @@
 		3BAAEE0E15102DB900353521 /* MarkovChain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MarkovChain.hpp; path = lib/MarkovChain.hpp; sourceTree = "<group>"; };
 		3BAAEE1015104D5E00353521 /* SecondOrderMarkovChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecondOrderMarkovChain.cpp; path = lib/SecondOrderMarkovChain.cpp; sourceTree = "<group>"; };
 		3BAAEE1115104D5E00353521 /* SecondOrderMarkovChain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SecondOrderMarkovChain.hpp; path = lib/SecondOrderMarkovChain.hpp; sourceTree = "<group>"; };
+		3BB550E91513CD67005106A3 /* TrigLookupTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrigLookupTables.h; sourceTree = "<group>"; };
+		3BB550EA1513CD97005106A3 /* TrigLookupTables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrigLookupTables.cpp; sourceTree = "<group>"; };
 		3BBE9F9E14F8513F0013CB1A /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
 		3BBE9F9F14F8513F0013CB1A /* View.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = View.mm; sourceTree = "<group>"; };
 		3BCEB90B150D2C26007CFA08 /* ShooterRateSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterRateSlider.h; sourceTree = "<group>"; };
@@ -1773,6 +1776,8 @@
 				3BE269C814F8430D00AFC61E /* FMPercussion.hpp */,
 				3BE269C914F8430D00AFC61E /* Instrument.cpp */,
 				3BE269CA14F8430D00AFC61E /* Instrument.hpp */,
+				3BB550E91513CD67005106A3 /* TrigLookupTables.h */,
+				3BB550EA1513CD97005106A3 /* TrigLookupTables.cpp */,
 			);
 			name = instruments;
 			path = lib/instruments;
@@ -2189,6 +2194,7 @@
 				3B2A4B241510058500F2DF5E /* PolygonObstacle.mm in Sources */,
 				3BAAEE0F15102DBC00353521 /* MarkovChain.cpp in Sources */,
 				3BAAEE1215104D5E00353521 /* SecondOrderMarkovChain.cpp in Sources */,
+				3BB550EB1513CD97005106A3 /* TrigLookupTables.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
