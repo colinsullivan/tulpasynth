@@ -1,13 +1,13 @@
 //
-//  TriObstacleModel.h
+//  BlackholeModel.h
 //  tulpasynth
 //
-//  Created by Colin Sullivan on 3/13/12.
+//  Created by Colin Sullivan on 3/16/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "ObstacleModel.h"
 
-@interface TriObstacleModel : ObstacleModel
+@interface BlackholeModel : ObstacleModel
 
 @end

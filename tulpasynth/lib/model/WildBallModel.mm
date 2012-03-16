@@ -30,8 +30,8 @@
 + (NSMutableDictionary*) defaultAttributes {
     NSMutableDictionary* defaults = [super defaultAttributes];
     
-    [defaults setValue:[NSNumber numberWithFloat:2.0] forKey:@"height"];
-    [defaults setValue:[NSNumber numberWithFloat:2.0] forKey:@"width"];
+    [defaults setValue:[NSNumber numberWithFloat:1.5] forKey:@"height"];
+    [defaults setValue:[NSNumber numberWithFloat:1.5] forKey:@"width"];
     
     return defaults;
 }

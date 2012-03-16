@@ -13,7 +13,7 @@
 @implementation RadialToolbox
 
 @synthesize active, prototypes;
-@synthesize squarePrototype, shooterPrototype, triPrototype;
+@synthesize squarePrototype, shooterPrototype, triPrototype, blackholePrototype;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -25,16 +25,19 @@
     [super setPosition:aPosition];
     
     self.squarePrototype.position = new b2Vec2(
-                                               self.position->x + 7,
+                                               self.position->x + 8.5,
                                                self.position->y + 7
                                                );
     self.shooterPrototype.position = new b2Vec2(
-                                            self.position->x - 7,
+                                            self.position->x - 8,
                                             self.position->y + 7
                                             );
     
-    self.triPrototype.position = new b2Vec2(self.position->x + 10,
+    self.triPrototype.position = new b2Vec2(self.position->x + 12,
                                             self.position->y + 2);
+    
+    self.blackholePrototype.position = new b2Vec2(self.position->x - 11,
+                                                  self.position->y + 1);
 }
 
 - (void) initialize {
@@ -81,6 +84,12 @@
     self.triPrototype.angle = [[[TriObstacleModel defaultAttributes] valueForKey:@"angle"] floatValue];
     self.triPrototype.shapeFixture->SetFilterData(filterData);
     [self.prototypes addObject:self.triPrototype];
+    
+    self.blackholePrototype = [[Blackhole alloc] initWithController:self.controller withModel:NULL];
+    self.blackholePrototype.width = [[[BlackholeModel defaultAttributes] valueForKey:@"width"] floatValue];
+    self.blackholePrototype.height = [[[BlackholeModel defaultAttributes] valueForKey:@"height"] floatValue];
+    self.blackholePrototype.shapeFixture->SetFilterData(filterData);
+    [self.prototypes addObject:self.blackholePrototype];
     
     
     self.effect.texture2d0.name = self.controller.toolboxTexture.name;
@@ -146,6 +155,14 @@
                                                                                                 @"x", [NSNumber numberWithFloat:self.position->x],
                                                                                                 @"y", [NSNumber numberWithFloat:self.position->y], nil],
                                                                            nil]];
+    }
+    else if ([self.blackholePrototype handleTap:tap]) {
+        // create new blackhole
+        [[BlackholeModel alloc] initWithController:self.controller withAttributes:[NSDictionary dictionaryWithKeysAndObjects:
+                                                                                   @"initialPosition", [NSDictionary dictionaryWithKeysAndObjects:
+                                                                                                        @"x", [NSNumber numberWithFloat:self.position->x],
+                                                                                                        @"y", [NSNumber numberWithFloat:self.position->y], nil]
+                                                                                   , nil]];
     }
     
     self.active = false;

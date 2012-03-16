@@ -16,6 +16,9 @@
 #import "TriObstacle.h"
 #import "TriObstacleModel.h"
 
+#import "Blackhole.h"
+#import "BlackholeModel.h"
+
 @interface RadialToolbox : PhysicsEntity
 
 @property BOOL active;
@@ -25,6 +28,7 @@
 @property (strong, nonatomic) BlockObstacle* squarePrototype;
 @property (strong, nonatomic) Shooter* shooterPrototype;
 @property (strong, nonatomic) TriObstacle* triPrototype;
+@property (strong, nonatomic) Blackhole* blackholePrototype;
 
 - (void) initialize;
 

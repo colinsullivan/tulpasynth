@@ -52,6 +52,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong) GLKTextureInfo* shooterRadialMenuBackground;
 @property (strong) GLKTextureInfo* shooterRadialMenuPointer;
 @property (strong) GLKTextureInfo* triObstacleTexture;
+@property (strong) GLKTextureInfo* blackholeTexture;
 
 /**
  *  Colors 

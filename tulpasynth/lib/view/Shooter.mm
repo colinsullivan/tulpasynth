@@ -82,6 +82,10 @@
     
 //    lastPerc = 0.0;
 //    prevTimeUntilNextShot = -1.0;
+    
+    self.effect.texture2d0.name = self.controller.shooterTexture.name;
+    self.effect.useConstantColor = YES;
+
 }
 
 
@@ -92,10 +96,8 @@
 
 -(void)prepareToDraw {
     float shooterOpacity = 1.0 - self.glow;
-    self.effect.useConstantColor = YES;
     GLKVector4 greenColor = self.controller.greenColor;
     self.effect.constantColor = GLKVector4Make(greenColor.r * shooterOpacity, greenColor.g * shooterOpacity, greenColor.b * shooterOpacity, shooterOpacity);
-    self.effect.texture2d0.name = self.controller.shooterTexture.name;
 
     [super prepareToDraw];
 
@@ -139,7 +141,7 @@
     ShooterModel* model = ((ShooterModel*)self.model);
 
     
-    float velocityScalar = 5.0;
+    float velocityScalar = 7.0;
     
     float wildBallWidth = [[[WildBallModel defaultAttributes] valueForKey:@"width"] floatValue];
     

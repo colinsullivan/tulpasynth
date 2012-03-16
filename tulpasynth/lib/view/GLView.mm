@@ -54,6 +54,10 @@ static GLubyte SquareIndices[] = {
 //    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof([self indices]), [self indices], GL_STATIC_DRAW);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(SquareIndices), SquareIndices, GL_DYNAMIC_DRAW);
 
+    self.effect.texture2d0.enabled = GL_TRUE;
+    self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
+    self.effect.texture2d0.target = GLKTextureTarget2D;
+
     [[GLView Instances] addObject:self];
 }
 
@@ -65,10 +69,6 @@ static GLubyte SquareIndices[] = {
 }
 
 - (void)prepareToDraw {
-    self.effect.texture2d0.enabled = GL_TRUE;
-    self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
-    self.effect.texture2d0.target = GLKTextureTarget2D;
-    
     [self.effect prepareToDraw];
     
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);

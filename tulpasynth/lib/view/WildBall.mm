@@ -36,7 +36,7 @@
     self.shapeFixture = self.body->CreateFixture(&myShapeFixture);
     
     b2MassData myBodyMass;
-    myBodyMass.mass = 0.25f;
+    myBodyMass.mass = 2.00f;
     myBodyMass.center.SetZero();
     self.body->SetMassData(&myBodyMass);
     
