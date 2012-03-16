@@ -237,6 +237,9 @@ db.on "ready", () ->
 
                     instance.set data.attributes
 
+                    # Update message data with model attributes
+                    data.attributes = instance.toJSON()
+
                 # Relay update message to other connected clients
                 data.method = "update"
                 sendToAllButOne data, ws, ["shotTimes"]
