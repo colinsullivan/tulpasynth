@@ -21,6 +21,11 @@
 
 @synthesize longPressable, longPresser;
 
+@synthesize rotateable, rotator, preGestureAngle;
+
+@synthesize pincheable, pincher, preScalingWidth, preScalingHeight;
+
+
 - (b2Vec2*)position {
     b2Vec2 bodyPosition = self.body->GetPosition();
     
@@ -49,9 +54,13 @@
     [super initialize];
     
     self.prePanningPosition = new b2Vec2();
-    self.pannable = false;
+    self.pannable = true;
     
     self.longPressable = false;
+    
+    self.rotateable = true;
+    
+    self.pincheable = true;
 
     
     PhysicsEntityModel* model = ((PhysicsEntityModel*)self.model);
@@ -182,15 +191,25 @@
 }
 
 - (void) handlePanStarted {
+    self.model.ignoreUpdates = true;
     self.prePanningPosition->Set(self.position->x, self.position->y);    
 }
 
 - (void) handlePanEnded {
     [self.model synchronize];
+    self.model.ignoreUpdates = false;
 }
 
 - (void) handlePanUpdate {
+    PhysicsEntityModel* model = (PhysicsEntityModel*)self.model;
+    b2Vec2 newPos = (*self.prePanningPosition) + self.panner->translation;
     
+    // save position to model
+    model.position = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                      [NSNumber numberWithFloat:newPos.x], @"x",
+                      [NSNumber numberWithFloat:newPos.y], @"y",
+                      nil];
+
 }
 
 - (GLboolean) handleTap:(TapEntity *) tap {
@@ -232,5 +251,114 @@
     
     return false;
 }
+
+- (GLboolean) handleRotate:(RotateEntity *) rotate {
+    if (self.rotateable) {
+        // if rotate just started
+        if (rotate->state == GestureEntityStateStart) {
+            // if both touches are in us
+            if (
+                [self _touchIsInside:rotate->touches[0] withFudge:2.0]
+                &&
+                [self _touchIsInside:rotate->touches[1] withFudge:2.0]
+                ) {
+                self.rotator = rotate;
+                self.preGestureAngle = self.angle;
+                
+                [self handleRotateStarted];
+                
+                return true;
+            }
+            //        else if(self.rotator) {
+            //            self.rotator = nil;
+            //        }
+        }
+        else if(rotate->state == GestureEntityStateUpdate && self.rotator == rotate) {
+            [self handleRotateUpdated];
+            return true;
+        }
+        // if rotate gesture ended and we were just being rotated
+        else if (rotate->state == GestureEntityStateEnd && self.rotator == rotate) {
+            self.rotator = nil;
+            
+            [self.model synchronize];
+            
+            [self handleRotateEnded];
+            
+            return true;
+            
+        }
+
+    }
+    
+    return false;
+}
+
+- (void) handleRotateStarted {
+    self.model.ignoreUpdates = true;
+}
+- (void) handleRotateUpdated {
+    PhysicsEntityModel* model = (PhysicsEntityModel*)self.model;
+    model.angle = [NSNumber numberWithFloat:self.preGestureAngle + self.rotator->rotation];
+}
+- (void) handleRotateEnded {
+    self.model.ignoreUpdates = false;
+}
+
+- (GLboolean) handlePinch:(PinchEntity *) pinch {
+    if (self.pincheable) {
+        // If pinch just started
+        if (pinch->state == GestureEntityStateStart) {
+            // If both touches are in us
+            if (
+                [self _touchIsInside:pinch->touches[0] withFudge:2.0]
+                &&
+                [self _touchIsInside:pinch->touches[1] withFudge:2.0]
+                ) {
+                self.pincher = pinch;
+                self.preScalingWidth = self.width;
+                self.preScalingHeight = self.height;
+                
+                [self handlePinchStarted];
+                
+                return true;
+            }
+            //        // incase we were watching an old pincher
+            //        else if (self.pincher) {
+            //            self.pincher = nil;
+            //        }
+        }
+        else if(pinch->state == GestureEntityStateUpdate && self.pincher == pinch) {
+            [self handlePinchUpdated];
+            return true;
+        }
+        // if pinch has ended and we were following this pincher
+        else if(pinch->state == GestureEntityStateEnd && self.pincher == pinch) {
+            self.pincher = nil;
+            
+            [self.model synchronize];
+            
+            [self handlePinchEnded];
+        }
+    }    
+    return false;
+}
+
+- (void) handlePinchStarted {
+    PhysicsEntityModel* model = (PhysicsEntityModel*)self.model;
+    model.ignoreUpdates = true;
+
+}
+- (void) handlePinchUpdated {
+    PhysicsEntityModel* model = (PhysicsEntityModel*)self.model;
+    model.width = [NSNumber numberWithFloat:self.preScalingWidth * self.pincher->scale];
+    model.height = [NSNumber numberWithFloat:self.preScalingHeight * self.pincher->scale];
+    
+}
+- (void) handlePinchEnded {
+    PhysicsEntityModel* model = (PhysicsEntityModel*)self.model;
+    model.ignoreUpdates = false;
+}
+
 
 @end

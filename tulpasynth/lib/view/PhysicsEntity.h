@@ -15,6 +15,10 @@
 #include "PanEntity.h"
 #include "TapEntity.h"
 #include "LongPressEntity.h"
+#include "RotateEntity.h"
+#include "PinchEntity.h"
+
+
 
 #import "GLView.h"
 #import "PhysicsEntityModel.h"
@@ -148,6 +152,51 @@
 - (void) handleLongPressUpdated;
 - (void) handleLongPressEnded;
 
+/**
+ *  Wether or not this object responds to a rotate gesture.
+ **/
+@property (nonatomic) BOOL rotateable;
+/**
+ *  Handler for a rotate gesture as invoked by the view.
+ **/
+- (GLboolean) handleRotate:(RotateEntity *) rotate;
+/**
+ *  The entity that is currently rotating this object.
+ **/
+@property RotateEntity * rotator;
+/**
+ *  Rotation value before gesture began
+ **/
+@property float32 preGestureAngle;
+/**
+ *  Handlers for when a rotate has started, updated, and ended.
+ **/
+- (void) handleRotateStarted;
+- (void) handleRotateUpdated;
+- (void) handleRotateEnded;
 
+
+/**
+ *  Wether or not this object responds to a pinch gesture
+ **/
+@property (nonatomic) BOOL pincheable;
+/**
+ *  The pinch gesture recognizer if this object is currently being pinched
+ **/
+@property PinchEntity * pincher;
+/**
+ *  Width and height properties for use when scaling (pinching)
+ **/ 
+@property GLfloat preScalingWidth, preScalingHeight;
+/**
+ *  handlePinch method as invoked by the view
+ **/
+- (GLboolean) handlePinch:(PinchEntity *) pinch;
+/**
+ *  Handlers for when a pinch has started, updated, and ended.
+ **/
+- (void) handlePinchStarted;
+- (void) handlePinchUpdated;
+- (void) handlePinchEnded;
 
 @end
