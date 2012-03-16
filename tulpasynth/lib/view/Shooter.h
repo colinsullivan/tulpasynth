@@ -44,7 +44,7 @@
 /**
  *  Time we fired the last ball.
  **/
-@property (strong, nonatomic) NSDate* lastShotTime;
+//@property (strong, nonatomic) NSDate* lastShotTime;
 
 /**
  *  Time when the next ball will be fired
@@ -84,6 +84,11 @@
 - (void) startAnimating;
 
 - (void) shootBall;
+
+/**
+ *  Cache shot times from model
+ **/
+@property (strong, nonatomic) NSMutableArray* shotTimes;
 
 /**
  *  Radial menu that pops up to change rate

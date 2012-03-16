@@ -13,7 +13,7 @@
 
 @implementation Shooter
 
-@synthesize instr, effect1, glow, rateSlider, rateBeforeSliding, nextShotTime, prevTimeUntilNextShot, animating, nextShotIndex, animatingPerc, lastAnimatingPerc;
+@synthesize instr, effect1, glow, rateSlider, rateBeforeSliding, nextShotTime, prevTimeUntilNextShot, animating, nextShotIndex, animatingPerc, lastAnimatingPerc, shotTimes;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -68,6 +68,9 @@
 //    self.lastShotTime = nil;
 
     if ([model.rate floatValue] > 0.0f) {
+        self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];
+        self.nextShotIndex = [NSNumber numberWithInt:-1];
+        [self advanceToNextShot];
 //        self.waitingToShoot = true;
 //        instr->play();
 //        self.animating = true;
@@ -166,15 +169,14 @@
                          nil]];
     
 //    self.lastShotTime = model.nextShotTime;
-    if (model.ignoreUpdates) {
-        // determine own next shot time
-        self.nextShotTime = [NSDate dateWithTimeInterval:(1.0/[model.rate floatValue]) sinceDate:self.nextShotTime];
-        self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
-    }
-    else {
+//    if (model.ignoreUpdates) {
+//        // determine own next shot time
+//        self.nextShotTime = [NSDate dateWithTimeInterval:(1.0/[model.rate floatValue]) sinceDate:self.nextShotTime];
+//        self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
+//    }
+//    else {
         [self advanceToNextShot];
-    }
-    self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
+//    }
 }
 
 - (void) advanceToNextShot {
@@ -197,12 +199,18 @@
     
     ShooterModel* model = ((ShooterModel*)self.model);
     
-    if ([keyPath isEqualToString:@"nextShotIndex"]) {
-        NSLog(@"nextShotIndex changed");
+    if ([keyPath isEqualToString:@"shotTimes"]) {
+//        NSLog(@"shotTimes changed");
         if ([model.rate floatValue] > 0.0) {
-            self.nextShotIndex = model.nextShotIndex;
-            self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex integerValue]];
-            self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
+            // if new shot times array is not greater, we should reset index
+            if ([model.shotTimes count] <= [self.shotTimes count]) {
+                self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];
+                self.nextShotIndex = [NSNumber numberWithInt:-1];
+                [self advanceToNextShot];
+            }
+            else {
+                self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];
+            }
         }
 //        self.nextShotIndex = model.nextShotIndex;
 //        self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex intValue]];
@@ -260,25 +268,25 @@
 
     self.animatingPerc = instr->percentComplete();
     float shootPerc = (49572.0/50969.0);
-    if (self.animating) {
-        // actually shoot ball when sound transient occurs
-        //        NSLog(@"instr->percentComplete(): %f", instr->percentComplete());
-        if (
-            // current playhead is past shoot marker, and previous playhead was in front
-            (animatingPerc > shootPerc && lastAnimatingPerc < shootPerc)
-            ||
-            // prev playhead was in front, and current playhead has wrapped around
-            (lastAnimatingPerc < shootPerc && animatingPerc < lastAnimatingPerc)
-            ) {
-            self.animating = false;
-            self.glow = 1.0;
-            [self shootBall];
-        }
-        else {
-            // increase glow
-            self.glow = (instr->percentComplete() / shootPerc);
-        }
+
+    // actually shoot ball when sound transient occurs
+    //        NSLog(@"instr->percentComplete(): %f", instr->percentComplete());
+    if (
+        // current playhead is past shoot marker, and previous playhead was in front
+        (animatingPerc > shootPerc && lastAnimatingPerc < shootPerc)
+        ||
+        // prev playhead was in front, and current playhead has wrapped around
+        (lastAnimatingPerc < shootPerc && animatingPerc < lastAnimatingPerc)
+        ) {
+//        self.animating = false;
+        self.glow = 1.0;
+        [self shootBall];
     }
+    else {
+        // increase glow
+        self.glow = (instr->percentComplete() / shootPerc);
+    }
+
     lastAnimatingPerc = animatingPerc;
 
 
@@ -286,7 +294,7 @@
     if (
         timeUntilNextShot < 0 && prevTimeUntilNextShot > 0
         ) {
-        //        NSLog(@"shooting");
+//        NSLog(@"shooting");
         
         [self startAnimating];
         
@@ -335,6 +343,7 @@
     ShooterModel* model = ((ShooterModel*)self.model);
     float newRate = [rateBeforeSliding floatValue] + (0.3*self.longPresser->translation.y);
     model.rate = [NSNumber numberWithFloat:newRate];
+    [model generateNewShotTimes];
 }
 - (void) handleLongPressEnded {
 //    NSLog(@"Shooter.handleLongPressEnded");
@@ -344,7 +353,6 @@
 
     // TODO: synchronization race condition here.  ignoreUpdates should be
     // turned off in callback
-    [model generateNewShotTimes];
     [model synchronize];
     
     model.ignoreUpdates = false;

@@ -10,7 +10,7 @@
 
 @implementation ShooterModel
 
-@synthesize rate, nextShotTime, shotTimes, nextShotIndex;
+@synthesize rate, nextShotTime, shotTimes;
 
 + (NSNumber*) maxRate {
     static NSNumber* theMaxRate;
@@ -74,7 +74,7 @@
     [attrs addObject:@"rate"];
     [attrs addObject:@"nextShotTime"];
     [attrs addObject:@"shotTimes"];
-    [attrs addObject:@"nextShotIndex"];
+//    [attrs addObject:@"nextShotIndex"];
     
     return attrs;
 }
@@ -85,7 +85,7 @@
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"width"];
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"height"];
     [defaults setValue:[NSNumber numberWithFloat:1.0] forKey:@"rate"];
-    [defaults setValue:[NSNumber numberWithInt:0] forKey:@"nextShotIndex"];
+//    [defaults setValue:[NSNumber numberWithInt:0] forKey:@"nextShotIndex"];
     
     
     return defaults;
@@ -149,7 +149,7 @@
                       [NSDate dateWithTimeInterval:(1.0/[self.rate doubleValue])*2.0 sinceDate:now],
                       [NSDate dateWithTimeInterval:(1.0/[self.rate doubleValue])    *3.0 sinceDate:now],
                       nil];
-    self.nextShotIndex = [NSNumber numberWithInt:0];
+//    self.nextShotIndex = [NSNumber numberWithInt:0];
 //    // generate a few more shot times
 //    NSDate* last = [self.shotTimes objectAtIndex:[self.shotTimes count]-1];
 //    while ([last timeIntervalSinceDate:now] > 2.0) {
@@ -157,6 +157,6 @@
 //        last = [self.shotTimes objectAtIndex:[self.shotTimes count]-1];
 //    }
     
-    NSLog(@"self.shotTimes: %@", self.shotTimes);
+//    NSLog(@"self.shotTimes: %@", self.shotTimes);
 }
 @end

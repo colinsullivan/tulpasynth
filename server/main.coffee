@@ -225,7 +225,7 @@ db.on "ready", () ->
                             # ignore shot times
                             delete data.attributes.shotTimes
                             # ignore shot index
-                            delete data.attributes.nextShotIndex
+                            # delete data.attributes.nextShotIndex
                         # Rate has changed, compensate shot times
                         else
                             compensatedShotTimes = []
