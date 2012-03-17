@@ -232,17 +232,32 @@ db.on "ready", () ->
                             for shotTime in data.attributes.shotTimes
                                 compensatedShotTimes.push shotTime+ws.timeOffset
 
+
                             data.attributes.shotTimes = compensatedShotTimes
 
-
+                        # If we're deleting this shooter
+                        if data.attributes.destroyed == true
+                            clearTimeout instance.nextUpdateTimeout
+                            data.attributes.destroyedAndSynced = true
+                    
                     instance.set data.attributes
+
 
                     # Update message data with model attributes
                     data.attributes = instance.toJSON()
 
-                # Relay update message to other connected clients
-                data.method = "update"
-                sendToAllButOne data, ws, ["shotTimes"]
+                # if model was being destroyed
+                if data.attributes.destroyed == true
+                    # Acknowledge
+                    data.attributes.destroyedAndSynced = true
+
+                    # relay to all
+                    data.method = "update"
+                    sendToAll data, ws, ["shotTimes"]
+                else
+                    # Relay update message to other connected clients
+                    data.method = "update"
+                    sendToAllButOne data, ws, ["shotTimes"]
 
                 # unpauseAll()
             else if data.method == "time_sync"

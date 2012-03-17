@@ -26,7 +26,7 @@
     
     [super initialize];
     
-    self.longPressable = true;
+    self.longPressable = false;
     
     self.effect1 = [[GLKBaseEffect alloc] init];
     self.effect1.transform.projectionMatrix = GLKMatrix4MakeOrtho(
@@ -238,6 +238,12 @@
 ////            model.nextShotTime = [NSDate dateWithTimeIntervalSinceNow:(1.0/[model.rate floatValue])];
 ////        }
     }
+    
+    // if model was destroyed
+    else if ([keyPath isEqualToString:@"destroyed"]) {
+        instr->stop();
+        instr->reset();
+    }
 }
 
 - (void) startAnimating {
@@ -258,6 +264,9 @@
 //        NSLog(@"[self.nextShotTime timeIntervalSinceNow]: %f", [self.nextShotTime timeIntervalSinceNow]);
 //    }
 
+    if (!self.active) {
+        return;
+    }
 
     NSTimeInterval timeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
 
@@ -328,7 +337,6 @@
 //    }
     
     [rateSlider update];
-    
 }
 
 - (void) setSelected:(BOOL)wasSelected {
@@ -351,25 +359,6 @@
     }
     
     return false;
-}
-
-
-- (void) handleLongPressStarted {
-//    NSLog(@"Shooter.handleLongPressStarted");
-    ShooterModel* model = ((ShooterModel*)self.model);
-
-    
-    rateSlider.active = true;
-}
-- (void) handleLongPressUpdated {
-    
-}
-- (void) handleLongPressEnded {
-//    NSLog(@"Shooter.handleLongPressEnded");
-    ShooterModel* model = ((ShooterModel*)self.model);
-    
-    
-
 }
 
 

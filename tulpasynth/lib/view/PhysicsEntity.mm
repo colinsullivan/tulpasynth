@@ -25,6 +25,11 @@
 
 @synthesize pincheable, pincher, preScalingWidth, preScalingHeight;
 
+@synthesize active;
+
+- (void)setActive:(BOOL)isActive {
+    active = isActive;
+}
 
 - (b2Vec2*)position {
     b2Vec2 bodyPosition = self.body->GetPosition();
@@ -82,6 +87,14 @@
         
 }
 
+- (id) initWithController:(tulpaViewController *)theController withModel:(Model *)aModel {
+    if (self = [super initWithController:theController withModel:aModel]) {
+        // set active to true after initialize
+        self.active = true;
+    }
+    return self;
+}
+
 - (void)dealloc {
     delete (b2Vec2*)self.prePanningPosition;
     delete (b2Vec2*)self.position;
@@ -137,6 +150,18 @@
     else if ([keyPath isEqualToString:@"position"]) {
         self.position = new b2Vec2([[[change valueForKey:@"new"] valueForKey:@"x"] floatValue], [[[change valueForKey:@"new"] valueForKey:@"y"] floatValue]);
     }
+    // if model was destroyed
+    else if ([keyPath isEqualToString:@"destroyed"] && [self.model.destroyed boolValue] == true) {
+        //        NSLog(@"wildBall destroying self");
+        // do not display
+        self.active = false;
+        
+    }
+    // if destruction was synchronized
+    else if ([keyPath isEqualToString:@"destroyedAndSynced"] && [self.model.destroyedAndSynced boolValue] == true) {
+        [self.controller.physicsEntitiesToDestroy addObject:self];
+    }
+
 }
 
 + (NSMutableArray*) Instances {
@@ -395,6 +420,12 @@
 
 - (void) handleCollision:(PhysicsEntity*)otherEntity withStrength:(float)collisionStrength {
     
+}
+
+- (void) draw {
+    if (self.active) {
+        [super draw];
+    }
 }
 
 

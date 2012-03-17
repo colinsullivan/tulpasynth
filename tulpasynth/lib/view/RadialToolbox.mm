@@ -96,15 +96,18 @@
     self.effect.texture2d0.name = self.controller.toolboxTexture.name;
 }
 
+- (id) initWithController:(tulpaViewController *)theController withModel:(Model *)aModel {
+    if (self = [super initWithController:theController withModel:aModel]) {
+        
+        // inactive initially
+        self.active = false;
+    }
+    return self;
+}
+
 - (void) dealloc {
 //    [self dealloc];
     delete (b2CircleShape*)self.shape;
-}
-
-- (void) draw {
-    if (self.active) {
-        [super draw];        
-    }
 }
 
 - (void) postDraw {

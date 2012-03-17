@@ -53,12 +53,14 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong) GLKTextureInfo* shooterRadialMenuPointer;
 @property (strong) GLKTextureInfo* triObstacleTexture;
 @property (strong) GLKTextureInfo* blackholeTexture;
+@property (strong) GLKTextureInfo* deleteButtonTexture;
 
 /**
  *  Colors 
  **/
 @property GLKVector4 greenColor;
 @property GLKVector4 orangeColor;
+@property GLKVector4 redColor;
 
 /**
  *  Load a texture given a filename (.png assumed).

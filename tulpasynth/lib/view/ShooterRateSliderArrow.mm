@@ -55,6 +55,11 @@
     return;
 }
 
+- (BOOL)active {
+    //active value slaved from slider
+    return self.slider.active;
+}
+
 - (id)initWithController:(tulpaViewController *)theController withModel:(Model *)aModel withShooterRateSlider:(ShooterRateSlider*)aSlider {
     if (self = [super initWithController:theController withModel:aModel]) {
         self.slider = aSlider;
@@ -91,17 +96,6 @@
 //    }
 }
 
-- (void) draw {
-    if (self.slider.active) {
-        [super draw];
-    }
-}
-
-- (void) postDraw {
-    if (self.slider.active) {
-        [super postDraw];
-    }
-}
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

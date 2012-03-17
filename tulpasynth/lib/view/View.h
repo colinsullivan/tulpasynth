@@ -41,6 +41,6 @@
 /**
  *  Mapping of model ids to views
  **/
-+ (NSMutableDictionary*) InstancesByModelId;
+//+ (NSMutableDictionary*) InstancesByModelId;
 
 @end

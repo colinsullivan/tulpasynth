@@ -37,6 +37,9 @@ namespace instruments {
         virtual void play() {
             return Instrument::play();
         }
+        virtual void stop() {
+            return Instrument::stop();
+        }
         virtual float percentComplete();
         
         unsigned long duration();

@@ -205,4 +205,11 @@
 - (void) handleCollision:(PhysicsEntity*)otherEntity withStrength:(float)collisionStrength;
 
 - (void) destroy;
+
+/**
+ *  Wether or not this view will be drawn (TODO: this can invoke an animation
+ *  when enabled/disabled).
+ **/
+@property (nonatomic) BOOL active;
+
 @end

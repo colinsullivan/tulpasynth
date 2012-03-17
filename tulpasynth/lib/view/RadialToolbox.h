@@ -21,8 +21,6 @@
 
 @interface RadialToolbox : PhysicsEntity
 
-@property BOOL active;
-
 @property (strong, nonatomic) NSMutableArray* prototypes;
 
 @property (strong, nonatomic) BlockObstacle* squarePrototype;

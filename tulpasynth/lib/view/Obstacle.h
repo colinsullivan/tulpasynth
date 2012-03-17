@@ -12,6 +12,7 @@
 #include "b2Math.h"
 
 #import "ObstacleModel.h"
+#import "ObstacleDeleteButton.h"
 
 @class tulpaViewController;
 
@@ -32,5 +33,9 @@
  **/
 @property (nonatomic) BOOL selected;
 
+/**
+ *  Delete button
+ **/
+@property (strong, nonatomic) ObstacleDeleteButton* deleteButton;
 
 @end

@@ -35,10 +35,7 @@
 
 - (void) initialize {
     [super initialize];
-    
-    // initially hidden
-    self.active = false;
-    
+
     self.angle = 0.0;
     
     self.shape = new b2CircleShape();
@@ -59,21 +56,23 @@
     arrow = [[ShooterRateSliderArrow alloc] initWithController:self.controller withModel:self.model withShooterRateSlider:self];
 }
 
+- (id) initWithController:(tulpaViewController *)theController withModel:(Model *)aModel {
+    if (self = [super initWithController:theController withModel:aModel]) {
+        // initially hidden
+        self.active = false;
+    }
+    return self;
+}
+
 - (void) dealloc {
     delete (b2CircleShape*)self.shape;
 }
 
 
-- (void) draw {
-    if (self.active) {
-        [super draw];
-    }
-}
-
 - (void) postDraw {
-    if (self.active) {
-        [super postDraw];
-        
+    [super postDraw];
+    
+    if (self.active) {    
         [arrow prepareToDraw];
         [arrow draw];
         [arrow postDraw];
@@ -92,6 +91,9 @@
         if ([arrow handlePan:pan]) {
             return true;
         }
+    }
+    else {
+        return true;
     }
     
     return false;

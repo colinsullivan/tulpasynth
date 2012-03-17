@@ -12,8 +12,6 @@
 
 @interface ShooterRateSlider : PhysicsEntity
 
-@property BOOL active;
-
 @property (strong, nonatomic) ShooterRateSliderArrow* arrow;
 /**
  *  What the shooting rate was before user started changing it.

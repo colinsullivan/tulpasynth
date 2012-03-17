@@ -69,15 +69,4 @@
     
     [super prepareToDraw];
 }
-
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    
-    // if model was destroyed
-    if ([keyPath isEqualToString:@"destroyed"] && [self.model.destroyed boolValue] == true) {
-//        NSLog(@"wildBall destroying self");
-        [self.controller.physicsEntitiesToDestroy addObject:self];
-    }
-    
-}
 @end

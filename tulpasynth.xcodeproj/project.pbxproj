@@ -67,6 +67,8 @@
 		3BB550F815143B3E005106A3 /* blackhole.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3BB550F715143B3E005106A3 /* blackhole.wav */; };
 		3BB550FB151441EE005106A3 /* LoopingRAMpler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB550F9151441ED005106A3 /* LoopingRAMpler.cpp */; };
 		3BBE9FA014F8513F0013CB1A /* View.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE9F9F14F8513F0013CB1A /* View.mm */; };
+		3BC5A221151535E400ADCDD5 /* ObstacleDeleteButton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5A220151535E400ADCDD5 /* ObstacleDeleteButton.mm */; };
+		3BC5A2231515370F00ADCDD5 /* delete-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A2221515370F00ADCDD5 /* delete-button.png */; };
 		3BCEB90D150D2C26007CFA08 /* ShooterRateSlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */; };
 		3BCEB910150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */; };
 		3BCEB911150D2CCC007CFA08 /* Shooter-Radial-Menu-Pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEB90F150D2CCC007CFA08 /* Shooter-Radial-Menu-Pointer.png */; };
@@ -478,6 +480,9 @@
 		3BB550FA151441ED005106A3 /* LoopingRAMpler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LoopingRAMpler.hpp; sourceTree = "<group>"; };
 		3BBE9F9E14F8513F0013CB1A /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
 		3BBE9F9F14F8513F0013CB1A /* View.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = View.mm; sourceTree = "<group>"; };
+		3BC5A21F151535E400ADCDD5 /* ObstacleDeleteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstacleDeleteButton.h; sourceTree = "<group>"; };
+		3BC5A220151535E400ADCDD5 /* ObstacleDeleteButton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObstacleDeleteButton.mm; sourceTree = "<group>"; };
+		3BC5A2221515370F00ADCDD5 /* delete-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-button.png"; sourceTree = "<group>"; };
 		3BCEB90B150D2C26007CFA08 /* ShooterRateSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterRateSlider.h; sourceTree = "<group>"; };
 		3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShooterRateSlider.mm; sourceTree = "<group>"; };
 		3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shooter-Radial-Menu-Background.png"; sourceTree = "<group>"; };
@@ -940,6 +945,7 @@
 		3B043FF214F9AAC900DE16A3 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				3BC5A2221515370F00ADCDD5 /* delete-button.png */,
 				3BB550F51513F3DE005106A3 /* blackhole.png */,
 				3B2A4B2515100B7500F2DF5E /* triobstacle.png */,
 				3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */,
@@ -1092,6 +1098,8 @@
 				3B2A4B231510058400F2DF5E /* PolygonObstacle.mm */,
 				3BB550F21513F200005106A3 /* Blackhole.h */,
 				3BB550F31513F200005106A3 /* Blackhole.mm */,
+				3BC5A21F151535E400ADCDD5 /* ObstacleDeleteButton.h */,
+				3BC5A220151535E400ADCDD5 /* ObstacleDeleteButton.mm */,
 			);
 			name = view;
 			path = lib/view;
@@ -2008,6 +2016,7 @@
 				3B2A4B2615100B7500F2DF5E /* triobstacle.png in Resources */,
 				3BB550F61513F3DE005106A3 /* blackhole.png in Resources */,
 				3BB550F815143B3E005106A3 /* blackhole.wav in Resources */,
+				3BC5A2231515370F00ADCDD5 /* delete-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2217,6 +2226,7 @@
 				3BB550EE1513F1D5005106A3 /* BlackholeModel.mm in Sources */,
 				3BB550F41513F202005106A3 /* Blackhole.mm in Sources */,
 				3BB550FB151441EE005106A3 /* LoopingRAMpler.cpp in Sources */,
+				3BC5A221151535E400ADCDD5 /* ObstacleDeleteButton.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

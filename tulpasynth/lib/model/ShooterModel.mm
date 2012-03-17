@@ -149,7 +149,7 @@
                       [NSDate dateWithTimeInterval:(1.0/[self.rate doubleValue]) sinceDate:now],
                       [NSDate dateWithTimeInterval:(1.0/[self.rate doubleValue])*2.0 sinceDate:now],
                       [NSDate dateWithTimeInterval:(1.0/[self.rate doubleValue])    *3.0 sinceDate:now],
-                      nil];
+                      nil];            
 //    self.nextShotIndex = [NSNumber numberWithInt:0];
 //    // generate a few more shot times
 //    NSDate* last = [self.shotTimes objectAtIndex:[self.shotTimes count]-1];

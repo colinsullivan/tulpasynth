@@ -22,9 +22,17 @@
 @property (nonatomic, assign) tulpaViewController* controller;
 /**
  *  Wether or not this model is currently alive.  When set to true,
- *  model instance will be destroyed.
+ *  corresponding views should display accordingly, but not delete 
+ *  their instances.
  **/
 @property (nonatomic, assign) NSNumber* destroyed;
+
+/**
+ *  Wether or not the destroying of this model has been synchronized.  When set
+ *  to true, the model instance will be destroyed, and corresponding views should
+ *  also be destroyed.
+ **/
+@property (nonatomic, assign) NSNumber* destroyedAndSynced;
 
 - (id) initWithController:(tulpaViewController*)theController withAttributes:(NSMutableDictionary*)attributes;
 

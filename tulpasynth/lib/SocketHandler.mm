@@ -46,6 +46,7 @@
             NSLog(@"ERROR: While serializing: %@", [error localizedDescription]);
         }
         else {
+//            NSLog(@"Sending message: %@", message);
 //            [self.socket writeData:serializedMessage withTimeout:-1 tag:0];
             [self.socket send:serializedMessage];
         }
@@ -174,6 +175,8 @@
 
 - (void) synchronizeModel:(Model*)aModel {
 
+//    NSLog(@"syncronizeModel");
+    
     if (aModel.nosync) {
         return;
     }

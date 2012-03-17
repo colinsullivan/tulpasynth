@@ -49,6 +49,10 @@ namespace instruments {
             return FileWvIn::reset();
         }
         
+        virtual void stop() {
+            return Instrument::stop();
+        }
+        
 //        virtual stk::StkFloat next_samp(int channel);
         virtual stk::StkFrames& next_buf(stk::StkFrames& frames);
         

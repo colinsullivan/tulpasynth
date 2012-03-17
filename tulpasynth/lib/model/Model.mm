@@ -15,7 +15,7 @@
 
 @implementation Model
 
-@synthesize id, controller, initialized, nosync, ignoreUpdates, destroyed;
+@synthesize id, controller, initialized, nosync, ignoreUpdates, destroyed, destroyedAndSynced;
 
 - (void) setInitialized:(BOOL)anInitialized {
     if (anInitialized) {
@@ -27,20 +27,30 @@
 }
 
 - (void) setDestroyed:(NSNumber *)isDestroyed {
+    destroyed = isDestroyed;
+
     if ([isDestroyed boolValue] == true) {
-        try {
-            [[Model Instances] removeObject:self];
-        } catch (NSException* e) {
-            if (e.name == NSRangeException) {
-                NSLog(@"NSRangeException occurred during Model Instances removeObject");
-            }
-            else {
-                NSLog(@"other exception occurred during Model Instances removeObject");
-            }
+        if (!self.nosync) {
+            [self synchronize];
         }
     }
-    destroyed = isDestroyed;
 }
+
+//- (void) setDestroyedAndSynced:(NSNumber *)wasDestroyedAndSynced {
+//    destroyedAndSynced = wasDestroyedAndSynced;
+//    if ([wasDestroyedAndSynced boolValue] == true) {
+//        try {
+//            [[Model Instances] removeObject:self];
+//        } catch (NSException* e) {
+//            if (e.name == NSRangeException) {
+//                NSLog(@"NSRangeException occurred during Model Instances removeObject");
+//            }
+//            else {
+//                NSLog(@"other exception occurred during Model Instances removeObject");
+//            }
+//        }        
+//    }
+//}
 
 - (id) initWithController:(tulpaViewController*)theController withAttributes:(NSMutableDictionary*)attributes {
 //    static int nextId = 0;
@@ -101,7 +111,11 @@
 }
 
 - (NSMutableArray*) serializableAttributes {
-    NSMutableArray* attributes = [[NSMutableArray alloc] initWithObjects:@"id", @"destroyed", nil];
+    NSMutableArray* attributes = [[NSMutableArray alloc] initWithObjects:
+                                  @"id",
+                                  @"destroyed",
+                                  @"destroyedAndSynced",
+                                nil];
     
     return attributes;
 }
@@ -175,8 +189,9 @@
 
 + (NSMutableDictionary*) defaultAttributes {
     return [NSMutableDictionary dictionaryWithKeysAndObjects:
-            @"destroyed", [NSNumber numberWithBool:false]
-            , nil];
+            @"destroyed", [NSNumber numberWithBool:false],
+            @"destroyedAndSynced", [NSNumber numberWithBool:false],
+            nil];
 }
 
 //+ (NSMutableDictionary*) constraints {

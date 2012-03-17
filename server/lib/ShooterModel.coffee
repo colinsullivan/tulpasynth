@@ -15,6 +15,7 @@ Backbone = require "backbone"
 ###
 class tulpasynth.models.ShooterModel extends Backbone.Model
     initialize: () ->
+        @nextUpdateTimeout = null;
         # if @get "rate"
             # @updateNextShotTimes()
             # nextShotTime = new Date()
@@ -27,6 +28,9 @@ class tulpasynth.models.ShooterModel extends Backbone.Model
         tulpasynth.modelInstances[@get "id"] = this
 
     updateNextShotTimes: () ->
+        if @get "destroyed"
+            return;
+
         shotTimes = @get("shotTimes")
         latestShotTime = shotTimes[shotTimes.length-1]
 
@@ -47,7 +51,7 @@ class tulpasynth.models.ShooterModel extends Backbone.Model
         # TODO: this should be triggered automatically but it is not
         @trigger "change:shotTimes"
 
-        setTimeout () =>
+        @nextUpdateTimeout = setTimeout () =>
             @updateNextShotTimes()
         , 1000.0
 

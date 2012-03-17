@@ -52,7 +52,8 @@ LongPressEntity * _longPressEntity;
 
 @synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture,
     toolboxTexture, shooterGlowingTexture, shooterRadialMenuPointer,
-    shooterRadialMenuBackground, triObstacleTexture, blackholeTexture;
+    shooterRadialMenuBackground, triObstacleTexture, blackholeTexture,
+    deleteButtonTexture;
 
 @synthesize fallingBalls, obstacles, wildBalls, selectedObstacles;
 
@@ -65,7 +66,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize socketHandler, waitingForIds, physicsEntitiesToDestroy;
 
-@synthesize greenColor, orangeColor;
+@synthesize greenColor, orangeColor, redColor;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -199,9 +200,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.shooterRadialMenuPointer = [self loadTexture:@"Shooter-Radial-Menu-Pointer"];
     self.triObstacleTexture = [self loadTexture:@"triobstacle"];
     self.blackholeTexture = [self loadTexture:@"blackhole"];
+    self.deleteButtonTexture = [self loadTexture:@"delete-button"];
     
     self.greenColor = GLKVector4Make(43.0/255.0, 208.0/255.0, 5.0/255.0, 1.0);
     self.orangeColor = GLKVector4Make(227.0/255.0, 151.0/255.0, 19.0/255.0, 1.0);
+    self.redColor = GLKVector4Make(249.0/255.0, 28.0/255.0, 28.0/255.0, 1.0);
     
     
     _pinchEntity = new PinchEntity(self.pinchRecognizer);
