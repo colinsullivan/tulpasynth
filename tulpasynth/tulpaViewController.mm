@@ -487,12 +487,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     // Handle tap in empty space
     
+    // if there are obstacles currently selected
     if ([self.selectedObstacles count]) {
         // deselect all selected
-        for (Obstacle* o in self.selectedObstacles) {
-            o.selected = false;
-        }
-        [self.selectedObstacles removeAllObjects];
+        [self deselectAllObstacles];
     }
     else {
         // Move toolbox to that point and display
@@ -697,5 +695,29 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
 }
 
+- (void) selectObstacles:(NSMutableArray*)obstaclesToSelect {
+    
+    // for each currently selected obstacle
+    for (Obstacle* o in self.selectedObstacles) {
+        // deselect
+        o.selected = false;
+    }
+    
+    // for each obstacle in our new list
+    for (Obstacle* o in obstaclesToSelect) {
+        o.selected = true;
+    }
+    
+    // save new list
+    self.selectedObstacles = obstaclesToSelect;
+    
+}
+- (void) selectObstacle:(Obstacle*)obstacleToSelect {
+    [self selectObstacles:[NSMutableArray arrayWithObjects:obstacleToSelect, nil]];
+}
+
+- (void) deselectAllObstacles {
+    [self selectObstacles:[[NSMutableArray alloc] init]];
+}
 
 @end

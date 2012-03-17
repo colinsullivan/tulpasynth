@@ -186,4 +186,18 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  **/
 @property (strong, nonatomic) NSMutableArray* selectedObstacles;
 
+/**
+ *  Called when one or more obstacles is to be selected
+ **/
+- (void) selectObstacles:(NSMutableArray*)obstaclesToSelect;
+/**
+ *  Called when a single obstacle is to be selected (proxy to
+ *  `obstaclesToSelect`).
+ **/
+- (void) selectObstacle:(Obstacle*)obstacleToSelect;
+
+/**
+ *  Helper method to deselect all currently selected obstacles.
+ **/
+- (void) deselectAllObstacles;
 @end

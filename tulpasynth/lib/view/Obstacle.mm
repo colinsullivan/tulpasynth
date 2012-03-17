@@ -66,7 +66,7 @@
 
 - (void) handleTapOccurred:(TapEntity *)aTap {
     [super handleTapOccurred:aTap];
-    self.selected = !self.selected;
+    [self.controller selectObstacle:self];
 }
 
 - (void) postDraw {
