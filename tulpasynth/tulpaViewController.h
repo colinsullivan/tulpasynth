@@ -172,4 +172,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  **/
 @property (strong, nonatomic) NSMutableArray* waitingForIds;
 
+/**
+ *  List of physics entities to destroy next timestep.
+ **/
+@property (strong, nonatomic) NSMutableArray* physicsEntitiesToDestroy;
+
 @end

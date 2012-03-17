@@ -37,4 +37,10 @@
  *  Override this function in view subclasses to handle initialization.
  **/
 - (void) initialize;
+
+/**
+ *  Mapping of model ids to views
+ **/
++ (NSMutableDictionary*) InstancesByModelId;
+
 @end

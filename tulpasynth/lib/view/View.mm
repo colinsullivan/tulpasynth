@@ -34,15 +34,12 @@
         [self initialize];
         
         // start watching model for changes, this will trigger an initial change event
-        [self startObservingKeyPaths:[aModel serializableAttributes] ofObject:aModel];
+        [self startObservingKeyPaths:[aModel serializableAttributes] ofObject:aModel];        
     }
-    
     return self;
 }
 
 - (void) initialize {
     
 }
-
-
 @end

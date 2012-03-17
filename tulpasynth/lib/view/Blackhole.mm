@@ -44,4 +44,19 @@
     self.effect.constantColor = self.controller.greenColor;
 }
 
+- (void) handleCollision:(PhysicsEntity*)otherEntity withStrength:(float)collisionStrength; {
+    
+    if ([otherEntity class] == [WildBall class]) {
+        // destroy ball model
+//        NSLog(@"destroying model: %@", otherEntity.model);
+        otherEntity.model.destroyed = [NSNumber numberWithBool:true];
+//        [[Model Instances] removeObject:otherEntity.model];
+//        // delete view
+//        [self.controller.wildBalls removeObject:otherEntity];
+//        [[PhysicsEntity Instances] removeObject:otherEntity];
+    }
+    
+    
+}
+
 @end

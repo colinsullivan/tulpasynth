@@ -82,6 +82,14 @@
     delete (b2Vec2*)self.prePanningPosition;
 }
 
+- (void) destroy {
+    self.controller.world->DestroyBody(self.body);
+
+    // destroy view by removing references
+    [[PhysicsEntity Instances] removeObject:self];
+    [self.controller.wildBalls removeObject:self];
+}
+
 
 //- (void) update {
 //    [super update];
@@ -358,6 +366,10 @@
 - (void) handlePinchEnded {
     PhysicsEntityModel* model = (PhysicsEntityModel*)self.model;
     model.ignoreUpdates = false;
+}
+
+- (void) handleCollision:(PhysicsEntity*)otherEntity withStrength:(float)collisionStrength {
+    
 }
 
 

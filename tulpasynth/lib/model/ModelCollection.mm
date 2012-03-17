@@ -39,6 +39,17 @@
     }
 }
 
+- (void)removeObject:(Model*)anObject {
+    NSIndexSet* removeIndex = [NSIndexSet indexSetWithIndex:[self.objects indexOfObject:anObject]];
+    [self willChange:NSKeyValueChangeRemoval valuesAtIndexes:removeIndex forKey:@"objects"];
+    [[self objects] removeObject:anObject];
+    [self didChange:NSKeyValueChangeRemoval valuesAtIndexes:removeIndex forKey:@"objects"];
+    
+    if (anObject.id) {
+        [self.objectsById removeObjectForKey:anObject.id];
+    }
+}
+
 - (Model*)getById:(NSNumber*)anId {
     Model* m = [self.objectsById objectForKey:anId];
     return m;

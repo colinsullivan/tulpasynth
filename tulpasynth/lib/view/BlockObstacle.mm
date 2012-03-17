@@ -60,9 +60,9 @@
 //    [super dealloc];
 }
 
-- (void) handleCollision:(float)collisionStrength {
+- (void) handleCollision:(PhysicsEntity *)otherEntity withStrength:(float)collisionStrength {
     
-    [super handleCollision:collisionStrength];
+    [super handleCollision:otherEntity withStrength:collisionStrength];
 
     self.instr->freq((5/self.width) * 1320);
     self.instr->velocity(collisionStrength);

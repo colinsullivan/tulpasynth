@@ -20,6 +20,11 @@
 
 @property (nonatomic, retain) NSNumber* id;
 @property (nonatomic, assign) tulpaViewController* controller;
+/**
+ *  Wether or not this model is currently alive.  When set to true,
+ *  model instance will be destroyed.
+ **/
+@property (nonatomic, assign) NSNumber* destroyed;
 
 - (id) initWithController:(tulpaViewController*)theController withAttributes:(NSMutableDictionary*)attributes;
 
@@ -74,8 +79,5 @@
  *  changing it via GUI)
  **/
 @property BOOL ignoreUpdates;
-
-
-
 
 @end

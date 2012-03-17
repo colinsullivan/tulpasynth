@@ -8,6 +8,8 @@
 
 #import "PhysicsEntityModel.h"
 
+#include "Stk.h"
+
 @interface WildBallModel : PhysicsEntityModel
 
 @property (strong, nonatomic) NSDictionary* initialLinearVelocity;

@@ -57,9 +57,8 @@
     nextInstr = 0;
 }
 
-- (void) handleCollision:(float)collisionStrength {
-    
-    [super handleCollision:collisionStrength];
+- (void) handleCollision:(PhysicsEntity *)otherEntity withStrength:(float)collisionStrength {
+    [super handleCollision:otherEntity withStrength:collisionStrength];
     
     /**
      *  Array of pitch indexes to use.  0 is the root of the scale.

@@ -14,8 +14,4 @@
 @implementation Obstacle
 
 
-- (void) handleCollision:(float)collisionStrength {
-    
-}
-
 @end

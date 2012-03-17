@@ -199,4 +199,10 @@
 - (void) handlePinchUpdated;
 - (void) handlePinchEnded;
 
+/**
+ *  Handle a collision with another entity
+ **/
+- (void) handleCollision:(PhysicsEntity*)otherEntity withStrength:(float)collisionStrength;
+
+- (void) destroy;
 @end

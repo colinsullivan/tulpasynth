@@ -32,6 +32,7 @@
     
     [defaults setValue:[NSNumber numberWithFloat:1.5] forKey:@"height"];
     [defaults setValue:[NSNumber numberWithFloat:1.5] forKey:@"width"];
+    [defaults setValue:[NSNumber numberWithFloat:stk::PI/4.0] forKey:@"angle"];
     
     return defaults;
 }

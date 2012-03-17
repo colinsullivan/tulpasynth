@@ -53,6 +53,14 @@
     return b2_dynamicBody;
 }
 
+- (void) destroy {
+    
+    // remove shape and body from physics world
+    delete ((b2CircleShape*)(self.shape));
+    self.body->DestroyFixture(self.shapeFixture);
+    
+    [super destroy];
+}
 
 -(void)prepareToDraw {
     self.effect.useConstantColor = YES;
@@ -60,5 +68,15 @@
     self.effect.texture2d0.name = self.controller.glowingCircleTexture.name;
     
     [super prepareToDraw];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    
+    // if model was destroyed
+    if ([keyPath isEqualToString:@"destroyed"] && [self.model.destroyed boolValue] == true) {
+        [self.controller.physicsEntitiesToDestroy addObject:self];
+    }
+    
 }
 @end

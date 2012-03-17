@@ -63,7 +63,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize world, collisionDetector, walls, toolbox, collisionFilter;
 
-@synthesize socketHandler, waitingForIds;
+@synthesize socketHandler, waitingForIds, physicsEntitiesToDestroy;
 
 @synthesize greenColor;
 
@@ -170,6 +170,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     TrigLookupTables::generate();
     
+    self.physicsEntitiesToDestroy = [[NSMutableArray alloc] init];
+    
     self.socketHandler = [[SocketHandler alloc] initWithController:self];
     self.waitingForIds = [[NSMutableArray alloc] init];
 
@@ -235,26 +237,34 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 //    wallsDef.position = b2Vec2(PX_TO_M(self.view.frame.size.height/2), PX_TO_M(self.view.frame.size.width/2));
     walls = self.world->CreateBody(&wallsDef);
     
-//    b2EdgeShape wallShape;
-//
-//    b2Vec2 topLeft(0.0, PX_TO_M(self.view.frame.size.width));
-//    b2Vec2 topRight(PX_TO_M(self.view.frame.size.height), PX_TO_M(self.view.frame.size.width));
-//    b2Vec2 bottomLeft(0.0, 0.0);
-//    b2Vec2 bottomRight(PX_TO_M(self.view.frame.size.height), 0.0);
-//
-//    b2FixtureDef wallFixtureDef;
-//    wallFixtureDef.friction = 0.1f;
-//    wallFixtureDef.restitution = 0.75f;
+    b2EdgeShape wallShape;
+
+    b2Vec2 topLeft(0.0, PX_TO_M(self.view.frame.size.width));
+    b2Vec2 topRight(PX_TO_M(self.view.frame.size.height), PX_TO_M(self.view.frame.size.width));
+    b2Vec2 bottomLeft(0.0, 0.0);
+    b2Vec2 bottomRight(PX_TO_M(self.view.frame.size.height), 0.0);
+
+    b2FixtureDef wallFixtureDef;
+    wallFixtureDef.friction = 0.0f;
+    wallFixtureDef.restitution = 1.0f;
+    wallFixtureDef.shape = &wallShape;
+
+    // Create left wall
+    wallShape.Set(bottomLeft, topLeft);
+    walls->CreateFixture(&wallFixtureDef);
+    
+    // Create right wall
+    wallShape.Set(bottomRight, topRight);
 //    wallFixtureDef.shape = &wallShape;
-//
-//    // Create left wall
-//    wallShape.Set(bottomLeft, topLeft);
-//    walls->CreateFixture(&wallFixtureDef);
-//    
-//    // Create right wall
-//    wallShape.Set(bottomRight, topRight);
-////    wallFixtureDef.shape = &wallShape;
-//    walls->CreateFixture(&wallFixtureDef);
+    walls->CreateFixture(&wallFixtureDef);
+    
+    // create bottom wall
+    wallShape.Set(bottomLeft, bottomRight);
+    walls->CreateFixture(&wallFixtureDef);
+    
+    // create top wall
+    wallShape.Set(topLeft, topRight);
+    walls->CreateFixture(&wallFixtureDef);
     
     self.toolbox = [[RadialToolbox alloc] initWithController:self withModel:NULL];
     
@@ -309,27 +319,30 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     entityTwo = ((__bridge id)body->GetUserData());
 
     collisionStrength /= 2000;
+    
+    [entityOne handleCollision:entityTwo withStrength:collisionStrength];
+    [entityTwo handleCollision:entityOne withStrength:collisionStrength];
 
-    if ([entityOne isKindOfClass:[BlockObstacle class]] || [entityTwo isKindOfClass:[BlockObstacle class]]) {
-        BlockObstacle* collidedSquare;
-        if([entityOne isKindOfClass:[BlockObstacle class]]) {
-            collidedSquare = entityOne;
-        }
-        else if([entityTwo isKindOfClass:[BlockObstacle class]]) {
-            collidedSquare = entityTwo;
-        }
-        [collidedSquare handleCollision:collisionStrength];
-    }
-    else if ([entityOne isKindOfClass:[TriObstacle class]] || [entityTwo isKindOfClass:[TriObstacle class]]) {
-        TriObstacle* collidedTri;
-        if ([entityOne isKindOfClass:[TriObstacle class]]) {
-            collidedTri = entityOne;
-        }
-        else if ([entityTwo isKindOfClass:[TriObstacle class]]) {
-            collidedTri = entityTwo;
-        }
-        [collidedTri handleCollision:collisionStrength];
-    }
+//    if ([entityOne isKindOfClass:[BlockObstacle class]] || [entityTwo isKindOfClass:[BlockObstacle class]]) {
+//        BlockObstacle* collidedSquare;
+//        if([entityOne isKindOfClass:[BlockObstacle class]]) {
+//            collidedSquare = entityOne;
+//        }
+//        else if([entityTwo isKindOfClass:[BlockObstacle class]]) {
+//            collidedSquare = entityTwo;
+//        }
+//        [collidedSquare handleCollision:collisionStrength];
+//    }
+//    else if ([entityOne isKindOfClass:[TriObstacle class]] || [entityTwo isKindOfClass:[TriObstacle class]]) {
+//        TriObstacle* collidedTri;
+//        if ([entityOne isKindOfClass:[TriObstacle class]]) {
+//            collidedTri = entityOne;
+//        }
+//        else if ([entityTwo isKindOfClass:[TriObstacle class]]) {
+//            collidedTri = entityTwo;
+//        }
+//        [collidedTri handleCollision:collisionStrength];
+//    }
         
 }
 
@@ -503,6 +516,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
 }
 
+
+
 - (void)update {
     
 //    float32 timeStep = 1.0f / 40.0f;
@@ -533,27 +548,31 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     // update all wild balls
     for (WildBall* b in self.wildBalls) {
         [b update];
-        
-        // if ball is off screen
-        if (
-            b.position->x > PX_TO_M(self.view.frame.size.height)
-            ||
-            b.position->x < 0
-            ||
-            b.position->y > PX_TO_M(self.view.frame.size.width)
-            ||
-            b.position->y < 0
-            ) {
-            
-            [ballsToDelete addObject:b];
-        }
+//        // if ball is off screen
+//        if (
+//            b.position->x > PX_TO_M(self.view.frame.size.height)
+//            ||
+//            b.position->x < 0
+//            ||
+//            b.position->y > PX_TO_M(self.view.frame.size.width)
+//            ||
+//            b.position->y < 0
+//            ) {
+//            
+//            [ballsToDelete addObject:b];
+//        }
         
     }
     
     // delete all balls that moved offscreen
-    for (WildBall* b in ballsToDelete) {
-        [self.wildBalls removeObject:b];
+//    for (WildBall* b in ballsToDelete) {
+//        [self.wildBalls removeObject:b];
+//    }
+    
+    for (PhysicsEntity* e in self.physicsEntitiesToDestroy) {
+        [e destroy];
     }
+    self.physicsEntitiesToDestroy = [[NSMutableArray alloc] init];
     
     // Update all GLView instances
     //    for (GLView* e in [GLView Instances]) {
@@ -623,7 +642,23 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             }
             else if (addedModelClass == [BlackholeModel class]) {
                 // create blackhole obstacle
+                Blackhole* b = [[Blackhole alloc] initWithController:self withModel:addedModel];
+                [self.obstacles addObject:b];
             }
+            
+        }
+        // if a model was deleted
+        else if ([[change valueForKey:@"kind"] intValue] == NSKeyValueChangeRemoval) {
+            // delete corresponding view
+            Model* removedModel = [[[Model Instances] objects] objectAtIndex:[[change valueForKey:@"indexes"] firstIndex]];
+            Class removedModelClass = [removedModel class];
+
+            NSLog(@"model was removed: %@", removedModel);
+
+//            if (removedModelClass == [WildBallModel class]) {
+//                [removedModel destroy];
+//            }
+            
             
         }
         

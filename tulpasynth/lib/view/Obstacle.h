@@ -21,6 +21,5 @@
  **/
 @interface Obstacle : PhysicsEntity
 
-- (void) handleCollision:(float)collisionStrength;
 
 @end

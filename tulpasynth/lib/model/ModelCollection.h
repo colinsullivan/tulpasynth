@@ -24,6 +24,11 @@
 - (void)addObject:(Model*)anObject;
 
 /**
+ *  Remove model instance from this collection.
+ **/
+- (void)removeObject:(Model*)anObject;
+
+/**
  *  Retreive a model instance by id
  **/
 - (Model*)getById:(NSNumber*)anId;

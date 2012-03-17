@@ -15,7 +15,7 @@
 
 @implementation Model
 
-@synthesize id, controller, initialized, nosync, ignoreUpdates;
+@synthesize id, controller, initialized, nosync, ignoreUpdates, destroyed;
 
 - (void) setInitialized:(BOOL)anInitialized {
     if (anInitialized) {
@@ -24,6 +24,13 @@
     }
     
     initialized = anInitialized;
+}
+
+- (void) setDestroyed:(NSNumber *)isDestroyed {
+    if ([isDestroyed boolValue] == true) {
+        [[Model Instances] removeObject:self];
+    }
+    destroyed = isDestroyed;
 }
 
 - (id) initWithController:(tulpaViewController*)theController withAttributes:(NSMutableDictionary*)attributes {
@@ -45,7 +52,7 @@
         
         // by default we will accept all incoming updates
         self.ignoreUpdates = false;
-                
+        
         // Set any default attributes
         [self initialize];
         
@@ -85,7 +92,7 @@
 }
 
 - (NSMutableArray*) serializableAttributes {
-    NSMutableArray* attributes = [[NSMutableArray alloc] initWithObjects:@"id", nil];
+    NSMutableArray* attributes = [[NSMutableArray alloc] initWithObjects:@"id", @"destroyed", nil];
     
     return attributes;
 }
@@ -158,7 +165,9 @@
 }
 
 + (NSMutableDictionary*) defaultAttributes {
-    return [[NSMutableDictionary alloc] init];
+    return [NSMutableDictionary dictionaryWithKeysAndObjects:
+            @"destroyed", [NSNumber numberWithBool:false]
+            , nil];
 }
 
 //+ (NSMutableDictionary*) constraints {
