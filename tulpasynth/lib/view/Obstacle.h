@@ -21,5 +21,16 @@
  **/
 @interface Obstacle : PhysicsEntity
 
+/**
+ *  The current color of this obstacle.  Changing this will
+ *  set the appropriate properties on the glkbaseeffect shader.
+ **/
+@property (nonatomic) GLKVector4 color;
+
+/**
+ *  If we're currently selected.
+ **/
+@property (nonatomic) BOOL selected;
+
 
 @end

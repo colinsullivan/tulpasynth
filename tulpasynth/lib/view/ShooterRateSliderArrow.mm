@@ -131,4 +131,17 @@
 //    return modelViewMatrix;
 //}
 
+- (void) handlePanStarted {
+    self.slider.panner = self.panner;
+    return [self.slider handlePanStarted];
+}
+- (void) handlePanUpdate {
+    self.slider.panner = self.panner;
+    return [self.slider handlePanUpdate];
+}
+- (void) handlePanEnded {
+    [self.slider handlePanEnded];
+    self.slider.panner = nil;
+}
+
 @end

@@ -44,8 +44,6 @@
     myBodyMass.mass = 10.0f;
     self.body->SetMassData(&myBodyMass);
     
-    self.effect.useConstantColor = YES;
-    self.effect.constantColor = self.controller.greenColor;
     self.effect.texture2d0.name = self.controller.triObstacleTexture.name;
     
     for (int i = 0; i < 5; i++) {

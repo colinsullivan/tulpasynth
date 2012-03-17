@@ -12,7 +12,7 @@
 
 @implementation ShooterRateSlider
 
-@synthesize active, arrow;
+@synthesize active, arrow, rateBeforeSliding;
 
 - (void) setPosition:(b2Vec2 *)aPosition {
     // Move menu behind the shooter
@@ -84,6 +84,44 @@
     [super update];
     
     [arrow update];
+}
+
+- (GLboolean) handlePan:(PanEntity *)pan {
+    // if pan didn't end up in this shape, see if it worked in arrow.
+    if(![super handlePan:pan]) {
+        if ([arrow handlePan:pan]) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+- (void) handlePanStarted {
+    ShooterModel* model = ((ShooterModel*)self.model);
+
+    model.ignoreUpdates = true;
+    rateBeforeSliding = model.rate;    
+}
+
+- (void) handlePanUpdate {
+    b2Vec2 newPos = (*self.prePanningPosition) + self.panner->translation;
+    
+    static float rateScalar = 0.3;
+    
+    ShooterModel* model = ((ShooterModel*)self.model);
+    float newRate = [rateBeforeSliding floatValue] + (rateScalar*-sinf(self.angle)*self.panner->translation.y) + (rateScalar*-cosf(self.angle)*self.panner->translation.x);
+    model.rate = [NSNumber numberWithFloat:newRate];
+    [model generateNewShotTimes];
+}
+
+- (void) handlePanEnded {
+    ShooterModel* model = ((ShooterModel*)self.model);
+    // TODO: synchronization race condition here.  ignoreUpdates should be
+    // turned off in callback
+    [model synchronize];
+    
+    model.ignoreUpdates = false;
 }
 
 @end

@@ -15,5 +15,10 @@
 @property BOOL active;
 
 @property (strong, nonatomic) ShooterRateSliderArrow* arrow;
+/**
+ *  What the shooting rate was before user started changing it.
+ **/
+@property (strong, nonatomic) NSNumber* rateBeforeSliding;
+
 
 @end

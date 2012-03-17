@@ -54,7 +54,7 @@ LongPressEntity * _longPressEntity;
     toolboxTexture, shooterGlowingTexture, shooterRadialMenuPointer,
     shooterRadialMenuBackground, triObstacleTexture, blackholeTexture;
 
-@synthesize fallingBalls, obstacles, wildBalls;
+@synthesize fallingBalls, obstacles, wildBalls, selectedObstacles;
 
 @synthesize context = _context;
 @synthesize effect = _effect;
@@ -65,7 +65,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize socketHandler, waitingForIds, physicsEntitiesToDestroy;
 
-@synthesize greenColor;
+@synthesize greenColor, orangeColor;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -171,6 +171,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     TrigLookupTables::generate();
     
     self.physicsEntitiesToDestroy = [[NSMutableArray alloc] init];
+    self.selectedObstacles = [[NSMutableArray alloc] init];
     
     self.socketHandler = [[SocketHandler alloc] initWithController:self];
     self.waitingForIds = [[NSMutableArray alloc] init];
@@ -200,6 +201,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.blackholeTexture = [self loadTexture:@"blackhole"];
     
     self.greenColor = GLKVector4Make(43.0/255.0, 208.0/255.0, 5.0/255.0, 1.0);
+    self.orangeColor = GLKVector4Make(227.0/255.0, 151.0/255.0, 19.0/255.0, 1.0);
     
     
     _pinchEntity = new PinchEntity(self.pinchRecognizer);
@@ -451,8 +453,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 
     // All obstacles can handle pan
     for (Obstacle * o in self.obstacles) {
-        [o handlePan:_panEntity];
+        if([o handlePan:_panEntity]) {
+            return;
+        }
     }
+    
+    // pan event was in empty space
 }
 
 - (IBAction)tapGestureHandler:(id)sender {
@@ -477,11 +483,19 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     }
     
     // Handle tap in empty space
-
-    // Move toolbox to that point and display
-    self.toolbox.position = _tapEntity->touches[0]->position;
-    self.toolbox.active = true;
     
+    if ([self.selectedObstacles count]) {
+        // deselect all selected
+        for (Obstacle* o in self.selectedObstacles) {
+            o.selected = false;
+        }
+        [self.selectedObstacles removeAllObjects];
+    }
+    else {
+        // Move toolbox to that point and display
+        self.toolbox.position = _tapEntity->touches[0]->position;
+        self.toolbox.active = true;
+    }    
 
 //    if (!handled) {
 //        
@@ -616,6 +630,18 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             
             Model* addedModel = [[[Model Instances] objects] objectAtIndex:[[change valueForKey:@"indexes"] firstIndex]];
             Class addedModelClass = [addedModel class];
+            
+            if (!addedModel) {
+                NSLog(@"!addedModel");
+                return;
+            }
+            else {
+                PhysicsEntityModel* m = (PhysicsEntityModel*)addedModel;
+                if(![[m.position valueForKey:@"x"] floatValue] || ![[m.position valueForKey:@"y"] floatValue]) {
+                    NSLog(@"addedModel position invalid!");
+                    return;
+                }
+            }
 
             // if a BlockObstacle model was added
             if (addedModelClass == [BlockModel class]) {

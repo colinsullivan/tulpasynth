@@ -42,8 +42,6 @@
     self.body->SetMassData(&myBodyMass);
 
     self.effect.texture2d0.name = self.controller.blackholeTexture.name;
-    self.effect.useConstantColor = YES;
-    self.effect.constantColor = self.controller.greenColor;
     
     instr = new instruments::RAMpler();
     NSString* path = [[NSBundle mainBundle] pathForResource:@"blackhole" ofType:@"wav"];

@@ -13,7 +13,7 @@
 
 @implementation Shooter
 
-@synthesize instr, effect1, glow, rateSlider, rateBeforeSliding, nextShotTime, prevTimeUntilNextShot, animating, nextShotIndex, animatingPerc, lastAnimatingPerc, shotTimes;
+@synthesize instr, effect1, glow, rateSlider, nextShotTime, prevTimeUntilNextShot, animating, nextShotIndex, animatingPerc, lastAnimatingPerc, shotTimes;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -96,8 +96,8 @@
 
 -(void)prepareToDraw {
     float shooterOpacity = 1.0 - self.glow;
-    GLKVector4 greenColor = self.controller.greenColor;
-    self.effect.constantColor = GLKVector4Make(greenColor.r * shooterOpacity, greenColor.g * shooterOpacity, greenColor.b * shooterOpacity, shooterOpacity);
+    GLKVector4 myColor = self.color;
+    self.effect.constantColor = GLKVector4Make(myColor.r * shooterOpacity, myColor.g * shooterOpacity, myColor.b * shooterOpacity, shooterOpacity);
 
     [super prepareToDraw];
 
@@ -107,12 +107,12 @@
     [super postDraw];
 
     // draw again with second texture.
-    GLKVector4 greenColor = self.controller.greenColor;    
+    GLKVector4 myColor = self.color;
     self.effect1.texture2d0.enabled = GL_TRUE;
     self.effect1.texture2d0.envMode = GLKTextureEnvModeModulate;
     self.effect1.texture2d0.target = GLKTextureTarget2D;
     self.effect1.useConstantColor = YES;
-    self.effect1.constantColor = GLKVector4Make(greenColor.r * self.glow, greenColor.g * self.glow, greenColor.b * self.glow, self.glow);
+    self.effect1.constantColor = GLKVector4Make(myColor.r * self.glow, myColor.g * self.glow, myColor.b * self.glow, self.glow);
     self.effect1.texture2d0.name = self.controller.shooterGlowingTexture.name;
     
     [self.effect1 prepareToDraw];
@@ -331,21 +331,38 @@
     
 }
 
+- (void) setSelected:(BOOL)wasSelected {
+    [super setSelected:wasSelected];
+    if (wasSelected) {
+        rateSlider.active = true;
+    }
+    else {
+        rateSlider.active = false;
+    }
+}
+
+- (GLboolean) handlePan:(PanEntity *)pan {
+    // if user wasn't trying to move object and we're selected
+    if (![super handlePan:pan] && self.selected) {
+        // may have been trying to change rate slider
+        if ([rateSlider handlePan:pan]) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+
 - (void) handleLongPressStarted {
 //    NSLog(@"Shooter.handleLongPressStarted");
     ShooterModel* model = ((ShooterModel*)self.model);
-    
-    model.ignoreUpdates = true;
+
     
     rateSlider.active = true;
-    rateBeforeSliding = model.rate;
 }
 - (void) handleLongPressUpdated {
     
-    ShooterModel* model = ((ShooterModel*)self.model);
-    float newRate = [rateBeforeSliding floatValue] + (0.3*self.longPresser->translation.y);
-    model.rate = [NSNumber numberWithFloat:newRate];
-    [model generateNewShotTimes];
 }
 - (void) handleLongPressEnded {
 //    NSLog(@"Shooter.handleLongPressEnded");
@@ -353,12 +370,6 @@
     
     
 
-    // TODO: synchronization race condition here.  ignoreUpdates should be
-    // turned off in callback
-    [model synchronize];
-    
-    model.ignoreUpdates = false;
-    rateSlider.active = false;
 }
 
 

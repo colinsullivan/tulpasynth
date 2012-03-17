@@ -34,13 +34,6 @@
     }
     position->Set(bodyPosition.x, bodyPosition.y);
     
-//    b2Vec2* oldPosition = position;
-//    position = new b2Vec2(bodyPosition.x, bodyPosition.y);
-//    
-//    if (oldPosition) {
-//        delete oldPosition;
-//    }
-
     return position;
 }
 
@@ -261,7 +254,7 @@
     return false;
 }
 
-- (void) handleTapOccurred:(TapEntity*)tap {
+- (void) handleTapOccurred:(TapEntity*)aTap {
     
 }
 

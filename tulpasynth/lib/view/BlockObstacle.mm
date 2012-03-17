@@ -49,8 +49,6 @@
     self.instr = new instruments::FMPercussion();
     self.instr->finish_initializing();
 
-    self.effect.useConstantColor = YES;
-    self.effect.constantColor = self.controller.greenColor;
     self.effect.texture2d0.name = self.controller.glowingBoxTexture.name;
 }
 

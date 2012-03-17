@@ -95,10 +95,6 @@
  **/
 @property (strong, nonatomic) ShooterRateSlider* rateSlider;
 
-/**
- *  What the shooting rate was before user started changing it.
- **/
-@property (strong, nonatomic) NSNumber* rateBeforeSliding;
 
 - (void) advanceToNextShot;
 

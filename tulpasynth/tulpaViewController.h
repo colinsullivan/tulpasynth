@@ -58,6 +58,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  Colors 
  **/
 @property GLKVector4 greenColor;
+@property GLKVector4 orangeColor;
 
 /**
  *  Load a texture given a filename (.png assumed).
@@ -176,5 +177,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  List of physics entities to destroy next timestep.
  **/
 @property (strong, nonatomic) NSMutableArray* physicsEntitiesToDestroy;
+
+
+/**
+ *  List of obstacles currently selected
+ **/
+@property (strong, nonatomic) NSMutableArray* selectedObstacles;
 
 @end
