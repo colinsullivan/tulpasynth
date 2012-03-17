@@ -28,8 +28,19 @@
 
 - (b2Vec2*)position {
     b2Vec2 bodyPosition = self.body->GetPosition();
+
+    if (!position) {
+        position = new b2Vec2();
+    }
+    position->Set(bodyPosition.x, bodyPosition.y);
     
-    position = new b2Vec2(bodyPosition.x, bodyPosition.y);
+//    b2Vec2* oldPosition = position;
+//    position = new b2Vec2(bodyPosition.x, bodyPosition.y);
+//    
+//    if (oldPosition) {
+//        delete oldPosition;
+//    }
+
     return position;
 }
 
@@ -80,6 +91,7 @@
 
 - (void)dealloc {
     delete (b2Vec2*)self.prePanningPosition;
+    delete (b2Vec2*)self.position;
 }
 
 - (void) destroy {
@@ -225,6 +237,7 @@
 - (void) handlePanEnded {
     [self.model synchronize];
     self.model.ignoreUpdates = false;
+    
 }
 
 - (void) handlePanUpdate {
