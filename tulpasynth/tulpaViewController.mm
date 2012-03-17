@@ -649,11 +649,13 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         }
         // if a model was deleted
         else if ([[change valueForKey:@"kind"] intValue] == NSKeyValueChangeRemoval) {
-            // delete corresponding view
-            Model* removedModel = [[[Model Instances] objects] objectAtIndex:[[change valueForKey:@"indexes"] firstIndex]];
-            Class removedModelClass = [removedModel class];
+//            NSLog(@"model was removed");
 
-            NSLog(@"model was removed: %@", removedModel);
+            // delete corresponding view
+//            Model* removedModel = [[[Model Instances] objects] objectAtIndex:[[change valueForKey:@"indexes"] firstIndex]];
+//            Class removedModelClass = [removedModel class];
+//            NSLog(@"model that was removed: %@", removedModel);
+
 
 //            if (removedModelClass == [WildBallModel class]) {
 //                [removedModel destroy];

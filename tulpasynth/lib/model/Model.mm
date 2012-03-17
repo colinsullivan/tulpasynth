@@ -28,7 +28,16 @@
 
 - (void) setDestroyed:(NSNumber *)isDestroyed {
     if ([isDestroyed boolValue] == true) {
-        [[Model Instances] removeObject:self];
+        try {
+            [[Model Instances] removeObject:self];
+        } catch (NSException* e) {
+            if (e.name == NSRangeException) {
+                NSLog(@"NSRangeException occurred during Model Instances removeObject");
+            }
+            else {
+                NSLog(@"other exception occurred during Model Instances removeObject");
+            }
+        }
     }
     destroyed = isDestroyed;
 }

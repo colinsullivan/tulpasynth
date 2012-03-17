@@ -86,8 +86,27 @@
     self.controller.world->DestroyBody(self.body);
 
     // destroy view by removing references
-    [[PhysicsEntity Instances] removeObject:self];
-    [self.controller.wildBalls removeObject:self];
+    try {
+        [[PhysicsEntity Instances] removeObject:self];
+    } catch (NSException * e) {
+        if (e.name == NSRangeException) {
+            NSLog(@"NSRangeException occurred PhysicsEntity Instances removeObject");
+        }
+        else {
+            NSLog(@"other exception occurred PhysicsEntity Instances removeObject");
+        }
+    }
+    
+    try {
+        [self.controller.wildBalls removeObject:self];
+    } catch (NSException* e) {
+        if (e.name == NSRangeException) {
+            NSLog(@"NSRangeException occurred controller.wildBalls removeObject");
+        }
+        else {
+            NSLog(@"other exception occurred wildBalls removeObject");
+        }
+    }
 }
 
 

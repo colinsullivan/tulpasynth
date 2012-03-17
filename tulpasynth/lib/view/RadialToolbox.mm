@@ -76,6 +76,7 @@
     self.shooterPrototype = [[Shooter alloc] initWithController:self.controller withModel:NULL];
     self.shooterPrototype.width = [[[ShooterModel defaultAttributes] valueForKey:@"width"] floatValue];
     self.shooterPrototype.height = [[[ShooterModel defaultAttributes] valueForKey:@"height"] floatValue];
+    self.shooterPrototype.angle = [[[ShooterModel defaultAttributes] valueForKey:@"angle"] floatValue];
     self.shooterPrototype.shapeFixture->SetFilterData(filterData);
     [self.prototypes addObject:self.shooterPrototype];
     

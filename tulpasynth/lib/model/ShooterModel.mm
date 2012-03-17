@@ -85,7 +85,8 @@
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"width"];
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"height"];
     [defaults setValue:[NSNumber numberWithFloat:1.0] forKey:@"rate"];
-//    [defaults setValue:[NSNumber numberWithInt:0] forKey:@"nextShotIndex"];
+    [defaults setValue:[NSNumber numberWithFloat:-stk::PI/4.0] forKey:@"angle"];
+
     
     
     return defaults;

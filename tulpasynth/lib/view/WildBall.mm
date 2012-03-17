@@ -31,7 +31,7 @@
     myShapeFixture.shape = self.shape;
     myShapeFixture.friction = 0.0f;
     myShapeFixture.density = 0.75f;
-    myShapeFixture.restitution = 0.0f;
+    myShapeFixture.restitution = 1.1f;
     
     self.shapeFixture = self.body->CreateFixture(&myShapeFixture);
     
@@ -75,6 +75,7 @@
     
     // if model was destroyed
     if ([keyPath isEqualToString:@"destroyed"] && [self.model.destroyed boolValue] == true) {
+//        NSLog(@"wildBall destroying self");
         [self.controller.physicsEntitiesToDestroy addObject:self];
     }
     
