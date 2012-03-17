@@ -245,7 +245,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     b2Vec2 bottomRight(PX_TO_M(self.view.frame.size.height), 0.0);
 
     b2FixtureDef wallFixtureDef;
-    wallFixtureDef.friction = 0.0f;
+    wallFixtureDef.friction = 0.1f;
     wallFixtureDef.restitution = 1.0f;
     wallFixtureDef.shape = &wallShape;
 

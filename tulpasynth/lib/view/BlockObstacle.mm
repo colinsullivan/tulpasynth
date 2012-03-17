@@ -33,7 +33,7 @@
     mySquareFixture.shape = self.shape;
     mySquareFixture.density = 1.0f;
     mySquareFixture.friction = 0.1f;
-    mySquareFixture.restitution = 1.5f;
+    mySquareFixture.restitution = 1.0f;
     
     self.shapeFixture = self.body->CreateFixture(&mySquareFixture);
 }
