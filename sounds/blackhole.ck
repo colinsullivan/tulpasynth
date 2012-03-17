@@ -5,15 +5,23 @@ Envelope filtAutomatorEnv => blackhole;
 masterFilt.gain(0.4);
 
 
-SqrOsc carrier => masterFilt;
+SinOsc carrier => masterFilt;
 carrier.sync(2);
-TriOsc modulator => carrier;
-modulator.gain(110);
-modulator.freq(110);
+SinOsc modulator => carrier;
+modulator.gain(220);
+modulator.freq(880);
 carrier.gain(0.5);
 
-Noise n => masterFilt;
-n.gain(0.5);
+SinOsc carrierTwo => masterFilt;
+carrierTwo.sync(2);
+modulator => carrierTwo;
+// SinOsc modulatorTwo => carrierTwo;
+// modulatorTwo.gain(110);
+// modulatorTwo.freq(220);
+carrierTwo.gain(0.5);
+
+// Noise n => masterFilt;
+// n.gain(0.5);
 // noiseShaper.Q(0.9);
 // noiseShaper.freq(1000);
 // noiseShaper.gain(1.75);
@@ -23,16 +31,19 @@ masterFilt.Q(10);
 masterEnv.duration(10::ms);
 
 fun void filtAutomator() {
-    880*3 => float maxFreq;
-    55 => float minFreq;
+    880*5 => float maxFreq;
+    880/2 => float minFreq;
 
     440 => float oscMaxFreq;
-    55 => float oscMinFreq;
+    oscMaxFreq/2.0 => float oscMinFreq;
 
+    float oscFreq;
 
     while(true) {
         masterFilt.freq(maxFreq - (maxFreq-minFreq)*filtAutomatorEnv.value());
-        carrier.freq(oscMaxFreq - (oscMaxFreq-oscMinFreq)*(filtAutomatorEnv.value()));
+        oscMaxFreq - (oscMaxFreq-oscMinFreq)*(filtAutomatorEnv.value()) => oscFreq;
+        carrier.freq(oscFreq);
+        carrierTwo.freq(oscFreq+2.0);
         10::ms => now;
     }
 }
@@ -49,5 +60,5 @@ fun void fire() {
 
 1::second => now;
 fire();
-2::second => now;
+1::second => now;
 
