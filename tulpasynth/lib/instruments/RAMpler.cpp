@@ -46,25 +46,23 @@ void instruments::RAMpler::set_clip(std::string clipPath) {
 stk::StkFrames& instruments::RAMpler::next_buf(stk::StkFrames& frames) {
     
     if(this->mPlaying) {
+        
         // Grab samples from clip
-        this->tick(frames);
+        this->tick(frames);            
+        
+        // If we've finished playing clip
+        if(this->isFinished()) {
+            // we're no longer playing
+            this->mPlaying = false;
+            // Reset clip to beginning
+            this->reset();
+        }
 
-//        this->_reset_if_needed();
     }
 
     return frames;
 }
 
-void instruments::RAMpler::_reset_if_needed() {
-    // If we've finished playing clip
-    if(this->isFinished()) {
-        // we're no longer playing
-        this->mPlaying = false;
-        // Reset clip to beginning
-        this->reset();
-    }
-    
-}
 
 unsigned long instruments::RAMpler::duration() {
     if (this->file_.isOpen()) {
@@ -78,11 +76,6 @@ float instruments::RAMpler::percentComplete() {
     return (time_ / this->getSize());    
 }
 
-void instruments::RAMpler::freq(stk::StkFloat aFreq) {
-    instruments::Instrument::freq(aFreq);
-    
-    this->setRate(file_.fileSize() * aFreq / Stk::sampleRate());
-}
 
 void instruments::RAMpler::play() {
     Instrument::play();

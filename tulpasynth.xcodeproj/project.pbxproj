@@ -64,6 +64,8 @@
 		3BB550EE1513F1D5005106A3 /* BlackholeModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BB550ED1513F1D4005106A3 /* BlackholeModel.mm */; };
 		3BB550F41513F202005106A3 /* Blackhole.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BB550F31513F200005106A3 /* Blackhole.mm */; };
 		3BB550F61513F3DE005106A3 /* blackhole.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB550F51513F3DE005106A3 /* blackhole.png */; };
+		3BB550F815143B3E005106A3 /* blackhole.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3BB550F715143B3E005106A3 /* blackhole.wav */; };
+		3BB550FB151441EE005106A3 /* LoopingRAMpler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB550F9151441ED005106A3 /* LoopingRAMpler.cpp */; };
 		3BBE9FA014F8513F0013CB1A /* View.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE9F9F14F8513F0013CB1A /* View.mm */; };
 		3BCEB90D150D2C26007CFA08 /* ShooterRateSlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */; };
 		3BCEB910150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */; };
@@ -471,6 +473,9 @@
 		3BB550F21513F200005106A3 /* Blackhole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blackhole.h; sourceTree = "<group>"; };
 		3BB550F31513F200005106A3 /* Blackhole.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Blackhole.mm; sourceTree = "<group>"; };
 		3BB550F51513F3DE005106A3 /* blackhole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackhole.png; sourceTree = "<group>"; };
+		3BB550F715143B3E005106A3 /* blackhole.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blackhole.wav; sourceTree = "<group>"; };
+		3BB550F9151441ED005106A3 /* LoopingRAMpler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoopingRAMpler.cpp; sourceTree = "<group>"; };
+		3BB550FA151441ED005106A3 /* LoopingRAMpler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LoopingRAMpler.hpp; sourceTree = "<group>"; };
 		3BBE9F9E14F8513F0013CB1A /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
 		3BBE9F9F14F8513F0013CB1A /* View.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = View.mm; sourceTree = "<group>"; };
 		3BCEB90B150D2C26007CFA08 /* ShooterRateSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterRateSlider.h; sourceTree = "<group>"; };
@@ -977,6 +982,7 @@
 		3B624C05150037120066A1CB /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				3BB550F715143B3E005106A3 /* blackhole.wav */,
 				3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */,
 			);
 			path = sounds;
@@ -1779,6 +1785,8 @@
 		3BE269C514F8430D00AFC61E /* instruments */ = {
 			isa = PBXGroup;
 			children = (
+				3BB550F9151441ED005106A3 /* LoopingRAMpler.cpp */,
+				3BB550FA151441ED005106A3 /* LoopingRAMpler.hpp */,
 				3B624C02150036B80066A1CB /* RAMpler.cpp */,
 				3B624C03150036B80066A1CB /* RAMpler.hpp */,
 				3BE269C614F8430D00AFC61E /* Envelopes.hpp */,
@@ -1999,6 +2007,7 @@
 				3BCEB911150D2CCC007CFA08 /* Shooter-Radial-Menu-Pointer.png in Resources */,
 				3B2A4B2615100B7500F2DF5E /* triobstacle.png in Resources */,
 				3BB550F61513F3DE005106A3 /* blackhole.png in Resources */,
+				3BB550F815143B3E005106A3 /* blackhole.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2207,6 +2216,7 @@
 				3BB550EB1513CD97005106A3 /* TrigLookupTables.cpp in Sources */,
 				3BB550EE1513F1D5005106A3 /* BlackholeModel.mm in Sources */,
 				3BB550F41513F202005106A3 /* Blackhole.mm in Sources */,
+				3BB550FB151441EE005106A3 /* LoopingRAMpler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

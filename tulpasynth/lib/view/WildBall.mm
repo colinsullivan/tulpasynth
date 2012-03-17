@@ -29,9 +29,9 @@
     
     b2FixtureDef myShapeFixture;
     myShapeFixture.shape = self.shape;
-    myShapeFixture.friction = 0.0f;
+    myShapeFixture.friction = 0.1f;
     myShapeFixture.density = 0.75f;
-    myShapeFixture.restitution = 1.1f;
+    myShapeFixture.restitution = 1.0f;
     
     self.shapeFixture = self.body->CreateFixture(&myShapeFixture);
     

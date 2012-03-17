@@ -13,6 +13,8 @@
 
 @implementation Blackhole
 
+@synthesize instr;
+
 - (void) setWidth:(float)width {
     [super setWidth:width];
     
@@ -42,11 +44,19 @@
     self.effect.texture2d0.name = self.controller.blackholeTexture.name;
     self.effect.useConstantColor = YES;
     self.effect.constantColor = self.controller.greenColor;
+    
+    instr = new instruments::RAMpler();
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"blackhole" ofType:@"wav"];
+    instr->set_clip([path UTF8String]);
+    instr->finish_initializing();
+
 }
 
 - (void) handleCollision:(PhysicsEntity*)otherEntity withStrength:(float)collisionStrength; {
     
     if ([otherEntity class] == [WildBall class]) {
+        instr->reset();
+        instr->play();
         // destroy ball model
 //        NSLog(@"destroying model: %@", otherEntity.model);
         otherEntity.model.destroyed = [NSNumber numberWithBool:true];

@@ -60,7 +60,7 @@
     myBodyMass.center.SetZero();
     self.body->SetMassData(&myBodyMass);
     
-    instr = new instruments::RAMpler();
+    instr = new instruments::LoopingRAMpler();
     NSString* path = [[NSBundle mainBundle] pathForResource:@"NoisePercussionReversed" ofType:@"wav"];
     instr->set_clip([path UTF8String]);
     instr->finish_initializing();

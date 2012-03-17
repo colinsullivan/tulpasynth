@@ -18,7 +18,7 @@
 #import "WildBallModel.h"
 #import "WildBall.h"
 
-#include "RAMpler.hpp"
+#include "LoopingRAMpler.hpp"
 
 #import "ShooterRateSlider.h"
 
@@ -39,7 +39,7 @@
 /**
  *  Instrument to play each time ball is fired 
  **/
-@property instruments::RAMpler* instr;
+@property instruments::LoopingRAMpler* instr;
 
 /**
  *  Time we fired the last ball.

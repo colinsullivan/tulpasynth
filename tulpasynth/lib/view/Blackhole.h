@@ -11,9 +11,12 @@
 #include "b2CircleShape.h"
 #include "b2Fixture.h"
 
+#include "RAMpler.hpp"
 
 #import "BlackholeModel.h"
 
 @interface Blackhole : Obstacle
+
+@property (nonatomic) instruments::RAMpler* instr;
 
 @end

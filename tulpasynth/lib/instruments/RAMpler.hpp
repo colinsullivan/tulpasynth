@@ -23,7 +23,7 @@ namespace instruments {
      *  @class      A sampler which keeps audio in RAM.
      *  @extends    instruments::Instrument
      **/
-    class RAMpler : protected Instrument, protected stk::FileLoop
+    class RAMpler : protected Instrument, protected stk::FileWvIn
     {
     public:
         /**
@@ -36,13 +36,7 @@ namespace instruments {
         /**
          *  Set clip to use
          **/
-        void set_clip(std::string clipPath);
-
-        /**
-         *  Helper method to reset `mPlaying` and `mClip` if we've finished
-         *  playing the clip.
-         **/
-        void _reset_if_needed();
+        virtual void set_clip(std::string clipPath);
 
 
         virtual void play();
@@ -50,15 +44,10 @@ namespace instruments {
         virtual bool playing() {
             return Instrument::playing();
         }
-        
-        virtual void freq(stk::StkFloat aFreq);
-        
-        void reset() {
-            return FileLoop::reset();
+                
+        virtual void reset() {
+            return FileWvIn::reset();
         }
-
-
-        
         
 //        virtual stk::StkFloat next_samp(int channel);
         virtual stk::StkFrames& next_buf(stk::StkFrames& frames);
@@ -71,11 +60,13 @@ namespace instruments {
         /**
          *  Percent of sample currently played
          **/
-        float percentComplete();
+        virtual float percentComplete();
         
         virtual void finish_initializing() {
             Instrument::finish_initializing();
         }
+        
+        
     };    
 };
 #endif
