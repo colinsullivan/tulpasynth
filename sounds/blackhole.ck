@@ -2,15 +2,15 @@ Envelope masterEnv => dac;
 
 LPF masterFilt => masterEnv;
 Envelope filtAutomatorEnv => blackhole;
-masterFilt.gain(0.6);
+masterFilt.gain(0.4);
 
 
-SinOsc carrier => masterFilt;
+SqrOsc carrier => masterFilt;
 carrier.sync(2);
-SqrOsc modulator => carrier;
-modulator.gain(0.8);
-modulator.freq(2);
-carrier.gain(0.7);
+TriOsc modulator => carrier;
+modulator.gain(110);
+modulator.freq(110);
+carrier.gain(0.5);
 
 Noise n => masterFilt;
 n.gain(0.5);
@@ -18,12 +18,12 @@ n.gain(0.5);
 // noiseShaper.freq(1000);
 // noiseShaper.gain(1.75);
 
-masterFilt.Q(8);
+masterFilt.Q(10);
 
 masterEnv.duration(10::ms);
 
 fun void filtAutomator() {
-    880 => float maxFreq;
+    880*3 => float maxFreq;
     55 => float minFreq;
 
     440 => float oscMaxFreq;
