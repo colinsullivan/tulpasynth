@@ -301,7 +301,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
     
     self.dragSelector = [[DragSelector alloc] initWithController:self withModel:NULL];
-    self.dragSelector.active = true;
+    self.dragSelector.active = false;
 
 }
 
@@ -460,6 +460,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (IBAction)panGestureHandler:(id)sender {
     _panEntity->update();
     
+    // if user is still dragging
+    if (self.dragSelector.panner) {
+        [self.dragSelector handlePan:_panEntity];
+        return;
+    }
+    
     // Allow toolbox to handle pan
 //    [self.toolbox handlePan:_panEntity];
 
@@ -470,7 +476,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         }
     }
     
-    // pan event was in empty space
+    // pan event was in empty space, user is dragging
+    [self.dragSelector handlePan:_panEntity];
 }
 
 - (IBAction)tapGestureHandler:(id)sender {

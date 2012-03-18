@@ -15,7 +15,7 @@
 
 @synthesize body, shape, shapeFixture;
 
-@synthesize pannable, panner, prePanningPosition;
+@synthesize pannable, prePanningPosition;
 
 @synthesize longPressable, longPresser;
 

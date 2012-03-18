@@ -9,6 +9,7 @@
 #import "GLView.h"
 #import "tulpaViewController.h"
 
+
 // Texture coordinates are rotated -90 degrees and flipped vertically because
 // this app only works in landscape.  I know, how budget.
 static Vertex SquareVertices[] = {
@@ -31,6 +32,8 @@ static GLubyte SquareIndices[] = {
 @synthesize active;
 
 @synthesize effect;
+
+@synthesize panner;
 
 /**
  *  Since position is a reference to a C++ object, override to avoid memory leaks
@@ -165,6 +168,20 @@ static GLubyte SquareIndices[] = {
     modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, M_TO_PX(self.height/2)*1.1, M_TO_PX(self.width/2)*1.1, 1.0f);
     
     return modelViewMatrix;
+}
+
+- (GLboolean) handlePan:(PanEntity *) pan {
+    return false;
+}
+
+- (void) handlePanStarted {
+    
+}
+- (void) handlePanEnded {
+    
+}
+- (void) handlePanUpdate {
+    
 }
 
 @end

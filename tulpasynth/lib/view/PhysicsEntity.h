@@ -12,7 +12,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 #include "Globals.h"
-#include "PanEntity.h"
 #include "TapEntity.h"
 #include "LongPressEntity.h"
 #include "RotateEntity.h"
@@ -59,37 +58,6 @@
 - (b2BodyType)bodyType;
 
 
-/**
- *  Determine if a touch was inside this entity.
- **/
-- (GLboolean) _touchIsInside:(TouchEntity *)touch;
-- (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor;
-
-
-/**
- *  Wether or not this object responds to a pan gesture
- **/
-@property (nonatomic) BOOL pannable;
-/**
- *  Handler for a pan (dragging) gesture.
- **/
-- (GLboolean) handlePan:(PanEntity *) pan;
-/**
- *  Handler for when a pan gesture involving this entity ended.
- **/
-- (void) handlePanEnded;
-/**
- *  Handler for when a pan gesture involving this entity has started.
- **/
-- (void) handlePanStarted;
-/**
- *  Handler for update when a pan gesture was active.
- **/
-- (void) handlePanUpdate;
-/**
- *  Pointer to pan gesture if it is currently happening on self
- **/
-@property PanEntity * panner;
 /**
  *  Position of this object before panning started.
  **/

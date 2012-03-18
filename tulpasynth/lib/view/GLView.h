@@ -11,6 +11,8 @@
 #import "View.h"
 
 #include "b2Body.h"
+#include "PanEntity.h"
+
 
 #include "Globals.h"
 
@@ -68,5 +70,38 @@
  *  in `update`.
  **/
 - (GLKMatrix4)currentModelViewTransform;
+
+/**
+ *  Determine if a touch was inside this entity.
+ **/
+- (GLboolean) _touchIsInside:(TouchEntity *)touch;
+- (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor;
+
+/**
+ *  Handler for a pan (dragging) gesture.
+ **/
+- (GLboolean) handlePan:(PanEntity *) pan;
+/**
+ *  Wether or not this object responds to a pan gesture
+ **/
+@property (nonatomic) BOOL pannable;
+/**
+ *  Handler for when a pan gesture involving this entity ended.
+ **/
+- (void) handlePanEnded;
+/**
+ *  Handler for when a pan gesture involving this entity has started.
+ **/
+- (void) handlePanStarted;
+/**
+ *  Handler for update when a pan gesture was active.
+ **/
+- (void) handlePanUpdate;
+/**
+ *  Pointer to pan gesture if it is currently happening on self
+ **/
+@property PanEntity * panner;
+
+
 
 @end

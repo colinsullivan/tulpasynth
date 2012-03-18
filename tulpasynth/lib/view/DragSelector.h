@@ -10,7 +10,15 @@
 
 @interface DragSelector : GLView
 
-//@property (nonatomic) b2Vec2 dragStart;
+/**
+ *  Start of drag in world coordinates
+ **/
+@property (nonatomic) b2Vec2 dragStart;
+
+/**
+ *  End of drag in world coordinates
+ **/
+@property (nonatomic) b2Vec2 dragEnd;
 
 
 @end
