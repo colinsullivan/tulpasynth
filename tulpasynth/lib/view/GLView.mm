@@ -85,6 +85,8 @@ static GLubyte SquareIndices[] = {
     self.effect.texture2d0.enabled = GL_TRUE;
     self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
     self.effect.texture2d0.target = GLKTextureTarget2D;
+    
+    self.panner = nil;
 
     [[GLView Instances] addObject:self];
 }

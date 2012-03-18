@@ -72,19 +72,9 @@
 - (GLKMatrix4)currentModelViewTransform;
 
 /**
- *  Determine if a touch was inside this entity.
- **/
-- (GLboolean) _touchIsInside:(TouchEntity *)touch;
-- (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor;
-
-/**
  *  Handler for a pan (dragging) gesture.
  **/
 - (GLboolean) handlePan:(PanEntity *) pan;
-/**
- *  Wether or not this object responds to a pan gesture
- **/
-@property (nonatomic) BOOL pannable;
 /**
  *  Handler for when a pan gesture involving this entity ended.
  **/

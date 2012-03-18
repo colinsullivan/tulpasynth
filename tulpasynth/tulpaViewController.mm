@@ -53,7 +53,7 @@ LongPressEntity * _longPressEntity;
 @synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture,
     toolboxTexture, shooterGlowingTexture, shooterRadialMenuPointer,
     shooterRadialMenuBackground, triObstacleTexture, blackholeTexture,
-    deleteButtonTexture;
+    deleteButtonTexture, toolbarTexture;
 
 @synthesize fallingBalls, obstacles, wildBalls, selectedObstacles;
 
@@ -62,7 +62,7 @@ LongPressEntity * _longPressEntity;
 
 @synthesize pinchRecognizer, rotateRecognizer, panRecognizer, tapRecognizer, longPressRecognizer;
 
-@synthesize world, collisionDetector, walls, toolbox, collisionFilter;
+@synthesize world, collisionDetector, walls, toolbox, toolbar, collisionFilter;
 
 @synthesize socketHandler, waitingForIds, physicsEntitiesToDestroy;
 
@@ -203,6 +203,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.triObstacleTexture = [self loadTexture:@"triobstacle"];
     self.blackholeTexture = [self loadTexture:@"blackhole"];
     self.deleteButtonTexture = [self loadTexture:@"delete-button"];
+    self.toolbarTexture = [self loadTexture:@"Toolbar"];
     
     self.greenColor = GLKVector4Make(43.0/255.0, 208.0/255.0, 5.0/255.0, 1.0);
     self.orangeColor = GLKVector4Make(227.0/255.0, 151.0/255.0, 19.0/255.0, 1.0);
@@ -274,6 +275,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     walls->CreateFixture(&wallFixtureDef);
     
     self.toolbox = [[RadialToolbox alloc] initWithController:self withModel:NULL];
+    self.toolbar = [[Toolbar alloc] initWithController:self withModel:NULL];
+    self.toolbar.active = true;
     
     // Register for model creation and deletion updates
     [[Model Instances] addObserver:self forKeyPath:@"objects" options:NSKeyValueObservingOptionNew context:NULL];
@@ -418,6 +421,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     [self.toolbox draw];
     [self.toolbox postDraw];
     
+    [self.toolbar prepareToDraw];
+    [self.toolbar draw];
+    [self.toolbar postDraw];
+    
     for (Obstacle* o in self.obstacles) {
         [o prepareToDraw];
         [o draw];
@@ -461,7 +468,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     _panEntity->update();
     
     // if user is still dragging
-    if (self.dragSelector.panner) {
+    if ((_panEntity->state == GestureEntityStateUpdate || _panEntity->state == GestureEntityStateEnd) && self.dragSelector.panner == _panEntity) {
+        NSLog(@"sending pan gesture to dragSelector so it can finish");
         [self.dragSelector handlePan:_panEntity];
         return;
     }
@@ -476,8 +484,15 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         }
     }
     
+    if ([self.toolbar handlePan:_panEntity]) {
+        return;
+    }
+    
     // pan event was in empty space, user is dragging
-    [self.dragSelector handlePan:_panEntity];
+    if (_panEntity->state == GestureEntityStateStart) {
+        NSLog(@"dragSelector handling pan in empty space");
+        [self.dragSelector handlePan:_panEntity];        
+    }
 }
 
 - (IBAction)tapGestureHandler:(id)sender {
@@ -562,6 +577,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     // Update toolbox no matter what
     [self.toolbox update];
+    
+    [self.toolbar update];
     
     if (self.waiting) {
         return;

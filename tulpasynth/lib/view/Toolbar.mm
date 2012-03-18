@@ -30,13 +30,13 @@
 
 - (void) setPosition:(b2Vec2*)aPosition {
     // max position
-    if (aPosition->x < 0) {
-        aPosition->x = 0;
-    }
-    
-    if (aPosition->x > -10.0 + self.width + self.width/2.0) {
-        aPosition->x = -10.0 + self.width + self.width/2.0;
-    }
+//    if (aPosition->x < 0) {
+//        aPosition->x = 0;
+//    }
+//    
+//    if (aPosition->x > -10.0 + self.width + self.width/2.0) {
+//        aPosition->x = -10.0 + self.width + self.width/2.0;
+//    }
     
     [super setPosition:aPosition];
 }
@@ -46,12 +46,12 @@
     
     self.pannable = true;
     
-    self.width = PX_TO_M(self.controller.view.frame.size.height);
-    self.height = PX_TO_M(self.controller.view.frame.size.width);
+    self.width = PX_TO_M(768);
+    self.height = PX_TO_M(768);
     
     self.angle = 0.0;
     
-    self.position = new b2Vec2(-10.0 + self.width + self.width/2.0, self.height/2.0);
+    self.position = new b2Vec2(-self.width/2.0, self.height/2.0);
     
     self.shape = new b2PolygonShape();
     self.shape->m_radius = 1.0f;
@@ -62,7 +62,7 @@
     self.shapeFixture = self.body->CreateFixture(&mySquareFixture);
     
     b2Filter filterData;
-    filterData.groupIndex = 1;
+    filterData.groupIndex = 2;
     self.shapeFixture->SetFilterData(filterData);
     
 //    b2MassData myBodyMass;
@@ -84,31 +84,14 @@
 //    jointDef.dampingRatio = 0.1f;
 //    jointDef.maxForce = 4000.0f * self.body->GetMass();
 //    self.mouseJoint = (b2MouseJoint*)self.controller.world->CreateJoint(&jointDef);
+    self.effect.texture2d0.name = self.controller.toolbarTexture.name;
+
 }
 
 - (b2BodyType) bodyType {
     return b2_dynamicBody;
 }
 
--(void)prepareToDraw {
-    self.effect.texture2d0.name = self.controller.toolboxTexture.name;
-    
-    [super prepareToDraw];
-}
-
-
-- (void) update {
-    [super update];
-    
-    if (self.panner) {
-        b2Vec2* newPos = self.prePanningPosition;
-        newPos->x += self.panner->translation.x;
-        self.position = newPos;
-        
-    }
-
-    NSLog(@"self.body->GetLinearVelocity(): %f", self.body->GetLinearVelocity().x);
-}
 
 - (void) handlePanStarted {
     [super handlePanStarted];
@@ -124,6 +107,12 @@
                                   b2Vec2(self.panner->velocity.x, 0.0),
                                   (*self.position)
                                   );
+}
+
+- (void) handlePanUpdate {
+    b2Vec2* newPos = self.prePanningPosition;
+    newPos->x += self.panner->translation.x;
+    self.position = newPos;   
 }
 
 

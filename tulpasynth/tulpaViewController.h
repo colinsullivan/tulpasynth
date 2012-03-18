@@ -24,6 +24,7 @@
 #include "Model.h"
 
 #import "RadialToolbox.h"
+#import "Toolbar.h"
 #import "SocketHandler.h"
 #import "DragSelector.h"
 
@@ -55,6 +56,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong) GLKTextureInfo* triObstacleTexture;
 @property (strong) GLKTextureInfo* blackholeTexture;
 @property (strong) GLKTextureInfo* deleteButtonTexture;
+@property (strong) GLKTextureInfo* toolbarTexture;
 
 /**
  *  Colors 
@@ -141,6 +143,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  Popup radial toolbox
  **/
 @property (strong, nonatomic) RadialToolbox* toolbox;
+
+/**
+ *  Slide-in toolbar
+ **/
+@property (strong, nonatomic) Toolbar* toolbar;
 
 /**
  *  When we started rendering

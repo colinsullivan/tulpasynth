@@ -57,11 +57,20 @@
  **/
 - (b2BodyType)bodyType;
 
+/**
+ *  Determine if a touch was inside this entity.
+ **/
+- (GLboolean) _touchIsInside:(TouchEntity *)touch;
+- (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor;
 
 /**
  *  Position of this object before panning started.
  **/
 @property b2Vec2* prePanningPosition;
+/**
+ *  Wether or not this object responds to a pan gesture
+ **/
+@property (nonatomic) BOOL pannable;
 
 
 /**

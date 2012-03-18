@@ -67,21 +67,21 @@
  **/
 - (GLboolean) handlePan:(PanEntity *) pan {
     if (pan->state == GestureEntityStateStart) {
+        self.panner = pan;
         dragStart.Set(pan->touches[0]->position->x, pan->touches[0]->position->y);
         dragEnd.Set(pan->touches[0]->position->x, pan->touches[0]->position->y);
         self.active = true;
         // update here to draw 0-width highlight, clearing last one or else
         // single frame of old highlight will display
         [self update];
-        self.panner = pan;
     }
-    else if (pan->state == GestureEntityStateUpdate) {
+    else if (pan->state == GestureEntityStateUpdate && self.panner == pan) {
         dragEnd.Set(pan->touches[0]->position->x, pan->touches[0]->position->y);
     }
-    else if (pan->state == GestureEntityStateEnd) {
+    else if (pan->state == GestureEntityStateEnd && self.panner == pan) {
+        self.panner = nil;
         dragEnd.Set(pan->touches[0]->position->x, pan->touches[0]->position->y);
         self.active = false;
-        self.panner = nil;
     }
     
     return true;

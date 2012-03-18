@@ -350,14 +350,19 @@
 }
 
 - (GLboolean) handlePan:(PanEntity *)pan {
-    // if user wasn't trying to move object and we're selected
-    if (![super handlePan:pan] && self.selected) {
-        // may have been trying to change rate slider
-        if ([rateSlider handlePan:pan]) {
-            return true;
-        }
+    // if user wasn't trying to move object
+    if (![super handlePan:pan]) {
+        // if we're selected
+        if (self.selected) {
+            // may have been trying to change rate slider
+            if ([rateSlider handlePan:pan]) {
+                return true;
+            }
+        }        
     }
-    
+    else {
+        return true;
+    }
     return false;
 }
 
