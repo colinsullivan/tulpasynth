@@ -739,4 +739,22 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     [self selectObstacles:[[NSMutableArray alloc] init]];
 }
 
+- (void) selectObstaclesWithinHighlight:(b2Shape*)highlightShape {
+    NSMutableArray* toSelect = [[NSMutableArray alloc] init];
+    
+    b2Transform identity;
+    identity.SetIdentity();
+
+    // for each obstacle
+    for (Obstacle* o in self.obstacles) {
+        // if highlight overlaps with obstacle
+        if (b2TestOverlap(highlightShape, 0, o.shape, 0, identity, o.body->GetTransform())) {
+            // select obstacle
+            [toSelect addObject:o];
+        }
+    }
+    
+    // select obstacles
+    [self selectObstacles:toSelect];
+}
 @end

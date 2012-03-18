@@ -15,6 +15,7 @@
 #include "b2World.h"
 #include "b2Contact.h"
 #include "b2WorldCallbacks.h"
+#include "b2Collision.h"
 
 #include "CollisionDetector.h"
 #include "CollisionFilter.h"
@@ -202,5 +203,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 - (void) deselectAllObstacles;
 
 @property (strong, nonatomic) DragSelector* dragSelector;
+
+/**
+ *  Select obstacles within given bounds.  Called by the dragSelector.
+ **/
+- (void) selectObstaclesWithinHighlight:(b2Shape*)highlightShape;
 
 @end

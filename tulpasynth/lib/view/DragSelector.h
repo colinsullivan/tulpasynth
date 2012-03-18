@@ -8,6 +8,8 @@
 
 #import "GLView.h"
 
+#include "b2PolygonShape.h"
+
 @interface DragSelector : GLView
 
 /**
@@ -19,6 +21,11 @@
  *  End of drag in world coordinates
  **/
 @property (nonatomic) b2Vec2 dragEnd;
+
+/**
+ *  a shape corresponding to the shape of the highlight.
+ **/
+@property (nonatomic) b2PolygonShape* shape;
 
 
 @end

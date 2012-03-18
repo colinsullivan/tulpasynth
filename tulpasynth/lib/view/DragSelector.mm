@@ -8,9 +8,11 @@
 
 #import "DragSelector.h"
 
+#import "tulpaViewController.h"
+
 @implementation DragSelector
 
-@synthesize dragStart, dragEnd;
+@synthesize dragStart, dragEnd, shape;
 
 - (void) initialize {
     [super initialize];
@@ -27,10 +29,15 @@
     self.position->Set(20, 20);
     self.width = 30;
     self.height = 15;
+    self.angle = 0.0;
 }
 
 - (void) update {
     [super update];
+    
+    if (!self.active) {
+        return;
+    }
     
     // position is midpoint between drag start and drag end
     b2Vec2 midpoint;
@@ -43,6 +50,16 @@
     self.width = fabs(dragStart.x - dragEnd.x);
     self.height = fabs(dragStart.y - dragEnd.y);
     
+    // select obstacles within these bounds
+    b2PolygonShape* oldShape = self.shape;
+
+    self.shape = new b2PolygonShape();
+
+    self.shape->SetAsBox(self.width/2.0, self.height/2.0, *(self.position), self.angle);
+
+    delete (b2PolygonShape*)oldShape;
+    
+    [self.controller selectObstaclesWithinHighlight:self.shape];
 }
 
 /**
@@ -52,10 +69,10 @@
     if (pan->state == GestureEntityStateStart) {
         dragStart.Set(pan->touches[0]->position->x, pan->touches[0]->position->y);
         dragEnd.Set(pan->touches[0]->position->x, pan->touches[0]->position->y);
+        self.active = true;
         // update here to draw 0-width highlight, clearing last one or else
         // single frame of old highlight will display
         [self update];
-        self.active = true;
         self.panner = pan;
     }
     else if (pan->state == GestureEntityStateUpdate) {
