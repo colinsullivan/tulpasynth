@@ -77,7 +77,7 @@ stk::StkFrames& FMPercussion::next_buf(stk::StkFrames& frames) {
             if (this->_carrierEnvelope->getState() == 0.0) {
                 this->stop();
             }
-        }        
+        }
     }
     
     return frames;
@@ -136,12 +136,13 @@ void FMPercussion::play() {
     this->_modulatorEnvelope->keyOn();
     this->_carrierEnvelope->setValue(0.0);
     this->_carrierEnvelope->keyOn();
+    this->_modulatorPhase = 0.0;
 }
 
 void FMPercussion::velocity(stk::StkFloat aVelocity) {
     Instrument::velocity(aVelocity);
 
-    this->modulationIndex(this->_velocity * 25);
+    this->modulationIndex((this->_velocity * 30));
 }
 
 void FMPercussion::stop() {
