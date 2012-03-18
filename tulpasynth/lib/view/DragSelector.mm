@@ -30,6 +30,8 @@
     self.width = 30;
     self.height = 15;
     self.angle = 0.0;
+    
+    self.scalingMultiplier = 1.0;
 }
 
 - (void) update {

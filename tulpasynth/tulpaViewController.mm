@@ -469,7 +469,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     // if user is still dragging
     if ((_panEntity->state == GestureEntityStateUpdate || _panEntity->state == GestureEntityStateEnd) && self.dragSelector.panner == _panEntity) {
-        NSLog(@"sending pan gesture to dragSelector so it can finish");
         [self.dragSelector handlePan:_panEntity];
         return;
     }

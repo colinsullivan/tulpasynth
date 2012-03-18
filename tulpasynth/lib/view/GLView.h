@@ -52,6 +52,13 @@
  **/
 @property (nonatomic) BOOL active;
 
+
+/**
+ *  Padding to add when scaling drawing.  Used to offset padding on texture
+ *  images.
+ **/
+@property (nonatomic) float scalingMultiplier;
+
 - (void) initialize;
 
 - (void)prepareToDraw;

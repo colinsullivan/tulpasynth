@@ -31,7 +31,7 @@ static GLubyte SquareIndices[] = {
 
 @synthesize active;
 
-@synthesize effect;
+@synthesize effect, scalingMultiplier;
 
 @synthesize panner;
 
@@ -85,6 +85,9 @@ static GLubyte SquareIndices[] = {
     self.effect.texture2d0.enabled = GL_TRUE;
     self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
     self.effect.texture2d0.target = GLKTextureTarget2D;
+    
+    // by default, scale by 110% because most texture images have about 10% padding.
+    self.scalingMultiplier = 1.1;
     
     self.panner = nil;
 
@@ -142,7 +145,7 @@ static GLubyte SquareIndices[] = {
     
     
     self.effect = nil;
-    
+
     delete (b2Vec2*)self.position;
 
 }
@@ -167,7 +170,7 @@ static GLubyte SquareIndices[] = {
     modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, M_TO_PX(self.position->y), M_TO_PX(self.position->x), 0.0);
     modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, self.angle, 0.0, 0.0, 1.0);
     // add 10% to size since texture images are padded
-    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, M_TO_PX(self.height/2)*1.1, M_TO_PX(self.width/2)*1.1, 1.0f);
+    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, M_TO_PX(self.height/2)*self.scalingMultiplier, M_TO_PX(self.width/2)*self.scalingMultiplier, 1.0f);
     
     return modelViewMatrix;
 }

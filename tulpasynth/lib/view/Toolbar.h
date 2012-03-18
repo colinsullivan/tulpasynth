@@ -13,16 +13,19 @@
 #import "PhysicsEntity.h"
 
 
-@interface Toolbar : PhysicsEntity {
-    b2Vec2 offsetPosition;
-}
+@interface Toolbar : PhysicsEntity
 
-@property (nonatomic) b2MouseJoint* mouseJoint;
+//@property (nonatomic) b2MouseJoint* mouseJoint;
 
-- (void) initialize;
-- (b2BodyType) bodyType;
--(void)prepareToDraw;
-- (void) update;
+/**
+ *  Wether or not the toolbox is completely closed (as in a drawer that is closed).
+ **/
+@property (nonatomic) BOOL closed;
+
+/**
+ *  Wether or not the toolbox is completely open.
+ **/
+@property (nonatomic) BOOL open;
 
 //- (GLKMatrix4)currentModelViewTransform;
 @end
