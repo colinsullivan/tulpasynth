@@ -274,7 +274,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     wallShape.Set(topLeft, topRight);
     walls->CreateFixture(&wallFixtureDef);
     
-    self.toolbox = [[RadialToolbox alloc] initWithController:self withModel:NULL];
+//    self.toolbox = [[RadialToolbox alloc] initWithController:self withModel:NULL];
     self.toolbar = [[Toolbar alloc] initWithController:self withModel:NULL];
     self.toolbar.active = true;
     
@@ -416,10 +416,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     [self.dragSelector draw];
     [self.dragSelector postDraw];
     
-    // Draw toolbox
-    [self.toolbox prepareToDraw];
-    [self.toolbox draw];
-    [self.toolbox postDraw];
+//    // Draw toolbox
+//    [self.toolbox prepareToDraw];
+//    [self.toolbox draw];
+//    [self.toolbox postDraw];
     
     [self.toolbar prepareToDraw];
     [self.toolbar draw];
@@ -497,16 +497,22 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 - (IBAction)tapGestureHandler:(id)sender {
     _tapEntity->update();
     
-    
-    if (self.toolbox.active) {
-        if ([self.toolbox handleTap:_tapEntity]) {
-            return;
-        }
-        else {
-            self.toolbox.active = false;
-            return;        
-        }
+    // if toolbar is open
+    if (self.toolbar.open) {
+        NSLog(@"closing toolbar");
+        [self.toolbar animateClosed];
+        return;
     }
+    
+//    if (self.toolbox.active) {
+//        if ([self.toolbox handleTap:_tapEntity]) {
+//            return;
+//        }
+//        else {
+//            self.toolbox.active = false;
+//            return;        
+//        }
+//    }
 
     // All obstacles can handle tap
     for (Obstacle * o in self.obstacles) {
@@ -523,9 +529,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         [self deselectAllObstacles];
     }
     else {
-        // Move toolbox to that point and display
-        self.toolbox.position = _tapEntity->touches[0]->position;
-        self.toolbox.active = true;
+//        // Move toolbox to that point and display
+//        self.toolbox.position = _tapEntity->touches[0]->position;
+//        self.toolbox.active = true;
+        
+        // open toolbar
+        [self.toolbar animateOpen];
     }    
 
 //    if (!handled) {
@@ -574,8 +583,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     // update drag selector no matter what
     [self.dragSelector update];
     
-    // Update toolbox no matter what
-    [self.toolbox update];
+//    // Update toolbox no matter what
+//    [self.toolbox update];
     
     [self.toolbar update];
     

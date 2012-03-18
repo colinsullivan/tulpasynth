@@ -12,7 +12,10 @@
 
 @implementation Toolbar
 
-@synthesize closed, open;
+@synthesize closed, open, prototypes;
+
+@synthesize squarePrototype, shooterPrototype, triPrototype, blackholePrototype;
+
 
 //- (const b2Vec2&)position {
 //    offsetPosition.Set([super position].x, [super position].y);
@@ -37,7 +40,7 @@
     openPosition.Set(-self.width/2.0 + 12.0, self.height/2.0);
     
     // left bounds
-    if (aPosition->x <= closedPosition.x) {
+    if (aPosition->x < closedPosition.x) {
         aPosition->x = closedPosition.x;
         self.closed = true;
         self.open = false;
@@ -48,7 +51,7 @@
     }
     
     // right bounds
-    if (aPosition->x >= openPosition.x) {
+    if (aPosition->x > openPosition.x) {
         aPosition->x = openPosition.x;
         self.closed = false;
         self.open = true;
@@ -58,6 +61,29 @@
         self.open = false;
     }
     
+    float prototypeX = aPosition->x + self.width/2.0 - 6.5;
+    float prototypeY = 4;
+    
+    self.squarePrototype.position = new b2Vec2(
+                                               prototypeX,
+                                               prototypeY
+                                               );
+    self.shooterPrototype.position = new b2Vec2(
+                                                prototypeX,
+                                                prototypeY + 10
+                                                );
+    
+    self.triPrototype.position = new b2Vec2(
+                                            prototypeX,
+                                            prototypeY + 20
+                                            );
+    
+    self.blackholePrototype.position = new b2Vec2(
+                                                  prototypeX,
+                                                  prototypeY + 30
+                                                  );
+
+    
     [super setPosition:aPosition];
 }
 
@@ -65,6 +91,9 @@
     [super initialize];
     
     self.pannable = true;
+    
+    self.prototypes = [[NSMutableArray alloc] init];
+
     
     self.width = PX_TO_M(768);
     self.height = PX_TO_M(768);
@@ -85,6 +114,33 @@
     filterData.groupIndex = 2;
     self.shapeFixture->SetFilterData(filterData);
     
+    filterData.groupIndex = 1;
+    // Create object prototypes
+    self.squarePrototype = [[BlockObstacle alloc] initWithController:self.controller withModel:NULL];
+    self.squarePrototype.width = [[[BlockModel defaultAttributes] valueForKey:@"width"] floatValue];
+    self.squarePrototype.height = [[[BlockModel defaultAttributes] valueForKey:@"height"] floatValue];
+    self.squarePrototype.shapeFixture->SetFilterData(filterData);
+    [self.prototypes addObject:self.squarePrototype];
+    
+    self.shooterPrototype = [[Shooter alloc] initWithController:self.controller withModel:NULL];
+    self.shooterPrototype.width = [[[ShooterModel defaultAttributes] valueForKey:@"width"] floatValue];
+    self.shooterPrototype.height = [[[ShooterModel defaultAttributes] valueForKey:@"height"] floatValue];
+    self.shooterPrototype.angle = [[[ShooterModel defaultAttributes] valueForKey:@"angle"] floatValue];
+    self.shooterPrototype.shapeFixture->SetFilterData(filterData);
+    [self.prototypes addObject:self.shooterPrototype];
+    
+    self.triPrototype = [[TriObstacle alloc] initWithController:self.controller withModel:NULL];
+    [self.triPrototype setWidth:[[[TriObstacleModel defaultAttributes] valueForKey:@"width"] floatValue] withHeight:[[[TriObstacleModel defaultAttributes] valueForKey:@"height"] floatValue]];
+    self.triPrototype.angle = [[[TriObstacleModel defaultAttributes] valueForKey:@"angle"] floatValue];
+    self.triPrototype.shapeFixture->SetFilterData(filterData);
+    [self.prototypes addObject:self.triPrototype];
+    
+    self.blackholePrototype = [[Blackhole alloc] initWithController:self.controller withModel:NULL];
+    self.blackholePrototype.width = [[[BlackholeModel defaultAttributes] valueForKey:@"width"] floatValue];
+    self.blackholePrototype.height = [[[BlackholeModel defaultAttributes] valueForKey:@"height"] floatValue];
+    self.blackholePrototype.shapeFixture->SetFilterData(filterData);
+    [self.prototypes addObject:self.blackholePrototype];
+
 //    b2MassData myBodyMass;
 //    myBodyMass.mass = 1.0f;
 //    self.body->SetMassData(&myBodyMass);
@@ -151,6 +207,9 @@
     b2Transform currentTransform = self.body->GetTransform();
     self.position = &currentTransform.p;
     
+    for (PhysicsEntity* e in self.prototypes) {
+        [e update];
+    }
 }
 
 
@@ -174,6 +233,72 @@
     b2Vec2* newPos = self.prePanningPosition;
     newPos->x += self.panner->translation.x*0.25;
     self.position = newPos;   
+}
+
+- (void) animateOpen {
+    self.body->ApplyLinearImpulse(
+                                  b2Vec2(50.0, 0.0), (*self.position)
+                                  );
+}
+- (void) animateClosed {
+    self.position->x = self.position->x-0.5;
+    self.body->ApplyLinearImpulse(
+                                  b2Vec2(-50.0, 0.0), (*self.position)
+                                  );
+}
+
+- (void) postDraw {
+    [super postDraw];
+    if (self.active) {
+        
+        for (PhysicsEntity* e in self.prototypes) {
+            [e prepareToDraw];
+            [e draw];
+            [e postDraw];
+        }
+    }
+}
+
+- (void) handleTapOccurred:(TapEntity*)tap {
+    // if tap was in block obstacle prototype
+    if ([self.squarePrototype handleTap:tap]) {
+        
+        // Create new block obstacle obstacle at point
+        BlockModel* sm = [[BlockModel alloc] initWithController:self.controller withAttributes:
+                          [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSNumber numberWithFloat:self.position->x], @"x",
+                            [NSNumber numberWithFloat:self.position->y], @"y", nil], @"initialPosition",
+                           nil]];
+        
+    }
+    else if ([self.shooterPrototype handleTap:tap]) {
+        // Create new shooter at that point
+        ShooterModel* sm = [[ShooterModel alloc] initWithController:self.controller withAttributes:
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSDictionary dictionaryWithObjectsAndKeys:
+                              [NSNumber numberWithFloat:self.position->x], @"x",
+                              [NSNumber numberWithFloat:self.position->y], @"y", nil], @"initialPosition",
+                             nil]];
+    }
+    else if ([self.triPrototype handleTap:tap]) {
+        // create new tri obstacle
+        [[TriObstacleModel alloc] initWithController:self.controller withAttributes:[NSDictionary dictionaryWithKeysAndObjects:
+                                                                                     @"initialPosition", [NSDictionary dictionaryWithKeysAndObjects:
+                                                                                                          @"x", [NSNumber numberWithFloat:self.position->x],
+                                                                                                          @"y", [NSNumber numberWithFloat:self.position->y], nil],
+                                                                                     nil]];
+    }
+    else if ([self.blackholePrototype handleTap:tap]) {
+        // create new blackhole
+        [[BlackholeModel alloc] initWithController:self.controller withAttributes:[NSDictionary dictionaryWithKeysAndObjects:
+                                                                                   @"initialPosition", [NSDictionary dictionaryWithKeysAndObjects:
+                                                                                                        @"x", [NSNumber numberWithFloat:self.position->x],
+                                                                                                        @"y", [NSNumber numberWithFloat:self.position->y], nil]
+                                                                                   , nil]];
+    }
+    
+    self.active = false;
 }
 
 

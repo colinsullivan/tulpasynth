@@ -11,14 +11,22 @@
 #include "b2MouseJoint.h"
 
 #import "PhysicsEntity.h"
+#import "BlockObstacle.h"
+#import "BlockModel.h"
+#import "Shooter.h"
+#import "TriObstacle.h"
+#import "TriObstacleModel.h"
+
+#import "Blackhole.h"
+#import "BlackholeModel.h"
+
 
 
 @interface Toolbar : PhysicsEntity
 
-//@property (nonatomic) b2MouseJoint* mouseJoint;
-
 /**
- *  Wether or not the toolbox is completely closed (as in a drawer that is closed).
+ *  Wether or not the toolbox is completely closed (as in a drawer that is
+ *  closed).
  **/
 @property (nonatomic) BOOL closed;
 
@@ -27,5 +35,14 @@
  **/
 @property (nonatomic) BOOL open;
 
-//- (GLKMatrix4)currentModelViewTransform;
+- (void) animateOpen;
+- (void) animateClosed;
+
+@property (strong, nonatomic) NSMutableArray* prototypes;
+
+@property (strong, nonatomic) BlockObstacle* squarePrototype;
+@property (strong, nonatomic) Shooter* shooterPrototype;
+@property (strong, nonatomic) TriObstacle* triPrototype;
+@property (strong, nonatomic) Blackhole* blackholePrototype;
+
 @end
