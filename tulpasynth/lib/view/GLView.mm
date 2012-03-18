@@ -26,7 +26,32 @@ static GLubyte SquareIndices[] = {
 
 @implementation GLView
 
+@synthesize position, width, height, angle;
+
+@synthesize active;
+
 @synthesize effect;
+
+/**
+ *  Since position is a reference to a C++ object, override to avoid memory leaks
+ **/
+- (b2Vec2*)position {
+    if (!position) {
+        position = new b2Vec2(0, 0);
+    }
+    
+    return position;
+}
+
+/**
+ *  Ensure angle is between 0 and 2PI
+ **/
+- (void) setAngle:(float32)anAngle {
+    while (anAngle >= M_PI*2) {
+        anAngle -= M_PI*2;
+    }
+    angle = anAngle;
+}
 
 - (void) initialize {
     
@@ -80,14 +105,16 @@ static GLubyte SquareIndices[] = {
 }
 
 - (void)draw {
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Position));
-//    glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Color));    
     
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, TexCoord));
-    
-//    glDrawElements(GL_TRIANGLES, sizeof([self indices])/sizeof([self indices][0]), GL_UNSIGNED_BYTE, 0);
-    glDrawElements(GL_TRIANGLES, sizeof(SquareIndices)/sizeof(SquareIndices[0]), GL_UNSIGNED_BYTE, 0);
-
+    if (self.active) {
+        glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Position));
+        //    glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Color));    
+        
+        glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, TexCoord));
+        
+        //    glDrawElements(GL_TRIANGLES, sizeof([self indices])/sizeof([self indices][0]), GL_UNSIGNED_BYTE, 0);
+        glDrawElements(GL_TRIANGLES, sizeof(SquareIndices)/sizeof(SquareIndices[0]), GL_UNSIGNED_BYTE, 0);        
+    }
 }
 
 - (void)postDraw {
@@ -104,15 +131,15 @@ static GLubyte SquareIndices[] = {
     self.effect.transform.modelviewMatrix = [self currentModelViewTransform];
 }
 
-- (GLKMatrix4)currentModelViewTransform {
-    return GLKMatrix4Identity;
-}
-
 - (void)dealloc {
     glDeleteBuffers(1, &_vertexBuffer);
     glDeleteBuffers(1, &_indexBuffer);
     
+    
     self.effect = nil;
+    
+    delete (b2Vec2*)self.position;
+
 }
 
 + (NSMutableArray*) Instances {
@@ -125,5 +152,19 @@ static GLubyte SquareIndices[] = {
     return instancesList;
 }
 
+/**
+ *  Ensure that translation corresponding to this entity is performed before 
+ *  drawing.
+ **/
+- (GLKMatrix4)currentModelViewTransform {
+    GLKMatrix4 modelViewMatrix = GLKMatrix4Identity;
+    
+    modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, M_TO_PX(self.position->y), M_TO_PX(self.position->x), 0.0);
+    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, self.angle, 0.0, 0.0, 1.0);
+    // add 10% to size since texture images are padded
+    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, M_TO_PX(self.height/2)*1.1, M_TO_PX(self.width/2)*1.1, 1.0f);
+    
+    return modelViewMatrix;
+}
 
 @end

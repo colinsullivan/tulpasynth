@@ -69,6 +69,7 @@
 		3BBE9FA014F8513F0013CB1A /* View.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE9F9F14F8513F0013CB1A /* View.mm */; };
 		3BC5A221151535E400ADCDD5 /* ObstacleDeleteButton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5A220151535E400ADCDD5 /* ObstacleDeleteButton.mm */; };
 		3BC5A2231515370F00ADCDD5 /* delete-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A2221515370F00ADCDD5 /* delete-button.png */; };
+		3BC5A2261515596700ADCDD5 /* DragSelector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5A2251515596600ADCDD5 /* DragSelector.mm */; };
 		3BCEB90D150D2C26007CFA08 /* ShooterRateSlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */; };
 		3BCEB910150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */; };
 		3BCEB911150D2CCC007CFA08 /* Shooter-Radial-Menu-Pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEB90F150D2CCC007CFA08 /* Shooter-Radial-Menu-Pointer.png */; };
@@ -483,6 +484,8 @@
 		3BC5A21F151535E400ADCDD5 /* ObstacleDeleteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstacleDeleteButton.h; sourceTree = "<group>"; };
 		3BC5A220151535E400ADCDD5 /* ObstacleDeleteButton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObstacleDeleteButton.mm; sourceTree = "<group>"; };
 		3BC5A2221515370F00ADCDD5 /* delete-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-button.png"; sourceTree = "<group>"; };
+		3BC5A2241515596500ADCDD5 /* DragSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragSelector.h; sourceTree = "<group>"; };
+		3BC5A2251515596600ADCDD5 /* DragSelector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DragSelector.mm; sourceTree = "<group>"; };
 		3BCEB90B150D2C26007CFA08 /* ShooterRateSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterRateSlider.h; sourceTree = "<group>"; };
 		3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShooterRateSlider.mm; sourceTree = "<group>"; };
 		3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shooter-Radial-Menu-Background.png"; sourceTree = "<group>"; };
@@ -1100,6 +1103,8 @@
 				3BB550F31513F200005106A3 /* Blackhole.mm */,
 				3BC5A21F151535E400ADCDD5 /* ObstacleDeleteButton.h */,
 				3BC5A220151535E400ADCDD5 /* ObstacleDeleteButton.mm */,
+				3BC5A2241515596500ADCDD5 /* DragSelector.h */,
+				3BC5A2251515596600ADCDD5 /* DragSelector.mm */,
 			);
 			name = view;
 			path = lib/view;
@@ -2227,6 +2232,7 @@
 				3BB550F41513F202005106A3 /* Blackhole.mm in Sources */,
 				3BB550FB151441EE005106A3 /* LoopingRAMpler.cpp in Sources */,
 				3BC5A221151535E400ADCDD5 /* ObstacleDeleteButton.mm in Sources */,
+				3BC5A2261515596700ADCDD5 /* DragSelector.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

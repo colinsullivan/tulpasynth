@@ -13,9 +13,7 @@
 
 @implementation PhysicsEntity
 
-@synthesize position, body, shape, shapeFixture;
-
-@synthesize width, height, angle;
+@synthesize body, shape, shapeFixture;
 
 @synthesize pannable, panner, prePanningPosition;
 
@@ -25,37 +23,35 @@
 
 @synthesize pincheable, pincher, preScalingWidth, preScalingHeight;
 
-@synthesize active;
 
-- (void)setActive:(BOOL)isActive {
-    active = isActive;
-}
-
+/**
+ *  Override getter for position so we can hook into b2Body::GetPosition.
+ **/
 - (b2Vec2*)position {
+    b2Vec2* currentPosition = [super position];
     b2Vec2 bodyPosition = self.body->GetPosition();
 
-    if (!position) {
-        position = new b2Vec2();
-    }
-    position->Set(bodyPosition.x, bodyPosition.y);
+    currentPosition->Set(bodyPosition.x, bodyPosition.y);
     
-    return position;
+    return currentPosition;
 }
 
+/**
+ *  Override setter for position so we can hook into b2Body::SetTransform.
+ **/
 - (void)setPosition:(b2Vec2*)aPosition {
     self.body->SetTransform(b2Vec2(aPosition->x, aPosition->y), -1*self.angle);
 }
 
+/**
+ *  Override setter for angle so we can hook into b2Body::SetTransform.
+ **/
 - (void)setAngle:(float32)anAngle {
-    if (anAngle >= M_PI*2) {
-        anAngle = anAngle - M_PI*2;
-    }
-    
-    if (self.body) {
-        self.body->SetTransform(self.body->GetPosition(), -1*anAngle);        
-    }
+    [super setAngle:anAngle];
 
-    angle = anAngle;
+    if (self.body) {
+        self.body->SetTransform(self.body->GetPosition(), -1*self.angle);        
+    }
 }
 
 - (void) initialize {
@@ -97,7 +93,6 @@
 
 - (void)dealloc {
     delete (b2Vec2*)self.prePanningPosition;
-    delete (b2Vec2*)self.position;
 }
 
 - (void) destroy {
@@ -178,16 +173,6 @@
     return b2_staticBody;
 }
 
-- (GLKMatrix4)currentModelViewTransform {
-    GLKMatrix4 modelViewMatrix = [super currentModelViewTransform];
-
-    modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, M_TO_PX(self.position->y), M_TO_PX(self.position->x), 0.0);
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, self.angle, 0.0, 0.0, 1.0);
-    // add 10% to size since texture images are padded
-    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, M_TO_PX(self.height/2)*1.1, M_TO_PX(self.width/2)*1.1, 1.0f);
-    
-    return modelViewMatrix;
-}
 
 - (GLboolean) _touchIsInside:(TouchEntity *)touch withFudge:(float)fudgeFactor {
     b2Rot r(-1*self.angle);
@@ -422,11 +407,6 @@
     
 }
 
-- (void) draw {
-    if (self.active) {
-        [super draw];
-    }
-}
 
 
 @end

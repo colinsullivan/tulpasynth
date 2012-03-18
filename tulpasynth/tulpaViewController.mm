@@ -68,6 +68,8 @@ LongPressEntity * _longPressEntity;
 
 @synthesize greenColor, orangeColor, redColor;
 
+@synthesize dragSelector;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -297,6 +299,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     glEnable(GL_BLEND);
     glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+    
+    self.dragSelector = [[DragSelector alloc] initWithController:self withModel:NULL];
+    self.dragSelector.active = true;
 
 }
 
@@ -403,6 +408,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
+    // draw drag selector
+    [self.dragSelector prepareToDraw];
+    [self.dragSelector draw];
+    [self.dragSelector postDraw];
     
     // Draw toolbox
     [self.toolbox prepareToDraw];
@@ -540,6 +549,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     // Turn these bitches down to increase performance
     int32 velocityIterations = 7;
     int32 positionIterations = 3;
+    
+    // update drag selector no matter what
+    [self.dragSelector update];
     
     // Update toolbox no matter what
     [self.toolbox update];

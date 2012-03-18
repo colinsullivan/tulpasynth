@@ -24,7 +24,7 @@
 
 #import "RadialToolbox.h"
 #import "SocketHandler.h"
-
+#import "DragSelector.h"
 
 /**
  *  Global audio callback.  userData will be the `tulpaViewController` 
@@ -200,4 +200,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
  *  Helper method to deselect all currently selected obstacles.
  **/
 - (void) deselectAllObstacles;
+
+@property (strong, nonatomic) DragSelector* dragSelector;
+
 @end

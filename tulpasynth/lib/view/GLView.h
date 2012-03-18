@@ -10,6 +10,8 @@
 
 #import "View.h"
 
+#include "b2Body.h"
+
 #include "Globals.h"
 
 
@@ -24,6 +26,29 @@
 }
 
 @property (strong, nonatomic) GLKBaseEffect* effect;
+
+/**
+ *  Width and height of this object (in world coordinates)
+ **/
+@property float width;
+@property float height;
+
+/**
+ *  Rotation of this object (in radians)
+ **/
+@property (nonatomic) float32 angle;
+
+/**
+ *  Position of the center of this object (in world coordinates)
+ **/
+@property (nonatomic) b2Vec2* position;
+
+
+/**
+ *  Wether or not this view will be drawn (TODO: this can invoke an animation
+ *  when enabled/disabled).
+ **/
+@property (nonatomic) BOOL active;
 
 - (void) initialize;
 

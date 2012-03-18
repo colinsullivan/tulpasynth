@@ -23,9 +23,6 @@
 #import "GLView.h"
 #import "PhysicsEntityModel.h"
 
-#include "b2Body.h"
-
-
 /**
  *  @class Base class for all graphics entities, all of which are subject
  *  to Box2D physics.
@@ -46,32 +43,9 @@
 @property b2Shape* shape;
 @property b2Fixture* shapeFixture;
 
-/**
- *  Width and height of this object (in world coordinates)
- **/
-@property float width;
-@property float height;
-
-/**
- *  Rotation of this object (in radians)
- **/
-@property (nonatomic) float32 angle;
-
-
-/**
- *  Hook into b2Body::GetPosition.  Setting the position from here
- *  will not do anything.
- **/
-@property b2Vec2* position;
 
 - (void) initialize;
 - (void)dealloc;
-
-/**
- *  Override getter for position so we can hook into b2Body::GetPosition.
- **/
-- (b2Vec2*)position;
-- (void)setPosition:(b2Vec2*)aPosition;
 
 /**
  *  Static list of all physics entity instances.
@@ -205,11 +179,5 @@
 - (void) handleCollision:(PhysicsEntity*)otherEntity withStrength:(float)collisionStrength;
 
 - (void) destroy;
-
-/**
- *  Wether or not this view will be drawn (TODO: this can invoke an animation
- *  when enabled/disabled).
- **/
-@property (nonatomic) BOOL active;
 
 @end
