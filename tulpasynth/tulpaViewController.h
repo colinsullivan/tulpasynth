@@ -58,6 +58,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong) GLKTextureInfo* deleteButtonTexture;
 @property (strong) GLKTextureInfo* toolbarTexture;
 @property (strong) GLKTextureInfo* addingRingTexture;
+@property (strong) GLKTextureInfo* wildBallTexture;
+@property (strong) GLKTextureInfo* wildBallGlowTexture;
 
 /**
  *  Colors 

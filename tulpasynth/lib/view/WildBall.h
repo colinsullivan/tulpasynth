@@ -17,9 +17,4 @@
 
 @interface WildBall : PhysicsEntity
 
-- (void) setWidth:(float)width;
-- (void) initialize;
-- (b2BodyType)bodyType;
--(void)prepareToDraw;
-
 @end

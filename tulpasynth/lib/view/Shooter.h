@@ -27,12 +27,6 @@
  **/
 @interface Shooter : Obstacle
 
-- (void) initialize;
-- (void) setWidth:(float)width;
--(void)prepareToDraw;
-- (b2BodyType)bodyType;
-
-@property (strong, nonatomic) GLKBaseEffect* effect1;
 
 @property float glow;
 

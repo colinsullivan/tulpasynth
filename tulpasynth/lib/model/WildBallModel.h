@@ -19,4 +19,9 @@
  **/
 @property (strong, nonatomic) NSNumber* pitchIndex;
 
+/**
+ *  Amount of energy in ball (i.e. number of collisions remaining before death)
+ **/
+@property (strong, nonatomic) NSNumber* energy;
+
 @end

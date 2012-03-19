@@ -53,7 +53,8 @@ LongPressEntity * _longPressEntity;
 @synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture,
     toolboxTexture, shooterGlowingTexture, shooterRadialMenuPointer,
     shooterRadialMenuBackground, triObstacleTexture, blackholeTexture,
-    deleteButtonTexture, toolbarTexture, addingRingTexture;
+    deleteButtonTexture, toolbarTexture, addingRingTexture, wildBallTexture,
+    wildBallGlowTexture;
 
 @synthesize fallingBalls, obstacles, wildBalls, selectedObstacles;
 
@@ -205,6 +206,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.deleteButtonTexture = [self loadTexture:@"delete-button"];
     self.toolbarTexture = [self loadTexture:@"Toolbar"];
     self.addingRingTexture = [self loadTexture:@"AddCircle"];
+    self.wildBallTexture = [self loadTexture:@"WildBall"];
+    self.wildBallGlowTexture = [self loadTexture:@"WildBallGlow"];
     
     self.greenColor = GLKVector4Make(43.0/255.0, 208.0/255.0, 5.0/255.0, 1.0);
     self.orangeColor = GLKVector4Make(227.0/255.0, 151.0/255.0, 19.0/255.0, 1.0);

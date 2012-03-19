@@ -31,7 +31,7 @@ static GLubyte SquareIndices[] = {
 
 @synthesize active;
 
-@synthesize effect, scalingMultiplier;
+@synthesize effect, effect1, scalingMultiplier;
 
 @synthesize panner;
 
@@ -69,6 +69,16 @@ static GLubyte SquareIndices[] = {
                                                                  0,
                                                                  -1,
                                                                  1);
+    
+    self.effect1 = [[GLKBaseEffect alloc] init];
+    self.effect1.transform.projectionMatrix = GLKMatrix4MakeOrtho(
+                                                                  0,
+                                                                  self.controller.view.frame.size.width,
+                                                                  self.controller.view.frame.size.height,
+                                                                  0,
+                                                                  -1,
+                                                                  1);
+
 
     // Vertex buffers
     glGenBuffers(1, &_vertexBuffer);        
@@ -86,6 +96,11 @@ static GLubyte SquareIndices[] = {
     self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
     self.effect.texture2d0.target = GLKTextureTarget2D;
     
+    self.effect1.texture2d0.enabled = GL_FALSE;
+    self.effect1.texture2d0.envMode = GLKTextureEnvModeModulate;
+    self.effect1.texture2d0.target = GLKTextureTarget2D;
+
+    
     // by default, scale by 110% because most texture images have about 10% padding.
     self.scalingMultiplier = 1.1;
     
@@ -100,16 +115,23 @@ static GLubyte SquareIndices[] = {
 - (GLubyte*)indices {
     return NULL;
 }
-
-- (void)prepareToDraw {
-    [self.effect prepareToDraw];
-    
+- (void)_bindAndEnable {
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
-//    glEnableVertexAttribArray(GLKVertexAttribColor);
-    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+    //    glEnableVertexAttribArray(GLKVertexAttribColor);
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);    
+}
+
+- (void)prepareToDraw {
+    [self.effect prepareToDraw];
+    [self _bindAndEnable];
+}
+
+- (void)prepareToDraw1 {
+    [self.effect1 prepareToDraw];
+    [self _bindAndEnable];
 }
 
 - (void)draw {
@@ -125,11 +147,27 @@ static GLubyte SquareIndices[] = {
     }
 }
 
-- (void)postDraw {
+- (void)_disable {
     glDisableVertexAttribArray(GLKVertexAttribPosition);
-//    glDisableVertexAttribArray(GLKVertexAttribColor);
-//    glDisable(GL_BLEND);
-    glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
+    //    glDisableVertexAttribArray(GLKVertexAttribColor);
+    //    glDisable(GL_BLEND);
+    glDisableVertexAttribArray(GLKVertexAttribTexCoord0);    
+}
+
+- (void)postDraw {
+    
+    [self _disable];
+    
+    // if effect1 is enabled
+    if (self.effect1.texture2d0.enabled == GL_TRUE) {
+        [self prepareToDraw1];
+        [self draw];
+        [self postDraw1];
+    }
+}
+
+- (void)postDraw1 {
+    [self _disable];
 }
 
 - (void)update {
@@ -137,6 +175,7 @@ static GLubyte SquareIndices[] = {
     //    _rotation += 90 * self.timeSinceLastUpdate;
     //    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, GLKMathDegreesToRadians(_rotation), 0, 0, 1);
     self.effect.transform.modelviewMatrix = [self currentModelViewTransform];
+    self.effect1.transform.modelviewMatrix = [self currentModelViewTransform];
 }
 
 - (void)dealloc {

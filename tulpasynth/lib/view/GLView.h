@@ -63,8 +63,12 @@
 - (void) initialize;
 
 - (void)prepareToDraw;
+- (void)prepareToDraw1;
+- (void)_bindAndEnable;
 - (void)draw;
+- (void)_disable;
 - (void)postDraw;
+- (void)postDraw1;
 
 - (void)update;
 
@@ -99,6 +103,11 @@
  *  Pointer to pan gesture if it is currently happening on self
  **/
 @property PanEntity * panner;
+
+/**
+ *  An optional secondary GLKBaseEffect for drawing two textures.
+ **/
+@property (strong, nonatomic) GLKBaseEffect* effect1;
 
 
 

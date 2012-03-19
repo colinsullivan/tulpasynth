@@ -13,7 +13,7 @@
 
 @implementation Shooter
 
-@synthesize instr, effect1, glow, rateSlider, nextShotTime, prevTimeUntilNextShot, animating, nextShotIndex, animatingPerc, lastAnimatingPerc, shotTimes;
+@synthesize instr, glow, rateSlider, nextShotTime, prevTimeUntilNextShot, animating, nextShotIndex, animatingPerc, lastAnimatingPerc, shotTimes;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -28,14 +28,6 @@
     
     self.longPressable = false;
     
-    self.effect1 = [[GLKBaseEffect alloc] init];
-    self.effect1.transform.projectionMatrix = GLKMatrix4MakeOrtho(
-                                                                 0,
-                                                                 self.controller.view.frame.size.width,
-                                                                 self.controller.view.frame.size.height,
-                                                                 0,
-                                                                 -1,
-                                                                 1);
     self.glow = 0.0;
         
     ShooterModel* model = ((ShooterModel*)self.model);
@@ -85,6 +77,10 @@
     
     self.effect.texture2d0.name = self.controller.shooterTexture.name;
     self.effect.useConstantColor = YES;
+    self.effect1.texture2d0.enabled = GL_TRUE;
+    self.effect1.useConstantColor = YES;
+    self.effect1.texture2d0.name = self.controller.shooterGlowingTexture.name;
+
 
 }
 
@@ -103,30 +99,17 @@
 
 }
 
+- (void)prepareToDraw1 {
+    // draw again with second texture.
+    GLKVector4 myColor = self.color;
+    self.effect1.constantColor = GLKVector4Make(myColor.r * self.glow, myColor.g * self.glow, myColor.b * self.glow, self.glow);
+    [super prepareToDraw1];
+}
+
 - (void) postDraw {
     [super postDraw];
 
-    // draw again with second texture.
-    GLKVector4 myColor = self.color;
-    self.effect1.texture2d0.enabled = GL_TRUE;
-    self.effect1.texture2d0.envMode = GLKTextureEnvModeModulate;
-    self.effect1.texture2d0.target = GLKTextureTarget2D;
-    self.effect1.useConstantColor = YES;
-    self.effect1.constantColor = GLKVector4Make(myColor.r * self.glow, myColor.g * self.glow, myColor.b * self.glow, self.glow);
-    self.effect1.texture2d0.name = self.controller.shooterGlowingTexture.name;
     
-    [self.effect1 prepareToDraw];
-
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    //    glEnableVertexAttribArray(GLKVertexAttribColor);
-    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-    
-    [super draw];
-    [super postDraw];
-
     // draw rate slider
     [rateSlider prepareToDraw];
     [rateSlider draw];
@@ -256,7 +239,6 @@
 
 - (void)update {
     [super update];
-    self.effect1.transform.modelviewMatrix = [self currentModelViewTransform];
     ShooterModel* model = ((ShooterModel*)self.model);
     
     // if it is time to shoot another ball
