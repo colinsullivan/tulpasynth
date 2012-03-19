@@ -53,7 +53,7 @@ LongPressEntity * _longPressEntity;
 @synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture,
     toolboxTexture, shooterGlowingTexture, shooterRadialMenuPointer,
     shooterRadialMenuBackground, triObstacleTexture, blackholeTexture,
-    deleteButtonTexture, toolbarTexture;
+    deleteButtonTexture, toolbarTexture, addingRingTexture;
 
 @synthesize fallingBalls, obstacles, wildBalls, selectedObstacles;
 
@@ -204,6 +204,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.blackholeTexture = [self loadTexture:@"blackhole"];
     self.deleteButtonTexture = [self loadTexture:@"delete-button"];
     self.toolbarTexture = [self loadTexture:@"Toolbar"];
+    self.addingRingTexture = [self loadTexture:@"AddCircle"];
     
     self.greenColor = GLKVector4Make(43.0/255.0, 208.0/255.0, 5.0/255.0, 1.0);
     self.orangeColor = GLKVector4Make(227.0/255.0, 151.0/255.0, 19.0/255.0, 1.0);
@@ -499,7 +500,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     // if toolbar is open
     if (self.toolbar.open) {
-        NSLog(@"closing toolbar");
+        
+        [self.toolbar handleTap:_tapEntity];
+        
         [self.toolbar animateClosed];
         return;
     }
@@ -534,7 +537,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 //        self.toolbox.active = true;
         
         // open toolbar
-        [self.toolbar animateOpen];
+        NSLog(@"opening toolbar");
+        [self.toolbar animateOpen:_tapEntity->touches[0]->position];
     }    
 
 //    if (!handled) {

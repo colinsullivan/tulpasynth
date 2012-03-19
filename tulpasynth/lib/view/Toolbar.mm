@@ -15,6 +15,7 @@
 @synthesize closed, open, prototypes;
 
 @synthesize squarePrototype, shooterPrototype, triPrototype, blackholePrototype;
+@synthesize addingRing;
 
 
 //- (const b2Vec2&)position {
@@ -34,13 +35,13 @@
 - (void) setPosition:(b2Vec2*)aPosition {
     // closed position
     b2Vec2 closedPosition;
-    closedPosition.Set(-self.width/2.0 + 0.75, self.height/2.0);
+    closedPosition.Set(-self.width/2.0, self.height/2.0);
     
     b2Vec2 openPosition;
     openPosition.Set(-self.width/2.0 + 12.0, self.height/2.0);
     
     // left bounds
-    if (aPosition->x < closedPosition.x) {
+    if (aPosition->x <= closedPosition.x) {
         aPosition->x = closedPosition.x;
         self.closed = true;
         self.open = false;
@@ -51,7 +52,7 @@
     }
     
     // right bounds
-    if (aPosition->x > openPosition.x) {
+    if (aPosition->x >= openPosition.x) {
         aPosition->x = openPosition.x;
         self.closed = false;
         self.open = true;
@@ -100,7 +101,7 @@
     
     self.angle = 0.0;
 
-    self.position = new b2Vec2(-self.width/2.0 + 0.75, self.height/2.0);
+    self.position = new b2Vec2(-self.width/2.0, self.height/2.0);
     
     self.shape = new b2PolygonShape();
     self.shape->m_radius = 1.0f;
@@ -167,6 +168,8 @@
     // toolbox is initially closed
     self.closed = true;
     self.open = false;
+    
+    self.addingRing = [[AddingRing alloc] initWithController:self.controller withModel:NULL];
 
 }
 
@@ -177,14 +180,15 @@
 - (GLboolean) handlePan:(PanEntity *)pan {
     // if toolbox is closed
     if (self.closed) {
-        // catch pan gestures that start towards the left side of screen
-        if (pan->state == GestureEntityStateStart) {
-            if (pan->touches[0]->position->x < 8.0) {
-                self.panner = pan;
-                [self handlePanStarted];
-                return true;
-            }
-        }
+//        // catch pan gestures that start towards the left side of screen
+//        if (pan->state == GestureEntityStateStart) {
+////            NSLog(@"pan->touches[0]->position->x: %f", pan->touches[0]->position->x);
+//            if (pan->touches[0]->position->x < 10.0) {
+//                self.panner = pan;
+//                [self handlePanStarted];
+//                return true;
+//            }
+//        }
 //        // continue pan gestures
 //        else if (pan->state == GestureEntityStateUpdate && self.panner == pan) {
 //            return [super handlePan:pan];
@@ -194,6 +198,24 @@
 //        }
     }
     else {
+//        // toolbox is open, see if pan was on an object prototype
+//        
+//        for (PhysicsEntity* proto in self.prototypes) {
+//            if ([proto handlePan:pan]) {
+//                NSLog(@"prototype handled the pan");
+//                
+//                if (pan->state == GestureEntityStateUpdate) {
+//                    // move prototype with pan
+//                    b2Vec2 newPos = (*proto.prePanningPosition) + pan->translation;
+////                    proto.position = new b2Vec2(newPos.x, newPos.y);
+//                    proto.position = &newPos;
+//                }
+//                
+//                return true;
+//            }
+//        }
+        
+//        NSLog(@"super handlePan");
         return [super handlePan:pan];
     }
     
@@ -210,13 +232,18 @@
     for (PhysicsEntity* e in self.prototypes) {
         [e update];
     }
+    
+    [self.addingRing update];
 }
 
 
 - (void) handlePanStarted {
     [super handlePanStarted];
+//    NSLog(@"handlePanStarted");
     self.body->SetLinearVelocity(b2Vec2(0.0, 0.0));
     self.closed = false;
+    
+    [self handlePanUpdate];
 }
 
 - (void) handlePanEnded {
@@ -235,13 +262,27 @@
     self.position = newPos;   
 }
 
-- (void) animateOpen {
+- (void) animateOpen:(b2Vec2*)ringLocation {
+    self.position = new b2Vec2(self.position->x+1.0, self.position->y);
     self.body->ApplyLinearImpulse(
                                   b2Vec2(50.0, 0.0), (*self.position)
                                   );
+    
+    // place ring
+    self.addingRing.position = new b2Vec2(ringLocation->x, ringLocation->y);
+    self.addingRing.active = true;
 }
+
+- (void)setClosed:(BOOL)isClosed {
+    if (isClosed) {
+        self.addingRing.active = false;
+    }
+    
+    closed = isClosed;
+}
+
 - (void) animateClosed {
-    self.position->x = self.position->x-0.5;
+    self.position = new b2Vec2(self.position->x-1.0, self.position->y);
     self.body->ApplyLinearImpulse(
                                   b2Vec2(-50.0, 0.0), (*self.position)
                                   );
@@ -256,10 +297,17 @@
             [e draw];
             [e postDraw];
         }
+        
+        [self.addingRing prepareToDraw];
+        [self.addingRing draw];
+        [self.addingRing postDraw];
     }
 }
 
 - (void) handleTapOccurred:(TapEntity*)tap {
+    
+    
+    
     // if tap was in block obstacle prototype
     if ([self.squarePrototype handleTap:tap]) {
         
@@ -267,8 +315,8 @@
         BlockModel* sm = [[BlockModel alloc] initWithController:self.controller withAttributes:
                           [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSDictionary dictionaryWithObjectsAndKeys:
-                            [NSNumber numberWithFloat:self.position->x], @"x",
-                            [NSNumber numberWithFloat:self.position->y], @"y", nil], @"initialPosition",
+                            [NSNumber numberWithFloat:self.addingRing.position->x], @"x",
+                            [NSNumber numberWithFloat:self.addingRing.position->y], @"y", nil], @"initialPosition",
                            nil]];
         
     }
@@ -277,28 +325,26 @@
         ShooterModel* sm = [[ShooterModel alloc] initWithController:self.controller withAttributes:
                             [NSDictionary dictionaryWithObjectsAndKeys:
                              [NSDictionary dictionaryWithObjectsAndKeys:
-                              [NSNumber numberWithFloat:self.position->x], @"x",
-                              [NSNumber numberWithFloat:self.position->y], @"y", nil], @"initialPosition",
+                              [NSNumber numberWithFloat:self.addingRing.position->x], @"x",
+                              [NSNumber numberWithFloat:self.addingRing.position->y], @"y", nil], @"initialPosition",
                              nil]];
     }
     else if ([self.triPrototype handleTap:tap]) {
         // create new tri obstacle
         [[TriObstacleModel alloc] initWithController:self.controller withAttributes:[NSDictionary dictionaryWithKeysAndObjects:
                                                                                      @"initialPosition", [NSDictionary dictionaryWithKeysAndObjects:
-                                                                                                          @"x", [NSNumber numberWithFloat:self.position->x],
-                                                                                                          @"y", [NSNumber numberWithFloat:self.position->y], nil],
+                                                                                                          @"x", [NSNumber numberWithFloat:self.addingRing.position->x],
+                                                                                                          @"y", [NSNumber numberWithFloat:self.addingRing.position->y], nil],
                                                                                      nil]];
     }
     else if ([self.blackholePrototype handleTap:tap]) {
         // create new blackhole
         [[BlackholeModel alloc] initWithController:self.controller withAttributes:[NSDictionary dictionaryWithKeysAndObjects:
                                                                                    @"initialPosition", [NSDictionary dictionaryWithKeysAndObjects:
-                                                                                                        @"x", [NSNumber numberWithFloat:self.position->x],
-                                                                                                        @"y", [NSNumber numberWithFloat:self.position->y], nil]
+                                                                                                        @"x", [NSNumber numberWithFloat:self.addingRing.position->x],
+                                                                                                        @"y", [NSNumber numberWithFloat:self.addingRing.position->y], nil]
                                                                                    , nil]];
     }
-    
-    self.active = false;
 }
 
 

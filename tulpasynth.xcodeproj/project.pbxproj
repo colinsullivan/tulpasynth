@@ -70,6 +70,8 @@
 		3BC5A221151535E400ADCDD5 /* ObstacleDeleteButton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5A220151535E400ADCDD5 /* ObstacleDeleteButton.mm */; };
 		3BC5A2231515370F00ADCDD5 /* delete-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A2221515370F00ADCDD5 /* delete-button.png */; };
 		3BC5A2261515596700ADCDD5 /* DragSelector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5A2251515596600ADCDD5 /* DragSelector.mm */; };
+		3BC5A2571516AFFE00ADCDD5 /* AddingRing.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5A2561516AFFD00ADCDD5 /* AddingRing.mm */; };
+		3BC5A2591516B11300ADCDD5 /* AddCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A2581516B11300ADCDD5 /* AddCircle.png */; };
 		3BCEB90D150D2C26007CFA08 /* ShooterRateSlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */; };
 		3BCEB910150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */; };
 		3BCEB911150D2CCC007CFA08 /* Shooter-Radial-Menu-Pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEB90F150D2CCC007CFA08 /* Shooter-Radial-Menu-Pointer.png */; };
@@ -486,6 +488,9 @@
 		3BC5A2221515370F00ADCDD5 /* delete-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-button.png"; sourceTree = "<group>"; };
 		3BC5A2241515596500ADCDD5 /* DragSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragSelector.h; sourceTree = "<group>"; };
 		3BC5A2251515596600ADCDD5 /* DragSelector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DragSelector.mm; sourceTree = "<group>"; };
+		3BC5A2551516AFFC00ADCDD5 /* AddingRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddingRing.h; sourceTree = "<group>"; };
+		3BC5A2561516AFFD00ADCDD5 /* AddingRing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AddingRing.mm; sourceTree = "<group>"; };
+		3BC5A2581516B11300ADCDD5 /* AddCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddCircle.png; sourceTree = "<group>"; };
 		3BCEB90B150D2C26007CFA08 /* ShooterRateSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterRateSlider.h; sourceTree = "<group>"; };
 		3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShooterRateSlider.mm; sourceTree = "<group>"; };
 		3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shooter-Radial-Menu-Background.png"; sourceTree = "<group>"; };
@@ -948,6 +953,7 @@
 		3B043FF214F9AAC900DE16A3 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				3BC5A2581516B11300ADCDD5 /* AddCircle.png */,
 				3BC5A2221515370F00ADCDD5 /* delete-button.png */,
 				3BB550F51513F3DE005106A3 /* blackhole.png */,
 				3B2A4B2515100B7500F2DF5E /* triobstacle.png */,
@@ -1105,6 +1111,8 @@
 				3BC5A220151535E400ADCDD5 /* ObstacleDeleteButton.mm */,
 				3BC5A2241515596500ADCDD5 /* DragSelector.h */,
 				3BC5A2251515596600ADCDD5 /* DragSelector.mm */,
+				3BC5A2551516AFFC00ADCDD5 /* AddingRing.h */,
+				3BC5A2561516AFFD00ADCDD5 /* AddingRing.mm */,
 			);
 			name = view;
 			path = lib/view;
@@ -2022,6 +2030,7 @@
 				3BB550F61513F3DE005106A3 /* blackhole.png in Resources */,
 				3BB550F815143B3E005106A3 /* blackhole.wav in Resources */,
 				3BC5A2231515370F00ADCDD5 /* delete-button.png in Resources */,
+				3BC5A2591516B11300ADCDD5 /* AddCircle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2233,6 +2242,7 @@
 				3BB550FB151441EE005106A3 /* LoopingRAMpler.cpp in Sources */,
 				3BC5A221151535E400ADCDD5 /* ObstacleDeleteButton.mm in Sources */,
 				3BC5A2261515596700ADCDD5 /* DragSelector.mm in Sources */,
+				3BC5A2571516AFFE00ADCDD5 /* AddingRing.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

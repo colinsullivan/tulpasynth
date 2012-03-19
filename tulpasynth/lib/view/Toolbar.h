@@ -20,6 +20,8 @@
 #import "Blackhole.h"
 #import "BlackholeModel.h"
 
+#import "AddingRing.h"
+
 
 
 @interface Toolbar : PhysicsEntity
@@ -35,7 +37,7 @@
  **/
 @property (nonatomic) BOOL open;
 
-- (void) animateOpen;
+- (void) animateOpen:(b2Vec2*)ringLocation;
 - (void) animateClosed;
 
 @property (strong, nonatomic) NSMutableArray* prototypes;
@@ -44,5 +46,7 @@
 @property (strong, nonatomic) Shooter* shooterPrototype;
 @property (strong, nonatomic) TriObstacle* triPrototype;
 @property (strong, nonatomic) Blackhole* blackholePrototype;
+
+@property (strong, nonatomic) AddingRing* addingRing;
 
 @end
