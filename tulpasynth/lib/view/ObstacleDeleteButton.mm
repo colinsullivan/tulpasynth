@@ -12,8 +12,6 @@
 
 @implementation ObstacleDeleteButton
 
-@synthesize active;
-
 - (void) setPosition:(b2Vec2 *)aPosition {
     
     ObstacleModel* model = (ObstacleModel*)model;
@@ -62,15 +60,6 @@
     self.effect.constantColor = self.controller.redColor;
 
 }
-
-- (id) initWithController:(tulpaViewController *)theController withModel:(Model *)aModel {
-    if (self = [super initWithController:theController withModel:aModel]) {
-        // initially hidden
-        self.active = false;
-    }
-    return self;
-}
-
 
 - (void) handleTapOccurred:(TapEntity *)tap {
     // delete model

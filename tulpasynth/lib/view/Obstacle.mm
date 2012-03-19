@@ -43,6 +43,7 @@
     
     self.color = self.controller.greenColor;
     self.deleteButton = [[ObstacleDeleteButton alloc] initWithController:self.controller withModel:self.model];
+    self.deleteButton.active = false;
 }
 
 - (GLboolean) handleTap:(TapEntity *)tap {

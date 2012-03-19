@@ -504,6 +504,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         [self.toolbar handleTap:_tapEntity];
         
         [self.toolbar animateClosed];
+        [self deselectAllObstacles];
         return;
     }
     
@@ -520,6 +521,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     // All obstacles can handle tap
     for (Obstacle * o in self.obstacles) {
         if ([o handleTap:_tapEntity]) {
+            NSLog(@"obstacle handled tap");
             return;
         }
     }
