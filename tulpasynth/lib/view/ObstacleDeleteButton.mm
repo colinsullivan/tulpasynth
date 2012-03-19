@@ -61,6 +61,10 @@
 
 }
 
+-(void) dealloc {
+    delete (b2PolygonShape*)self.shape;
+}
+
 - (void) handleTapOccurred:(TapEntity *)tap {
     // delete model
     self.model.destroyed = [NSNumber numberWithBool:true];

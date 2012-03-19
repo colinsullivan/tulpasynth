@@ -96,6 +96,10 @@
 //    }
 }
 
+- (void) dealloc {
+    delete (b2PolygonShape*)self.shape;
+}
+
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

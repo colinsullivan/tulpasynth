@@ -9,7 +9,6 @@
 #import "GLView.h"
 #import "tulpaViewController.h"
 
-
 // Texture coordinates are rotated -90 degrees and flipped vertically because
 // this app only works in landscape.  I know, how budget.
 static Vertex SquareVertices[] = {
@@ -24,6 +23,7 @@ static GLubyte SquareIndices[] = {
     0, 1, 2,
     2, 3, 0
 };
+
 
 @implementation GLView
 
@@ -79,19 +79,6 @@ static GLubyte SquareIndices[] = {
                                                                   -1,
                                                                   1);
 
-
-    // Vertex buffers
-    glGenBuffers(1, &_vertexBuffer);        
-    glGenBuffers(1, &_indexBuffer);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-//    glBufferData(GL_ARRAY_BUFFER, sizeof(_vertices), _vertices, GL_DYNAMIC_DRAW);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SquareVertices), SquareVertices, GL_STATIC_DRAW);
-    
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-//    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof([self indices]), [self indices], GL_STATIC_DRAW);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(SquareIndices), SquareIndices, GL_DYNAMIC_DRAW);
-
     self.effect.texture2d0.enabled = GL_TRUE;
     self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
     self.effect.texture2d0.target = GLKTextureTarget2D;
@@ -116,12 +103,7 @@ static GLubyte SquareIndices[] = {
     return NULL;
 }
 - (void)_bindAndEnable {
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    //    glEnableVertexAttribArray(GLKVertexAttribColor);
-    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);    
+
 }
 
 - (void)prepareToDraw {
@@ -137,21 +119,21 @@ static GLubyte SquareIndices[] = {
 - (void)draw {
     
     if (self.active) {
-        glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Position));
+
         //    glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Color));    
         
-        glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, TexCoord));
+        
         
         //    glDrawElements(GL_TRIANGLES, sizeof([self indices])/sizeof([self indices][0]), GL_UNSIGNED_BYTE, 0);
-        glDrawElements(GL_TRIANGLES, sizeof(SquareIndices)/sizeof(SquareIndices[0]), GL_UNSIGNED_BYTE, 0);        
+        glDrawElements(GL_TRIANGLES, sizeof(SquareIndices)/sizeof(SquareIndices[0]), GL_UNSIGNED_BYTE, 0);
     }
 }
 
 - (void)_disable {
-    glDisableVertexAttribArray(GLKVertexAttribPosition);
+//    glDisableVertexAttribArray(GLKVertexAttribPosition);
     //    glDisableVertexAttribArray(GLKVertexAttribColor);
     //    glDisable(GL_BLEND);
-    glDisableVertexAttribArray(GLKVertexAttribTexCoord0);    
+//    glDisableVertexAttribArray(GLKVertexAttribTexCoord0);    
 }
 
 - (void)postDraw {
@@ -179,8 +161,8 @@ static GLubyte SquareIndices[] = {
 }
 
 - (void)dealloc {
-    glDeleteBuffers(1, &_vertexBuffer);
-    glDeleteBuffers(1, &_indexBuffer);
+//    glDeleteBuffers(1, &_vertexBuffer);
+//    glDeleteBuffers(1, &_indexBuffer);
     
     
     self.effect = nil;
@@ -226,6 +208,44 @@ static GLubyte SquareIndices[] = {
 }
 - (void) handlePanUpdate {
     
+}
+
++ (GLuint)vertexBuffer {
+    static GLuint _vertexBuffer;
+    
+    if (!_vertexBuffer) {
+        glGenBuffers(1, &_vertexBuffer);        
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(SquareVertices), SquareVertices, GL_STATIC_DRAW);        
+    }
+    
+    return _vertexBuffer;
+}
++ (GLuint)indexBuffer {
+    static GLuint _indexBuffer;
+    
+    if (!_indexBuffer) {
+        glGenBuffers(1, &_indexBuffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(SquareIndices), SquareIndices, GL_STATIC_DRAW);
+    }
+    
+    return _indexBuffer;
+}
+
++ (void) initializeBuffers {
+    
+    glBindBuffer(GL_ARRAY_BUFFER, [[GLView class] vertexBuffer]);
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Position));
+    glEnableVertexAttribArray(GLKVertexAttribPosition);
+    
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, TexCoord));
+    
+    //    glEnableVertexAttribArray(GLKVertexAttribColor);
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, [[GLView class] indexBuffer]);
+
 }
 
 @end

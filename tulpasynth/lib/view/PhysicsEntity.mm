@@ -104,21 +104,29 @@
 
 - (void) destroy {
     // remove shape and body from physics world
-    self.body->DestroyFixture(self.shapeFixture);
-    self.controller.world->DestroyBody(self.body);
-    delete ((b2Shape*)(self.shape));
-
-    // destroy view by removing references
-    try {
-        [[PhysicsEntity Instances] removeObject:self];
-    } catch (NSException * e) {
-        if (e.name == NSRangeException) {
-            NSLog(@"NSRangeException occurred PhysicsEntity Instances removeObject");
-        }
-        else {
-            NSLog(@"other exception occurred PhysicsEntity Instances removeObject");
-        }
-    }
+//    if (self.shapeFixture) {
+//        if (self.shapeFixture->GetBody() == self.body) {
+//            self.body->DestroyFixture(self.shapeFixture);
+//            self.controller.world->DestroyBody(self.body);
+//        }
+//        else {
+//            NSLog(@"deleting fixture would have failed.\nclass: %@", [self class]);
+//            return;
+//        }
+//    }
+//    // destroy view by removing references
+//    try {
+//        [[PhysicsEntity Instances] removeObject:self];
+//    } catch (NSException * e) {
+//        if (e.name == NSRangeException) {
+//            NSLog(@"NSRangeException occurred PhysicsEntity Instances removeObject");
+//        }
+//        else {
+//            NSLog(@"other exception occurred PhysicsEntity Instances removeObject");
+//        }
+//    }
+    
+    self->body->SetActive(false);
     
     try {
         [self.controller.wildBalls removeObject:self];

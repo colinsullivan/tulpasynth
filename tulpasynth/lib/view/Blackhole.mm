@@ -59,6 +59,10 @@
 
 }
 
+- (void) dealloc {
+    delete (b2CircleShape*)self.shape;
+}
+
 - (void) handleCollision:(PhysicsEntity*)otherEntity withStrength:(float)collisionStrength; {
     
     if ([otherEntity class] == [WildBall class]) {

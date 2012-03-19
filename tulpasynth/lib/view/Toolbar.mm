@@ -33,6 +33,7 @@
 //}
 
 - (void) setPosition:(b2Vec2*)aPosition {
+    
     // closed position
     b2Vec2 closedPosition;
     closedPosition.Set(-self.width/2.0, self.height/2.0);

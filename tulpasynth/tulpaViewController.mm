@@ -48,7 +48,7 @@ LongPressEntity * _longPressEntity;
 
 @implementation tulpaViewController
 
-@synthesize startTime, safeUpdateTime, lastUpdateTime, waiting;
+@synthesize startTime, safeUpdateTime, lastUpdateTime;
 
 @synthesize glowingCircleTexture, glowingBoxTexture, shooterTexture,
     toolboxTexture, shooterGlowingTexture, shooterRadialMenuPointer,
@@ -287,7 +287,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     // Audio setup
     NSLog(@"starting real-time audio...");
-    bool result = MoAudio::init(stk::SRATE, FRAMESIZE, NUM_CHANNELS);
+    stk::Stk::setSampleRate(22050.0);
+    bool result = MoAudio::init(stk::Stk::sampleRate(), FRAMESIZE, NUM_CHANNELS);
     if (!result) {
         NSLog(@"cannot initialize real-time audio!");
         return;
@@ -302,14 +303,14 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.startTime = [NSDate dateWithTimeIntervalSinceNow:0.0];
     self.safeUpdateTime = [NSDate dateWithTimeInterval:0.0 sinceDate:self.startTime];
     self.lastUpdateTime = [NSDate dateWithTimeInterval:0.0 sinceDate:self.startTime];
-    self.waiting = false;
     
     glEnable(GL_BLEND);
     glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
     
     self.dragSelector = [[DragSelector alloc] initWithController:self withModel:NULL];
     self.dragSelector.active = false;
-
+    
+    [[GLView class] initializeBuffers];
 }
 
 - (void)beginCollision:(b2Contact*) contact {
@@ -427,7 +428,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     [self.toolbar prepareToDraw];
     [self.toolbar draw];
-    [self.toolbar postDraw];
+    [self.toolbar postDraw];        
     
     for (Obstacle* o in self.obstacles) {
         [o prepareToDraw];
@@ -493,7 +494,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     // pan event was in empty space, user is dragging
     if (_panEntity->state == GestureEntityStateStart) {
-        NSLog(@"dragSelector handling pan in empty space");
+//        NSLog(@"dragSelector handling pan in empty space");
         [self.dragSelector handlePan:_panEntity];        
     }
 }
@@ -524,7 +525,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     // All obstacles can handle tap
     for (Obstacle * o in self.obstacles) {
         if ([o handleTap:_tapEntity]) {
-            NSLog(@"obstacle handled tap");
+//            NSLog(@"obstacle handled tap");
             return;
         }
     }
@@ -542,7 +543,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
 //        self.toolbox.active = true;
         
         // open toolbar
-        NSLog(@"opening toolbar");
+//        NSLog(@"opening toolbar");
         [self.toolbar animateOpen:_tapEntity->touches[0]->position];
     }    
 
@@ -597,10 +598,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     [self.toolbar update];
     
-    if (self.waiting) {
-        return;
-    }
-
     // if it is safe to update
 //    static NSTimeInterval safeUpdateInterval;
 //    safeUpdateInterval = [self.safeUpdateTime timeIntervalSinceDate:self.lastUpdateTime];
@@ -691,8 +688,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             }
             else {
                 PhysicsEntityModel* m = (PhysicsEntityModel*)addedModel;
-                if(![[m.position valueForKey:@"x"] floatValue] || ![[m.position valueForKey:@"y"] floatValue]) {
-                    NSLog(@"addedModel position invalid!");
+                if(
+                   !b2IsValid([[m.position valueForKey:@"x"] floatValue])
+                   ||
+                   !b2IsValid([[m.position valueForKey:@"y"] floatValue])
+                   ) {
+                    NSLog(@"addedModel position invalid!\n\tx:\t%f\n\ty:\t%f", [[m.position valueForKey:@"x"] floatValue], [[m.position valueForKey:@"y"] floatValue]);
                     return;
                 }
             }

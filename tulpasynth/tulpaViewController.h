@@ -168,8 +168,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong, nonatomic) NSDate* lastUpdateTime;
 
 
-@property BOOL waiting;
-
 
 /**
  *  Callback primarily used to handle all model changes and synchronize

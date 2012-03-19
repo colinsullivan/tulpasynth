@@ -45,4 +45,11 @@
     self.shape = new b2PolygonShape();
 }
 
+- (void) destroy {
+    [super destroy];
+    if (self.shape) {
+        delete ((b2PolygonShape*)(self.shape));
+    }
+}
+
 @end

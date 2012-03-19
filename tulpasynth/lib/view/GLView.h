@@ -20,12 +20,16 @@
 /**
  *  @class  View class that takes care of generalized open gl drawing stuff.
  **/
-@interface GLView : View {
-    
-@protected
-    GLuint _vertexBuffer;
-    GLuint _indexBuffer;
-}
+@interface GLView : View
+
+/**
+ *  All GLView instances will use the same vertexBuffer and indexBuffer.
+ **/
++ (GLuint)vertexBuffer;
++ (GLuint)indexBuffer;
+
++ (void) initializeBuffers;
+
 
 @property (strong, nonatomic) GLKBaseEffect* effect;
 
@@ -82,6 +86,12 @@
  *  in `update`.
  **/
 - (GLKMatrix4)currentModelViewTransform;
+
+///**
+// *  If there are new changes to the transform or other properties of the
+// *  effect since last draw, we need to draw it again.
+// **/
+//@property (nonatomic) BOOL changesToDraw;
 
 /**
  *  Handler for a pan (dragging) gesture.

@@ -87,6 +87,10 @@
 
 - (void) dealloc {
     delete instr;
+    if (self.shape) {
+        delete ((b2CircleShape*)(self.shape));
+    }
+
 }
 
 

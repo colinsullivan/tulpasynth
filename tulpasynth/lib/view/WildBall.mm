@@ -57,6 +57,13 @@
 
 }
 
+- (void) dealloc {
+    if (self.shape) {
+        delete ((b2CircleShape*)(self.shape));
+    }
+
+}
+
 - (b2BodyType)bodyType {
     return b2_dynamicBody;
 }
