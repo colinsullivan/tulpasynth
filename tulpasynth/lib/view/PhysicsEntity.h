@@ -42,6 +42,12 @@
 @property b2Shape* shape;
 @property b2Fixture* shapeFixture;
 
+/**
+ *  The current color of this object.  Changing this will
+ *  set the appropriate properties on the glkbaseeffect shader.
+ **/
+@property (nonatomic) GLKVector4 color;
+
 
 - (void) initialize;
 - (void)dealloc;

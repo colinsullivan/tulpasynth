@@ -23,6 +23,13 @@
 
 @synthesize pincheable, pincher, preScalingWidth, preScalingHeight;
 
+@synthesize color;
+
+- (void) setColor:(GLKVector4)aColor {
+    self.effect.useConstantColor = YES;
+    color = aColor;
+    self.effect.constantColor = aColor;
+}
 
 /**
  *  Override getter for position so we can hook into b2Body::GetPosition.

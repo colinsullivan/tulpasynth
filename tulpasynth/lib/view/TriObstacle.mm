@@ -70,13 +70,11 @@
     int note = 60 + pitch;
     float freq = 440 * pow(2, (note - 69.0)/12.0);
     
-    static float upperBoundFreq = 440 * pow(2, ((60+24) - 69.0)/12.0);
+    static float upperBoundFreq = 440 * pow(2, ((60+17) - 69.0)/12.0);
     
     float r, g, b;
     [[self class] HSVtoRGB:&r :&g :&b :(freq/upperBoundFreq)*360.0 :1.0 :1.0];
     self.color = GLKVector4Make(r, g, b, 1.0);
-    
-    
     
     instrs[nextInstr]->freq(freq);
     instrs[nextInstr]->velocity(collisionStrength);
@@ -85,6 +83,9 @@
     if (++nextInstr >= instrs.size()) {
         nextInstr = 0;
     }
+    
+    // give color to ball
+    otherEntity.color = self.color;
 }
 
 + (SecondOrderMarkovChain*) pitchGenerator {

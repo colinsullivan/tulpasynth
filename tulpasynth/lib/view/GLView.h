@@ -29,6 +29,7 @@
 
 @property (strong, nonatomic) GLKBaseEffect* effect;
 
+
 /**
  *  Width and height of this object (in world coordinates)
  **/

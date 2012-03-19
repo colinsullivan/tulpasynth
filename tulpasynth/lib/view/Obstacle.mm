@@ -13,13 +13,8 @@
 
 @implementation Obstacle
 
-@synthesize color, selected, deleteButton;
+@synthesize selected, deleteButton;
 
-- (void) setColor:(GLKVector4)aColor {
-    self.effect.useConstantColor = YES;
-    color = aColor;
-    self.effect.constantColor = aColor;
-}
 
 - (void) setSelected:(BOOL)wasSelected {
     if (wasSelected) {
