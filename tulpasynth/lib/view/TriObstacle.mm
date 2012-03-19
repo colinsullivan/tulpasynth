@@ -86,6 +86,10 @@
     
     // give color to ball
     otherEntity.color = self.color;
+    
+    // give pitch to ball model
+    WildBallModel* m = (WildBallModel*)otherEntity.model;
+    m.pitchIndex = [NSNumber numberWithInt:pitchTableIndex];
 }
 
 + (SecondOrderMarkovChain*) pitchGenerator {

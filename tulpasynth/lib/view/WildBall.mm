@@ -65,4 +65,10 @@
     [super destroy];
 }
 
+- (void) update {
+    if (self.active) {
+        [super update];
+    }
+}
+
 @end

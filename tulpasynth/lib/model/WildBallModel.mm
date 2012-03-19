@@ -10,7 +10,7 @@
 
 @implementation WildBallModel
 
-@synthesize initialLinearVelocity;
+@synthesize initialLinearVelocity, pitchIndex;
 
 - (void) initialize {
     self.nosync = true;
@@ -32,6 +32,7 @@
     
     [defaults setValue:[NSNumber numberWithFloat:1.5] forKey:@"height"];
     [defaults setValue:[NSNumber numberWithFloat:1.5] forKey:@"width"];
+    [defaults setValue:[NSNumber numberWithFloat:0] forKey:@"pitchIndex"];
     
     return defaults;
 }

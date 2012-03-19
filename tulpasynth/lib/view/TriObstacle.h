@@ -12,6 +12,8 @@
 #include "FMPercussion.hpp"
 #include "SecondOrderMarkovChain.hpp"
 
+#include "WildBallModel.h"
+
 /**
  *  @class  A triangular obstacle.
  **/

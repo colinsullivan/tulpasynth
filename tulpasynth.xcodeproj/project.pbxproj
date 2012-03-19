@@ -72,6 +72,14 @@
 		3BC5A2261515596700ADCDD5 /* DragSelector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5A2251515596600ADCDD5 /* DragSelector.mm */; };
 		3BC5A2571516AFFE00ADCDD5 /* AddingRing.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5A2561516AFFD00ADCDD5 /* AddingRing.mm */; };
 		3BC5A2591516B11300ADCDD5 /* AddCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A2581516B11300ADCDD5 /* AddCircle.png */; };
+		3BC5A2621516C21200ADCDD5 /* blackhole_pitch_00.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A25A1516C21200ADCDD5 /* blackhole_pitch_00.wav */; };
+		3BC5A2631516C21200ADCDD5 /* blackhole_pitch_01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A25B1516C21200ADCDD5 /* blackhole_pitch_01.wav */; };
+		3BC5A2641516C21200ADCDD5 /* blackhole_pitch_02.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A25C1516C21200ADCDD5 /* blackhole_pitch_02.wav */; };
+		3BC5A2651516C21200ADCDD5 /* blackhole_pitch_03.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A25D1516C21200ADCDD5 /* blackhole_pitch_03.wav */; };
+		3BC5A2661516C21200ADCDD5 /* blackhole_pitch_04.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A25E1516C21200ADCDD5 /* blackhole_pitch_04.wav */; };
+		3BC5A2671516C21200ADCDD5 /* blackhole_pitch_05.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A25F1516C21200ADCDD5 /* blackhole_pitch_05.wav */; };
+		3BC5A2681516C21200ADCDD5 /* blackhole_pitch_06.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A2601516C21200ADCDD5 /* blackhole_pitch_06.wav */; };
+		3BC5A2691516C21200ADCDD5 /* blackhole_pitch_07.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5A2611516C21200ADCDD5 /* blackhole_pitch_07.wav */; };
 		3BCEB90D150D2C26007CFA08 /* ShooterRateSlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */; };
 		3BCEB910150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */; };
 		3BCEB911150D2CCC007CFA08 /* Shooter-Radial-Menu-Pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEB90F150D2CCC007CFA08 /* Shooter-Radial-Menu-Pointer.png */; };
@@ -491,6 +499,14 @@
 		3BC5A2551516AFFC00ADCDD5 /* AddingRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddingRing.h; sourceTree = "<group>"; };
 		3BC5A2561516AFFD00ADCDD5 /* AddingRing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AddingRing.mm; sourceTree = "<group>"; };
 		3BC5A2581516B11300ADCDD5 /* AddCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddCircle.png; sourceTree = "<group>"; };
+		3BC5A25A1516C21200ADCDD5 /* blackhole_pitch_00.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blackhole_pitch_00.wav; sourceTree = "<group>"; };
+		3BC5A25B1516C21200ADCDD5 /* blackhole_pitch_01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blackhole_pitch_01.wav; sourceTree = "<group>"; };
+		3BC5A25C1516C21200ADCDD5 /* blackhole_pitch_02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blackhole_pitch_02.wav; sourceTree = "<group>"; };
+		3BC5A25D1516C21200ADCDD5 /* blackhole_pitch_03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blackhole_pitch_03.wav; sourceTree = "<group>"; };
+		3BC5A25E1516C21200ADCDD5 /* blackhole_pitch_04.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blackhole_pitch_04.wav; sourceTree = "<group>"; };
+		3BC5A25F1516C21200ADCDD5 /* blackhole_pitch_05.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blackhole_pitch_05.wav; sourceTree = "<group>"; };
+		3BC5A2601516C21200ADCDD5 /* blackhole_pitch_06.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blackhole_pitch_06.wav; sourceTree = "<group>"; };
+		3BC5A2611516C21200ADCDD5 /* blackhole_pitch_07.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blackhole_pitch_07.wav; sourceTree = "<group>"; };
 		3BCEB90B150D2C26007CFA08 /* ShooterRateSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterRateSlider.h; sourceTree = "<group>"; };
 		3BCEB90C150D2C26007CFA08 /* ShooterRateSlider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShooterRateSlider.mm; sourceTree = "<group>"; };
 		3BCEB90E150D2CCC007CFA08 /* Shooter-Radial-Menu-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shooter-Radial-Menu-Background.png"; sourceTree = "<group>"; };
@@ -997,6 +1013,14 @@
 		3B624C05150037120066A1CB /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				3BC5A25A1516C21200ADCDD5 /* blackhole_pitch_00.wav */,
+				3BC5A25B1516C21200ADCDD5 /* blackhole_pitch_01.wav */,
+				3BC5A25C1516C21200ADCDD5 /* blackhole_pitch_02.wav */,
+				3BC5A25D1516C21200ADCDD5 /* blackhole_pitch_03.wav */,
+				3BC5A25E1516C21200ADCDD5 /* blackhole_pitch_04.wav */,
+				3BC5A25F1516C21200ADCDD5 /* blackhole_pitch_05.wav */,
+				3BC5A2601516C21200ADCDD5 /* blackhole_pitch_06.wav */,
+				3BC5A2611516C21200ADCDD5 /* blackhole_pitch_07.wav */,
 				3BB550F715143B3E005106A3 /* blackhole.wav */,
 				3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */,
 			);
@@ -2031,6 +2055,14 @@
 				3BB550F815143B3E005106A3 /* blackhole.wav in Resources */,
 				3BC5A2231515370F00ADCDD5 /* delete-button.png in Resources */,
 				3BC5A2591516B11300ADCDD5 /* AddCircle.png in Resources */,
+				3BC5A2621516C21200ADCDD5 /* blackhole_pitch_00.wav in Resources */,
+				3BC5A2631516C21200ADCDD5 /* blackhole_pitch_01.wav in Resources */,
+				3BC5A2641516C21200ADCDD5 /* blackhole_pitch_02.wav in Resources */,
+				3BC5A2651516C21200ADCDD5 /* blackhole_pitch_03.wav in Resources */,
+				3BC5A2661516C21200ADCDD5 /* blackhole_pitch_04.wav in Resources */,
+				3BC5A2671516C21200ADCDD5 /* blackhole_pitch_05.wav in Resources */,
+				3BC5A2681516C21200ADCDD5 /* blackhole_pitch_06.wav in Resources */,
+				3BC5A2691516C21200ADCDD5 /* blackhole_pitch_07.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

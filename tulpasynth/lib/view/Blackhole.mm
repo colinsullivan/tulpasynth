@@ -13,8 +13,6 @@
 
 @implementation Blackhole
 
-@synthesize instr;
-
 - (void) setWidth:(float)width {
     [super setWidth:width];
     
@@ -25,6 +23,8 @@
     [super initialize];
     
     BlackholeModel* model = ((BlackholeModel*)self.model);
+    
+    
     
     self.shape = new b2CircleShape();
     self.width = [model.width floatValue];
@@ -43,16 +43,27 @@
 
     self.effect.texture2d0.name = self.controller.blackholeTexture.name;
     
-    instr = new instruments::RAMpler();
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"blackhole" ofType:@"wav"];
-    instr->set_clip([path UTF8String]);
-    instr->finish_initializing();
+//    instr = new instruments::RAMpler();
+//    NSString* path = [[NSBundle mainBundle] pathForResource:@"blackhole" ofType:@"wav"];
+//    instr->set_clip([path UTF8String]);
+//    instr->finish_initializing();
+    
+    for (int i = 0; i < 8; i++) {
+        instruments::RAMpler* instr = new instruments::RAMpler();
+        NSString* filename = [NSString stringWithFormat:@"blackhole_pitch_0%d", i];
+        NSString* path = [[NSBundle mainBundle] pathForResource:filename ofType:@"wav"];
+        instr->set_clip([path UTF8String]);
+        instr->finish_initializing();
+        instrs.push_back(instr);
+    }
 
 }
 
 - (void) handleCollision:(PhysicsEntity*)otherEntity withStrength:(float)collisionStrength; {
     
     if ([otherEntity class] == [WildBall class]) {
+        WildBallModel* m = (WildBallModel*)otherEntity.model;
+        instruments::RAMpler* instr = instrs[[m.pitchIndex intValue]];
         instr->reset();
         instr->play();
         // destroy ball model

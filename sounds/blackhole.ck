@@ -30,16 +30,31 @@ masterFilt.Q(10);
 
 masterEnv.duration(10::ms);
 
-fun void filtAutomator() {
-    880*5 => float maxFreq;
-    880/2 => float minFreq;
+float _freq;
+fun float freq(float aFreq) {
+    aFreq => _freq;
+    modulator.freq(_freq*2.0);
+    carrier.freq(_freq);
+    modulator.gain(_freq/2.0);
+    return _freq;
+}
 
-    440 => float oscMaxFreq;
-    oscMaxFreq/2.0 => float oscMinFreq;
+fun void filtAutomator() {
+    float maxFreq;
+    float minFreq;
+
+    float oscMaxFreq;
+    float oscMinFreq;
 
     float oscFreq;
 
     while(true) {
+        _freq*10.0 => maxFreq;
+        _freq => minFreq;
+
+        _freq => oscMaxFreq;
+        _freq/2.0 => oscMinFreq;
+
         masterFilt.freq(maxFreq - (maxFreq-minFreq)*filtAutomatorEnv.value());
         oscMaxFreq - (oscMaxFreq-oscMinFreq)*(filtAutomatorEnv.value()) => oscFreq;
         carrier.freq(oscFreq);
@@ -47,18 +62,32 @@ fun void filtAutomator() {
         10::ms => now;
     }
 }
+// Shred @ filtAutomatorShred;
 spork ~ filtAutomator();
+
+
 
 fun void fire() {
     0.25::second => dur fireDuration;
+    // spork ~ filtAutomator() @=> filtAutomatorShred;
     filtAutomatorEnv.duration(fireDuration);
     filtAutomatorEnv.keyOn();
     masterEnv.keyOn();
     fireDuration => now;
     masterEnv.keyOff();
+    filtAutomatorEnv.keyOff();
+    // filtAutomatorShred.exit();
 }
 
 1::second => now;
-fire();
+[0, 4, 5, 7, 10, 12, 14, 17] @=> int pitches[];
+60 => int basePitch;
+
+for(0 => int i; i < pitches.size(); i++) {
+    freq(Std.mtof(basePitch + pitches[i]));
+    fire();
+    0.5::second => now;
+}
+
 1::second => now;
 

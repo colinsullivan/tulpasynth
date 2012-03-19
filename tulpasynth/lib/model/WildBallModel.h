@@ -14,4 +14,9 @@
 
 @property (strong, nonatomic) NSDictionary* initialLinearVelocity;
 
+/**
+ *  Pitch embued on ball by other entity.
+ **/
+@property (strong, nonatomic) NSNumber* pitchIndex;
+
 @end
