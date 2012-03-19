@@ -31,7 +31,7 @@
     myShapeFixture.shape = self.shape;
     myShapeFixture.friction = 0.1f;
     myShapeFixture.density = 0.33f;
-    myShapeFixture.restitution = 1.25f;
+    myShapeFixture.restitution = 1.0f;
     
     self.shapeFixture = self.body->CreateFixture(&myShapeFixture);
     
@@ -61,14 +61,6 @@
     return b2_dynamicBody;
 }
 
-- (void) destroy {
-    
-    // remove shape and body from physics world
-    delete ((b2CircleShape*)(self.shape));
-    self.body->DestroyFixture(self.shapeFixture);
-    
-    [super destroy];
-}
 
 - (void) update {
     if (self.active) {

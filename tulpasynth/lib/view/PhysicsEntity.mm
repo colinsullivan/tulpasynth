@@ -103,7 +103,10 @@
 }
 
 - (void) destroy {
+    // remove shape and body from physics world
+    self.body->DestroyFixture(self.shapeFixture);
     self.controller.world->DestroyBody(self.body);
+    delete ((b2Shape*)(self.shape));
 
     // destroy view by removing references
     try {
@@ -157,12 +160,12 @@
         //        NSLog(@"wildBall destroying self");
         // do not display
         self.active = false;
-        
+        [self.controller.physicsEntitiesToDestroy addObject:self];        
     }
-    // if destruction was synchronized
-    else if ([keyPath isEqualToString:@"destroyedAndSynced"] && [self.model.destroyedAndSynced boolValue] == true) {
-        [self.controller.physicsEntitiesToDestroy addObject:self];
-    }
+//    // if destruction was synchronized
+//    else if ([keyPath isEqualToString:@"destroyedAndSynced"] && [self.model.destroyedAndSynced boolValue] == true) {
+//        
+//    }
 
 }
 
