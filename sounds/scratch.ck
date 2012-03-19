@@ -98,3 +98,15 @@
 // //     <<< "", attackCurve.lookup(i) >>>;
 // // }
 
+
+[0, 4, 5, 7, 10, 12, 14, 17, 24] @=> int pitches[];
+60 => int basePitch;
+
+for(0 => int i; i < pitches.size(); i++) {
+    <<< "pitch:", pitches[i], "freq:", Std.mtof(basePitch + pitches[i]), "ratio:", Std.mtof(basePitch + pitches[i])/Std.mtof(basePitch + 24) >>>;
+}
+
+
+
+
+
