@@ -701,6 +701,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
                    !b2IsValid([[m.position valueForKey:@"y"] floatValue])
                    ) {
                     NSLog(@"addedModel position invalid!\n\tx:\t%f\n\ty:\t%f", [[m.position valueForKey:@"x"] floatValue], [[m.position valueForKey:@"y"] floatValue]);
+                    m.destroyed = [NSNumber numberWithBool:true];
                     return;
                 }
             }
