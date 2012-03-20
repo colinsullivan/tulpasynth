@@ -92,6 +92,11 @@
                                                     self.color.b * energyPerc, 
                                                     1.0);
     }
+    else if ([keyPath isEqualToString:@"pitchIndex"]) {
+        if ([m.pitchIndex intValue] >= 0) {
+            self.color = [[TriObstacle class] pitchIndexToColor:[m.pitchIndex intValue]];
+        }
+    }
 }
 
 

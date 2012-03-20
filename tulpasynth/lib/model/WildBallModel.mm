@@ -24,6 +24,7 @@
     
     [attributes addObject:@"initialLinearVelocity"];
     [attributes addObject:@"energy"];
+    [attributes addObject:@"pitchIndex"];
     
     return attributes;
 }

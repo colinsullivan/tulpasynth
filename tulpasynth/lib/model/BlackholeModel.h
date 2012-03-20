@@ -15,4 +15,9 @@
  **/
 @property (strong, nonatomic) NSMutableArray* eatenBallTimes;
 
+/**
+ *  A list of pitch indexes of the balls that were eaten.
+ **/
+@property (strong, nonatomic) NSMutableArray* pitchIndexes;
+
 @end

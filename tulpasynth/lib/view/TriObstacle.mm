@@ -58,25 +58,16 @@
 - (void) handleCollision:(PhysicsEntity *)otherEntity withStrength:(float)collisionStrength {
     [super handleCollision:otherEntity withStrength:collisionStrength];
     
-    /**
-     *  Array of pitch indexes to use.  0 is the root of the scale.
-     **/
-    static const int pitchGeneratorOutputMapping[] = {0, 4, 5, 7, 10, 12, 14, 17};
+
 
     int pitchTableIndex = [[self class] pitchGenerator]->nextIndex();
 //    NSLog(@"pitchTableIndex: %d", pitchTableIndex);
-    int pitch = pitchGeneratorOutputMapping[pitchTableIndex];
-//    NSLog(@"pitch: %d", pitch);
-    int note = 60 + pitch;
-    float freq = 440 * pow(2, (note - 69.0)/12.0);
+
     
-    static float upperBoundFreq = 440 * pow(2, ((60+17) - 69.0)/12.0);
     
-    float r, g, b;
-    [[self class] HSVtoRGB:&r :&g :&b :(freq/upperBoundFreq)*360.0 :1.0 :1.0];
-    self.color = GLKVector4Make(r, g, b, 1.0);
+    self.color = [[self class] pitchIndexToColor:pitchTableIndex];
     
-    instrs[nextInstr]->freq(freq);
+    instrs[nextInstr]->freq([[self class] pitchIndexToFreq:pitchTableIndex]);
     instrs[nextInstr]->velocity(collisionStrength);
     instrs[nextInstr]->play();
     
@@ -84,12 +75,51 @@
         nextInstr = 0;
     }
     
-    // give color to ball
-    otherEntity.color = self.color;
-    
     // give pitch to ball model
     WildBallModel* m = (WildBallModel*)otherEntity.model;
     m.pitchIndex = [NSNumber numberWithInt:pitchTableIndex];
+}
+
++ (NSArray*) pitchIndexToNoteMapping {
+    /**
+     *  Array of pitch indexes to use.  0 is the root of the scale.
+     **/
+    
+    static NSArray* theMapping;
+    
+    if (!theMapping) {
+        theMapping = [[NSArray alloc] initWithObjects:
+                      [NSNumber numberWithInt:0],
+                      [NSNumber numberWithInt:4],
+                      [NSNumber numberWithInt:5],
+                      [NSNumber numberWithInt:7],
+                      [NSNumber numberWithInt:10],
+                      [NSNumber numberWithInt:12],
+                      [NSNumber numberWithInt:14],
+                      [NSNumber numberWithInt:17],
+                      nil];
+    }
+    
+    return theMapping;
+}
+
++ (float) pitchIndexToFreq:(int)index {
+    NSNumber* pitch = [[[self class] pitchIndexToNoteMapping] objectAtIndex:index];
+    //    NSLog(@"pitch: %d", pitch);
+    int note = 60 + [pitch intValue];
+    float freq = 440 * pow(2, (note - 69.0)/12.0);
+    return freq;
+}
+
++(GLKVector4) pitchIndexToColor:(int) index {
+    static float upperBoundFreq = 440 * pow(2, ((60+17) - 69.0)/12.0);
+    
+    float freq = [[self class] pitchIndexToFreq:index];
+    float r, g, b;
+    [[self class] HSVtoRGB:&r :&g :&b :(freq/upperBoundFreq)*360.0 :1.0 :1.0];
+    
+    return GLKVector4Make(r, g, b, 1.0);
+
 }
 
 + (SecondOrderMarkovChain*) pitchGenerator {

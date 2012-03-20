@@ -35,6 +35,11 @@
  **/
 + (SecondOrderMarkovChain*) pitchGenerator;
 
++ (NSArray*) pitchIndexToNoteMapping;
+
++ (float) pitchIndexToFreq:(int)index;
+
++(GLKVector4) pitchIndexToColor:(int) index;
 +(void) HSVtoRGB:(float *)r :(float *)g :(float *)b :(float )h :(float )s :(float )v;
 
 @end
