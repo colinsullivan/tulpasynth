@@ -30,6 +30,10 @@
 #import "FallingBall.h"
 #import "BlockObstacle.h"
 
+#import "ReceivingShooterModel.h"
+#import "ReceivingShooter.h"
+
+
 
 //#include "FMPercussion.hpp"
 
@@ -54,7 +58,7 @@ LongPressEntity * _longPressEntity;
     toolboxTexture, shooterGlowingTexture, shooterRadialMenuPointer,
     shooterRadialMenuBackground, triObstacleTexture, blackholeTexture,
     deleteButtonTexture, toolbarTexture, addingRingTexture, wildBallTexture,
-    wildBallGlowTexture;
+    wildBallGlowTexture, receivingShooterTexture, receivingShooterGlowingTexture;
 
 @synthesize fallingBalls, obstacles, wildBalls, selectedObstacles;
 
@@ -208,6 +212,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.addingRingTexture = [self loadTexture:@"AddCircle"];
     self.wildBallTexture = [self loadTexture:@"WildBall"];
     self.wildBallGlowTexture = [self loadTexture:@"WildBallGlow"];
+    self.receivingShooterTexture = [self loadTexture:@"ReceivingShooter"];
+    self.receivingShooterGlowingTexture = [self loadTexture:@"ReceivingShooterGlowing"];
+    
     
     self.greenColor = GLKVector4Make(43.0/255.0, 208.0/255.0, 5.0/255.0, 1.0);
     self.orangeColor = GLKVector4Make(227.0/255.0, 151.0/255.0, 19.0/255.0, 1.0);
@@ -495,7 +502,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     // pan event was in empty space, user is dragging
     if (_panEntity->state == GestureEntityStateStart) {
 //        NSLog(@"dragSelector handling pan in empty space");
-        [self.dragSelector handlePan:_panEntity];        
+//        [self.dragSelector handlePan:_panEntity];  
     }
 }
 

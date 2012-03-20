@@ -92,5 +92,7 @@
 
 - (void) advanceToNextShot;
 
+- (void) initializeTextures;
+
 
 @end

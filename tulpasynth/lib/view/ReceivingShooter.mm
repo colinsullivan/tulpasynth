@@ -6,11 +6,18 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+
 #import "ReceivingShooter.h"
 
 #import "tulpaViewController.h"
 
 @implementation ReceivingShooter
+
+- (void) initializeTextures {
+    self.effect.texture2d0.name = self.controller.receivingShooterTexture.name;
+    self.effect1.texture2d0.name = self.controller.receivingShooterGlowingTexture.name;
+}
+
 
 - (void) advanceToNextShot {
     ReceivingShooterModel* model = ((ReceivingShooterModel*)self.model);

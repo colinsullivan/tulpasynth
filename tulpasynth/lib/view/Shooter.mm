@@ -78,13 +78,16 @@
 //    lastPerc = 0.0;
 //    prevTimeUntilNextShot = -1.0;
     
-    self.effect.texture2d0.name = self.controller.shooterTexture.name;
     self.effect.useConstantColor = YES;
     self.effect1.texture2d0.enabled = GL_TRUE;
     self.effect1.useConstantColor = YES;
+
+    [self initializeTextures];
+}
+
+- (void) initializeTextures {
+    self.effect.texture2d0.name = self.controller.shooterTexture.name;
     self.effect1.texture2d0.name = self.controller.shooterGlowingTexture.name;
-
-
 }
 
 
@@ -210,8 +213,8 @@
     ShooterModel* model = ((ShooterModel*)self.model);
     
     if ([keyPath isEqualToString:@"shotTimes"]) {
-        NSLog(@"shotTimes changed");
-        NSLog(@"[shotTimes count]: %d", [model.shotTimes count]);
+//        NSLog(@"shotTimes changed");
+//        NSLog(@"[shotTimes count]: %d", [model.shotTimes count]);
 //        if ([model.rate floatValue] > 0.0) {
 
         self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];

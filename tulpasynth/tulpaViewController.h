@@ -28,8 +28,6 @@
 #import "SocketHandler.h"
 #import "DragSelector.h"
 
-#import "ReceivingShooterModel.h"
-#import "ReceivingShooter.h"
 
 /**
  *  Global audio callback.  userData will be the `tulpaViewController` 
@@ -63,6 +61,8 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong) GLKTextureInfo* addingRingTexture;
 @property (strong) GLKTextureInfo* wildBallTexture;
 @property (strong) GLKTextureInfo* wildBallGlowTexture;
+@property (strong) GLKTextureInfo* receivingShooterTexture;
+@property (strong) GLKTextureInfo* receivingShooterGlowingTexture;
 
 /**
  *  Colors 
