@@ -33,7 +33,7 @@
     
     [defaults setValue:[NSNumber numberWithFloat:1.5] forKey:@"height"];
     [defaults setValue:[NSNumber numberWithFloat:1.5] forKey:@"width"];
-    [defaults setValue:[NSNumber numberWithFloat:0] forKey:@"pitchIndex"];
+    [defaults setValue:[NSNumber numberWithInt:-1] forKey:@"pitchIndex"];
     [defaults setValue:[NSNumber numberWithInt:8] forKey:@"energy"];
     
     return defaults;

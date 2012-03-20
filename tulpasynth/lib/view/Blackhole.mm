@@ -67,9 +67,14 @@
     
     if ([otherEntity class] == [WildBall class]) {
         WildBallModel* m = (WildBallModel*)otherEntity.model;
-        instruments::RAMpler* instr = instrs[[m.pitchIndex intValue]];
-        instr->reset();
-        instr->play();
+        
+        // if ball has a pitch
+        if ([m.pitchIndex intValue] >= 0) {
+            instruments::RAMpler* instr = instrs[[m.pitchIndex intValue]];
+            instr->reset();
+            instr->play();            
+        }
+        
         // destroy ball model
 //        NSLog(@"destroying model: %@", otherEntity.model);
         otherEntity.model.destroyed = [NSNumber numberWithBool:true];
