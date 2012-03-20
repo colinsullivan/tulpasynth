@@ -726,6 +726,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
                 Blackhole* b = [[Blackhole alloc] initWithController:self withModel:addedModel];
                 [self.obstacles addObject:b];
             }
+            else if (addedModelClass == [ReceivingShooterModel class]) {
+                ReceivingShooter* s = [[ReceivingShooter alloc] initWithController:self withModel:addedModel];
+                [self.obstacles addObject:s];
+            }
             
         }
         // if a model was deleted

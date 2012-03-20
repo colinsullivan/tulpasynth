@@ -28,6 +28,9 @@
 #import "SocketHandler.h"
 #import "DragSelector.h"
 
+#import "ReceivingShooterModel.h"
+#import "ReceivingShooter.h"
+
 /**
  *  Global audio callback.  userData will be the `tulpaViewController` 
  *  instance.

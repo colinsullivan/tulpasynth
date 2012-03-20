@@ -78,3 +78,9 @@ class tulpasynth.models.ShooterModel extends tulpasynth.models.TulpasynthModel
     #     setTimeout () =>
     #         @updateNextShotTime()
     #     , (1.0 / @get("rate"))*1000.0
+
+###
+#   @class  
+###
+class tulpasynth.models.ReceivingShooterModel extends tulpasynth.models.ShooterModel
+    

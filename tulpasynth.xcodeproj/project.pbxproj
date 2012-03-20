@@ -60,6 +60,8 @@
 		3B7EB48E14F8462D00452194 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7EB46C14F845C700452194 /* libRestKit.a */; };
 		3BAAEE0F15102DBC00353521 /* MarkovChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAEE0D15102DB700353521 /* MarkovChain.cpp */; };
 		3BAAEE1215104D5E00353521 /* SecondOrderMarkovChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAEE1015104D5E00353521 /* SecondOrderMarkovChain.cpp */; };
+		3BAF4D161518714C0024DBCE /* ReceivingShooterModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF4D151518714B0024DBCE /* ReceivingShooterModel.mm */; };
+		3BAF4D19151871980024DBCE /* ReceivingShooter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF4D18151871980024DBCE /* ReceivingShooter.mm */; };
 		3BB550EB1513CD97005106A3 /* TrigLookupTables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB550EA1513CD97005106A3 /* TrigLookupTables.cpp */; };
 		3BB550EE1513F1D5005106A3 /* BlackholeModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BB550ED1513F1D4005106A3 /* BlackholeModel.mm */; };
 		3BB550F41513F202005106A3 /* Blackhole.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BB550F31513F200005106A3 /* Blackhole.mm */; };
@@ -481,6 +483,10 @@
 		3BAAEE0E15102DB900353521 /* MarkovChain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MarkovChain.hpp; path = lib/MarkovChain.hpp; sourceTree = "<group>"; };
 		3BAAEE1015104D5E00353521 /* SecondOrderMarkovChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecondOrderMarkovChain.cpp; path = lib/SecondOrderMarkovChain.cpp; sourceTree = "<group>"; };
 		3BAAEE1115104D5E00353521 /* SecondOrderMarkovChain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SecondOrderMarkovChain.hpp; path = lib/SecondOrderMarkovChain.hpp; sourceTree = "<group>"; };
+		3BAF4D141518714B0024DBCE /* ReceivingShooterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceivingShooterModel.h; sourceTree = "<group>"; };
+		3BAF4D151518714B0024DBCE /* ReceivingShooterModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ReceivingShooterModel.mm; sourceTree = "<group>"; };
+		3BAF4D17151871970024DBCE /* ReceivingShooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceivingShooter.h; sourceTree = "<group>"; };
+		3BAF4D18151871980024DBCE /* ReceivingShooter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ReceivingShooter.mm; sourceTree = "<group>"; };
 		3BB550E91513CD67005106A3 /* TrigLookupTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrigLookupTables.h; sourceTree = "<group>"; };
 		3BB550EA1513CD97005106A3 /* TrigLookupTables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrigLookupTables.cpp; sourceTree = "<group>"; };
 		3BB550EC1513F1D4005106A3 /* BlackholeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackholeModel.h; sourceTree = "<group>"; };
@@ -1079,6 +1085,8 @@
 				3B2A4B1D150FE9BD00F2DF5E /* TriObstacleModel.mm */,
 				3BB550EC1513F1D4005106A3 /* BlackholeModel.h */,
 				3BB550ED1513F1D4005106A3 /* BlackholeModel.mm */,
+				3BAF4D141518714B0024DBCE /* ReceivingShooterModel.h */,
+				3BAF4D151518714B0024DBCE /* ReceivingShooterModel.mm */,
 			);
 			name = model;
 			path = lib/model;
@@ -1143,6 +1151,8 @@
 				3BC5A2251515596600ADCDD5 /* DragSelector.mm */,
 				3BC5A2551516AFFC00ADCDD5 /* AddingRing.h */,
 				3BC5A2561516AFFD00ADCDD5 /* AddingRing.mm */,
+				3BAF4D17151871970024DBCE /* ReceivingShooter.h */,
+				3BAF4D18151871980024DBCE /* ReceivingShooter.mm */,
 			);
 			name = view;
 			path = lib/view;
@@ -2283,6 +2293,8 @@
 				3BC5A221151535E400ADCDD5 /* ObstacleDeleteButton.mm in Sources */,
 				3BC5A2261515596700ADCDD5 /* DragSelector.mm in Sources */,
 				3BC5A2571516AFFE00ADCDD5 /* AddingRing.mm in Sources */,
+				3BAF4D161518714C0024DBCE /* ReceivingShooterModel.mm in Sources */,
+				3BAF4D19151871980024DBCE /* ReceivingShooter.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -192,8 +192,8 @@ db.on "ready", () ->
                         sendToAll message, ["shotTimes"]
 
                     # Relay create message to other connected clients
-                    data.method = "create"
-                    sendToAllButOne data, ws, ["shotTimes"]
+                    # data.method = "create"
+                    # sendToAllButOne data, ws, ["shotTimes"]
 
                     # start updating shot times
                     shooter.updateNextShotTimes()
@@ -201,7 +201,7 @@ db.on "ready", () ->
                 # if this is a blackhole, we'll need to synchronize eaten ball
                 # times.
                 else if data.class is "BlackholeModel"
-                    compensateTimes data.attributes, "eatenBallTimes", ws.timeOffset+1.0
+                    compensateTimes data.attributes, "eatenBallTimes", ws.timeOffset+1.5
 
                     # Create blackholemodel object
                     blackhole = new tulpasynth.models.BlackholeModel data.attributes
@@ -214,14 +214,14 @@ db.on "ready", () ->
 
                     # get id for new shooter
                     tulpasynth.models.next_id db, (nextId) =>
-                        shooterAttributes.id = nextId
-                        shooter = new tulpasynth.models.ShooterModel shooterAttributes
+                        shooterAttributes.id = nextId*1
+                        shooter = new tulpasynth.models.ReceivingShooterModel shooterAttributes
 
                         # relate blackhole and shooter
                         blackhole.relatedShooter = shooter
 
                         data.attributes = shooter.toJSON()
-                        data.class = "ShooterModel"
+                        data.class = "ReceivingShooterModel"
                         data.method = "create"
                         # relay to other clients
                         sendToAllButOne data, ws, ["shotTimes"]
@@ -273,14 +273,20 @@ db.on "ready", () ->
                     if data.class is "BlackholeModel"
 
                         # compensate ball eaten times (plus 1::second)
-                        compensateTimes data.attributes, "eatenBallTimes", ws.timeOffset+1.0
+                        compensateTimes data.attributes, "eatenBallTimes", ws.timeOffset+1.5
                         # update model instance in RAM
                         instance.set data.attributes
 
                         # Update related shooter's shot times
                         instance.relatedShooter.set "shotTimes", data.attributes.eatenBallTimes
-                    
+                        # Update shooter clients
+                        shooterUpdateMsg = 
+                            method: "update"
+                            class: "ReceivingShooterModel"
+                            attributes: instance.relatedShooter.toJSON()
+                        sendToAllButOne shooterUpdateMsg, ws, ["shotTimes"]
 
+                        return
 
                     # Update message data with model attributes
                     data.attributes = instance.toJSON()

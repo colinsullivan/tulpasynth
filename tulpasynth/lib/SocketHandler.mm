@@ -96,9 +96,15 @@
     else if ([method isEqualToString:@"create"]) {
         // pause rendering
 //        self.controller.paused = true;
+        
+        NSLog(@"creating model %d", [[[data valueForKey:@"attributes"] valueForKey:@"id"] intValue]);
 
         // create corresponding model
         Model* m = [[NSClassFromString([data valueForKey:@"class"]) alloc] initWithController:self.controller withAttributes:[data valueForKey:@"attributes"]];
+//        // if model is not initialized, initialize
+//        if (!m.initialized) {
+//            m.initialized = true;
+//        }
     }
     else if ([method isEqualToString:@"update"]) {
 //        self.controller.paused = true;
@@ -106,7 +112,7 @@
         NSNumber* modelId = [[data valueForKey:@"attributes"] valueForKey:@"id"];
         Model* m = [[Model Instances] getById:modelId];
         if (!m) {
-            NSLog(@"Model not found!");
+            NSLog(@"Model %d not found!", [modelId intValue]);
             return;
         }
 

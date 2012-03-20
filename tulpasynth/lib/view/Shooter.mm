@@ -67,6 +67,9 @@
 //        instr->play();
 //        self.animating = true;
     }
+    else {
+        self.nextShotTime = nil;
+    }
 //    else {
 //        self.waitingToShoot = false;
 //    }
@@ -175,13 +178,16 @@
     if (nextIndex < [model.shotTimes count]) {
         // assume next shot time will be the next indexed value in the array
         self.nextShotIndex = [NSNumber numberWithInt:nextIndex];
-//        NSLog(@"automatically advancing to shot %d", [self.nextShotIndex intValue]);
+        NSLog(@"automatically advancing to shot %d", [self.nextShotIndex intValue]);
         self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex intValue]];
+        NSLog(@"nextShotTime: %@", self.nextShotTime);        
         self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
-//        NSLog(@"nextShotTime: %f", [self.nextShotTime timeIntervalSince1970]);        
     }
     // no more shots
     else {
+        NSLog(@"no mo");
+        // roll back so we can try again next time
+        self.nextShotIndex = [NSNumber numberWithInt:nextIndex-1];
         instr->stop();
         self.nextShotTime = nil;
     }
@@ -195,17 +201,18 @@
     
     if ([keyPath isEqualToString:@"shotTimes"]) {
 //        NSLog(@"shotTimes changed");
-        if ([model.rate floatValue] > 0.0) {
-            // if new shot times array is not greater, we should reset index
-            if ([model.shotTimes count] <= [self.shotTimes count]) {
-                self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];
-                self.nextShotIndex = [NSNumber numberWithInt:-1];
-                [self advanceToNextShot];
-            }
-            else {
-                self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];
-            }
-        }
+//        if ([model.rate floatValue] > 0.0) {
+
+        self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];
+        
+//        if ([model.shotTimes count] < [self.shotTimes count]) {
+        self.nextShotIndex = [NSNumber numberWithInt:-1];
+//        }
+        
+        // try advancing
+        [self advanceToNextShot];
+
+//        }
 //        self.nextShotIndex = model.nextShotIndex;
 //        self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex intValue]];
 //        self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
@@ -223,7 +230,7 @@
     // if the rate has changed
     else if ([keyPath isEqualToString:@"rate"]) {
         // play loop at same rate
-        instr->freq([model.rate floatValue]);
+        instr->freq([model.rate floatValue]);            
 //        
 ////        if (model.ignoreUpdates) {
 ////            // determine own next shot time

@@ -86,6 +86,7 @@
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"height"];
     [defaults setValue:[NSNumber numberWithFloat:1.0] forKey:@"rate"];
     [defaults setValue:[NSNumber numberWithFloat:-stk::PI/4.0] forKey:@"angle"];
+    
 
     
     
@@ -119,16 +120,16 @@
 }
 
 - (void) initialize {
-    if (!self.shotTimes) {
-        NSDate* now = [NSDate dateWithTimeIntervalSinceNow:0.0];
-        self.shotTimes = [[NSMutableArray alloc] initWithObjects:
-                          now,
-                          // next shot is 1 second in the future
-                          [NSDate dateWithTimeInterval:1.0 sinceDate:now],
-                          // then 1 second after that
-                          [NSDate dateWithTimeInterval:2.0 sinceDate:now],
-                          nil];        
-    }
+//    if (!self.shotTimes) {
+//        NSDate* now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+//        self.shotTimes = [[NSMutableArray alloc] initWithObjects:
+//                          now,
+//                          // next shot is 1 second in the future
+//                          [NSDate dateWithTimeInterval:1.0 sinceDate:now],
+//                          // then 1 second after that
+//                          [NSDate dateWithTimeInterval:2.0 sinceDate:now],
+//                          nil];        
+//    }
 //    else {
 //        // shot times were initialized as doubles, convert to dates
 //        NSMutableArray* shotTimeNumbers = self.shotTimes;
