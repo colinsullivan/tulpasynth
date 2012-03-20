@@ -230,10 +230,10 @@ db.on "ready", () ->
 
 
                 # Other models, just relay message
-                else
+                # else
                     
-                    data.method = "create"
-                    sendToAllButOne data, ws
+                #     data.method = "create"
+                #     sendToAllButOne data, ws
 
 
 
