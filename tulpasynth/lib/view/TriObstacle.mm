@@ -106,7 +106,7 @@
 + (float) pitchIndexToFreq:(int)index {
     NSNumber* pitch = [[[self class] pitchIndexToNoteMapping] objectAtIndex:index];
     //    NSLog(@"pitch: %d", pitch);
-    int note = 60 + [pitch intValue];
+    int note = 72 + [pitch intValue];
     float freq = 440 * pow(2, (note - 69.0)/12.0);
     return freq;
 }

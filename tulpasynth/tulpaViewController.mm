@@ -144,11 +144,12 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         tempFrames->resize(numFrames, NUM_CHANNELS, 0.0);
 
         (*instruments::Instrument::Instances)[i]->next_buf((*tempFrames));
+        stk::StkFloat gain = (*instruments::Instrument::Instances)[i]->gain();
 
         for(int j = 0; j < NUM_CHANNELS; j++) {
             // Add samples to master output for each channel
             for(unsigned int k = 0; k < numFrames; k++) {
-                outputSamples[k*NUM_CHANNELS+j] += 0.4*(Float32)(*tempFrames)[k*NUM_CHANNELS+j];
+                outputSamples[k*NUM_CHANNELS+j] += gain*(Float32)(*tempFrames)[k*NUM_CHANNELS+j];
             }
         }
 

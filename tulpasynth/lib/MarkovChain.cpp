@@ -54,7 +54,7 @@ int MarkovChain::_findInRow(std::vector<float>& row) {
         // if probability is a candidate
         if (row[j] < seed && row[j] >= currentLargestProbability) {
             // if it is equal to other candidate, randomly choose between current and new
-            bool maybe = ((random()/RAND_MAX) < 0.5);
+            bool maybe = (((float)random()/(float)RAND_MAX) < 0.5);
             if (row[j] != currentLargestProbability || maybe) {
                 currentLargestProbabilityIndex = j;
                 currentLargestProbability = row[j];
@@ -62,8 +62,7 @@ int MarkovChain::_findInRow(std::vector<float>& row) {
         }
         j++;
     }
-    
-//    prevIndex = currentLargestProbabilityIndex;
+
     return currentLargestProbabilityIndex;
 }
 

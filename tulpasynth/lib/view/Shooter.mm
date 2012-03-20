@@ -58,6 +58,7 @@
     instr = new instruments::LoopingRAMpler();
     NSString* path = [[NSBundle mainBundle] pathForResource:@"NoisePercussionReversed" ofType:@"wav"];
     instr->set_clip([path UTF8String]);
+    ((instruments::Instrument*)(instr))->gain(0.75);
     instr->finish_initializing();
     
 //    self.lastShotTime = nil;

@@ -128,6 +128,13 @@ namespace instruments {
 //            return this->ns;
 //        }
         
+        stk::StkFloat gain() {
+            return _gain;
+        }
+        void gain(float aGain) {
+            _gain = aGain;
+        }
+        
         static std::vector<Instrument*>* Instances;
     protected:
         /**
@@ -152,6 +159,11 @@ namespace instruments {
         
         stk::StkFloat _velocity;
         stk::StkFloat _freq;
+        
+        /**
+         *  Gain of this instrument should be applied to all samples.
+         **/
+        stk::StkFloat _gain;
 
         /**
          *  Save namespace

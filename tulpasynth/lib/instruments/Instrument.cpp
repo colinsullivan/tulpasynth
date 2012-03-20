@@ -21,6 +21,7 @@ Instrument::Instrument(/*Orchestra* anOrch, Json::Value initialAttributes*/) {
     // this->defaultAttributes["gain"] = 1.0;
     
     this->mPlaying = false;
+    _gain = 1.0;
     
 
     // If the initial attributes did not include an id, error
