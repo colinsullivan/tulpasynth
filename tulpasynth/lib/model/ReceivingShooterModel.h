@@ -10,4 +10,9 @@
 
 @interface ReceivingShooterModel : ShooterModel
 
+/**
+ *  Pitch indexes to give to next balls that are shot
+ **/
+@property (strong, nonatomic) NSMutableArray* nextPitchIndexes;
+
 @end

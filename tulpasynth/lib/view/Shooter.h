@@ -55,6 +55,8 @@
  **/
 @property NSTimeInterval prevTimeUntilNextShot;
 
+@property NSNumber* nextPitchIndex;
+
 /**
  *  Wether or not we've shot a ball this round.
  **/

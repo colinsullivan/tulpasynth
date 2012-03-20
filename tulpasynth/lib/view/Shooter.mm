@@ -13,7 +13,7 @@
 
 @implementation Shooter
 
-@synthesize instr, glow, rateSlider, nextShotTime, prevTimeUntilNextShot, animating, nextShotIndex, animatingPerc, lastAnimatingPerc, shotTimes;
+@synthesize instr, glow, rateSlider, nextShotTime, prevTimeUntilNextShot, animating, nextShotIndex, animatingPerc, lastAnimatingPerc, shotTimes, nextPitchIndex;
 
 - (void) setWidth:(float)width {
     [super setWidth:width];
@@ -31,6 +31,8 @@
     self.glow = 0.0;
         
     ShooterModel* model = ((ShooterModel*)self.model);
+    
+    self.nextPitchIndex = [NSNumber numberWithInt:-1];
 
     // create rate slider which is initially hidden by default
     rateSlider = [[ShooterRateSlider alloc] initWithController:self.controller withModel:model];
@@ -161,6 +163,7 @@
                                               @"x", [NSNumber numberWithFloat:cosf(self.angle)*velocityScalar],
                                               @"y", [NSNumber numberWithFloat:-sinf(self.angle)*velocityScalar],
                                               nil],
+                         @"pitchIndex", self.nextPitchIndex,
                          nil]];
     
 //    self.lastShotTime = model.nextShotTime;

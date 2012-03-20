@@ -29,6 +29,11 @@
     self.effect.useConstantColor = YES;
     color = aColor;
     self.effect.constantColor = aColor;
+    
+    if (self.effect1.texture2d0.enabled == GL_TRUE) {
+        self.effect1.useConstantColor = YES;
+        self.effect1.constantColor = aColor;
+    }
 }
 
 /**

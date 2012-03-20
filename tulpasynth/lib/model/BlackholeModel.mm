@@ -10,12 +10,13 @@
 
 @implementation BlackholeModel
 
-@synthesize eatenBallTimes;
+@synthesize eatenBallTimes, eatenBallPitchIndexes;
 
 - (NSMutableArray*) serializableAttributes {
     NSMutableArray* attrs = [super serializableAttributes];
     
     [attrs addObject:@"eatenBallTimes"];
+    [attrs addObject:@"eatenBallPitchIndexes"];
     
     return attrs;
 }
@@ -26,6 +27,7 @@
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"width"];
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"height"];
     [defaults setValue:[NSMutableArray array] forKey:@"eatenBallTimes"];
+    [defaults setValue:[NSMutableArray array] forKey:@"eatenBallPitchIndexes"];
     
     return defaults;
 }

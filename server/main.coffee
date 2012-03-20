@@ -210,7 +210,9 @@ db.on "ready", () ->
                     shooterAttributes = data.attributes
                     shooterAttributes.rate = 0.0
                     shooterAttributes.shotTimes = data.attributes.eatenBallTimes
+                    shooterAttributes.nextPitchIndexes = data.attributes.eatenBallPitchIndexes
                     delete data.attributes.eatenBallTimes
+                    delete data.attributes.eatenBallPitchIndexes
 
                     # get id for new shooter
                     tulpasynth.models.next_id db, (nextId) =>
@@ -277,14 +279,16 @@ db.on "ready", () ->
                         # update model instance in RAM
                         instance.set data.attributes
 
-                        # Update related shooter's shot times
-                        instance.relatedShooter.set "shotTimes", data.attributes.eatenBallTimes
-                        # Update shooter clients
-                        shooterUpdateMsg = 
-                            method: "update"
-                            class: "ReceivingShooterModel"
-                            attributes: instance.relatedShooter.toJSON()
-                        sendToAllButOne shooterUpdateMsg, ws, ["shotTimes"]
+                        if instance.relatedShooter
+                            # Update related shooter's shot times
+                            instance.relatedShooter.set "shotTimes", data.attributes.eatenBallTimes
+                            instance.relatedShooter.set "nextPitchIndexes", data.attributes.eatenBallPitchIndexes
+                            # Update shooter clients
+                            shooterUpdateMsg = 
+                                method: "update"
+                                class: "ReceivingShooterModel"
+                                attributes: instance.relatedShooter.toJSON()
+                            sendToAllButOne shooterUpdateMsg, ws, ["shotTimes"]
 
                         return
                     else if data.class is "ReceivingShooterModel"

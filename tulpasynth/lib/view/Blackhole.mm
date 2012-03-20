@@ -87,6 +87,10 @@
         BlackholeModel* model = (BlackholeModel*)self.model;
         [model.eatenBallTimes addObject:[NSDate dateWithTimeIntervalSinceNow:0.0]];
         
+        // save pitch index of ball
+        [model.eatenBallPitchIndexes addObject:m.pitchIndex];
+        
+        
         
 //        // TODO: hack
 //        if ([model.eatenBallTimes count] > 25) {

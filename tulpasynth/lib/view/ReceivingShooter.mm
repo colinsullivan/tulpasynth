@@ -32,17 +32,27 @@
 
     [super advanceToNextShot];
     
-    if ([self.nextShotIndex intValue]+1 < [self.shotTimes count]) {
-        NSLog(@"ReceivingShooter determining rate of next shot");
-        // determine rate based on next shot time and the one after that
-        NSDate* nextNextShotTime = [self.shotTimes objectAtIndex:[self.nextShotIndex intValue]+1];
-        NSLog(@"nextNextShotTime: %@", nextNextShotTime);
-        // determine own rate based on time between shots
-        model.rate = [NSNumber numberWithDouble:(1.0 / [nextNextShotTime timeIntervalSinceDate:self.nextShotTime])];   
-        NSLog(@"model.rate: %@", model.rate);
+    if ([self.nextShotIndex intValue] > 0) {
+//        NSLog(@"ReceivingShooter determining rate of next shot");
+//        // determine rate based on next shot time and the one after that
+//        NSDate* nextNextShotTime = [self.shotTimes objectAtIndex:[self.nextShotIndex intValue]+1];
+//        NSLog(@"nextNextShotTime: %@", nextNextShotTime);
+//        // determine own rate based on time between shots
+//        model.rate = [NSNumber numberWithDouble:(1.0 / [nextNextShotTime timeIntervalSinceDate:self.nextShotTime])];   
+//        NSLog(@"model.rate: %@", model.rate);
+        
+        // determine rate based on prev shot time and next shot time
+        NSDate* prevShotTime = [self.shotTimes objectAtIndex:[self.nextShotIndex intValue]-1];
+        model.rate = [NSNumber numberWithDouble:(1.0 / [self.nextShotTime timeIntervalSinceDate:prevShotTime])];
+//        NSLog(@"model.rate: %@", model.rate);
+        
     }
-    else {
-        NSLog(@"not enough shot times to determine rate");
+//    else {
+//        NSLog(@"not enough shot times to determine rate");
+//    }
+    
+    if ([self.nextShotIndex integerValue] < [model.nextPitchIndexes count]) {
+        self.nextPitchIndex = [model.nextPitchIndexes objectAtIndex:[self.nextShotIndex integerValue]];
     }
 
 }

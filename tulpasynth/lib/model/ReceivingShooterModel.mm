@@ -10,6 +10,24 @@
 
 @implementation ReceivingShooterModel
 
+@synthesize nextPitchIndexes;
+
+- (NSMutableArray*)serializableAttributes {
+    NSMutableArray* attrs = [super serializableAttributes];
+    
+    [attrs addObject:@"nextPitchIndexes"];
+    
+    return attrs;
+}
+
++ (NSMutableDictionary*)defaultAttributes {
+    NSMutableDictionary* attrs = [super defaultAttributes];
+    
+    [attrs setValue:[NSMutableArray array] forKey:@"nextPitchIndexes"];
+    
+    return attrs;
+}
+
 + (NSNumber*) maxRate {
     static NSNumber* theMaxRate;
     if (!theMaxRate) {
