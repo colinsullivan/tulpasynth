@@ -175,6 +175,8 @@
     ShooterModel* model = ((ShooterModel*)self.model);
     float nextIndex = [self.nextShotIndex intValue]+1;
     
+    NSLog(@"now: %@", [NSDate dateWithTimeIntervalSinceNow:0.0]);
+    
     if (nextIndex < [model.shotTimes count]) {
         // assume next shot time will be the next indexed value in the array
         self.nextShotIndex = [NSNumber numberWithInt:nextIndex];
@@ -182,12 +184,14 @@
         self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex intValue]];
         NSLog(@"nextShotTime: %@", self.nextShotTime);        
         self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
+        
+//        if ([self.nextShotTime timeIntervalSinceNow] > 0.0) {
+//            [self advanceToNextShot];
+//        }
     }
     // no more shots
     else {
         NSLog(@"no mo");
-        // roll back so we can try again next time
-        self.nextShotIndex = [NSNumber numberWithInt:nextIndex-1];
         instr->stop();
         self.nextShotTime = nil;
     }
@@ -278,7 +282,7 @@
     float shootPerc = (49572.0/50969.0);
 
     // actually shoot ball when sound transient occurs
-    //        NSLog(@"instr->percentComplete(): %f", instr->percentComplete());
+//        NSLog(@"instr->percentComplete(): %f", instr->percentComplete());
     if (
         // current playhead is past shoot marker, and previous playhead was in front
         (animatingPerc > shootPerc && lastAnimatingPerc < shootPerc)
@@ -312,7 +316,7 @@
             //        instr->reset();
         }
         // if we're behind schedule
-        else if (timeUntilNextShot < 0 && prevTimeUntilNextShot < 0 && [self.nextShotIndex integerValue] < [model.shotTimes count]) {
+        else if (timeUntilNextShot < 0 && prevTimeUntilNextShot < 0) {
             [self advanceToNextShot];
         }
         //    // if we've run out of shoots

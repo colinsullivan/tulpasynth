@@ -139,17 +139,19 @@
 //        }
 //        self.shotTimes = shotTimeDates;
 //    }
+    [self generateNewShotTimes];
     [super initialize];
 }
 
 
 - (void) generateNewShotTimes {
     NSDate* now = [NSDate dateWithTimeIntervalSinceNow:0.0];
+    double defaultRate = [[[[self class] defaultAttributes] valueForKey:@"rate"] doubleValue];
     self.shotTimes = [[NSMutableArray alloc] initWithObjects:
                       now,
-                      [NSDate dateWithTimeInterval:(1.0/[self.rate doubleValue]) sinceDate:now],
-                      [NSDate dateWithTimeInterval:(1.0/[self.rate doubleValue])*2.0 sinceDate:now],
-                      [NSDate dateWithTimeInterval:(1.0/[self.rate doubleValue])    *3.0 sinceDate:now],
+                      [NSDate dateWithTimeInterval:defaultRate sinceDate:now],
+                      [NSDate dateWithTimeInterval:(1.0/defaultRate)*2.0 sinceDate:now],
+                      [NSDate dateWithTimeInterval:(1.0/defaultRate)*3.0 sinceDate:now],
                       nil];            
 //    self.nextShotIndex = [NSNumber numberWithInt:0];
 //    // generate a few more shot times

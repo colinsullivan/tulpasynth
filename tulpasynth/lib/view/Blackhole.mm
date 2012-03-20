@@ -81,6 +81,17 @@
         // save time the ball collided
         BlackholeModel* model = (BlackholeModel*)self.model;
         [model.eatenBallTimes addObject:[NSDate dateWithTimeIntervalSinceNow:0.0]];
+        
+        
+//        // TODO: hack
+//        if ([model.eatenBallTimes count] > 25) {
+//            for (int i = 0; i < [model.eatenBallTimes count]-1; i++) {
+//                [model.eatenBallTimes replaceObjectAtIndex:i withObject:[model.eatenBallTimes objectAtIndex:i+1]];
+//            }
+//            [model.eatenBallTimes removeLastObject];
+//        }
+        
+        
         [model synchronize];
     }
     

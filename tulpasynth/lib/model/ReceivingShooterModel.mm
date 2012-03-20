@@ -28,5 +28,9 @@
     return theMinRate;
 }
 
+- (void) generateNewShotTimes {
+    return;
+}
+
 
 @end
