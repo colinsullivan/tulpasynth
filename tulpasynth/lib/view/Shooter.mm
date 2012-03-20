@@ -180,6 +180,11 @@
         self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
 //        NSLog(@"nextShotTime: %f", [self.nextShotTime timeIntervalSince1970]);        
     }
+    // no more shots
+    else {
+        instr->stop();
+        self.nextShotTime = nil;
+    }
 }
 
 
@@ -254,7 +259,6 @@
         return;
     }
 
-    NSTimeInterval timeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
 
 //    if ([model.rate floatValue] != 0.0) {
 //        NSLog(@"nextShotTime: %f", [self.nextShotTime timeIntervalSince1970]);
@@ -286,27 +290,31 @@
 
     lastAnimatingPerc = animatingPerc;
 
-
-    // If it is time to shoot another ball because we're on time
-    if (
-        timeUntilNextShot < 0 && prevTimeUntilNextShot > 0
-        ) {
-//        NSLog(@"shooting");
-        
-        [self startAnimating];
-        
-        //        instr->freq([model.rate floatValue]);
-//        instr->reset();
+    // if there is another ball to shoot
+    if (self.nextShotTime) {
+        NSTimeInterval timeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
+        // If it is time to shoot another ball because we're on time
+        if (
+            timeUntilNextShot < 0 && prevTimeUntilNextShot > 0
+            ) {
+            //        NSLog(@"shooting");
+            
+            [self startAnimating];
+            
+            //        instr->freq([model.rate floatValue]);
+            //        instr->reset();
+        }
+        // if we're behind schedule
+        else if (timeUntilNextShot < 0 && prevTimeUntilNextShot < 0 && [self.nextShotIndex integerValue] < [model.shotTimes count]) {
+            [self advanceToNextShot];
+        }
+        //    // if we've run out of shoots
+        //    else if ([self.nextShotIndex integerValue] == [model.shotTimes count]-1) {
+        ////        NSLog(@"No 'mo shoots!");
+        //    }
+        prevTimeUntilNextShot = timeUntilNextShot;
     }
-    // if we're behind schedule
-    else if (timeUntilNextShot < 0 && prevTimeUntilNextShot < 0 && [self.nextShotIndex integerValue] < [model.shotTimes count]) {
-        [self advanceToNextShot];
-    }
-    // if we've run out of shoots
-    else if ([self.nextShotIndex integerValue] == [model.shotTimes count]-1) {
-//        NSLog(@"No 'mo shoots!");
-    }
-    prevTimeUntilNextShot = timeUntilNextShot;
+    
 
     
 //    // if it is time to trigger shooting sound

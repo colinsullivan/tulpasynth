@@ -13,7 +13,7 @@ Backbone = require "backbone"
 ###
 #   @class  Model of a shooter object
 ###
-class tulpasynth.models.ShooterModel extends Backbone.Model
+class tulpasynth.models.ShooterModel extends tulpasynth.models.TulpasynthModel
     initialize: () ->
         @nextUpdateTimeout = null;
         # if @get "rate"
@@ -25,7 +25,8 @@ class tulpasynth.models.ShooterModel extends Backbone.Model
             #     @updateNextShotTime()
             # , (1.0/@get("rate"))*1000.0
 
-        tulpasynth.modelInstances[@get "id"] = this
+        super()
+
 
     updateNextShotTimes: () ->
         if @get "destroyed"

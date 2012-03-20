@@ -10,13 +10,37 @@
 
 @implementation BlackholeModel
 
+@synthesize eatenBallTimes;
+
+- (NSMutableArray*) serializableAttributes {
+    NSMutableArray* attrs = [super serializableAttributes];
+    
+    [attrs addObject:@"eatenBallTimes"];
+    
+    return attrs;
+}
+
 + (NSMutableDictionary*) defaultAttributes {
     NSMutableDictionary* defaults = [super defaultAttributes];
     
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"width"];
     [defaults setValue:[NSNumber numberWithFloat:5.0] forKey:@"height"];
+    [defaults setValue:[NSMutableArray array] forKey:@"eatenBallTimes"];
     
     return defaults;
+}
+
+// ghetto serialize for eaten ball times
+- (NSMutableDictionary*) serialize {
+    NSMutableDictionary* attributes = [super serialize];
+ 
+    NSMutableArray* eatenTimesDates = [attributes objectForKey:@"eatenBallTimes"];
+    NSMutableArray* eatenTimeNumbers = [[NSMutableArray alloc] init];
+    for (NSDate* eatenTime in eatenTimesDates) {
+        [eatenTimeNumbers addObject:[NSNumber numberWithDouble:[eatenTime timeIntervalSince1970]]];
+    }
+    [attributes setValue:eatenTimeNumbers forKey:@"eatenBallTimes"];
+    return attributes;
 }
 
 @end

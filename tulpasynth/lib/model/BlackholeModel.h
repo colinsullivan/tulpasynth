@@ -10,4 +10,9 @@
 
 @interface BlackholeModel : ObstacleModel
 
+/**
+ *  A list of times that this blackhole ate balls.
+ **/
+@property (strong, nonatomic) NSMutableArray* eatenBallTimes;
+
 @end

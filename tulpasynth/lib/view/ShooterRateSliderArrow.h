@@ -18,7 +18,7 @@
 /**
  *  Reference to the slider we're attached to.
  **/
-@property (nonatomic) ShooterRateSlider* slider;
+@property (weak, nonatomic) ShooterRateSlider* slider;
 
 /**
  *  Initialize with slider.

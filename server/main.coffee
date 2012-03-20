@@ -9,7 +9,10 @@ argv = require("optimist").argv;
 _ = require("underscore")._;
 
 tulpasynth = require "./lib/tulpasynth.coffee"
+require "./lib/TulpasynthModel.coffee"
 require "./lib/ShooterModel.coffee"
+require "./lib/BlackholeModel.coffee"
+
 
 
 
@@ -87,6 +90,13 @@ unpauseAll = () ->
 
     sendToAll message
 
+compensateTimes = (attributes, attributeName, offset) ->
+    compensatedShotTimes = []
+    for value in attributes[attributeName]
+        compensatedShotTimes.push value+offset
+
+    attributes[attributeName] = compensatedShotTimes
+
 
 db = redis.createClient()
 db.on "ready", () ->
@@ -142,11 +152,8 @@ db.on "ready", () ->
                 response.method = "response_id"
 
                 # Get next id
-                db.get "next_id", (err, nextId) =>
+                tulpasynth.models.next_id db, (nextId) =>
                     response.id = nextId
-
-                    # Increment next id
-                    db.incr("next_id")
             
                     sendToOne response, ws
 
@@ -164,12 +171,7 @@ db.on "ready", () ->
 
                     # Offset shoot times based on this client's time offset
                     # amount, putting the shotTimes in server time
-                    
-                    compensatedShotTimes = []
-                    for shotTime in data.attributes.shotTimes
-                        compensatedShotTimes.push shotTime+ws.timeOffset
-
-                    data.attributes.shotTimes = compensatedShotTimes
+                    compensateTimes data.attributes, "shotTimes", ws.timeOffset
                     
 
                     shooter = new tulpasynth.models.ShooterModel data.attributes
@@ -195,6 +197,37 @@ db.on "ready", () ->
 
                     # start updating shot times
                     shooter.updateNextShotTimes()
+
+                # if this is a blackhole, we'll need to synchronize eaten ball
+                # times.
+                else if data.class is "BlackholeModel"
+                    compensateTimes data.attributes, "eatenBallTimes", ws.timeOffset+1.0
+
+                    # Create blackholemodel object
+                    blackhole = new tulpasynth.models.BlackholeModel data.attributes
+
+                    # Create shootermodel object for other clients
+                    shooterAttributes = data.attributes
+                    shooterAttributes.rate = 0.0
+                    shooterAttributes.shotTimes = data.attributes.eatenBallTimes
+                    delete data.attributes.eatenBallTimes
+
+                    # get id for new shooter
+                    tulpasynth.models.next_id db, (nextId) =>
+                        shooterAttributes.id = nextId
+                        shooter = new tulpasynth.models.ShooterModel shooterAttributes
+
+                        # relate blackhole and shooter
+                        blackhole.relatedShooter = shooter
+
+                        data.attributes = shooter.toJSON()
+                        data.class = "ShooterModel"
+                        data.method = "create"
+                        # relay to other clients
+                        sendToAllButOne data, ws, ["shotTimes"]
+
+                        shooter.updateNextShotTimes();
+
 
                 # Other models, just relay message
                 else
@@ -228,19 +261,25 @@ db.on "ready", () ->
                             # delete data.attributes.nextShotIndex
                         # Rate has changed, compensate shot times
                         else
-                            compensatedShotTimes = []
-                            for shotTime in data.attributes.shotTimes
-                                compensatedShotTimes.push shotTime+ws.timeOffset
-
-
-                            data.attributes.shotTimes = compensatedShotTimes
+                            compensateTimes data.attributes, "shotTimes", ws.timeOffset
 
                         # If we're deleting this shooter
                         if data.attributes.destroyed == true
                             clearTimeout instance.nextUpdateTimeout
                             data.attributes.destroyedAndSynced = true
+
+                        instance.set data.attributes
+
+                    if data.class is "BlackholeModel"
+
+                        # compensate ball eaten times (plus 1::second)
+                        compensateTimes data.attributes, "eatenBallTimes", ws.timeOffset+1.0
+                        # update model instance in RAM
+                        instance.set data.attributes
+
+                        # Update related shooter's shot times
+                        instance.relatedShooter.set "shotTimes", data.attributes.eatenBallTimes
                     
-                    instance.set data.attributes
 
 
                     # Update message data with model attributes

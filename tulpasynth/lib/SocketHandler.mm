@@ -107,7 +107,7 @@
         Model* m = [[Model Instances] getById:modelId];
         if (!m) {
             NSLog(@"Model not found!");
-            exit(-1);
+            return;
         }
 
         [m deserialize:[data valueForKey:@"attributes"]];

@@ -77,6 +77,11 @@
 //        // delete view
 //        [self.controller.wildBalls removeObject:otherEntity];
 //        [[PhysicsEntity Instances] removeObject:otherEntity];
+        
+        // save time the ball collided
+        BlackholeModel* model = (BlackholeModel*)self.model;
+        [model.eatenBallTimes addObject:[NSDate dateWithTimeIntervalSinceNow:0.0]];
+        [model synchronize];
     }
     
     
