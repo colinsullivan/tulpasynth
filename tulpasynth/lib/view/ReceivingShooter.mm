@@ -19,6 +19,13 @@
 }
 
 
+- (void) setSelected:(BOOL)isSelected {
+    [super setSelected:isSelected];
+    
+    // never show rate slider.
+    self.rateSlider.active = false;
+}
+
 - (void) advanceToNextShot {
     ReceivingShooterModel* model = ((ReceivingShooterModel*)self.model);
 //    NSLog(@"model.shotTimes: %@", model.shotTimes);
