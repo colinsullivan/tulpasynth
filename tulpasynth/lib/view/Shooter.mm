@@ -175,14 +175,20 @@
     ShooterModel* model = ((ShooterModel*)self.model);
     float nextIndex = [self.nextShotIndex intValue]+1;
     
-    NSLog(@"now: %@", [NSDate dateWithTimeIntervalSinceNow:0.0]);
+//    NSLog(@"now: %@", [NSDate dateWithTimeIntervalSinceNow:0.0]);
+    
+    // if we still need to shoot our current ball
+    if (self.nextShotTime && [self.nextShotTime timeIntervalSinceNow] > 0) {
+        // wait.
+        return;
+    }
     
     if (nextIndex < [model.shotTimes count]) {
         // assume next shot time will be the next indexed value in the array
         self.nextShotIndex = [NSNumber numberWithInt:nextIndex];
-        NSLog(@"automatically advancing to shot %d", [self.nextShotIndex intValue]);
+//        NSLog(@"automatically advancing to shot %d", [self.nextShotIndex intValue]);
         self.nextShotTime = [model.shotTimes objectAtIndex:[self.nextShotIndex intValue]];
-        NSLog(@"nextShotTime: %@", self.nextShotTime);        
+//        NSLog(@"nextShotTime: %@", self.nextShotTime);        
         self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
         
 //        if ([self.nextShotTime timeIntervalSinceNow] > 0.0) {
@@ -191,7 +197,7 @@
     }
     // no more shots
     else {
-        NSLog(@"no mo");
+//        NSLog(@"no mo");
         instr->stop();
         self.nextShotTime = nil;
     }
@@ -204,17 +210,18 @@
     ShooterModel* model = ((ShooterModel*)self.model);
     
     if ([keyPath isEqualToString:@"shotTimes"]) {
-//        NSLog(@"shotTimes changed");
+        NSLog(@"shotTimes changed");
+        NSLog(@"[shotTimes count]: %d", [model.shotTimes count]);
 //        if ([model.rate floatValue] > 0.0) {
 
         self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];
         
-//        if ([model.shotTimes count] < [self.shotTimes count]) {
-        self.nextShotIndex = [NSNumber numberWithInt:-1];
-//        }
+        if ([model.shotTimes count] < [self.shotTimes count]) {
+            self.nextShotIndex = [NSNumber numberWithInt:-1];
+        }
         
         // try advancing
-        [self advanceToNextShot];
+        [self advanceToNextShot];            
 
 //        }
 //        self.nextShotIndex = model.nextShotIndex;
@@ -306,7 +313,7 @@
         NSTimeInterval timeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
         // If it is time to shoot another ball because we're on time
         if (
-            timeUntilNextShot < 0 && prevTimeUntilNextShot > 0
+            timeUntilNextShot <= 0 && prevTimeUntilNextShot > 0
             ) {
             //        NSLog(@"shooting");
             

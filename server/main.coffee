@@ -270,7 +270,7 @@ db.on "ready", () ->
 
                         instance.set data.attributes
 
-                    if data.class is "BlackholeModel"
+                    else if data.class is "BlackholeModel"
 
                         # compensate ball eaten times (plus 1::second)
                         compensateTimes data.attributes, "eatenBallTimes", ws.timeOffset+1.5
@@ -287,6 +287,12 @@ db.on "ready", () ->
                         sendToAllButOne shooterUpdateMsg, ws, ["shotTimes"]
 
                         return
+                    else if data.class is "ReceivingShooterModel"
+                        # don't replace shot times
+                        delete data.attributes.shotTimes
+                        # update model instance in RAM
+                        instance.set data.attributes
+
 
                     # Update message data with model attributes
                     data.attributes = instance.toJSON()
