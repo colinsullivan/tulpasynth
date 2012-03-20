@@ -27,6 +27,7 @@
     [super initialize];
     
     self.longPressable = false;
+    self.pincheable = false;
     
     self.glow = 0.0;
         
