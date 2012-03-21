@@ -46,8 +46,12 @@
     myBodyMass.mass = 10.0f;
     self.body->SetMassData(&myBodyMass);
     
-    self.instr = new instruments::FMPercussion();
-    self.instr->finish_initializing();
+    self.instr = new instruments::BendingFMPercussion();
+    ((instruments::Instrument*)self.instr)->finish_initializing();
+//    instr->freq(880);
+//    instr->velocity(1.0);
+//    instr->duration(0.7);
+//    instr->play();
 
     self.effect.texture2d0.name = self.controller.glowingBoxTexture.name;
 }
@@ -62,9 +66,46 @@
     
     [super handleCollision:otherEntity withStrength:collisionStrength];
 
-    self.instr->freq((5/self.width) * 1320);
-    self.instr->velocity(collisionStrength);
-    self.instr->play();
+    BlockModel* model = ((BlockModel*)self.model);
+    
+    if ([otherEntity class] == [WildBall class]) {
+        WildBallModel* ballModel = ((WildBallModel*)otherEntity.model);
+        int pitchIndex = [ballModel.pitchIndex intValue];
+        if (pitchIndex >= 0) {
+            float freq = [[TriObstacle class] pitchIndexToFreq:pitchIndex];
+            self.instr->freq(freq/2.0);
+            self.instr->velocity(collisionStrength);
+            
+            // map width of block into duration of bend
+            float minDuration = 0.1;
+            float maxDuration = 1.25;
+            float rangeDuration = maxDuration - minDuration;
+            
+            float minWidth = [[model class] minWidth];
+            float maxWidth = [[model class] maxWidth];
+            float rangeWidth = maxWidth - minWidth;
+            
+            float widthPerc = [model.width floatValue] / rangeWidth;
+            float duration = (widthPerc * rangeDuration) + minDuration;
+            
+            // map angle of block into bend direction
+            float maxAngle = stk::TWO_PI;
+            float anglePerc = [model.angle floatValue] / maxAngle;
+            if (anglePerc < 0.5) {
+                self.instr->bendDirection(1.0);
+            }
+            else {
+                self.instr->bendDirection(-1.0);
+            }
+            
+            
+            self.instr->duration(duration);
+            self.instr->play();
+            
+            // assume color from ball
+            self.color = [[TriObstacle class] pitchIndexToColor:pitchIndex];
+        }
+    }
 }
 
 //- (void)update {

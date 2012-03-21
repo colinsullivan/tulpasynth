@@ -48,11 +48,12 @@ namespace instruments {
 
         virtual void freq(stk::StkFloat aFreq);
         
+        
         virtual void finish_initializing() {
             Instrument::finish_initializing();
         }
 
-    private:
+    protected:
         /**
          *  Frequencies of both carrier and modulator waves
          **/

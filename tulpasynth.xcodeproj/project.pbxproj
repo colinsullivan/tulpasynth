@@ -64,6 +64,7 @@
 		3BAF4D19151871980024DBCE /* ReceivingShooter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF4D18151871980024DBCE /* ReceivingShooter.mm */; };
 		3BAF7548151910EB00FEC305 /* ReceivingShooter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF7546151910EB00FEC305 /* ReceivingShooter.png */; };
 		3BAF7549151910EB00FEC305 /* ReceivingShooterGlowing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF7547151910EB00FEC305 /* ReceivingShooterGlowing.png */; };
+		3BAF754C151A12F600FEC305 /* BendingFMPercussion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF754B151A12F600FEC305 /* BendingFMPercussion.cpp */; };
 		3BB550EB1513CD97005106A3 /* TrigLookupTables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB550EA1513CD97005106A3 /* TrigLookupTables.cpp */; };
 		3BB550EE1513F1D5005106A3 /* BlackholeModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BB550ED1513F1D4005106A3 /* BlackholeModel.mm */; };
 		3BB550F41513F202005106A3 /* Blackhole.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BB550F31513F200005106A3 /* Blackhole.mm */; };
@@ -491,6 +492,8 @@
 		3BAF4D18151871980024DBCE /* ReceivingShooter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ReceivingShooter.mm; sourceTree = "<group>"; };
 		3BAF7546151910EB00FEC305 /* ReceivingShooter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReceivingShooter.png; sourceTree = "<group>"; };
 		3BAF7547151910EB00FEC305 /* ReceivingShooterGlowing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReceivingShooterGlowing.png; sourceTree = "<group>"; };
+		3BAF754A151A12E900FEC305 /* BendingFMPercussion.hpp */ = {isa = PBXFileReference; path = BendingFMPercussion.hpp; sourceTree = "<group>"; };
+		3BAF754B151A12F600FEC305 /* BendingFMPercussion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BendingFMPercussion.cpp; sourceTree = "<group>"; };
 		3BB550E91513CD67005106A3 /* TrigLookupTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrigLookupTables.h; sourceTree = "<group>"; };
 		3BB550EA1513CD97005106A3 /* TrigLookupTables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrigLookupTables.cpp; sourceTree = "<group>"; };
 		3BB550EC1513F1D4005106A3 /* BlackholeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackholeModel.h; sourceTree = "<group>"; };
@@ -1863,6 +1866,8 @@
 				3BE269CA14F8430D00AFC61E /* Instrument.hpp */,
 				3BB550E91513CD67005106A3 /* TrigLookupTables.h */,
 				3BB550EA1513CD97005106A3 /* TrigLookupTables.cpp */,
+				3BAF754A151A12E900FEC305 /* BendingFMPercussion.hpp */,
+				3BAF754B151A12F600FEC305 /* BendingFMPercussion.cpp */,
 			);
 			name = instruments;
 			path = lib/instruments;
@@ -2303,6 +2308,7 @@
 				3BC5A2571516AFFE00ADCDD5 /* AddingRing.mm in Sources */,
 				3BAF4D161518714C0024DBCE /* ReceivingShooterModel.mm in Sources */,
 				3BAF4D19151871980024DBCE /* ReceivingShooter.mm in Sources */,
+				3BAF754C151A12F600FEC305 /* BendingFMPercussion.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

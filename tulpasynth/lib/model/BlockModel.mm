@@ -10,19 +10,26 @@
 
 @implementation BlockModel
 
-static float minWidth = 6.0;
-static float maxWidth = 50.0;
++ (float) minWidth {
+    static float minWidth = 6.0;
+    return minWidth;
+}
++ (float) maxWidth {
+    static float maxWidth = 50.0;
+    return maxWidth;
+}
+
 
 // ensure width and height are within bounds
 - (void)setWidth:(NSNumber *)aWidth {
     
     float value = [aWidth floatValue];
     
-    if (value < minWidth) {
-        aWidth = [NSNumber numberWithFloat:minWidth];
+    if (value < [[self class] minWidth]) {
+        aWidth = [NSNumber numberWithFloat:[[self class] minWidth]];
     }
-    else if (value > maxWidth) {
-        aWidth = [NSNumber numberWithFloat:maxWidth];
+    else if (value > [[self class] maxWidth]) {
+        aWidth = [NSNumber numberWithFloat:[[self class] maxWidth]];
     }
     
     [super setWidth:aWidth];
@@ -32,11 +39,11 @@ static float maxWidth = 50.0;
     
     float value = [aHeight floatValue];
     
-    if (value < minWidth/2.0) {
-        aHeight = [NSNumber numberWithFloat:minWidth/2.0];
+    if (value < [[self class] minWidth]/2.0) {
+        aHeight = [NSNumber numberWithFloat:[[self class] minWidth]/2.0];
     }
-    else if (value > maxWidth/2.0) {
-        aHeight = [NSNumber numberWithFloat:maxWidth/2.0];
+    else if (value > [[self class] maxWidth]/2.0) {
+        aHeight = [NSNumber numberWithFloat:[[self class] maxWidth]/2.0];
     }
     
     [super setHeight:aHeight];

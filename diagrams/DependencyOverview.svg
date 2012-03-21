@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="46cm" height="23cm" viewBox="193 162 909 458" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <g>
+      <rect style="fill: #ffffff" x="796" y="356" width="148.7" height="70"/>
+      <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="796" y="356" width="148.7" height="70"/>
+      <rect style="fill: #ffffff" x="776" y="370" width="40" height="14"/>
+      <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="776" y="370" width="40" height="14"/>
+      <rect style="fill: #ffffff" x="776" y="398" width="40" height="14"/>
+      <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="776" y="398" width="40" height="14"/>
+      <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="824" y="381.9">
+        <tspan x="824" y="381.9">tulpasynth server</tspan>
+      </text>
+    </g>
+    <g>
+      <g>
+        <rect style="fill: #ffffff" x="1017.85" y="300.5" width="83.75" height="70"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1017.85" y="300.5" width="83.75" height="70"/>
+        <rect style="fill: #ffffff" x="997.85" y="314.5" width="40" height="14"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="997.85" y="314.5" width="40" height="14"/>
+        <rect style="fill: #ffffff" x="997.85" y="342.5" width="40" height="14"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="997.85" y="342.5" width="40" height="14"/>
+        <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="1045.85" y="326.4">
+          <tspan x="1045.85" y="326.4">Node.js</tspan>
+        </text>
+      </g>
+      <g>
+        <rect style="fill: #ffffff" x="1031" y="411.5" width="70.6" height="70"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1031" y="411.5" width="70.6" height="70"/>
+        <rect style="fill: #ffffff" x="1011" y="425.5" width="40" height="14"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1011" y="425.5" width="40" height="14"/>
+        <rect style="fill: #ffffff" x="1011" y="453.5" width="40" height="14"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1011" y="453.5" width="40" height="14"/>
+        <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="1059" y="437.4">
+          <tspan x="1059" y="437.4">Redis</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="516" y="356" width="143.3" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="516" y="356" width="143.3" height="70"/>
+    <rect style="fill: #ffffff" x="496" y="370" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="496" y="370" width="40" height="14"/>
+    <rect style="fill: #ffffff" x="496" y="398" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="496" y="398" width="40" height="14"/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="544" y="381.9">
+      <tspan x="544" y="381.9">tulpasynth client</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="315.75" y="256" width="80.85" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="315.75" y="256" width="80.85" height="70"/>
+    <rect style="fill: #ffffff" x="295.75" y="270" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="295.75" y="270" width="40" height="14"/>
+    <rect style="fill: #ffffff" x="295.75" y="298" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="295.75" y="298" width="40" height="14"/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="343.75" y="281.9">
+      <tspan x="343.75" y="281.9">RestKit</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="214.7" y="356" width="181.9" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="214.7" y="356" width="181.9" height="70"/>
+    <rect style="fill: #ffffff" x="194.7" y="370" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="194.7" y="370" width="40" height="14"/>
+    <rect style="fill: #ffffff" x="194.7" y="398" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="194.7" y="398" width="40" height="14"/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="242.7" y="381.9">
+      <tspan x="242.7" y="381.9">NSKeyValueObserving/</tspan>
+      <tspan x="242.7" y="397.9">NSKeyValueCoding</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="336.25" y="549" width="60.35" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="336.25" y="549" width="60.35" height="70"/>
+    <rect style="fill: #ffffff" x="316.25" y="563" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="316.25" y="563" width="40" height="14"/>
+    <rect style="fill: #ffffff" x="316.25" y="591" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="316.25" y="591" width="40" height="14"/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="364.25" y="574.9">
+      <tspan x="364.25" y="574.9">STK</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="274.6" y="163" width="122" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="274.6" y="163" width="122" height="70"/>
+    <rect style="fill: #ffffff" x="254.6" y="177" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="254.6" y="177" width="40" height="14"/>
+    <rect style="fill: #ffffff" x="254.6" y="205" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="254.6" y="205" width="40" height="14"/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="302.6" y="188.9">
+      <tspan x="302.6" y="188.9">SocketRocket</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="318.75" y="458" width="77.85" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="318.75" y="458" width="77.85" height="70"/>
+    <rect style="fill: #ffffff" x="298.75" y="472" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="298.75" y="472" width="40" height="14"/>
+    <rect style="fill: #ffffff" x="298.75" y="500" width="40" height="14"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="298.75" y="500" width="40" height="14"/>
+    <text style="fill: #000000;text-anchor:start;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="346.75" y="483.9">
+      <tspan x="346.75" y="483.9">Box2D</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="516,391 456.3,391 456.3,198 403.305,198 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="415.953,193 399.953,198 415.953,203 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="516,391 456.3,391 456.3,291 403.305,291 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="415.953,286 399.953,291 415.953,296 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="516,391 516,391 403.305,391 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="415.953,386 399.953,391 415.953,396 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="516,391 456.3,391 456.3,493 403.305,493 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="415.953,488 399.953,493 415.953,498 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="516,391 456.3,391 456.3,584 403.305,584 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="415.953,579 399.953,584 415.953,589 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="944.7,391 981.275,391 981.275,335.5 1011.14,335.5 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="998.497,340.5 1014.5,335.5 998.497,330.5 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="944.7,391 981,391 981,446.5 1024.29,446.5 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1011.65,451.5 1027.65,446.5 1011.65,441.5 "/>
+  </g>
+</svg>

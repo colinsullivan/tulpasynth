@@ -10,4 +10,10 @@
 
 @interface BlockModel : ObstacleModel
 
+/**
+ *  Maximum and minimum widths
+ **/
++ (float) minWidth;
++ (float) maxWidth;
+
 @end

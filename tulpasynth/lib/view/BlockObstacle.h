@@ -11,7 +11,7 @@
 
 #import "PolygonObstacle.h"
 
-#import "FMPercussion.hpp"
+#import "BendingFMPercussion.hpp"
 
 #import "BlockModel.h"
 
@@ -22,7 +22,7 @@
 
 //@property b2PolygonShape* square;
 
-@property instruments::FMPercussion* instr;
+@property instruments::BendingFMPercussion* instr;
 
 
 @end
