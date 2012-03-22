@@ -48,6 +48,7 @@
     
     for (int i = 0; i < 5; i++) {
         instruments::FMPercussion* instr = new instruments::FMPercussion();
+        instr->gain(0.2);
         instr->finish_initializing();
         instrs.push_back(instr);
     }

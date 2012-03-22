@@ -53,6 +53,7 @@
         NSString* filename = [NSString stringWithFormat:@"blackhole_pitch_0%d", i];
         NSString* path = [[NSBundle mainBundle] pathForResource:filename ofType:@"wav"];
         instr->set_clip([path UTF8String]);
+        ((instruments::Instrument*)instr)->gain(0.2);
         instr->finish_initializing();
         instrs.push_back(instr);
     }

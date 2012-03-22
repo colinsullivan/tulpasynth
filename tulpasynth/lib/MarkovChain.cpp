@@ -41,7 +41,7 @@ MarkovChain::MarkovChain(std::vector< std::vector<float> >* someProbabilities) {
 
 int MarkovChain::_findInRow(std::vector<float>& row) {
     // generate random seed
-    float seed = (float)random()/(float)RAND_MAX;
+    float seed = random()/(float)RAND_MAX;
     
     // Keep track of current largest probability value, and the column index
     float currentLargestProbability = -1.0;
@@ -54,7 +54,7 @@ int MarkovChain::_findInRow(std::vector<float>& row) {
         // if probability is a candidate
         if (row[j] < seed && row[j] >= currentLargestProbability) {
             // if it is equal to other candidate, randomly choose between current and new
-            bool maybe = (((float)random()/(float)RAND_MAX) < 0.5);
+            bool maybe = (random()/(float)RAND_MAX < 0.5);
             if (row[j] != currentLargestProbability || maybe) {
                 currentLargestProbabilityIndex = j;
                 currentLargestProbability = row[j];

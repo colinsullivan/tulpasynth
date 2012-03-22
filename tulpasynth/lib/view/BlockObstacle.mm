@@ -47,6 +47,7 @@
     self.body->SetMassData(&myBodyMass);
     
     self.instr = new instruments::BendingFMPercussion();
+    ((instruments::Instrument*)self.instr)->gain(0.2);
     ((instruments::Instrument*)self.instr)->finish_initializing();
 //    instr->freq(880);
 //    instr->velocity(1.0);

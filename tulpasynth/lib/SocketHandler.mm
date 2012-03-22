@@ -112,7 +112,7 @@
         NSNumber* modelId = [[data valueForKey:@"attributes"] valueForKey:@"id"];
         Model* m = [[Model Instances] getById:modelId];
         if (!m) {
-            NSLog(@"Model %d not found!", [modelId intValue]);
+//            NSLog(@"Model %d not found!", [modelId intValue]);
             return;
         }
 

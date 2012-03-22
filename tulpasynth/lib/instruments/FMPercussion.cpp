@@ -140,6 +140,10 @@ void FMPercussion::play() {
 }
 
 void FMPercussion::velocity(stk::StkFloat aVelocity) {
+    if (aVelocity > 0.9) {
+        aVelocity = 0.9;
+    }
+
     Instrument::velocity(aVelocity);
 
     this->modulationIndex((this->_velocity * 30));

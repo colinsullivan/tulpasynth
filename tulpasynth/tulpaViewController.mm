@@ -33,6 +33,10 @@
 #import "ReceivingShooterModel.h"
 #import "ReceivingShooter.h"
 
+#include "Ambience.hpp"
+
+instruments::Ambience* ambienceInstr;
+
 
 
 //#include "FMPercussion.hpp"
@@ -150,6 +154,9 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
             // Add samples to master output for each channel
             for(unsigned int k = 0; k < numFrames; k++) {
                 outputSamples[k*NUM_CHANNELS+j] += gain*(Float32)(*tempFrames)[k*NUM_CHANNELS+j];
+//                if (outputSamples[k*NUM_CHANNELS+j] > 1.0) {
+//                    NSLog(@"Clipping!");
+//                }
             }
         }
 
@@ -319,6 +326,11 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     self.dragSelector.active = false;
     
     [[GLView class] initializeBuffers];
+    
+    ambienceInstr = new instruments::Ambience();
+    ((instruments::Instrument*)ambienceInstr)->finish_initializing();
+    ((instruments::Instrument*)ambienceInstr)->play();
+    ((instruments::Instrument*)ambienceInstr)->gain(0.15);
 }
 
 - (void)beginCollision:(b2Contact*) contact {
@@ -668,6 +680,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     //    self.effect.transform.projectionMatrix = projectionMatrix;
     
 //        self.lastUpdateTime = [NSDate dateWithTimeIntervalSinceNow:0.0];
+    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
