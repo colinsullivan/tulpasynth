@@ -4,3 +4,4 @@
 *.sass-cache
 tulpasynth.xcodeproj/xcuserdata/*
 tulpasynth.xcodeproj/project.xcworkspace/xcuserdata/*
+tulpasynth/lib/vendor/Box2D_v2.2.1*

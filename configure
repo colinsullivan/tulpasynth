@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+echo "******************************"
+echo "*  Downloading dependencies  *"
+echo "******************************"
+
+git submodule update --init
+
+echo "Downloading Box2D"
+cd tulpasynth/lib/vendor/
+wget http://box2d.googlecode.com/files/Box2D_v2.2.1.zip
+unzip Box2D_v2.2.1.zip
+
+
+
