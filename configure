@@ -4,6 +4,7 @@ echo "******************************"
 echo "*  Downloading dependencies  *"
 echo "******************************"
 
+echo "RestKit and SocketRocket"
 git submodule update --init
 
 echo "Box2D"
@@ -21,3 +22,7 @@ echo "MoMu"
 wget http://momu.stanford.edu/toolkit/release/momu-1.0.0.tgz
 tar xvzf momu-1.0.0.tgz
 rm momu-1.0.0.tgz
+
+echo "Server-side"
+cd ../../../server/
+npm install
