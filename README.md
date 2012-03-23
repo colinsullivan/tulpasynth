@@ -1,26 +1,51 @@
 # tulpasynth
 
-# Colin Sullivan
+tulpasynth is a real-time collaborative music creation system.
 
-# 256b: Homework 3: Instrument
+
+It was initially developed by Colin Sullivan during the Music 256A course at Stanford's CCRMA, and was later rebuilt using different technologies for 256B.  It is named "tulpasynth" in the spirit of creation without boundaries.
+
+[github.com/colinsullivan/tulpasynth](https://github.com/colinsullivan/tulpasynth)
+
+## Overview
+tulpasynth is an abstract interface for users to collaboratively create music together.  The most recent version has a user interface written in iOS using OpenGL, and communicates with the Node.js server via websockets.
+
+It looks something like this:
+
+[https://ccrma.stanford.edu/~colinsul/projects/tulpasynth/tulpasynth_scene_01.png](https://ccrma.stanford.edu/~colinsul/projects/tulpasynth/tulpasynth_scene_01.png)
+
+## Goals
+To enable _spontaneous creation_ by responding to familiar touchscreen gestures and requiring only simple interaction paradigms to manipulate the entities in the application.
+
+Users build systems with _emerging complexity_ as they add/manipulate primitive entities in the system and connect them together.
 
 ## Interaction
-
-This is a musical application that runs on the iPhone.  Currently it is a fairly minimal application in which the user can only perform a small set of actions:
-
-* Single-tap on empty space creates a falling ball object.
-* Long-tap on empty space creates a statically positioned rectangular obstacle.
-    * Drag on a rectangle moves it to a new location
-    * Pinch on a rectangle resizes it proportionally
-    * Rotate gesture on a rectangle rotates it
-
-When a ball collides with a rectangle, a sound is triggered.  This is an FM synthesis percussion sound that I synthesized based on a John Chowning paper[^chowning].  The sound utilizes complex amplitude envelopes to achieve the percussive effect.  These envelopes are implemented in lookup tables which were generated using the `CurveTable` object in ChucK.
+tulpasynth runs on an iOS device.  Users tap in the empty space to add objects to the screen, which may create flying "balls" that collide with other objects and make sound when they collide.  The pitch of these balls can be manipulated with other entities, and they can also be "teleported" to another player's screen.
 
 ## Implementation
+The UI is written in Objective-C and utilizes Cocoa's `NSKeyValueObserving` and `NSKeyValueCoding` protocols to provide event callbacks for a Model-View pattern.  The model data is synchronized over a websocket using Square's SocketStream library, and Node.js handles some simple manipulations on the models to send the proper information to other clients.
 
-All of the functionality is initiated from the `tulpaViewController` class, so look there first if you'd like to see how things are working together.  Most of the drawing code is in `PhysicsEntity` and its subclasses, and the gesture handling code for moving the obstacles can be found in the `Obstacle` class.
+The graphics are written in OpenGL, and are slaved to the Box2D physics engine for motion.
 
-For more details, see the header files.
+## Building
 
-[^chowning]: [The Synthesis of Complex Audio Spectra by Means of 
-Frequency Modulation, John Chowning, 1973/2007](https://ccrma.stanford.edu/sites/default/files/user/jc/fmsynthesispaperfinal_1.pdf)
+```bash
+git clone git@github.com:colinsullivan/tulpasynth.git
+cd tulpasynth/
+./configure
+```
+
+To run tulpasynth client open `tulpasynth.xcodeproj`, select "tulpasynth" as the build target, and run.  You'll need to configure your tulpasynth server's IP and port in the tulpasynth preferences in the device's settings.
+
+To run the server after starting redis,
+
+```bash
+cd server/
+./main.coffee -a myipaddress -p myport
+```
+
+## Future
+After a few iterations trying different interactions and synchronization schemes, I think this project is on the right track in terms of the original high-level goals stated above.  I would love to experiment more with the physics engine and with creating  "Rube Goldberg" like systems that users can pass the results of to one another, and really feel like they are creating music together.
+
+## v0.1
+More information on v0.1 of tulpasynth, which was developed using different technologies, can be found here: [ccrma.stanford.edu/~colinsul/projects/tulpasynth_v01](http://ccrma.stanford.edu/~colinsul/projects/tulpasynth_v01)
