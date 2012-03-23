@@ -17,4 +17,7 @@ wget http://momu.stanford.edu/stk/release/momu-stk-1.0.0.tgz
 tar xvzf momu-stk-1.0.0.tgz
 rm momu-stk-1.0.0.tgz
 
-
+echo "MoMu"
+wget http://momu.stanford.edu/toolkit/release/momu-1.0.0.tgz
+tar xvzf momu-1.0.0.tgz
+rm momu-1.0.0.tgz
