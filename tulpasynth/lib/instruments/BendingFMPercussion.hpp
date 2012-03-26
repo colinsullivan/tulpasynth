@@ -1,10 +1,11 @@
-//
-//  BendingFMPercussion.h
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 3/21/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       BendingFMPercussion.hpp
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #ifndef tulpasynth_BendingFMPercussion_h
 #define tulpasynth_BendingFMPercussion_h

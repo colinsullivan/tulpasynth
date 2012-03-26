@@ -1,10 +1,11 @@
-//
-//  ReceivingShooter.h
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 3/20/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       ReceivingShooter.h
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #import "Shooter.h"
 

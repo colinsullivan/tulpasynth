@@ -1,10 +1,11 @@
-//
-//  CollisionDetector.cpp
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 2/28/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       CollisionDetector.mm
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #include <iostream>
 

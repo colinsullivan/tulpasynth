@@ -1,10 +1,11 @@
-//
-//  TrigLookupTables.cpp
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 3/16/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       TrigLookupTables.cpp
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #include <iostream>
 

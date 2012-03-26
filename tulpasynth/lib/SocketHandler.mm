@@ -1,10 +1,11 @@
-//
-//  SocketHandler.m
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 3/1/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       SocketHandler.mm
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #include <time.h>
 #include <xlocale.h>

@@ -1,10 +1,11 @@
-//
-//  AddingRing.m
-//  tulpasynth
-//
-//  Created by Colin Sullivan on 3/18/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ *  @file       AddingRing.mm
+ *
+ *  @author     Colin Sullivan <colinsul [at] gmail.com>
+ *
+ *              Copyright (c) 2012 Colin Sullivan
+ *              Licensed under the GPLv3 license.
+ **/
 
 #import "AddingRing.h"
 

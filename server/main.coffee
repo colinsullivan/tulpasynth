@@ -1,4 +1,17 @@
 #!/usr/bin/env coffee
+###
+#   @file       main.coffee
+#
+#   @author     Colin Sullivan <colinsul [at] gmail.com>
+#
+#               Copyright (c) 2012 Colin Sullivan
+#               Licensed under the GPLv3 license.
+###
+
+
+###
+#   This file contains the entry point for the tulpasynth server.
+###
 
 colors = require "colors"
 net = require "net"
