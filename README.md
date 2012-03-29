@@ -14,6 +14,10 @@ It looks something like this:
 
 [https://ccrma.stanford.edu/~colinsul/projects/tulpasynth/tulpasynth_scene_01.png](https://ccrma.stanford.edu/~colinsul/projects/tulpasynth/tulpasynth_scene_01.png)
 
+Here is a demo video:
+
+[https://vimeo.com/39234533](https://vimeo.com/39234533)
+
 ## Goals
 To enable _spontaneous creation_ by responding to familiar touchscreen gestures and requiring only simple interaction paradigms to manipulate the entities in the application.
 
