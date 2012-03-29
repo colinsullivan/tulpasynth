@@ -115,4 +115,20 @@
         m.destroyed = [NSNumber numberWithBool:true];
     }
 }
+
+- (void) destroy {
+    [super destroy];
+
+    try {
+        [self.controller.wildBalls removeObject:self];
+    } catch (NSException* e) {
+        if (e.name == NSRangeException) {
+            NSLog(@"NSRangeException occurred controller.wildBalls removeObject");
+        }
+        else {
+            NSLog(@"other exception occurred wildBalls removeObject");
+        }
+    }
+}
+
 @end

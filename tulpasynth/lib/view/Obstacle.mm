@@ -79,4 +79,19 @@
     [self.deleteButton update];
 }
 
+- (void) destroy {
+    [super destroy];
+
+    try {
+        [self.controller.obstacles removeObject:self];
+    } catch (NSException* e) {
+        if (e.name == NSRangeException) {
+            NSLog(@"NSRangeException occurred controller.obstacles removeObject");
+        }
+        else {
+            NSLog(@"other exception occurred obstacles removeObject");
+        }
+    }
+}
+
 @end

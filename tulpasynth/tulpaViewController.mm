@@ -628,7 +628,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         [o update];
     }
     
-    NSMutableArray* ballsToDelete = [[NSMutableArray alloc] init];
+//    NSMutableArray* ballsToDelete = [[NSMutableArray alloc] init];
     
     // update all wild balls
     for (WildBall* b in self.wildBalls) {

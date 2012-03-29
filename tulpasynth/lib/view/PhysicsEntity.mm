@@ -132,17 +132,6 @@
 //    }
     
     self->body->SetActive(false);
-    
-    try {
-        [self.controller.wildBalls removeObject:self];
-    } catch (NSException* e) {
-        if (e.name == NSRangeException) {
-            NSLog(@"NSRangeException occurred controller.wildBalls removeObject");
-        }
-        else {
-            NSLog(@"other exception occurred wildBalls removeObject");
-        }
-    }
 }
 
 
@@ -173,7 +162,7 @@
         //        NSLog(@"wildBall destroying self");
         // do not display
         self.active = false;
-        [self.controller.physicsEntitiesToDestroy addObject:self];        
+        [self.controller.physicsEntitiesToDestroy addObject:self];
     }
 //    // if destruction was synchronized
 //    else if ([keyPath isEqualToString:@"destroyedAndSynced"] && [self.model.destroyedAndSynced boolValue] == true) {
