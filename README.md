@@ -41,7 +41,7 @@ To run the server after starting redis,
 
 ```bash
 cd server/
-./main.coffee -a myipaddress -p myport
+./main.coffee --address=myipaddress --port=myport
 ```
 
 ## Future
