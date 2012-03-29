@@ -46,7 +46,7 @@
 - (void) setShotTimes:(NSMutableArray *)someShotTimes {
     // if shot times are numbers
 //    NSLog(@"setShotTimes: %@", someShotTimes);
-    if ([[someShotTimes objectAtIndex:0] class] == [NSDecimalNumber class]) {
+    if ([someShotTimes count] > 0 && [[someShotTimes objectAtIndex:0] class] == [NSDecimalNumber class]) {
 //        NSLog(@"converting from decimal number to dates");
         // convert to dates
         NSMutableArray* shotTimeNumbers = someShotTimes;

@@ -241,7 +241,7 @@ db.on "ready", () ->
                         # relay to other clients
                         sendToAllButOne data, ws, ["shotTimes"]
 
-                        shooter.updateNextShotTimes();
+                        shooter.updateNextShotTimes()
 
 
                 # Other models, just relay message

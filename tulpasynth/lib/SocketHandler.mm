@@ -98,7 +98,7 @@
         // pause rendering
 //        self.controller.paused = true;
         
-        NSLog(@"creating model %d", [[[data valueForKey:@"attributes"] valueForKey:@"id"] intValue]);
+//        NSLog(@"creating model %d", [[[data valueForKey:@"attributes"] valueForKey:@"id"] intValue]);
 
         // create corresponding model
         Model* m = [[NSClassFromString([data valueForKey:@"class"]) alloc] initWithController:self.controller withAttributes:[data valueForKey:@"attributes"]];
