@@ -78,7 +78,7 @@ sendToAll = (data, timeOffsetAttributes) ->
     console.log data
 
     for connectionId, client of openConnections
-        debugMsg "To client #{connectionId} with offset #{client.timeOffset}"
+        # debugMsg "To client #{connectionId} with offset #{client.timeOffset}"
         client.send JSON.stringify(offsetTimeAttributes(data, timeOffsetAttributes, client.timeOffset))
 
 sendToAllButOne = (data, one, timeOffsetAttributes) ->
@@ -93,7 +93,7 @@ sendToOne = (data, one, timeOffsetAttributes) ->
     debugMsg "Sending to one:"
     console.log data
 
-    debugMsg "To client #{one.connectionId} with offset #{one.timeOffset}"
+    # debugMsg "To client #{one.connectionId} with offset #{one.timeOffset}"
     one.send JSON.stringify(offsetTimeAttributes(data, timeOffsetAttributes, one.timeOffset))
 
 unpauseAll = () ->
@@ -156,8 +156,8 @@ db.on "ready", () ->
                 temp.setTime(data.time*1000)
                 data.time = temp
 
-            debugMsg "Data received:"
-            console.log data
+            # debugMsg "Data received:"
+            # console.log data
 
             response = {}
 
@@ -241,7 +241,7 @@ db.on "ready", () ->
                         # relay to other clients
                         sendToAllButOne data, ws, ["shotTimes"]
 
-                        shooter.updateNextShotTimes()
+                        # shooter.updateNextShotTimes()
 
 
                 # Other models, just relay message

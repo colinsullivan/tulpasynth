@@ -63,17 +63,17 @@
     
 //    self.lastShotTime = nil;
 
-    if ([model.rate floatValue] > 0.0f) {
-        self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];
-        self.nextShotIndex = [NSNumber numberWithInt:-1];
-        [self advanceToNextShot];
+//    if ([model.rate floatValue] > 0.0f) {
+    self.shotTimes = model.shotTimes;
+    self.nextShotIndex = [NSNumber numberWithInt:-1];
+//    [self advanceToNextShot];
 //        self.waitingToShoot = true;
 //        instr->play();
 //        self.animating = true;
-    }
-    else {
-        self.nextShotTime = nil;
-    }
+//    }
+//    else {
+//        self.nextShotTime = nil;
+//    }
 //    else {
 //        self.waitingToShoot = false;
 //    }
@@ -218,15 +218,25 @@
     ShooterModel* model = ((ShooterModel*)self.model);
     
     if ([keyPath isEqualToString:@"shotTimes"]) {
+        
+        if ([model.shotTimes count] == 0) {
+            return;
+        }
+        
 //        NSLog(@"shotTimes changed");
 //        NSLog(@"[shotTimes count]: %d", [model.shotTimes count]);
 //        if ([model.rate floatValue] > 0.0) {
 
-        self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];
+//        self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];
         
-        if ([model.shotTimes count] < [self.shotTimes count]) {
-            self.nextShotIndex = [NSNumber numberWithInt:-1];
+        if (model.shotTimes != self.shotTimes) {
+//            NSLog(@"resetting shot times");
+            self.nextShotIndex = [NSNumber numberWithInt:0];
+            self.shotTimes = model.shotTimes;
+            self.nextShotTime = [model.shotTimes objectAtIndex:0];
+            self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
         }
+
         
         // try advancing
         [self advanceToNextShot];            
