@@ -7,11 +7,9 @@
  *              Licensed under the GPLv3 license.
  **/
 
-#import "ObstacleModel.h"
+#import "ShooterBaseModel.h"
 
-#include "Stk.h"
-
-@interface ShooterModel : ObstacleModel
+@interface ShooterModel : ShooterBaseModel
 
 /**
  *  Rate at which this shooter will fire balls (in Hz).

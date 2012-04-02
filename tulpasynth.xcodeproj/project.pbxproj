@@ -45,6 +45,8 @@
 		3B2A4B21150FE9D500F2DF5E /* TriObstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A4B20150FE9D500F2DF5E /* TriObstacle.mm */; };
 		3B2A4B241510058500F2DF5E /* PolygonObstacle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A4B231510058400F2DF5E /* PolygonObstacle.mm */; };
 		3B2A4B2615100B7500F2DF5E /* triobstacle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A4B2515100B7500F2DF5E /* triobstacle.png */; };
+		3B5048681529F61600A164E8 /* ShooterBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B5048671529F61600A164E8 /* ShooterBase.mm */; };
+		3B50486B1529F77200A164E8 /* ShooterBaseModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B50486A1529F77200A164E8 /* ShooterBaseModel.mm */; };
 		3B624C04150036B80066A1CB /* RAMpler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C02150036B80066A1CB /* RAMpler.cpp */; };
 		3B624C0B150038010066A1CB /* NoisePercussionReversed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */; };
 		3B62509F1500AB430066A1CB /* SocketHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B62509E1500AB430066A1CB /* SocketHandler.mm */; };
@@ -464,6 +466,10 @@
 		3B2A4B221510058400F2DF5E /* PolygonObstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonObstacle.h; sourceTree = "<group>"; };
 		3B2A4B231510058400F2DF5E /* PolygonObstacle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PolygonObstacle.mm; sourceTree = "<group>"; };
 		3B2A4B2515100B7500F2DF5E /* triobstacle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triobstacle.png; sourceTree = "<group>"; };
+		3B5048661529F61600A164E8 /* ShooterBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterBase.h; sourceTree = "<group>"; };
+		3B5048671529F61600A164E8 /* ShooterBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShooterBase.mm; sourceTree = "<group>"; };
+		3B5048691529F77200A164E8 /* ShooterBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShooterBaseModel.h; sourceTree = "<group>"; };
+		3B50486A1529F77200A164E8 /* ShooterBaseModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShooterBaseModel.mm; sourceTree = "<group>"; };
 		3B624C02150036B80066A1CB /* RAMpler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RAMpler.cpp; sourceTree = "<group>"; };
 		3B624C03150036B80066A1CB /* RAMpler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RAMpler.hpp; sourceTree = "<group>"; };
 		3B624C0A150038010066A1CB /* NoisePercussionReversed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = NoisePercussionReversed.wav; sourceTree = "<group>"; };
@@ -1098,6 +1104,8 @@
 				3BB550ED1513F1D4005106A3 /* BlackholeModel.mm */,
 				3BAF4D141518714B0024DBCE /* ReceivingShooterModel.h */,
 				3BAF4D151518714B0024DBCE /* ReceivingShooterModel.mm */,
+				3B5048691529F77200A164E8 /* ShooterBaseModel.h */,
+				3B50486A1529F77200A164E8 /* ShooterBaseModel.mm */,
 			);
 			name = model;
 			path = lib/model;
@@ -1261,6 +1269,8 @@
 				3BC5A2561516AFFD00ADCDD5 /* AddingRing.mm */,
 				3BAF4D17151871970024DBCE /* ReceivingShooter.h */,
 				3BAF4D18151871980024DBCE /* ReceivingShooter.mm */,
+				3B5048661529F61600A164E8 /* ShooterBase.h */,
+				3B5048671529F61600A164E8 /* ShooterBase.mm */,
 			);
 			name = view;
 			path = lib/view;
@@ -2307,6 +2317,8 @@
 				3B94ED21151BFD7C00BAFB61 /* OscPrintReceivedElements.cpp in Sources */,
 				3B94ED22151BFD7C00BAFB61 /* OscReceivedElements.cpp in Sources */,
 				3B94ED23151BFD7C00BAFB61 /* OscTypes.cpp in Sources */,
+				3B5048681529F61600A164E8 /* ShooterBase.mm in Sources */,
+				3B50486B1529F77200A164E8 /* ShooterBaseModel.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,10 +7,12 @@
  *              Licensed under the GPLv3 license.
  **/
 
-#import "Shooter.h"
+#import "ShooterBase.h"
 
 #import "ReceivingShooterModel.h"
 
-@interface ReceivingShooter : Shooter
+@interface ReceivingShooter : ShooterBase
+
+@property (strong, nonatomic) NSNumber* nextShotRate;
 
 @end

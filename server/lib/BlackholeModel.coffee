@@ -19,3 +19,5 @@ class tulpasynth.models.BlackholeModel extends tulpasynth.models.TulpasynthModel
         @relatedShooter = null
 
         super()
+
+    eatenBallTimeDelay: 2.0

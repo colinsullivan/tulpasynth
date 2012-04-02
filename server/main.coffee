@@ -214,7 +214,8 @@ db.on "ready", () ->
                 # if this is a blackhole, we'll need to synchronize eaten ball
                 # times.
                 else if data.class is "BlackholeModel"
-                    compensateTimes data.attributes, "eatenBallTimes", ws.timeOffset+1.5
+                    # Add time to all eatenBallTimes
+                    compensateTimes data.attributes, "eatenBallTimes", ws.timeOffset+tulpasynth.models.BlackholeModel.prototype.eatenBallTimeDelay
 
                     # Create blackholemodel object
                     blackhole = new tulpasynth.models.BlackholeModel data.attributes
@@ -287,8 +288,8 @@ db.on "ready", () ->
 
                     else if data.class is "BlackholeModel"
 
-                        # compensate ball eaten times (plus 1::second)
-                        compensateTimes data.attributes, "eatenBallTimes", ws.timeOffset+1.5
+                        # compensate ball eaten times
+                        compensateTimes data.attributes, "eatenBallTimes", ws.timeOffset+tulpasynth.models.BlackholeModel.prototype.eatenBallTimeDelay
                         # update model instance in RAM
                         instance.set data.attributes
 
