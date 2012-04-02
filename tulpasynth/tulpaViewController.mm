@@ -292,11 +292,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     // create top wall
     wallShape.Set(topLeft, topRight);
     walls->CreateFixture(&wallFixtureDef);
-    
-//    self.toolbox = [[RadialToolbox alloc] initWithController:self withModel:NULL];
-    self.toolbar = [[Toolbar alloc] initWithController:self withModel:NULL];
-    self.toolbar.active = true;
-    
+        
     // Register for model creation and deletion updates
     [[Model Instances] addObserver:self forKeyPath:@"objects" options:NSKeyValueObservingOptionNew context:NULL];
     
@@ -314,6 +310,10 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
         NSLog(@"cannot start real-time audio!");
         return;
     }
+    
+    self.toolbar = [[Toolbar alloc] initWithController:self withModel:NULL];
+    self.toolbar.active = true;
+
     
     self.startTime = [NSDate dateWithTimeIntervalSinceNow:0.0];
     self.safeUpdateTime = [NSDate dateWithTimeInterval:0.0 sinceDate:self.startTime];
