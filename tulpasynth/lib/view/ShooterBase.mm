@@ -205,7 +205,7 @@
         if (
             timeUntilNextShot <= 0 && prevTimeUntilNextShot > 0
             ) {
-        NSLog(@"shooting");
+//        NSLog(@"shooting");
             
             [self startAnimating];
             

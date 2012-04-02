@@ -56,11 +56,11 @@
 
             // determine rate based on next next shot time
             NSDate* futureShotTime = [self.shotTimes objectAtIndex:nextIndex+1];
-            NSLog(@"futureShotTime: %f", [futureShotTime timeIntervalSince1970]);
-            NSLog(@"nextShotTime: %f", [newNextShotTime timeIntervalSince1970]);
-            NSLog(@"now: %f", [[NSDate dateWithTimeIntervalSinceNow:0.0] timeIntervalSince1970]);
+//            NSLog(@"futureShotTime: %f", [futureShotTime timeIntervalSince1970]);
+//            NSLog(@"nextShotTime: %f", [newNextShotTime timeIntervalSince1970]);
+//            NSLog(@"now: %f", [[NSDate dateWithTimeIntervalSinceNow:0.0] timeIntervalSince1970]);
             NSTimeInterval nextToFuture = [futureShotTime timeIntervalSinceDate:newNextShotTime];
-            NSLog(@"nextToFuture: %f", nextToFuture);
+//            NSLog(@"nextToFuture: %f", nextToFuture);
             self.nextShotRate = [NSNumber numberWithDouble:(1.0 / nextToFuture)];
             
             if (nextIndex < [model.nextPitchIndexes count]) {
@@ -71,7 +71,7 @@
             self.nextShotIndex = [NSNumber numberWithInt:nextIndex];
             self.nextShotTime = newNextShotTime;
             self.prevTimeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
-            NSLog(@"self.prevTimeUntilNextShot: %f", self.prevTimeUntilNextShot);
+//            NSLog(@"self.prevTimeUntilNextShot: %f", self.prevTimeUntilNextShot);
 
             return true;
         }
@@ -98,7 +98,7 @@
         }
         else {
             self.shotTimes = model.shotTimes;
-            NSLog(@"self.shotTimes: %@", self.shotTimes);
+//            NSLog(@"self.shotTimes: %@", self.shotTimes);
             [self advanceToNextShot];
         }
         

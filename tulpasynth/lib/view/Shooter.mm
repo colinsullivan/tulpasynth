@@ -71,7 +71,7 @@
         }
         // no more shots
         else {
-            NSLog(@"no mo");
+//            NSLog(@"no mo");
             self.instr->stop();
             self.nextShotTime = nil;
             return false;
