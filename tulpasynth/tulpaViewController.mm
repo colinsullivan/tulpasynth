@@ -64,7 +64,7 @@ LongPressEntity * _longPressEntity;
     deleteButtonTexture, toolbarTexture, addingRingTexture, wildBallTexture,
     wildBallGlowTexture, receivingShooterTexture, receivingShooterGlowingTexture;
 
-@synthesize fallingBalls, obstacles, wildBalls, selectedObstacles;
+@synthesize obstacles, wildBalls, selectedObstacles;
 
 @synthesize context = _context;
 @synthesize effect = _effect;
@@ -236,7 +236,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     _longPressEntity = new LongPressEntity(self.longPressRecognizer);
     
     // Initialize game object lists
-    self.fallingBalls = [[NSMutableArray alloc] init];
     self.obstacles = [[NSMutableArray alloc] init];
     self.wildBalls = [[NSMutableArray alloc] init];
     
@@ -410,8 +409,7 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData) {
     
     delete self->_world;
     delete collisionDetector;
-    
-    self.fallingBalls = nil;
+
     self.obstacles = nil;
     
 //    [self.toolbox dealloc];

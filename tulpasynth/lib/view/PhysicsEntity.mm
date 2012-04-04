@@ -105,33 +105,26 @@
 
 - (void)dealloc {
     delete (b2Vec2*)self.prePanningPosition;
+    
+    // destroy body and all attached fixtures
+    self.controller.world->DestroyBody(self.body);
+    self.body = NULL;
 }
 
 - (void) destroy {
-    // remove shape and body from physics world
-//    if (self.shapeFixture) {
-//        if (self.shapeFixture->GetBody() == self.body) {
-//            self.body->DestroyFixture(self.shapeFixture);
-//            self.controller.world->DestroyBody(self.body);
-//        }
-//        else {
-//            NSLog(@"deleting fixture would have failed.\nclass: %@", [self class]);
-//            return;
-//        }
-//    }
-//    // destroy view by removing references
-//    try {
-//        [[PhysicsEntity Instances] removeObject:self];
-//    } catch (NSException * e) {
-//        if (e.name == NSRangeException) {
-//            NSLog(@"NSRangeException occurred PhysicsEntity Instances removeObject");
-//        }
-//        else {
-//            NSLog(@"other exception occurred PhysicsEntity Instances removeObject");
-//        }
-//    }
-    
     self->body->SetActive(false);
+
+    // initiate dealloc by removing references
+    try {
+        [[PhysicsEntity Instances] removeObject:self];
+    } catch (NSException * e) {
+        if (e.name == NSRangeException) {
+            NSLog(@"NSRangeException occurred PhysicsEntity Instances removeObject");
+        }
+        else {
+            NSLog(@"other exception occurred PhysicsEntity Instances removeObject");
+        }
+    }
 }
 
 

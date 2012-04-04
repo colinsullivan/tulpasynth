@@ -62,7 +62,21 @@
     if (self.shape) {
         delete ((b2CircleShape*)(self.shape));
     }
+}
 
+- (void) destroy {
+    [super destroy];
+
+    try {
+        [self.controller.wildBalls removeObject:self];
+    } catch (NSException* e) {
+        if (e.name == NSRangeException) {
+            NSLog(@"NSRangeException occurred while removing wildball!");
+        }
+        else {
+            NSLog(@"Other exception occurred while removing wildball!");
+        }
+    }
 }
 
 - (b2BodyType)bodyType {
@@ -113,21 +127,6 @@
     if ([m.energy intValue] == 0) {
         // ball should die
         m.destroyed = [NSNumber numberWithBool:true];
-    }
-}
-
-- (void) destroy {
-    [super destroy];
-
-    try {
-        [self.controller.wildBalls removeObject:self];
-    } catch (NSException* e) {
-        if (e.name == NSRangeException) {
-            NSLog(@"NSRangeException occurred controller.wildBalls removeObject");
-        }
-        else {
-            NSLog(@"other exception occurred wildBalls removeObject");
-        }
     }
 }
 

@@ -47,6 +47,19 @@ static GLubyte SquareIndices[] = {
     return position;
 }
 
+- (void) setPosition:(b2Vec2 *)aPosition {
+    b2Vec2* oldPosition = NULL;
+    if (position) {
+        oldPosition = position;
+    }
+    
+    position = aPosition;
+    
+    if (oldPosition) {
+        delete oldPosition;
+    }
+}
+
 /**
  *  Ensure angle is between 0 and 2PI
  **/
@@ -167,6 +180,7 @@ static GLubyte SquareIndices[] = {
     
     
     self.effect = nil;
+    self.effect1 = nil;
 
     delete (b2Vec2*)self.position;
 

@@ -36,10 +36,10 @@
 - (void) setPosition:(b2Vec2*)aPosition {
     
     // closed position
-    b2Vec2 closedPosition;
+    static b2Vec2 closedPosition;
     closedPosition.Set(-self.width/2.0, self.height/2.0);
     
-    b2Vec2 openPosition;
+    static b2Vec2 openPosition;
     openPosition.Set(-self.width/2.0 + 12.0, self.height/2.0);
     
     // left bounds
@@ -67,25 +67,21 @@
     float prototypeX = aPosition->x + self.width/2.0 - 6.5;
     float prototypeY = 4;
     
-    self.squarePrototype.position = new b2Vec2(
-                                               prototypeX,
-                                               prototypeY
-                                               );
-    self.shooterPrototype.position = new b2Vec2(
-                                                prototypeX,
-                                                prototypeY + 10
-                                                );
+    b2Vec2* tempPos = new b2Vec2();
     
-    self.triPrototype.position = new b2Vec2(
-                                            prototypeX,
-                                            prototypeY + 20
-                                            );
+    tempPos->Set(prototypeX, prototypeY);
+    self.squarePrototype.position = tempPos;
     
-    self.blackholePrototype.position = new b2Vec2(
-                                                  prototypeX,
-                                                  prototypeY + 30
-                                                  );
-
+    tempPos->Set(prototypeX, prototypeY + 10);
+    self.shooterPrototype.position = tempPos;
+    
+    tempPos->Set(prototypeX, prototypeY + 20);
+    self.triPrototype.position = tempPos;
+    
+    tempPos->Set(prototypeX, prototypeY + 30);
+    self.blackholePrototype.position = tempPos;
+    
+    delete tempPos;
     
     [super setPosition:aPosition];
 }
@@ -348,6 +344,4 @@
                                                                                    , nil]];
     }
 }
-
-
 @end

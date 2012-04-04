@@ -136,11 +136,6 @@ void audioCallback(Float32 * buffer, UInt32 numFrames, void * userData);
 @property (strong, nonatomic) NSMutableArray * obstacles;
 
 /**
- *  The list of falling balls that are currently instantiated.
- **/
-@property (strong, nonatomic) NSMutableArray * fallingBalls;
-
-/**
  *  The list of wild balls currently in play.
  **/
 @property (strong, nonatomic) NSMutableArray* wildBalls;
