@@ -53,6 +53,7 @@
     self.shapeFixture->SetFilterData(filterData);
     
     self.effect.useConstantColor = NO;
+    self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
     self.effect.texture2d0.name = self.controller.shooterRadialMenuBackground.name;
     
     arrow = [[ShooterRateSliderArrow alloc] initWithController:self.controller withModel:self.model withShooterRateSlider:self];

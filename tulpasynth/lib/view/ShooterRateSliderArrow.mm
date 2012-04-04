@@ -91,6 +91,7 @@
     self.shapeFixture->SetFilterData(filterData);
     
     self.effect.useConstantColor = NO;
+    self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
     self.effect.texture2d0.name = self.controller.shooterRadialMenuPointer.name;
     
 //    if (self.slider.position) {

@@ -57,8 +57,7 @@
     self.shapeFixture->SetFilterData(filterData);
     
     self.effect.texture2d0.name = self.controller.deleteButtonTexture.name;
-    self.effect.useConstantColor = YES;
-    self.effect.constantColor = self.controller.redColor;
+    self.color = self.controller.redColor;
 
 }
 
