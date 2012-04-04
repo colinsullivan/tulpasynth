@@ -161,6 +161,8 @@
 //    jointDef.dampingRatio = 0.1f;
 //    jointDef.maxForce = 4000.0f * self.body->GetMass();
 //    self.mouseJoint = (b2MouseJoint*)self.controller.world->CreateJoint(&jointDef);
+    self.effect.useConstantColor = NO;
+    self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
     self.effect.texture2d0.name = self.controller.toolbarTexture.name;
     
     // toolbox is initially closed
@@ -344,4 +346,21 @@
                                                                                    , nil]];
     }
 }
+
++ (GLKBaseEffect*)effectInstance {
+    static GLKBaseEffect* theInstance = nil;
+    if (!theInstance) {
+        theInstance = [[GLKBaseEffect alloc] init];
+    }
+    return theInstance;
+}
+
++ (GLKBaseEffect*)effect1Instance {
+    static GLKBaseEffect* theInstance = nil;
+    if (!theInstance) {
+        theInstance = [[GLKBaseEffect alloc] init];
+    }
+    return theInstance;
+}
+
 @end

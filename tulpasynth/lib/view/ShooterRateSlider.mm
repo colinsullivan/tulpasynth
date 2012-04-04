@@ -52,6 +52,7 @@
     filterData.groupIndex = 1;
     self.shapeFixture->SetFilterData(filterData);
     
+    self.effect.useConstantColor = NO;
     self.effect.texture2d0.name = self.controller.shooterRadialMenuBackground.name;
     
     arrow = [[ShooterRateSliderArrow alloc] initWithController:self.controller withModel:self.model withShooterRateSlider:self];
@@ -126,5 +127,22 @@
     
     model.ignoreUpdates = false;
 }
+
++ (GLKBaseEffect*)effectInstance {
+    static GLKBaseEffect* theInstance = nil;
+    if (!theInstance) {
+        theInstance = [[GLKBaseEffect alloc] init];
+    }
+    return theInstance;
+}
+
++ (GLKBaseEffect*)effect1Instance {
+    static GLKBaseEffect* theInstance = nil;
+    if (!theInstance) {
+        theInstance = [[GLKBaseEffect alloc] init];
+    }
+    return theInstance;
+}
+
 
 @end

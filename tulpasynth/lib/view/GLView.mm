@@ -75,7 +75,7 @@ static GLubyte SquareIndices[] = {
     [super initialize];
     
     // Shader for this object
-    self.effect = [[GLKBaseEffect alloc] init];
+    self.effect = [[self class] effectInstance];
     self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(
                                                                  0,
                                                                  self.controller.view.frame.size.width,
@@ -84,7 +84,7 @@ static GLubyte SquareIndices[] = {
                                                                  -1,
                                                                  1);
     
-    self.effect1 = [[GLKBaseEffect alloc] init];
+    self.effect1 = [[self class] effect1Instance];
     self.effect1.transform.projectionMatrix = GLKMatrix4MakeOrtho(
                                                                   0,
                                                                   self.controller.view.frame.size.width,
@@ -121,11 +121,13 @@ static GLubyte SquareIndices[] = {
 }
 
 - (void)prepareToDraw {
+    self.effect.transform.modelviewMatrix = [self currentModelViewTransform];
     [self.effect prepareToDraw];
     [self _bindAndEnable];
 }
 
 - (void)prepareToDraw1 {
+    self.effect1.transform.modelviewMatrix = [self currentModelViewTransform];
     [self.effect1 prepareToDraw];
     [self _bindAndEnable];
 }
@@ -170,8 +172,6 @@ static GLubyte SquareIndices[] = {
     //    GLKMatrix4Translate(modelViewMatrix, _position->y, _position->x, _position->z);
     //    _rotation += 90 * self.timeSinceLastUpdate;
     //    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, GLKMathDegreesToRadians(_rotation), 0, 0, 1);
-    self.effect.transform.modelviewMatrix = [self currentModelViewTransform];
-    self.effect1.transform.modelviewMatrix = [self currentModelViewTransform];
 }
 
 - (void)dealloc {
@@ -261,6 +261,22 @@ static GLubyte SquareIndices[] = {
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, [[GLView class] indexBuffer]);
 
+}
+
++ (GLKBaseEffect*)effectInstance {
+    static GLKBaseEffect* theInstance = nil;
+    if (!theInstance) {
+        theInstance = [[GLKBaseEffect alloc] init];
+    }
+    return theInstance;
+}
+
++ (GLKBaseEffect*)effect1Instance {
+    static GLKBaseEffect* theInstance = nil;
+    if (!theInstance) {
+        theInstance = [[GLKBaseEffect alloc] init];
+    }
+    return theInstance;
 }
 
 @end

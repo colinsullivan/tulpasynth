@@ -71,4 +71,20 @@
     self.model.destroyed = [NSNumber numberWithBool:true];
 }
 
++ (GLKBaseEffect*)effectInstance {
+    static GLKBaseEffect* theInstance = nil;
+    if (!theInstance) {
+        theInstance = [[GLKBaseEffect alloc] init];
+    }
+    return theInstance;
+}
+
++ (GLKBaseEffect*)effect1Instance {
+    static GLKBaseEffect* theInstance = nil;
+    if (!theInstance) {
+        theInstance = [[GLKBaseEffect alloc] init];
+    }
+    return theInstance;
+}
+
 @end

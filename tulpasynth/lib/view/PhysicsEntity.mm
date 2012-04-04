@@ -23,17 +23,24 @@
 
 @synthesize pincheable, pincher, preScalingWidth, preScalingHeight;
 
-@synthesize color;
+@synthesize color, opacity, opacity1;
 
-- (void) setColor:(GLKVector4)aColor {
-    self.effect.useConstantColor = YES;
-    color = aColor;
-    self.effect.constantColor = aColor;
-    
-    if (self.effect1.texture2d0.enabled == GL_TRUE) {
-        self.effect1.useConstantColor = YES;
-        self.effect1.constantColor = aColor;
+- (void) prepareToDraw {
+    if (self.effect.useConstantColor) {
+        self.effect.constantColor = GLKVector4Make(
+                                                   self.color.r * opacity, 
+                                                   self.color.g * opacity, 
+                                                   self.color.b * opacity, 
+                                                   1.0);
     }
+    if (self.effect1.texture2d0.enabled == GL_TRUE && self.effect1.useConstantColor) {
+        self.effect1.constantColor = GLKVector4Make(
+                                                    self.color.r * opacity1, 
+                                                    self.color.g * opacity1, 
+                                                    self.color.b * opacity1, 
+                                                    1.0);
+    }    
+    [super prepareToDraw];
 }
 
 /**
@@ -78,6 +85,15 @@
     self.rotateable = true;
     
     self.pincheable = true;
+    
+    self.effect.useConstantColor = YES;
+    if (self.effect1.texture2d0.enabled == GL_TRUE) {
+        self.effect1.useConstantColor = YES;
+    }
+    
+    opacity = 1.0;
+    opacity1 = 1.0;
+
 
     
     PhysicsEntityModel* model = ((PhysicsEntityModel*)self.model);

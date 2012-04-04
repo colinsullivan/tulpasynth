@@ -48,6 +48,12 @@
  **/
 @property (nonatomic) GLKVector4 color;
 
+/**
+ *  Current opacity of both GLKBaseEffects.  Should probably just
+ *  be encoded into color vector.
+ **/
+@property (nonatomic) float opacity;
+@property (nonatomic) float opacity1;
 
 - (void) initialize;
 - (void)dealloc;

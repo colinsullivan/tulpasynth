@@ -84,12 +84,6 @@
 }
 
 
-- (void) update {
-    if (self.active) {
-        [super update];
-    }
-}
-
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -100,12 +94,7 @@
         // change glowing-ness
         
         // update glow effect accordingly
-        float energyPerc = [m.energy floatValue] / [[[WildBallModel defaultAttributes] valueForKey:@"energy"] floatValue];
-        self.effect1.constantColor = GLKVector4Make(
-                                                    self.color.r * energyPerc, 
-                                                    self.color.g * energyPerc, 
-                                                    self.color.b * energyPerc, 
-                                                    1.0);
+        self.opacity1 = [m.energy floatValue] / [[[WildBallModel defaultAttributes] valueForKey:@"energy"] floatValue];
     }
     else if ([keyPath isEqualToString:@"pitchIndex"]) {
         if ([m.pitchIndex intValue] >= 0) {
@@ -129,5 +118,22 @@
         m.destroyed = [NSNumber numberWithBool:true];
     }
 }
+
++ (GLKBaseEffect*)effectInstance {
+    static GLKBaseEffect* theInstance = nil;
+    if (!theInstance) {
+        theInstance = [[GLKBaseEffect alloc] init];
+    }
+    return theInstance;
+}
+
++ (GLKBaseEffect*)effect1Instance {
+    static GLKBaseEffect* theInstance = nil;
+    if (!theInstance) {
+        theInstance = [[GLKBaseEffect alloc] init];
+    }
+    return theInstance;
+}
+
 
 @end

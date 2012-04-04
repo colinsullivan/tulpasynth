@@ -120,6 +120,13 @@
  **/
 @property (strong, nonatomic) GLKBaseEffect* effect1;
 
+/**
+ *  Return pointer to instance of GLKBaseEffect to use for self.effect.
+ **/
++ (GLKBaseEffect*)effectInstance;
++ (GLKBaseEffect*)effect1Instance;
+
+
 
 
 @end
