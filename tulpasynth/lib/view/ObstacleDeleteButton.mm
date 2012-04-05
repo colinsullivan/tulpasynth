@@ -66,6 +66,9 @@
 }
 
 - (void) handleTapOccurred:(TapEntity *)tap {
+    // deselect obstacle
+    [self.controller deselectAllObstacles];
+
     // delete model
     self.model.destroyed = [NSNumber numberWithBool:true];
 }
