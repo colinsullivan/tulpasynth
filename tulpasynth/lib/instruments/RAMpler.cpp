@@ -82,3 +82,9 @@ void instruments::RAMpler::play() {
     
 //    this->reset();
 }
+
+void instruments::RAMpler::freq(stk::StkFloat aFreq) {
+    Instrument::freq(aFreq);
+
+    FileWvIn::setRate(FileWvIn::file_.fileSize() * aFreq / Stk::sampleRate());
+}

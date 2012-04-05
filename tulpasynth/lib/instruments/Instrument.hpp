@@ -92,6 +92,7 @@ namespace instruments {
             this->_freq = aFreq;
         };
 
+        virtual float percentComplete(){ return -1.0; };
 
         /**
          *  Pull the next sample from this unit generator

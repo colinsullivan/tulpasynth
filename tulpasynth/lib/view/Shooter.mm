@@ -18,11 +18,15 @@
 
 
 - (void) initialize {
-    
     [super initialize];
-    
-        
     ShooterModel* model = ((ShooterModel*)self.model);
+
+    instruments::LoopingRAMpler* theInstr = new instruments::LoopingRAMpler();
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"NoisePercussionReversed" ofType:@"wav"];
+    theInstr->set_clip([path UTF8String]);
+    ((instruments::Instrument*)(theInstr))->gain(0.15);
+    theInstr->finish_initializing();
+    self.instr = ((instruments::Instrument*)theInstr);
 
     // create rate slider which is initially hidden by default
     rateSlider = [[ShooterRateSlider alloc] initWithController:self.controller withModel:model];
@@ -33,6 +37,10 @@
 
     self.effect.texture2d0.name = self.controller.shooterTexture.name;
     self.effect1.texture2d0.name = self.controller.shooterGlowingTexture.name;
+}
+
+- (void) dealloc {
+    delete ((instruments::LoopingRAMpler*)self.instr);
 }
 
 

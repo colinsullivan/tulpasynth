@@ -16,7 +16,7 @@
 #import "WildBallModel.h"
 #import "WildBall.h"
 
-#include "LoopingRAMpler.hpp"
+#include "Instrument.hpp"
 
 
 @interface ShooterBase : Obstacle
@@ -29,7 +29,8 @@
 /**
  *  Instrument to play each time ball is fired 
  **/
-@property instruments::LoopingRAMpler* instr;
+@property instruments::Instrument* instr;
+
 
 /**
  *  Time when the next ball will be fired

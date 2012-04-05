@@ -11,6 +11,8 @@
 
 #import "ReceivingShooterModel.h"
 
+#include "RAMpler.hpp"
+
 @interface ReceivingShooter : ShooterBase
 
 @property (strong, nonatomic) NSNumber* nextShotRate;

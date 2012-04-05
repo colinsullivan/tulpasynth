@@ -47,12 +47,6 @@
     myBodyMass.center.SetZero();
     self.body->SetMassData(&myBodyMass);
 
-    instr = new instruments::LoopingRAMpler();
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"NoisePercussionReversed" ofType:@"wav"];
-    instr->set_clip([path UTF8String]);
-    ((instruments::Instrument*)(instr))->gain(0.15);
-    instr->finish_initializing();
-
     self.nextShotTime = nil;
     
     self.effect.useConstantColor = YES;
@@ -62,7 +56,6 @@
 }
 
 - (void) dealloc {
-    delete instr;
     if (self.shape) {
         delete ((b2CircleShape*)(self.shape));
     }
@@ -127,7 +120,16 @@
 
 - (BOOL) advanceToNextShot {
     // if we still need to shoot our current ball
-    if (self.nextShotTime && [self.nextShotTime timeIntervalSinceNow] > 0) {
+    NSTimeInterval timeUntilNextShot = [self.nextShotTime timeIntervalSinceNow];
+    if (
+        self.nextShotTime
+        &&
+        (
+            (timeUntilNextShot > 0)
+            ||
+            (timeUntilNextShot < 0 && self.prevTimeUntilNextShot > 0)
+        )
+    ) {
         // wait.
         return false;
     }
@@ -137,10 +139,10 @@
 }
 
 - (void) startAnimating {
+
     self.animating = true;
     self.animatingPerc = 0.0;
     self.lastAnimatingPerc = 0.0;
-    instr->reset();
     instr->play();
 }
 
@@ -154,7 +156,6 @@
     // if model was destroyed
     if ([keyPath isEqualToString:@"destroyed"]) {
         instr->stop();
-        instr->reset();
     }
 
 }
@@ -203,7 +204,7 @@
 //        NSLog(@"timeUntilNextShot: %f", timeUntilNextShot);
         // If it is time to shoot another ball because we're on time
         if (
-            timeUntilNextShot <= 0 && prevTimeUntilNextShot > 0
+            (timeUntilNextShot <= 0 && prevTimeUntilNextShot > 0)
             ) {
 //        NSLog(@"shooting");
             

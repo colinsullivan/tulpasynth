@@ -53,6 +53,11 @@ namespace instruments {
             return Instrument::stop();
         }
         
+        /**
+         *  Set rate to play file based on a frequency in Hz
+         **/
+        virtual void freq(stk::StkFloat aFreq);
+
 //        virtual stk::StkFloat next_samp(int channel);
         virtual stk::StkFrames& next_buf(stk::StkFrames& frames);
         

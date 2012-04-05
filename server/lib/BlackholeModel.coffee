@@ -20,4 +20,4 @@ class tulpasynth.models.BlackholeModel extends tulpasynth.models.TulpasynthModel
 
         super()
 
-    eatenBallTimeDelay: 2.0
+    eatenBallTimeDelay: 3.0

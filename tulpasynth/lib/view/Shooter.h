@@ -15,10 +15,13 @@
 
 #import "ShooterRateSlider.h"
 
+#include "LoopingRAMpler.hpp"
+
 /**
  *  @class A shooting obstacle.
  **/
 @interface Shooter : ShooterBase
+
 
 
 /**

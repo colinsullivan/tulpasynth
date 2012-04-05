@@ -18,15 +18,23 @@
 
 - (void) initialize {
     [super initialize];
+
+    instruments::RAMpler* theInstr = new instruments::RAMpler();
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"NoisePercussionReversed" ofType:@"wav"];
+    theInstr->set_clip([path UTF8String]);
+    ((instruments::Instrument*)(theInstr))->gain(0.15);
+    theInstr->finish_initializing();
+    self.instr = ((instruments::Instrument*)theInstr);
+
     self.effect.texture2d0.name = self.controller.receivingShooterTexture.name;
     self.effect1.texture2d0.name = self.controller.receivingShooterGlowingTexture.name;
-    
+
     self.nextShotRate = nil;
-    
 }
 - (void) startAnimating {
     
     self.instr->freq([self.nextShotRate floatValue]);
+    ((instruments::RAMpler*)self.instr)->reset();
     
     [super startAnimating];
     
@@ -75,16 +83,11 @@
 
             return true;
         }
-        else {
-//            NSLog(@"no mo shots received");
-//            self.instr->stop();
-            return false;
-        }
     }
     
     return false;
-    
 }
+
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -101,22 +104,7 @@
 //            NSLog(@"self.shotTimes: %@", self.shotTimes);
             [self advanceToNextShot];
         }
-        
-//        NSLog(@"shotTimes changed");
-//        NSLog(@"[shotTimes count]: %d", [model.shotTimes count]);
-        //        if ([model.rate floatValue] > 0.0) {
-        
-        //        self.shotTimes = [NSMutableArray arrayWithArray:model.shotTimes];
 
-        
-//        if (model.shotTimes != self.shotTimes) {
-//            NSLog(@"resetting shot times");
-//            self.shotTimes = model.shotTimes;
-//        }
-        
-        
-        // try advancing
-//        [self advanceToNextShot];            
     }
 }
 
