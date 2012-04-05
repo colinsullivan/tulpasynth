@@ -200,19 +200,22 @@
     b2Transform obstaclePostion((*self.position), r);
     b2Vec2 touchPosition(touch->position->x, touch->position->y);
     
-    b2Vec2 touchPositionFudged[5];
-    touchPositionFudged[0] = touchPosition;
-    touchPositionFudged[1].Set(touch->position->x - fudgeFactor, touch->position->y);
-    touchPositionFudged[2].Set(touch->position->x, touch->position->y - fudgeFactor);
-    touchPositionFudged[3].Set(touch->position->x + fudgeFactor, touch->position->y);
-    touchPositionFudged[4].Set(touch->position->x, touch->position->y + fudgeFactor);
+    b2AABB boundingBox;
+    self.shape->ComputeAABB(&boundingBox, obstaclePostion, 0);
     
-    for (int i = 0; i < 5; i++) {
-        if (self.shape->TestPoint(obstaclePostion, touchPositionFudged[i])) {
-            return true;
-        }
+    b2Vec2 boundingBoxCenter = boundingBox.GetCenter();
+    b2Vec2 boundingBoxHalfWidths = boundingBox.GetExtents();
+    
+    // determine if touch is within bounding box
+    if (
+        touchPosition.x > (boundingBoxCenter.x - boundingBoxHalfWidths.x) &&
+        touchPosition.x < (boundingBoxCenter.x + boundingBoxHalfWidths.x) &&
+        touchPosition.y < (boundingBoxCenter.y + boundingBoxHalfWidths.y) &&
+        touchPosition.y > (boundingBoxCenter.y - boundingBoxHalfWidths.y)
+    ) {
+        return true;
     }
-    
+
     return false;
 }
 
