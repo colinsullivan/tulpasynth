@@ -11,6 +11,12 @@
 
 @implementation PolygonObstacle
 
+- (void) initialize {
+    [super initialize];
+
+    self.shape = new b2PolygonShape();
+}
+
 - (void)setHeight:(float)height {
     [super setHeight:height];
     
@@ -35,22 +41,14 @@
         self.body->DestroyFixture(self.shapeFixture);        
     }
     
-    if (self.shape) {
-        delete (b2PolygonShape*)self.shape;
-    }
 }
 
 - (void) createShape {
     [self destroyShape];
-    
-    self.shape = new b2PolygonShape();
 }
 
-- (void) destroy {
-    [super destroy];
-    if (self.shape) {
-        delete ((b2PolygonShape*)(self.shape));
-    }
+- (void) dealloc {
+    delete (b2PolygonShape*)self.shape;
 }
 
 @end

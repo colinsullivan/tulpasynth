@@ -59,8 +59,6 @@
 
 - (void) dealloc {
     delete (instruments::FMPercussion*)self.instr;
-    
-//    [super dealloc];
 }
 
 - (void) handleCollision:(PhysicsEntity *)otherEntity withStrength:(float)collisionStrength {
